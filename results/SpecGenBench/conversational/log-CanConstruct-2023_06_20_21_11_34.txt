@@ -1,0 +1,70 @@
+class CanConstruct {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < ransomNote.length(); (int)Character.MIN_VALUE <= (int)ransomNote.charAt(i) && (int)ransomNote.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\forall int i; 0 <= i && i < magazine.length(); (int)Character.MIN_VALUE <= (int)magazine.charAt(i) && (int)magazine.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures \result <==> (\forall int i; 0 <= i && i < ransomNote.length(); (\exists int j; 0 <= j && j < magazine.length(); magazine.charAt(j) == ransomNote.charAt(i)));
+      @*/
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); 0 <= cnt[magazine.charAt(i) - 'a']);
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); cnt[magazine.charAt(i) - 'a'] == (\sum int j; 0 <= j && j < i; (magazine.charAt(j) == magazine.charAt(i) ? 1 : 0)));
+        //@ decreases magazine.length() - i;
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < ransomNote.length(); 0 <= cnt[ransomNote.charAt(i) - 'a']);
+        //@ maintaining (\forall int i; 0 <= i && i < ransomNote.length(); cnt[ransomNote.charAt(i) - 'a'] == (\sum int j; 0 <= j && j < magazine.length(); (magazine.charAt(j) == ransomNote.charAt(i) ? 1 : 0)) - (\sum int j; 0 <= j && j < i; (ransomNote.charAt(j) == ransomNote.charAt(i) ? 1 : 0)));
+        //@ decreases ransomNote.length() - i;
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:14: error: cannot find symbol
+        //@ decreases magazine.length() - i;
+                                          ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:20: error: cannot find symbol
+        //@ decreases ransomNote.length() - i;
+                                            ^
+  symbol:   variable i
+  location: class CanConstruct
+2 errors
+
+class CanConstruct {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < ransomNote.length(); (int)Character.MIN_VALUE <= (int)ransomNote.charAt(i) && (int)ransomNote.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\forall int i; 0 <= i && i < magazine.length(); (int)Character.MIN_VALUE <= (int)magazine.charAt(i) && (int)magazine.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures \result <==> (\forall int i; 0 <= i && i < ransomNote.length(); (\exists int j; 0 <= j && j < magazine.length(); magazine.charAt(j) == ransomNote.charAt(i)));
+      @*/
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); 0 <= cnt[magazine.charAt(i) - 'a']);
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); cnt[magazine.charAt(i) - 'a'] == (\sum int j; 0 <= j && j < i; (magazine.charAt(j) == magazine.charAt(i) ? 1 : 0)));
+        //@ decreases magazine.length() - i;
+        for (int i = 0; i < magazine.length(); i++) {
+            cnt[magazine.charAt(i) - 'a']++;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < ransomNote.length(); 0 <= cnt[ransomNote.charAt(i) - 'a']);
+        //@ maintaining (\forall int i; 0 <= i && i < ransomNote.length(); cnt[ransomNote.charAt(i) - 'a'] == (\sum int j; 0 <= j && j < magazine.length(); (magazine.charAt(j) == ransomNote.charAt(i) ? 1 : 0)) - (\sum int j; 0 <= j && j < i; (ransomNote.charAt(j) == ransomNote.charAt(i) ? 1 : 0)));
+        //@ decreases ransomNote.length() - i;
+        for (int i = 0; i < ransomNote.length(); i++) {
+            cnt[ransomNote.charAt(i) - 'a']--;
+            if(cnt[ransomNote.charAt(i) - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}

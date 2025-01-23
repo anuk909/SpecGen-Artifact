@@ -1,0 +1,39 @@
+//@ invariant true;
+
+class A extends RuntimeException {
+    //@ public invariant true;
+}
+
+class B extends A {
+    //@ public invariant true;
+}
+
+class C extends B {
+    //@ public invariant true;
+}
+
+class F {
+    //@ ensures true;
+    void foo() {
+        try {
+            B b = new B();
+            throw b;
+        } catch (B exc) {
+            assert false;
+        }
+    }
+}
+
+public class exceptions12 {
+    //@ requires args != null;
+    //@ ensures true;
+    public static void main(String[] args) {
+        try {
+            F f = new F();
+            f.foo();
+        } catch (B exc) {
+            assert false;
+        }
+    }
+}
+

@@ -1,0 +1,35 @@
+/**
+ * @ invariant enum1.VAL1.ordinal() == 0;
+ * @ invariant enum1.VAL2.ordinal() == 1;
+ * @ invariant enum1.VAL3.ordinal() == 2;
+ * @ invariant enum1.VAL4.ordinal() == 3;
+ * @ invariant enum1.VAL5.ordinal() == 4;
+ */
+enum enum1 {
+  VAL1,
+  VAL2,
+  VAL3,
+  VAL4,
+  VAL5;
+
+  /**
+   * @ ensures (\forall enum1 e; e != null; System.out.println(e));
+   */
+  static {
+    for (enum1 e : enum1.values()) {
+      System.out.println(e);
+    }
+  }
+}
+
+class Main {
+  /**
+   * @ requires e != null;
+   * @ ensures e == enum1.VAL5;
+   */
+  public static void main(String[] args) {
+    enum1 e = enum1.VAL5;
+    assert (e == enum1.VAL5);
+  }
+}
+

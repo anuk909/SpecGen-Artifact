@@ -1,0 +1,297 @@
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    //@ ensures \result[1] == 0;
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(-delta) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:8: verify: Validity is unknown - no model available method SolveQuadraticEquation.solve - : (error "line 2650 column 18: model is not available")
+    public static double[] solve(int a, int b, int c) {
+                           ^
+1 verification failure
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+        ^
+2 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:264:) in method solve
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+                                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:264: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:12:
+    public static /*@ pure @*/ double sqrt(double a);
+                                      ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:247: verify: Precondition conjunct is false: Double.isNaN(a) || a < 0.0
+      @   requires Double.isNaN(a) || a < 0.0;
+                                   ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:250: verify: Precondition conjunct is false: a == Double.POSITIVE_INFINITY
+      @   requires a == Double.POSITIVE_INFINITY;
+                     ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:253: verify: Precondition conjunct is false: java.lang.Math.isPositiveZero(a)
+      @   requires isPositiveZero(a);
+                                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:256: verify: Precondition conjunct is false: java.lang.Math.isNegativeZero(a)
+      @   requires isNegativeZero(a);
+                                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:259: verify: Precondition conjunct is false: a > 0.0
+      @   requires a > 0.0 && a < Double.POSITIVE_INFINITY;
+                     ^
+7 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+error: An error while executing a proof script for solve: (error "Solver has unexpectedly terminated")
+1 error
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+        ^
+2 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+        ^
+2 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+        ^
+2 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+        ^
+2 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+        ^
+2 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    //@ ensures \result[1] == Math.sqrt(Math.abs(b * b - 4 * a * c)) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6:) in method solve
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:19:
+    //@ ensures \result[0] == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+        ^
+2 verification failures
+

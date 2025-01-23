@@ -1,0 +1,59 @@
+public class Cookie {
+
+  private String name;
+  private String value;
+
+  //@ requires name != null && value != null;
+  //@ ensures this.name == name && this.value == value;
+  public Cookie(String name, String value) {
+    this.name = name;
+    this.value = value;
+  }
+
+  //@ ensures \result == name;
+  public String getName() {
+    return name;
+  }
+
+  //@ ensures \result == value;
+  public String getValue() {
+    return value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Cookie.java:7: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures this.name == name && this.value == value;
+                  ^
+/home/max/Documents/JMLGPT/tmp/Cookie.java:7: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures this.name == name && this.value == value;
+                                       ^
+/home/max/Documents/JMLGPT/tmp/Cookie.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == name;
+                         ^
+/home/max/Documents/JMLGPT/tmp/Cookie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == value;
+                         ^
+4 errors
+
+public class Cookie {
+
+  private /*@ spec_public @*/ String name;
+  private /*@ spec_public @*/ String value;
+
+  //@ requires name != null && value != null;
+  //@ ensures this.name == name && this.value == value;
+  public Cookie(String name, String value) {
+    this.name = name;
+    this.value = value;
+  }
+
+  //@ ensures \result == name;
+  public String getName() {
+    return name;
+  }
+
+  //@ ensures \result == value;
+  public String getValue() {
+    return value;
+  }
+}
+

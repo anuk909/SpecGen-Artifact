@@ -1,0 +1,16 @@
+class Main {
+    //@ ensures \result ==> \typeof(i) == \type(Integer);
+    //@ ensures !\result ==> \typeof(i) != \type(Integer);
+    public static boolean test(Integer i) {
+        if (i instanceof Integer) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //@ ensures \result ==> test(null) == false && test(new Integer(1)) == true;
+    public static boolean f() {
+        return (!test(null)) && (test(new Integer(1)));
+    }
+}

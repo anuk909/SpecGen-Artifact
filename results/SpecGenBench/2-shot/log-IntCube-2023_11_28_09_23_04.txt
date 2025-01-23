@@ -1,0 +1,31 @@
+public class IntCube {
+
+    //@ requires x >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures \result == x * x * x;
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if(x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        for(int i = 0; i < x; i++) {
+            for(int j = 0; j < x; j++) {
+                for(int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        return (neg ? -res : res);
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IntCube.java:5:) in method cubeOf
+        return (neg ? -res : res);
+        ^
+/home/max/Documents/JMLGPT/tmp/IntCube.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IntCube.java:20:
+    //@ ensures \result == x * x * x;
+        ^
+2 verification failures
+

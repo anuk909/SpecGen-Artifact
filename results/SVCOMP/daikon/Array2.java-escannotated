@@ -1,0 +1,40 @@
+public class Array2 {
+
+  /*@ ensures \result == true; */
+  public static boolean func(int unknown) {
+    int[] arr;
+    if (unknown > 0)
+      arr = new int[1];
+    else
+      arr = new int[0];
+
+    if (unknown > 0)
+      arr[0] = 1;
+
+    if (unknown > 0)
+      return arr.length == 1 && arr[0] == 1;
+    else
+      return arr.length == 0;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    func(-2);
+    func(-1);
+    func(0);
+    func(1);
+    func(2);
+    func(3);
+    func(4);
+    func(114);
+    func(514);    
+    func(580);
+    func(1919);
+    func(810);
+    func(-514);
+  }
+
+}

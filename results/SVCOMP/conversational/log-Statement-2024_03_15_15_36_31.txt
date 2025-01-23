@@ -1,0 +1,548 @@
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:12: verify: The prover cannot establish an assertion (Assert) in method execute
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:33: verify: The prover cannot establish an assertion (Assert) in method executeQuery
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:23: verify: The prover cannot establish an assertion (Assert) in method executeUpdate
+      assert false;
+      ^
+3 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:33: error: unreported exception SQLException; must be caught or declared to be thrown
+      throw new SQLException();
+      ^
+1 error
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) false;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:12: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:9:) in method execute
+      throw new SQLException();
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:12:
+  //@ signals (SQLException e) false;
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:33: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:30:) in method executeQuery
+      throw new SQLException();
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:33:
+  //@ signals (SQLException e) false;
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:23: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:20:) in method executeUpdate
+      throw new SQLException();
+      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:20: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:23:
+  //@ signals (SQLException e) false;
+      ^
+6 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:9: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method execute
+  //@ signals (SQLException e) e.getMessage().contains("<bad/>");
+                                             ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:30: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method executeQuery
+  //@ signals (SQLException e) e.getMessage().contains("<bad/>");
+                                             ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:20: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method executeUpdate
+  //@ signals (SQLException e) e.getMessage().contains("<bad/>");
+                                             ^
+3 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:9: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method execute: (Caller: Statement.execute(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:9:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:30: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeQuery: (Caller: Statement.executeQuery(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:30:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:20: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeUpdate: (Caller: Statement.executeUpdate(java.lang.String,java.lang.Object...), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:20:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+6 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:9: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method execute: (Caller: Statement.execute(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:9:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:30: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeQuery: (Caller: Statement.executeQuery(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:30:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:20: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeUpdate: (Caller: Statement.executeUpdate(java.lang.String,java.lang.Object...), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:20:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+6 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:12: error: constructor SQLException in class SQLException cannot be applied to given types;
+      throw new SQLException("Bad input detected");
+            ^
+  required: no arguments
+  found:    String
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/Statement.java:23: error: constructor SQLException in class SQLException cannot be applied to given types;
+      throw new SQLException("Bad input detected");
+            ^
+  required: no arguments
+  found:    String
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/Statement.java:33: error: constructor SQLException in class SQLException cannot be applied to given types;
+      throw new SQLException("Bad input detected");
+            ^
+  required: no arguments
+  found:    String
+  reason: actual and formal argument lists differ in length
+3 errors
+
+class SQLException extends Exception {
+    public SQLException() {
+        super();
+    }
+
+    public SQLException(String message) {
+        super(message);
+    }
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:16: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method execute: (Caller: Statement.execute(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:16:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:37: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeQuery: (Caller: Statement.executeQuery(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:37:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:27: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeUpdate: (Caller: Statement.executeUpdate(java.lang.String,java.lang.Object...), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:27:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+6 verification failures
+
+class SQLException extends Exception {
+    public SQLException() {
+        super();
+    }
+
+    public SQLException(String message) {
+        super(message);
+    }
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:16: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method execute: (Caller: Statement.execute(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:16:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:37: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeQuery: (Caller: Statement.executeQuery(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:37:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:27: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeUpdate: (Caller: Statement.executeUpdate(java.lang.String,java.lang.Object...), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:27:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+6 verification failures
+
+class SQLException extends Exception {
+    public SQLException() {
+        super();
+    }
+
+    public SQLException(String message) {
+        super(message);
+    }
+}
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ requires o != null;
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException("Bad input detected");
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:16: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method execute: (Caller: Statement.execute(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:16:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:37: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeQuery: (Caller: Statement.executeQuery(java.lang.String), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:37:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:27: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30:) in method executeUpdate: (Caller: Statement.executeUpdate(java.lang.String,java.lang.Object...), Callee: java.lang.String.contains(java.lang.CharSequence))
+  //@ signals (SQLException e) e.getMessage() == null || e.getMessage().contains("<bad/>");
+                                                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:30: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:27:
+	//-RAC@ public invariant charArray != null; // FIXME - why this when there is a non_null declaration
+	               ^
+6 verification failures
+

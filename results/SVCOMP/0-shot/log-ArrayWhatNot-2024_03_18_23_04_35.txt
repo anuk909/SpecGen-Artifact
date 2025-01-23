@@ -1,0 +1,54 @@
+public class ArrayWhatNot {
+
+  /*@
+    requires size >= 0;
+    ensures \result == -1 && size < 8 || \result == 0 && int_array[7] != 7 || \result == 1 && int_array[7] == 7 && what_not_array.length == size;
+  @*/
+  public static int func(int size) {
+    if (size < 8) return -1;
+
+    int int_array[] = new int[size];
+
+    /*@
+      loop_invariant 0 <= i && i <= size;
+      loop_invariant (\forall int j; 0 <= j && j < i; int_array[j] == j);
+      decreases size - i;
+    @*/
+    for (int i = 0; i < size; i++)
+      int_array[i] = i;
+
+    if (int_array[7] != 7)
+      return 0;
+
+    what_not what_not_array[] = new what_not[size];
+
+    /*@
+      requires what_not_array != null;
+      ensures \result == 0 && what_not_array.length != size || \result == 1 && what_not_array.length == size;
+    @*/
+    if (what_not_array.length != size)
+      return 0;
+    return 1;
+  }
+
+  class what_not {
+  };
+
+}
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:5: error: cannot find symbol
+    ensures \result == -1 && size < 8 || \result == 0 && int_array[7] != 7 || \result == 1 && int_array[7] == 7 && what_not_array.length == size;
+                                                         ^
+  symbol:   variable int_array
+  location: class ArrayWhatNot
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:5: error: cannot find symbol
+    ensures \result == -1 && size < 8 || \result == 0 && int_array[7] != 7 || \result == 1 && int_array[7] == 7 && what_not_array.length == size;
+                                                                                              ^
+  symbol:   variable int_array
+  location: class ArrayWhatNot
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:5: error: cannot find symbol
+    ensures \result == -1 && size < 8 || \result == 0 && int_array[7] != 7 || \result == 1 && int_array[7] == 7 && what_not_array.length == size;
+                                                                                                                   ^
+  symbol:   variable what_not_array
+  location: class ArrayWhatNot
+3 errors
+

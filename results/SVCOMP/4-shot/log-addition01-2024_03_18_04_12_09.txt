@@ -1,0 +1,46 @@
+public class addition01 {
+
+    //@ requires n >= 0 && c >= 0 && m >= 0 && m < 10000 && n < 10000;
+    //@ ensures \result == m + n || \result == -1;
+    public static int addition(int m, int n, int c) {
+        if (n == 0) {
+            return m;
+        }
+
+        if (c >= 150) {
+            assert false;
+        }
+
+        if (n > 0) {
+            return addition(m + 1, n - 1, ++c);
+        } else {
+            return addition(m - 1, n + 1, ++c);
+        }
+    }
+
+    //@ requires m >= 0 && m < 10000 && n >= 0 && n < 10000;
+    //@ ensures \result == 1 <==> addition(m, n, 0) == m + n;
+    //@ ensures \result == 0 <==> addition(m, n, 0) != m + n;
+    public static int f(int m, int n) {
+        if (m < 0 || m >= 10000) {
+            return -1;
+        }
+        if (n < 0 || n >= 10000) {
+            return -1;
+        }
+        int c = 0;
+        int result = addition(m, n, c);
+        return (result == m + n) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/addition01.java:11: verify: The prover cannot establish an assertion (Assert) in method addition
+            assert false;
+            ^
+/home/max/Documents/JMLGPT/tmp/addition01.java:33: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/addition01.java:23:) in method f
+        return (result == m + n) ? 1 : 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/addition01.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/addition01.java:33:
+    //@ ensures \result == 0 <==> addition(m, n, 0) != m + n;
+        ^
+3 verification failures
+

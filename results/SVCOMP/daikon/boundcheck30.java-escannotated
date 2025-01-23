@@ -1,0 +1,31 @@
+public class boundcheck30 {
+
+  /*@ ensures (\result == false)  ==  (\old(i) == -2 || \old(i) == -1); */
+  /*@ ensures (\result == true)  ==  (\old(i) >= 0); */
+  private static boolean recursion(int i) {
+    if (i == 0) {
+      return true;
+    }
+    if (i > 0) {
+      return recursion(i - 1);
+    }
+    if (i < 0) {
+      return false;
+    }
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    recursion(-2);
+    recursion(-1);
+    recursion(0);
+    recursion(1);
+    recursion(2);
+    recursion(3);
+    recursion(4);
+  }
+}

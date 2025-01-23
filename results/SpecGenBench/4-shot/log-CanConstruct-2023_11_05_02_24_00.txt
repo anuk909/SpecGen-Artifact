@@ -1,0 +1,69 @@
+class CanConstruct {
+    //@ requires (\forall int i; 0 <= i && i < ransomNote.length(); (int)Character.MIN_VALUE <= (int)ransomNote.charAt(i) && (int)ransomNote.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ requires (\forall int i; 0 <= i && i < magazine.length(); (int)Character.MIN_VALUE <= (int)magazine.charAt(i) && (int)magazine.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < ransomNote.length(); (\exists int j; 0 <= j && j < magazine.length(); ransomNote.charAt(i) == magazine.charAt(j)));
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        //@ maintaining 0 <= i && i <= magazine.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; (\forall int k; 0 <= k && k < 26; cnt[k] >= 0));
+        //@ decreases magazine.length() - i;
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        //@ maintaining 0 <= i && i <= ransomNote.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; (\forall int k; 0 <= k && k < 26; cnt[k] >= 0));
+        //@ decreases ransomNote.length() - i;
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:10: error: cannot find symbol
+        //@ maintaining 0 <= i && i <= magazine.length();
+                             ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:10: error: cannot find symbol
+        //@ maintaining 0 <= i && i <= magazine.length();
+                                  ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:11: error: cannot find symbol
+        //@ maintaining (\forall int j; 0 <= j && j < i; (\forall int k; 0 <= k && k < 26; cnt[k] >= 0));
+                                                      ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:12: error: cannot find symbol
+        //@ decreases magazine.length() - i;
+                                          ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:16: error: cannot find symbol
+        //@ maintaining 0 <= i && i <= ransomNote.length();
+                             ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:16: error: cannot find symbol
+        //@ maintaining 0 <= i && i <= ransomNote.length();
+                                  ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:17: error: cannot find symbol
+        //@ maintaining (\forall int j; 0 <= j && j < i; (\forall int k; 0 <= k && k < 26; cnt[k] >= 0));
+                                                      ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:18: error: cannot find symbol
+        //@ decreases ransomNote.length() - i;
+                                            ^
+  symbol:   variable i
+  location: class CanConstruct
+8 errors
+

@@ -1,0 +1,22 @@
+class NullPointerException1 {
+  /*@ ensures \result == true; */
+  public static boolean f() {
+    Object o = null;
+    try {
+      o.hashCode();
+      // should pass
+      return false;
+    } catch (Exception e) {
+    }
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f();
+  }
+}
+;

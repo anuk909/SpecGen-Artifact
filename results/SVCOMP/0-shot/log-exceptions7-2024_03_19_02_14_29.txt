@@ -1,0 +1,44 @@
+class A extends RuntimeException {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public boolean equals(Object obj) {
+    return true;
+  }
+}
+
+class B extends A {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public boolean equals(Object obj) {
+    return true;
+  }
+}
+
+class C extends B {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public boolean equals(Object obj) {
+    return true;
+  }
+}
+
+class exceptions7 {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public static void main(String[] args) {
+    try {
+      try {
+        C c = new C();
+        A a = new A();
+        throw a;
+      } catch (C exc) {
+        assert false;
+      } catch (B exc) {
+        assert false;
+      }
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+

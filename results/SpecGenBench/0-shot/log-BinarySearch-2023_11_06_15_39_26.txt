@@ -1,0 +1,43 @@
+public class BinarySearch {
+
+    //@ requires arr != null;
+    //@ requires (\forall int i; 0 <= i && i < arr.length; arr[i] >= arr[i - 1]);
+    //@ ensures \result >= -1 && \result < arr.length;
+    public static int Binary(int[] arr, int key) {
+        //@ assert arr != null;
+        //@ assert (\forall int i; 0 <= i && i < arr.length; arr[i] >= arr[i - 1]);
+        
+        if (arr.length == 0) {
+            //@ ensures \result == -1;
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ loop_invariant low <= high;
+            //@ loop_invariant (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ loop_invariant (\forall int i; high <= i && i < arr.length; arr[i] >= key);
+            //@ loop_invariant low <= mid && mid < high;
+            //@ decreases high - low;
+            while (low < high && arr[mid] != key) {
+                if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+                mid = low + (high - low) / 2;
+            }
+            
+            //@ assert low >= high;
+            if (low >= high) {
+                //@ ensures \result == -1;
+                return -1;
+            }
+            
+            //@ assert arr[mid] == key;
+            //@ ensures \result == mid;
+            return mid;
+        }
+    }
+}

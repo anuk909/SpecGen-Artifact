@@ -1,0 +1,17 @@
+class A {
+  public static /*@ spec_public */ int i = 1;
+}
+;
+
+class putstatic_getstatic1 {
+  //@ ensures A.i == 1 ==> \result == true && A.i == 999 ==> \result == true;
+  //@ ensures A.i != 1 ==> \result == false || A.i != 999 ==> \result == false;
+  public static boolean f() {
+    if(A.i != 1) return false;
+    A.i = 999;
+    if (A.i != 999)
+      return false;
+    return true;
+  }
+}
+

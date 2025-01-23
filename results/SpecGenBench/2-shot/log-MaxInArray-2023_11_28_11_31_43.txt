@@ -1,0 +1,23 @@
+class MaxInArray {
+    //@ requires arr.length > 0 && arr.length <= Integer.MAX_VALUE;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int i; 0 <= i && i < k; res >= arr[i]);
+        //@ decreases arr.length - k;
+        for(int k = 0; k < arr.length; k++) {
+            res = ((arr[k] > res) ? arr[k] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:4:) in method maxElementInArray
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:13:
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+        ^
+2 verification failures
+

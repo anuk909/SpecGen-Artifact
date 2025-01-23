@@ -1,0 +1,20 @@
+class SelfDeviding {
+    //@ requires num >= 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ loop_invariant temp >= 0;
+        //@ loop_invariant (\forall int i; i >= 0 && i < temp; num % (temp / (10^i)) == 0);
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit >= 0 && digit <= 9;
+            //@ assert temp % 10 == digit;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}

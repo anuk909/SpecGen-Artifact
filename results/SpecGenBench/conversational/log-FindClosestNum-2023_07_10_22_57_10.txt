@@ -1,0 +1,113 @@
+import java.util.Math;
+
+class FindClosestNum {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) <= Math.abs(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) < Math.abs(nums[i]) || (Math.abs(\result) == Math.abs(nums[i]) && \result >= nums[i]));
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; Math.abs(ans) <= Math.abs(nums[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; Math.abs(ans) < Math.abs(nums[i]) || (Math.abs(ans) == Math.abs(nums[i]) && ans >= nums[i]));
+        //@ decreases nums.length - i;
+        for(int num : nums) {
+            int absNum = Math.abs(num);
+            if(absNum < Math.abs(ans) || (absNum == Math.abs(ans) && num > ans)) {
+                ans = num;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:1: error: cannot find symbol
+import java.util.Math;
+                ^
+  symbol:   class Math
+  location: package java.util
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:13: error: cannot find symbol
+        //@ decreases nums.length - i;
+                                    ^
+  symbol:   variable i
+  location: class FindClosestNum
+2 errors
+
+class FindClosestNum {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) <= Math.abs(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) < Math.abs(nums[i]) || (Math.abs(\result) == Math.abs(nums[i]) && \result >= nums[i]));
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; Math.abs(ans) <= Math.abs(nums[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; Math.abs(ans) < Math.abs(nums[i]) || (Math.abs(ans) == Math.abs(nums[i]) && ans >= nums[i]));
+        //@ decreases nums.length - numIndex;
+        for(int numIndex = 0; numIndex < nums.length; numIndex++) {
+            int num = nums[numIndex];
+            int absNum = Math.abs(num);
+            if(absNum < Math.abs(ans) || (absNum == Math.abs(ans) && num > ans)) {
+                ans = num;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method findClosestNumber
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; Math.abs(ans) < Math.abs(nums[i]) || (Math.abs(ans) == Math.abs(nums[i]) && ans >= nums[i]));
+            ^
+1 verification failure
+
+class FindClosestNum {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) <= Math.abs(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) < Math.abs(nums[i]) || (Math.abs(\result) == Math.abs(nums[i]) && \result >= nums[i]));
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        //@ maintaining (\forall int i; 0 <= i && i < numIndex; Math.abs(ans) <= Math.abs(nums[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < numIndex; Math.abs(ans) < Math.abs(nums[i]) || (Math.abs(ans) == Math.abs(nums[i]) && ans >= nums[i]));
+        //@ decreases nums.length - numIndex;
+        for(int numIndex = 0; numIndex < nums.length; numIndex++) {
+            int num = nums[numIndex];
+            int absNum = Math.abs(num);
+            if(absNum < Math.abs(ans) || (absNum == Math.abs(ans) && num > ans)) {
+                ans = num;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:13: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method findClosestNumber
+            int num = nums[numIndex];
+                          ^
+1 verification failure
+
+class FindClosestNum {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) <= Math.abs(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; Math.abs(\result) < Math.abs(nums[i]) || (Math.abs(\result) == Math.abs(nums[i]) && \result >= nums[i]));
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        //@ maintaining (\forall int i; 0 <= i && i < numIndex; Math.abs(ans) <= Math.abs(nums[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < numIndex; Math.abs(ans) < Math.abs(nums[i]) || (Math.abs(ans) == Math.abs(nums[i]) && ans >= nums[i]));
+        //@ decreases nums.length - numIndex;
+        for(int numIndex = 0; numIndex < nums.length; numIndex++) {
+            //@ assume 0 <= numIndex && numIndex < nums.length;
+            int num = nums[numIndex];
+            int absNum = Math.abs(num);
+            if(absNum < Math.abs(ans) || (absNum == Math.abs(ans) && num > ans)) {
+                ans = num;
+            }
+        }
+
+        return ans;
+    }
+}
+

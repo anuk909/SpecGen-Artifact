@@ -1,0 +1,36 @@
+public class TransposeMatrix {
+
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length);
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != null);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    public int[][] transposeMat(int[][] matrix) {
+        int m, n, p, q;
+        m = matrix.length;
+        n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        //@ loop_invariant 0 <= c && c <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j]));
+        //@ decreases n - c;
+        for (int c = 0; c < n; c++) {
+
+            //@ loop_invariant 0 <= d && d <= m;
+            //@ loop_invariant (\forall int i; 0 <= i && i < d; transpose[c][i] == matrix[i][c]);
+            //@ decreases m - d;
+            for (int d = 0; d < m; d++) {
+                transpose[c][d] = matrix[d][c];
+            }
+
+        }
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:24: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                transpose[c][d] = matrix[d][c];
+                          ^
+  Reason: Double rewriting of ident: c c_857_857___29 c_857_871___35
+1 error
+

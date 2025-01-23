@@ -1,0 +1,37 @@
+public class TokenTest01 {
+  //@ ensures \result <==> tokens.length != 4 && (\forall int i; 0 <= i && i < tokens.length; checkToken(i, tokens[i]));
+  public static boolean f() {
+    String sentence = "automatic test case generation";
+    String[] tokens = sentence.split(" ");
+    if(tokens.length == 4) return false;
+
+    int i = 0;
+    for (String token : tokens) {
+      System.out.println(token);
+      if (i == 0) {
+        if (!token.equals("automatic"))
+          return false;
+      }
+      else if (i == 1) {
+        if (!token.equals("test"))
+          return false;
+      }
+      else if (i == 2) {
+        if (!token.equals("case"))
+          return false;
+      }
+      else if (i == 3) {
+        if (!token.equals("generation"))
+          return false;
+      }
+      ++i;
+    }
+    return true;
+  }
+  
+  //@ ensures \result <==> i == 0 && token.equals("automatic") || i == 1 && token.equals("test") || i == 2 && token.equals("case") || i == 3 && token.equals("generation");
+  private static boolean checkToken(int i, String token) {
+    return i == 0 && token.equals("automatic") || i == 1 && token.equals("test") || i == 2 && token.equals("case") || i == 3 && token.equals("generation");
+  }
+}
+

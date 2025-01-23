@@ -1,0 +1,39 @@
+public class BubbleSort {
+    //@ requires array != null;
+    //@ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+    public void swap(int x, int y, int array[]) {
+        int temp;
+        //@ assume 0 <= x && x < array.length && 0 <= y && y < array.length;
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires arr != null;
+    //@ ensures \result != null && \result.length == arr.length && (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ maintaining (\forall int i; 0 <= i && i < n - 1; arr[i] <= arr[i+1]);
+        //@ decreasing n;
+        for (int i = 0; i < n-1; i++) {
+
+            //@ maintaining (\forall int j; 0 <= j && j < n - i - 1; arr[j] <= arr[j+1]);
+            //@ decreasing n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {
+                    swap(j, j + 1, arr);
+                }
+            }
+        }
+        return arr;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:17: error: variable i is already defined in method bubbleSort(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < n - 1; arr[i] <= arr[i+1]);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:21: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int j; 0 <= j && j < n - i - 1; arr[j] <= arr[j+1]);
+                                         ^
+2 errors
+

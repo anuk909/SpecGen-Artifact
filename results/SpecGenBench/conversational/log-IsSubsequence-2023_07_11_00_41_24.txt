@@ -1,0 +1,575 @@
+class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\exists int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)))));
+    @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\exists int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)))));
+        ^
+2 verification failures
+
+java
+class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\exists int l; 0 <= l && l < j; s.charAt(k) == t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:1: error: class, interface, enum, or record expected
+java
+^
+1 error
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\exists int l; 0 <= l && l < j; s.charAt(k) == t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:18:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\exists int l; 0 <= l && l < j; s.charAt(k) == t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:18:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j <= m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j <= m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j <= m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j <= m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j == m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j == m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j == m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j == m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j == m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j == m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j == m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j == m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n && j == m;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n && j == m;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+
+public class IsSubsequence {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < t.length(); (int)Character.MIN_VALUE <= (int)t.charAt(i) && (int)t.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n && 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l)));
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+        ensures \result <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < t.length(); s.charAt(i) == t.charAt(j) && (\forall int k; 0 <= k && k < i; (\forall int l; 0 <= l && l < j; s.charAt(k) != t.charAt(l))))); @*/
+        ^
+2 verification failures
+

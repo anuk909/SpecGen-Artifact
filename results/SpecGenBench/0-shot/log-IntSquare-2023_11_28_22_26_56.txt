@@ -1,0 +1,33 @@
+public class IntSquare {
+
+    //@ requires true;
+    //@ ensures \result >= 0;
+    public static int squareOf(int x) {
+        //@ assume x >= 0;
+        if(x < 0)
+            x = -x;
+        
+        int res = 0;
+        //@ loop_invariant res >= 0;
+        //@ loop_invariant res == (\sum int k; k >= 0 && k < i; 1);
+        //@ loop_invariant i >= 0 && i <= x;
+        //@ loop_invariant (\forall int k; k >= 0 && k < i; (\forall int j; j >= 0 && j < x; res == res + 1));
+        for(int i = 0; i < x; i++) {
+            //@ loop_invariant res >= 0;
+            //@ loop_invariant res == (\sum int k; k >= 0 && k < i; 1);
+            //@ loop_invariant j >= 0 && j <= x;
+            //@ loop_invariant (\forall int k; k >= 0 && k < i; (\forall int j; j >= 0 && j < x; res == res + 1));
+            for(int j = 0; j < x; j++) {
+                res = res + 1;
+            }
+        }
+        //@ assert res == (\sum int k; k >= 0 && k < x; 1);
+        return res;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IntSquare.java:19: error: variable j is already defined in method squareOf(int)
+            //@ loop_invariant (\forall int k; k >= 0 && k < i; (\forall int j; j >= 0 && j < x; res == res + 1));
+                                                                             ^
+1 error
+

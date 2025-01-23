@@ -1,0 +1,24 @@
+class recursion2 {
+  /*@ ensures \result == true; */
+  public static boolean f() {
+    return recursion_test(0) == 10;
+  }
+
+  /*@ ensures \result >= 0; */
+  static int recursion_test(int depth) {
+    if (depth < 10) return recursion_test(depth + 1) + 1;
+    else return 0;
+  }
+
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f();
+    for(int i = -5; i <= 15; i++) {
+      recursion_test(i);
+    }
+  }
+}

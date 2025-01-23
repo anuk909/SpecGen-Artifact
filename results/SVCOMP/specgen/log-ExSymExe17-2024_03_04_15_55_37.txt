@@ -1,0 +1,387 @@
+public class Main {
+    static int field;
+
+    //@ ensures \result ==> field == x - 0 - 4 && field != 0;
+    //@ ensures !\result ==> field != x - 0 - 4 || field == 0;
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    //@ ensures \result ==> z == x - 0 - 4 && z != 0;
+    //@ ensures !\result ==> z != x - 0 - 4 || z == 0;
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:1: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> field == x - 0 - 4 && field != 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+    //@ ensures \result ==> field == x - 0 - 4 && field != 0;
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> field == x - 0 - 4 && field != 0;
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> field != x - 0 - 4 || field == 0;
+                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: cannot find symbol
+    //@ ensures !\result ==> field != x - 0 - 4 || field == 0;
+                                      ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> field != x - 0 - 4 || field == 0;
+                                                   ^
+7 errors
+
+public class Main {
+    static /*@ spec_public @*/ int field;
+
+    //@ ensures \result ==> field == x - 0 - 4 && field != 0;
+    //@ ensures !\result ==> field != x - 0 - 4 || field == 0;
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    //@ ensures \result ==> z == x - 0 - 4 && z != 0;
+    //@ ensures !\result ==> z != x - 0 - 4 || z == 0;
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:1: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+    //@ ensures \result ==> field == x - 0 - 4 && field != 0;
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: cannot find symbol
+    //@ ensures !\result ==> field != x - 0 - 4 || field == 0;
+                                      ^
+  symbol:   variable x
+  location: class Main
+3 errors
+
+public class Main {
+    static /*@ spec_public @*/ int field;
+
+    //@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+    //@ ensures !\result ==> field != 9 - 0 - 4 || field == 0;
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    //@ ensures \result ==> z == x - 0 - 4 && z != 0;
+    //@ ensures !\result ==> z != x - 0 - 4 || z == 0;
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:1: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the Java source code. They should be added in separate JML files or as comments within the Java source code.
+// Here is the JML specification for the Java program:
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the Java source code. They should be added in separate JML files or as comments within the Java source code.
+// Here is the JML specification for the Java program:
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the Java source code. They should be added in separate JML files or as comments within the Java source code.
+// Here is the JML specification for the Java program:
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the Java source code. They should be added in separate JML files or as comments within the Java source code.
+// Here is the JML specification for the Java program:
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the Java source code. They should be added in separate JML files or as comments within the Java source code.
+// Here is the JML specification for the Java program:
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:2: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the Java source code. They should be added in separate JML files or as comments within the Java source code.
+// Here is the JML specification for the Java program:
+
+/* JML specification for class Main */
+public class Main {
+    /*@ public static spec_public @*/ int field;
+
+    /*@ ensures \result ==> field == 9 - 0 - 4 && field != 0;
+        ensures !\result ==> field != 9 - 0 - 4 || field == 0; @*/
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field);
+    }
+
+    /*@ ensures \result ==> z == x - 0 - 4 && z != 0;
+        ensures !\result ==> z != x - 0 - 4 || z == 0; @*/
+    public boolean test(int x, int z) {
+        System.out.println("Testing ExSymExe17");
+        int y = 0;
+        z = x - y - 4;
+        if (z == 0) {
+            System.out.println("branch FOO1");
+            return false;
+        } else System.out.println("branch FOO2");
+        if (y == 0) System.out.println("branch BOO1");
+        else
+            System.out.println("branch BOO2");
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+

@@ -1,0 +1,791 @@
+
+public class BubbleSort { 
+    /*@ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ assignable array[x], array[y];
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+
+    /*@ requires arr.length > 0;
+      @ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+      @ ensures \result.length == arr.length;
+      @ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; arr[j] == \result[i]));
+      @ assignable \nothing;
+      @*/
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:26: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method bubbleSort: underflow in int difference
+            for (int j = 0; j < n-i-1; j++) {
+                                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:32: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:16:) in method bubbleSort
+	    return arr;
+	    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:16: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:32:
+      @ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+        ^
+3 verification failures
+
+
+public class BubbleSort { 
+    /*@ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ assignable array[x], array[y];
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]); @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+
+    /*@ requires arr != null;
+      @ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+      @ ensures \result != null && \result.length == arr.length;
+      @ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+      @ assignable \nothing; @*/
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; arr[k] <= arr[j]));
+            //@ decreases n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:24: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; arr[k] <= arr[j]));
+                                                                          ^
+1 error
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ requires array.length > 0;
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+      @ ensures \result != null;
+      @ ensures \result.length == array.length;
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+        //@ decreases n - i;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ maintaining 0 <= j && j < n - i - 1;
+            //@ maintaining (\forall int k; i <= k && k < j; array[j] >= array[k]);
+            //@ decreases n - i - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires array != null;
+      @ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ assignable array[x], array[y];
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:5:) in method bubbleSort
+	    return array;
+	    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:27:
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:8:) in method bubbleSort
+	    return array;
+	    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:27:
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+        ^
+4 verification failures
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ requires (\forall int i; 0 <= i && i < array.length; Integer.MIN_VALUE <= array[i] && array[i] <= Integer.MAX_VALUE);
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @ ensures \result != null && \result.length == array.length;
+      @ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+      @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+            //@ decreasing n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires array != null;
+      @ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+      @ requires (\forall int i; 0 <= i && i < array.length; Integer.MIN_VALUE <= array[i] && array[i] <= Integer.MAX_VALUE);
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                                                                          ^
+1 error
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ requires (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+      @ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @ ensures \result.length == array.length;
+      @ pure @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+            //@ decreases n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires array != null;
+      @ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ requires (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                                                                          ^
+1 error
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @ assignable \nothing;
+      @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+            //@ decreases n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires array != null;
+      @ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @ assignable array[x], array[y];
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                                                                          ^
+1 error
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @ assignable \nothing;
+      @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+            //@ decreases n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ requires array != null;
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @ assignable array[x], array[y];
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                                                                          ^
+1 error
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @ assignable \nothing;
+      @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @ assignable array[x], array[y];
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                                                                          ^
+1 error
+
+
+public class BubbleSort { 
+    /*@ requires array != null;
+      @ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+      @ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+      @ assignable \nothing;
+      @*/
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; i <= j1 && j1 < n; array[k] <= array[j1]));
+            //@ maintaining (\forall int j2; i <= j2 && j2 < n-1; array[j2] <= array[j2+1]);
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    /*@ requires 0 <= x && x < array.length;
+      @ requires 0 <= y && y < array.length;
+      @ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+      @ assignable array[x], array[y];
+      @*/
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: verify: The prover cannot establish an assertion (LoopDecreases) in method bubbleSort
+            //@ decreases n - i;
+                ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method bubbleSort
+            //@ maintaining (\forall int j2; i <= j2 && j2 < n-1; array[j2] <= array[j2+1]);
+                ^
+2 verification failures
+
+
+public class BubbleSort { 
+    //@ requires array != null;
+    //@ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+    public int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; array[j2] <= array[j2+1]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method bubbleSort
+                if (array[j+1] < array[j]) {  
+                                      ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method bubbleSort
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; array[j2] <= array[j2+1]));
+                ^
+2 verification failures
+
+
+public class BubbleSort { 
+    //@ requires array != null;
+    //@ ensures (\forall int i; 0 <= i && i < array.length - 1; array[i] <= array[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < array.length; (\exists int j; 0 <= j && j < array.length; \result[j] == array[i]));
+    int[] bubbleSort(int array[]) {
+        int n = array.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; array[j2] <= array[j2+1]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                //@ decreases n - j - 1;
+                if (array[j+1] < array[j]) {  
+		            swap(j, j + 1, array); 
+                } 
+	        }
+	    } 
+	    return array;
+    } 
+
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; array[k] <= array[j]));
+                    ^
+1 error
+
+
+public class BubbleSort { 
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) 
+        //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+        //@ decreases n - i;
+        {	
+            for (int j = 0; j < n-i-1; j++) 
+            //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+            //@ decreases n - j;
+            {
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+    
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:9: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            ^
+2 errors
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) 
+        //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+        //@ decreases n - i;
+        {	
+            for (int j = i+1; j < n; j++) 
+            //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+            //@ decreases n - j;
+            {
+                if (arr[j] < arr[i]) {  
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                } 
+            }
+        } 
+        return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:10: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            ^
+2 errors
+
+
+public class BubbleSort { 
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) 
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i;
+        {	
+            for (int j = i+1; j < n; j++) 
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+            {
+                if (arr[j] < arr[i]) {  
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                } 
+            }
+        } 
+        return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:9: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+                ^
+2 errors
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) 
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i;
+        {	
+            for (int j = i+1; j < n; j++) 
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+            {
+                if (arr[j] < arr[i]) {  
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                } 
+            }
+        } 
+        return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:10: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+                ^
+2 errors
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method bubbleSort
+                if (arr[j+1] < arr[j]) {  
+                                  ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method bubbleSort
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+                ^
+2 verification failures
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+                    //@ assert arr[j+1] < arr[j];
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires array != null;
+    //@ requires 0 <= x && x < array.length;
+    //@ requires 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method bubbleSort: overflow in int difference
+            for (int j = 0; j < n-i-1; j++) {
+                                 ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method bubbleSort
+                if (arr[j+1] < arr[j]) {  
+                       ^
+2 verification failures
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i < n - 1;
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                //@ maintaining 0 <= j && j < n - i - 1;
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                //@ decreases n - i - j - 2;
+                if (arr[j+1] < arr[j]) {  
+		            int temp = arr[j];
+		            arr[j] = arr[j+1];
+		            arr[j+1] = temp;
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= j && j < n - i - 1;
+                    ^
+1 error
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {
+            //@ maintaining 0 <= i && i < n - 1;
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i - 1;
+            for (int j = 0; j < n-i-1; j++) {
+                //@ maintaining 0 <= j && j < n - i - 1;
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                if (arr[j+1] < arr[j]) {  
+		            int temp = arr[j];
+		            arr[j] = arr[j+1];
+		            arr[j+1] = temp;
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= j && j < n - i - 1;
+                    ^
+1 error
+
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; 0 <= j && j < arr.length; \result[j] == arr[i]));
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i < n - 1;
+            //@ maintaining (\forall int j1; 0 <= j1 && j1 < i; (\forall int j2; i <= j2 && j2 < n-1; arr[j2] >= arr[j2+1]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-i-1; j++) {
+                //@ maintaining 0 <= j && j < n - i - 1;
+                //@ maintaining (\forall int k; i <= k && k < j; arr[k] <= arr[j]);
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= j && j < n - i - 1;
+                    ^
+1 error
+

@@ -1,0 +1,25 @@
+class Hanoi {
+
+    static int counter = 0;
+
+    //@ requires n > 0;
+    //@ ensures \result == 1;
+    static int hanoi(int n) {
+        if (n == 1) {
+          return 1;
+        }
+        return 2 * (hanoi(n - 1)) + 1;
+    }
+    
+    //@ requires n >= 0 && from >= 0 && to >= 0 && via >= 0;
+    //@ ensures counter == (int) (Math.pow(2, n) - 1);
+    static void applyHanoi(int n, int from, int to, int via) {
+        if (n == 0) {
+          return;
+        }
+        // increment the number of steps
+        counter++;
+        applyHanoi(n - 1, from, via, to);
+        applyHanoi(n - 1, via, to, from);
+    }
+}

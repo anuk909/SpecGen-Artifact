@@ -1,0 +1,30 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class exceptions7 {
+  //@ requires true;
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      try {
+        C c = new C();
+        A a = new A();
+        throw a;
+      } catch (C exc) {
+        assert false;
+      } catch (B exc) {
+        assert false;
+      }
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions7.java:22: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+

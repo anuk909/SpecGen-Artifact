@@ -1,0 +1,57 @@
+class NegCounter {
+
+    /*@ requires arr != null;
+      @ ensures \result >= 0;
+      @ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] >= 0) ==> \result == 0;
+      @ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] < 0) ==> \result == arr.length;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] < 0) ==> 0 < \result && \result < arr.length;
+      @*/
+    public int countNegInArray(int[] arr) {
+        int cnt = 0;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining 0 <= cnt && cnt <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] >= 0) ==> cnt == 0;
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] < 0) ==> cnt == i;
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] < 0)
+                cnt = cnt + 1;
+        }
+
+        return cnt;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/NegCounter.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/NegCounter.java:7:) in method countNegInArray
+        return cnt;
+        ^
+/home/max/Documents/JMLGPT/tmp/NegCounter.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/NegCounter.java:21:
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] < 0) ==> 0 < \result && \result < arr.length;
+        ^
+2 verification failures
+
+class NegCounter {
+
+    /*@ requires arr != null;
+      @ ensures \result >= 0;
+      @ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] >= 0) ==> \result == 0;
+      @ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] < 0) ==> \result == arr.length;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] < 0) ==> 0 <= \result && \result <= arr.length;
+      @*/
+    public int countNegInArray(int[] arr) {
+        int cnt = 0;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining 0 <= cnt && cnt <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] >= 0) ==> cnt == 0;
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] < 0) ==> cnt == i;
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] < 0)
+                cnt = cnt + 1;
+        }
+
+        return cnt;
+    }
+
+}
+

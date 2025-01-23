@@ -1,0 +1,133 @@
+import java.util.Random;
+
+public final class Verifier {
+  //@ ensures \result ==> condition;
+  //@ ensures !\result ==> (\exists int i; 0 <= i && i < \result; condition);
+  public static void assume(boolean condition) {
+    if (!condition) {
+      Runtime.getRuntime().halt(1);
+    }
+  }
+
+  //@ ensures \result == true || \result == false;
+  public static boolean nondetBoolean() {
+    return new Random().nextBoolean();
+  }
+
+  //@ ensures (byte)Integer.MIN_VALUE <= \result && \result <= (byte)Integer.MAX_VALUE;
+  public static byte nondetByte() {
+    return (byte) (new Random().nextInt());
+  }
+
+  //@ ensures (char)Character.MIN_VALUE <= \result && \result <= (char)Character.MAX_VALUE;
+  public static char nondetChar() {
+    return (char) (new Random().nextInt());
+  }
+
+  //@ ensures (short)Integer.MIN_VALUE <= \result && \result <= (short)Integer.MAX_VALUE;
+  public static short nondetShort() {
+    return (short) (new Random().nextInt());
+  }
+
+  //@ ensures \result == (int)Integer.MIN_VALUE || \result == (int)Integer.MAX_VALUE || (int)Integer.MIN_VALUE < \result && \result < (int)Integer.MAX_VALUE;
+  public static int nondetInt() {
+    return new Random().nextInt();
+  }
+
+  //@ ensures \result == (long)Long.MIN_VALUE || \result == (long)Long.MAX_VALUE || (long)Long.MIN_VALUE < \result && \result < (long)Long.MAX_VALUE;
+  public static long nondetLong() {
+    return new Random().nextLong();
+  }
+
+  //@ ensures \result >= 0;
+  public static float nondetFloat() {
+    return new Random().nextFloat();
+  }
+
+  //@ ensures \result >= 0;
+  public static double nondetDouble() {
+    return new Random().nextDouble();
+  }
+
+  //@ ensures \result != null && \result.length() >= 0;
+  public static String nondetString() {
+    Random random = new Random();
+    int size = random.nextInt();
+    assume(size >= 0);
+    byte[] bytes = new byte[size];
+    random.nextBytes(bytes);
+    return new String(bytes);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Verifier.java:4: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result ==> condition;
+               ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:5: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures !\result ==> (\exists int i; 0 <= i && i < \result; condition);
+                ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:5: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures !\result ==> (\exists int i; 0 <= i && i < \result; condition);
+                                                          ^
+3 errors
+
+import java.util.Random;
+
+public final class Verifier {
+  //@ ensures condition;
+  //@ ensures !condition;
+  public static void assume(boolean condition) {
+    if (!condition) {
+      Runtime.getRuntime().halt(1);
+    }
+  }
+
+  //@ ensures \result == true || \result == false;
+  public static boolean nondetBoolean() {
+    return new Random().nextBoolean();
+  }
+
+  //@ ensures (byte)Integer.MIN_VALUE <= \result && \result <= (byte)Integer.MAX_VALUE;
+  public static byte nondetByte() {
+    return (byte) (new Random().nextInt());
+  }
+
+  //@ ensures (char)Character.MIN_VALUE <= \result && \result <= (char)Character.MAX_VALUE;
+  public static char nondetChar() {
+    return (char) (new Random().nextInt());
+  }
+
+  //@ ensures (short)Integer.MIN_VALUE <= \result && \result <= (short)Integer.MAX_VALUE;
+  public static short nondetShort() {
+    return (short) (new Random().nextInt());
+  }
+
+  //@ ensures \result == (int)Integer.MIN_VALUE || \result == (int)Integer.MAX_VALUE || (int)Integer.MIN_VALUE < \result && \result < (int)Integer.MAX_VALUE;
+  public static int nondetInt() {
+    return new Random().nextInt();
+  }
+
+  //@ ensures \result == (long)Long.MIN_VALUE || \result == (long)Long.MAX_VALUE || (long)Long.MIN_VALUE < \result && \result < (long)Long.MAX_VALUE;
+  public static long nondetLong() {
+    return new Random().nextLong();
+  }
+
+  //@ ensures \result >= 0;
+  public static float nondetFloat() {
+    return new Random().nextFloat();
+  }
+
+  //@ ensures \result >= 0;
+  public static double nondetDouble() {
+    return new Random().nextDouble();
+  }
+
+  //@ ensures \result != null && \result.length() >= 0;
+  public static String nondetString() {
+    Random random = new Random();
+    int size = random.nextInt();
+    assume(size >= 0);
+    byte[] bytes = new byte[size];
+    random.nextBytes(bytes);
+    return new String(bytes);
+  }
+}

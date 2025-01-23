@@ -1,0 +1,1397 @@
+class Main {
+
+  static int field;
+
+  //@ requires true;
+  //@ ensures b == b_old + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == a_old[i]);
+  public void testa(int b, boolean[] a) {
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures true;
+  public void test5(double xm, double ym) {
+    if (xm < ym && xm > ym) {
+      System.out.println("unreachable");
+      assert (false);
+    } else assert (true);
+  }
+
+  //@ requires true;
+  //@ ensures true;
+  public void test3(double x, double y) {
+    if (Math.sin(x) + Math.cos(y) == 1) System.out.println("eq");
+    else System.out.println("neq");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ ensures true;
+  public static void test1(int x, boolean b) {
+    System.out.println("test1");
+    Integer z = new Integer((int) x);
+    if (z <= 1200) System.out.println("le 1200");
+    if (z >= 1200) System.out.println("ge 1200");
+    if (b) {
+      System.out.println("b true");
+    } else {
+      System.out.println("b false");
+    }
+  }
+
+  //@ requires true;
+  //@ ensures x == x_old + z;
+  //@ ensures x > z ==> (\forall int i; x_old <= i && i < x; i != z);
+  public void test(int x, int z) {
+    // x = x >>> 1;
+    x = x + z;
+    if (x > z) {
+      // if (z > x)
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (x + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ ensures x == z_old + 1;
+  //@ ensures z == z_old + 1;
+  public void test2(int x, int z) {
+    System.out.println("in test2 " + x + " " + z);
+    x = z++;
+    // z=5;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (x > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:6: error: cannot find symbol
+  //@ ensures b == b_old + 1;
+                   ^
+  symbol:   variable b_old
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:7: error: cannot find symbol
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == a_old[i]);
+                                                              ^
+  symbol:   variable a_old
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:31: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:31: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:55: error: cannot find symbol
+  //@ ensures x == x_old + z;
+                   ^
+  symbol:   variable x_old
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:56: error: cannot find symbol
+  //@ ensures x > z ==> (\forall int i; x_old <= i && i < x; i != z);
+                                        ^
+  symbol:   variable x_old
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:70: error: cannot find symbol
+  //@ ensures x == z_old + 1;
+                   ^
+  symbol:   variable z_old
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:71: error: cannot find symbol
+  //@ ensures z == z_old + 1;
+                   ^
+  symbol:   variable z_old
+  location: class Main
+Note: /home/max/Documents/JMLGPT/tmp/ExSymExe.java uses or overrides a deprecated API that is marked for removal.
+Note: Recompile with -Xlint:removal for details.
+8 errors
+
+class Main {
+
+  static int field;
+
+  //@ requires true;
+  //@ modifies b;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures true;
+  public void test5(double xm, double ym) {
+    if (xm < ym && xm > ym) {
+      System.out.println("unreachable");
+      assert (false);
+    } else assert (true);
+  }
+
+  //@ requires true;
+  //@ ensures true;
+  public void test3(double x, double y) {
+    if (Math.sin(x) + Math.cos(y) == 1) System.out.println("eq");
+    else System.out.println("neq");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ ensures true;
+  public static void test1(int x, boolean b) {
+    System.out.println("test1");
+    Integer z = new Integer((int) x);
+    if (z <= 1200) System.out.println("le 1200");
+    if (z >= 1200) System.out.println("ge 1200");
+    if (b) {
+      System.out.println("b true");
+    } else {
+      System.out.println("b false");
+    }
+  }
+
+  //@ requires true;
+  //@ modifies x;
+  //@ ensures x == \old(x) + z;
+  //@ ensures x > z ==> (\forall int i; \old(x) <= i && i < x; i != z);
+  public void test(int x, int z) {
+    // x = x >>> 1;
+    x = x + z;
+    if (x > z) {
+      // if (z > x)
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (x + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies x, z;
+  //@ ensures x == \old(z) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int x, int z) {
+    System.out.println("in test2 " + x + " " + z);
+    x = z++;
+    // z=5;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (x > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:6: error: An assignable clause may not contain method formal parameters: b
+  //@ modifies b;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:32: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:32: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:56: error: An assignable clause may not contain method formal parameters: x
+  //@ modifies x;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:72: error: An assignable clause may not contain method formal parameters: x
+  //@ modifies x, z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:72: error: An assignable clause may not contain method formal parameters: z
+  //@ modifies x, z;
+                  ^
+Note: /home/max/Documents/JMLGPT/tmp/ExSymExe.java uses or overrides a deprecated API that is marked for removal.
+Note: Recompile with -Xlint:removal for details.
+6 errors
+
+class Main {
+
+  static int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies x;
+  //@ ensures x == \old(x) + z;
+  //@ ensures x > z ==> (\forall int i; \old(x) <= i && i < x; i != z);
+  public void test(int x, int z) {
+    int x_old = x;
+
+    x = x + z;
+    if (x > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (x + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies x, z;
+  //@ ensures x == \old(z) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int x, int z) {
+    int x_old = x;
+    int z_old = z;
+
+    System.out.println("in test2 " + x + " " + z);
+    x = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (x > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:28: error: An assignable clause may not contain method formal parameters: x
+  //@ modifies x;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:44: error: An assignable clause may not contain method formal parameters: x
+  //@ modifies x, z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:44: error: An assignable clause may not contain method formal parameters: z
+  //@ modifies x, z;
+                  ^
+5 errors
+
+class Main {
+
+  static int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field, z;
+  //@ ensures field == \old(z) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+    int z_old = z;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:28: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+  //@ modifies field;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:29: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == \old(field) + z;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:29: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == \old(field) + z;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:30: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:30: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:30: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:44: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+  //@ modifies field, z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:44: error: An assignable clause may not contain method formal parameters: z
+  //@ modifies field, z;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:45: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == \old(z) + 1;
+              ^
+11 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, /*@ spec_public @*/ boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field, z;
+  //@ ensures field == \old(z) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+    int z_old = z;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:8: error: This JML modifier is not allowed for a formal parameter
+  public void testa(int b, /*@ spec_public @*/ boolean[] a) {
+                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:44: error: An assignable clause may not contain method formal parameters: z
+  //@ modifies field, z;
+                      ^
+4 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y + x : y - x;
+                                          ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y >= 0) ? y + x : y - x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y >= 0) ? y + x : y - x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y >= 0) ? y + x : y - x;  
+                                           ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x >= 0 && y >= 0) ? y + x : y - x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x >= 0 && y >= 0) ? y + x : y - x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x >= 0 && y >= 0) ? y + x : y - x;  
+                                            ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y > 0) ? y - x : y + x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y - x : y + x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y > 0) ? y - x : y + x;  
+                                          ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y >= 0) ? y + x : y + x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y >= 0) ? y + x : y + x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y >= 0) ? y + x : y + x;  
+                                           ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 0 && y >= 0) ? y - x : y - x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x > 0 && y >= 0) ? y - x : y - x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x > 0 && y >= 0) ? y - x : y - x;  
+                                           ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x >= 0 && y > 0) ? y - x : y + x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x >= 0 && y > 0) ? y - x : y + x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x >= 0 && y > 0) ? y - x : y + x;  
+                                           ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x >= 0 && y >= 0) ? y + x : y + x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x >= 0 && y >= 0) ? y + x : y + x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x >= 0 && y >= 0) ? y + x : y + x;  
+                                            ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x >= 0 && y >= 0) ? y - x : y - x;  
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incomparable types: int and boolean
+  //@ ensures \result == (x >= 0 && y >= 0) ? y - x : y - x;  
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe.java:18: error: incompatible types: int cannot be converted to boolean
+  //@ ensures \result == (x >= 0 && y >= 0) ? y - x : y - x;  
+                                            ^
+2 errors
+
+class Main {
+
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures b == \old(b) + 1;
+  //@ ensures (\forall int i; 0 <= i && i < a.length; a[i] == \old(a[i]));
+  public void testa(int b, boolean[] a) {
+    int b_old = b;
+    boolean[] a_old = a.clone();
+
+    b++;
+    if (a[0]) System.out.println("array0");
+    if (a[1]) System.out.println("array1");
+  }
+
+  //@ requires true;
+ 
+  public static int test4(int x, int y) {
+    if (x > 0 && y > 0) {
+      return y + x;
+    } else {
+      return y - x;
+    }
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + z;
+  //@ ensures field > z ==> (\forall int i; \old(field) <= i && i < field; i != z);
+  public void test(int z) {
+    int field_old = field;
+
+    field = field + z;
+    if (field > z) {
+      System.out.println("unreachable");
+      assert false;
+    }
+    if (field + 6 > 0) System.out.println("br3");
+    else System.out.println("br2");
+  }
+
+  //@ requires true;
+  //@ modifies field;
+  //@ ensures field == \old(field) + 1;
+  //@ ensures z == \old(z) + 1;
+  public void test2(int z) {
+    int field_old = field;
+
+    System.out.println("in test2 " + field + " " + z);
+    field = z++;
+    if (z > 0) {
+      System.out.println("branch2 FOO1");
+    } else System.out.println("branch2 FOO2");
+    if (field > 0) System.out.println("branch2 BOO1");
+    else System.out.println("branch2 BOO2");
+  }
+}
+

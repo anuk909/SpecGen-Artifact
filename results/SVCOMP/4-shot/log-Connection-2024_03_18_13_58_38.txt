@@ -1,0 +1,65 @@
+class SQLException extends Exception {
+}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \no_exception;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \no_exception;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \no_exception;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+public class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \no_exception;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ ensures \no_exception;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Connection.java:7: error: This backslash token is unknown: \no_exception
+  //@ ensures \no_exception;
+              ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:15: error: This backslash token is unknown: \no_exception
+  //@ ensures \no_exception;
+              ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:23: error: This backslash token is unknown: \no_exception
+  //@ ensures \no_exception;
+              ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:34: error: This backslash token is unknown: \no_exception
+  //@ ensures \no_exception;
+              ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:41: error: This backslash token is unknown: \no_exception
+  //@ ensures \no_exception;
+              ^
+5 errors
+

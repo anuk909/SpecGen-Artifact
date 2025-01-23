@@ -1,0 +1,53 @@
+public class StringStartEnd01 {
+  //@ requires strings != null;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ ensures (\forall int i; 0 <= i && i < strings.length; \result[i] == 1 ==> strings[i].startsWith("te"));
+  public static int[] countStringsStartingWithTe(String[] strings) {
+    int[] result = new int[strings.length];
+    for (int i = 0; i < strings.length; i++) {
+      if (strings[i].startsWith("te")) {
+        result[i] = 1;
+      }
+    }
+    return result;
+  }
+
+  //@ requires strings != null;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ ensures \result == (\sum int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ? 1 : 0);
+  public static int countStringsStartingWithSte(String[] strings) {
+    int count = 0;
+    for (String string : strings) {
+      if (string.startsWith("ste", 2)) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  //@ requires strings != null;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ ensures \result == (\sum int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ? 1 : 0);
+  public static int countStringsEndingWithEd(String[] strings) {
+    int count = 0;
+    for (String string : strings) {
+      if (string.endsWith("ed")) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public static void main(String[] args) {
+    String[] strings = {"tested", "testing", "passed", "passing"};
+
+    int[] countsStartingWithTe = countStringsStartingWithTe(strings);
+    int countStartingWithSte = countStringsStartingWithSte(strings);
+    int countEndingWithEd = countStringsEndingWithEd(strings);
+
+    assert Arrays.stream(countsStartingWithTe).sum() == 2;
+    assert countStartingWithSte == 1;
+    assert countEndingWithEd == 2;
+  }
+}
+

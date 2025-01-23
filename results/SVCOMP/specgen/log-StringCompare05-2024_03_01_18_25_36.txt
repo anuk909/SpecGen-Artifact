@@ -1,0 +1,34 @@
+public class StringCompare05 {
+    //@ requires string != null;
+    //@ ensures \result <==> new String(string) == string;
+    public static boolean f (String string) {
+        String s1 = new String(string);
+        return s1 == string;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringCompare05.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result <==> new String(string) == string;
+                             ^
+1 error
+
+public class StringCompare05 {
+    //@ requires string != null;
+    //@ ensures \result <==> string.equals(new String(string));
+    public static boolean f (String string) {
+        String s1 = new String(string);
+        return s1 == string;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringCompare05.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result <==> string.equals(new String(string));
+                                           ^
+1 error
+
+public class StringCompare05 {
+    //@ requires string != null;
+    //@ ensures \result <==> string.equals(string);
+    public static boolean f (String string) {
+        String s1 = new String(string);
+        return s1 == string;
+    }
+}

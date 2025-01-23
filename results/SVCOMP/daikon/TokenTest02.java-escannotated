@@ -1,0 +1,25 @@
+public class TokenTest02 {
+  public static boolean f(String sentence) {
+    String[] tokens = sentence.split(" ");
+
+    int i = 0;
+    for (String token : tokens) {
+      if (i == 3)
+        if (!token.equals("genneration"))
+          return false;
+      ++i;
+    }
+    return true;
+  }
+  
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("Test generation");
+    f("");
+    f("Test my your genneration");
+    f("OH Test my your genneration");
+  }
+}

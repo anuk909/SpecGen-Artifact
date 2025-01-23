@@ -1,0 +1,22 @@
+class Main {
+    //@ requires Integer.MIN_VALUE <= x && x <= Integer.MAX_VALUE;
+    //@ ensures \result == (x > 0 && \result == true) || (x <= 0 && \result == false);
+    public static boolean main(int x) {
+        x = x > 0 ? x % 10 : -(x % 10);
+
+        Main inst = new Main();
+        return inst.test(x);
+    }
+
+    //@ requires Integer.MIN_VALUE <= x && x <= Integer.MAX_VALUE;
+    //@ ensures \result == (x + 1.0 > 0 && \result == true) || (x + 1.0 <= 0 && \result == false);
+    public boolean test(int x) {
+        double res = (double) ++x;
+        if (res > 0) System.out.println("x >0");
+        else {
+            return false;
+        }
+        return true;
+    }
+}
+

@@ -1,0 +1,192 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    private final Map<String, Object> map = new HashMap<>();
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> (\forall String key; map.containsKey(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == map.get(name);
+                           ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result != null ==> (\forall String key; map.containsKey(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:20: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures map.get(name) == value;
+                ^
+3 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    private final Map<String, Object> map = new HashMap<>();
+
+    //@ spec_public
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ spec_public
+    //@ ensures \result != null ==> (\forall String key; map.containsKey(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ spec_public
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: No modifiers are allowed prior to a lightweight specification case
+    //@ spec_public
+        ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:16: error: No modifiers are allowed prior to a lightweight specification case
+    //@ spec_public
+        ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:22: error: No modifiers are allowed prior to a lightweight specification case
+    //@ spec_public
+        ^
+3 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    // @ public model instance Map<String, Object> map;
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> (\forall String key; map.containsKey(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: non-static method get(K) cannot be referenced from a static context
+    //@ ensures \result == map.get(name);
+                              ^
+  where K,V are type-variables:
+    K extends Object declared in class map
+    V extends Object declared in class map
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:12: error: cannot find symbol
+        return map.get(name);
+                  ^
+  symbol:   method get(String)
+  location: class map
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:15: error: cannot find symbol
+    //@ ensures \result != null ==> (\forall String key; map.containsKey(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+                                                            ^
+  symbol:   method containsKey(String)
+  location: class map
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:17: error: cannot find symbol
+        return Collections.enumeration(map.keySet());
+                                          ^
+  symbol:   method keySet()
+  location: class map
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:20: error: non-static method get(K) cannot be referenced from a static context
+    //@ ensures map.get(name) == value;
+                   ^
+  where K,V are type-variables:
+    K extends Object declared in class map
+    V extends Object declared in class map
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:22: error: cannot find symbol
+        this.map.put(name, value);
+            ^
+  symbol: variable map
+Note: /home/max/Documents/JMLGPT/tmp/HttpSession.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+6 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    private final Map<String, Object> map = new HashMap<>();
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == map.get(name);
+                           ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:20: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures map.get(name) == value;
+                ^
+3 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    //@ spec_public
+    private final Map<String, Object> map = new HashMap<>();
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}

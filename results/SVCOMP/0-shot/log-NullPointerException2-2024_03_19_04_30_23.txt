@@ -1,0 +1,19 @@
+class A {
+  int i;
+}
+
+class NullPointerException2 {
+  //@ requires true;
+  //@ ensures \result == false ==> (\exc instanceof NullPointerException);
+  //@ ensures \result == true ==> (\forall A a; a == null; a.i == 0);
+  public static boolean f() {
+    A a = null;
+    try {
+      a.i = 0;
+    } catch (NullPointerException exc) {
+      return false;
+    }
+    return true;
+  }
+}
+

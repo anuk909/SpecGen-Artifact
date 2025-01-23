@@ -1,0 +1,38 @@
+class ExSymExe8 {
+  /*@ invariant this != null; */
+  /*@ ensures (x >= -1)  ==  (\old(z) >= 2); */
+  /*@ ensures (x >= -1)  ==  (\result == true); */
+  /*@ ensures (x >= -1)  ==  (z >= 0); */
+  /*@ ensures (x >= -1)  ==>  (x <= 2); */
+  /*@ ensures (z <= -1)  ==  (\old(z) <= 1); */
+  /*@ ensures (z <= -1)  ==  (\result == false); */
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe8");
+    int y = 3;
+    int p = 2;
+    x = z - y;
+    z = z - p;
+    if (z < 0) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x < 0) System.out.println("branch BOO1");
+    else
+      System.out.println("branch BOO2");
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    ExSymExe8 e = new ExSymExe8();
+    for(int i = -5; i <= 5; i++) {
+      for(int j = -5; j <= 5; j++) {
+        e.test(i, j);
+        e.test(j, i);
+      }
+    }
+  }
+}

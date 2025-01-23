@@ -1,0 +1,20 @@
+public class ClassCastException1 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    //@ try_spec: \invariant true;
+    //@ try_spec: \exsures (ClassCastException exc) false;
+    try {
+      Object x = new Integer(0);
+      String y = (String) x;
+    } catch (ClassCastException exc) {
+      //@ catch_spec: \invariant true;
+      //@ catch_spec: \exsures (ClassCastException exc) false;
+      return false;
+    }
+    //@ normal_return_spec: \invariant true;
+    //@ normal_return_spec: \exsures (ClassCastException exc) false;
+    return true;
+  }
+}
+

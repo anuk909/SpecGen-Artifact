@@ -1,0 +1,44 @@
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    //@ ensures \result <= stones.length();
+    //@ ensures (\forall int i; 0 <= i && i < stones.length(); (\exists int j; 0 <= j && j < jewels.length(); stones.charAt(i) == jewels.charAt(j))) ==> \result == jewels.length();
+    //@ ensures (\exists int i; 0 <= i && i < stones.length(); (\forall int j; 0 <= j && j < jewels.length(); stones.charAt(i) != jewels.charAt(j))) ==> \result == 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining 0 <= jewelsLength;
+        //@ maintaining 0 <= stonesLength;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\exists int j; 0 <= j && j < jewelsLength; stones.charAt(k) == jewels.charAt(j))) ==> jewelsCount == jewels.length();
+        //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < jewelsLength; stones.charAt(k) != jewels.charAt(j))) ==> jewelsCount == 0;
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ maintaining 0 <= jewelsLength;
+            //@ maintaining 0 <= stonesLength;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\exists int j; 0 <= j && j < jewelsLength; stones.charAt(k) == jewels.charAt(j))) ==> jewelsCount == jewels.length();
+            //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < jewelsLength; stones.charAt(k) != jewels.charAt(j))) ==> jewelsCount == 0;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:23: error: variable j is already defined in method numJewelsInStones(String,String)
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\exists int j; 0 <= j && j < jewelsLength; stones.charAt(k) == jewels.charAt(j))) ==> jewelsCount == jewels.length();
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:24: error: variable j is already defined in method numJewelsInStones(String,String)
+            //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < jewelsLength; stones.charAt(k) != jewels.charAt(j))) ==> jewelsCount == 0;
+                                                                          ^
+2 errors
+

@@ -1,0 +1,180 @@
+public class CalculatorShuffled {
+    //@ requires operator == '+' || operator == '-' || operator == '*' || operator == '/';
+    //@ ensures \result == spec_calculate(num1, num2, operator);
+    public int calculate(int num1, int num2, char operator) {
+
+        int output;
+
+        switch (operator)
+        {
+            case '-':
+            	output = num1 * num2;
+                break;
+
+            case '*':
+            	output = num1 / num2;
+                break;
+
+            case '/':
+            	output = num1 + num2;
+                break;
+
+            case '+':
+            	output = num1 - num2;
+		break;
+
+            default:
+                return -1;
+        }
+        return output;
+    }
+
+    /*@ 	requires operator == '+' || operator == '-' || operator == '*' || operator == '/';
+            	ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+            	ensures operator == '+' ==> \result == num1 - num2;
+            	ensures operator == '-' ==> \result == num1 * num2;
+            	ensures operator == '*' ==> \result == num1 / num2;
+            	ensures operator == '/' ==> \result == num1 + num2;
+        public model function static int spec_calculate(int num1, int num2, char operator) {
+	    switch (operator)
+        {
+            case '-':
+            	return num1 * num2;
+
+            case '*':
+            	return num1 / num2;
+
+            case '/':
+            	return num1 + num2;
+
+            case '+':
+            	return num1 - num2;
+
+            default:
+                return -1;
+        }
+        }@*/
+}
+/home/max/Documents/JMLGPT/tmp/CalculatorShuffled.java:38: error: <identifier> expected
+        public model function static int spec_calculate(int num1, int num2, char operator) {
+                             ^
+/home/max/Documents/JMLGPT/tmp/CalculatorShuffled.java:38: error: Method specs may not precede a variable declaration
+        public model function static int spec_calculate(int num1, int num2, char operator) {
+                              ^
+2 errors
+
+public class CalculatorShuffled {
+    //@ requires operator == '+' || operator == '-' || operator == '*' || operator == '/';
+    //@ ensures \result == spec_calculate(num1, num2, operator);
+    public int calculate(int num1, int num2, char operator) {
+
+        int output;
+
+        switch (operator)
+        {
+            case '-':
+            	output = num1 * num2;
+                break;
+
+            case '*':
+            	output = num1 / num2;
+                break;
+
+            case '/':
+            	output = num1 + num2;
+                break;
+
+            case '+':
+            	output = num1 - num2;
+		break;
+
+            default:
+                return -1;
+        }
+        return output;
+    }
+
+    /*@ 	requires operator == '+' || operator == '-' || operator == '*' || operator == '/';
+            	ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+            	ensures operator == '+' ==> \result == num1 - num2;
+            	ensures operator == '-' ==> \result == num1 * num2;
+            	ensures operator == '*' ==> \result == num1 / num2;
+            	ensures operator == '/' ==> \result == num1 + num2;
+        @*/
+        public static int spec_calculate(int num1, int num2, char operator) {
+	    switch (operator)
+        {
+            case '-':
+            	return num1 * num2;
+
+            case '*':
+            	return num1 / num2;
+
+            case '/':
+            	return num1 + num2;
+
+            case '+':
+            	return num1 - num2;
+
+            default:
+                return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalculatorShuffled.java:3: warning: A non-pure method is being called where it is not permitted: CalculatorShuffled.spec_calculate(int,int,char)
+    //@ ensures \result == spec_calculate(num1, num2, operator);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/CalculatorShuffled.java:15: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method calculate
+            	output = num1 / num2;
+            	              ^
+/home/max/Documents/JMLGPT/tmp/CalculatorShuffled.java:46: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method spec_calculate
+            	return num1 / num2;
+            	            ^
+1 warning
+2 verification failures
+
+public class CalculatorShuffled {
+    //@ requires operator == '+' || operator == '-' || operator == '*' || operator == '/';
+    //@ ensures \result == spec_calculate(num1, num2, operator);
+    public int calculate(int num1, int num2, char operator) {
+        int output;
+        switch (operator) {
+            case '-':
+                output = num1 * num2;
+                break;
+            case '*':
+                output = num1 / num2;
+                break;
+            case '/':
+                output = num1 + num2;
+                break;
+            case '+':
+                output = num1 - num2;
+                break;
+            default:
+                return -1;
+        }
+        return output;
+    }
+
+    //@ requires operator == '+' || operator == '-' || operator == '*' || operator == '/';
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures operator == '+' ==> \result == num1 - num2;
+    //@ ensures operator == '-' ==> \result == num1 * num2;
+    //@ ensures operator == '*' ==> \result == num1 / num2;
+    //@ ensures operator == '/' ==> \result == num1 + num2;
+    public static /*@ pure @*/ int spec_calculate(int num1, int num2, char operator) {
+        switch (operator) {
+            case '-':
+                return num1 * num2;
+            case '*':
+                return num1 / num2;
+            case '/':
+                return num1 + num2;
+            case '+':
+                return num1 - num2;
+            default:
+                return -1;
+        }
+    }
+}

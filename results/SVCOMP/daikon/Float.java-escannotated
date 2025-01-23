@@ -1,0 +1,21 @@
+class Float {
+
+  /*@ ensures \result == true; */
+  public static boolean f(float a, float b) {
+    return (a + b != a || b == 0.0);
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(float i = -5; i <= 5; i += 1) {
+      for(float j = -5; j <= 5; j += 1) {
+        f(i,j);
+        f(j,i);
+      }
+    }
+  }
+
+}

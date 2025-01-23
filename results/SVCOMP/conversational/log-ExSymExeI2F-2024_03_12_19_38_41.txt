@@ -1,0 +1,58 @@
+class Main {
+
+  //@ ensures \result ==> (x != 3 && x != 0) || (x > 0);
+  //@ ensures !\result ==> (x == 3 || x == 0) && x <= 0;
+  public static boolean f(int x) {
+    if (x != 3 && x != 0)
+      return true;
+
+    Main inst = new Main();
+    return inst.test(x);
+  }
+
+  //@ ensures \result ==> res > 0;
+  //@ ensures !\result ==> res <= 0;
+  public boolean test(int x) {
+    float res = (float) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeI2F.java:13: error: cannot find symbol
+  //@ ensures \result ==> res > 0;
+                          ^
+  symbol:   variable res
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeI2F.java:14: error: cannot find symbol
+  //@ ensures !\result ==> res <= 0;
+                           ^
+  symbol:   variable res
+  location: class Main
+2 errors
+
+class Main {
+
+  //@ ensures \result ==> (x != 3 && x != 0) || (x > 0);
+  //@ ensures !\result ==> (x == 3 || x == 0) && x <= 0;
+  public static boolean f(int x) {
+    if (x != 3 && x != 0)
+      return true;
+
+    Main inst = new Main();
+    return inst.test(x);
+  }
+
+  //@ ensures \result ==> x > 0;
+  //@ ensures !\result ==> x <= 0;
+  public boolean test(int x) {
+    float res = (float) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}

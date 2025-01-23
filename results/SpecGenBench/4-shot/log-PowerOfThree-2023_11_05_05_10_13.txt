@@ -1,0 +1,17 @@
+class PowerOfThree {
+    //@ ensures \result == true <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        int temp = n;
+        //@ maintaining (\forall int i; i >= 0 && temp % Math.pow(3, i) == 0; temp == n / Math.pow(3, i));
+        //@ decreases temp;
+        while (temp != 0 && temp % 3 == 0) {
+            temp /= 3;
+        }
+        return temp == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopDecreasesNonNegative) in method isPowerOfThree
+        //@ decreases temp;
+            ^
+1 verification failure
+

@@ -1,0 +1,71 @@
+class A {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class ClassCastException2 {
+    //@ ensures \result <==> (\exists ClassCastException exc; true; false);
+    public static boolean f() {
+        try {
+            A c = new C();
+            B b = (B) c;
+        } catch (ClassCastException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ClassCastException2.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ClassCastException2.java:8:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/ClassCastException2.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ClassCastException2.java:16:
+    //@ ensures \result <==> (\exists ClassCastException exc; true; false);
+        ^
+2 verification failures
+
+class A {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class ClassCastException2 {
+    //@ ensures \result <==> false;
+    public static boolean f() {
+        try {
+            A c = new C();
+            B b = (B) c;
+        } catch (ClassCastException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ClassCastException2.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ClassCastException2.java:8:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/ClassCastException2.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ClassCastException2.java:16:
+    //@ ensures \result <==> false;
+        ^
+2 verification failures
+
+class A {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class ClassCastException2 {
+    //@ ensures \result <==> true;
+    public static boolean f() {
+        try {
+            A c = new C();
+            B b = (B) c;
+        } catch (ClassCastException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+

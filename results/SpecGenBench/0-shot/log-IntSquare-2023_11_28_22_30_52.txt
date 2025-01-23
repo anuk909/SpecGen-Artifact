@@ -1,0 +1,31 @@
+public class IntSquare {
+
+    //@ requires x >= 0;
+    //@ ensures \result >= 0;
+    public static int squareOf(int x) {
+        if(x < 0)
+            x = -x;
+        int res = 0;
+        //@ loop_invariant res >= 0;
+        //@ loop_invariant res == (\sum int k; 0 <= k && k < i; 1);
+        //@ loop_invariant res == (\sum int k; 0 <= k && k < j; 1) * i;
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ loop_invariant res >= 0;
+            //@ loop_invariant res == (\sum int k; 0 <= k && k < j; 1) * i;
+            //@ decreases x - j;
+            for(int j = 0; j < x; j++) {
+                res = res + 1;
+            }
+        }
+        return res;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IntSquare.java:11: error: cannot find symbol
+        //@ loop_invariant res == (\sum int k; 0 <= k && k < j; 1) * i;
+                                                             ^
+  symbol:   variable j
+  location: class IntSquare
+1 error
+

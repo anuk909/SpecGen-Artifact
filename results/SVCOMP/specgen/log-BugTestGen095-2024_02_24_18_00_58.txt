@@ -1,0 +1,78 @@
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result.equals("fg");
+    //@ ensures !\result ==> !\result.equals("fg");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result ==> \result.equals("fg");
+                                   ^
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:4: error: boolean cannot be dereferenced
+    //@ ensures !\result ==> !\result.equals("fg");
+                                     ^
+2 errors
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result == (new StringBuilder(arg).append("Z").toString().equals("fg"));
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (new StringBuilder(arg).append("Z").toString().equals("fg"));
+                            ^
+1 error
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result.equals("fg");
+    //@ ensures !\result ==> !\result.equals("fg");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result ==> \result.equals("fg");
+                                   ^
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:4: error: boolean cannot be dereferenced
+    //@ ensures !\result ==> !\result.equals("fg");
+                                     ^
+2 errors
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result == ((new StringBuilder(arg).append("Z").toString()).equals("fg"));
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == ((new StringBuilder(arg).append("Z").toString()).equals("fg"));
+                             ^
+1 error
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result == (arg + "Z").equals("fg");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}

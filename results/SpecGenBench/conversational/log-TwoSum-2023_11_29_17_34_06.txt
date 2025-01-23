@@ -1,0 +1,62 @@
+class TwoSum {
+    //@ requires nums != null;
+    //@ ensures \result != null;
+    //@ ensures (\exists int i, j; 0 <= i && i < nums.length && 0 <= j && j < nums.length; nums[i] + nums[j] == target && \result[0] == i && \result[1] == j);
+    //@ ensures (\forall int i, j; 0 <= i && i < nums.length && 0 <= j && j < nums.length; nums[i] + nums[j] != target || (\result[0] != i || \result[1] != j));
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int k, l; 0 <= k && k < i && 0 <= l && l < i; nums[k] + nums[l] != target);
+        //@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+            //@ loop_invariant i + 1 <= j && j <= n;
+            //@ loop_invariant (\forall int k; i <= k && k < j; nums[i] + nums[k] != target);
+            //@ decreases n - j;
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/TwoSum.java:4:) in method twoSum
+        return new int[0];
+        ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/TwoSum.java:21:
+    //@ ensures (\exists int i, j; 0 <= i && i < nums.length && 0 <= j && j < nums.length; nums[i] + nums[j] == target && \result[0] == i && \result[1] == j);
+        ^
+2 verification failures
+
+class TwoSum {
+    //@ requires nums != null;
+    //@ ensures \result != null;
+    //@ ensures (\exists int i, j; 0 <= i && i < nums.length && 0 <= j && j < nums.length; nums[i] + nums[j] == target && \result[0] == i && \result[1] == j);
+    //@ ensures (\forall int i, j; 0 <= i && i < nums.length && 0 <= j && j < nums.length; nums[i] + nums[j] != target || (\result[0] != i || \result[1] != j));
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int k, l; 0 <= k && k < i && 0 <= l && l < i; nums[k] + nums[l] != target);
+        //@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+            //@ loop_invariant i + 1 <= j && j <= n;
+            //@ loop_invariant (\forall int k; i <= k && k < j; nums[i] + nums[k] != target);
+            //@ decreases n - j;
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/TwoSum.java:4:) in method twoSum
+        return new int[]{-1, -1};
+        ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/TwoSum.java:21:
+    //@ ensures (\exists int i, j; 0 <= i && i < nums.length && 0 <= j && j < nums.length; nums[i] + nums[j] == target && \result[0] == i && \result[1] == j);
+        ^
+2 verification failures
+

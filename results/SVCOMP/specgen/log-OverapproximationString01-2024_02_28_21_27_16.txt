@@ -1,0 +1,71 @@
+public class OverapproximationString01 {
+  //@ requires s != null;
+  //@ ensures complete.equals("not possible") ==> \result == true;
+  //@ ensures !complete.equals("not possible") ==> \result == false;
+  public static void foo(String s) {
+    String prefix = "abc";
+    String complete = prefix + s;
+    if (complete.equals("not possible")) {
+      assert (true);
+    } else {
+      assert (false);
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+  //@ ensures complete.equals("not possible") ==> \result == true;
+              ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures complete.equals("not possible") ==> \result == true;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+  //@ ensures !complete.equals("not possible") ==> \result == false;
+               ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures !complete.equals("not possible") ==> \result == false;
+                                                    ^
+4 errors
+
+public class OverapproximationString01 {
+  //@ requires s != null;
+  //@ ensures complete.equals("not possible") ==> true;
+  //@ ensures !complete.equals("not possible") ==> false;
+  public static void foo(String s) {
+    String prefix = "abc";
+    String complete = prefix + s;
+    if (complete.equals("not possible")) {
+      assert (true);
+    } else {
+      assert (false);
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+  //@ ensures complete.equals("not possible") ==> true;
+              ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+  //@ ensures !complete.equals("not possible") ==> false;
+               ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+2 errors
+
+public class OverapproximationString01 {
+  //@ requires s != null;
+  //@ ensures true;
+  public static void foo(String s) {
+    String prefix = "abc";
+    String complete = prefix + s;
+    if (complete.equals("not possible")) {
+      assert (true);
+    } else {
+      assert (false);
+    }
+  }
+}

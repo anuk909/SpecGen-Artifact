@@ -1,0 +1,33 @@
+import java.util.Random;
+
+class assert1 {
+    //@ ensures i >= 10 ==> \result == true;
+    //@ ensures i < 10 ==> \result == false;
+    public static boolean checkAssertion(int i) {
+        return i >= 10;
+    }
+
+    //@ ensures \result == new Random().nextInt();
+    public static int generateRandomInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures checkAssertion(i);
+    public static void func() {
+        int i = generateRandomInt();
+
+        if (i >= 10) assert checkAssertion(i) : "my super assertion"; // should hold
+
+        if (i >= 20) assert checkAssertion(i) : "my super assertion"; // should hold
+    }
+}
+/home/max/Documents/JMLGPT/tmp/assert1.java:10: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextInt();
+                           ^
+/home/max/Documents/JMLGPT/tmp/assert1.java:15: error: cannot find symbol
+    //@ ensures checkAssertion(i);
+                               ^
+  symbol:   variable i
+  location: class assert1
+2 errors
+

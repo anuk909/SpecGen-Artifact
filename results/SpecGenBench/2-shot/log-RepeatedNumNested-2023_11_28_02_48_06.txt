@@ -1,0 +1,23 @@
+public class RepeatedNumNested {
+
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (0 <= \result && \result < arr.length && (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i] && \result < i));
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            //@ maintaining 0 <= i && i <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; k < j && j < i; arr[k] != arr[j]));
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:8: error: variable j is already defined in method repeatedNum(int[])
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; k < j && j < i; arr[k] != arr[j]));
+                                                                          ^
+1 error
+

@@ -1,0 +1,19 @@
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (\exists int i; i >= 0 && Math.pow(3, i) == n);
+    public boolean isPowerOfThree(int n) {
+        int temp = n;
+        //@ maintaining temp >= 0;
+        //@ maintaining temp % 3 == 0 ==> (\exists int i; i >= 0 && Math.pow(3, i) == temp);
+        //@ decreases temp;
+        while (temp != 0 && temp % 3 == 0) {
+            temp /= 3;
+        }
+        return temp == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:7: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfThree
+        //@ maintaining temp % 3 == 0 ==> (\exists int i; i >= 0 && Math.pow(3, i) == temp);
+            ^
+1 verification failure
+

@@ -1,0 +1,75 @@
+public class PrimeNumbers
+{
+    private static /*@ spec_public @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    private /*@ spec_public @*/ int primeArray[];
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n && (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+      @ ensures (\forall int i, j; 0 <= i && i < j && j < primeArray.length; primeArray[i] < primeArray[j]);
+      @ assignable primeArray;
+      @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        //@ ghost int count_counter;
+        //@ set count_counter = 1;
+        //@ maintaining 2 <= count && count <= n+1;
+        //@ maintaining count_counter + 1 == count;
+        //@ maintaining (\forall int i; 0 <= i && i < count_counter; isPrime(primeArray[i]));
+        //@ maintaining (\forall int i, j; 0 <= i && i < j && j < count_counter; primeArray[i] < primeArray[j]);
+        //@ maintaining (\forall int i; count_counter <= i && i < primeArray.length; primeArray[i] == 0);
+        //@ decreases n - count;
+        for (count = 2; count <= n;)
+        { 
+
+            //@ ghost int j_counter;
+            //@ set j_counter = 2;
+            //@ maintaining 2 <= j && j <= num/2;
+            //@ maintaining j_counter + 1 == j;
+            //@ decreases num/2 - j;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+                //@ set j_counter = j_counter + 1;
+            }
+            //@ assert j_counter == num/2 + 1;
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+            //@ set count_counter = count_counter + 1;
+        } 
+        //@ assert count_counter == n+1;
+        return primeArray; 
+    }
+
+    //@ requires num > 0;
+    //@ ensures \result <==> (\forall int i; 2 <= i && i < num; num%i != 0);
+    /*@ pure @*/ private static boolean isPrime(int num) {
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0)
+                return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures primeArray.length == n && (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:23: error: variable j is already defined in method primeList(int)
+        //@ maintaining (\forall int i, j; 0 <= i && i < j && j < count_counter; primeArray[i] < primeArray[j]);
+                                        ^
+2 errors
+

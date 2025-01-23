@@ -1,0 +1,411 @@
+class A1 {
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures new A3().some_member == 1;
+    //@ ensures new A3().some_other_member == 2;
+    //@ ensures new A3().yet_another_member == 3;
+    public static void main(String[] args) {
+        A3 a3 = new A3();
+        assert a3.some_member == 1;
+        assert a3.some_other_member == 2;
+        assert a3.yet_another_member == 3;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:32: error: Object allocation is not permitted in specification expressions
+    //@ ensures new A3().some_member == 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:32: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures new A3().some_member == 1;
+                        ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:33: error: Object allocation is not permitted in specification expressions
+    //@ ensures new A3().some_other_member == 2;
+                ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:33: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures new A3().some_other_member == 2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:34: error: Object allocation is not permitted in specification expressions
+    //@ ensures new A3().yet_another_member == 3;
+                ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:34: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures new A3().yet_another_member == 3;
+                        ^
+6 errors
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures (new A3()).some_member == 1;
+    //@ ensures (new A3()).some_other_member == 2;
+    //@ ensures (new A3()).yet_another_member == 3;
+    public static void main(String[] args) {
+        A3 a3 = new A3();
+        assert a3.some_member == 1;
+        assert a3.some_other_member == 2;
+        assert a3.yet_another_member == 3;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: error: Object allocation is not permitted in specification expressions
+    //@ ensures (new A3()).some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:36: error: Object allocation is not permitted in specification expressions
+    //@ ensures (new A3()).some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:37: error: Object allocation is not permitted in specification expressions
+    //@ ensures (new A3()).yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures (\new A3()).some_member == 1;
+    //@ ensures (\new A3()).some_other_member == 2;
+    //@ ensures (\new A3()).yet_another_member == 3;
+    public static void main(String[] args) {
+        A3 a3 = new A3();
+        assert a3.some_member == 1;
+        assert a3.some_other_member == 2;
+        assert a3.yet_another_member == 3;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: error: This backslash token is unknown: \new
+    //@ ensures (\new A3()).some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:36: error: This backslash token is unknown: \new
+    //@ ensures (\new A3()).some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:37: error: This backslash token is unknown: \new
+    //@ ensures (\new A3()).yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+    public static void main(String[] args) {
+        A3 a3 = new A3();
+        assert a3.some_member == 1;
+        assert a3.some_other_member == 2;
+        assert a3.yet_another_member == 3;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+                  ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+                                                                                    ^
+3 errors
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+    public static A3 main(String[] args) {
+        A3 a3 = new A3();
+        assert a3.some_member == 1;
+        assert a3.some_other_member == 2;
+        assert a3.yet_another_member == 3;
+        return a3;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:38: verify: The prover cannot establish an assertion (Assert) in method main
+        assert a3.some_member == 1;
+        ^
+1 verification failure
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+    public static A3 main(String[] args) {
+        A3 a3 = new A3();
+        return a3;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:38: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Inheritance1.java:35:) in method main
+        return a3;
+        ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Inheritance1.java:38:
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);
+        ^
+2 verification failures
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);  
+    public static A3 main(String[] args) {
+        A3 a3 = new A3();
+        return a3;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:38: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Inheritance1.java:35:) in method main
+        return a3;
+        ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:35: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Inheritance1.java:38:
+    //@ ensures (\result.some_member == 1) && (\result.some_other_member == 2) && (\result.yet_another_member == 3);  
+        ^
+2 verification failures
+
+class A1 {
+    //@ spec_public
+    int some_member;
+
+    //@ ensures some_member == 1;
+    A1() {
+        some_member = 1;
+    }
+}
+;
+
+class A2 extends A1 {
+    //@ spec_public
+    int some_other_member;
+
+    //@ ensures some_other_member == 2;
+    A2() {
+        some_other_member = 2;
+    }
+}
+;
+
+class A3 extends A2 {
+    //@ spec_public
+    int yet_another_member;
+
+    //@ ensures yet_another_member == 3;
+    A3() {
+        yet_another_member = 3;
+    }
+}
+;
+
+class Inheritance1 {
+ 
+    public static A3 main(String[] args) {
+        A3 a3 = new A3();
+        return a3;
+    }
+}
+
+

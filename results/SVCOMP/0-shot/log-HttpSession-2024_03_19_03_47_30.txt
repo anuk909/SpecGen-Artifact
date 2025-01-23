@@ -1,0 +1,33 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final Map<String, Object> map = new HashMap<>();
+
+  // JML specification for getAttribute method
+  //@ requires name != null;
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  // JML specification for getAttributeNames method
+  //@ ensures \result != null;
+  //@ ensures \result instanceof Enumeration;
+  //@ ensures (\forall String name; map.keySet().contains(name); ((Enumeration<String>)\result).contains(name));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  // JML specification for setAttribute method
+  //@ requires name != null && value != null;
+  //@ modifies map;
+  //@ ensures map.get(name) == value;
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}
+

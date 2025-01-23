@@ -1,0 +1,233 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.checkNoSymbolic(s) == s;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      //@ requires x != null && !x.contains("<bad/>");
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:16: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null && !x.contains("<bad/>");
+          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:22: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+          ^
+2 errors
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.checkNoSymbolic(s) == s;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      //@ requires x != null && !x.contains("<bad/>");
+      //@ ensures \result != null;
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+      //@ ensures \result != null;
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:16: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null && !x.contains("<bad/>");
+          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:23: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+          ^
+2 errors
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.checkNoSymbolic(s) == s;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      //@ requires x != null && !x.contains("<bad/>");
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:16: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null && !x.contains("<bad/>");
+          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:22: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+          ^
+2 errors
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.checkNoSymbolic(s) == s;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      //@ requires x != null && !x.contains("<bad/>");
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:12: error: cannot find symbol
+  //@ ensures \result.checkNoSymbolic(s) == s;
+                                      ^
+  symbol:   variable s
+  location: class HttpServletResponse
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:12: error: cannot find symbol
+  //@ ensures \result.checkNoSymbolic(s) == s;
+                                            ^
+  symbol:   variable s
+  location: class HttpServletResponse
+2 errors
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      //@ requires x != null && !x.contains("<bad/>");
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}

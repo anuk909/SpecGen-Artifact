@@ -1,0 +1,28 @@
+class char1 {
+    //@ requires arg != null;
+    //@ ensures \result == -1 && arg.length() < 1 ||
+    //@          \result == 0 && (arg.length() >= 1 && arg.charAt(0) < 0 || arg.charAt(0) > '\uffff') ||
+    //@          \result == 1 && (arg.length() >= 1 && arg.charAt(0) >= 0 && arg.charAt(0) <= '\uffff');
+    public static int fun(String arg) {
+        if (arg.length() < 1)
+            return -1;
+        char my_char = arg.charAt(0);
+        int x = my_char;
+        if (!(x >= 0 && x <= '\uffff'))
+            return 0;
+
+        my_char = '\uffff';
+        my_char++;
+        if (my_char == 0)
+            return 0;
+        return 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/char1.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/char1.java:3:) in method fun
+            return 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/char1.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/char1.java:17:
+    //@ ensures \result == -1 && arg.length() < 1 ||
+        ^
+2 verification failures
+

@@ -1,0 +1,266 @@
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures delta >= 0 ==> \result[0] == (-b - Math.sqrt(delta)) / (2 * a) && \result[1] == 0;
+    //@ ensures delta < 0 ==> \result[0] == -b / (2 * a) && \result[1] == Math.sqrt(-delta) / (2 * a);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(-delta) / (2*a);
+        }
+        return res;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: error: cannot find symbol
+    //@ ensures delta >= 0 ==> \result[0] == (-b - Math.sqrt(delta)) / (2 * a) && \result[1] == 0;
+                ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: error: cannot find symbol
+    //@ ensures delta >= 0 ==> \result[0] == (-b - Math.sqrt(delta)) / (2 * a) && \result[1] == 0;
+                                                             ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:7: error: cannot find symbol
+    //@ ensures delta < 0 ==> \result[0] == -b / (2 * a) && \result[1] == Math.sqrt(-delta) / (2 * a);
+                ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:7: error: cannot find symbol
+    //@ ensures delta < 0 ==> \result[0] == -b / (2 * a) && \result[1] == Math.sqrt(-delta) / (2 * a);
+                                                                                     ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+4 errors
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == spec_root1(a, b, c) && \result[1] == spec_root2(a, b, c);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(-delta) / (2*a);
+        }
+        return res;
+    } 
+    
+    /*@ requires a != 0;
+        ensures \result == (-b - Math.sqrt(delta)) / (2 * a);
+    */
+    public static double spec_root1(int a, int b, int c) {
+        double delta = b * b - 4 * a * c;
+        return (-b - Math.sqrt(delta)) / (2 * a);
+    }
+    
+    /*@ requires a != 0;
+        ensures \result == Math.sqrt(-delta) / (2 * a);
+    */
+    public static double spec_root2(int a, int b, int c) {
+        double delta = b * b - 4 * a * c;
+        return Math.sqrt(-delta) / (2 * a);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: warning: A non-pure method is being called where it is not permitted: SolveQuadraticEquation.spec_root1(int,int,int)
+    //@ ensures \result[0] == spec_root1(a, b, c) && \result[1] == spec_root2(a, b, c);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:6: warning: A non-pure method is being called where it is not permitted: SolveQuadraticEquation.spec_root2(int,int,int)
+    //@ ensures \result[0] == spec_root1(a, b, c) && \result[1] == spec_root2(a, b, c);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:22: error: cannot find symbol
+        ensures \result == (-b - Math.sqrt(delta)) / (2 * a);
+                                           ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:30: error: cannot find symbol
+        ensures \result == Math.sqrt(-delta) / (2 * a);
+                                      ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+2 errors
+2 warnings
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == spec_root1(a, b, c) && \result[1] == spec_root2(a, b, c);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(-delta) / (2*a);
+        }
+        return res;
+    } 
+    
+    /*@ requires a != 0;
+        ensures \result == (-b - Math.sqrt(delta)) / (2 * a);
+    */
+    public static /*@ pure @*/ double spec_root1(int a, int b, int c) {
+        double delta = b * b - 4 * a * c;
+        return (-b - Math.sqrt(delta)) / (2 * a);
+    }
+    
+    /*@ requires a != 0;
+        ensures \result == Math.sqrt(-delta) / (2 * a);
+    */
+    public static /*@ pure @*/ double spec_root2(int a, int b, int c) {
+        double delta = b * b - 4 * a * c;
+        return Math.sqrt(-delta) / (2 * a);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:22: error: cannot find symbol
+        ensures \result == (-b - Math.sqrt(delta)) / (2 * a);
+                                           ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:30: error: cannot find symbol
+        ensures \result == Math.sqrt(-delta) / (2 * a);
+                                      ^
+  symbol:   variable delta
+  location: class SolveQuadraticEquation
+2 errors
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == spec_root1(a, b, c) && \result[1] == spec_root2(a, b, c);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(-delta) / (2*a);
+        }
+        return res;
+    } 
+    
+    /*@ requires a != 0;
+        ensures \result == (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    */
+    public static /*@ pure @*/ double spec_root1(int a, int b, int c) {
+        return (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    }
+    
+    /*@ requires a != 0;
+        ensures \result == Math.sqrt(-1 * (b * b - 4 * a * c)) / (2 * a);
+    */
+    public static /*@ pure @*/ double spec_root2(int a, int b, int c) {
+        return Math.sqrt(-1 * (b * b - 4 * a * c)) / (2 * a);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:11: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:264:) in method solve
+            res[0] = (-b - Math.sqrt(delta)) / (2 * a);
+                                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:264: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:11:
+    public static /*@ pure @*/ double sqrt(double a);
+                                      ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:247: verify: Precondition conjunct is false: Double.isNaN(a) || a < 0.0
+      @   requires Double.isNaN(a) || a < 0.0;
+                                   ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:250: verify: Precondition conjunct is false: a == Double.POSITIVE_INFINITY
+      @   requires a == Double.POSITIVE_INFINITY;
+                     ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:253: verify: Precondition conjunct is false: java.lang.Math.isPositiveZero(a)
+      @   requires isPositiveZero(a);
+                                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:256: verify: Precondition conjunct is false: java.lang.Math.isNegativeZero(a)
+      @   requires isNegativeZero(a);
+                                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:259: verify: Precondition conjunct is false: a > 0.0
+      @   requires a > 0.0 && a < Double.POSITIVE_INFINITY;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:22:) in method spec_root1
+        return (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:25:
+        ensures \result == (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+        ^
+/home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:32: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:264:) in method spec_root2
+        return Math.sqrt(-1 * (b * b - 4 * a * c)) / (2 * a);
+                        ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:264: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SolveQuadraticEquation.java:32:
+    public static /*@ pure @*/ double sqrt(double a);
+                                      ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:247: verify: Precondition conjunct is false: Double.isNaN(a) || a < 0.0
+      @   requires Double.isNaN(a) || a < 0.0;
+                                   ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:250: verify: Precondition conjunct is false: a == Double.POSITIVE_INFINITY
+      @   requires a == Double.POSITIVE_INFINITY;
+                     ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:253: verify: Precondition conjunct is false: java.lang.Math.isPositiveZero(a)
+      @   requires isPositiveZero(a);
+                                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:256: verify: Precondition conjunct is false: java.lang.Math.isNegativeZero(a)
+      @   requires isNegativeZero(a);
+                                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Math.jml:259: verify: Precondition conjunct is false: a > 0.0
+      @   requires a > 0.0 && a < Double.POSITIVE_INFINITY;
+                     ^
+16 verification failures
+
+import java.lang.Math;
+
+public class SolveQuadraticEquation {
+    //@ requires a != 0;
+    //@ ensures \result.length == 2;
+    //@ ensures \result[0] == spec_root1(a, b, c) && \result[1] == spec_root2(a, b, c);
+    public static double[] solve(int a, int b, int c) {
+        double[] res = new double[2];
+        double delta = b * b - 4 * a * c;
+        if(delta >= 0) {
+            res[0] = (-b - Math.sqrt(Math.abs(delta))) / (2 * a);
+            res[1] = 0;
+        }
+        else {
+            res[0] = -b / (2*a);
+            res[1] = Math.sqrt(Math.abs(delta)) / (2*a);
+        }
+        return res;
+    } 
+    
+    /*@ requires a != 0;
+        ensures \result == (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    */
+    public static /*@ pure @*/ double spec_root1(int a, int b, int c) {
+        return (-b - Math.sqrt(Math.abs(b * b - 4 * a * c))) / (2 * a);
+    }
+    
+    /*@ requires a != 0;
+        ensures \result == Math.sqrt(Math.abs(-1 * (b * b - 4 * a * c))) / (2 * a);
+    */
+    public static /*@ pure @*/ double spec_root2(int a, int b, int c) {
+        return Math.sqrt(Math.abs(-1 * (b * b - 4 * a * c))) / (2 * a);
+    }
+
+aborted
+}

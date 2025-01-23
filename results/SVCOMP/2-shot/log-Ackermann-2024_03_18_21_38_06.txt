@@ -1,0 +1,36 @@
+public class Ackermann {
+
+    //@ requires m >= 0 && n >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures \result == spec_ack(m, n);
+    public static int ack(int m, int n) {
+        if (m == 0) {
+            return n + 1;
+        }
+        if (n == 0) {
+            return ack(m - 1, 1);
+        }
+        return ack(m - 1, ack(m, n - 1));
+    }
+
+    /*@ 	requires m >= 0 && n >= 0;
+            ensures \result >= 0;
+            ensures \result == spec_ack(m, n);
+        public model function static int spec_ack(int m, int n) {
+            if (m == 0) {
+                return n + 1;
+            } else if (n == 0) {
+                return spec_ack(m - 1, 1);
+            } else {
+                return spec_ack(m - 1, spec_ack(m, n - 1));
+            }
+        }@*/
+}
+/home/max/Documents/JMLGPT/tmp/Ackermann.java:19: error: <identifier> expected
+        public model function static int spec_ack(int m, int n) {
+                             ^
+/home/max/Documents/JMLGPT/tmp/Ackermann.java:19: error: Method specs may not precede a variable declaration
+        public model function static int spec_ack(int m, int n) {
+                              ^
+2 errors
+

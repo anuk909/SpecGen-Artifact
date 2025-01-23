@@ -1,0 +1,54 @@
+public class calc {
+  //@ requires args != null;
+  //@ requires args.length >= 2;
+  //@ requires (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  //@ ensures \result == null;
+  public static void fun(String[] args) {
+    if (args.length < 2) {
+      System.out.println("need two arguments");
+      return;
+    }
+    new calc().do_stuff(args[0], args[1]);
+  }
+
+  //@ requires a != null && b != null;
+  //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+  //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+  public void do_stuff(String a, String b) {
+    try {
+      int x = Integer.parseInt(a);
+      int y = Integer.parseInt(b);
+      assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+    } catch (java.lang.NumberFormatException e) {
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:5: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+1 error
+
+public class calc {
+  //@ requires args != null;
+  //@ requires args.length >= 2;
+  //@ requires (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  public static void fun(String[] args) {
+    if (args.length < 2) {
+      System.out.println("need two arguments");
+      return;
+    }
+    new calc().do_stuff(args[0], args[1]);
+  }
+
+  //@ requires a != null && b != null;
+  //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+  //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+  public void do_stuff(String a, String b) {
+    try {
+      int x = Integer.parseInt(a);
+      int y = Integer.parseInt(b);
+      assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+    } catch (java.lang.NumberFormatException e) {
+    }
+  }
+}

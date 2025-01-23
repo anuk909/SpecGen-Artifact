@@ -1,0 +1,1247 @@
+public class SortedListInsert {
+
+  private static class List {
+    public int x;
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    private List(int x, List next) {
+      this.x = x;
+      this.next = next;
+    }
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:23: error: constructor List in class List cannot be applied to given types;
+        next = new List(x, next);
+               ^
+  required: no arguments
+  found:    int,List
+  reason: actual and formal argument lists differ in length
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;  
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;  
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));  
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\exists List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));  
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures (\exists List l; l != null && l != this; l.next == \old(l.next) && l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\exists List l; l != null && l != this; l.next == \old(l.next) || l.x == \old(l.x));  
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures (\exists List l; l != null && l != this; l.next == \old(l.next) || l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) || l.x == \old(l.x));  
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures (\forall List l; l != null && l != this; l.next == \old(l.next) || l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x < data ==> x == data && next.x > data && next.next == \old(next);  
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x < data ==> x == data && next.x > data && next.next == \old(next);  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x < data ==> x == data && next.x >= data && next.next == \old(next);  
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x < data ==> x == data && next.x >= data && next.next == \old(next);  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);  
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x <= data ==> x == data && next.x > data && next.next == \old(next);  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x <= data ==> x == data && next.x >= data && next.next == \old(next);  
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x <= data ==> x == data && next.x >= data && next.next == \old(next);  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x - 1 <= data ==> x == data && next.x > data && next.next == \old(next);  
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x - 1 <= data ==> x == data && next.x > data && next.next == \old(next);  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+    //@ ensures x - 1 <= data ==> x == data && next.x >= data && next.next == \old(next);  
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:19: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x - 1 <= data ==> x == data && next.x >= data && next.next == \old(next);  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+ 
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+ 
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x > data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x >= data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+ 
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x > data ==> next.x >= data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x >= data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+ 
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x >= data ==> next.x > data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x >= data ==> next.x >= data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+ 
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18:) in method insert
+    public void insert(int data) {
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SortedListInsert.java:20:
+    //@ ensures x >= data ==> next.x >= data && (\forall List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+        ^
+3 verification failures
+
+public class SortedListInsert {
+
+  private static class List {
+    public /*@ spec_public @*/ int x;
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires true;
+ 
+    //@ ensures x > data ==> next.x > data && (\exists List l; l != null && l != this && l != next; l.next == \old(l.next) && l.x == \old(l.x));  
+ 
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List newNext = new List();
+        newNext.x = this.x;
+        newNext.next = this.next;
+        this.next = newNext;
+        this.x = data;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method List
+      this.next = null;
+                ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:5: verify: The prover cannot establish an assertion (NullField) in method insert
+    public /*@ spec_public @*/ List next;
+                                    ^
+2 verification failures
+

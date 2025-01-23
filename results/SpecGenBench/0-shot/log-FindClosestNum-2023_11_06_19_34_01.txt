@@ -1,0 +1,47 @@
+class FindClosestNum {
+    
+    //@ requires nums != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] == nums[i]);
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        //@ loop_invariant 0 <= i && i <= nums.length;
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; nums[j] != ans);
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; nums[j] >= 0);
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; nums[j] <= ans);
+        //@ decreases nums.length - i;
+        for(int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            int absNum = (num<0?-num:num);
+            int absAns = (ans<0?-ans:ans);
+
+            //@ assert absNum >= 0;
+            //@ assert absAns >= 0;
+
+            //@ assert (\forall int j; 0 <= j && j < i; nums[j] != ans);
+            //@ assert (\forall int j; 0 <= j && j < i; nums[j] >= 0);
+            //@ assert (\forall int j; 0 <= j && j < i; nums[j] <= ans);
+
+            //@ assert absNum >= 0;
+            //@ assert absAns >= 0;
+
+            //@ assert absNum < absAns || (absNum == absAns && num > ans) ==> ans == num;
+            //@ assert !(absNum < absAns || (absNum == absAns && num > ans)) ==> ans == \old(ans);
+
+            if(absNum < absAns || (absNum == absAns && num > ans)) {
+                ans = num;
+            }
+
+            //@ assert (\forall int j; 0 <= j && j <= i; nums[j] != ans);
+            //@ assert (\forall int j; 0 <= j && j <= i; nums[j] >= 0);
+            //@ assert (\forall int j; 0 <= j && j <= i; nums[j] <= ans);
+        }
+
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] != ans);
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] >= 0);
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] <= ans);
+
+        return ans;
+    }
+}

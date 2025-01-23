@@ -1,0 +1,27 @@
+class FindClosestNum {
+    //@ requires nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; ans <= nums[i]);
+    //@ ensures (\exists int i; 0 <= i && i < nums.length; ans == nums[i]);
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        for(int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            int absNum = (num<0?-num:num);
+            int absAns = (ans<0?-ans:ans);
+            //@ maintaining (\forall int j; 0 <= j && j < i; ans <= nums[j]);
+            //@ maintaining (\exists int j; 0 <= j && j < i; ans == nums[j]);
+            //@ decreases nums.length - i;
+            if(absNum < absAns || (absNum == absAns && num > ans)) {
+                ans = num;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; ans <= nums[j]);
+                ^
+1 error
+

@@ -1,0 +1,46 @@
+class SQLException extends Exception {
+}
+
+public class Statement {
+
+  /*@ invariant this != null; */
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  /*@ modifies Statement.$assertionsDisabled, s.toString; */
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  /*@ modifies Statement.$assertionsDisabled, args[*], args[].toString; */
+  public static void main(String[] args) {
+    Statement s = new Statement();
+    try {
+      s.execute("");
+      s.execute("123");
+      s.execute("fgaes%");
+      s.execute("<bad/>");
+      s.executeUpdate("");
+      s.executeUpdate("123");
+      s.executeUpdate("fgaes%");
+      s.executeUpdate("<bad/>");
+      s.executeQuery("");
+      s.executeQuery("123");
+      s.executeQuery("fgaes%");
+      s.executeQuery("<bad/>");
+    } catch (SQLException e) {
+
+    }
+  }
+}

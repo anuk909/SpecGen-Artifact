@@ -1,0 +1,32 @@
+public class ChangeCase {
+
+  //@ ensures \result == c;
+  //@ ensures c > 'z' ==> \result == c;
+  //@ ensures c >= 'a' && c <= 'z' ==> \result == (char)(c - 'a' + 'A');
+  //@ ensures c > 'Z' ==> \result == c;
+  //@ ensures c >= 'A' && c <= 'Z' ==> \result == (char)(c - 'A' + 'a');
+  public char changeCase(char c) {
+    char result = ' ';    
+    if (c > 'z') {
+      result = c;
+    } else if (c >= 'a') {
+      result =  (char)(c - 'a' + 'A');
+    } else if (c > 'Z') {
+      result =  c;
+    } else if (c >= 'A') {
+      result =  (char)(c - 'A' + 'a');
+    } else {
+      result = c;
+    }
+    return result;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/ChangeCase.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ChangeCase.java:3:) in method changeCase
+    return result;
+    ^
+/home/max/Documents/JMLGPT/tmp/ChangeCase.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ChangeCase.java:21:
+  //@ ensures \result == c;
+      ^
+2 verification failures
+

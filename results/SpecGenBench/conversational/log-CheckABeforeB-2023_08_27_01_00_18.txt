@@ -1,0 +1,578 @@
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < chars.length; chars[i] == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < chars.length && chars[i] != 'a');
+      @ pure function @*/
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'b') {
+            i++;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:5: error: Expected an identifier, found end of JML comment instead
+      @ pure function @*/
+                      ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:5: error: ';' expected
+      @ pure function @*/
+                         ^
+2 errors
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < chars.length; chars[i] == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < chars.length && chars[i] != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'b') {
+            i++;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:3: error: cannot find symbol
+      @ ensures \result ==> (\forall int i; 0 <= i && i < chars.length; chars[i] == 'a');
+                                                          ^
+  symbol:   variable chars
+  location: class CheckABeforeB
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:3: error: cannot find symbol
+      @ ensures \result ==> (\forall int i; 0 <= i && i < chars.length; chars[i] == 'a');
+                                                                        ^
+  symbol:   variable chars
+  location: class CheckABeforeB
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:4: error: cannot find symbol
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < chars.length && chars[i] != 'a');
+                                                           ^
+  symbol:   variable chars
+  location: class CheckABeforeB
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:4: error: cannot find symbol
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < chars.length && chars[i] != 'a');
+                                                                           ^
+  symbol:   variable chars
+  location: class CheckABeforeB
+4 errors
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert i >= 0 && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert i >= 0 && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    /*@ requires s != null;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == 'a');
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < s.length() && s.charAt(i) != 'a');
+      @ pure @*/
+    public boolean checkString(String s) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s.charAt(j) == 'a');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'a') {
+            i++;
+        }
+        //@ maintaining i <= s.length();
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+        //@ decreases s.length() - i;
+        while (i < s.length() && s.charAt(i) == 'b') {
+            i++;
+        }
+        //@ assert 0 <= i && i <= s.length();
+        return i == s.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < s.length(); s.charAt(j) == 'b');
+            ^
+1 verification failure
+

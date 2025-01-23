@@ -1,0 +1,87 @@
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ ensures \result == num1 + num2;
+    public /*@ pure @*/ int add(int num1, int num2, char operator) {
+        if(operator == '+') {
+            return num1 + num2;
+        } else {
+            return -1;
+        }
+    }
+
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ ensures \result == num1 - num2;
+    public /*@ pure @*/ int subtract(int num1, int num2, char operator) {
+        if(operator == '-') {
+            return num1 - num2;
+        } else {
+            return -1;
+        }
+    }
+
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ ensures \result == num1 * num2;
+    public /*@ pure @*/ int multiply(int num1, int num2, char operator) {
+        if(operator == '*') {
+            return num1 * num2;
+        } else {
+            return -1;
+        }
+    }
+
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires num2 != 0;
+    //@ ensures \result == num1 / num2;
+    public /*@ pure @*/ int divide(int num1, int num2, char operator) {
+        if(operator == '/') {
+            return num1 / num2;
+        } else {
+            return -1;
+        }
+    }
+
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires num2 != 0;
+    //@ ensures \result == num1 % num2;
+    public /*@ pure @*/ int modulo(int num1, int num2, char operator) {
+        if(operator == '%') {
+            return num1 % num2;
+        } else {
+            return -1;
+        }
+    }
+
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator);
+    public /*@ pure @*/ int calculate(int num1, int num2, char operator) {
+        int output;
+
+        switch (operator) {
+            case '+':
+                output = add(num1, num2, operator);
+                break;
+
+            case '-':
+                output = subtract(num1, num2, operator);
+                break;
+
+            case '*':
+                output = multiply(num1, num2, operator);
+                break;
+
+            case '/':
+                output = divide(num1, num2, operator);
+                break;
+
+            case '%':
+                output = modulo(num1, num2, operator);
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        return output;
+    }
+}

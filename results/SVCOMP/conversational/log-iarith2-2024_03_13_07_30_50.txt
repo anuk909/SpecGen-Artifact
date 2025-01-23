@@ -1,0 +1,150 @@
+class iarith2 {
+    //@ ensures \result == -2;
+    private static int i() {
+        int value = 3;
+        value &= 1;
+        value |= 4;
+        value ^= 4;
+        value <<= 2;
+        value >>= 1;
+        value = -value;
+        value >>>= 1;
+        return value;
+    }
+
+    //@ ensures \result == -2L;
+    private static long l() {
+        long value = 3L;
+        value &= 1L;
+        value |= 4L;
+        value ^= 4L;
+        value <<= 2L;
+        value >>= 1L;
+        value = -value;
+        value >>>= 1L;
+        return value;
+    }
+
+    //@ ensures (127 < 32767) ==> false;
+    private static void s() {
+        short lhs = 127;
+        short rhs = 32767;
+        if (lhs < rhs) {
+            return;
+        }
+        assert false;
+    }
+}
+error: An internal JML error occurred, possibly recoverable.  Please report the bug with as much information as you can.
+  Reason: class com.sun.tools.javac.tree.JCTree$JCAssignOp cannot be cast to class com.sun.tools.javac.tree.JCTree$JCBinary (com.sun.tools.javac.tree.JCTree$JCAssignOp and com.sun.tools.javac.tree.JCTree$JCBinary are in module jdk.compiler of loader 'app')
+  java.lang.ClassCastException: class com.sun.tools.javac.tree.JCTree$JCAssignOp cannot be cast to class com.sun.tools.javac.tree.JCTree$JCBinary (com.sun.tools.javac.tree.JCTree$JCAssignOp and com.sun.tools.javac.tree.JCTree$JCBinary are in module jdk.compiler of loader 'app')
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.addBinaryChecks(JmlAssertionAdder.java:13214)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitAssignopHelper(JmlAssertionAdder.java:12946)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitAssignop(JmlAssertionAdder.java:12885)
+  	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCAssignOp.accept(JCTree.java:2048)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitExec(JmlAssertionAdder.java:7086)
+  	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCExpressionStatement.accept(JCTree.java:1539)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertMethodBodyNoInit(JmlAssertionAdder.java:1235)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlMethodDecl(JmlAssertionAdder.java:17247)
+  	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlMethodDecl.accept(JmlTree.java:1383)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlClassDecl(JmlAssertionAdder.java:15904)
+  	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlClassDecl.accept(JmlTree.java:1295)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlEsc.check(JmlEsc.java:112)
+  	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.esc(JmlCompiler.java:536)
+  	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.flow(JmlCompiler.java:362)
+  	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:936)
+  	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+  	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+  	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+1 error
+
+class iarith2 {
+    //@ ensures \result == -2;
+    private static int i() {
+        int value = 3;
+        value &= 1;
+        value |= 4;
+        value ^= 4;
+        value <<= 2;
+        value >>= 1;
+        value = -value;
+        value >>>= 1;
+        return value;
+    }
+
+    //@ ensures \result == -2L;
+    private static long l() {
+        long value = 3L;
+        value &= 1L;
+        value |= 4L;
+        value ^= 4L;
+        value <<= 2L;
+        value >>= 1L;
+        value = -value;
+        value >>>= 1L;
+        return value;
+    }
+
+    //@ ensures (127 < 32767) ==> false;
+    private static void s() {
+        short lhs = 127;
+        short rhs = 32767;
+        if (lhs < rhs) {
+            return;
+        }
+        assert false;
+    }
+}
+error: An internal JML error occurred, possibly recoverable.  Please report the bug with as much information as you can.
+  Reason: class com.sun.tools.javac.tree.JCTree$JCAssignOp cannot be cast to class com.sun.tools.javac.tree.JCTree$JCBinary (com.sun.tools.javac.tree.JCTree$JCAssignOp and com.sun.tools.javac.tree.JCTree$JCBinary are in module jdk.compiler of loader 'app')
+  java.lang.ClassCastException: class com.sun.tools.javac.tree.JCTree$JCAssignOp cannot be cast to class com.sun.tools.javac.tree.JCTree$JCBinary (com.sun.tools.javac.tree.JCTree$JCAssignOp and com.sun.tools.javac.tree.JCTree$JCBinary are in module jdk.compiler of loader 'app')
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.addBinaryChecks(JmlAssertionAdder.java:13214)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitAssignopHelper(JmlAssertionAdder.java:12946)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitAssignop(JmlAssertionAdder.java:12885)
+  	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCAssignOp.accept(JCTree.java:2048)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitExec(JmlAssertionAdder.java:7086)
+  	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCExpressionStatement.accept(JCTree.java:1539)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertMethodBodyNoInit(JmlAssertionAdder.java:1235)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlMethodDecl(JmlAssertionAdder.java:17247)
+  	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlMethodDecl.accept(JmlTree.java:1383)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlClassDecl(JmlAssertionAdder.java:15904)
+  	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlClassDecl.accept(JmlTree.java:1295)
+  	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+  	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+  	at jdk.compiler/org.jmlspecs.openjml.esc.JmlEsc.check(JmlEsc.java:112)
+  	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.esc(JmlCompiler.java:536)
+  	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.flow(JmlCompiler.java:362)
+  	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:936)
+  	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+  	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+  	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+  	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+1 error
+

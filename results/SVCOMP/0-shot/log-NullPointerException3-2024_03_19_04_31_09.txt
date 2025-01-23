@@ -1,0 +1,23 @@
+class A {
+  int i;
+}
+
+public class NullPointerException3 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    A a = null;
+    try {
+      //@ assert a == null;
+      int i = a.i;
+      //@ unreachable;
+    } catch (NullPointerException exc) {
+      //@ assert exc instanceof NullPointerException;
+      //@ assert a == null;
+      return false;
+    }
+    //@ assert false; // This line should not be reachable
+    return true;
+  }
+}
+

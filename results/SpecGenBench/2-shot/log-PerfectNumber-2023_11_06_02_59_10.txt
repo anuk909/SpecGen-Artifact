@@ -1,0 +1,27 @@
+class PerfectNumber {
+    //@ ensures \result <==> num is a perfect number;
+    public boolean isPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        int sum = 1;
+        //@ maintaining 1 <= d && d <= num;
+        //@ maintaining sum == 1 + (\sum int i; 2 <= i && i < d; (num % i == 0) ? i + (num / i) : 0);
+        //@ decreases num - d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum == num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:2: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result <==> num is a perfect number;
+                                 ^
+1 error
+

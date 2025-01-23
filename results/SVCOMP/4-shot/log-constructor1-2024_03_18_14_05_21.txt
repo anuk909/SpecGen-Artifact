@@ -1,0 +1,73 @@
+class sub {}
+;
+
+class A {
+  //@ public invariant my_field == 0;
+  //@ public invariant my_sub == null;
+  //@ public invariant something_static == 3;
+  //@ ensures my_field == 2;
+  A() {
+    my_field = 2;
+  }
+
+  int my_field;
+  sub my_sub;
+
+  static int something_static = 3;
+}
+;
+
+class Main {
+  //@ ensures some_a.my_field == 0;
+  //@ ensures some_a.my_sub == null;
+  //@ ensures some_a.something_static == 3;
+  //@ ensures other_a.my_field == 2;
+  //@ ensures other_a.my_sub == null;
+  public static void main(String[] args) {
+    A some_a = new A();
+    A other_a = new A(1);
+  }
+}
+;
+/home/max/Documents/JMLGPT/tmp/constructor1.java:5: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public invariant my_field == 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:6: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public invariant my_sub == null;
+                       ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:7: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public invariant something_static == 3;
+                       ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:21: error: cannot find symbol
+  //@ ensures some_a.my_field == 0;
+              ^
+  symbol:   variable some_a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/constructor1.java:22: error: cannot find symbol
+  //@ ensures some_a.my_sub == null;
+              ^
+  symbol:   variable some_a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/constructor1.java:23: error: cannot find symbol
+  //@ ensures some_a.something_static == 3;
+              ^
+  symbol:   variable some_a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/constructor1.java:24: error: cannot find symbol
+  //@ ensures other_a.my_field == 2;
+              ^
+  symbol:   variable other_a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/constructor1.java:25: error: cannot find symbol
+  //@ ensures other_a.my_sub == null;
+              ^
+  symbol:   variable other_a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/constructor1.java:28: error: constructor A in class A cannot be applied to given types;
+    A other_a = new A(1);
+                ^
+  required: no arguments
+  found:    int
+  reason: actual and formal argument lists differ in length
+9 errors
+

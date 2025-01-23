@@ -1,0 +1,71 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires x == 3;
+  //@ requires 0 <= arg;
+  //@ ensures field == arg % 10;
+  //@ ensures \result ==> test(3, field, field2);
+  //@ ensures !\result ==> field < 0;
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == 3;
+  //@ requires z == y * (z + r);
+  //@ requires r == -y * (z + r);
+  //@ ensures \result ==> x > 99 && (r > z ==> \result == false);
+  //@ ensures !\result ==> x <= 99 || (r <= z ==> \result == true);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:5: error: cannot find symbol
+  //@ requires x == 3;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == arg % 10;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> test(3, field, field2);
+                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> test(3, field, field2);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> test(3, field, field2);
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !\result ==> field < 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:21: error: cannot find symbol
+  //@ requires z == y * (z + r);
+                    ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:22: error: cannot find symbol
+  //@ requires r == -y * (z + r);
+                     ^
+  symbol:   variable y
+  location: class Main
+8 errors
+

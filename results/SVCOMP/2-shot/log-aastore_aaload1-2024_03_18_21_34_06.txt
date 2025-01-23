@@ -1,0 +1,50 @@
+import java.util.Random;
+
+public class aastore_aaload1 {
+  static class A {
+    int value = 0;
+  }
+
+  //@ requires 0 <= args.length && args.length <= Integer.MAX_VALUE;
+  //@ ensures \result == null <==> size < 0;
+  //@ ensures \result != null ==> \result.length == size;
+  public static void main(String[] args) {
+    int size = new Random().nextInt();
+    if (size < 0) return;
+    A[] array = new A[size];
+
+    //@ maintaining 0 <= i && i <= size;
+    //@ maintaining (\forall int j; 0 <= j && j < i; array[j] != null);
+    //@ decreases size - i;
+    for (int i = 0; i < size; i++) {
+      array[i] = new A();
+    }
+    //@ maintaining 0 <= i && i <= size;
+    //@ maintaining (\forall int j; 0 <= j && j < i; array[j] != null);
+    //@ decreases size - i;
+    for (int i = 0; i < size; i++) {
+      assert array[i] != null;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null <==> size < 0;
+               ^
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:9: error: cannot find symbol
+  //@ ensures \result == null <==> size < 0;
+                                   ^
+  symbol:   variable size
+  location: class aastore_aaload1
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:10: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result != null ==> \result.length == size;
+               ^
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:10: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result != null ==> \result.length == size;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:10: error: cannot find symbol
+  //@ ensures \result != null ==> \result.length == size;
+                                                    ^
+  symbol:   variable size
+  location: class aastore_aaload1
+5 errors
+

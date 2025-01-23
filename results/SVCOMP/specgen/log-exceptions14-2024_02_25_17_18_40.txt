@@ -1,0 +1,54 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions14 {
+  //@ ensures \result == \nothing;
+  public static void main(String[] args) {
+    try {
+      try {
+        C c = new C();
+        A a = new A();
+      } catch (C exc) {
+        assert false;
+      } catch (B exc) {
+        assert false;
+      }
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions14.java:8: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \nothing;
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions14.java:8: error: No operator for <any> == none
+  //@ ensures \result == \nothing;
+                      ^
+2 errors
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions14 {
+  public static void main(String[] args) {
+    try {
+      try {
+        C c = new C();
+        A a = new A();
+      } catch (C exc) {
+        assert false;
+      } catch (B exc) {
+        assert false;
+      }
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+

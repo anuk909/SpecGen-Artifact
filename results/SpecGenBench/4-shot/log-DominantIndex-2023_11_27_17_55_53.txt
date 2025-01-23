@@ -1,0 +1,41 @@
+class DominantIndex {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures \result >= -1 && \result < nums.length;
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < nums.length; 2 * nums[i] <= nums[\old(biggest_index)]);
+    //@ ensures \result >= 0 ==> nums[\result] >= nums[i] && (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining 0 <= biggest_index && biggest_index < i;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[biggest_index] >= nums[j]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:5: error: cannot find symbol
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < nums.length; 2 * nums[i] <= nums[\old(biggest_index)]);
+                                                                                                      ^
+  symbol:   variable biggest_index
+  location: class DominantIndex
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:6: error: cannot find symbol
+    //@ ensures \result >= 0 ==> nums[\result] >= nums[i] && (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+                                                       ^
+  symbol:   variable i
+  location: class DominantIndex
+2 errors
+

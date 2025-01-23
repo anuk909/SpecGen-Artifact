@@ -1,0 +1,1310 @@
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private Node root; // root of trie
+    private int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val && x != null;
+    private Node get2(Node x, CharArray key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.get(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, CharArray key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.get(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, CharArray key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.get(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || -1;
+    public int get(CharArray key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(CharArray key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(CharArray key, int val) {
+        if (val == -1) delete(key);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public CharArray longestPrefixOf(CharArray query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.get(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:20: error: cannot find symbol
+    private Node get2(Node x, CharArray key, int d) {
+                              ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:29: error: cannot find symbol
+    private Node put2(Node x, CharArray key, int val, int d) {
+                              ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:44: error: cannot find symbol
+    private Node delete(Node x, CharArray key, int d) {
+                                ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:62: error: cannot find symbol
+    public int get(CharArray key) {
+                   ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:70: error: cannot find symbol
+    public boolean contains(CharArray key) {
+                            ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:76: error: cannot find symbol
+    public void put(CharArray key, int val) {
+                    ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:93: error: cannot find symbol
+    public CharArray longestPrefixOf(CharArray query) {
+                                     ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:93: error: cannot find symbol
+    public CharArray longestPrefixOf(CharArray query) {
+           ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:101: error: cannot find symbol
+    private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+                                        ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null;
+                ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:19: error: bad operand types for binary operator '=='
+    //@ ensures \result == x.val && x != null;
+                        ^
+  first type:  Node
+  second type: int
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:81: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == N;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+15 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val && x != null;
+    private Node get2(Node x, CharArray key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.get(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, CharArray key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.get(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, CharArray key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.get(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || -1;
+    public int get(CharArray key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(CharArray key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(CharArray key, int val) {
+        if (val == -1) delete(key);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public CharArray longestPrefixOf(CharArray query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.get(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:20: error: cannot find symbol
+    private Node get2(Node x, CharArray key, int d) {
+                              ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:29: error: cannot find symbol
+    private Node put2(Node x, CharArray key, int val, int d) {
+                              ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:44: error: cannot find symbol
+    private Node delete(Node x, CharArray key, int d) {
+                                ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:62: error: cannot find symbol
+    public int get(CharArray key) {
+                   ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:70: error: cannot find symbol
+    public boolean contains(CharArray key) {
+                            ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:76: error: cannot find symbol
+    public void put(CharArray key, int val) {
+                    ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:93: error: cannot find symbol
+    public CharArray longestPrefixOf(CharArray query) {
+                                     ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:93: error: cannot find symbol
+    public CharArray longestPrefixOf(CharArray query) {
+           ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:101: error: cannot find symbol
+    private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+                                        ^
+  symbol:   class CharArray
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:19: error: bad operand types for binary operator '=='
+    //@ ensures \result == x.val && x != null;
+                        ^
+  first type:  Node
+  second type: int
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+12 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:19: error: bad operand types for binary operator '=='
+    //@ ensures \result == x.val && x != null;
+                        ^
+  first type:  Node
+  second type: int
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+3 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || \result == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:19: error: bad operand types for binary operator '=='
+    //@ ensures \result == x.val && x != null;
+                        ^
+  first type:  Node
+  second type: int
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || \result == -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+3 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || \result == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:19: error: bad operand types for binary operator '=='
+    //@ ensures \result == x.val && x != null;
+                        ^
+  first type:  Node
+  second type: int
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || \result == -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+3 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result.val == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result.val == x.val || \result.val == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: int cannot be dereferenced
+    //@ ensures \result.val == x.val || \result.val == -1;
+                       ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result.val == x.val || \result.val == -1;
+                               ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: int cannot be dereferenced
+    //@ ensures \result.val == x.val || \result.val == -1;
+                                               ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+4 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result.val == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || \result == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || \result == -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+2 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result.val == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || \result == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || \result == -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+2 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result.val == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || \result == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || \result == -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+2 errors
+
+public class Trie {
+    private static final int R = 256; // extended ASCII
+
+    private /*@ spec_public @*/ Node root; // root of trie
+    private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+    // R-way trie node
+    private static class Node {
+        private int val = -1;
+        private Node[] next = new Node[R];
+    }
+
+    //@ ensures root != null;
+    public Trie() {
+        root = new Node();
+    }
+
+    //@ requires key != null;
+    //@ ensures \result.val == x.val && x != null;
+    private Node get2(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) return x;
+        char c = key.charAt(d);
+        return get2(x.next[c], key, d + 1);
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures N == \old(N) + 1;
+    private Node put2(Node x, String key, int val, int d) {
+        if (x == null) x = new Node();
+        if (d == key.length()) {
+            if (x.val == -1) N++;
+            x.val = val;
+            return x;
+        }
+
+        char c = key.charAt(d);
+        x.next[c] = put2(x.next[c], key, val, d + 1);
+        return x;
+    }
+
+    //@ requires key != null;
+    //@ ensures N == \old(N) - 1;
+    private Node delete(Node x, String key, int d) {
+        if (x == null) return null;
+        if (d == key.length()) {
+            if (x.val != -1) N--;
+            x.val = -1;
+        } else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        // remove subtrie rooted at x if it is completely empty
+        if (x.val != -1) return x;
+        for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+        return null;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result == x.val || \result == -1;
+    public int get(String key) {
+        Node x = get2(root, key, 0);
+        if (x == null) return -1;
+        return x.val;
+    }
+
+    //@ requires key != null;
+    //@ ensures \result <==> get(key) != -1;
+    public boolean contains(String key) {
+        return get(key) != -1;
+    }
+
+    //@ requires key != null && val != -1;
+    //@ ensures contains(key);
+    public void put(String key, int val) {
+        if (val == -1) delete(root, key, 0);
+        else root = put2(root, key, val, 0);
+    }
+
+    //@ ensures \result == N;
+    public int size() {
+        return N;
+    }
+
+    //@ ensures \result <==> size() == 0;
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+    public String longestPrefixOf(String query) {
+        int length = longestPrefixOf(root, query, 0, -1);
+        if (length == -1) return null;
+        else return query.substring(0, length);
+    }
+
+    //@ requires query != null;
+    //@ ensures \result == length || \result == -1;
+    private int longestPrefixOf(Node x, String query, int d, int length) {
+        if (x == null) return length;
+        if (x.val != -1) length = d;
+        if (d == query.length()) return length;
+        char c = query.charAt(d);
+        return longestPrefixOf(x.next[c], query, d + 1, length);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    //@ ensures \result == x.val || \result == -1;
+                           ^
+  symbol:   variable x
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:92: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == null || (\exists int i; 0 <= i && i < \result.length(); longestPrefixOf(root, query, 0, -1) == i);
+                                                                                   ^
+2 errors
+

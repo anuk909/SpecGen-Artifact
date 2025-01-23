@@ -1,0 +1,53 @@
+class Main {
+    //@ requires args != null;
+    //@ ensures \result == -32;
+    public static void main(String[] args) {
+        int i = 99;
+        //@ maintaining i == 100;
+        //@ maintaining i == 102;
+        //@ maintaining i == 99;
+        //@ maintaining i == 102;
+        //@ maintaining i == 99;
+        //@ maintaining i == 102;
+        //@ maintaining i == 68;
+        //@ maintaining i == 136;
+        //@ maintaining i == 45;
+        //@ maintaining i == -45;
+        //@ maintaining i == 32;
+        //@ assert i == -32;
+        ++i;
+        int tmp = i + 2;
+        i = tmp;
+        tmp = i - 3;
+        i = tmp;
+        i += 3;
+        i -= 3;
+        tmp = i * 2;
+        i = tmp;
+        tmp = i / 3;
+        i = tmp;
+        i %= 34;
+        i = -i;
+        assert i == -32;
+        long l = 99;
+        //@ maintaining l == 100;
+        //@ maintaining l == 102;
+        //@ maintaining l == 99;
+        //@ maintaining l == 96;
+        //@ maintaining l == 64;
+        //@ maintaining l == 128;
+        //@ maintaining l == 42;
+        //@ maintaining l == -42;
+        //@ maintaining l == 32;
+        //@ assert l == -32L;
+        ++l;
+        l += 2L;
+        l -= 3L;
+        l *= 2L;
+        l /= 3L;
+        l %= 34L;
+        l = -l;
+        assert l == -32L;
+    }
+}
+

@@ -1,0 +1,89 @@
+import java.util.Arrays;
+
+class LargestPerimeter {
+    //@ requires A != null && A.length > 0;
+    //@ ensures \result == 0 || (\exists int i; 2 <= i && i < A.length; A[i-2] + A[i-1] > A[i] && \result == A[i-2] + A[i-1] + A[i]);
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        //@ maintaining (\forall int i; 0 <= i && i < A.length; (\forall int j; 0 <= j && j < i; A[j] <= A[i]));
+        //@ maintaining 2 <= i && i <= A.length;
+        //@ decreases i;
+        for (int i = A.length - 1; i >= 2; --i) {
+            //@ maintaining 2 <= j && j <= i;
+            //@ maintaining A[j-2] + A[j-1] <= A[j];
+            //@ decreases i - j;
+            for (int j = i; j >= 2; --j) {
+                if (A[j - 2] + A[j - 1] > A[j]) {
+                    return A[j - 2] + A[j - 1] + A[j];
+                }
+            }
+        }
+        return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/LargestPerimeter.java:8: error: variable i is already defined in method largestPerimeter(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < A.length; (\forall int j; 0 <= j && j < i; A[j] <= A[i]));
+                                     ^
+1 error
+
+import java.util.Arrays;
+
+class LargestPerimeter {
+    //@ requires A != null && A.length > 0;
+    //@ ensures \result == 0 || (\exists int i; 2 <= i && i < A.length; A[i-2] + A[i-1] > A[i] && \result == A[i-2] + A[i-1] + A[i]);
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        //@ maintaining (\forall int k; 0 <= k && k < A.length; (\forall int j; 0 <= j && j < k; A[j] <= A[k]));
+        //@ maintaining 2 <= i && i <= A.length;
+        //@ decreases i;
+        for (int i = A.length - 1; i >= 2; --i) {
+            //@ maintaining 2 <= j && j <= i;
+            //@ maintaining A[j-2] + A[j-1] <= A[j];
+            //@ decreases i - j;
+            for (int j = i; j >= 2; --j) {
+                if (A[j - 2] + A[j - 1] > A[j]) {
+                    return A[j - 2] + A[j - 1] + A[j];
+                }
+            }
+        }
+        return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/LargestPerimeter.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method largestPerimeter
+        //@ maintaining 2 <= i && i <= A.length;
+            ^
+/home/max/Documents/JMLGPT/tmp/LargestPerimeter.java:13: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex) in method largestPerimeter
+            //@ maintaining A[j-2] + A[j-1] <= A[j];
+                                                ^
+2 verification failures
+
+import java.util.Arrays;
+
+class LargestPerimeter {
+    //@ requires A != null && A.length > 0;
+    //@ ensures \result == 0 || (\exists int i; 2 <= i && i < A.length; A[i-2] + A[i-1] > A[i] && \result == A[i-2] + A[i-1] + A[i]);
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        //@ maintaining (\forall int k; 0 <= k && k < A.length; (\forall int j; 0 <= j && j < k; A[j] <= A[k]));
+        //@ maintaining 2 <= i && i <= A.length;
+        //@ decreases i;
+        for (int i = A.length - 1; i >= 2; --i) {
+            //@ maintaining 2 <= j && j <= i;
+            //@ maintaining (\forall int k; j <= k && k < i; A[k] <= A[i]);
+            //@ decreases i - j;
+            for (int j = i; j >= 2; --j) {
+                //@ assume j-2 < A.length && j-1 < A.length && j < A.length;
+                //@ maintaining A[j-2] + A[j-1] <= A[j];
+                if (A[j - 2] + A[j - 1] > A[j]) {
+                    return A[j - 2] + A[j - 1] + A[j];
+                }
+            }
+        }
+        return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/LargestPerimeter.java:17: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining A[j-2] + A[j-1] <= A[j];
+                    ^
+1 error
+

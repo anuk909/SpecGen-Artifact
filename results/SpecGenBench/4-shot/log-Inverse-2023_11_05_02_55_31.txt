@@ -1,0 +1,29 @@
+public class Inverse {
+
+    //@ requires x != null && y != null;
+    //@ requires x.length == y.length;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < x.length; x[i] == y[x.length - 1 - i]);
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < x.length; x[i] != y[x.length - 1 - i]);
+    public static boolean Inverse(int[] x, int[] y) {
+        if (x.length != y.length) return false;
+        int index = 0;
+
+        //@ maintaining 0 <= index && index <= x.length;
+        //@ maintaining (\forall int i; 0 <= i && i < index; x[i] == y[x.length - 1 - i]);
+        //@ maintaining index < x.length ==> x[index] == y[x.length - 1 - index];
+        //@ decreases x.length - index;
+        while (index < x.length) {
+            if (x[index] != y[x.length - 1 - index]) {
+                return false;
+            } else {
+                index = index + 1;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Inverse.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Inverse
+        //@ maintaining index < x.length ==> x[index] == y[x.length - 1 - index];
+            ^
+1 verification failure
+

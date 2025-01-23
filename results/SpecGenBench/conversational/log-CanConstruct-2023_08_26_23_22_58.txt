@@ -1,0 +1,55 @@
+class CanConstruct {
+    //@ requires ransomNote != null && magazine != null;
+    //@ ensures \result == (ransomNote.length() <= magazine.length() && \forall int i; 0 <= i && i < 26; count(ransomNote, i) <= count(magazine, i));
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); count(magazine.substring(0, i), c) == cnt[c - 'a'] + count(magazine.substring(i), c));
+        //@ decreases magazine.length() - i;
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires s != null;
+    //@ requires 0 <= c && c < 26;
+    //@ ensures \result >= 0;
+    public static int count(String s, int c) {
+        int cnt = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch - 'a' == c) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:3: warning: A non-pure method is being called where it is not permitted: CanConstruct.count(java.lang.String,int)
+    //@ ensures \result == (ransomNote.length() <= magazine.length() && \forall int i; 0 <= i && i < 26; count(ransomNote, i) <= count(magazine, i));
+                                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:3: warning: A non-pure method is being called where it is not permitted: CanConstruct.count(java.lang.String,int)
+    //@ ensures \result == (ransomNote.length() <= magazine.length() && \forall int i; 0 <= i && i < 26; count(ransomNote, i) <= count(magazine, i));
+                                                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:12: warning: A non-pure method is being called where it is not permitted: CanConstruct.count(java.lang.String,int)
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); count(magazine.substring(0, i), c) == cnt[c - 'a'] + count(magazine.substring(i), c));
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:12: warning: A non-pure method is being called where it is not permitted: CanConstruct.count(java.lang.String,int)
+        //@ maintaining (\forall int i; 0 <= i && i < magazine.length(); count(magazine.substring(0, i), c) == cnt[c - 'a'] + count(magazine.substring(i), c));
+                                                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:13: error: cannot find symbol
+        //@ decreases magazine.length() - i;
+                                          ^
+  symbol:   variable i
+  location: class CanConstruct
+1 error
+4 warnings
+

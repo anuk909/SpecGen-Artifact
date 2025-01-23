@@ -1,0 +1,52 @@
+public class BellmanFord {
+    static final int INFINITY = Integer.MAX_VALUE;
+
+    //@ requires N > 0 && D.length == N * N && src >= 0 && src < N;
+    //@ ensures \result.length == N && (\forall int i; 0 <= i && i < N; \result[i] == INFINITY || \result[i] >= 0);
+    public static int[] runBellmanFord(int N, int D[], int src) {
+        int dist[] = new int[N];
+        boolean infinite[] = new boolean[N];
+        for (int i = 0; i < N; i++) {
+            dist[i] = INFINITY;
+            infinite[i] = true;
+        }
+        dist[src] = 0;
+        infinite[src] = false;
+
+        //@ maintaining 0 <= k && k <= N;
+        //@ maintaining (\forall int i; 0 <= i && i < N; \forall int j; 0 <= j && j < N; (\forall int l; 0 <= l && l < i; dist[j] <= dist[l] + D[l * N + j]));
+        //@ decreases N - k;
+        int k;
+        for (k = 0; k < N; k++) {
+            boolean relaxed = false;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (i == j) continue;
+                    if (!infinite[i]) {
+                        if (dist[j] > dist[i] + D[i * N + j]) {
+                            dist[j] = dist[i] + D[i * N + j];
+                            infinite[j] = false;
+                            relaxed = true;
+                        }
+                    }
+                }
+            }
+            if (!relaxed)
+                break;
+        }
+
+        if (k == N) {
+            // We relaxed during the N-th iteration, so there must be a negative-weight cycle.
+        }
+
+        return dist;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:19: error: variable declaration not allowed here
+        int k;
+            ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:16: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining 0 <= k && k <= N;
+            ^
+2 errors
+

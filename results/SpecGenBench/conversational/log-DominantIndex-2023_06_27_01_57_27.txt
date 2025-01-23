@@ -1,0 +1,603 @@
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; nums[i] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: error: variable i is already defined in method dominantIndex(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < nums.length; nums[i] <= m1);
+                                     ^
+1 error
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:23: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method dominantIndex: int multiply overflow
+        return m1 >= m2 * 2 ? index : -1;
+                        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; nums[j] <= m1);
+            ^
+1 warning
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:14: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method dominantIndex
+            if (nums[i] > m1) {
+                    ^
+1 warning
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < nums.length; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining -1 <= m2 && m2 <= m1;
+        //@ maintaining -1 <= index && index < nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            //@ assume i >= 0;
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        //@ assume m2 >= 0 && m1 >= 0 && index >= 0 && index < nums.length;
+        //@ assume m2 <= (Integer.MAX_VALUE - 1) / 2;
+        //@ assume m1 <= Integer.MAX_VALUE / 2;
+        //@ assume m1 >= m2 * 2 || m1 == -1;
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != index ==> nums[j] <= m1);
+            ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:28:
+    //@ ensures \result == -1 || nums[\result] >= 2 * (\max int i; 0 <= i && i < nums.length && i != \result; nums[i]);
+        ^
+1 warning
+3 verification failures
+

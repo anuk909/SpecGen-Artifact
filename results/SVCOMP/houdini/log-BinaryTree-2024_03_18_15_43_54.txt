@@ -1,0 +1,6433 @@
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    //@ non_null
+    //@ non_null
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:50: error: NonNull is not a repeatable annotation type
+    //@ non_null
+        ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:4: error: This JML modifier is not allowed for a invariant clause
+    //@ spec_public
+        ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:49: error: This JML modifier is not allowed for a constructor declaration
+    //@ non_null
+        ^
+3 errors
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    //@ non_null
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:4: error: This JML modifier is not allowed for a invariant clause
+    //@ spec_public
+        ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:49: error: This JML modifier is not allowed for a constructor declaration
+    //@ non_null
+        ^
+2 errors
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    //@ non_null
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:48: error: This JML modifier is not allowed for a constructor declaration
+    //@ non_null
+        ^
+1 error
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:159: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:130:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:130: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:159:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v < 1
+  //@ requires v < 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:158: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:129:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:129: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:158:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v <= 1
+  //@ requires v <= 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:157: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:128:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:128: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:157:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v == 1
+  //@ requires v == 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:156: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:127:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:127: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:156:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v != 1
+  //@ requires v != 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:155: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:126:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:126: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:155:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v >= 1
+  //@ requires v >= 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:154: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:125:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:125: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:154:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v > 1
+  //@ requires v > 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:153: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:124:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:124: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:153:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v < 0
+  //@ requires v < 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:152: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:123:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:123: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:152:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v <= 0
+  //@ requires v <= 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:151: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:122:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:122: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:151:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v == 0
+  //@ requires v == 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:150: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:121:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:121: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:150:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v != 0
+  //@ requires v != 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:149: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:120:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:120: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:149:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v >= 0
+  //@ requires v >= 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:148: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:119:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:119: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:148:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v > 0
+  //@ requires v > 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:147: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:118:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:118: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:147:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v < -1
+  //@ requires v < -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:146: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:117:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:117: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:146:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v <= -1
+  //@ requires v <= -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:145: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:116:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:116: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:145:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v == -1
+  //@ requires v == -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:144: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:115:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:115: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:144:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v != -1
+  //@ requires v != -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:143: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:114:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:114: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:143:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v >= -1
+  //@ requires v >= -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires v > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:142: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:113:) in method main
+      t2.search(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:113: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:142:
+  public boolean search(int v) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:108: verify: Precondition conjunct is false: v > -1
+  //@ requires v > -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 1;
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:138: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:78:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:78: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:138:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v < 1
+  //@ requires v < 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v <= 1;
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:137: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:77:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:77: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:137:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v <= 1
+  //@ requires v <= 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v == 1;
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:136: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:76:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:76: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:136:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v == 1
+  //@ requires v == 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v != 1;
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:135: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:75:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:75: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:135:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v != 1
+  //@ requires v != 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v >= 1;
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:134: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:74:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:74: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:134:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v >= 1
+  //@ requires v >= 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v > 1;
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:133: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:73:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:73: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:133:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v > 1
+  //@ requires v > 1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < 0;
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:132: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:72:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:72: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:132:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v < 0
+  //@ requires v < 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v <= 0;
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:131: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:71:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:71: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:131:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v <= 0
+  //@ requires v <= 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v == 0;
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:130: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:70:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:70: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:130:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v == 0
+  //@ requires v == 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v != 0;
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:129: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:69:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:69: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:129:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v != 0
+  //@ requires v != 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v >= 0;
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:128: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:68:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:68: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:128:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v >= 0
+  //@ requires v >= 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v > 0;
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:127: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:67:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:67: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:127:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v > 0
+  //@ requires v > 0;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v < -1;
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:126: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:66:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:66: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:126:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v < -1
+  //@ requires v < -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v <= -1;
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:125: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:65:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:65: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:125:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v <= -1
+  //@ requires v <= -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v == -1;
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:124: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:64:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:64: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:124:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v == -1
+  //@ requires v == -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v != -1;
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:123: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:63:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:63: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:123:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v != -1
+  //@ requires v != -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v >= -1;
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:122: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:62:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:62: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:122:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v >= -1
+  //@ requires v >= -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires v > -1;
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:121: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:61:) in method main
+      t2.insert(i);
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:61: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:121:
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:60: verify: Precondition conjunct is false: v > -1
+  //@ requires v > -1;
+                 ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ invariant value < 1;
+    //@ invariant value <= 1;
+    //@ invariant value == 1;
+    //@ invariant value != 1;
+    //@ invariant value >= 1;
+    //@ invariant value > 1;
+    //@ invariant value < 0;
+    //@ invariant value <= 0;
+    //@ invariant value == 0;
+    //@ invariant value != 0;
+    //@ invariant value >= 0;
+    //@ invariant value > 0;
+    //@ invariant value < -1;
+    //@ invariant value <= -1;
+    //@ invariant value == -1;
+    //@ invariant value != -1;
+    //@ invariant value >= -1;
+    //@ invariant value > -1;
+    int value;
+    //@ spec_public
+    //@ non_null
+    Node left;
+    //@ spec_public
+    //@ non_null
+    Node right;
+
+    //@ requires v < 1;
+    //@ requires v <= 1;
+    //@ requires v == 1;
+    //@ requires v != 1;
+    //@ requires v >= 1;
+    //@ requires v > 1;
+    //@ requires v < 0;
+    //@ requires v <= 0;
+    //@ requires v == 0;
+    //@ requires v != 0;
+    //@ requires v >= 0;
+    //@ requires v > 0;
+    //@ requires v < -1;
+    //@ requires v <= -1;
+    //@ requires v == -1;
+    //@ requires v != -1;
+    //@ requires v >= -1;
+    //@ requires v > -1;
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  //@ non_null
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures v >= 0 ==> \result;
+  //@ ensures v >= 0 ==> !\result;
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+
+    BinaryTree t2 = new BinaryTree();
+    for(int i = 10; i >= -10; i = i + 2) {
+      t2.insert(i);
+    }
+    for(int i = -3; i <= 3; i++) {
+      t2.search(i);
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:57: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+1 verification failure
+

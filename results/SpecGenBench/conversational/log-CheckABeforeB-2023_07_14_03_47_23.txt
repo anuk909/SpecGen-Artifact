@@ -1,0 +1,929 @@
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'b') {
+            i++;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'b') {
+            i++;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a' && chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'b') {
+            i++;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method checkString
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            ^
+1 verification failure
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+                //@ maintaining 0 <= i && i <= chars.length;
+                //@ decreases chars.length - i;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+                //@ maintaining 0 <= i && i <= chars.length;
+                //@ decreases chars.length - i;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:18: error: illegal start of statement
+            } else {
+            ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                    ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:33: error: illegal start of statement
+            } else {
+            ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:29: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                    ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+                //@ maintaining 0 <= i && i <= chars.length;
+                //@ decreases chars.length - i;
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+                //@ maintaining 0 <= i && i <= chars.length;
+                //@ decreases chars.length - i;
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:13: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                    ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:28: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                    ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+                //@ maintaining 0 <= i && i <= chars.length;
+                //@ decreases chars.length - i;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+                //@ maintaining 0 <= i && i <= chars.length;
+                //@ decreases chars.length - i;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:18: error: illegal start of statement
+            } else {
+            ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                    ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:33: error: illegal start of statement
+            } else {
+            ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:29: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                    ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:17: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:36: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:32: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:17: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:36: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:32: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:17: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:36: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:32: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:17: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:36: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:32: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:17: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:36: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:32: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:17: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:36: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:32: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+4 errors
+
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'a');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'a') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+        //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ decreases chars.length - i;
+        while (i < chars.length) {
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+            //@ maintaining (\forall int j; i <= j && j < chars.length; chars[j] != 'b');
+            //@ maintaining 0 <= i && i <= chars.length;
+            //@ decreases chars.length - i;
+            if (chars[i] == 'b') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'a');
+                ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:27: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining (\forall int j; 0 <= j && j < i; chars[j] == 'b');
+                ^
+2 errors
+

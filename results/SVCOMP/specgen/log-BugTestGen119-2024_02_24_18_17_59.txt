@@ -1,0 +1,64 @@
+import java.util.Random;
+
+public class BugTestGen119 {
+    //@ ensures \result == true <==> tmp.equals("true");
+    //@ ensures \result == false <==> tmp.equals("false");
+    public static boolean main(String[] args) {
+        boolean booleanValue = new Random().nextBoolean();
+	
+        String tmp = String.valueOf(booleanValue);
+        if (booleanValue) return tmp.equals("true");
+        else return tmp.equals("false");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen119.java:4: error: cannot find symbol
+    //@ ensures \result == true <==> tmp.equals("true");
+                                     ^
+  symbol:   variable tmp
+  location: class BugTestGen119
+/home/max/Documents/JMLGPT/tmp/BugTestGen119.java:5: error: cannot find symbol
+    //@ ensures \result == false <==> tmp.equals("false");
+                                      ^
+  symbol:   variable tmp
+  location: class BugTestGen119
+2 errors
+
+import java.util.Random;
+
+public class BugTestGen119 {
+    //@ ensures \result == true <==> String.valueOf(booleanValue).equals("true");
+    //@ ensures \result == false <==> String.valueOf(booleanValue).equals("false");
+    public static boolean main(String[] args) {
+        boolean booleanValue = new Random().nextBoolean();
+	
+        String tmp = String.valueOf(booleanValue);
+        if (booleanValue) return tmp.equals("true");
+        else return tmp.equals("false");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen119.java:4: error: cannot find symbol
+    //@ ensures \result == true <==> String.valueOf(booleanValue).equals("true");
+                                                    ^
+  symbol:   variable booleanValue
+  location: class BugTestGen119
+/home/max/Documents/JMLGPT/tmp/BugTestGen119.java:5: error: cannot find symbol
+    //@ ensures \result == false <==> String.valueOf(booleanValue).equals("false");
+                                                     ^
+  symbol:   variable booleanValue
+  location: class BugTestGen119
+2 errors
+
+import java.util.Random;
+
+public class BugTestGen119 {
+    //@ ensures \result == true <==> String.valueOf(\result).equals("true");
+    //@ ensures \result == false <==> String.valueOf(\result).equals("false");
+    public static boolean main(String[] args) {
+        boolean booleanValue = new Random().nextBoolean();
+	
+        String tmp = String.valueOf(booleanValue);
+        if (booleanValue) return tmp.equals("true");
+        else return tmp.equals("false");
+    }
+}
+

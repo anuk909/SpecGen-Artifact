@@ -1,0 +1,1820 @@
+public class MinePump {
+
+    boolean pumpRunning = false;
+
+    boolean systemActive = true;
+
+    Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures this.env == env;
+                    ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:17: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures systemActive ==> processEnvironment();
+                ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:17: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+                ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:35: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pumpRunning;
+                ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:40: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == pumpRunning;
+                           ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:45: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning;
+                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:50: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == env.isMethaneLevelCritical();
+                           ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning;
+                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:62: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:62: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:62: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:62: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:71: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning;
+                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:77: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == systemActive;
+                           ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:90: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+23 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+    //@ invariant pumpRunning ==> systemActive;
+    //@ invariant !pumpRunning ==> systemActive;
+    //@ invariant systemActive ==> pumpRunning;
+    //@ invariant !systemActive ==> !pumpRunning;
+    //@ invariant env != null;
+    //@ invariant \invariant_for(env);
+    public class Environment {
+
+        //@ ensures \result != null;
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:79: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant pumpRunning ==> systemActive;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:80: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !pumpRunning ==> systemActive;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:81: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant systemActive ==> pumpRunning;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant !systemActive ==> !pumpRunning;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;
+                     ^
+15 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();  
+    //@ ensures systemActive ==> processEnvironment();  
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+ 
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+ 
+ 
+ 
+ 
+    //@ invariant env != null;  
+    //@ invariant \invariant_for(env);  
+    public class Environment {
+
+        //@ ensures \result != null;  
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/MinePump.java:83: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant env != null;  
+                  ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:84: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+    //@ invariant \invariant_for(env);  
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: incompatible types: void cannot be converted to boolean
+    //@ ensures pumpRunning ==> env.lowerWaterLevel();  
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:14: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();  
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:87: error: A \result expression may not be used in the specification of a method that returns void
+        //@ ensures \result != null;  
+                     ^
+5 errors
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+ 
+ 
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+ 
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures \result == pumpRunning;
+    public boolean isPumpRunning() {
+        return pumpRunning;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result == env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result != null;
+    @Override
+    public String toString() {
+        return "Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString();
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !pumpRunning ==> systemActive ==> !pumpRunning && !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+
+ 
+ 
+ 
+ 
+ 
+ 
+    public class Environment {
+
+ 
+        public Environment() {
+            super();
+        }
+
+        //@ ensures \result == true || \result == false;
+        public boolean isMethaneLevelCritical() {
+            // implementation details
+        }
+
+        //@ ensures true;
+        public void lowerWaterLevel() {
+            // implementation details
+        }
+
+        //@ ensures \result != null;
+        @Override
+        public String toString() {
+            // implementation details
+        }
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/MinePump.java:95: error: missing return statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:106: error: missing return statement
+        }
+        ^
+2 errors
+

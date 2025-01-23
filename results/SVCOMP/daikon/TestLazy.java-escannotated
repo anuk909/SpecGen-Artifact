@@ -1,0 +1,32 @@
+class TestLazy {
+  /*@ ensures \result == true; */
+  public static boolean g (int arg) {
+    if (arg == 0)
+      return (new TestLazy()).f(0, arg);
+    return true;
+  }
+
+  public boolean f(int a, int b) {
+    Integer i = null;
+    if (a < 5) {
+      i = Integer.valueOf(4);
+      i.floatValue();
+    } else
+      return false;
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = -5; i <= 8; i++) {
+      (new TestLazy()).g(i);
+      for(int j = -5; j <= 8; j++) {
+        (new TestLazy()).f(i,j);
+        (new TestLazy()).f(j,i);
+      }
+    }
+  }
+}

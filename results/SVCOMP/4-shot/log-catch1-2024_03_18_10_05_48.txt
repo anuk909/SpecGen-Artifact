@@ -1,0 +1,31 @@
+class some_exception1 extends Throwable {}
+;
+
+class some_exception2 extends some_exception1 {}
+;
+
+class catch1 {
+  //@ ensures \result <==> true;
+  //@ signals (some_exception2 e) false;
+  //@ signals (some_exception1 e) \result == true;
+  public static boolean fun() {
+    try {
+      throw new some_exception2();
+    } catch (some_exception1 e) {
+      if(!(e instanceof some_exception2)) return false;
+      if (e instanceof some_exception2) return true;
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/catch1.java:9: error: incompatible types: some_exception2 cannot be converted to Exception
+  //@ signals (some_exception2 e) false;
+               ^
+/home/max/Documents/JMLGPT/tmp/catch1.java:10: error: incompatible types: some_exception1 cannot be converted to Exception
+  //@ signals (some_exception1 e) \result == true;
+               ^
+/home/max/Documents/JMLGPT/tmp/catch1.java:10: error: A \result expression may not be in a signals clause
+  //@ signals (some_exception1 e) \result == true;
+                                   ^
+3 errors
+

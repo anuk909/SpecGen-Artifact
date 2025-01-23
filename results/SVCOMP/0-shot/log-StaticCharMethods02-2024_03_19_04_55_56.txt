@@ -1,0 +1,22 @@
+public class StaticCharMethods02 {
+  //@ requires arg != null;
+  //@ ensures \result == -1 || \result == 0 || \result == 1;
+  public static int f(String arg) {
+    // Check if the argument is not null
+    if (arg == null) {
+      throw new NullPointerException("Argument cannot be null");
+    }
+    
+    // Check if the length of the argument is less than 1
+    if (arg.length() < 1) {
+      return -1;
+    }
+    
+    // Get the first character of the argument
+    char c = arg.charAt(0);
+    
+    // Check if the character is a letter
+    return (Character.toUpperCase(c) != Character.toLowerCase(c)) ? 1 : 0;
+  }
+}
+

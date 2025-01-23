@@ -1,0 +1,34 @@
+public class ChangeCase {
+
+  //@ requires (int)Character.MIN_VALUE <= (int)c && (int)c <= (int)Character.MAX_VALUE;
+  //@ ensures (int)Character.MIN_VALUE <= (int)\result && (int)\result <= (int)Character.MAX_VALUE;
+  //@ ensures ((int)c > (int)'z') ==> \result == c;
+  //@ ensures ((int)'a' <= (int)c && (int)c <= (int)'z') ==> \result == (char)((int)c - (int)'a' + (int)'A');
+  //@ ensures ((int)c > (int)'Z') ==> \result == c;
+  //@ ensures ((int)'A' <= (int)c && (int)c <= (int)'Z') ==> \result == (char)((int)c - (int)'A' + (int)'a');
+  //@ ensures !(((int)'a' <= (int)c && (int)c <= (int)'z') || ((int)'A' <= (int)c && (int)c <= (int)'Z')) ==> \result == c;
+  public char changeCase(char c) {
+    char result = ' ';    
+    if (c > 'z') {
+      result = c;
+    } else if (c >= 'a') {
+      result =  (char)(c - 'a' + 'A');
+    } else if (c > 'Z') {
+      result =  c;
+    } else if (c >= 'A') {
+      result =  (char)(c - 'A' + 'a');
+    } else {
+      result = c;
+    }
+    return result;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/ChangeCase.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ChangeCase.java:7:) in method changeCase
+    return result;
+    ^
+/home/max/Documents/JMLGPT/tmp/ChangeCase.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ChangeCase.java:23:
+  //@ ensures ((int)c > (int)'Z') ==> \result == c;
+      ^
+2 verification failures
+

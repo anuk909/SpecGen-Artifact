@@ -1,0 +1,50 @@
+class Main {
+
+  /*@ ensures \result == true; */
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*@ ensures (x >= 1)  ==  (\result == true); */
+  /*@ ensures (x >= 1)  ==>  (x - \old(x) - 3 == 0); */
+  /*@ ensures (x == -2 || x == -1 || x == 0)  ==  (\old(x) == -5 || \old(x) == -4 || \old(x) == -3); */
+  /*@ ensures (x == -2 || x == -1 || x == 0)  ==  (\result == false); */
+  /*@ ensures (x == -2 || x == -1 || x == 0)  ==>  (\old(this) != null); */
+  /*@ ensures (x == -2 || x == -1 || x == 0)  ==>  (x > z); */
+  /*@ ensures (x == -2 || x == -1 || x == 0)  ==>  (y > z); */
+  /*@ ensures (x == -2 || x == -1 || x == 0)  ==>  (z < \old(z)); */
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe25");
+    y = z + 1;
+    z = z + x;
+    x = x + 3;
+    if (z > 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x > 0) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+
+    return true;
+  }
+}
+
+class ExSymExe25 {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int i = -5; i <= 5; i++) {
+      for(int j = -5; j <= 5; j++) {
+        Main.f();
+        e.test(i, j, i - j);
+        e.test(j, i, j + i);
+      }
+    }
+  }
+}

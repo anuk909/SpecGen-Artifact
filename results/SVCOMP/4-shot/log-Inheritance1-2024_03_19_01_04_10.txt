@@ -1,0 +1,60 @@
+class A1 {
+  //@ public normal_behavior
+  //@ ensures some_member == 1;
+  int some_member;
+
+  //@ public normal_behavior
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  //@ public normal_behavior
+  //@ ensures some_other_member == 2;
+  int some_other_member;
+
+  //@ public normal_behavior
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  //@ public normal_behavior
+  //@ ensures yet_another_member == 3;
+  int yet_another_member;
+
+  //@ public normal_behavior
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  //@ public normal_behavior
+  //@ ensures \result == null;
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:4: error: Method specs may not precede a variable declaration
+  int some_member;
+      ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:17: error: Method specs may not precede a variable declaration
+  int some_other_member;
+      ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:30: error: Method specs may not precede a variable declaration
+  int yet_another_member;
+      ^
+3 errors
+

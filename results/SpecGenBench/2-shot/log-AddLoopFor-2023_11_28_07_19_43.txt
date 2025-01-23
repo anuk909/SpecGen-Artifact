@@ -1,0 +1,28 @@
+public class AddLoopFor {
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ loop_invariant sum == y + (x - n);
+            //@ loop_variant n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ loop_invariant sum == y - (-x - n);
+            //@ loop_variant n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:7: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+            //@ loop_variant n;
+                ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:13: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+            //@ loop_variant n;
+                ^
+2 errors
+

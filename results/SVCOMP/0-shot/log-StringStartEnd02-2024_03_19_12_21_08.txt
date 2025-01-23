@@ -1,0 +1,25 @@
+public class StringStartEnd02 {
+
+  //@ requires args != null;
+  //@ requires args.length >= 4;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(String[] args) {
+    // Effects: returns true if exactly one of the first 4 elements of args starts with "te", false otherwise
+    
+    if (args.length < 4)
+      return false;
+    int i = 0;
+
+    //@ loop_invariant 0 <= j <= 4;
+    //@ loop_invariant 0 <= i <= 4;
+    //@ loop_invariant (\forall int k; 0 <= k < j; args[k].startsWith("te") ==> i == k);
+    for (int j = 0; j < 4; j++) {
+      if (args[j].startsWith("te"))
+        ++i;
+    }
+
+    return i == 1;
+  }
+  
+}
+

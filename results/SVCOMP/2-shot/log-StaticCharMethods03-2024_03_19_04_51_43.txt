@@ -1,0 +1,17 @@
+public class StaticCharMethods03 {
+  /*@ public normal_behavior
+    @    requires arg.length() >= 1;
+    @    requires (\forall int i; 0 <= i && i < arg.length(); (int)Character.MIN_VALUE <= (int)arg.charAt(i) && (int)arg.charAt(i) <= (int)Character.MAX_VALUE);
+    @    ensures \result == -1 || \result == 0 || \result == 1;
+    @    ensures \result == -1 ==> arg.length() < 1;
+    @    ensures \result == 0 ==> Character.isDefined(arg.charAt(0));
+    @    ensures \result == 1 ==> !Character.isDefined(arg.charAt(0));
+    @*/
+  public static int f(String arg) {
+    if (arg.length() < 1) return -1;
+
+    char c = arg.charAt(0);
+    return (Character.isDefined(c) == false) ? 1 : 0;
+  }
+}
+

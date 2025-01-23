@@ -1,0 +1,48 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires s == null || !s.contains("<bad/>");
+  public void sendRedirect(String s) throws IOException {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires x == null || !x.contains("<bad/>");
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s == null || !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:11: error: cannot find symbol
+  //@ requires x == null || !x.contains("<bad/>");
+               ^
+  symbol:   variable x
+  location: class HttpServletResponse
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:11: error: cannot find symbol
+  //@ requires x == null || !x.contains("<bad/>");
+                             ^
+  symbol:   variable x
+  location: class HttpServletResponse
+2 errors
+

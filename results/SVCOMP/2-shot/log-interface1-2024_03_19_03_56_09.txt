@@ -1,0 +1,36 @@
+class cl {}
+
+interface A {
+  //@ public normal_behavior
+  //@    assignable \nothing;
+  //@    ensures true;
+  public void f();
+}
+
+class B implements A {
+  //@ public normal_behavior
+  //@    assignable \nothing;
+  //@    ensures false;
+  public void f() {
+    assert false; // should fail
+  }
+}
+
+class C implements A {
+  //@ public normal_behavior
+  //@    assignable \nothing;
+  //@    ensures true;
+  public void f() {}
+}
+
+class Main {
+  //@ requires args != null;
+  //@ requires (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  //@ ensures true;
+  public static void main(String[] args) {
+    A b = new B();
+    A c = new C();
+    b.f(); // really calls B.f
+  }
+}
+

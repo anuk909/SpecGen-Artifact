@@ -1,0 +1,226 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg != null;
+  //@ requires arg >= Short.MIN_VALUE && arg <= Short.MAX_VALUE;
+  //@ ensures \result ==> arg < 0;
+  //@ ensures !\result ==> arg >= 0;
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires r == field2;
+  //@ ensures \result ==> z <= x;
+  //@ ensures !\result ==> z > x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:19: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires r == field2;
+                    ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg != null;
+  //@ requires arg >= Short.MIN_VALUE && arg <= Short.MAX_VALUE;
+  //@ ensures \result ==> arg < 0;
+  //@ ensures !\result ==> arg >= 0;
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires field2 == r;
+  //@ ensures \result ==> z <= x;
+  //@ ensures !\result ==> z > x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7:) in method f
+    return inst.test(x, arg, field2);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExe14.java:16:
+  //@ ensures \result ==> arg < 0;
+      ^
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+2 verification failures
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg != null;
+  //@ requires arg >= Short.MIN_VALUE && arg <= Short.MAX_VALUE;
+  //@ ensures \result ==> arg < 0;  
+  //@ ensures !\result ==> arg >= 0;
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires field2 == r;
+  //@ ensures \result ==> z <= x;
+  //@ ensures !\result ==> z > x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7:) in method f
+    return inst.test(x, arg, field2);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExe14.java:16:
+  //@ ensures \result ==> arg < 0;  
+      ^
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+2 verification failures
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg != null;
+  //@ requires arg >= Short.MIN_VALUE && arg <= Short.MAX_VALUE;
+  //@ ensures \result ==> arg <= 0;  
+  //@ ensures !\result ==> arg >= 0;
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires field2 == r;
+  //@ ensures \result ==> z <= x;
+  //@ ensures !\result ==> z > x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7:) in method f
+    return inst.test(x, arg, field2);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExe14.java:16:
+  //@ ensures \result ==> arg <= 0;  
+      ^
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+2 verification failures
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg != null;
+  //@ requires arg >= Short.MIN_VALUE && arg <= Short.MAX_VALUE;
+ 
+  //@ ensures !\result ==> arg >= 0;
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires field2 == r;
+  //@ ensures \result ==> z <= x;
+  //@ ensures !\result ==> z > x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+

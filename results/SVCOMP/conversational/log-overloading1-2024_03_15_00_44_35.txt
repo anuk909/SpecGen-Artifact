@@ -1,0 +1,366 @@
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(new other_class()) == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int f(other_class o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:4: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: error: Object allocation is not permitted in specification expressions
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3);
+                                                            ^
+2 errors
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && f(other_class.class) == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(new other_class()) == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int f(Class<other_class> o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:4: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:4: error: no suitable method found for f(other_class)
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && f(new other_class()) == 3;
+                                                       ^
+    method Main.f(int) is not applicable
+      (argument mismatch; other_class cannot be converted to int)
+    method Main.f(double) is not applicable
+      (argument mismatch; other_class cannot be converted to double)
+    method Main.f(Class<other_class>) is not applicable
+      (argument mismatch; other_class cannot be converted to Class<other_class>)
+/home/max/Documents/JMLGPT/tmp/overloading1.java:9: error: no suitable method found for f(other_class)
+    if (f(new other_class()) == 3) return false;
+        ^
+    method Main.f(int) is not applicable
+      (argument mismatch; other_class cannot be converted to int)
+    method Main.f(double) is not applicable
+      (argument mismatch; other_class cannot be converted to double)
+    method Main.f(Class<other_class>) is not applicable
+      (argument mismatch; other_class cannot be converted to Class<other_class>)
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+3 errors
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+
+class other_class {}
+
+class Main {
+  //@ ensures \result ==> f(1) == 1 && f(1.0d) == 2 && fClass() == 3;
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (fClass() == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  public static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  public static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  public static int fClass() {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures !\result ==> !(f(1) == 1 && f(1.0d) == 2 && fClass() == 3);
+      ^
+2 verification failures
+

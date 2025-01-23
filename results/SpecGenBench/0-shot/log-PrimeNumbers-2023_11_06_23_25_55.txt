@@ -1,0 +1,44 @@
+public class PrimeNumbers
+{
+    // Precondition: n >= 0
+    // Postcondition: Returns an array of prime numbers with length n
+    public int[] primeList(int n)
+    {
+        // Precondition: n >= 0
+        // Postcondition: primeArray is initialized with length n
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        {
+            // Precondition: num >= 3, j >= 2, num/2 >= 2
+            // Postcondition: status = 0 if num is divisible by any number between 2 and num/2 (inclusive), otherwise status = 1
+            for (j = 2; j <= num/2; j++)
+            {
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            // Precondition: status = 0 or 1
+            // Postcondition: primeArray[count - 1] = num if status = 1, otherwise primeArray[count - 1] remains unchanged
+            if (status != 0)
+            {
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+
+            num++;
+        }
+        // Postcondition: Returns primeArray
+        return primeArray;
+    }
+
+    // Precondition: n >= 0, d > 0
+    // Postcondition: Returns true if n is divisible by d, otherwise false
+    private static boolean div(int n, int d) { return n%d == 0; }
+}

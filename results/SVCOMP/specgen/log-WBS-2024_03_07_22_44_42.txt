@@ -1,0 +1,348 @@
+public class WBS {
+
+    private int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private int WBS_Node_WBS_rlt_PRE2;
+
+    public int Nor_Pressure;
+    public int Alt_Pressure;
+    public int Sys_Mode;
+
+    //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0;
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == \result;
+    //@ ensures Sys_Mode == 0 ==> Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == \result;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+/home/max/Documents/JMLGPT/tmp/WBS.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:27: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == \result;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:29: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures Alt_Pressure == \result;
+                                 ^
+5 errors
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+    //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0;
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+    //@ ensures Sys_Mode == 0 ==> Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+/home/max/Documents/JMLGPT/tmp/WBS.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:11:) in method WBS
+    public WBS() {
+           ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:17:
+    //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:30: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:28:) in method update
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:30:
+    //@ ensures Sys_Mode == 0 ==> Nor_Pressure == 0;
+        ^
+4 verification failures
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+    //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0;  
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+    //@ ensures Sys_Mode == 0 ==> Nor_Pressure == 0;  
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/WBS.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:11:) in method WBS
+    public WBS() {
+           ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:17:
+    //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0;  
+        ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:30: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:28:) in method update
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:30:
+    //@ ensures Sys_Mode == 0 ==> Nor_Pressure == 0;  
+        ^
+4 verification failures
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+ 
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+ 
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/WBS.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:12:) in method WBS
+    public WBS() {
+           ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:12: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:17:
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;
+        ^
+2 verification failures
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+ 
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;  
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+ 
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/WBS.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:12:) in method WBS
+    public WBS() {
+           ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:12: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:17:
+    //@ ensures WBS_Node_WBS_BSCU_rlt_PRE1 == 0;  
+        ^
+2 verification failures
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+ 
+ 
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+ 
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/WBS.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:13:) in method WBS
+    public WBS() {
+           ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:17:
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;
+        ^
+2 verification failures
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+ 
+ 
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;  
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+ 
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/WBS.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/WBS.java:13:) in method WBS
+    public WBS() {
+           ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/WBS.java:17:
+    //@ ensures WBS_Node_WBS_rlt_PRE2 == 100;  
+        ^
+2 verification failures
+
+public class WBS {
+
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+    private /*@ spec_public @*/ int WBS_Node_WBS_BSCU_rlt_PRE1;
+    private /*@ spec_public @*/ int WBS_Node_WBS_rlt_PRE2;
+
+    public /*@ spec_public @*/ int Nor_Pressure;
+    public /*@ spec_public @*/ int Alt_Pressure;
+    public /*@ spec_public @*/ int Sys_Mode;
+
+ 
+ 
+ 
+    //@ ensures Nor_Pressure == 0;
+    //@ ensures Alt_Pressure == 0;
+    //@ ensures Sys_Mode == 0;
+    public WBS() {
+        WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+        WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+        WBS_Node_WBS_rlt_PRE2 = 100;
+        Nor_Pressure = 0;
+        Alt_Pressure = 0;
+        Sys_Mode = 0;
+    }
+
+    //@ requires 0 <= PedalPos && PedalPos <= 4;
+    //@ ensures Sys_Mode == 1 ==> Nor_Pressure == Nor_Pressure;
+ 
+    //@ ensures Alt_Pressure == Alt_Pressure;
+    public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+        // Implementation details omitted for brevity
+    }
+}
+
+

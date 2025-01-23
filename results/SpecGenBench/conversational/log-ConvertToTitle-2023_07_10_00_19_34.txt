@@ -1,0 +1,130 @@
+class Solution {
+    //@ requires columnNumber >= 1;
+    //@ ensures \result != null;
+    //@ ensures \result.length() > 0;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); 'A' <= \result.charAt(i) && \result.charAt(i) <= 'Z');
+    //@ ensures \result.equals(\old(\result.reverse().toString()));
+    public String convertToTitle(int columnNumber) {
+        StringBuffer sb = new StringBuffer();
+        //@ maintaining columnNumber > 0;
+        //@ maintaining sb != null;
+        //@ maintaining (\forall int i; 0 <= i && i < sb.length(); 'A' <= sb.charAt(i) && sb.charAt(i) <= 'Z');
+        //@ maintaining sb.equals(\old(sb.reverse().toString()));
+        //@ decreases columnNumber;
+        while (columnNumber > 0) {
+            int a0 = (columnNumber - 1) % 26 + 1;
+            sb.append((char)(a0 - 1 + 'A'));
+            columnNumber = (columnNumber - a0) / 26;
+        }
+        return sb.reverse().toString();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:6: error: A \result expression is not allowed in an old environment
+    //@ ensures \result.equals(\old(\result.reverse().toString()));
+                                    ^
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:6: error: cannot find symbol
+    //@ ensures \result.equals(\old(\result.reverse().toString()));
+                                           ^
+  symbol:   method reverse()
+  location: class String
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:12: error: cannot find symbol
+        //@ maintaining sb.equals(\old(sb.reverse().toString()));
+                                       ^
+  symbol:   variable sb
+  location: class Solution
+3 errors
+
+class Solution {
+    //@ requires columnNumber >= 1;
+    //@ ensures \result != null;
+    //@ ensures \result.length() > 0;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); 'A' <= \result.charAt(i) && \result.charAt(i) <= 'Z');
+    //@ ensures \result.equals(reverseString(\old(\result)));
+    public String convertToTitle(int columnNumber) {
+        StringBuffer sb = new StringBuffer();
+        //@ maintaining columnNumber > 0;
+        //@ maintaining sb != null;
+        //@ maintaining (\forall int i; 0 <= i && i < sb.length(); 'A' <= sb.charAt(i) && sb.charAt(i) <= 'Z');
+        //@ maintaining sb.equals(reverseString(\old(sb.toString())));
+        //@ decreases columnNumber;
+        while (columnNumber > 0) {
+            int a0 = (columnNumber - 1) % 26 + 1;
+            sb.append((char)(a0 - 1 + 'A'));
+            columnNumber = (columnNumber - a0) / 26;
+        }
+        return reverseString(sb.toString());
+    }
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures \result.length() == str.length();
+    //@ ensures (\forall int i; 0 <= i && i < str.length(); \result.charAt(i) == str.charAt(str.length() - 1 - i));
+    private String reverseString(String str) {
+        StringBuffer reversed = new StringBuffer();
+        //@ maintaining reversed != null;
+        //@ maintaining reversed.length() == str.length();
+        //@ maintaining (\forall int i; 0 <= i && i < reversed.length(); reversed.charAt(i) == str.charAt(str.length() - 1 - i));
+        //@ decreases str.length() - reversed.length();
+        for (int i = 0; i < str.length(); i++) {
+            reversed.append(str.charAt(str.length() - 1 - i));
+        }
+        return reversed.toString();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:6: error: A \result expression is not allowed in an old environment
+    //@ ensures \result.equals(reverseString(\old(\result)));
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:6: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result.equals(reverseString(\old(\result)));
+                               ^
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:6: warning: A non-pure method is being called where it is not permitted: Solution.reverseString(java.lang.String)
+    //@ ensures \result.equals(reverseString(\old(\result)));
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:12: error: cannot find symbol
+        //@ maintaining sb.equals(reverseString(\old(sb.toString())));
+                                                     ^
+  symbol:   variable sb
+  location: class Solution
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:30: error: variable i is already defined in method reverseString(String)
+        //@ maintaining (\forall int i; 0 <= i && i < reversed.length(); reversed.charAt(i) == str.charAt(str.length() - 1 - i));
+                                     ^
+4 errors
+1 warning
+
+class Solution {
+    //@ requires columnNumber >= 1;
+    //@ ensures \result != null;
+    //@ ensures \result.length() > 0;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); 'A' <= \result.charAt(i) && \result.charAt(i) <= 'Z');
+    //@ ensures \result.equals(reverseString(\old(\result)));
+    public String convertToTitle(int columnNumber) {
+        StringBuffer sb = new StringBuffer();
+        //@ maintaining columnNumber > 0;
+        //@ maintaining sb != null;
+        //@ maintaining (\forall int i; 0 <= i && i < sb.length(); 'A' <= sb.charAt(i) && sb.charAt(i) <= 'Z');
+        //@ maintaining sb.toString().equals(reverseString(\old(sb.toString())));
+        //@ decreases columnNumber;
+        while (columnNumber > 0) {
+            int a0 = (columnNumber - 1) % 26 + 1;
+            sb.append((char)(a0 - 1 + 'A'));
+            columnNumber = (columnNumber - a0) / 26;
+        }
+        return reverseString(sb.toString());
+    }
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures \result.length() == str.length();
+    //@ ensures (\forall int i; 0 <= i && i < str.length(); \result.charAt(i) == str.charAt(str.length() - 1 - i));
+    private String reverseString(String str) {
+        StringBuffer reversed = new StringBuffer();
+        //@ maintaining reversed != null;
+        //@ maintaining reversed.length() == str.length();
+        //@ maintaining (\forall int i; 0 <= i && i < reversed.length(); reversed.charAt(i) == str.charAt(str.length() - 1 - i));
+        //@ decreases str.length() - reversed.length();
+        for (int i = 0; i < str.length(); i++) {
+            reversed.append(str.charAt(str.length() - 1 - i));
+        }
+        return reversed.toString();
+    }
+}

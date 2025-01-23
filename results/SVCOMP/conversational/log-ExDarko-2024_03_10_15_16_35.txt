@@ -1,0 +1,85 @@
+class MyInteger {
+  int value;
+
+  //@ ensures \result == value;
+  public MyInteger(int value) {
+    this.value = value;
+  }
+
+  //@ requires obj != null;
+  //@ ensures \result <==> (obj == this || (obj instanceof MyInteger && this.value == ((MyInteger)obj).value));
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof MyInteger)) {
+      return false;
+    }
+    MyInteger other = (MyInteger) obj;
+    return this.value == other.value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:4: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == value;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:10: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> (obj == this || (obj instanceof MyInteger && this.value == ((MyInteger)obj).value));
+                                                                            ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:10: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> (obj == this || (obj instanceof MyInteger && this.value == ((MyInteger)obj).value));
+                                                                                                      ^
+3 errors
+
+class MyInteger {
+  //@ spec_public
+  int value;
+
+  //@ ensures \result == value;
+  public MyInteger(int value) {
+    this.value = value;
+  }
+
+  //@ requires obj != null;
+  //@ ensures \result <==> (obj == this || (obj instanceof MyInteger && this.value == ((MyInteger)obj).value));
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof MyInteger)) {
+      return false;
+    }
+    MyInteger other = (MyInteger) obj;
+    return this.value == other.value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:5: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == value;
+               ^
+1 error
+
+class MyInteger {
+  //@ spec_public
+  int value;
+
+  //@ ensures value == v;
+  public MyInteger(int v) {
+    value = v;
+  }
+
+  //@ requires obj != null;
+  //@ ensures \result <==> (obj == this || (obj instanceof MyInteger && this.value == ((MyInteger)obj).value));
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof MyInteger)) {
+      return false;
+    }
+    MyInteger other = (MyInteger) obj;
+    return this.value == other.value;
+  }
+}
+

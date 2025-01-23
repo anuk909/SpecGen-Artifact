@@ -1,0 +1,105 @@
+//@ ensures (\result == true) ==> (exc instanceof A);
+//@ ensures (\result == false) ==> !(exc instanceof A);
+//@ assignable \nothing;
+static boolean isInstanceOfA(Throwable exc) {
+    return exc instanceof A;
+}
+
+//@ requires exc instanceof A;
+//@ ensures exc instanceof A;
+//@ assignable \nothing;
+static void throwA(A exc) {
+    throw exc;
+}
+
+//@ requires exc instanceof B;
+//@ ensures exc instanceof B;
+//@ assignable \nothing;
+static void throwB(B exc) {
+    throw exc;
+}
+
+//@ requires exc instanceof C;
+//@ ensures exc instanceof C;
+//@ assignable \nothing;
+static void throwC(C exc) {
+    throw exc;
+}
+
+//@ requires true;
+//@ ensures (\result == true) ==> (exc instanceof A);
+//@ ensures (\result == false) ==> !(exc instanceof A);
+//@ assignable \nothing;
+static boolean isInstanceOfA(Throwable exc) {
+    return exc instanceof A;
+}
+
+//@ requires true;
+//@ ensures (\result == true) ==> (exc instanceof B);
+//@ ensures (\result == false) ==> !(exc instanceof B);
+//@ assignable \nothing;
+static boolean isInstanceOfB(Throwable exc) {
+    return exc instanceof B;
+}
+
+//@ requires true;
+//@ ensures (\result == true) ==> (exc instanceof C);
+//@ ensures (\result == false) ==> !(exc instanceof C);
+//@ assignable \nothing;
+static boolean isInstanceOfC(Throwable exc) {
+    return exc instanceof C;
+}
+
+//@ requires true;
+//@ ensures (\result == true) ==> (exc instanceof RuntimeException);
+//@ ensures (\result == false) ==> !(exc instanceof RuntimeException);
+//@ assignable \nothing;
+static boolean isInstanceOfRuntimeException(Throwable exc) {
+    return exc instanceof RuntimeException;
+}
+
+class A extends RuntimeException {
+    //@ ensures isInstanceOfA(\result);
+    //@ assignable \nothing;
+    A() {
+    }
+}
+
+class B extends A {
+    //@ ensures isInstanceOfB(\result);
+    //@ assignable \nothing;
+    B() {
+    }
+}
+
+class C extends B {
+    //@ ensures isInstanceOfC(\result);
+    //@ assignable \nothing;
+    C() {
+    }
+}
+
+//@ requires true;
+//@ ensures isInstanceOfRuntimeException(\result);
+//@ assignable \nothing;
+public static void main(String[] args) {
+    try {
+        A a = new A();
+        foo();
+    } catch (B exc) {
+        assert false;
+    }
+}
+
+//@ requires true;
+//@ ensures isInstanceOfRuntimeException(\result);
+//@ assignable \nothing;
+static void foo() {
+    try {
+        A b = new A();
+        throw b;
+    } catch (A exc) {
+        assert false;
+    }
+}
+

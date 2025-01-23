@@ -1,0 +1,23 @@
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int k; 0 <= k && k < \result.length(); \result.charAt(k) == 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ loop_invariant 0 <= i && i <= chars.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; chars[k] == 'a');
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        int j = i;
+        //@ loop_invariant i <= j && j <= chars.length;
+        //@ loop_invariant (\forall int k; i <= k && k < j; chars[k] == 'b');
+        //@ decreases chars.length - j;
+        while (j < chars.length && chars[j] == 'b') {
+            j++;
+        }
+        //@ assert j == chars.length;
+        return j == chars.length;
+    }
+}

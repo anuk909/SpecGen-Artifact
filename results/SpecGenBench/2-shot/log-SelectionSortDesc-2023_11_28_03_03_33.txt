@@ -1,0 +1,32 @@
+public class SelectionSortDesc {
+
+    //@ requires arr != null;
+    //@ assignable arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] >= arr[i]);
+        //@ maintaining i <= arr.length - 1;
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i+1 <= k && k < j; arr[k] <= arr[index]);
+            //@ maintaining i+1 <= j && j <= arr.length;
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:17: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method selectionSort
+                if (arr[j] > arr[index]){  
+                       ^
+1 verification failure
+

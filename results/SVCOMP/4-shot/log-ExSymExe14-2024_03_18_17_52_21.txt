@@ -1,0 +1,53 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg < 0;
+  //@ ensures field == arg;
+  //@ ensures \result == inst.test(x, arg, field2);
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result == (z > x && x > r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == arg;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7: error: cannot find symbol
+  //@ ensures \result == inst.test(x, arg, field2);
+                                   ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == inst.test(x, arg, field2);
+                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:7: error: cannot find symbol
+  //@ ensures \result == inst.test(x, arg, field2);
+                         ^
+  symbol:   variable inst
+  location: class Main
+4 errors
+

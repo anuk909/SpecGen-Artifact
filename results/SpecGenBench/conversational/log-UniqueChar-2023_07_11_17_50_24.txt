@@ -1,0 +1,69 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j) || i == j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.containsKey(s.charAt(i)));
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.get(s.charAt(i)) == (\sum int j; 0 <= j && j <= i; (s.charAt(j) == s.charAt(i)) ? 1 : 0));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.containsKey(s.charAt(i)));
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.get(s.charAt(i)) == (\sum int j; 0 <= j && j <= i; (s.charAt(j) == s.charAt(i)) ? 1 : 0));
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < i; s.charAt(i) != s.charAt(j) || i == j));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:9: error: variable i is already defined in method firstUniqChar(String)
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.containsKey(s.charAt(i)));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:10: error: variable i is already defined in method firstUniqChar(String)
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.get(s.charAt(i)) == (\sum int j; 0 <= j && j <= i; (s.charAt(j) == s.charAt(i)) ? 1 : 0));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:16: error: variable i is already defined in method firstUniqChar(String)
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.containsKey(s.charAt(i)));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:17: error: variable i is already defined in method firstUniqChar(String)
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); frequency.get(s.charAt(i)) == (\sum int j; 0 <= j && j <= i; (s.charAt(j) == s.charAt(i)) ? 1 : 0));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:18: error: variable i is already defined in method firstUniqChar(String)
+        //@ maintaining (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < i; s.charAt(i) != s.charAt(j) || i == j));
+                                     ^
+5 errors
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j) || i == j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) == (\sum int k; 0 <= k && k <= j; (s.charAt(k) == s.charAt(j)) ? 1 : 0));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) == (\sum int k; 0 <= k && k <= j; (s.charAt(k) == s.charAt(j)) ? 1 : 0));
+        //@ maintaining (\forall int j; 0 <= j && j < i; (\forall int k; 0 <= k && k < j; s.charAt(j) != s.charAt(k) || j == k));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}

@@ -1,0 +1,904 @@
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); i != j ==> num.charAt(i) != num.charAt(j)));
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); \num_of int j; 0 <= j && j < num.length(); num.charAt(i) == num.charAt(j)) == h.getOrDefault(i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); \num_of int j; 0 <= j && j < num.length(); num.charAt(i) == num.charAt(j)) != h.getOrDefault(i, 0));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; \num_of int j; 0 <= j && j < num.length(); num.charAt(k) == num.charAt(j)) == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(k, 0) == num.charAt(k) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); \num_of int j; 0 <= j && j < num.length(); num.charAt(i) == num.charAt(j)) == h.getOrDefault(i, 0));
+                                                                                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); \num_of int j; 0 <= j && j < num.length(); num.charAt(i) == num.charAt(j)) != h.getOrDefault(i, 0));
+                                                                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: error: Incorrectly formed or terminated loop_invariant statement near here
+        //@ maintaining (\forall int k; 0 <= k && k < i; \num_of int j; 0 <= j && j < num.length(); num.charAt(k) == num.charAt(j)) == h.getOrDefault(k, 0));
+                                                                                                                                                           ^
+3 errors
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); i != j ==> num.charAt(i) != num.charAt(j)));
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+                                                                                               ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+                                                                                                ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+2 errors
+2 warnings
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); i != j ==> num.charAt(i) != num.charAt(j)));
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+                                                                                               ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+                                                                                                ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+2 errors
+2 warnings
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); i != j ==> num.charAt(i) != num.charAt(j)));
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+                                                                                               ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+                                                                                                ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+2 errors
+2 warnings
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); i != j ==> num.charAt(i) != num.charAt(j)));
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == h.getOrDefault(i, 0));
+                                                                                               ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != h.getOrDefault(i, 0));
+                                                                                                ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == h.getOrDefault(k, 0));
+                                                                                              ^
+2 errors
+2 warnings
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); i != j ==> num.charAt(i) != num.charAt(j)));
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+                                                                                                            ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+                                                                                                             ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+                                                                                                ^
+4 errors
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:9: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+                                                                                                ^
+2 errors
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:5: verify: The prover cannot establish an assertion (NullField) in method DigitCount
+    private /*@ spec_public @*/ Map<Integer, Integer> h;
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:35: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+                                             ^
+3 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        return map != null && map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:35: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+        return map != null && map.containsKey(key) ? map.get(key) : defaultValue;
+                                                            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        return map != null && map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); k != j ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:35: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+        return map != null && map.containsKey(key) ? map.get(key) : defaultValue;
+                                                            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        return map != null && map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:35: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+        return map != null && map.containsKey(key) ? map.get(key) : defaultValue;
+                                                            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.get(key);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:36: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+            return map.get(key);
+            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.get(key);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:36: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+            return map.get(key);
+            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.get(key);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:36: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+            return map.get(key);
+            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.get(key);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:36: verify: The prover cannot establish an assertion (PossiblyNullUnbox) in method getOrDefault
+            return map.get(key);
+            ^
+2 verification failures
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.getOrDefault(key, defaultValue);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+1 verification failure
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.getOrDefault(key, defaultValue);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+1 verification failure
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.getOrDefault(key, defaultValue);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+1 verification failure
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    private /*@ spec_public nullable @*/ Map<Integer, Integer> h;
+    
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); num.charAt(i) - '0' == getOrDefault(h, i, 0));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); num.charAt(i) - '0' != getOrDefault(h, i, 0));
+    public boolean digitCount(String num) {
+        h = new HashMap<>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(i, digit);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; num.charAt(k) - '0' == getOrDefault(h, k, 0));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ pure
+    private /*@ spec_public @*/ int getOrDefault(Map<Integer, Integer> map, int key, int defaultValue) {
+        if (map != null && map.containsKey(key)) {
+            return map.getOrDefault(key, defaultValue);
+        } else {
+            return defaultValue;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < num.length(); j != k ==> num.charAt(k) != num.charAt(j)));
+            ^
+1 verification failure
+

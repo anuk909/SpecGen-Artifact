@@ -1,0 +1,50 @@
+import java.util.Random;
+
+public class array_iteration01 {
+
+  /*@ ensures \result == -1 || \result == 0; */
+  public static int f(int index) {
+    int[] ia = new int[200];
+    if(!(0 <= index && index < ia.length)) return -1;
+    ia[index] = new Random().nextInt();
+    for (int i = 0; i < ia.length; i++) {
+      __Loop_Invariant_Dummy1(index, ia, i);
+      if (ia[i] == 0)
+        return 0;
+      ;
+    }
+    return 1;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f(-2);
+    f(-1);
+    f(0);
+    f(1);
+    f(2);
+    f(3);
+    f(4);
+    f(114);
+    f(514);    
+    f(580);
+    f(1919);
+    f(810);
+    f(-514);
+  }
+
+  /*@ requires i == 0 || i == 1; */
+  /*@ requires ia.length == 200; */
+  /*@ requires ia[i] == -1163287367 || ia[i] == 0; */
+  /*@ requires index < ia.length-1; */
+  /*@ requires i < ia.length-1; */
+  /*@ requires ia[i] % ia[index] == 0; */
+  /*@ ensures ia[\old(i)] == -1163287367 || ia[\old(i)] == 0; */
+  /*@ ensures \old(index) < ia.length-1; */
+  /*@ ensures \old(i) < ia.length-1; */
+  /*@ ensures ia[\old(i)] % ia[\old(index)] == 0; */
+  public static void __Loop_Invariant_Dummy1(int index, int[] ia, int i) {}
+}

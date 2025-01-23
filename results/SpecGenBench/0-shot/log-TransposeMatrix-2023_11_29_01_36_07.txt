@@ -1,0 +1,49 @@
+public class TransposeMatrix {
+ 
+    //@ requires matrix != null;
+    //@ requires matrix.length > 0;
+    //@ requires (\forall int[] row; row \in matrix; row != null && row.length == matrix[0].length);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int[] row; row \in \result; row != null && row.length == matrix.length);
+    public int[][] transposeMat(int[][] matrix) {
+        int m, n, p, q;
+        m = matrix.length;
+        n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        //@ loop_invariant c >= 0 && c <= n;
+        //@ loop_invariant (\forall int[] row; row \in transpose; row != null && row.length == m);
+        //@ loop_invariant (\forall int i; i >= 0 && i < c; (\forall int j; j >= 0 && j < m; transpose[j][i] == matrix[i][j]));
+        //@ decreases n - c;
+        for (int c = 0; c < n; c++) {
+            //@ loop_invariant d >= 0 && d <= m;
+            //@ loop_invariant (\forall int i; i >= 0 && i < d; transpose[c][i] == matrix[i][c]);
+            //@ decreases m - d;
+            for (int d = 0; d < m; d++) {
+                transpose[c][d] = matrix[d][c];
+            }
+        }
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:5: error: This backslash token is unknown: \in
+    //@ requires (\forall int[] row; row \in matrix; row != null && row.length == matrix[0].length);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:5: error: ')' expected
+    //@ requires (\forall int[] row; row \in matrix; row != null && row.length == matrix[0].length);
+                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:8: error: This backslash token is unknown: \in
+    //@ ensures (\forall int[] row; row \in \result; row != null && row.length == matrix.length);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:8: error: ')' expected
+    //@ ensures (\forall int[] row; row \in \result; row != null && row.length == matrix.length);
+                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:16: error: This backslash token is unknown: \in
+        //@ loop_invariant (\forall int[] row; row \in transpose; row != null && row.length == m);
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:16: error: ')' expected
+        //@ loop_invariant (\forall int[] row; row \in transpose; row != null && row.length == m);
+                                                                                                 ^
+6 errors
+

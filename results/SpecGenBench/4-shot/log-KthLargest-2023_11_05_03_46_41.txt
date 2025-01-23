@@ -1,0 +1,24 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires k > 0 && k <= nums.length;
+    //@ ensures \result == (\max int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; nums[i] >= nums[j])) && (\forall int i; 0 <= i && i < nums.length; nums[i] <= \result);
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: error: incomparable types: int and boolean
+    //@ ensures \result == (\max int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; nums[i] >= nums[j])) && (\forall int i; 0 <= i && i < nums.length; nums[i] <= \result);
+                        ^
+1 error
+

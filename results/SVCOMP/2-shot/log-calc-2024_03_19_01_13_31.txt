@@ -1,0 +1,38 @@
+public class calc {
+    //@ requires args != null;
+    //@ requires args.length >= 2;
+    //@ ensures System.out.println("need two arguments");
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires \typeof(a) == \type(String) && \typeof(b) == \type(String);
+    //@ requires \d_is_int(a) && \d_is_int(b);
+    //@ ensures \result == (Integer.parseInt(a) != Integer.parseInt(b) || x == y);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+
+    //@ requires s != null;
+    //@ requires \typeof(s) == \type(String);
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < s.length(); Character.isDigit(s.charAt(i)));
+    boolean \d_is_int(String s) {
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+

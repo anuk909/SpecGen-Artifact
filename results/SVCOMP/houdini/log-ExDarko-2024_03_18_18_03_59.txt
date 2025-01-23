@@ -1,0 +1,55 @@
+class MyInteger {
+  int value;
+
+  public MyInteger(int value) {
+    this.value = value;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof MyInteger)) {
+      return false;
+    }
+    MyInteger other = (MyInteger) obj;
+    return this.value == other.value;
+  }
+  
+}
+
+class ExDarko {
+  public static void main(String[] args) {
+
+    MyInteger myInt1, myInt2;
+    for(int i = -3; i <= 3; i++) {
+      for(int j = -3; j <= 3; j++) {
+        myInt1 = new MyInteger(i);
+        myInt2 = new MyInteger(j);
+        myInt1.equals(myInt2);
+        myInt2.equals(myInt1);
+      }
+    }
+
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:30: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExDarko.java:9:) in method main
+        myInt1.equals(myInt2);
+                     ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExDarko.java:30:
+  public boolean equals(Object obj) {
+                 ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Object.jml:84: verify: Precondition conjunct is false: this == obj
+      @     requires this == obj;
+                          ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Object.jml:88: verify: Precondition conjunct is false: \typeof(this) == \type(Object)
+      @     requires obj != null && \typeof(this) == \type(Object);
+                                                  ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Object.jml:92: verify: Precondition conjunct is false: obj == null
+      @     requires obj == null;
+                         ^
+5 verification failures
+

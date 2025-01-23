@@ -1,0 +1,71 @@
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ ensures SQLException is thrown if close operation fails
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:6: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+                           ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:14: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+                           ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:22: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+                           ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:33: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures SQLException is thrown if s.contains("<bad/>");
+                           ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:40: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures SQLException is thrown if close operation fails
+                           ^
+5 errors
+

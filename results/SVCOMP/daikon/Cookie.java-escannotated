@@ -1,0 +1,42 @@
+public class Cookie {
+
+  /*@ invariant this.name != null; */
+  /*@ invariant this.value != null; */
+  /*@ spec_public */ private String name;
+  /*@ spec_public */ private String value;
+
+  /*@ ensures this.name == \old(name); */
+  /*@ ensures this.value == \old(value); */
+  public Cookie(String name, String value) {
+    this.name = name;
+    this.value = value;
+  }
+
+  /*@ ensures this.name == \result; */
+  /*@ ensures \result == \old(this.name); */
+  public String getName() {
+    return name;
+  }
+
+  /*@ ensures this.value == \result; */
+  /*@ ensures \result == \old(this.value); */
+  public String getValue() {
+    return value;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Cookie c1 = new Cookie("123", "456");
+    Cookie c2 = new Cookie("1g2a3", "ar56");
+    Cookie c3 = new Cookie("$%^&gsjh", "98gbfn");
+    c1.getName();
+    c1.getValue();
+    c2.getName();
+    c2.getValue();
+    c3.getName();
+    c3.getValue();
+  }
+}

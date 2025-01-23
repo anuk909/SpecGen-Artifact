@@ -1,0 +1,49 @@
+public class BubbleSortDesc { 
+    
+    //@ requires \forall int j; 0 <= j && j < array.length; \forall int i; 0 <= i && i < j ;array[i] >= array[j];
+    //@ ensures \result.length == arr.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] >= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ maintaining 0 <= i && i <= n-1;
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] >= arr[k+1]);
+        //@ decreases n - i;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ maintaining 0 <= j && j <= n-i-1;
+            //@ maintaining (\forall int k; 0 <= k && k < j; arr[k] >= arr[k+1]);
+            //@ decreases n - i - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] > arr[j]) {  
+                    swap(j, j + 1, arr); 
+                } 
+            }
+        } 
+        return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:3: error: non-static variable length cannot be referenced from a static context
+    //@ requires \forall int j; 0 <= j && j < array.length; \forall int i; 0 <= i && i < j ;array[i] >= array[j];
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:3: error: cannot find symbol
+    //@ requires \forall int j; 0 <= j && j < array.length; \forall int i; 0 <= i && i < j ;array[i] >= array[j];
+                                                                                            ^
+  symbol:   variable array
+  location: class BubbleSortDesc
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:3: error: cannot find symbol
+    //@ requires \forall int j; 0 <= j && j < array.length; \forall int i; 0 <= i && i < j ;array[i] >= array[j];
+                                                                                                        ^
+  symbol:   variable array
+  location: class BubbleSortDesc
+3 errors
+

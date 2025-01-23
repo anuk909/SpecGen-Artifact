@@ -1,0 +1,291 @@
+public class SelectionSort {
+
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int j; i + 1 <= j && j < arr.length; arr[j] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:8: error: variable j is already defined in method selectionSort(int[])
+            //@ maintaining (\forall int j; i + 1 <= j && j < arr.length; arr[j] >= arr[index]);
+                                         ^
+1 error
+
+public class SelectionSort {
+
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i + 1 <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:4: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelectionSort.java:3:) in method selectionSort
+    public static void selectionSort(int[] arr){  
+                       ^
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelectionSort.java:4:
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+        ^
+2 verification failures
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i + 1 <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:5: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelectionSort.java:4:) in method selectionSort
+    public static void selectionSort(int[] arr){  
+                       ^
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelectionSort.java:5:
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+        ^
+2 verification failures
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i + 1 <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining 0 <= index && index <= i;
+                ^
+1 verification failure
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i + 1 <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i+1;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining (\forall int k; i + 1 <= k && k < arr.length; arr[k] >= arr[index]);
+                ^
+1 verification failure
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i+1;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+                ^
+1 verification failure
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining 0 <= index && index <= i;
+                ^
+1 verification failure
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i+1;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+                ^
+1 verification failure
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i + 1 <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining 0 <= index && index <= i;
+                ^
+1 verification failure
+
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+            //@ maintaining 0 <= index && index <= i+1;
+            //@ decreases arr.length - i;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i, j; 0 <= i && i < j && j < arr.length; arr[i] <= arr[j]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method selectionSort
+            //@ maintaining (\forall int k; i <= k && k < arr.length; arr[k] >= arr[index]);
+                ^
+1 verification failure
+

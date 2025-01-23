@@ -1,0 +1,34 @@
+class ComputeArea {
+    /**
+     * Computes the overlap area between two rectangles.
+     * 
+     * @param ax1 the x-coordinate of the top-left corner of the first rectangle
+     * @param ay1 the y-coordinate of the top-left corner of the first rectangle
+     * @param ax2 the x-coordinate of the bottom-right corner of the first rectangle
+     * @param ay2 the y-coordinate of the bottom-right corner of the first rectangle
+     * @param bx1 the x-coordinate of the top-left corner of the second rectangle
+     * @param by1 the y-coordinate of the top-left corner of the second rectangle
+     * @param bx2 the x-coordinate of the bottom-right corner of the second rectangle
+     * @param by2 the y-coordinate of the bottom-right corner of the second rectangle
+     * @return the overlap area between the two rectangles
+     */
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        // Precondition: ax1 <= ax2, ay1 <= ay2, bx1 <= bx2, by1 <= by2
+        
+        // Compute the areas of the two rectangles
+        int area1 = (ax2 - ax1) * (ay2 - ay1);
+        int area2 = (bx2 - bx1) * (by2 - by1);
+        
+        // Compute the overlap width and height
+        int overlapWidth = (ax2 < bx2 ? ax2 : bx2) - (ax1 > bx1 ? ax1 : bx1);
+        int overlapHeight = (ay2 < by2 ? ay2 : by2) - (ay1 > by1 ? ay1 : by1);
+        
+        // Compute the overlap area
+        int overlapArea = (overlapWidth > 0 ? overlapWidth : 0) * (overlapHeight > 0 ? overlapHeight : 0);
+        
+        // Postcondition: overlapArea >= 0
+        
+        // Compute and return the total area minus the overlap area
+        return area1 + area2 - overlapArea;
+    }
+}

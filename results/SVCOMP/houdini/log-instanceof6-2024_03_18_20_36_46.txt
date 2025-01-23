@@ -1,0 +1,60 @@
+class Main {
+  //@ ensures \result;
+  //@ ensures !\result;
+  public static boolean f() {
+    A[] as = {new A(), new B()};
+    if(!(as[0] instanceof A)) return false;
+    if (!(as[1] instanceof A))
+      return false;
+    return true;
+  }
+}
+;
+
+class A {}
+
+class B extends A {}
+
+class instanceof6 {
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    Main.f();
+  }
+
+}
+
+/home/max/Documents/JMLGPT/tmp/instanceof6.java:9: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/instanceof6.java:3:) in method f
+    return true;
+    ^
+/home/max/Documents/JMLGPT/tmp/instanceof6.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/instanceof6.java:9:
+  //@ ensures !\result;
+      ^
+2 verification failures
+
+class Main {
+  //@ ensures \result;
+  public static boolean f() {
+    A[] as = {new A(), new B()};
+    if(!(as[0] instanceof A)) return false;
+    if (!(as[1] instanceof A))
+      return false;
+    return true;
+  }
+}
+;
+
+class A {}
+
+class B extends A {}
+
+class instanceof6 {
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    Main.f();
+  }
+
+}
+
+

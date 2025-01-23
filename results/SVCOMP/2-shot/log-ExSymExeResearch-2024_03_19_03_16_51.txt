@@ -1,0 +1,29 @@
+class Main {
+    
+    //@ requires arg != Integer.MIN_VALUE;
+    //@ ensures \result == (\result != (arg + 5));
+    public static boolean f(int arg) {
+        int x = arg > 0 ? arg : -arg;
+        int y = 5;
+        Main inst = new Main();
+        return inst.test(x, y) != x + y;
+    }
+
+    //@ requires 0 <= a && a < 100 && 0 <= b && b < 100;
+    //@ ensures \result == (\result == (a - b) ? (a - b) : (a + b));
+    public int test(int a, int b) {
+        int result = 0;
+        if (a >= 0 && a < 100 && b >= 0 && b < 100) {
+            int sum = a + b;
+            int diff = a - b;
+            int temp;
+
+            if (sum > 0) temp = a;
+            else temp = b;
+            if (temp < diff) result = temp;
+            else result = diff;
+        }
+        return result;
+    }
+}
+

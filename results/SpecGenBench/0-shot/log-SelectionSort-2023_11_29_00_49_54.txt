@@ -1,0 +1,28 @@
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        //@ loop_invariant 0 <= i && i <= arr.length - 1;
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ loop_invariant i + 1 <= j && j <= arr.length;
+            for (int j = i + 1; j < arr.length; j++){  
+                //@ loop_invariant i <= index && index < j;
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:12: error: Loop specifications must immediately precede a loop statement
+                //@ loop_invariant i <= index && index < j;
+                    ^
+1 error
+

@@ -1,0 +1,544 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \symbolic arg;
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures \result ==> 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:5: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic arg;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+                                                                                      ^
+2 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures \result ==> 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: Incorrectly formed or terminated requires statement near here -- perhaps a missing semicolon
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: Token \result is not a type
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: ';' expected
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: illegal start of type
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: invalid method declaration; return type required
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: illegal start of type
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: <identifier> expected
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: <identifier> expected
+  //@ ensures \result ==> (arg < 0) || test(3, arg, field2);
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+                                                                                      ^
+9 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures \result <==> 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: Incorrectly formed or terminated requires statement near here -- perhaps a missing semicolon
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: Token \result is not a type
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: ';' expected
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: illegal start of type
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: invalid method declaration; return type required
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: illegal start of type
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: <identifier> expected
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: <identifier> expected
+  //@ ensures \result <==> (arg < 0) || test(3, arg, field2);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+                                                                                      ^
+9 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures \result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: Incorrectly formed or terminated requires statement near here -- perhaps a missing semicolon
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: Token \result is not a type
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: ';' expected
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: illegal start of type
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: invalid method declaration; return type required
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: illegal start of type
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: <identifier> expected
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:6: error: <identifier> expected
+  //@ ensures \result == (arg < 0) || test(3, arg, field2);
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false));
+                                                                                      ^
+9 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures (\result == (arg < 0) || test(3, arg, field2));
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures (\result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: ')' expected
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+                                                                                      ^
+1 error
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures (\result == (arg < 0) || test(3, arg, field2));
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures (\result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: ')' expected
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+                                                                                      ^
+1 error
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures (\result == (arg < 0) || test(3, arg, field2));
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures (\result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: ')' expected
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+                                                                                      ^
+1 error
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures (\result == (arg < 0) || test(3, arg, field2));
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures (\result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: ')' expected
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+                                                                                      ^
+1 error
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures (\result == (arg < 0) || test(3, arg, field2));
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures (\result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")) && 
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:26: error: ')' expected
+  //@         (! (x < r) ==> (System.out.println("branch BOO2") && \result == false)));
+                                                                                      ^
+1 error
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures (\result == (arg < 0) || test(3, arg, field2));
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  //@ ensures (\result == 
+  //@     (\forall int x, z, r; 
+  //@         test(x, z, r) ==> (x == 3 && r == x + z && x == z - 3 && z == r) && 
+  //@         (z < x ==> System.out.println("branch FOO1")) && 
+  //@         (x < r ==> System.out.println("branch BOO1")));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:25: error: ')' expected
+  //@         (x < r ==> System.out.println("branch BOO1")));
+                                                            ^
+1 error
+

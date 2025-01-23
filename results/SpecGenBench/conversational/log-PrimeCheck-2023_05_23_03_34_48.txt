@@ -1,0 +1,75 @@
+class PrimeCheck {
+   
+   //@ requires a >= 2;
+   //@ ensures (\result ==> (\forall int i; 2 <= i && i <= a/2; a % i != 0));
+   //@ ensures (!\result ==> (\exists int i; 2 <= i && i <= a/2; a % i == 0));
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:12: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method isPrime
+	   if (a%i == 0)
+	        ^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:4:) in method isPrime
+	return true;
+	^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:16:
+   //@ ensures (\result ==> (\forall int i; 2 <= i && i <= a/2; a % i != 0));
+       ^
+3 verification failures
+
+class PrimeCheck {
+   
+   //@ requires a >= 2;
+   //@ ensures (\result ==> (\forall int i; 2 <= i && i <= a/2; a % i != 0));
+   //@ ensures (!\result ==> (\exists int i; 2 <= i && i <= a/2; a % i == 0));
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	//@ maintaining 2 <= i && i <= mid+1;
+	//@ maintaining (\forall int j; 2 <= j && j < i; a % j != 0);
+	//@ decreases mid - i + 2;
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+error: An internal JML error occurred, possibly recoverable.  Please report the bug with as much information as you can.
+  Reason: Unexpected result when querying SMT solver for reason for an unknown result: (error "Error writing to solver: (get-info :reason-unknown) java.io.IOException: Stream closed")
+1 error
+
+class PrimeCheck {
+   
+   //@ requires a >= 2;
+   //@ ensures (\result ==> (\forall int i; 2 <= i && i <= a/2; a % i != 0));
+   //@ ensures (!\result ==> (\exists int i; 2 <= i && i <= a/2; a % i == 0));
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	//@ maintaining 2 <= i && i <= mid+1;
+	//@ maintaining (\forall int j; 2 <= j && j < i; a % j != 0);
+	//@ decreases mid - i + 2;
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}

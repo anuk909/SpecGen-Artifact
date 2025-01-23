@@ -1,0 +1,46 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires 0 < nums.length;
+    //@ requires 0 <= k && k < nums.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; \result >= nums[i]);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length && \result < nums[i]; nums[i] <= \result);
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; pq.contains(nums[j]));
+        //@ maintaining pq.size() <= k;
+        //@ decreases nums.length - i;
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: cannot find symbol
+        //@ maintaining 0 <= i && i <= nums.length;
+                             ^
+  symbol:   variable i
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: cannot find symbol
+        //@ maintaining 0 <= i && i <= nums.length;
+                                  ^
+  symbol:   variable i
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: cannot find symbol
+        //@ maintaining (\forall int j; 0 <= j && j < i; pq.contains(nums[j]));
+                                                      ^
+  symbol:   variable i
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:14: error: cannot find symbol
+        //@ decreases nums.length - i;
+                                    ^
+  symbol:   variable i
+  location: class KthLargest
+4 errors
+

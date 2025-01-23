@@ -1,0 +1,70 @@
+public class OverapproximationString01 {
+  //@ requires s != null;
+  //@ ensures (\exists String prefix; prefix.equals("abc"); \result.equals(prefix + s) && (\result.equals("not possible") ==> \result.equals("not possible")));
+  public static void foo(String s) {
+    String prefix = "abc";
+    String complete = prefix + s;
+    if (complete.equals("not possible")) {
+      assert (true);
+    } else {
+      assert (false);
+    }
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\exists String prefix; prefix.equals("abc"); \result.equals(prefix + s) && (\result.equals("not possible") ==> \result.equals("not possible")));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\exists String prefix; prefix.equals("abc"); \result.equals(prefix + s) && (\result.equals("not possible") ==> \result.equals("not possible")));
+                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\exists String prefix; prefix.equals("abc"); \result.equals(prefix + s) && (\result.equals("not possible") ==> \result.equals("not possible")));
+                                                                                                                               ^
+3 errors
+
+public class OverapproximationString01 {
+  //@ requires s != null;
+  //@ ensures (\exists String prefix; prefix.equals("abc"); complete.equals(prefix + s) && (complete.equals("not possible") ==> complete.equals("not possible")));
+  public static void foo(String s) {
+    String prefix = "abc";
+    String complete = prefix + s;
+    if (complete.equals("not possible")) {
+      assert (true);
+    } else {
+      assert (false);
+    }
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+  //@ ensures (\exists String prefix; prefix.equals("abc"); complete.equals(prefix + s) && (complete.equals("not possible") ==> complete.equals("not possible")));
+                                                            ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+  //@ ensures (\exists String prefix; prefix.equals("abc"); complete.equals(prefix + s) && (complete.equals("not possible") ==> complete.equals("not possible")));
+                                                                                            ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+  //@ ensures (\exists String prefix; prefix.equals("abc"); complete.equals(prefix + s) && (complete.equals("not possible") ==> complete.equals("not possible")));
+                                                                                                                                ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+3 errors
+
+public class OverapproximationString01 {
+  //@ requires s != null;
+  //@ ensures (\exists String prefix; prefix.equals("abc"); prefix.concat(s).equals("not possible") ==> prefix.concat(s).equals("not possible"));
+  public static void foo(String s) {
+    String prefix = "abc";
+    String complete = prefix + s;
+    if (complete.equals("not possible")) {
+      assert (true);
+    } else {
+      assert (false);
+    }
+  }
+
+}

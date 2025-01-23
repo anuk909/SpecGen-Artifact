@@ -1,0 +1,612 @@
+public class GCD {
+	
+    //@ requires 0 <= n && 0 <= d;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ requires (\forall int i; 0 <= i && i < num.length(); (int)Character.MIN_VALUE <= (int)num.charAt(i) && (int)num.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires (\forall int i; 0 <= i && i < num1.length(); (int)Character.MIN_VALUE <= (int)num1.charAt(i) && (int)num1.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ requires (\forall int i; 0 <= i && i < num2.length(); (int)Character.MIN_VALUE <= (int)num2.charAt(i) && (int)num2.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < \result; (div(num1, i) == 0 && div(num2, i) == 0));
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num.length(); (int)Character.MIN_VALUE <= (int)num.charAt(i) && (int)num.charAt(i) <= (int)Character.MAX_VALUE);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num.length(); (int)Character.MIN_VALUE <= (int)num.charAt(i) && (int)num.charAt(i) <= (int)Character.MAX_VALUE);
+                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num.length(); (int)Character.MIN_VALUE <= (int)num.charAt(i) && (int)num.charAt(i) <= (int)Character.MAX_VALUE);
+                                                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:10: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:10: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num1.length(); (int)Character.MIN_VALUE <= (int)num1.charAt(i) && (int)num1.charAt(i) <= (int)Character.MAX_VALUE);
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num1.length(); (int)Character.MIN_VALUE <= (int)num1.charAt(i) && (int)num1.charAt(i) <= (int)Character.MAX_VALUE);
+                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num1.length(); (int)Character.MIN_VALUE <= (int)num1.charAt(i) && (int)num1.charAt(i) <= (int)Character.MAX_VALUE);
+                                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num2.length(); (int)Character.MIN_VALUE <= (int)num2.charAt(i) && (int)num2.charAt(i) <= (int)Character.MAX_VALUE);
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num2.length(); (int)Character.MIN_VALUE <= (int)num2.charAt(i) && (int)num2.charAt(i) <= (int)Character.MAX_VALUE);
+                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: error: int cannot be dereferenced
+    //@ requires (\forall int i; 0 <= i && i < num2.length(); (int)Character.MIN_VALUE <= (int)num2.charAt(i) && (int)num2.charAt(i) <= (int)Character.MAX_VALUE);
+                                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < \result; (div(num1, i) == 0 && div(num2, i) == 0));
+                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < \result; (div(num1, i) == 0 && div(num2, i) == 0));
+                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                                                  ^
+11 errors
+4 warnings
+
+public class GCD {
+	
+    //@ requires 0 <= n && 0 <= d;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ requires 0 <= num;
+    //@ ensures \result == num;
+    //@ also
+    //@ requires num < 0;
+    //@ ensures \result == -num;
+    public /*@ pure @*/ int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires 0 <= num1 && 0 <= num2;
+    //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < \result; (div(num1, i) == 0 && div(num2, i) == 0));
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:20: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < \result; (div(num1, i) == 0 && div(num2, i) == 0));
+                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:20: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < \result; (div(num1, i) == 0 && div(num2, i) == 0));
+                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:6: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method div
+        return n%d; 
+                ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+            ^
+4 warnings
+2 verification failures
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (div(num1, \result) == 0 && div(num2, \result) == 0);
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (div(num1, i) == 0 && div(num2, i) == 0) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result > 0 && (div(num1, \result) == 0 && div(num2, \result) == 0);
+                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result > 0 && (div(num1, \result) == 0 && div(num2, \result) == 0);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+            ^
+4 warnings
+1 verification failure
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (div(num1, \result) == 0 && div(num2, \result) == 0);
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ ensures \result == (n % d) == 0;
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result > 0 && (div(num1, \result) == 0 && div(num2, \result) == 0);
+                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result > 0 && (div(num1, \result) == 0 && div(num2, \result) == 0);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (div(num1, j) == 0 && div(num2, j) == 0));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: error: incomparable types: boolean and int
+    //@ ensures \result == (n % d) == 0;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: error: incomparable types: boolean and int
+    //@ ensures \result == (n % d) == 0;
+                                   ^
+2 errors
+4 warnings
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == (div(n, d) == 0);
+                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:21:) in method isDivisible
+        return div(n, d) == 0;
+                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:27:
+    public static int div(int n, int d) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:19: verify: Precondition conjunct is false: d != 0
+    //@ requires d != 0;
+                   ^
+5 warnings
+4 verification failures
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ pure
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == (div(n, d) == 0);
+                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:21:) in method isDivisible
+        return div(n, d) == 0;
+                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:27:
+    public static int div(int n, int d) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:19: verify: Precondition conjunct is false: d != 0
+    //@ requires d != 0;
+                   ^
+5 warnings
+4 verification failures
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ pure
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: warning: A non-pure method is being called where it is not permitted: GCD.isDivisible(int,int)
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == (div(n, d) == 0);
+                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:21:) in method isDivisible
+        return div(n, d) == 0;
+                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:27:
+    public static int div(int n, int d) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:19: verify: Precondition conjunct is false: d != 0
+    //@ requires d != 0;
+                   ^
+5 warnings
+4 verification failures
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ pure
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ ensures \result == (div(n, d) == 0);
+    //@ pure
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == (div(n, d) == 0);
+                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:28: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:21:) in method isDivisible
+        return div(n, d) == 0;
+                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:28:
+    public static int div(int n, int d) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:19: verify: Precondition conjunct is false: d != 0
+    //@ requires d != 0;
+                   ^
+1 warning
+4 verification failures
+
+public class GCD {
+    //@ requires num1 > 0 && num2 > 0;
+    //@ ensures \result > 0 && (isDivisible(num1, \result) && isDivisible(num2, \result));
+    public static int gcd(int num1, int num2) {
+        int i = 1;
+        int gcd = 1;
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int j; 1 <= j && j < i; (isDivisible(num1, j) && isDivisible(num2, j)));
+        //@ decreases num1 - i;
+        while (i <= num1 && i <= num2) {
+            if (isDivisible(num1, i) && isDivisible(num2, i)) {
+                gcd = i;
+            }
+            i++;
+        }
+        return gcd;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == n % d;
+    public static int div(int n, int d) {
+        return n % d;
+    }
+    
+    //@ pure
+    //@ ensures \result == (div(n, d) == 0);
+    public static boolean isDivisible(int n, int d) {
+        return div(n, d) == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+

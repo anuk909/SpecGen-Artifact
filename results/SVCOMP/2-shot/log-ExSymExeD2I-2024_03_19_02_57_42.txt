@@ -1,0 +1,25 @@
+class Main {
+
+  //@ requires x >= 0.0 && x <= Integer.MAX_VALUE / 2;
+  //@ ensures \result == test(x);
+  public static boolean f (double x) {
+    if (x >= 0.0 && x <= Integer.MAX_VALUE / 2) {
+      Main inst = new Main();
+      return inst.test(x);
+    }
+    return true;
+  }
+
+  //@ requires x >= 0.0;
+  //@ ensures \result == (res > 0);
+  public boolean test(double x) {
+
+    int res = (int) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+

@@ -1,0 +1,130 @@
+class CalcDuration {
+    //@ requires timeSeries != null;
+    //@ requires (\forall int i; 0 <= i && i < timeSeries.length; 0 <= timeSeries[i]);
+    //@ requires duration >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures \result == spec_calcDuration(timeSeries, duration);
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ ghost int i_counter;
+        //@ set i_counter = 0;
+        //@ maintaining -1 <= i && i < timeSeries.length;
+        //@ maintaining i_counter + i + 1 == timeSeries.length;
+        //@ maintaining ans == spec_calcDuration(timeSeries, duration, i_counter);
+        //@ maintaining expired == spec_expired(timeSeries, duration, i_counter);
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+            //@ set i_counter = i_counter + 1;
+        }
+        //@ assert i_counter == timeSeries.length;
+        return ans;
+    }
+
+    //@ requires timeSeries != null;
+    //@ requires (\forall int i; 0 <= i && i < timeSeries.length; 0 <= timeSeries[i]);
+    //@ requires duration >= 0;
+    //@ ensures \result >= 0;
+    public /*@ pure @*/ int spec_calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+
+    //@ requires timeSeries != null;
+    //@ requires (\forall int i; 0 <= i && i < timeSeries.length; 0 <= timeSeries[i]);
+    //@ requires duration >= 0;
+    //@ requires 0 <= i_counter && i_counter <= timeSeries.length;
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+    public /*@ pure @*/ int spec_calcDuration(int[] timeSeries, int duration, int i_counter) {
+        int ans = 0;
+        int expired = 0;
+        for (int i = 0; i < i_counter; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+
+    //@ requires timeSeries != null;
+    //@ requires (\forall int i; 0 <= i && i < timeSeries.length; 0 <= timeSeries[i]);
+    //@ requires duration >= 0;
+    //@ requires 0 <= i_counter && i_counter <= timeSeries.length;
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+    public /*@ pure @*/ int spec_expired(int[] timeSeries, int duration, int i_counter) {
+        int expired = 0;
+        for (int i = 0; i < i_counter; ++i) {
+            expired = timeSeries[i] + duration;
+        }
+        return expired;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:52: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:71: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:52: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:71: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:52: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:71: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:52: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:71: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method calcDuration
+        //@ maintaining i_counter + i + 1 == timeSeries.length;
+            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:38: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method spec_calcDuration
+            if (timeSeries[i] >= expired) {
+                          ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:52: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:64: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcDuration.java:52:) in method spec_calcDuration
+        return ans;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:52: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcDuration.java:64:
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; duration);
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:71: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:77: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcDuration.java:71:) in method spec_expired
+        return expired;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:71: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcDuration.java:77:
+    //@ ensures \result == (\sum int i; 0 <= i && i < i_counter; timeSeries[i] + duration);
+        ^
+10 warnings
+6 verification failures
+

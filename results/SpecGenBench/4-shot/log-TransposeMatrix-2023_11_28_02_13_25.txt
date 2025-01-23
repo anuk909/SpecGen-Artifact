@@ -1,0 +1,31 @@
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null && (\forall int i, j; 0 <= i && i < matrix.length && 0 <= j && j < matrix[i].length; Integer.MIN_VALUE <= matrix[i][j] && matrix[i][j] <= Integer.MAX_VALUE);
+       //@ ensures \result != null && \result.length == matrix[0].length && (\forall int i, j; 0 <= i && i < \result.length && 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]);
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining (\forall int i, j; 0 <= i && i < c && 0 <= j && j < m; transpose[j][i] == matrix[i][j]);
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining (\forall int i, j; 0 <= i && i < c && 0 <= j && j < m; transpose[j][i] == matrix[i][j]);
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:19: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[c][d] = matrix[d][c];
+                            ^
+  Reason: Double rewriting of ident: c c_776_776___31 c_776_790___34
+1 error
+

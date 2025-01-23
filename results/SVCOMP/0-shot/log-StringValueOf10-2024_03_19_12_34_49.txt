@@ -1,0 +1,17 @@
+public class StringValueOf10 {
+  //@ requires arg != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(String arg) {
+    Object objectRef = arg; // assign string to an Object reference
+    //@ assert objectRef != null;
+    
+    String tmp = String.valueOf(objectRef);
+    //@ assert tmp != null;
+    
+    //@ assert tmp.equals(objectRef.toString());
+    
+    //@ assert \result == (tmp.equals(arg + "s"));
+    return tmp.equals(arg + "s");
+  }
+}
+

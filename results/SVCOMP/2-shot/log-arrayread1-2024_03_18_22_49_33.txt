@@ -1,0 +1,19 @@
+class arrayread1 {
+
+  static /*@ spec_public @*/ arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures \result == 0 <==> readback != null;
+  //@ ensures \result == 1 <==> readback == null;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    arrayread1[] a = new arrayread1[c];
+    readback = a[0];
+    return ((readback == null) ? 1 : 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:11: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method func
+    readback = a[0];
+             ^
+1 verification failure
+

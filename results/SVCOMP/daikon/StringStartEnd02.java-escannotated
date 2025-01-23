@@ -1,0 +1,43 @@
+public class StringStartEnd02 {
+
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires args.length == 1 || args.length == 4 || args.length == 5; */
+  /*@ ensures (\old(args.length) == 1)  ==>  ((args.length == 1) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null)))); */
+  /*@ ensures (\old(args.length) == 1)  ==>  ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (\old(args.length) == 1)  ==>  (\old(args) != null); */
+  /*@ ensures (\old(args.length) == 1)  ==>  (\result == false); */
+  /*@ ensures (\result == false)  ==>  (\old(args.length) == 1 || \old(args.length) == 4 || \old(args.length) == 5); */
+  /*@ ensures (\result == true)  ==>  ((args.length == 4) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null)))); */
+  /*@ ensures (\result == true)  ==>  (\old(args) != null); */
+  /*@ ensures (\result == true)  ==>  (\old(args.length) == 4); */
+  public static boolean f(String[] args) {
+    if (args.length < 4)
+      return false;
+    int i = 0;
+
+    for (int j = 0; j < 4; j++) {
+      if (args[j].startsWith("te"))
+        ++i;
+    }
+
+    return i == 1;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    String[] arr = {"tera"};
+    f(arr);
+    arr = new String[]{"tera", "", "123", "eef"};
+    f(arr);
+    arr = new String[]{"tera", "te", "123", "eef"};
+    f(arr);
+    arr = new String[]{"tera", "te", "123", "eef", ""};
+    f(arr);
+    arr = new String[]{"tera", "te", "123", "eef", ""};
+    f(arr);
+  }
+  
+}

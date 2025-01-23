@@ -1,0 +1,47 @@
+class Main {
+  static int[] a;
+
+  //@ ensures a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures a[0] == x ==> \result == false;
+  //@ ensures a[0] != x ==> \result == true;
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else System.out.println("branch2 <0");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a != null && a.length == 1 && a[0] == -3;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a != null && a.length == 1 && a[0] == -3;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a != null && a.length == 1 && a[0] == -3;
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:14: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires a != null && a.length == 1;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:14: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires a != null && a.length == 1;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a[0] == x ==> \result == false;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a[0] != x ==> \result == true;
+              ^
+7 errors
+

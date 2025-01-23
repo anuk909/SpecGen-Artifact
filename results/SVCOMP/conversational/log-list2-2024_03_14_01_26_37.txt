@@ -1,0 +1,1073 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires \result >= 0;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result == entry.Value;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:30: error: A \result expression may not be used in the specification of a method that returns void
+  //@ requires \result >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list2.java:45: error: cannot find symbol
+  //@ ensures \result == entry.Value;
+                         ^
+  symbol:   variable entry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list2.java:56: error: cannot find symbol
+    return Verifier.nondetInt();
+           ^
+  symbol:   variable Verifier
+  location: class Utils_nondet
+3 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result == entry.Value;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return 0; // Placeholder for nondeterministic integer generation
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:44: error: cannot find symbol
+  //@ ensures \result == entry.Value;
+                         ^
+  symbol:   variable entry
+  location: class LinkedList
+1 error
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return 0; // Placeholder for nondeterministic integer generation
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index <= size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:31: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:18:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:31:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:17: verify: Precondition conjunct is false: index <= size()
+  //@ requires index <= size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:44:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:44: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:48:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return 0; // Placeholder for nondeterministic integer generation
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:33: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:18:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:33:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:17: verify: Precondition conjunct is false: index < size()
+  //@ requires index < size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:54: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:50:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:50: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:54:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return 0; // Placeholder for nondeterministic integer generation
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:33: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:18:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:33:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:17: verify: Precondition conjunct is false: index < size()
+  //@ requires index < size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:54: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:50:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:50: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:54:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:33: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:18:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:33:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:17: verify: Precondition conjunct is false: index < size()
+  //@ requires index < size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:54: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:50:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:50: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:54:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    LinkedListEntry current = Head;
+    while (current != null) {
+      count++;
+      current = current.Next;
+    }
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    if (index == 0) {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      newEntry.Next = Head;
+      Head = newEntry;
+    } else {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      newEntry.Next = current.Next;
+      current.Next = newEntry;
+    }
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+    } else {
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      current.Next = current.Next.Next;
+    }
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry current = Head;
+    for (int i = 0; i < index; i++) {
+      current = current.Next;
+    }
+    return current.Value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index <= size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:41: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:22:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:41:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:21: verify: Precondition conjunct is false: index <= size()
+  //@ requires index <= size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:66: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:60:) in method get
+    return current.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:60: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:66:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    LinkedListEntry current = Head;
+    while (current != null) {
+      count++;
+      current = current.Next;
+    }
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    if (index == 0) {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      newEntry.Next = Head;
+      Head = newEntry;
+    } else {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      newEntry.Next = current.Next;
+      current.Next = newEntry;
+    }
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+    } else {
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      current.Next = current.Next.Next;
+    }
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry current = Head;
+    for (int i = 0; i < index; i++) {
+      current = current.Next;
+    }
+    return current.Value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index <= size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:41: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:22:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:41:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:21: verify: Precondition conjunct is false: index <= size()
+  //@ requires index <= size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:66: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:60:) in method get
+    return current.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:60: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:66:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    LinkedListEntry current = Head;
+    while (current != null) {
+      count++;
+      current = current.Next;
+    }
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void add(int index, int e) {
+    if (index == 0) {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      newEntry.Next = Head;
+      Head = newEntry;
+    } else {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      newEntry.Next = current.Next;
+      current.Next = newEntry;
+    }
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+    } else {
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      current.Next = current.Next.Next;
+    }
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry current = Head;
+    for (int i = 0; i < index; i++) {
+      current = current.Next;
+    }
+    return current.Value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:41: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:22:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:41:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:21: verify: Precondition conjunct is false: index < size()
+  //@ requires index < size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:66: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:60:) in method get
+    return current.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:60: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:66:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    LinkedListEntry current = Head;
+    while (current != null) {
+      count++;
+      current = current.Next;
+    }
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void add(int index, int e) {
+    if (index == 0) {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      newEntry.Next = Head;
+      Head = newEntry;
+    } else {
+      LinkedListEntry newEntry = new LinkedListEntry();
+      newEntry.Value = e;
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      newEntry.Next = current.Next;
+      current.Next = newEntry;
+    }
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+    } else {
+      LinkedListEntry current = Head;
+      for (int i = 0; i < index - 1; i++) {
+        current = current.Next;
+      }
+      current.Next = current.Next.Next;
+    }
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int get(int index) {
+    LinkedListEntry current = Head;
+    for (int i = 0; i < index; i++) {
+      current = current.Next;
+    }
+    return current.Value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:41: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:22:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:41:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:21: verify: Precondition conjunct is false: index < size()
+  //@ requires index < size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:66: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:60:) in method get
+    return current.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:60: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:66:
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+      ^
+7 verification failures
+

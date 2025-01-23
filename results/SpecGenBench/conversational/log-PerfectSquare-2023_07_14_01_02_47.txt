@@ -1,0 +1,42 @@
+class PerfectSquare {
+    //@ ensures \result ==> num >= 0 && (\exists int i; 0 <= i && i * i == num);
+    //@ ensures !\result ==> num < 0 || (\forall int i; 0 <= i && i * i != num);
+    public static boolean isPerfectSquare(int num) {
+        if(num == 0)
+            return true;
+
+        //@ maintaining 1 <= i && i <= num;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 1; i * i <= num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:2:) in method isPerfectSquare
+            return true;
+            ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:2: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6:
+    //@ ensures \result ==> num >= 0 && (\exists int i; 0 <= i && i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ ensures \result ==> num >= 0 && (\exists int i; 0 <= i && i * i == num);
+    //@ ensures !\result ==> num < 0 || (\forall int i; 0 <= i && i * i != num);
+    public static boolean isPerfectSquare(int num) {
+        if(num < 0)
+            return false;
+
+        //@ maintaining 0 <= i && i <= num;
+        //@ maintaining !(\exists int j; 0 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 0; i <= num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}

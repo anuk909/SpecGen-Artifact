@@ -1,0 +1,36 @@
+class Main {
+
+  /*@ ensures \result == true; */
+  public static boolean f(float x) {
+    Main inst = new Main();
+    if (x >= 0)
+      return inst.test(x);
+    return true;
+  }
+
+  /*@ ensures (\result == false)  ==>  (\old(this) != null); */
+  public boolean test(float x) {
+    System.out.println("Testing FNEG");
+    float y = -x;
+    if (y > 0) {
+      return false;
+    } else
+      System.out.println("branch -x <= 0");
+    return true;
+  }
+  
+}
+
+class ExSymExeFNEG {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(float x = -10; x <= 10; x += 1.0) {
+      Main.f(x);
+      e.test(x);
+    }
+  }
+}

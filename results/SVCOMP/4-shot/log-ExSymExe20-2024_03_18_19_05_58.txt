@@ -1,0 +1,53 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires x == 3 && z == 9 && r == field2;
+  //@ ensures \result == true || \result == false;
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == 3 && z == 9 && r == field2;
+  //@ ensures \result == true || \result == false;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == 9 && r == field2;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == 9 && r == field2;
+                         ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == 9 && r == field2;
+                                   ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires x == 3 && z == 9 && r == field2;
+                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:14: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires x == 3 && z == 9 && r == field2;
+                                        ^
+5 errors
+

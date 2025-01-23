@@ -1,0 +1,22 @@
+class SelfDeviding {
+    /**
+     * Checks if a given number is self dividable.
+     * A number is self dividable if it is divisible by each of its digits.
+     * 
+     * @param num the number to check
+     * @return true if the number is self dividable, false otherwise
+     * @ensures \result == (\forall int i; 0 <= i && i < Integer.toString(num).length(); 
+     *                num % Integer.parseInt(Character.toString(Integer.toString(num).charAt(i))) == 0)
+     */
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}

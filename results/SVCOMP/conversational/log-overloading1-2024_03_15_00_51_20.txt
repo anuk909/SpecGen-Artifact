@@ -1,0 +1,341 @@
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(new other_class()) == 3) return false;
+    return true;
+  }
+
+  //@ ensures \result == 1;
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ ensures \result == 2;
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ ensures \result == 3;
+  static int f(other_class o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+                           ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+                                        ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+                                                        ^
+4 errors
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(new other_class()) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(other_class o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(new other_class()) != 3;
+                                                          ^
+1 error
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:24: error: method f(int) is already defined in class Main
+  static int f(int o) {
+             ^
+1 error
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:24: error: method f(int) is already defined in class Main
+  static int f(int o) {
+             ^
+1 error
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int i, double d) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+      ^
+2 verification failures
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3, 1.0d) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3, 1.0d) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int i, double d) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3, 1.0d) != 3;
+      ^
+2 verification failures
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:24: error: method f(int) is already defined in class Main
+  static int f(int o) {
+             ^
+1 error
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int i, double d) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+      ^
+2 verification failures
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int o) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:24: error: method f(int) is already defined in class Main
+  static int f(int o) {
+             ^
+1 error
+
+class other_class {}
+;
+
+class Main {
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+  public static boolean f() {
+    if(f(1) == 1) return false;
+    if(f(1.0d) == 2) return false;
+    if (f(3) == 3) return false;
+    return true;
+  }
+
+  //@ spec_public
+  static int f(int i) {
+    return 1;
+  }
+
+  //@ spec_public
+  static int f(double d) {
+    return 2;
+  }
+
+  //@ spec_public
+  static int f(int i, double d) {
+    return 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/overloading1.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/overloading1.java:5:) in method f
+    if(f(1) == 1) return false;
+                  ^
+/home/max/Documents/JMLGPT/tmp/overloading1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/overloading1.java:7:
+  //@ ensures \result <==> f(1) != 1 || f(1.0d) != 2 || f(3) != 3;
+      ^
+2 verification failures
+

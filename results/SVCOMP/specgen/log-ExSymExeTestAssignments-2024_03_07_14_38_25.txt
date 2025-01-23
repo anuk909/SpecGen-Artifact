@@ -1,0 +1,85 @@
+class Main {
+  int field;
+
+  //@ requires x < 0 ==> \result == true;
+  //@ requires x >= 0 ==> \result == test(x);
+  public static boolean f (int x) {
+    if (x < 0) return true;
+    return test(x);
+  }
+
+  //@ ensures x == 3;
+  //@ ensures x > 0 ==> \result == true;
+  //@ ensures x <= 0 ==> \result == false;
+  public static boolean test(int x) {
+    x = 3;
+    if (x > 0) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeTestAssignments.java:4: error: A \result expression may not be in a requires clause
+  //@ requires x < 0 ==> \result == true;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeTestAssignments.java:5: error: A \result expression may not be in a requires clause
+  //@ requires x >= 0 ==> \result == test(x);
+                           ^
+2 errors
+
+class Main {
+  int field;
+
+  //@ requires x < 0;
+  //@ ensures \result == true;
+  //@ requires x >= 0;
+  //@ ensures \result == test(x);
+  public static boolean f (int x) {
+    if (x < 0) return true;
+    return test(x);
+  }
+
+  //@ modifies x;
+  //@ ensures x == 3;
+  //@ ensures x > 0 ==> \result == true;
+  //@ ensures x <= 0 ==> \result == false;
+  public static boolean test(int x) {
+    x = 3;
+    if (x > 0) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeTestAssignments.java:13: error: An assignable clause may not contain method formal parameters: x
+  //@ modifies x;
+               ^
+1 error
+
+class Main {
+  int field;
+
+  //@ requires x < 0;
+  //@ ensures \result == true;
+  //@ requires x >= 0;
+  //@ ensures \result == test(x);
+  public static boolean f (int x) {
+    if (x < 0) return true;
+    return test(x);
+  }
+
+  //@ ensures x == 3;
+  //@ ensures x > 0 ==> \result == true;
+  //@ ensures x <= 0 ==> \result == false;
+  public static boolean test(int x) {
+    int temp = 3;
+    x = temp;
+    if (x > 0) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}

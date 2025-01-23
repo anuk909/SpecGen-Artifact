@@ -1,0 +1,33 @@
+class CanConstruct {
+    //@ requires ransomNote != null && magazine != null;
+    //@ ensures \result == true || \result == false;
+    public boolean canConstruct(String ransomNote, String magazine) {
+        //@ assert ransomNote != null && magazine != null;
+        if (ransomNote.length() > magazine.length()) {
+            //@ assert ransomNote.length() > magazine.length();
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert ransomNote.length() <= magazine.length();
+        int[] cnt = new int[26];
+        //@ loop_invariant 0 <= i && i <= magazine.length();
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; cnt[magazine.charAt(j) - 'a'] >= 0);
+        //@ decreases magazine.length() - i;
+        for (int i = 0; i < magazine.length(); i++) {
+            cnt[magazine.charAt(i) - 'a']++;
+        }
+        //@ loop_invariant 0 <= i && i <= ransomNote.length();
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; cnt[ransomNote.charAt(j) - 'a'] >= 0);
+        //@ decreases ransomNote.length() - i;
+        for (int i = 0; i < ransomNote.length(); i++) {
+            cnt[ransomNote.charAt(i) - 'a']--;
+            if (cnt[ransomNote.charAt(i) - 'a'] < 0) {
+                //@ assert cnt[ransomNote.charAt(i) - 'a'] < 0;
+                //@ assert \result == false;
+                return false;
+            }
+        }
+        //@ assert \result == true;
+        return true;
+    }
+}

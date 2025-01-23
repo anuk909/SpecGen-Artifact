@@ -1,0 +1,119 @@
+public class MinePump {
+
+  //@ invariants
+  //@   pumpRunning == true || pumpRunning == false;
+  //@   systemActive == true || systemActive == false;
+
+  boolean pumpRunning = false;
+
+  boolean systemActive = true;
+
+  Environment env;
+
+  //@ requires env != null;
+  //@ assignable this.env;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable pumpRunning, systemActive;
+  //@ ensures pumpRunning == \old(pumpRunning) && systemActive == \old(systemActive);
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable \nothing;
+  //@ ensures \result == (pumpRunning && isMethaneAlarm());
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable \nothing;
+  //@ ensures pumpRunning == \old(pumpRunning) && systemActive == \old(systemActive);
+  private void processEnvironment__wrappee__base() {}
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable pumpRunning;
+  //@ ensures pumpRunning == true;
+  void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable \nothing;
+  //@ ensures \result == pumpRunning;
+  public boolean isPumpRunning() {
+    return pumpRunning;
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable pumpRunning;
+  //@ ensures pumpRunning == false;
+  void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable \nothing;
+  //@ ensures \result == (env.isMethaneLevelCritical());
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable \nothing;
+  //@ ensures \result != null;
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable pumpRunning, systemActive;
+  //@ ensures pumpRunning == false && systemActive == false;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable systemActive;
+  //@ ensures pumpRunning == false && systemActive == true;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ requires pumpRunning == true || pumpRunning == false;
+  //@ requires systemActive == true || systemActive == false;
+  //@ assignable \nothing;
+  //@ ensures \result == (systemActive);
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+

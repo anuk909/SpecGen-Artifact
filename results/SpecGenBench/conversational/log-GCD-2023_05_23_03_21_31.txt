@@ -1,0 +1,353 @@
+public class GCD {
+	
+        //@ requires d != 0;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+	//@ ensures \result >= 1;
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1, i) == 0 && div(num2, i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1, j) != 0 || div(num2, j) != 0);
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1, i) == 0 && div(num2, i) == 0) ==> \result >= i;
+	//@ ensures \result == -1 <==> num1 == 0 && num2 == 0;
+	//@ ensures \result == num1 || \result == num2 <==> num1 == 0 || num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1, i) == 0 && div(num2, i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1, j) != 0 || div(num2, j) != 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1, i) == 0 && div(num2, i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1, j) != 0 || div(num2, j) != 0);
+	                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1, i) == 0 && div(num2, i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1, j) != 0 || div(num2, j) != 0);
+	                                                                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1, i) == 0 && div(num2, i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1, j) != 0 || div(num2, j) != 0);
+	                                                                                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1, i) == 0 && div(num2, i) == 0) ==> \result >= i;
+	                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1, i) == 0 && div(num2, i) == 0) ==> \result >= i;
+	                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: error: cannot find symbol
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1, i) == 0 && div(num2, i) == 0) ==> \result >= i;
+	                                                                                                                       ^
+  symbol:   variable i
+  location: class GCD
+1 error
+6 warnings
+
+public class GCD {
+	
+        //@ requires d != 0;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires num != Integer.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+	//@ ensures \result >= 1;
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	//@ ensures \result == -1 <==> num1 == 0 && num2 == 0;
+	//@ ensures \result == num1 || \result == num2 <==> num1 == 0 || num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: error: cannot find symbol
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                                                     ^
+  symbol:   variable i
+  location: class GCD
+1 error
+6 warnings
+
+public class GCD {
+	
+        //@ requires d != 0;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires num != Integer.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+	//@ ensures \result >= 1;
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	//@ ensures \result == -1 <==> num1 == 0 && num2 == 0;
+	//@ ensures \result == num1 || \result == num2 <==> num1 == 0 || num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: error: cannot find symbol
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                                                     ^
+  symbol:   variable i
+  location: class GCD
+1 error
+6 warnings
+
+public class GCD {
+	
+        //@ requires d != 0;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires num != Integer.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+	//@ ensures \result >= 1;
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	//@ ensures \result == -1 <==> num1 == 0 && num2 == 0;
+	//@ ensures \result == num1 || \result == num2 <==> num1 == 0 || num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: error: cannot find symbol
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                                                     ^
+  symbol:   variable i
+  location: class GCD
+1 error
+6 warnings
+
+public class GCD {
+	
+        //@ requires d != 0;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires num != Integer.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+	//@ ensures \result >= 1;
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	//@ ensures \result == -1 <==> num1 == 0 && num2 == 0;
+	//@ ensures \result == num1 || \result == num2 <==> num1 == 0 || num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+				//@ assert (\forall int j; i < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+			}
+        }
+		//@ assert (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> result >= i;
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                           ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(num1,i) == 0 && div(num2,i) == 0) ==> (\forall int j; \result < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+	                                                                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: error: cannot find symbol
+	//@ ensures (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> \result >= i;
+	                                                                                                                     ^
+  symbol:   variable i
+  location: class GCD
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+				//@ assert (\forall int j; i < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+				                                                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+				//@ assert (\forall int j; i < j && j <= num1 && j <= num2; div(num1,j) != 0 || div(num2,j) != 0);
+				                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ assert (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> result >= i;
+		                                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ assert (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> result >= i;
+		                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: error: cannot find symbol
+		//@ assert (\forall int i; 1 <= i && i <= num1 && i <= num2 && div(num1,i) == 0 && div(num2,i) == 0) ==> result >= i;
+		                                                                                                                   ^
+  symbol:   variable i
+  location: class GCD
+2 errors
+10 warnings
+

@@ -1,0 +1,19 @@
+public class Mccarthy91 {
+  /*@ ensures (\old(n) <= 100)  ==>  (\result == 91); */
+  /*@ ensures (\old(n) >= 101)  ==>  (\result - \old(n) + 10 == 0); */
+  public static int f(int n) {
+    if (n > 100) return n - 10;
+    else return f(f(n + 11));
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = -5; i <= 5; i++)
+      f(i);
+    for(int i = 97; i <= 105; i = i + 1)
+      f(i);
+  }
+}

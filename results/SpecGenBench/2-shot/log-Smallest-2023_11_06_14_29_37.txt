@@ -1,0 +1,27 @@
+public class Smallest {
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:15: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method Smallest
+            if (a[index] < a[smallest]) {
+                            ^
+1 verification failure
+

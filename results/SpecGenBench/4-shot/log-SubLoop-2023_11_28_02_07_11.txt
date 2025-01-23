@@ -1,0 +1,30 @@
+public class SubLoop {
+    //@ requires Integer.MIN_VALUE <= x - y && x - y <= Integer.MAX_VALUE && y != Integer.MIN_VALUE;
+    //@ ensures \result == x - y;
+    public static int subLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ decreases n;
+            //@ maintaining sum == x - (y - n) && 0 <= n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ decreases n;
+            //@ maintaining sum == x + (y - n) && 0 <= n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SubLoop.java:17: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method subLoop
+            //@ maintaining sum == x + (y - n) && 0 <= n;
+                ^
+1 verification failure
+

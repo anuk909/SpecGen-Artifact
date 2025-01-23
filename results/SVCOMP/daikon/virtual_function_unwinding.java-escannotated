@@ -1,0 +1,45 @@
+interface Interface {
+  boolean b();
+}
+
+class Inner implements Interface {
+  /*@ invariant this != null; */
+  /*@ also_ensures \result == false; */
+  public boolean b() {
+    return false;
+  }
+}
+
+class Outer implements Interface {
+  /*@ invariant this != null; */
+  /*@ invariant this.inner != null; */
+  /*@ invariant \typeof(this.inner) == \type(Inner); */
+  /*@ spec_public */ private Interface inner;
+
+  /*@ requires inner != null; */
+  /*@ requires \typeof(inner) == \type(Inner); */
+  /*@ ensures this.inner == \old(inner); */
+  /*@ ensures \typeof(this.inner) == \old(\typeof(inner)); */
+  public Outer(Interface inner) {
+    this.inner = inner;
+  }
+
+  /*@ also_ensures \result == true; */
+  public boolean b() {
+    return !inner.b();
+  }
+}
+
+public class virtual_function_unwinding {
+  /*@ ensures \result == true; */
+  public static boolean fun() {
+    return new Outer(new Inner()).b();
+  }
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    fun();
+  }
+}

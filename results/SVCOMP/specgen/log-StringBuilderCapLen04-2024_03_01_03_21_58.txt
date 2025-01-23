@@ -1,0 +1,71 @@
+public class StringBuilderCapLen04 {
+    //@ requires arg != null;
+    //@ ensures \result < 0 ==> \result == false;
+    //@ ensures \result >= 0 ==> \result == true;
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+        return buffer.capacity() == 69;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderCapLen04.java:3: error: bad operand types for binary operator '<'
+    //@ ensures \result < 0 ==> \result == false;
+                        ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/StringBuilderCapLen04.java:4: error: bad operand types for binary operator '>='
+    //@ ensures \result >= 0 ==> \result == true;
+                        ^
+  first type:  boolean
+  second type: int
+2 errors
+
+public class StringBuilderCapLen04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> buffer.capacity() == 69;
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+        return buffer.capacity() == 69;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderCapLen04.java:3: error: cannot find symbol
+    //@ ensures \result ==> buffer.capacity() == 69;
+                            ^
+  symbol:   variable buffer
+  location: class StringBuilderCapLen04
+1 error
+
+public class StringBuilderCapLen04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> buffer.capacity() == 69;
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+        return buffer.capacity() == 69;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderCapLen04.java:3: error: cannot find symbol
+    //@ ensures \result ==> buffer.capacity() == 69;
+                            ^
+  symbol:   variable buffer
+  location: class StringBuilderCapLen04
+1 error
+
+public class StringBuilderCapLen04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> new StringBuilder(arg).capacity() == 69;
+    public static boolean f(String arg) {
+        return new StringBuilder(arg).capacity() == 69;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderCapLen04.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> new StringBuilder(arg).capacity() == 69;
+                            ^
+1 error
+
+public class StringBuilderCapLen04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> arg.length() <= 69;
+    public static boolean f(String arg) {
+        return new StringBuilder(arg).capacity() == 69;
+    }
+}
+

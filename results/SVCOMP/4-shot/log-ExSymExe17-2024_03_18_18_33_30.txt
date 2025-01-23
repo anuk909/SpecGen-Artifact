@@ -1,0 +1,58 @@
+class Main {
+  static int field;
+
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ ensures z == x - 0 - 4 ==> \result == false && z != x - 0 - 4 ==> \result == true;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe17");
+    int y = 0;
+    z = x - y - 4;
+    if (z == 0) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (y == 0) System.out.println("branch BOO1");
+    else
+      System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+                          ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+                               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+                                            ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+                                                                                        ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+                                                                                             ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe17.java:4: error: cannot find symbol
+  //@ ensures \result == (z == x - 0 - 4 && z == 0) ==> \result == false && \result == (z == x - 0 - 4 && z != 0) ==> \result == true;
+                                                                                                          ^
+  symbol:   variable z
+  location: class Main
+6 errors
+

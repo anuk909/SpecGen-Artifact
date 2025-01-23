@@ -1,0 +1,23 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires k > 0 && k <= nums.length;
+    //@ ensures \result == \max(nums);
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        //@ loop_invariant pq.size() <= k;
+        //@ loop_invariant \forall int i; 0 <= i < pq.size(); pq.contains(nums[i]);
+        //@ loop_invariant \forall int i; pq.size() <= i < nums.length; !pq.contains(nums[i]);
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        //@ assert pq.size() == k;
+        return pq.peek();
+    }
+}

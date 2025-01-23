@@ -1,0 +1,18 @@
+public class StringValueOf04 {
+  /*@ ensures (\result == false)  ==  (\old(booleanValue) == false); */
+  /*@ ensures (\result == true)  ==  (\old(booleanValue) == true); */
+  public static boolean f(boolean booleanValue) {
+    String tmp = String.valueOf(booleanValue);
+    return tmp.equals("true");
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args)
+  {
+    f(true);
+    f(false);
+  }
+}

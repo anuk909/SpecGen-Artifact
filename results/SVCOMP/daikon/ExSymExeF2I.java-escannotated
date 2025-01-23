@@ -1,0 +1,36 @@
+class Main {
+
+  /*@ ensures \result == true; */
+  public static boolean f(float x) {
+    if (x >= 0.0f && x <= Integer.MAX_VALUE / 2) {
+      Main inst = new Main();
+      return inst.test(x);
+    }
+    return true;
+  }
+
+  public boolean test(float x) {
+
+    int res = (int) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+  
+}
+
+class ExSymExeF2I {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(float x = -10; x <= 10; x += 1.0) {
+      Main.f(x);
+      e.test(x);
+    }
+  }
+}

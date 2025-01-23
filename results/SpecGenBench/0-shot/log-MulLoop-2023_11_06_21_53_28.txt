@@ -1,0 +1,35 @@
+public class MulLoop {
+
+	/**
+	 * Multiplies two integers using a loop.
+	 * 
+	 * @param a the first integer
+	 * @param b the second integer
+	 * @return the result of multiplying a and b
+	 * @ensures \result == a * b
+	 */
+	public static int mulLoop(int a, int b) {
+        int res = 0;
+        if (b >= 0) {
+            /*@
+            loop_invariant 0 <= i && i <= b;
+            loop_invariant res == (\sum int j; 0 <= j && j < i; a);
+            decreases b - i;
+            @*/
+            for(int i = 0; i < b; i++) {
+                res = res + a;
+            }
+        } else {
+            /*@
+            loop_invariant 0 <= i && i <= -b;
+            loop_invariant res == (\sum int j; 0 <= j && j < i; -a);
+            decreases -b - i;
+            @*/
+            for(int i = 0; i < -b; i++) {
+                res = res - a;
+            }
+        }
+        return res;
+    }
+
+}

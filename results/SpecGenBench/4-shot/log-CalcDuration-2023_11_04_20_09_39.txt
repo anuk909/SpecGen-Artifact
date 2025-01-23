@@ -1,0 +1,67 @@
+class CalcDuration {
+    //@ requires timeSeries != null;
+    //@ requires (\forall int i; 0 <= i && i < timeSeries.length; timeSeries[i] >= 0);
+    //@ ensures \result >= 0;
+    //@ ensures \result == spec_calcDuration(timeSeries, duration);
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+        //@ maintaining ans >= 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; timeSeries[j] >= 0);
+        //@ maintaining (\forall int j; 0 <= j && j < i; ans == spec_calcDuration(Arrays.copyOfRange(timeSeries, 0, j), duration));
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+
+    /*@ requires timeSeries != null;
+      @ requires (\forall int i; 0 <= i && i < timeSeries.length; timeSeries[i] >= 0);
+      @ ensures \result >= 0;
+      @ ensures \result == spec_calcDuration(timeSeries, duration);
+      @*/
+    public static int spec_calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+        //@ maintaining ans >= 0;
+        //@ maintaining (\forall int j; 0 <= j && j < i; timeSeries[j] >= 0);
+        //@ maintaining (\forall int j; 0 <= j && j < i; ans == spec_calcDuration(Arrays.copyOfRange(timeSeries, 0, j), duration));
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:5: warning: A non-pure method is being called where it is not permitted: CalcDuration.spec_calcDuration(int[],int)
+    //@ ensures \result == spec_calcDuration(timeSeries, duration);
+                                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:12: error: cannot find symbol
+        //@ maintaining (\forall int j; 0 <= j && j < i; ans == spec_calcDuration(Arrays.copyOfRange(timeSeries, 0, j), duration));
+                                                                                  ^
+  symbol:   variable Arrays
+  location: class CalcDuration
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:28: warning: A non-pure method is being called where it is not permitted: CalcDuration.spec_calcDuration(int[],int)
+      @ ensures \result == spec_calcDuration(timeSeries, duration);
+                                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:36: error: cannot find symbol
+        //@ maintaining (\forall int j; 0 <= j && j < i; ans == spec_calcDuration(Arrays.copyOfRange(timeSeries, 0, j), duration));
+                                                                                  ^
+  symbol:   variable Arrays
+  location: class CalcDuration
+2 errors
+2 warnings
+

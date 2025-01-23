@@ -1,0 +1,50 @@
+class Float {
+
+  //@ ensures \result;
+  //@ ensures !\result;
+  public static boolean f(float a, float b) {
+    return (a + b != a || b == 0.0);
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    for(float i = -5; i <= 5; i += 1) {
+      for(float j = -5; j <= 5; j += 1) {
+        f(i,j);
+        f(j,i);
+      }
+    }
+  }
+
+}
+
+
+/home/max/Documents/JMLGPT/tmp/Float.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Float.java:4:) in method f
+    return (a + b != a || b == 0.0);
+    ^
+/home/max/Documents/JMLGPT/tmp/Float.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Float.java:6:
+  //@ ensures !\result;
+      ^
+2 verification failures
+
+class Float {
+
+  //@ ensures \result;
+  public static boolean f(float a, float b) {
+    return (a + b != a || b == 0.0);
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    for(float i = -5; i <= 5; i += 1) {
+      for(float j = -5; j <= 5; j += 1) {
+        f(i,j);
+        f(j,i);
+      }
+    }
+  }
+
+}
+
+
+

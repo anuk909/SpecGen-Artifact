@@ -1,0 +1,26 @@
+public class IsAscending {
+    //@ requires arr != null;
+    //@ ensures \result == true || \result == false;
+    //@ ensures \result == true ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] < arr[i+1]);
+    //@ ensures \result == false ==> (\exists int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public boolean isAscending (int[] arr) {
+        int n = arr.length;
+        //@ assume n >= 0;
+        if (n < 2) {
+            return true;
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; arr[k] < arr[k+1]);
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            if(arr[i] >= arr[i+1])
+                return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsAscending.java:16: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method isAscending
+            if(arr[i] >= arr[i+1])
+                            ^
+1 verification failure
+

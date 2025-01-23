@@ -1,0 +1,34 @@
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    //@ ensures \result == (\num_of int i; 0 <= i && i < stones.length(); (\num_of int j; 0 <= j && j < jewels.length(); stones.charAt(i) == jewels.charAt(j)));
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining jewelsCount == (\num_of int k; 0 <= k && k < i; (\num_of int j; 0 <= j && j < jewelsLength; stones.charAt(k) == jewels.charAt(j)));
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining (\forall int k; 0 <= k && k < j; stones.charAt(i) != jewels.charAt(k));
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:4: error: incompatible types: \bigint cannot be converted to boolean
+    //@ ensures \result == (\num_of int i; 0 <= i && i < stones.length(); (\num_of int j; 0 <= j && j < jewels.length(); stones.charAt(i) == jewels.charAt(j)));
+                                                                           ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: error: incompatible types: \bigint cannot be converted to boolean
+        //@ maintaining jewelsCount == (\num_of int k; 0 <= k && k < i; (\num_of int j; 0 <= j && j < jewelsLength; stones.charAt(k) == jewels.charAt(j)));
+                                                                         ^
+2 errors
+

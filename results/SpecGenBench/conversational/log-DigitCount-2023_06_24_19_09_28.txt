@@ -1,0 +1,142 @@
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); count(num, i) == num.charAt(i) - '0');
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(v, 0) != count(num, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires 0 <= i && i < num.length();
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+    private int count(String num, int i) {
+        int count = 0;
+        for (int j = 0; j < num.length(); j++) {
+            if (num.charAt(j) - '0' == num.charAt(i) - '0') {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:6: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); count(num, i) == num.charAt(i) - '0');
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:6: warning: A non-pure method is being called where it is not permitted: DigitCount.count(java.lang.String,int)
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); count(num, i) == num.charAt(i) - '0');
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:11: warning: A non-pure method is being called where it is not permitted: DigitCount.count(java.lang.String,int)
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:18: warning: A non-pure method is being called where it is not permitted: DigitCount.count(java.lang.String,int)
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+                                                              ^
+1 error
+3 warnings
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class DigitCount {
+    private /*@ spec_public @*/ Map<Integer, Integer> h;
+
+    //@ requires num != null;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); count(num, i) == num.charAt(i) - '0');
+    public boolean digitCount(String num) {
+        h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(v, 0) != count(num, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires 0 <= i && i < num.length();
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+    private /*@ spec_public @*/ int count(String num, int i) {
+        int count = 0;
+        for (int j = 0; j < num.length(); j++) {
+            if (num.charAt(j) - '0' == num.charAt(i) - '0') {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:8: warning: A non-pure method is being called where it is not permitted: DigitCount.count(java.lang.String,int)
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); count(num, i) == num.charAt(i) - '0');
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:13: warning: A non-pure method is being called where it is not permitted: DigitCount.count(java.lang.String,int)
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:20: warning: A non-pure method is being called where it is not permitted: DigitCount.count(java.lang.String,int)
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:5: verify: The prover cannot establish an assertion (NullField) in method DigitCount
+    private /*@ spec_public @*/ Map<Integer, Integer> h;
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:32: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:37: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method count: overflow in int sum
+                count++;
+                     ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:40: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DigitCount.java:32:) in method count
+        return count;
+        ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:32: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DigitCount.java:40:
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:32: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:32: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:32: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:32: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int j; 0 <= j && j < num.length(); num.charAt(j) - '0' == num.charAt(i) - '0' ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:17: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method digitCount: overflow in int sum
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:20: verify: The prover cannot establish an assertion (LoopInvariant) in method digitCount
+        //@ maintaining (\forall int j; 0 <= j && j < i; count(num, j) == num.charAt(j) - '0');
+            ^
+8 warnings
+6 verification failures
+

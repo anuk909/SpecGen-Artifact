@@ -1,0 +1,39 @@
+// JML specifications for class cl
+class cl {
+  // no specifications required
+}
+
+// JML specifications for interface A
+interface A {
+  //@ public normal_behavior
+  //@ ensures true;
+  public void f();
+}
+
+// JML specifications for class B
+class B implements A {
+  //@ public normal_behavior
+  //@ ensures false;
+  public void f() {
+    assert false; // should fail
+  }
+}
+
+// JML specifications for class C
+class C implements A {
+  //@ public normal_behavior
+  //@ ensures true;
+  public void f() {}
+}
+
+// JML specifications for class Main
+class Main {
+  //@ public normal_behavior
+  //@ ensures true;
+  public static void main(String[] args) {
+    A b = new B();
+    A c = new C();
+    b.f(); // really calls B.f
+  }
+}
+

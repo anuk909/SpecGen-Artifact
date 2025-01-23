@@ -1,0 +1,31 @@
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result == (\forall int k; 0 <= k && k < n; s.charAt(k) == t.charAt(\result));
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: error: cannot find symbol
+    //@ ensures \result == (\forall int k; 0 <= k && k < n; s.charAt(k) == t.charAt(\result));
+                                                         ^
+  symbol:   variable n
+  location: class IsSubsequence
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: error: incompatible types: boolean cannot be converted to int
+    //@ ensures \result == (\forall int k; 0 <= k && k < n; s.charAt(k) == t.charAt(\result));
+                                                                                    ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+2 errors
+

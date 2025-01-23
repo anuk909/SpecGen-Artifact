@@ -1,0 +1,49 @@
+public class BubbleSort { 
+    
+    //@ requires \forall int i, j; 0 <= i && i < j && j < array.length; array[i] <= array[j];
+    //@ ensures \result.length == array.length;
+    //@ ensures \forall int i, j; 0 <= i && i < j && j < \result.length; \result[i] <= \result[j];
+    void swap(int x, int y,  int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires arr != null;
+    //@ ensures \result.length == arr.length;
+    //@ ensures \forall int i, j; 0 <= i && i < j && j < \result.length; \result[i] <= \result[j];
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ maintaining 0 <= i && i <= n-1;
+        //@ maintaining \forall int k, l; 0 <= k && k < l && l < i; arr[k] <= arr[l];
+        //@ decreases n - i;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ maintaining 0 <= j && j <= n-i-1;
+            //@ maintaining \forall int k, l; 0 <= k && k < l && l < j; arr[k] <= arr[l];
+            //@ decreases n - i - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result.length == array.length;
+                 ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:5: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \forall int i, j; 0 <= i && i < j && j < \result.length; \result[i] <= \result[j];
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:5: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \forall int i, j; 0 <= i && i < j && j < \result.length; \result[i] <= \result[j];
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:5: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \forall int i, j; 0 <= i && i < j && j < \result.length; \result[i] <= \result[j];
+                                                                                        ^
+4 errors
+

@@ -1,0 +1,27 @@
+class Main {
+  /*@ ensures (\result == false)  ==  (\old(b) == false); */
+  /*@ ensures (\result == true)  ==  (\old(b) == true); */
+  public static boolean f(boolean b) {
+    char[] diff = {'d', 'i', 'f', 'f'};
+    char[] blue = {'b', 'l', 'u', 'e'};
+
+    StringBuilder buffer = new StringBuilder();
+
+    buffer.append(diff).append(blue);
+
+    String tmp = buffer.toString();
+    if (b) return (tmp.equals("diffblue"));
+    else return (!tmp.equals("diffblue"));
+  }
+}
+
+class java_append_char {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main.f(true);
+    Main.f(false);
+  }
+}

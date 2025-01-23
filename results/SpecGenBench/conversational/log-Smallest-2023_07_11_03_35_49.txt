@@ -1,0 +1,332 @@
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:16: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method Smallest
+            if (a[index] < a[smallest]) {
+                            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index < a.length);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            //@ assume 0 <= index && index < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:17: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method Smallest
+            if (a[index] < a[smallest]) {
+                            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index < a.length);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:13: verify: The prover cannot establish an assertion (LoopInvariant) in method Smallest
+        //@ maintaining (0 <= index && index < a.length);
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Smallest.java:5:) in method Smallest
+        return smallest;
+        ^
+/home/max/Documents/JMLGPT/tmp/Smallest.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Smallest.java:23:
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+        ^
+2 verification failures
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length;
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Assert) in method Smallest
+        //@ assert 0 <= smallest && smallest < a.length;
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Assert) in method Smallest: Smallest element index is within array bounds
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Assert) in method Smallest: Smallest element index is within array bounds
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Assert) in method Smallest: Smallest element index is within array bounds
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Assert) in method Smallest: Smallest element index is within array bounds
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:23: verify: The prover cannot establish an assertion (Assert) in method Smallest: Smallest element index is within array bounds
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+            ^
+1 verification failure
+
+public class Smallest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] >= a[0]);
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] >= a[smallest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume 0 <= index && index < a.length;
+            //@ assume 0 <= smallest && smallest < a.length;
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        //@ assert 0 <= smallest && smallest < a.length : "Smallest element index is within array bounds";
+        return smallest;
+    }
+}

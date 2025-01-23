@@ -1,0 +1,39 @@
+public class SetZero {
+	//@ requires a != null && 0 <= iBegin && iBegin <= iEnd && iEnd <= a.length;
+	//@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == 0);
+	public static void SetZero(int[] a, int iBegin, int iEnd) {
+		int k = iBegin;
+
+		while (k < iEnd) {
+            		a[k] = 0;
+            		k = k + 1 ;
+        	}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/SetZero.java:4: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SetZero.java:3:) in method SetZero
+	public static void SetZero(int[] a, int iBegin, int iEnd) {
+	                   ^
+/home/max/Documents/JMLGPT/tmp/SetZero.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SetZero.java:4:
+	//@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == 0);
+	    ^
+/home/max/Documents/JMLGPT/tmp/SetZero.java:8: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method SetZero
+            		a[k] = 0;
+            		 ^
+3 verification failures
+
+public class SetZero {
+	//@ requires a != null && 0 <= iBegin && iBegin <= iEnd && iEnd <= a.length;
+	//@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == 0);
+	public static void SetZero(int[] a, int iBegin, int iEnd) {
+		int k = iBegin;
+
+		//@ loop_invariant iBegin <= k && k <= iEnd;
+		//@ loop_invariant (\forall int i; iBegin <= i && i < k; a[i] == 0);
+		while (k < iEnd) {
+			//@ assume k >= 0;
+            		a[k] = 0;
+            		k = k + 1 ;
+        	}
+	}
+}
+

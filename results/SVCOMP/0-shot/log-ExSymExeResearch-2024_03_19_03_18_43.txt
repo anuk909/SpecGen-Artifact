@@ -1,0 +1,39 @@
+class Main {
+
+  //@ requires arg >= Integer.MIN_VALUE && arg <= Integer.MAX_VALUE;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(int arg) {
+    int x = arg > 0 ? arg : -arg;
+    int y = 5;
+    Main inst = new Main();
+    //@ assert inst != null;
+    //@ assert x >= 0;
+    //@ assert y == 5;
+    //@ assert inst.test(x, y) >= Integer.MIN_VALUE && inst.test(x, y) <= Integer.MAX_VALUE;
+    //@ assert x + y >= Integer.MIN_VALUE && x + y <= Integer.MAX_VALUE;
+    return inst.test(x, y) != x + y;
+  }
+
+  //@ requires a >= Integer.MIN_VALUE && a <= Integer.MAX_VALUE;
+  //@ requires b >= Integer.MIN_VALUE && b <= Integer.MAX_VALUE;
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public int test(int a, int b) { // invokevirtual
+    int result = 0;
+    //@ assert a >= 0 && a < 100;
+    //@ assert b >= 0 && b < 100;
+    if (a >= 0 && a < 100 && b >= 0 && b < 100) {
+      int sum = a + b;
+      int diff = a - b;
+      int temp;
+
+      if (sum > 0) temp = a;
+      else temp = b;
+      //@ assert temp >= Integer.MIN_VALUE && temp <= Integer.MAX_VALUE;
+      if (temp < diff) result = temp;
+      else result = diff;
+    }
+    //@ assert result >= Integer.MIN_VALUE && result <= Integer.MAX_VALUE;
+    return result;
+  }
+}
+

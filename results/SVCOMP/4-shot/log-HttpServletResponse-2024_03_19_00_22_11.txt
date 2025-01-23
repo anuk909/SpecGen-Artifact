@@ -1,0 +1,52 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ ensures \nothing;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      //@ requires x != null;
+      //@ ensures \nothing;
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      //@ requires x != null;
+      //@ ensures \nothing;
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ ensures \nothing;
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  //@ ensures s != null ==> s.contains("<bad/>") ==> false;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:16: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null;
+          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:23: error: A method specification incorrectly follows non-JML modifiers
+      //@ requires x != null;
+          ^
+2 errors
+

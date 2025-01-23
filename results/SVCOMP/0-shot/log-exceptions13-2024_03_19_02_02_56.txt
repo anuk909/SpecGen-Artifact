@@ -1,0 +1,37 @@
+class A extends RuntimeException {
+    //@ public represents thisException = this;
+}
+
+class B extends A {
+    //@ public represents thisException = this;
+}
+
+class C extends B {
+    //@ public represents thisException = this;
+}
+
+class F {
+    //@ ensures \result == null;
+    B foo() {
+        try {
+            B b = new B();
+            throw b;
+        } catch (B exc) {
+            throw exc;
+        }
+    }
+}
+
+public class exceptions13 {
+    //@ requires args != null;
+    //@ ensures \result == null;
+    public static void main(String[] args) {
+        try {
+            F f = new F();
+            f.foo();
+        } catch (B exc) {
+            assert false;
+        }
+    }
+}
+

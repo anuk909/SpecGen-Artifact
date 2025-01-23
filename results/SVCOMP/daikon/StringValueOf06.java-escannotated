@@ -1,0 +1,17 @@
+public class StringValueOf06 {
+  /*@ ensures (\result == true)  ==>  (\old(integerValue) == 77); */
+  public static boolean f(int integerValue) {
+    String tmp = String.valueOf(integerValue);
+    return tmp.equals("77");
+  }
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = -5; i <= 5; i++)
+    f(i);
+    for(int i = 75; i <= 80; i++)
+      f(i);
+  }
+}

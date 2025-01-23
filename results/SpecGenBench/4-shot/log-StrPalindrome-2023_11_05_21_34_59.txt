@@ -1,0 +1,25 @@
+public class StrPalindrome {
+    //@ requires str != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < str.length(); str.charAt(i) == str.charAt(str.length() - 1 - i));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < str.length(); str.charAt(i) != str.charAt(str.length() - 1 - i));
+    public boolean isPalindrome(String str) {
+        String reverse = "";
+        //@ maintaining reverse.equals(\old(reverse) + \old(str).charAt(\old(str).length() - 1 - i));
+        //@ decreases i;
+        int length = str.length();
+
+        for (int i = length - 1; 0 <= i; i--) {
+            reverse = reverse + str.charAt(i);
+        }
+
+        return reverse.equals(str);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StrPalindrome.java:9: error: variable declaration not allowed here
+        int length = str.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/StrPalindrome.java:7: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining reverse.equals(\old(reverse) + \old(str).charAt(\old(str).length() - 1 - i));
+            ^
+2 errors
+

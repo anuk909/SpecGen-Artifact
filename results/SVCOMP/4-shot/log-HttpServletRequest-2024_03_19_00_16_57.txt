@@ -1,0 +1,112 @@
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ Cookie cookie = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ ensures tainted == value && cookie.getName().equals(tainted) && cookie.getValue().equals(tainted);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].equals(tainted));
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && result[0] == cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:5: error: cannot find symbol
+  private /*@ spec_public @*/ Cookie cookie = null;
+                              ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:25: error: cannot find symbol
+  public Cookie[] getCookies() {
+         ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:11: error: cannot find symbol
+    this.cookie = new Cookie(tainted, tainted);
+                      ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:24: error: cannot find symbol
+  //@ ensures \result.length == 1 && result[0] == cookie;
+                                     ^
+  symbol:   variable result
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: error: cannot find symbol
+    return new Cookie[] {cookie};
+               ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+5 errors
+

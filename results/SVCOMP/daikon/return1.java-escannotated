@@ -1,0 +1,37 @@
+class return1 {
+  /*@ ensures \result == 1; */
+  public static short short_value() {
+    short s = 1;
+    return s;
+  }
+
+  /*@ ensures \result == true; */
+  public static boolean bool_value() {
+    boolean b = true;
+    return b;
+  }
+
+  /*@ ensures \result == 4295032831L; */
+  public static long long_value() {
+    long l = 0x10000ffffl;
+    return l;
+  }
+
+  /*@ ensures \result == false; */
+  public static boolean f() {
+    short s = short_value();
+    if (s == 1)
+      if (bool_value())
+        if (long_value() == 0x10000ffffl)
+          return false;
+    return true;
+  }
+  
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f();
+  }
+}

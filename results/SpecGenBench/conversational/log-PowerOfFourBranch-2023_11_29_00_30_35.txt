@@ -1,0 +1,80 @@
+class PowerOfFourBranch {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == 4^i);
+    public boolean isPowerOfFour(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        if((n & (n - 1)) != 0) {
+            return false;
+        }
+        if((n & 0xaaaaaaaa) != 0) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourBranch.java:3: error: bad operand types for binary operator '^'
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == 4^i);
+                                                             ^
+  first type:  boolean
+  second type: int
+1 error
+
+class PowerOfFourBranch {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == (int)Math.pow(4, i));
+    public boolean isPowerOfFour(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        if((n & (n - 1)) != 0) {
+            return false;
+        }
+        if((n & 0xaaaaaaaa) != 0) {
+            return false;
+        }
+        return true;
+    }
+}
+error: An error while executing a proof script for isPowerOfFour: (error "expecting bit-vector terms")
+1 error
+
+class PowerOfFourBranch {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == (int)Math.pow(4, i));
+    public boolean isPowerOfFour(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        if((n & (n - 1)) != 0) {
+            return false;
+        }
+        if((n & 0xaaaaaaaaL) != 0) {
+            return false;
+        }
+        return true;
+    }
+}
+error: An error while executing a proof script for isPowerOfFour: (error "expecting bit-vector terms")
+1 error
+
+class PowerOfFourBranch {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == (int)Math.pow(4, i));
+    public boolean isPowerOfFour(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        if((n & (n - 1)) != 0) {
+            return false;
+        }
+        if((n & 0xaaaaaaaaL) != 0L) {
+            return false;
+        }
+        return true;
+    }
+}
+error: An error while executing a proof script for isPowerOfFour: (error "expecting bit-vector terms")
+1 error
+

@@ -1,0 +1,49 @@
+class Main {
+    //@ ensures \result ==> \result == false;
+    //@ ensures !\result ==> \result == true;
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10;
+    //@ ensures \result == y && y > 10;
+    //@ ensures \result == 0 && x <= 10 && y <= 10;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result == z+1 && z > 10;
+    //@ ensures \result == z-1 && z <= 10;
+    public int method_b(int z) {
+        if (z > 10) return z++;
+        else return z--;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10);
+    //@ ensures !\result ==> arg >= 0 && arg <= 10;
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:13:) in method method_a
+        if (x > 10) return x;
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:16:
+    //@ ensures \result == y && y > 10;
+        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:21:) in method method_b
+        if (z > 10) return z++;
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:24:
+    //@ ensures \result == z+1 && z > 10;
+        ^
+4 verification failures
+

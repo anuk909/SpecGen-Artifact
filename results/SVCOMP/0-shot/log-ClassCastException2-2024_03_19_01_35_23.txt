@@ -1,0 +1,27 @@
+class A {
+  // No invariants for class A
+}
+
+class B extends A {
+  // No invariants for class B
+}
+
+class C extends B {
+  // No invariants for class C
+}
+
+public class ClassCastException2 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    try {
+      A c = new C();
+      B b = (B) c;
+    } catch (ClassCastException exc) {
+      //@ assert false; // Exception caught, should not reach here
+      return false;
+    }
+    return true;
+  }
+}
+

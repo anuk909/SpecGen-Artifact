@@ -1,0 +1,354 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == z && z == r;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == field && r == field2;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == field && r == field2;
+                         ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires x == 3 && z == field && r == field2;
+                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == field && r == field2;
+                                       ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires x == 3 && z == field && r == field2;
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                           ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                         ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                            ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                          ^
+  symbol:   variable r
+  location: class Main
+13 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == z && z == r;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == field && r == field2;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == field && r == field2;
+                         ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == field && r == field2;
+                                       ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                           ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                         ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                            ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                          ^
+  symbol:   variable r
+  location: class Main
+11 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == z && z == r;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+                         ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+                                            ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                           ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+  //@ ensures \result ==> (z >= x && x < r);
+                                         ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                            ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures !\result ==> (z < x || x >= r);
+                                          ^
+  symbol:   variable r
+  location: class Main
+11 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+  //@ ensures \result ==> (Main.field >= 3 && 3 < Main.field2);
+  //@ ensures !\result ==> (Main.field < 3 || 3 >= Main.field2);
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == z && z == r;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+                         ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ requires x == 3 && z == Main.field && r == Main.field2;
+                                            ^
+  symbol:   variable r
+  location: class Main
+3 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires Main.field == 3 && Main.field2 == 9;
+  //@ ensures \result ==> (Main.field >= 3 && 3 < Main.field2);
+  //@ ensures !\result ==> (Main.field < 3 || 3 >= Main.field2);
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == z && z == r;
+  //@ ensures \result ==> (z >= x && x < r);
+  //@ ensures !\result ==> (z < x || x >= r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}

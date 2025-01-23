@@ -1,0 +1,29 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires nums1.length > 0 && nums2.length > 0;
+    //@ requires (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]));
+    //@ ensures \result != null;
+    //@ ensures \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j] && (\exists int k; j <= k && k < nums2.length; \result[i] == nums2[k] && (\forall int l; k < l && l < nums2.length; \result[i] < nums2[l]))));
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:13: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method nextGreaterElement
+            while (j < n && nums2[j] != nums1[i]) {
+                                 ^
+1 verification failure
+

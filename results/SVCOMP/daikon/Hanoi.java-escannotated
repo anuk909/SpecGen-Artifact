@@ -1,0 +1,52 @@
+class Hanoi {
+
+    /*@ spec_public */ static int counter = 0;
+
+    /*@ requires Hanoi.counter == 0; */
+    /*@ requires n >= 1; */
+    /*@ ensures (\result == 1)  ==  (\old(n) == 1); */
+    /*@ ensures Hanoi.counter == 0; */
+    /*@ ensures \result >= 1; */
+    static int hanoi(int n) {
+        if (n == 1) {
+          return 1;
+        }
+        return 2 * (hanoi(n - 1)) + 1;
+    }
+    
+    /*@ requires n >= 0; */
+    /*@ modifies Hanoi.counter; */
+    /*@ ensures (\old(n) == 0)  ==  (Hanoi.counter == \old(Hanoi.counter)); */
+    /*@ ensures Hanoi.counter >= \old(Hanoi.counter); */
+    static void applyHanoi(int n, int from, int to, int via) {
+        if (n == 0) {
+          return;
+        }
+        // increment the number of steps
+        counter++;
+        applyHanoi(n - 1, from, via, to);
+        applyHanoi(n - 1, via, to, from);
+    }
+    
+    /*@ requires Hanoi.counter == 0; */
+    /*@ requires args != null; */
+    /*@ requires \typeof(args) == \type(java.lang.String[]); */
+    /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+    /*@ modifies Hanoi.counter; */
+    /*@ ensures Hanoi.counter == 702; */
+    /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+    public static void main(String[] args) {
+      for(int i = 1; i <= 5; i++) {
+        hanoi(i);
+      }
+      for(int i = 0; i < 3; i++) {
+        for(int j = -3; j < 0; j++) {
+          for(int k = 9; k < 12; k++) {
+            for(int n = 0; n <= 4; n++) {
+              applyHanoi(n, i, j, k);
+            }
+          }
+        }
+      }
+    }
+}

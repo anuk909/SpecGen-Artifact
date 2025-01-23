@@ -1,0 +1,37 @@
+public class IntCube {
+    //@ requires Integer.MIN_VALUE <= x && x <= Integer.MAX_VALUE;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if(x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; (\forall int b; 0 <= b && b < x; (\forall int c; 0 <= c && c < x; res == (a * x * x) + (b * x) + c)));
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; (\forall int c; 0 <= c && c < x; res == (i * x * x) + (b * x) + c));
+            //@ decreases x - j;
+            for(int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == (i * x * x) + (j * x) + c);
+                //@ decreases x - k;
+                for(int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IntCube.java:3:) in method cubeOf
+        return (neg ? -res : res);
+        ^
+/home/max/Documents/JMLGPT/tmp/IntCube.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IntCube.java:27:
+    //@ ensures \result == (x * x * x);
+        ^
+2 verification failures
+

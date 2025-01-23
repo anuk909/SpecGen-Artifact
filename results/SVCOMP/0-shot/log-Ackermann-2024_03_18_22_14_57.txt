@@ -1,0 +1,21 @@
+public class Ackermann {
+
+  //@ requires m >= 0 && n >= 0;
+  //@ ensures \result >= 0;
+  public static int ack(int m, int n) {
+    //@ decreases m + n;
+    if (m == 0) {
+      return n + 1;
+    }
+    if (n == 0) {
+      return ack(m - 1, 1);
+    }
+    return ack(m - 1, ack(m, n - 1));
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Ackermann.java:6: error: Loop specifications must immediately precede a loop statement
+    //@ decreases m + n;
+        ^
+1 error
+

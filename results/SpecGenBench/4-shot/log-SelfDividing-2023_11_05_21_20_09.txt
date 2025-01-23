@@ -1,0 +1,37 @@
+class SelfDeviding {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.toString().length(); num.toString().charAt(i) != '0' && num % Character.getNumericValue(num.toString().charAt(i)) == 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining (\forall int i; 0 <= i && i < temp.toString().length(); temp.toString().charAt(i) != '0' && num % Character.getNumericValue(temp.toString().charAt(i)) == 0);
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:3: error: int cannot be dereferenced
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.toString().length(); num.toString().charAt(i) != '0' && num % Character.getNumericValue(num.toString().charAt(i)) == 0);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:3: error: int cannot be dereferenced
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.toString().length(); num.toString().charAt(i) != '0' && num % Character.getNumericValue(num.toString().charAt(i)) == 0);
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:3: error: int cannot be dereferenced
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.toString().length(); num.toString().charAt(i) != '0' && num % Character.getNumericValue(num.toString().charAt(i)) == 0);
+                                                                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:6: error: int cannot be dereferenced
+        //@ maintaining (\forall int i; 0 <= i && i < temp.toString().length(); temp.toString().charAt(i) != '0' && num % Character.getNumericValue(temp.toString().charAt(i)) == 0);
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:6: error: int cannot be dereferenced
+        //@ maintaining (\forall int i; 0 <= i && i < temp.toString().length(); temp.toString().charAt(i) != '0' && num % Character.getNumericValue(temp.toString().charAt(i)) == 0);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:6: error: int cannot be dereferenced
+        //@ maintaining (\forall int i; 0 <= i && i < temp.toString().length(); temp.toString().charAt(i) != '0' && num % Character.getNumericValue(temp.toString().charAt(i)) == 0);
+                                                                                                                                                        ^
+6 errors
+

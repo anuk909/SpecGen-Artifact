@@ -1,0 +1,1139 @@
+public class PrimeNumbers
+{
+    /*@ public normal_behavior     
+      @    requires d != 0;
+      @    ensures \result <==> n%d == 0;
+      @    pure function @*/
+    private static boolean div(int n, int d) { return n%d == 0; }
+
+    private int primeArray[];
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:6: error: Expected an identifier, found end of JML comment instead
+      @    pure function @*/
+                         ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:6: error: ';' expected
+      @    pure function @*/
+                            ^
+2 errors
+
+public class PrimeNumbers
+{
+    /*@ public normal_behavior     
+      @    requires d != 0;
+      @    ensures \result <==> n%d == 0;
+      @    pure @*/
+    private static boolean div(int n, int d) { return n%d == 0; }
+
+    private int primeArray[];
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:3: warning: There is no point to a specification case having more visibility than its method
+    /*@ public normal_behavior     
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures primeArray.length == n;
+                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+                                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+                                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:28: error: variable j is already defined in method primeList(int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:29: error: variable j is already defined in method primeList(int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+                                                                                  ^
+13 errors
+1 warning
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    private static boolean div(int n, int d) { return n%d == 0; }
+
+    //@ spec_public
+    private int primeArray[];
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.div(int,int)
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:26: error: variable j is already defined in method primeList(int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:26: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.div(int,int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:27: error: variable j is already defined in method primeList(int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+                                                                                  ^
+2 errors
+2 warnings
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return n%d == 0; }
+
+    //@ spec_public
+    private int primeArray[];
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:27: error: variable j is already defined in method primeList(int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:28: error: variable j is already defined in method primeList(int)
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[i] != primeArray[j]));
+                                                                                  ^
+2 errors
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return n%d == 0; }
+
+    //@ spec_public
+    private int primeArray[];
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; div(primeArray[i], j) ==> primeArray[i] == j));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int primeArray[];
+                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:5: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method div
+    private static boolean div(int n, int d) { return n%d == 0; }
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:47: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12:) in method primeList
+        return primeArray; 
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:47:
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+        ^
+6 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:47: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12:) in method primeList
+        return primeArray; 
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:47:
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+        ^
+5 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray = null;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray = null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray = null;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray = null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:26: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray = null;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray = null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:26: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray = null;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray = null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray = null;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray = null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:26: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray = null;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private int[] primeArray = null;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15:) in method primeList: primeArray
+        primeArray = new int[n];
+                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:19:
+      @ pure @*/
+        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:26: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+                ^
+4 verification failures
+
+public class PrimeNumbers
+{
+    //@ spec_public
+    /*@ pure @*/
+    private static boolean div(int n, int d) { return d != 0 && n%d == 0; }
+
+    //@ spec_public
+    private int[] primeArray;
+    
+    /*@ requires n > 0;
+      @ ensures primeArray.length == n;
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+      @ ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+      @ pure @*/
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n; count++)
+        { 
+            //@ maintaining 2 <= num && num <= Integer.MAX_VALUE;
+            //@ maintaining count - 1 <= n;
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 2 <= k && k <= primeArray[i]/2; div(primeArray[i], k) ==> primeArray[i] == k));
+            //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int k; 0 <= k && k < i; primeArray[i] != primeArray[k]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+}

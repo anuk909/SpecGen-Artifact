@@ -1,0 +1,221 @@
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; res >= a[i]);
+        //@ decreases arr.length - i;
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:7: error: variable i is already defined in method minElementInArray(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; res >= a[i]);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:7: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; res >= a[i]);
+                                                      ^
+  symbol:   variable a
+  location: class MinInArray
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:7: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; res >= a[i]);
+                                                                       ^
+  symbol:   variable a
+  location: class MinInArray
+3 errors
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; res >= arr[i]);
+        //@ decreases arr.length - i;
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:7: error: variable i is already defined in method minElementInArray(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; res >= arr[i]);
+                                     ^
+1 error
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int j; 0 <= j && j < arr.length; res >= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:7: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method minElementInArray
+        //@ maintaining (\forall int j; 0 <= j && j < arr.length; res >= arr[j]);
+            ^
+1 verification failure
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:10: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method minElementInArray
+            res = ((arr[i] < res) ? arr[i] : res);
+                       ^
+1 verification failure
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            //@ assume i >= 0;
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MinInArray.java:3:) in method minElementInArray
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MinInArray.java:13:
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+        ^
+2 verification failures
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            //@ assume i >= 0;
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        //@ assert (\forall int j; 0 <= j && j < arr.length; res <= arr[j]);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MinInArray.java:3:) in method minElementInArray
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MinInArray.java:14:
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+        ^
+2 verification failures
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            //@ assume i >= 0;
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        //@ assert (\forall int j; 0 <= j && j < arr.length; res <= arr[j]);
+        //@ assert (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:14: verify: The prover cannot establish an assertion (Assert) in method minElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+            ^
+1 verification failure
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            //@ assume i >= 0;
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        //@ assert (\forall int j; 0 <= j && j < arr.length; res <= arr[j]);
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:14: verify: The prover cannot establish an assertion (Assert) in method minElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+            ^
+1 verification failure
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            //@ assume i >= 0;
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        //@ assert (\forall int j; 0 <= j && j < arr.length; res <= arr[j]);
+        //@ assert (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:14: verify: The prover cannot establish an assertion (Assert) in method minElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+            ^
+1 verification failure
+
+class MinInArray {
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int minElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; res <= arr[j]);
+        //@ decreases arr.length - i;
+        for(int i = 1; i < arr.length; i++) {
+            //@ assume i >= 0;
+            res = ((arr[i] < res) ? arr[i] : res);
+        }
+        //@ assert (\forall int j; 0 <= j && j < arr.length; res <= arr[j]);
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinInArray.java:14: verify: The prover cannot establish an assertion (Assert) in method minElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+            ^
+1 verification failure
+

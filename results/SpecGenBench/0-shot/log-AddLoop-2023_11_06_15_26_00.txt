@@ -1,0 +1,28 @@
+public class AddLoop {
+    //@ requires true;
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        //@ maintaining sum == x + (\old(y) - n);
+        //@ decreasing n;
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ decreasing n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (y - n);
+            //@ decreasing n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        //@ assert sum == x + y;
+        return sum;
+    }
+}

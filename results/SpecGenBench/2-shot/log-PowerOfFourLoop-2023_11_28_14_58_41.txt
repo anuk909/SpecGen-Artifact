@@ -1,0 +1,28 @@
+class PowerOfTwoLoop {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == 4^i);
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining n % 4 == 0 ==> (\exists int i; i >= 0 && n == 4^i);
+        //@ decreases n;
+        while (n % 4 == 0) {
+            n /= 4;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:3: error: bad operand types for binary operator '^'
+    //@ ensures \result <==> (\exists int i; i >= 0 && n == 4^i);
+                                                             ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: error: bad operand types for binary operator '^'
+        //@ maintaining n % 4 == 0 ==> (\exists int i; i >= 0 && n == 4^i);
+                                                                       ^
+  first type:  boolean
+  second type: int
+2 errors
+

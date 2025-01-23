@@ -1,0 +1,930 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= e;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:53: error: cannot find symbol
+    return Verifier.nondetInt();
+           ^
+  symbol:   variable Verifier
+  location: class Utils_nondet
+1 error
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= e;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list1.java:52: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list1.java:48:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list1.java:48: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list1.java:52:
+  //@ ensures \result >= 0;
+      ^
+/home/max/Documents/JMLGPT/tmp/list1.java:66: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list1.java:64:) in method accumulator
+    if (e % 2 == 0) if (aggregated < e) return e;
+                                        ^
+/home/max/Documents/JMLGPT/tmp/list1.java:64: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list1.java:66:
+  //@ ensures \result >= 0;
+      ^
+6 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= e;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: verify: The prover cannot establish an assertion (Invariant) in method add
+  //@ public invariant Value >= 0;
+             ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: verify: The prover cannot establish an assertion (Invariant) in method remove
+  //@ public invariant Value >= 0;
+             ^
+/home/max/Documents/JMLGPT/tmp/list1.java:69: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list1.java:67:) in method accumulator
+    if (e % 2 == 0) if (aggregated < e) return e;
+                                        ^
+/home/max/Documents/JMLGPT/tmp/list1.java:67: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list1.java:69:
+  //@ ensures \result >= 0;
+      ^
+6 verification failures
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || ... || e == newEntry);
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= e;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || ... || e == newEntry);
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || ... || e == \old(e.Next));
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: illegal start of expression
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || ... || e == newEntry);
+                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: illegal start of expression
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || ... || e == newEntry);
+                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/list1.java:42: error: illegal start of expression
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || ... || e == \old(e.Next));
+                                                                                                                           ^
+3 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= e;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == \old(e.Next));
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: variable e is already defined in method add(int,int)
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: variable e is already defined in method add(int)
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+4 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int index, int val) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = val;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= val;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int val) {
+    add(size(), val);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == \old(e.Next));
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+2 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int index, int val) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = val;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= val;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int val) {
+    add(size(), val);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == \old(e.Next));
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+2 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+  public void add(int index, int val) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = val;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= val;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+  public void add(int val) {
+    add(size(), val);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+                                                                                                                                ^
+  symbol:   variable entry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+                                                                                                                                ^
+  symbol:   variable entry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:42: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+                                                                                                                                ^
+  symbol:   variable entry
+  location: class LinkedList
+3 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int index, int val) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = val;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= val;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int val) {
+    add(size(), val);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:42: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+                                                                                                                                ^
+  symbol:   variable entry
+  location: class LinkedList
+3 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != null ==> (\exists LinkedListEntry e; e == Next);
+  //@ public invariant Value >= 0;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int index, int val) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = val;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires 0 <= val;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+  public void add(int val) {
+    add(size(), val);
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder value, should be replaced with actual nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:36: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == newEntry);
+                                                                                                                                ^
+  symbol:   variable newEntry
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list1.java:42: error: cannot find symbol
+  //@ ensures (\forall LinkedListEntry e; e != null; e == \old(e) || e == Head || e == Head.Next || e == Head.Next.Next || e == entry);
+                                                                                                                                ^
+  symbol:   variable entry
+  location: class LinkedList
+3 errors
+

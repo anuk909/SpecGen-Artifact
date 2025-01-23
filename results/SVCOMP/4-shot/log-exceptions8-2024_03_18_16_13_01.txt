@@ -1,0 +1,52 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class Main {
+  //@ requires true;
+  //@ ensures \result == \old(\result);
+  static void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (C exc) {
+      int i = 0;
+    }
+  }
+
+  //@ requires true;
+  //@ ensures \result == \old(\result);
+  public static void main(String[] args) {
+    try {
+      A a = new A();
+      foo();
+      throw a;
+    } catch (B exc) {
+      assert false;
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \old(\result);
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \old(\result);
+                               ^
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:9: error: A \result expression is not allowed in an old environment
+  //@ ensures \result == \old(\result);
+                              ^
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:20: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \old(\result);
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:20: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \old(\result);
+                               ^
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:20: error: A \result expression is not allowed in an old environment
+  //@ ensures \result == \old(\result);
+                              ^
+6 errors
+

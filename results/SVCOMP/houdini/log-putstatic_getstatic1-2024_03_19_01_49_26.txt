@@ -1,0 +1,116 @@
+class A {
+  //@ invariant 0 <= i;
+  public static int i = 1;
+}
+;
+
+class putstatic_getstatic1 {
+  //@ ensures \result;
+  //@ ensures !\result;
+  public static boolean f() {
+    if(A.i != 1) return false;
+    A.i = 999;
+    if (A.i != 999)
+      return false;
+    return true;
+  }
+
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:2: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant 0 <= i;
+                     ^
+1 error
+
+class A {
+  public static int i = 1;
+}
+;
+
+class putstatic_getstatic1 {
+  //@ ensures \result;
+  //@ ensures !\result;
+  public static boolean f() {
+    if(A.i != 1) return false;
+    A.i = 999;
+    if (A.i != 999)
+      return false;
+    return true;
+  }
+
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:10: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:7:) in method f
+    if(A.i != 1) return false;
+                 ^
+/home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:10:
+  //@ ensures \result;
+      ^
+2 verification failures
+
+class A {
+  public static int i = 1;
+}
+;
+
+class putstatic_getstatic1 {
+  //@ ensures !\result;
+  public static boolean f() {
+    if(A.i != 1) return false;
+    A.i = 999;
+    if (A.i != 999)
+      return false;
+    return true;
+  }
+
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:7:) in method f
+    return true;
+    ^
+/home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/putstatic_getstatic1.java:13:
+  //@ ensures !\result;
+      ^
+2 verification failures
+
+class A {
+  public static int i = 1;
+}
+;
+
+class putstatic_getstatic1 {
+  public static boolean f() {
+    if(A.i != 1) return false;
+    A.i = 999;
+    if (A.i != 999)
+      return false;
+    return true;
+  }
+
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+

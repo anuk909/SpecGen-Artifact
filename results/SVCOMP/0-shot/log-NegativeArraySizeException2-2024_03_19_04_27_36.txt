@@ -1,0 +1,17 @@
+public class NegativeArraySizeException2 {
+  //@ requires true;
+  //@ ensures (\result == true) || (\result == false);
+  public static boolean f() {
+    //@ ensures (\result == true) || (\result == false);
+    try {
+      //@ assume false; // This line is to indicate that the following statement will throw an exception
+      int a[] = new int[-1];
+    } catch (Exception exc) {
+      //@ assert (\result == false);
+      return false;
+    }
+    //@ assert (\result == true);
+    return true;
+  }
+}
+

@@ -1,0 +1,18 @@
+class DigitRoot {
+    //@ ensures \result >= 0;
+    public int digitRoot(int num) {
+        //@ loop_invariant num >= 0;
+        //@ decreases num;
+        while (num >= 10) {
+            int sum = 0;
+            //@ loop_invariant num > 0 && sum >= 0;
+            //@ decreases num;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+        }
+        return num;
+    }
+}

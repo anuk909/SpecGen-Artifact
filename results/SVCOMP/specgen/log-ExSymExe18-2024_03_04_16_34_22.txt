@@ -1,0 +1,43 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ ensures \result ==> (\result == false || field2 == 0) && (\result == false || field == 9);
+  //@ ensures \result ==> (\result == false || z * x * y >= x * y) && (\result == false || x * r >= y * x);
+  //@ ensures \result ==> (\result == false || z * x * y < x * y ==> \result == false);
+  //@ ensures \result ==> (\result == false || x * r < y * x ==> \result == false);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+  
+  //@ ensures \result ==> (\result == false || r == y * x);
+  //@ ensures \result ==> (\result == false || x == 3);
+  //@ ensures \result ==> (\result == false || z == 9);
+  //@ ensures \result ==> (\result == false || z * x * y >= x * y);
+  //@ ensures \result ==> (\result == false || x * r >= y * x);
+  //@ ensures \result ==> (\result == false || z * x * y < x * y ==> \result == false);
+  //@ ensures \result ==> (\result == false || x * r < y * x ==> \result == false);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    int y = 3;
+    x = x * r;
+    z = z * x;
+    r = y * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 33554432 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid5616.log
+

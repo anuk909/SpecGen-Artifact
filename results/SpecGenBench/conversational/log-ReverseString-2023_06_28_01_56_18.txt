@@ -1,0 +1,598 @@
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[s.length - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[s.length - i - 1]));
+        //@ decreases right - left;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method reverseString
+        //@ maintaining 0 <= left && left <= right && right < n;
+            ^
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ReverseString.java:5:) in method reverseString
+    public void reverseString(char[] s) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ReverseString.java:6:
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+           ^
+3 verification failures
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[s.length - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[s.length - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method reverseString
+        //@ maintaining 0 <= left && left <= right && right < n;
+            ^
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ReverseString.java:5:) in method reverseString
+    public void reverseString(char[] s) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ReverseString.java:6:
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+           ^
+3 verification failures
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+
+class ReverseString {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < s.length; (int)Character.MIN_VALUE <= (int)s[i] && (int)s[i] <= (int)Character.MAX_VALUE);
+      @    assignable s[*];
+      @    ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1])); @*/
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ maintaining 0 <= left && left <= right && right < n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+        //@ decreases right - left + 1;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < left; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+/home/max/Documents/JMLGPT/tmp/ReverseString.java:10: error: cannot find symbol
+        //@ maintaining (\forall int i; right < i && i < n; s[i] == \old(s[n - i - 1]));
+                                                                           ^
+  symbol:   variable n
+  location: class ReverseString
+2 errors
+

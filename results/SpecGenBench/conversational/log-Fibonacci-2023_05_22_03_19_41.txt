@@ -1,0 +1,254 @@
+public class Fibonacci {
+    //@ public invariant fib.length == 2 || (fib.length >= 2 && fib.length <= 93);
+    //@ public invariant (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+    private /*@ spec_public @*/ long fib[];
+
+    /*@ ensures fib.length == 2;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    /*@ requires 2 <= size && size <= 93;
+      @ ensures fib.length == size;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci(int size) {
+        fib = new long[size];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    /*@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0); @*/
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:20: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:4:) in method Fibonacci
+    Fibonacci(int size) {
+    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:20:
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+               ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:38: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method fibCompute: overflow in long sum
+            fib[index] = fib[index - 2] + fib[index - 1];
+                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:38: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method fibCompute
+            fib[index] = fib[index - 2] + fib[index - 1];
+               ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:28: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method getFib
+        return fib[index];
+                  ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:28: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method getFib
+        return fib[index];
+                  ^
+6 verification failures
+
+public class Fibonacci {
+    //@ public invariant fib.length == 2 || (fib.length >= 2 && fib.length <= 93);
+    //@ public invariant (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+    private /*@ spec_public @*/ long fib[];
+
+    /*@ ensures fib.length == 2;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    /*@ requires 2 <= size && size <= 93;
+      @ ensures fib.length == size;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci(int size) {
+        fib = new long[size];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    /*@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i-1] >= 0 && fib[i-2] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] <= Long.MAX_VALUE - fib[i-1]);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] >= fib[i-1]);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] >= fib[i-2]); @*/
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:20: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:4:) in method Fibonacci
+    Fibonacci(int size) {
+    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:20:
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+               ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:43: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method fibCompute: overflow in long sum
+            fib[index] = fib[index - 2] + fib[index - 1];
+                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:43: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method fibCompute
+            fib[index] = fib[index - 2] + fib[index - 1];
+               ^
+4 verification failures
+
+public class Fibonacci {
+    //@ public invariant fib.length == 2 || (fib.length >= 2 && fib.length <= 93);
+    //@ public invariant (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+    private /*@ spec_public @*/ long fib[];
+
+    /*@ ensures fib.length == 2;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    /*@ requires 2 <= size && size <= 93;
+      @ ensures fib.length == size;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci(int size) {
+        fib = new long[size];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    /*@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i-1] >= 0 && fib[i-2] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] <= Long.MAX_VALUE - fib[i-1]);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] >= fib[i-1]);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] >= fib[i-2]);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; i == 0 || i == 1 || fib[i-1] >= 0);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; i == 0 || i == 1 || fib[i-2] >= 0); @*/
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:20: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:4:) in method Fibonacci
+    Fibonacci(int size) {
+    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:20:
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+               ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:45: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method fibCompute
+            fib[index] = fib[index - 2] + fib[index - 1];
+                            ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:45: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method fibCompute
+            fib[index] = fib[index - 2] + fib[index - 1];
+               ^
+4 verification failures
+
+public class Fibonacci {
+    //@ public invariant fib.length == 2 || (fib.length >= 2 && fib.length <= 93);
+    //@ public invariant (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+    private /*@ spec_public @*/ long fib[];
+
+    /*@ ensures fib.length == 2;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    /*@ requires 2 <= size && size <= 93;
+      @ ensures fib.length == size;
+      @ ensures fib[0] == 0;
+      @ ensures fib[1] == 1; @*/
+    Fibonacci(int size) {
+        fib = new long[size];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    /*@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; fib[i] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i-1] >= 0 && fib[i-2] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] <= Long.MAX_VALUE - fib[i-1]);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] >= fib[i-1]);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] >= fib[i-2]);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; i == 0 || i == 1 || fib[i-1] >= 0);
+      @ ensures (\forall int i; 0 <= i && i < fib.length; i == 0 || i == 1 || fib[i-2] >= 0);
+      @ ensures (\forall int i; 2 <= i && i < fib.length; i == 0 || i == 1 || fib[i-1] <= Long.MAX_VALUE - fib[i-2]); @*/
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:20: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:4:) in method Fibonacci
+    Fibonacci(int size) {
+    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:20:
+    //@ public invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i-1] + fib[i-2]);
+               ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:46: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method fibCompute
+            fib[index] = fib[index - 2] + fib[index - 1];
+                            ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:46: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method fibCompute
+            fib[index] = fib[index - 2] + fib[index - 1];
+               ^
+4 verification failures
+

@@ -1,0 +1,439 @@
+public class SortedListInsert {
+
+  private static class List {
+    public int x;
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    private List(int x, List next) {
+      this.x = x;
+      this.next = next;
+    }
+
+    //@ requires true;
+    //@ ensures \result.x == SENTINEL && \result.next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures \result.x == data && \result.next.x == x && \result.next.next == next;
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:15: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result.x == SENTINEL && \result.next == null;
+                 ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result.x == SENTINEL && \result.next == null;
+                             ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:15: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result.x == SENTINEL && \result.next == null;
+                                          ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:21: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result.x == data && \result.next.x == x && \result.next.next == next;
+                 ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:21: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result.x == data && \result.next.x == x && \result.next.next == next;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:21: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result.x == data && \result.next.x == x && \result.next.next == next;
+                                                             ^
+6 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:23: error: constructor List in class List cannot be applied to given types;
+        next = new List(x, next);
+               ^
+  required: no arguments
+  found:    int,List
+  reason: actual and formal argument lists differ in length
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(data, this);
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:23: error: constructor List in class List cannot be applied to given types;
+        next = new List(data, this);
+               ^
+  required: no arguments
+  found:    int,List
+  reason: actual and formal argument lists differ in length
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next == n;
+    public List(int data, List n) {
+      x = data;
+      next = n;
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ requires true;
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List();
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+
+    //@ requires true;
+    //@ ensures x == data && next == n;
+    public List(int data, List n) {
+      x = data;
+      next = n;
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+

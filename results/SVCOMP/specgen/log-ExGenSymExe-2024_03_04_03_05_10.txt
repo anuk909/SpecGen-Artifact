@@ -1,0 +1,126 @@
+static class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  //@ ensures \result != null ==> \result == this.next && \result.elem == \old(this.next.elem) && this.next == \old(this.next.next);
+  //@ ensures \result == null ==> \result == this && this.next == \old(this.next);
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:1: error: modifier static not allowed here
+static class Node {
+       ^
+1 error
+
+class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  //@ ensures \result != null ==> \result == this.next && \result.elem == \old(this.next.elem) && this.next == \old(this.next.next);
+  //@ ensures \result == null ==> \result == this && this.next == \old(this.next);
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:3: verify: The prover cannot establish an assertion (NullField) in method Node
+  Node next;
+       ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:6:) in method swapNode
+        return t;
+        ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:19:
+  //@ ensures \result != null ==> \result == this.next && \result.elem == \old(this.next.elem) && this.next == \old(this.next.next);
+      ^
+3 verification failures
+
+class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  //@ ensures \result != null ==> \result == this.next && \result.elem == \old(this.next.elem) && this.next == \old(this.next.next);  
+  //@ ensures \result == null ==> \result == this && this.next == \old(this.next);
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:3: verify: The prover cannot establish an assertion (NullField) in method Node
+  Node next;
+       ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:6:) in method swapNode
+        return t;
+        ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:19:
+  //@ ensures \result != null ==> \result == this.next && \result.elem == \old(this.next.elem) && this.next == \old(this.next.next);  
+      ^
+3 verification failures
+
+class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+ 
+  //@ ensures \result == null ==> \result == this && this.next == \old(this.next);
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:3: verify: The prover cannot establish an assertion (NullField) in method Node
+  Node next;
+       ^
+1 verification failure
+

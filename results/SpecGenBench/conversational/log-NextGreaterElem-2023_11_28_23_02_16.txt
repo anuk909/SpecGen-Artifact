@@ -1,0 +1,734 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; 0 <= k && k < j; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining 0 <= j && j <= n;
+        //@ maintaining 0 <= k && k <= n;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; j <= k && k < n; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                          ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) ==> \result[i] == nums2[k] && k < nums2.length) ==> \result[i] == -1);
+                                                                                                                                                                                                                                ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                             ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:9: error: cannot find symbol
+        //@ maintaining 0 <= j && j <= n;
+                                  ^
+  symbol:   variable j
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:10: error: cannot find symbol
+        //@ maintaining 0 <= k && k <= n;
+                                  ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                           ^
+  symbol:   variable z
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:11: error: cannot find symbol
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y < z && z < n; nums2[z] < nums2[y]) ==> res[x] == nums2[z] && z < n) ==> res[x] == -1);
+                                                                                                                                                                                                 ^
+  symbol:   variable z
+  location: class NextGreaterElem
+8 errors
+

@@ -1,0 +1,27 @@
+import java.util.Arrays;
+
+public class ContainsDuplicate {
+
+    //@ requires nums != null;
+    //@ ensures \result ==> (\exists int i, j; 0 <= i && i < j && j < nums.length; nums[i] == nums[j]);
+    //@ ensures !\result ==> (\forall int i, j; 0 <= i && i < j && j < nums.length; nums[i] != nums[j]);
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+
+        //@ maintaining 0 <= i && i < n - 1;
+        //@ maintaining (\forall int k; 0 <= k && k < i; nums[k] != nums[i]);
+        //@ decreases n - i;
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method containsDuplicate
+        //@ maintaining 0 <= i && i < n - 1;
+            ^
+1 verification failure
+

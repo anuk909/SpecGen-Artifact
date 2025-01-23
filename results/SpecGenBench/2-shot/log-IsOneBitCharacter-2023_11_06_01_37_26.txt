@@ -1,0 +1,24 @@
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result == (\exists int i; 0 <= i && i < bits.length - 1; i += bits[i] + 1) && i == bits.length - 1;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreasing n - i;
+        while (i < n - 1) {
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (\exists int i; 0 <= i && i < bits.length - 1; i += bits[i] + 1) && i == bits.length - 1;
+                                                                            ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: error: cannot find symbol
+    //@ ensures \result == (\exists int i; 0 <= i && i < bits.length - 1; i += bits[i] + 1) && i == bits.length - 1;
+                                                                                               ^
+  symbol:   variable i
+  location: class IsOneBitCharacter
+2 errors
+

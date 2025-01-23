@@ -1,0 +1,47 @@
+class TwoSum {
+    //@ requires nums != null;
+    //@ ensures (\exists int i; 0 <= i && i < \result.length; \exists int j; i + 1 <= j && j < \result.length; nums[\result[0]] + nums[\result[1]] == target);
+    //@ ensures \result.length == 2 ==> nums[\result[0]] + nums[\result[1]] == target;
+    //@ ensures \result.length == 0 ==> (\forall int i; 0 <= i && i < nums.length; nums[i] + nums[i] != target);
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+        //@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+            //@ maintaining i + 1 <= j && j <= n;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+            //@ maintaining (\forall int k; i <= k && k < j; nums[\result[0]] + nums[\result[1]] != target);
+            //@ decreases n - j;
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+                                                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:13: error: variable j is already defined in method twoSum(int[],int)
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:13: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:13: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[\result[0]] + nums[\result[1]] != target));
+                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:14: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\forall int k; i <= k && k < j; nums[\result[0]] + nums[\result[1]] != target);
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:14: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\forall int k; i <= k && k < j; nums[\result[0]] + nums[\result[1]] != target);
+                                                                                      ^
+7 errors
+

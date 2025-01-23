@@ -1,0 +1,58 @@
+public class shifting {
+
+  //@ requires i >= 0 && i <= 100;
+  //@ ensures \result == 1 || \result == 0 || \result == -1;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if ((1L << i) > Integer.MAX_VALUE) {
+      return 0;
+    }
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/shifting.java:10: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method f
+    if ((1L << i) > Integer.MAX_VALUE) {
+            ^
+1 verification failure
+
+public class shifting {
+
+  //@ requires i >= 0 && i <= 100;
+  //@ ensures \result == 1 || \result == 0 || \result == -1;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    //@ assert (1L << i) <= Integer.MAX_VALUE;
+    if ((1L << i) > Integer.MAX_VALUE) {
+      return 0;
+    }
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/shifting.java:10: verify: The prover cannot establish an assertion (Assert) in method f
+    //@ assert (1L << i) <= Integer.MAX_VALUE;
+        ^
+1 verification failure
+
+public class shifting {
+
+  //@ requires i >= 0 && i <= 100;
+  //@ ensures \result == 1 || \result == 0 || \result == -1;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    //@ assume i >= 0 && i <= 31;
+    if ((1L << i) > Integer.MAX_VALUE) {
+      return 0;
+    }
+    return 1;
+  }
+}
+

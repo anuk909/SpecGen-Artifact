@@ -1,0 +1,319 @@
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i < num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        for(int i = 1; i < num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+            if(i * i == num)
+                 ^
+1 verification failure
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i < num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        for(int i = 1; i < num; i++) {
+            //@ assume i <= Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:7: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+            if(i * i == num)
+                 ^
+1 verification failure
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i < num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        for(int i = 1; i < num; i++) {
+            //@ assume i <= Math.sqrt(Integer.MAX_VALUE) && i * i <= Integer.MAX_VALUE;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:10: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:10:
+    //@ ensures \result == (\exists int i; 1 <= i && i < num; i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        for(int i = 1; i * i <= num; i++) {
+            //@ assume i <= Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:5: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+        for(int i = 1; i * i <= num; i++) {
+                         ^
+1 verification failure
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 1; i * i <= num; i++) {
+            //@ assume i <= Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+        for(int i = 1; i * i <= num; i++) {
+                         ^
+1 verification failure
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 1; i <= Math.sqrt(num); i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 1; i <= num / 2 + 1; i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 1; i <= num / 2 + 1; i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return num == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return num == 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 1 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= num / 2 + 1; i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= Math.sqrt(num); i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= num / 2 + 1; i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= Math.sqrt(num); i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= num; i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= Math.sqrt(num); i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= num / 2 + 1; i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num;
+        for(int i = 0; i <= Math.sqrt(num); i++) {
+            //@ assume i * i <= Integer.MAX_VALUE && Integer.MIN_VALUE <= i * i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11:
+    //@ ensures \result == (\exists int i; 0 <= i && i * i <= num && num < (i+1) * (i+1); i * i == num);
+        ^
+2 verification failures
+

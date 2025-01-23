@@ -1,0 +1,488 @@
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        //@ maintaining minX2 >= bx2;
+        //@ maintaining minX2 == bx2 || minX2 == ax2;
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        int maxX1 = bx1;
+        //@ maintaining maxX1 <= bx1;
+        //@ maintaining maxX1 == bx1 || maxX1 == ax1;
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        int minY2 = by2;
+        //@ maintaining minY2 >= by2;
+        //@ maintaining minY2 == by2 || minY2 == ay2;
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        int maxY1 = by1;
+        //@ maintaining maxY1 <= by1;
+        //@ maintaining maxY1 == by1 || maxY1 == ay1;
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:6: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining minX2 >= bx2;
+            ^
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:12: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining maxX1 <= bx1;
+            ^
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:18: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining minY2 >= by2;
+            ^
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:24: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining maxY1 <= by1;
+            ^
+4 errors
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        //@ maintaining minX2 >= bx2;
+        //@ maintaining minX2 == bx2 || minX2 == ax2;
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        int maxX1 = bx1;
+        //@ maintaining maxX1 <= bx1;
+        //@ maintaining maxX1 == bx1 || maxX1 == ax1;
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        int minY2 = by2;
+        //@ maintaining minY2 >= by2;
+        //@ maintaining minY2 == by2 || minY2 == ay2;
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        int maxY1 = by1;
+        //@ maintaining maxY1 <= by1;
+        //@ maintaining maxY1 == by1 || maxY1 == ay1;
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        //@ assert overlapWidth >= 0;
+        //@ assert overlapHeight >= 0;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:6: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining minX2 >= bx2;
+            ^
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:12: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining maxX1 <= bx1;
+            ^
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:18: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining minY2 >= by2;
+            ^
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:24: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining maxY1 <= by1;
+            ^
+4 errors
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+        //@ assert minX2 == bx2 || minX2 == ax2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+        //@ assert maxX1 == bx1 || maxX1 == ax1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+        //@ assert minY2 == by2 || minY2 == ay2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+        //@ assert maxY1 == by1 || maxY1 == ay1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        //@ assert overlapArea >= 0;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        //@ assert overlapArea >= 0;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        //@ assert overlapArea >= 0;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        //@ assert overlapArea >= 0;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        //@ assert overlapArea >= 0;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+
+class ComputeOverlapBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result >= 0;
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int minX2 = bx2;
+        int maxX1 = bx1;
+        int minY2 = by2;
+        int maxY1 = by1;
+        
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        //@ assert minX2 >= bx2;
+
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        //@ assert maxX1 <= bx1;
+
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        //@ assert minY2 >= by2;
+
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        //@ assert maxY1 <= by1;
+
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        //@ assert overlapArea >= 0;
+        return overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeOverlapBranch.java:13: verify: The prover cannot establish an assertion (Assert) in method computeOverlapArea
+        //@ assert minX2 >= bx2;
+            ^
+1 verification failure
+

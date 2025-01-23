@@ -1,0 +1,75 @@
+public class startswith {
+    //@ requires request != null;
+    //@ ensures \result == true || \result == false;
+    //@ ensures \result == true ==> !request.equals("") || !argsEnv[0].equals("GOTCHA");
+    //@ ensures \result == false ==> request.equals("") && argsEnv[0].equals("GOTCHA");
+    public boolean doPost(String request) throws IOException {
+        String param = request;
+        String[] argsEnv = {param};
+
+        if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/startswith.java:6: error: cannot find symbol
+    public boolean doPost(String request) throws IOException {
+                                                 ^
+  symbol:   class IOException
+  location: class startswith
+/home/max/Documents/JMLGPT/tmp/startswith.java:4: error: cannot find symbol
+    //@ ensures \result == true ==> !request.equals("") || !argsEnv[0].equals("GOTCHA");
+                                                            ^
+  symbol:   variable argsEnv
+  location: class startswith
+/home/max/Documents/JMLGPT/tmp/startswith.java:5: error: cannot find symbol
+    //@ ensures \result == false ==> request.equals("") && argsEnv[0].equals("GOTCHA");
+                                                           ^
+  symbol:   variable argsEnv
+  location: class startswith
+3 errors
+
+public class startswith {
+    //@ requires request != null;
+    //@ ensures \result == true || \result == false;
+    //@ ensures \result == true ==> !request.equals("") || !param.equals("GOTCHA");
+    //@ ensures \result == false ==> request.equals("") && param.equals("GOTCHA");
+    public boolean doPost(String request) {
+        String param = request;
+        String[] argsEnv = {param};
+
+        if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/startswith.java:4: error: cannot find symbol
+    //@ ensures \result == true ==> !request.equals("") || !param.equals("GOTCHA");
+                                                            ^
+  symbol:   variable param
+  location: class startswith
+/home/max/Documents/JMLGPT/tmp/startswith.java:5: error: cannot find symbol
+    //@ ensures \result == false ==> request.equals("") && param.equals("GOTCHA");
+                                                           ^
+  symbol:   variable param
+  location: class startswith
+2 errors
+
+public class startswith {
+    //@ requires request != null;
+    //@ ensures \result == true || \result == false;
+    //@ ensures \result == true ==> !request.equals("") || !request.equals("GOTCHA");
+    //@ ensures \result == false ==> request.equals("") && request.equals("GOTCHA");
+    public boolean doPost(String request) {
+        String param = request;
+        String[] argsEnv = {param};
+
+        if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+            return false;
+        }
+        return true;
+    }
+}
+

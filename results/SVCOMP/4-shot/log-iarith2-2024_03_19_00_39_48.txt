@@ -1,0 +1,42 @@
+class iarith2 {
+    //@ ensures \result == 1;
+    private static int i() {
+        int value = 3;
+        value &= 1;
+        value |= 4;
+        value ^= 4;
+        value <<= 2;
+        value >>= 1;
+        value = -value;
+        value >>>= 1;
+        return value;
+    }
+
+    //@ ensures \result == 1L;
+    private static long l() {
+        long value = 3L;
+        value &= 1L;
+        value |= 4L;
+        value ^= 4L;
+        value <<= 2L;
+        value >>= 1L;
+        value = -value;
+        value >>>= 1L;
+        return value;
+    }
+
+    //@ ensures (\result == 1);
+    private static void s() {
+        short lhs = 127;
+        short rhs = 32767;
+        if (lhs < rhs) {
+            return;
+        }
+        assert false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/iarith2.java:28: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\result == 1);
+                  ^
+1 error
+

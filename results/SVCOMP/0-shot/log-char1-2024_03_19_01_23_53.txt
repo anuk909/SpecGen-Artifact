@@ -1,0 +1,29 @@
+class char1 {
+
+  //@ requires arg != null;
+  //@ ensures \result == -1 || \result == 0 || \result == 1;
+  public static int fun(String arg) {
+    // ensures -1 is returned if the length of the argument is less than 1
+    if (arg.length() < 1)
+      return -1;
+    
+    char my_char = arg.charAt(0);
+    int x = my_char;
+    
+    // ensures 0 is returned if x is not within the valid character range
+    if (!(x >= 0 && x <= '\uffff'))
+      return 0;
+
+    my_char = '\uffff';
+    my_char++;
+    
+    // ensures 0 is returned if my_char overflows and becomes 0
+    if (my_char == 0)
+      return 0;
+    
+    // ensures 1 is returned if none of the above conditions are met
+    return 1;
+  }
+  
+}
+

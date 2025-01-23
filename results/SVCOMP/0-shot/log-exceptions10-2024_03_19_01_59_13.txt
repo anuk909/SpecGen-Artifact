@@ -1,0 +1,56 @@
+/**
+ * JML specification for class A
+ */
+class A extends RuntimeException {
+  // no additional JML specification needed
+}
+
+/**
+ * JML specification for class B
+ */
+class B extends A {
+  // no additional JML specification needed
+}
+
+/**
+ * JML specification for class C
+ */
+class C extends B {
+  // no additional JML specification needed
+}
+
+/**
+ * JML specification for exceptions10 class
+ */
+public class exceptions10 {
+  /**
+   * JML specification for the foo method
+   * @requires true
+   * @modifies \nothing
+   * @ensures (Exception exc) ==> false
+   */
+  static void foo() {
+    try {
+      A b = new A();
+      throw b;
+    } catch (A exc) {
+      assert false;
+    }
+  }
+
+  /**
+   * JML specification for the main method
+   * @requires true
+   * @modifies \nothing
+   * @ensures (Exception exc) ==> false
+   */
+  public static void main(String[] args) {
+    try {
+      A a = new A();
+      foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+

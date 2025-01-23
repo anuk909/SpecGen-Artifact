@@ -1,0 +1,21 @@
+class PlusOne {
+    //@ requires digits != null;
+    //@ ensures \result != null;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length; \result[i] == digits[i] + 1 % 10);
+    //@ ensures (\exists int i; 0 <= i && i < digits.length; \result[i] != 0);
+    public int[] plusOne(int[] digits) {
+        //@ loop_invariant 0 <= i && i <= digits.length;
+        //@ loop_invariant (\forall int j; i < j && j < digits.length; digits[j] == \old(digits[j]));
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; digits[j] == \old(digits[j] + 1 % 10));
+        //@ loop_invariant (\exists int j; 0 <= j && j < i; digits[j] != 0);
+        for (int i = digits.length - 1; i >= 0; i--) {
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
+}

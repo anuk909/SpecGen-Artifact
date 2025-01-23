@@ -1,0 +1,60 @@
+import java.util.Arrays;
+
+public class ContainsDuplicate {
+
+    //@ requires nums != null;
+    //@ ensures \result <==> (\exists int i, j; 0 <= i && i < j && j < nums.length; nums[i] == nums[j]);
+    public /*@ pure @*/ boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+
+        //@ loop_invariant 0 <= i && i <= n-1;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; nums[k] <= nums[i]);
+        //@ loop_invariant (\exists int k; 0 <= k && k < i; nums[k] == nums[i]) <==> \result;
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:13: error: A \result expression may not be in a loop_invariant clause
+        //@ loop_invariant (\exists int k; 0 <= k && k < i; nums[k] == nums[i]) <==> \result;
+                                                                                      ^
+1 error
+
+import java.util.Arrays;
+
+public class ContainsDuplicate {
+
+    //@ requires nums != null;
+    //@ ensures \result <==> (\exists int i, j; 0 <= i && i < j && j < nums.length; nums[i] == nums[j]);
+    public /*@ pure @*/ boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        boolean result = false;
+
+        //@ loop_invariant 0 <= i && i <= n-1;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; nums[k] <= nums[i]);
+        //@ loop_invariant (\exists int k; 0 <= k && k < i; nums[k] == nums[i]) <==> result;
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:8: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:7:) in method containsDuplicate: a[*]
+        Arrays.sort(nums);
+                   ^
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:8:
+    public /*@ pure @*/ boolean containsDuplicate(int[] nums) {
+               ^
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method containsDuplicate
+        //@ loop_invariant 0 <= i && i <= n-1;
+            ^
+3 verification failures
+

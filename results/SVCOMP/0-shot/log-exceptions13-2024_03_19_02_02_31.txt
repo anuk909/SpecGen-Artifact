@@ -1,0 +1,38 @@
+class A extends RuntimeException {
+  // No JML specification needed as it is a simple class definition
+}
+
+class B extends A {
+  // No JML specification needed as it is a simple class definition
+}
+
+class C extends B {
+  // No JML specification needed as it is a simple class definition
+}
+
+class F {
+  //@ ensures (true);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ requires (args != null);
+  //@ ensures (true);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+

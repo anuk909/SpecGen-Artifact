@@ -1,0 +1,323 @@
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != s.charAt(i+1));
+    public static int repeatedChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) != s.charAt(i));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; s.charAt(k) != s.charAt(i));
+            //@ decreasing s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != s.charAt(i+1));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedChar
+            //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) != s.charAt(i));
+                ^
+1 verification failure
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != s.charAt(i+1));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) != s.charAt(i));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) != s.charAt(i));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; s.charAt(k) != s.charAt(i));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != s.charAt(i+1));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:5:) in method repeatedChar
+                    return i;
+                    ^
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:20:
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+        ^
+2 verification failures
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != s.charAt(i+1));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) != s.charAt(i));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) != s.charAt(i));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; s.charAt(k) != s.charAt(i));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != s.charAt(i+1));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:5:) in method repeatedChar
+                    return i;
+                    ^
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:20:
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+        ^
+2 verification failures
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < i; s.charAt(k) != s.charAt(j)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < i; s.charAt(k) != s.charAt(j)));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j; 0 <= j && j < i; s.charAt(k) != s.charAt(j)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:14: error: variable j is already defined in method repeatedChar(String)
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < i; s.charAt(k) != s.charAt(j)));
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:15: error: variable j is already defined in method repeatedChar(String)
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j; 0 <= j && j < i; s.charAt(k) != s.charAt(j)));
+                                                                            ^
+2 errors
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < i; s.charAt(k) != s.charAt(j1)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j2; 0 <= j2 && j2 < i; s.charAt(k) != s.charAt(j2)));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j3; 0 <= j3 && j3 < i; s.charAt(k) != s.charAt(j3)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j4; 0 <= j4 && j4 < s.length(); s.charAt(i) != s.charAt(j4)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < i; s.charAt(k) != s.charAt(j1)));
+            ^
+1 verification failure
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j2; 0 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j3; 0 <= j3 && j3 < i; s.charAt(k) != s.charAt(j3)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j4; 0 <= j4 && j4 < s.length(); s.charAt(i) != s.charAt(j4)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:15: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j3; 0 <= j3 && j3 < i; s.charAt(k) != s.charAt(j3)));
+                ^
+1 verification failure
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j2; 0 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j3; 0 <= j3 && j3 < k; s.charAt(k) != s.charAt(j3)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j4; 0 <= j4 && j4 < s.length(); s.charAt(i) != s.charAt(j4)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+            ^
+1 verification failure
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j2; i+1 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j2; i+1 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+                ^
+1 verification failure
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j2; i+1 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j2; i+1 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+                ^
+1 verification failure
+
+public class RepeatedCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int i; 0 <= i && i < \result; s.charAt(i) == s.charAt(\result));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; i+1 <= k && k < j; (\forall int j2; i+1 <= j2 && j2 < k; s.charAt(k) != s.charAt(j2)));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j1; 0 <= j1 && j1 < k; s.charAt(k) != s.charAt(j1)));
+            ^
+1 verification failure
+

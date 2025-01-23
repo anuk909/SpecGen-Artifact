@@ -1,0 +1,22 @@
+public class boundcheck30 {
+
+    //@ requires Integer.MIN_VALUE <= i && i <= Integer.MAX_VALUE;
+    //@ ensures true;
+    private static void recursion(int i) {
+        if (i == 0) {
+            return;
+        }
+        if (i > 0) {
+            //@ assert i - 1 >= Integer.MIN_VALUE;
+            recursion(i - 1);
+        }
+        if (i < 0) {
+            assert false;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/boundcheck30.java:14: verify: The prover cannot establish an assertion (Assert) in method recursion
+            assert false;
+            ^
+1 verification failure
+

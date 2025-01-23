@@ -1,0 +1,217 @@
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] <= nums2[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m && 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; (\forall int j; 0 <= j && j < p2; nums1[i] <= nums2[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p2; (\forall int j; 0 <= j && j < p1; nums2[i] <= nums1[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+        //@ decreases m + n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:10: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method merge: overflow in int sum
+        int[] sorted = new int[m + n];
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:10: verify: The prover cannot establish an assertion (PossiblyNegativeSize) in method merge
+        int[] sorted = new int[m + n];
+                                 ^
+2 verification failures
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] <= nums2[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m && 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; (\forall int j; 0 <= j && j < p2; nums1[i] <= nums2[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p2; (\forall int j; 0 <= j && j < p1; nums2[i] <= nums1[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+        //@ decreases m + n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:16: verify: The prover cannot establish an assertion (LoopInvariant) in method merge
+        //@ maintaining (\forall int i; 0 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+            ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Merge.java:4:) in method merge
+    public void merge(int[] nums1, int[] nums2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Merge.java:7:
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+        ^
+3 verification failures
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] <= nums2[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m && 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; (\forall int j; 0 <= j && j < p2; nums1[i] <= nums2[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p2; (\forall int j; 0 <= j && j < p1; nums2[i] <= nums1[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p1 + p2; (\forall int j; i <= j && j < p1 + p2; sorted[i] <= sorted[j]));
+        //@ decreases m + n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:31: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method merge
+            nums1[i] = sorted[i];
+                 ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:31: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method merge
+            nums1[i] = sorted[i];
+                 ^
+2 verification failures
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] <= nums2[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m && 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; (\forall int j; 0 <= j && j < p2; nums1[i] <= nums2[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p2; (\forall int j; 0 <= j && j < p1; nums2[i] <= nums1[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p1 + p2; (\forall int j; i <= j && j < p1 + p2; sorted[i] <= sorted[j]));
+        //@ decreases m + n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        for (int i = 0; i != m + n; ++i) {
+            //@ assume i >= 0;
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Merge.java:4:) in method merge
+    public void merge(int[] nums1, int[] nums2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Merge.java:7:
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+        ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:32: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method merge
+            nums1[i] = sorted[i];
+                 ^
+3 verification failures
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] <= nums2[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] <= nums1[j]));
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1]);
+    //@ ensures (\forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m && 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; (\forall int j; 0 <= j && j < p2; nums1[i] <= nums2[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p2; (\forall int j; 0 <= j && j < p1; nums2[i] <= nums1[j]));
+        //@ maintaining (\forall int i; 0 <= i && i < p1 + p2; (\forall int j; i <= j && j < p1 + p2; sorted[i] <= sorted[j]));
+        //@ decreases m + n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        for (int i = 0; i != m + n; ++i) {
+            //@ assume i >= 0 && i < nums1.length;
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:14: verify: The prover cannot establish an assertion (LoopInvariant) in method merge
+        //@ maintaining (\forall int i; 0 <= i && i < p1; (\forall int j; 0 <= j && j < p2; nums1[i] <= nums2[j]));
+            ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:15: verify: The prover cannot establish an assertion (LoopInvariant) in method merge
+        //@ maintaining (\forall int i; 0 <= i && i < p2; (\forall int j; 0 <= j && j < p1; nums2[i] <= nums1[j]));
+            ^
+2 verification failures
+

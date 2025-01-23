@@ -1,0 +1,455 @@
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result > 0 ==> \result == x || \result == y;
+  //@ ensures \result <= 0 ==> \result == 0;
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+  public static boolean f(int arg) {
+    Main ex = new Main();
+    if (arg < 0 || arg > 10) return true;
+    return ex.test(arg, 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:10: error: bad operand types for binary operator '>'
+  //@ ensures \result > 0 ==> \result == x || \result == y;
+                      ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:10: error: incomparable types: boolean and int
+  //@ ensures \result > 0 ==> \result == x || \result == y;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:10: error: incomparable types: boolean and int
+  //@ ensures \result > 0 ==> \result == x || \result == y;
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:11: error: bad operand types for binary operator '<='
+  //@ ensures \result <= 0 ==> \result == 0;
+                      ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:11: error: incomparable types: boolean and int
+  //@ ensures \result <= 0 ==> \result == 0;
+                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:27: error: non-static method test(int,int) cannot be referenced from a static context
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+                                                 ^
+6 errors
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg > 10 || new Main().test(arg, 0);
+  public static boolean f(int arg) {
+    Main ex = new Main();
+    if (arg < 0 || arg > 10) return true;
+    return ex.test(arg, 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> arg < 0 || arg > 10 || new Main().test(arg, 0);
+                                                 ^
+1 error
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+  public static boolean f(int arg) {
+    Main ex = new Main();
+    if (arg < 0 || arg > 10) return true;
+    return ex.test(arg, 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: error: non-static method test(int,int) cannot be referenced from a static context
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+                                                 ^
+1 error
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg > 10 || new Main().test(arg, 0);
+  public boolean f(int arg) {
+    Main ex = new Main();
+    if (arg < 0 || arg > 10) return true;
+    return ex.test(arg, 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> arg < 0 || arg > 10 || new Main().test(arg, 0);
+                                                 ^
+1 error
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+  public boolean f(int arg) {
+    if (arg < 0 || arg > 10) return true;
+    return test(arg, 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26:) in method f
+    return test(arg, 0);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29:
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4:) in method test
+    int v = method_a(x, y);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12:
+  public int method_a(int x, int y) {
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: verify: Precondition conjunct is false: y >= 0
+  //@ requires x >= 0 && y >= 0;
+                           ^
+5 verification failures
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);  
+  public boolean f(int arg) {
+    if (arg < 0 || arg > 10) return true;
+    return test(arg, 0);
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26:) in method f
+    return test(arg, 0);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29:
+  //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);  
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4:) in method test
+    int v = method_a(x, y);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12:
+  public int method_a(int x, int y) {
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: verify: Precondition conjunct is false: y >= 0
+  //@ requires x >= 0 && y >= 0;
+                           ^
+5 verification failures
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg < 0 || arg >= 10 || test(arg, 0);  
+  public boolean f(int arg) {
+    if (arg < 0 || arg > 10) return true;
+    return test(arg, 0);
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26:) in method f
+    return test(arg, 0);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29:
+  //@ ensures \result ==> arg < 0 || arg >= 10 || test(arg, 0);  
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4:) in method test
+    int v = method_a(x, y);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12:
+  public int method_a(int x, int y) {
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: verify: Precondition conjunct is false: y >= 0
+  //@ requires x >= 0 && y >= 0;
+                           ^
+5 verification failures
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg <= 0 || arg > 10 || test(arg, 0);  
+  public boolean f(int arg) {
+    if (arg < 0 || arg > 10) return true;
+    return test(arg, 0);
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26:) in method f
+    return test(arg, 0);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29:
+  //@ ensures \result ==> arg <= 0 || arg > 10 || test(arg, 0);  
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4:) in method test
+    int v = method_a(x, y);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12:
+  public int method_a(int x, int y) {
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: verify: Precondition conjunct is false: y >= 0
+  //@ requires x >= 0 && y >= 0;
+                           ^
+5 verification failures
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+  //@ ensures \result ==> arg <= 0 || arg >= 10 || test(arg, 0);  
+  public boolean f(int arg) {
+    if (arg < 0 || arg > 10) return true;
+    return test(arg, 0);
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26:) in method f
+    return test(arg, 0);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:26: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29:
+  //@ ensures \result ==> arg <= 0 || arg >= 10 || test(arg, 0);  
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4:) in method test
+    int v = method_a(x, y);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12:
+  public int method_a(int x, int y) {
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: verify: Precondition conjunct is false: y >= 0
+  //@ requires x >= 0 && y >= 0;
+                           ^
+5 verification failures
+
+class Main {
+  //@ requires x >= 0 && y >= 0;
+  //@ ensures \result >= 0;
+  public int method_a(int x, int y) {
+    if (x > 10) return x;
+    if (y > 10) return y;
+    return 0;
+  }
+
+  //@ ensures \result ==> (method_a(x, y) <= 0);
+  public boolean test(int x, int y) {
+    int v = method_a(x, y);
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ ensures \result == z + 1 ==> z > 10;
+  //@ ensures \result == z - 1 ==> z <= 10;
+  public int method_b(int z) {
+    if (z > 10) return z + 1;
+    else return z - 1;
+  }
+
+ 
+  public boolean f(int arg) {
+    if (arg < 0 || arg > 10) return true;
+    return test(arg, 0);
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4:) in method test
+    int v = method_a(x, y);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:12:
+  public int method_a(int x, int y) {
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: verify: Precondition conjunct is false: y >= 0
+  //@ requires x >= 0 && y >= 0;
+                           ^
+3 verification failures
+

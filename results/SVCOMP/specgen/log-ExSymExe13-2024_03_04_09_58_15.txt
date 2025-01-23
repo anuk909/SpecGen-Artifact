@@ -1,0 +1,219 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field2 == 0;
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires r == 0;
+  //@ ensures \result ==> r == x + z && z == x - 3 - 4 && (x + z < 99) && (x >= x - 3 - 4);
+  //@ ensures !\result ==> r != x + z || z != x - 3 - 4 || x - 3 - 4 < x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field2 == 0;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+                                      ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+                                                        ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+                                                             ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:8: error: cannot find symbol
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+                                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:8: error: cannot find symbol
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+                                                       ^
+  symbol:   variable x
+  location: class Main
+7 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field2 == 0;
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires r == 0;
+  //@ ensures \result ==> r == x + z && z == x - 3 - 4 && (x + z < 99) && (x >= x - 3 - 4);
+  //@ ensures !\result ==> r != x + z || z != x - 3 - 4 || x - 3 - 4 < x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+                                      ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+                                                        ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == (x + arg < 99) && (x >= x - 3 - 4);
+                                                             ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:8: error: cannot find symbol
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+                                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:8: error: cannot find symbol
+  //@ ensures !\result ==> field2 != 0 || x - 3 - 4 >= x;
+                                                       ^
+  symbol:   variable x
+  location: class Main
+5 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field2 == 0;
+  //@ ensures \result ==> \result == (arg + arg < 99) && (arg >= arg - 3 - 4);
+  //@ ensures !\result ==> field2 != 0 || arg - 3 - 4 >= arg;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires r == 0;
+  //@ ensures \result ==> r == x + z && z == x - 3 - 4 && (x + z < 99) && (x >= x - 3 - 4);
+  //@ ensures !\result ==> r != x + z || z != x - 3 - 4 || x - 3 - 4 < x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:16: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/ExSymExe13.java:22:) in method f
+    return inst.test(x, arg, field2);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExe13.java:16:
+  public boolean test(int x, int z, int r) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:19: verify: Precondition conjunct is false: r == 0
+  //@ requires r == 0;
+                 ^
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 314572800 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid10748.log
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field2 == 0;
+  //@ ensures \result ==> \result == (arg + arg < 99) && (arg >= arg - 3 - 4);
+  //@ ensures !\result ==> field2 != 0 || arg - 3 - 4 >= arg;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, arg, 0);
+  }
+  
+  //@ requires r == 0;
+  //@ ensures \result ==> r == x + z && z == x - 3 - 4 && (x + z < 99) && (x >= x - 3 - 4);
+  //@ ensures !\result ==> r != x + z || z != x - 3 - 4 || x - 3 - 4 < x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}

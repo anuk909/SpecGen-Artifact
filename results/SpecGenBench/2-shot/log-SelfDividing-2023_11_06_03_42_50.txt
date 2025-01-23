@@ -1,0 +1,18 @@
+class SelfDeviding {
+    //@ requires num > 0;
+    //@ ensures \result == true <==> (\forall int i; 0 <= i && i < num; (i % 10 != 0 && num % (i % 10) == 0));
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i % 10 != 0 && num % (i % 10) == 0));
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}

@@ -1,0 +1,114 @@
+class SelfDeviding {
+    /*@ requires num >= 0;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < num; (i != 0 && num % i == 0));
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < num; (i == 0 || num % i != 0)); @*/
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0));
+        //@ maintaining (\exists int i; 0 <= i && i < temp; (i == 0 || num % i != 0)) ==> \result == false;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0)) ==> \result == true;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\exists int i; 0 <= i && i < temp; (i == 0 || num % i != 0)) ==> \result == false;
+                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:10: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0)) ==> \result == true;
+                                                                                           ^
+2 errors
+
+java
+class SelfDeviding {
+    /*@ requires num >= 0;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < num; (i != 0 && num % i == 0));
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < num; (i == 0 || num % i != 0)); @*/
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0));
+        //@ maintaining (\exists int i; 0 <= i && i < temp; (i == 0 || num % i != 0)) ==> \result == false;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0)) ==> \result == true;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit >= 0 && digit <= 9;
+            //@ assert num % digit == 0 ==> (\forall int i; 0 <= i && i < temp / 10; (i != 0 && num % i == 0));
+            //@ assert num % digit != 0 ==> (\exists int i; 0 <= i && i < temp / 10; (i == 0 || num % i != 0));
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:1: error: class, interface, enum, or record expected
+java
+^
+1 error
+
+public class SelfDeviding {
+    /*@ requires num >= 0;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < num; (i != 0 && num % i == 0));
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < num; (i == 0 || num % i != 0)); @*/
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0));
+        //@ maintaining (\exists int i; 0 <= i && i < temp; (i == 0 || num % i != 0)) ==> \result == false;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0)) ==> \result == true;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit >= 0 && digit <= 9;
+            //@ assert num % digit == 0 ==> (\forall int i; 0 <= i && i < temp / 10; (i != 0 && num % i == 0));
+            //@ assert num % digit != 0 ==> (\exists int i; 0 <= i && i < temp / 10; (i == 0 || num % i != 0));
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\exists int i; 0 <= i && i < temp; (i == 0 || num % i != 0)) ==> \result == false;
+                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:10: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0)) ==> \result == true;
+                                                                                           ^
+2 errors
+
+public class SelfDeviding {
+    /*@ requires num >= 0;
+      @ ensures \result ==> (\forall int i; 0 <= i && i < num; (i != 0 && num % i == 0));
+      @ ensures !\result ==> (\exists int i; 0 <= i && i < num; (i == 0 || num % i != 0)); @*/
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; 0 <= i && i < temp; (i != 0 && num % i == 0));
+        //@ maintaining (\exists int i; 0 <= i && i < temp; (i == 0 || num % i != 0));
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit >= 0 && digit <= 9;
+            //@ assert num % digit == 0 ==> (\forall int i; 0 <= i && i < temp / 10; (i != 0 && num % i == 0));
+            //@ assert num % digit != 0 ==> (\exists int i; 0 <= i && i < temp / 10; (i == 0 || num % i != 0));
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}

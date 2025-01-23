@@ -1,0 +1,144 @@
+
+class PrimeCheck {
+   
+   /*@ requires a > 0;
+     @ ensures \result <==> (\forall int i; 2 <= i && i <= a/2; a%i != 0);
+     @*/
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	while (i <= mid) {
+	   if (a%d == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:13: error: cannot find symbol
+	   if (a%d == 0)
+	         ^
+  symbol:   variable d
+  location: class PrimeCheck
+1 error
+
+
+class PrimeCheck {
+   
+   //@ requires a > 0;
+   //@ ensures \result ==> (\forall int i; 2 <= i && i < a; a%i != 0);
+   //@ ensures !\result ==> (\exists int i; 2 <= i && i < a; a%i == 0);
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:13: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method isPrime
+	   if (a%i == 0)
+	        ^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:5:) in method isPrime
+	return true;
+	^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:17:
+   //@ ensures \result ==> (\forall int i; 2 <= i && i < a; a%i != 0);
+       ^
+3 verification failures
+
+
+class PrimeCheck {
+   
+   //@ requires a > 1;
+   //@ ensures \result ==> (\forall int i; 2 <= i && i < a; a%i != 0);
+   //@ ensures !\result ==> (\exists int i; 2 <= i && i < a; a%i == 0);
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	//@ maintaining 2 <= i && i <= mid + 1;
+	//@ maintaining 0 < mid && mid <= a/2;
+	//@ maintaining (\forall int k; 2 <= k && k < i; a%k != 0);
+	//@ decreases mid - i;
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+
+error: An error while executing a proof script for isPrime: (error "Solver has unexpectedly terminated")
+1 error
+
+
+class PrimeCheck {
+   
+   /*@ requires a >= 2;
+     @ ensures (\result ==> (\forall int i; 2 <= i && i < a; a%i != 0));
+     @ ensures (!\result ==> (\exists int i; 2 <= i && i < a; a%i == 0));
+     @*/
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:14: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method isPrime
+	   if (a%i == 0)
+	        ^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:5:) in method isPrime
+	return true;
+	^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:18:
+     @ ensures (\result ==> (\forall int i; 2 <= i && i < a; a%i != 0));
+       ^
+3 verification failures
+
+
+class PrimeCheck {
+   
+   /*@ requires a >= 2;
+     @ ensures (\result ==> (\forall int i; 2 <= i && i < a; a%i != 0));
+     @*/
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	//@ maintaining 2 <= i && i <= mid + 1;
+	//@ maintaining 2 <= a;
+	//@ maintaining (\forall int k; 2 <= k && k < i; a%k != 0);
+	//@ decreases mid - i;
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+

@@ -1,0 +1,32 @@
+public class MulNested {
+    //@ requires x >= 0 && y >= 0;
+    //@ ensures \result == x * y;
+    public static int mulNested(int x, int y) {
+        int res = 0, m = x, n = y, sign = 1;
+        if(x < 0){
+            m = -x;
+            sign = -sign;
+        }
+        if(y < 0){
+            n = -y;
+            sign = -sign;
+        }
+        //@ maintaining 0 <= res && res <= m * n;
+        //@ maintaining res == i * n;
+        //@ decreases m - i;
+        for(int i = 0; i < m; i++) {
+            //@ maintaining 0 <= res && res <= m * n;
+            //@ maintaining res == i * n + j;
+            //@ decreases n - j;
+            for(int j = 0; j < n; j++) {
+                res = res + 1;
+            }
+        }
+        return sign * res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MulNested.java:15: verify: The prover cannot establish an assertion (LoopInvariant) in method mulNested
+        //@ maintaining res == i * n;
+            ^
+1 verification failure
+

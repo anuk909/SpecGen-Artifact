@@ -1,0 +1,29 @@
+class DominantIndex {
+    //@ requires 0 <= nums.length && nums.length <= Integer.MAX_VALUE;
+    //@ ensures \result == -1 || (0 <= \result && \result < nums.length && (\forall int i; 0 <= i && i < nums.length; nums[i] <= nums[\result] / 2));
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= m1);
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= m2);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= m2);
+            ^
+1 verification failure
+

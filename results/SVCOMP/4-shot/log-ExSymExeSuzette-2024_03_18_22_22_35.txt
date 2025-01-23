@@ -1,0 +1,49 @@
+class Main {
+    //@ requires x >= 0 && y >= 0;
+    //@ ensures \result >= 0;
+    public boolean test(int x, int y) {
+
+        int v = method_a(x, y);
+
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result >= 0;
+    public int method_a(int x, int y) {
+
+        if (x > 10) return x;
+
+        if (y > 10) return y;
+
+        return 0;
+    }
+
+    //@ ensures z > 10 ==> \result == z + 1 && z <= 10 ==> \result == z - 1;
+    public int method_b(int z) {
+
+        if (z > 10) return z + 1;
+        else return z - 1;
+    }
+
+    //@ ensures arg < 0 || arg > 10 ==> \result == true;
+    //@ ensures !(arg < 0 || arg > 10) ==> \result == test(arg, 0);
+    public static boolean f(int arg) {
+
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:3: error: bad operand types for binary operator '>='
+    //@ ensures \result >= 0;
+                        ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:32: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures !(arg < 0 || arg > 10) ==> \result == test(arg, 0);
+                                                      ^
+2 errors
+

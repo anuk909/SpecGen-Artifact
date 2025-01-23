@@ -1,0 +1,23 @@
+class RotateArray {
+    //@ requires nums != null;
+    //@ requires 0 <= k && k <= nums.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(newArr[(i + k) % nums.length]));
+    public static void rotate(int[] nums, int k) {
+        int n = nums.length;
+        int[] newArr = new int[n];
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; newArr[(j + k) % n] == nums[j]);
+        //@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+            newArr[(i + k) % n] = nums[i];
+        }
+        System.arraycopy(newArr, 0, nums, 0, n);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RotateArray.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(newArr[(i + k) % nums.length]));
+                                                                           ^
+  symbol:   variable newArr
+  location: class RotateArray
+1 error
+

@@ -1,0 +1,33 @@
+class if_expr1 {
+  //@ requires x == 10 || x == 9;
+  //@ ensures \result <==> (x == 10 && y == 11) || (x == 9 && y == 9);
+  public static boolean main(int x) {
+    int y = x == 10 ? 11 : 9;
+    if (x == 10) return y == 11;
+    else return y == 9;
+  }
+}
+;
+/home/max/Documents/JMLGPT/tmp/if_expr1.java:3: error: cannot find symbol
+  //@ ensures \result <==> (x == 10 && y == 11) || (x == 9 && y == 9);
+                                       ^
+  symbol:   variable y
+  location: class if_expr1
+/home/max/Documents/JMLGPT/tmp/if_expr1.java:3: error: cannot find symbol
+  //@ ensures \result <==> (x == 10 && y == 11) || (x == 9 && y == 9);
+                                                              ^
+  symbol:   variable y
+  location: class if_expr1
+2 errors
+
+class if_expr1 {
+  //@ requires x == 10 || x == 9;
+  //@ ensures \result <==> (x == 10 && (x == 10 ? 11 : 9) == 11) || (x == 9 && (x == 10 ? 11 : 9) == 9);
+  public static boolean main(int x) {
+    int y = x == 10 ? 11 : 9;
+    if (x == 10) return y == 11;
+    else return y == 9;
+  }
+}
+;
+

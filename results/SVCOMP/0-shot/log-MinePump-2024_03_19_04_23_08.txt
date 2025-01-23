@@ -1,0 +1,87 @@
+public class MinePump {
+
+  //@ public invariant pumpRunning == true || pumpRunning == false;
+  //@ public invariant systemActive == true || systemActive == false;
+
+  boolean pumpRunning = false;
+
+  boolean systemActive = true;
+
+  Environment env;
+
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.waterLevel) > env.waterLevel;
+  //@ ensures systemActive ==> \old(env.waterLevel) > env.waterLevel || \old(env.isMethaneLevelCritical()) == true;
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> pumpRunning == false;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning == true;
+  void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures \result == pumpRunning;
+  public boolean isPumpRunning() {
+    return pumpRunning;
+  }
+
+  //@ ensures pumpRunning == false;
+  void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures systemActive == false && pumpRunning == false;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures systemActive == true;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+

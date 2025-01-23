@@ -1,0 +1,49 @@
+class Main {
+  static int field;
+  static int field2;
+
+  public static boolean f(Short arg) {
+    int x = 13000;
+    Main inst = new Main();
+    field = arg;
+    if (field < 0)
+      return true;
+    return inst.test(x, field, field2);
+  }
+  
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe15");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r <= 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+
+class ExSymExe15 {
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int i = -5; i <= 5; i++) {
+      for(int j = -5; j <= 5; j++) {
+        Main.f(new Short((short)i));
+        e.test(i, j, i + j);
+        e.test(j, i, i - j);
+      }
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:34: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method main
+        Main.f(new Short((short)i));
+                         ^
+Note: /home/max/Documents/JMLGPT/tmp/ExSymExe15.java uses or overrides a deprecated API that is marked for removal.
+Note: Recompile with -Xlint:removal for details.
+1 verification failure
+

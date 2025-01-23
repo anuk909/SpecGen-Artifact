@@ -1,0 +1,13 @@
+public class StaticCharMethods03 {
+    //@ requires arg != null;
+    //@ ensures \result == -1 <==> arg.length() < 1;
+    //@ ensures \result == 1 <==> arg.length() >= 1 && !Character.isDefined(arg.charAt(0));
+    //@ ensures \result == 0 <==> arg.length() >= 1 && Character.isDefined(arg.charAt(0));
+    public static int f(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        return (Character.isDefined(c) == false) ? 1 : 0;
+    }
+}
+

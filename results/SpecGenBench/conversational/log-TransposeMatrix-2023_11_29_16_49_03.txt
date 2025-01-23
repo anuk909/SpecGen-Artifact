@@ -1,0 +1,412 @@
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          for (int c = 0; c < n; c++) {
+              //@ maintaining 0 <= c && c <= n;
+              //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+              //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+              //@ decreases n - c;
+              for (int d = 0; d < m; d++) {
+                  //@ maintaining 0 <= d && d <= m;
+                  //@ maintaining \forall int i; 0 <= i && i < d; transpose[c][i] == matrix[i][c];
+                  //@ maintaining \forall int i; 0 <= i && i < c; transpose[c][i] == matrix[i][c];
+                  //@ decreases m - d;
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:24: error: Loop specifications must immediately precede a loop statement
+                  //@ maintaining 0 <= d && d <= m;
+                      ^
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          for (int c = 0; c < n; c++) 
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          {
+
+              for (int d = 0; d < m; d++) 
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[c][i] == matrix[i][c];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[c][i] == matrix[i][c];
+              //@ decreases m - d;
+              {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:26: error: Loop specifications must immediately precede a loop statement
+              //@ maintaining 0 <= d && d <= m;
+                  ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:19: error: Loop specifications must immediately precede a loop statement
+          //@ maintaining 0 <= c && c <= n;
+              ^
+2 errors
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[c][i] == matrix[i][c];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[c][i] == matrix[i][c];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[c][d] = matrix[d][c];
+                            ^
+  Reason: Double rewriting of ident: c c_1182_1182___29 c_1182_1196___35
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[c][i] == matrix[i][c];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[c][i] == matrix[i][c];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[c][d] = matrix[d][c];
+                            ^
+  Reason: Double rewriting of ident: c c_1182_1182___29 c_1182_1196___35
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[i][c] == matrix[c][i];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[i][c] == matrix[c][i];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[d][c] = matrix[c][d];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[d][c] = matrix[c][d];
+                            ^
+  Reason: Double rewriting of ident: d d_1500_1500___18 d_1500_1514___36
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[i][c] == matrix[c][i];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[i][c] == matrix[c][i];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[c][d] = matrix[d][c];
+                            ^
+  Reason: Double rewriting of ident: c c_1182_1182___29 c_1182_1196___35
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[i][c] == matrix[c][i];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[i][c] == matrix[c][i];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[d][c] = matrix[c][d];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[d][c] = matrix[c][d];
+                            ^
+  Reason: Double rewriting of ident: d d_1500_1500___18 d_1500_1514___36
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[i][c] == matrix[c][i];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[i][c] == matrix[c][i];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[c][d] = matrix[d][c];
+                            ^
+  Reason: Double rewriting of ident: c c_1182_1182___29 c_1182_1196___35
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[i][c] == matrix[c][i];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[i][c] == matrix[c][i];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[d][c] = matrix[c][d];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[d][c] = matrix[c][d];
+                            ^
+  Reason: Double rewriting of ident: d d_1500_1500___18 d_1500_1514___36
+1 error
+
+public class TransposeMatrix {
+ 
+       //@ requires matrix != null;
+       //@ requires matrix.length > 0;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i] != null;
+       //@ requires \forall int i; 0 <= i && i < matrix.length; matrix[i].length == matrix[0].length;
+       //@ ensures \result != null;
+       //@ ensures \result.length == matrix[0].length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \result[i] != null && \result[i].length == matrix.length;
+       //@ ensures \forall int i; 0 <= i && i < \result.length; \forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i];
+       public int[][] transposeMat(int[][] matrix)
+       {
+          int m, n, p, q;
+          m = matrix.length;
+          n = matrix[0].length;
+          int[][] transpose = new int[n][m];
+
+          //@ maintaining 0 <= c && c <= n;
+          //@ maintaining \forall int i; 0 <= i && i < c; \forall int j; 0 <= j && j < m; transpose[j][i] == matrix[i][j];
+          //@ maintaining \forall int i; 0 <= i && i < m; \forall int j; 0 <= j && j < c; transpose[j][i] == matrix[i][j];
+          //@ decreases n - c;
+          for (int c = 0; c < n; c++) {
+
+              //@ maintaining 0 <= d && d <= m;
+              //@ maintaining \forall int i; 0 <= i && i < d; transpose[i][c] == matrix[c][i];
+              //@ maintaining \forall int i; 0 <= i && i < c; transpose[i][c] == matrix[c][i];
+              //@ decreases m - d;
+              for (int d = 0; d < m; d++) {
+                  transpose[c][d] = matrix[d][c];
+              }
+
+          }
+          return transpose;
+       }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:29: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                  transpose[c][d] = matrix[d][c];
+                            ^
+  Reason: Double rewriting of ident: c c_1182_1182___29 c_1182_1196___35
+1 error
+

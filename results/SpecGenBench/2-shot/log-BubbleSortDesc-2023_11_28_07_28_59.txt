@@ -1,0 +1,48 @@
+public class BubbleSortDesc { 
+    
+    //@ requires (\forall int i; 0 <= i && i < array.length; Integer.MIN_VALUE <= array[i] && array[i] <= Integer.MAX_VALUE);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; Integer.MIN_VALUE <= \result[i] && \result[i] <= Integer.MAX_VALUE);
+    void swap(int x, int y, int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires (\forall int i; 0 <= i && i < arr.length; Integer.MIN_VALUE <= arr[i] && arr[i] <= Integer.MAX_VALUE);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; Integer.MIN_VALUE <= \result[i] && \result[i] <= Integer.MAX_VALUE);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ maintaining (\forall int i, j; 0 <= i && i < n && 0 <= j && j < n - i - 1; arr[j+1] <= arr[j]);
+        //@ decreasing n - i - 1;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ maintaining (\forall int j; 0 <= j && j < n - i - 1; arr[j+1] <= arr[j]);
+            //@ decreasing n - i - 1 - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] > arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; Integer.MIN_VALUE <= \result[i] && \result[i] <= Integer.MAX_VALUE);
+                                               ^
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; Integer.MIN_VALUE <= \result[i] && \result[i] <= Integer.MAX_VALUE);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; Integer.MIN_VALUE <= \result[i] && \result[i] <= Integer.MAX_VALUE);
+                                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:17: error: variable i is already defined in method bubbleSort(int[])
+        //@ maintaining (\forall int i, j; 0 <= i && i < n && 0 <= j && j < n - i - 1; arr[j+1] <= arr[j]);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:21: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int j; 0 <= j && j < n - i - 1; arr[j+1] <= arr[j]);
+                                         ^
+5 errors
+

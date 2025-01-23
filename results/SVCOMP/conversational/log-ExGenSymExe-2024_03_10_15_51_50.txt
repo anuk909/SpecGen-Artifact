@@ -1,0 +1,386 @@
+static class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, this;
+    @*/
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:9: error: A this or super token must be followed by a field selection
+    @ assignable next, this;
+                       ^
+1 error
+
+static class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, \nothing;
+    @*/
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:1: error: modifier static not allowed here
+static class Node {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:9: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+    @ assignable next, \nothing;
+                 ^
+6 errors
+
+public class Node {
+  public int elem;
+  public Node next;
+  public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, \nothing;
+    @*/
+  public Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:1: error: class Node is public, should be declared in a file named Node.java
+public class Node {
+       ^
+1 error
+
+// Node.java
+public class Node {
+  public int elem;
+  public Node next;
+  public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, \nothing;
+    @*/
+  public Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:2: error: class Node is public, should be declared in a file named Node.java
+public class Node {
+       ^
+1 error
+
+// Node.java
+class Node {
+  public int elem;
+  public Node next;
+  public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, \nothing;
+    @*/
+  public Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:4: verify: The prover cannot establish an assertion (NullField) in method Node
+  public Node next;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:14: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10:) in method swapNode: static_next
+    static_next = new Node();
+                ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:14:
+    @ assignable next, \nothing;
+      ^
+3 verification failures
+
+// Node.java
+class Node {
+  public int elem;
+  public Node next;
+  public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, static_next;
+    @*/
+  public Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:4: verify: The prover cannot establish an assertion (NullField) in method Node
+  public Node next;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:22: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10:) in method swapNode: t.next
+        t.next = this;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:22:
+    @ assignable next, static_next;
+      ^
+3 verification failures
+
+// Node.java
+class Node {
+  public int elem;
+  public Node next;
+  public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, static_next, next.next;
+    @*/
+  public Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:4: verify: The prover cannot establish an assertion (NullField) in method Node
+  public Node next;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8:) in method swapNode
+        return t;
+        ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:23:
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+         ^
+3 verification failures
+
+// Node.java
+class Node {
+  public int elem;
+  public Node next;
+  public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, static_next, next.next;
+    @*/
+  public Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:4: verify: The prover cannot establish an assertion (NullField) in method Node
+  public Node next;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8:) in method swapNode
+        return t;
+        ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:23:
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+         ^
+3 verification failures
+
+// Node.java
+class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, static_next, next.next;
+    @*/
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+    @ assignable next, static_next, next.next;
+                 ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+    @ assignable next, static_next, next.next;
+                       ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+    @ assignable next, static_next, next.next;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:10: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+    @ assignable next, static_next, next.next;
+                                        ^
+8 errors
+
+// Node.java
+class Node {
+  spec_public int elem;
+  spec_public Node next;
+  spec_public static Node static_next;
+
+  /*@ public normal_behavior
+    @    ensures \result != null ==> \result.elem == elem && \result.next == next;
+    @    ensures \result == null ==> \result == null;
+    @ assignable next, static_next, next.next;
+    @*/
+  Node swapNode() {
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:3: error: <identifier> expected
+  spec_public int elem;
+             ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:4: error: ';' expected
+  spec_public Node next;
+                  ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:4: error: <identifier> expected
+  spec_public Node next;
+                       ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:5: error: <identifier> expected
+  spec_public static Node static_next;
+             ^
+4 errors
+

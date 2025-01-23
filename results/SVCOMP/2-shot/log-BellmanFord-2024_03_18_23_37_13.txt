@@ -1,0 +1,88 @@
+public class BellmanFord {
+
+    static final int INFINITY = Integer.MAX_VALUE;
+
+    //@ requires N > 0;
+    //@ requires D != null && D.length == N*N;
+    //@ requires src >= 0 && src < N;
+    //@ ensures \result != null && \result.length == N;
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= INFINITY);
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == INFINITY) == infinite[i];
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == 0) == (i == src);
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == dist[i]);
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == INFINITY) == infinite[i];
+    static int[] runBellmanFord(int N, int D[], int src) {
+        // Initialize distances.
+        int dist[] = new int[N];
+        boolean infinite[] = new boolean[N];
+        for (int i = 0; i < N; i++) {
+            dist[i] = INFINITY;
+            infinite[i] = true;
+        }
+        dist[src] = 0;
+        infinite[src] = false;
+
+        // Keep relaxing edges until either:
+        //  (1) No more edges need to be updated.
+        //  (2) We have passed through the edges N times.
+        int k;
+        for (k = 0; k < N; k++) {
+            boolean relaxed = false;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (i == j) continue;
+                    if (!infinite[i]) {
+                        if (dist[j] > dist[i] + D[i * N + j]) {
+                            dist[j] = dist[i] + D[i * N + j];
+                            infinite[j] = false;
+                            relaxed = true;
+                        }
+                    }
+                }
+            }
+            if (!relaxed)
+                break;
+        }
+
+        // Check for negative-weight edges.
+        if (k == N) {
+            // We relaxed during the N-th iteration, so there must be
+            // a negative-weight cycle.
+        }
+
+        // Return the computed distances.
+        return dist;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:10: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == INFINITY) == infinite[i];
+                                                                            ^
+  symbol:   variable infinite
+  location: class BellmanFord
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:10: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == INFINITY) == infinite[i];
+                                                                                     ^
+  symbol:   variable i
+  location: class BellmanFord
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:11: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == 0) == (i == src);
+                                                                      ^
+  symbol:   variable i
+  location: class BellmanFord
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:12: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == dist[i]);
+                                                               ^
+  symbol:   variable dist
+  location: class BellmanFord
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:13: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == INFINITY) == infinite[i];
+                                                                            ^
+  symbol:   variable infinite
+  location: class BellmanFord
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:13: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < N; \result[i] == INFINITY) == infinite[i];
+                                                                                     ^
+  symbol:   variable i
+  location: class BellmanFord
+6 errors
+

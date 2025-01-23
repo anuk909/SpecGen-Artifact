@@ -1,0 +1,81 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != this;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ public invariant Head != null;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  //@ ensures size() == \old(size()) + 1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e >= 0;
+  //@ ensures size() == \old(size()) + 1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures size() == \old(size()) - 1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ requires e >= 0;
+  //@ requires aggregated >= 0;
+  //@ ensures \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+

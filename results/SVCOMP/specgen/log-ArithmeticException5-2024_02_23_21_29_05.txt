@@ -1,0 +1,30 @@
+public class ArithmeticException5 {
+    //@ requires i != 0;
+    //@ ensures \result == true <==> (\forall double j; j = 10 / i);
+    //@ ensures \result == false <==> (\exists ArithmeticException exc; exc != null);
+    public static boolean arithmeticException5(double i) {
+        try {
+            double j = 10 / i;
+        } catch (ArithmeticException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ArithmeticException5.java:3: error: incompatible types: double cannot be converted to boolean
+    //@ ensures \result == true <==> (\forall double j; j = 10 / i);
+                                                          ^
+1 error
+
+public class ArithmeticException5 {
+    //@ requires i != 0;
+    //@ ensures (\result == true && Double.isFinite(10 / i)) || (\result == false && !Double.isFinite(10 / i));
+    public static boolean arithmeticException5(double i) {
+        try {
+            double j = 10 / i;
+        } catch (ArithmeticException exc) {
+            return false;
+        }
+        return true;
+    }
+}

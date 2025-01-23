@@ -1,0 +1,40 @@
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    public int maxElementInArray(int[] arr) {
+        //@ ensures \result == -1 ==> arr.length == 0;
+        if (arr.length == 0) return -1;
+        
+        int res = Integer.MIN_VALUE;
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ decreases arr.length - i;
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        
+        //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:5: warning: A refining statement is required for statement specifications
+        //@ ensures \result == -1 ==> arr.length == 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:16: warning: A refining statement is required for statement specifications
+        //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+            ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:4: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:3:) in method maxElementInArray
+    public int maxElementInArray(int[] arr) {
+               ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:4:
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+        ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:16: warning: INTERNAL ERROR: Unexpected statements following a return statement are ignored
+        //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+                     ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:5: verify: The prover cannot establish an assertion (Postcondition) in method maxElementInArray
+        //@ ensures \result == -1 ==> arr.length == 0;
+            ^
+3 warnings
+3 verification failures
+

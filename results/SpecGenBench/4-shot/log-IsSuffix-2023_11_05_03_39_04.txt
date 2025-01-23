@@ -1,0 +1,44 @@
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < pat.length(); isSuffix(pat, txt, i));
+    public boolean isSuffix (String pat, String txt) {
+	
+        int i = pat.length() - 1;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); isSuffix(pat, txt, k));
+        //@ decreases i;
+        while(i >= 0) {
+            int j = i - pat.length() + txt.length();
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+        }
+
+        return true;
+    }
+
+    //@ requires 0 <= i && i < pat.length();
+    //@ ensures \result <==> (\forall int k; 0 <= k && k <= i; pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    private boolean isSuffix(String pat, String txt, int i) {
+        for(int k = 0; k <= i; k++) {
+            if(pat.charAt(k) != txt.charAt(txt.length() - pat.length() + k))
+                return false;
+        }
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < pat.length(); isSuffix(pat, txt, i));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: warning: A non-pure method is being called where it is not permitted: IsSuffix.isSuffix(java.lang.String,java.lang.String,int)
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < pat.length(); isSuffix(pat, txt, i));
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: warning: A non-pure method is being called where it is not permitted: IsSuffix.isSuffix(java.lang.String,java.lang.String,int)
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); isSuffix(pat, txt, k));
+                                                                              ^
+1 error
+2 warnings
+

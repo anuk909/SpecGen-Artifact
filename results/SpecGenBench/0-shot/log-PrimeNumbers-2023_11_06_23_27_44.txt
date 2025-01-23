@@ -1,0 +1,59 @@
+public class PrimeNumbers
+{
+    private static boolean div(int n, int d) 
+    //@ requires true;
+    //@ ensures \result == (n % d == 0);
+    {
+        return n % d == 0;
+    }
+
+    private int primeArray[];
+    
+    public int[] primeList(int n)
+    //@ requires n >= 0;
+    //@ ensures \result.length == n && (\forall int i; 0 <= i && i < n; isPrime(\result[i]));
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        //@ loop_invariant 2 <= count && count <= n+1 && (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+        //@ decreases n - count;
+        { 
+            for (j = 2; j <= num/2; j++)
+            //@ loop_invariant 2 <= j && j <= num/2+1 && status == (\forall int k; 2 <= k && k < j; !div(num, k));
+            //@ decreases num/2 - j;
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+
+    private boolean isPrime(int num)
+    //@ requires true;
+    //@ ensures \result == (\forall int i; 2 <= i && i < num; !div(num, i));
+    {
+        for (int i = 2; i < num; i++)
+        {
+            if (div(num, i))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}

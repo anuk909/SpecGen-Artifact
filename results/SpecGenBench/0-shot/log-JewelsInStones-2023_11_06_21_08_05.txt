@@ -1,0 +1,49 @@
+class JewelsInStones {
+    //@ requires jewels != null;
+    //@ requires stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        //@ assert jewels != null;
+        //@ assert stones != null;
+        //@ assert jewels.length() >= 0;
+        //@ assert stones.length() >= 0;
+        //@ assert \forall int i; 0 <= i && i < jewels.length(); jewels.charAt(i) != '\0';
+        //@ assert \forall int i; 0 <= i && i < stones.length(); stones.charAt(i) != '\0';
+
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ assert jewelsLength >= 0;
+        //@ assert stonesLength >= 0;
+
+        //@ loop_invariant 0 <= i && i <= stonesLength;
+        //@ loop_invariant jewelsCount >= 0;
+        //@ loop_invariant \forall int k; 0 <= k && k < i; stones.charAt(k) != '\0';
+        //@ loop_invariant \forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\0';
+        //@ loop_invariant \forall int k; 0 <= k && k < i; \forall int j; 0 <= j && j < jewelsLength; stones.charAt(k) != jewels.charAt(j) ==> jewelsCount == \old(jewelsCount);
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ assert stones.charAt(i) != '\0';
+
+            //@ loop_invariant 0 <= j && j <= jewelsLength;
+            //@ loop_invariant \forall int k; 0 <= k && k < i; stones.charAt(k) != '\0';
+            //@ loop_invariant \forall int k; 0 <= k && k < j; jewels.charAt(k) != '\0';
+            //@ loop_invariant \forall int k; 0 <= k && k < i; \forall int l; 0 <= l && l < j; stones.charAt(k) != jewels.charAt(l) ==> jewelsCount == \old(jewelsCount);
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert jewels.charAt(j) != '\0';
+
+                if (stone == jewel) {
+                    //@ assert stone == jewel;
+                    jewelsCount++;
+                    //@ assert jewelsCount == \old(jewelsCount) + 1;
+                    break;
+                }
+            }
+            //@ assert \forall int k; 0 <= k && k < i; \forall int l; 0 <= l && l < jewelsLength; stones.charAt(k) != jewels.charAt(l) ==> jewelsCount == \old(jewelsCount);
+        }
+        //@ assert \forall int i; 0 <= i && i < stonesLength; \forall int j; 0 <= j && j < jewelsLength; stones.charAt(i) != jewels.charAt(j) ==> jewelsCount == \old(jewelsCount);
+        return jewelsCount;
+    }
+}

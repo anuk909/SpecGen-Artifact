@@ -1,0 +1,31 @@
+class TwoSum {
+    //@ requires nums != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; 0 <= \result[i] && \result[i] < nums.length);
+    //@ ensures (\exists int i; 0 <= i && i < \result.length; \exists int j; i + 1 <= j && j < \result.length; nums[\result[i]] + nums[\result[j]] == target);
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+	
+	//@ maintaining 0 <= i && i <= n;
+	//@ maintaining (\forall int t; 0 <= t && t < i; (\forall int j; i <= j && j < n; nums[t] + nums[j] != target));
+	//@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+	    
+	    //@ maintaining i + 1 <= j && j <= n;
+	    //@ maintaining (\forall int t; 0 <= t && t < i; (\forall int j; i <= j && j < n; nums[t] + nums[j] != target));
+	    //@ maintaining (\forall int t; i <= t && t < j; nums[i] + nums[t] != target);
+	    //@ decreases n - j;
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[0];
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:15: error: variable j is already defined in method twoSum(int[],int)
+	    //@ maintaining (\forall int t; 0 <= t && t < i; (\forall int j; i <= j && j < n; nums[t] + nums[j] != target));
+	                                                                  ^
+1 error
+

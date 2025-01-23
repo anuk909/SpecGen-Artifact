@@ -1,0 +1,48 @@
+class PerfectNumber {
+    //@ ensures \result <==> (num > 1 && sumOfDivisors(num) == num);
+    public boolean isPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        int sum = 1;
+        //@ maintaining 2 <= d && d*d <= num+1;
+        //@ maintaining sum == sumOfDivisors(num);
+        //@ decreases num - d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum == num;
+    }
+
+    //@ requires num > 1;
+    //@ ensures \result == sumOfDivisors(num);
+    public /*@ pure @*/ int sumOfDivisors(int num) {
+        int sum = 1;
+        //@ maintaining 2 <= d && d*d <= num+1;
+        //@ maintaining sum == sumOfDivisors(num);
+        //@ decreases num - d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPerfectNumber
+        //@ maintaining 2 <= d && d*d <= num+1;
+            ^
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:28: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method sumOfDivisors
+        //@ maintaining sum == sumOfDivisors(num);
+            ^
+2 verification failures
+

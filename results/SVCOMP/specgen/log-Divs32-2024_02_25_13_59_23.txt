@@ -1,0 +1,645 @@
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures quotient == numerator / denominator;
+    //@ ensures quotient == MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures quotient == MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures quotientNeedsNegation ==> quotient == -tempAbsQuotient;
+    //@ ensures !quotientNeedsNegation ==> quotient == tempAbsQuotient;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:7: error: cannot find symbol
+    //@ ensures quotient == numerator / denominator;
+                ^
+  symbol:   variable quotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: cannot find symbol
+    //@ ensures quotient == MAX_INT && numerator >= 0 ==> denominator == 0;
+                ^
+  symbol:   variable quotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures quotient == MAX_INT && numerator >= 0 ==> denominator == 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: cannot find symbol
+    //@ ensures quotient == MIN_INT && numerator < 0 ==> denominator == 0;
+                ^
+  symbol:   variable quotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures quotient == MIN_INT && numerator < 0 ==> denominator == 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> quotient == -tempAbsQuotient;
+                ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> quotient == -tempAbsQuotient;
+                                          ^
+  symbol:   variable quotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> quotient == -tempAbsQuotient;
+                                                       ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> quotient == tempAbsQuotient;
+                 ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> quotient == tempAbsQuotient;
+                                           ^
+  symbol:   variable quotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> quotient == tempAbsQuotient;
+                                                       ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+11 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+                ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+                                                      ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+                 ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+                                                      ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+                ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+                                                      ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+                 ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+                                                      ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+                ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures quotientNeedsNegation ==> \result == -tempAbsQuotient;
+                                                      ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+                 ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures !quotientNeedsNegation ==> \result == tempAbsQuotient;
+                                                      ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                            ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                           ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MAX_INT && numerator >= 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == MIN_INT && numerator < 0 ==> denominator == 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                            ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                           ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                            ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                           ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                            ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                           ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                            ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                           ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+6 errors
+
+public class Divs32 {
+
+    static final int MAX_INT = 2147483647;
+    static final int MIN_INT = -2147483648;
+
+    //@ requires denominator != 0;
+    //@ ensures \result == numerator / denominator;
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+    public static int divS32(int numerator, int denominator) {
+        int quotient;
+        int tempAbsQuotient;
+        boolean quotientNeedsNegation = false;
+        if (denominator == 0) {
+            quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+        } else {
+            if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+            else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+            else quotientNeedsNegation = false;
+
+            int calcDenominator;
+
+            if (denominator >= 0) calcDenominator = denominator;
+            else calcDenominator = -denominator;
+
+            tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+            quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+        }
+
+        return quotient;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MAX_INT && numerator >= 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == Divs32.MIN_INT && numerator < 0 ==> denominator == 0;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                            ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:10: error: cannot find symbol
+    //@ ensures \result == -tempAbsQuotient && quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                           ^
+  symbol:   variable tempAbsQuotient
+  location: class Divs32
+/home/max/Documents/JMLGPT/tmp/Divs32.java:11: error: cannot find symbol
+    //@ ensures \result == tempAbsQuotient && !quotientNeedsNegation;
+                                               ^
+  symbol:   variable quotientNeedsNegation
+  location: class Divs32
+6 errors
+

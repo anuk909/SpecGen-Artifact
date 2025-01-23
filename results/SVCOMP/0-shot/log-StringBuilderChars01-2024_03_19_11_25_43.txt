@@ -1,0 +1,36 @@
+public class StringBuilderChars01 {
+  //@ requires true;
+  //@ ensures \result == true;
+  public static boolean f() {
+    StringBuilder buffer = new StringBuilder("DiffBlue Limited");
+
+    //@ assert buffer.toString().equals("DiffBlue Limited");
+    if(!(buffer.toString().equals("DiffBlue Limited"))) return false;
+
+    //@ assert buffer.charAt(0) != buffer.charAt(4);
+    if(!(buffer.charAt(0) != buffer.charAt(4))) return false;
+
+    char[] charArray = new char[buffer.length()];
+    buffer.getChars(0, buffer.length(), charArray, 0);
+
+    int i = 0;
+    for (char character : charArray) {
+      System.out.print(character);
+      //@ assert character == buffer.charAt(i);
+      if(!(character == buffer.charAt(i))) return false;
+      ++i;
+    }
+
+    buffer.setCharAt(0, 'H');
+    buffer.setCharAt(6, 'T');
+    //@ assert buffer.toString().equals("HiffBlTe Limited");
+    if(!(buffer.toString().equals("HiffBlTe Limited"))) return false;
+
+    buffer.reverse();
+    //@ assert buffer.toString().equals("detimiL eTlBffiH");
+    if (!(buffer.toString().equals("detimiL eTlBffiH")))
+      return false;
+    return true;
+  }
+}
+

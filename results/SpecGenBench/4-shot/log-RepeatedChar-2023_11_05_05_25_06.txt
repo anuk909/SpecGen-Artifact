@@ -1,0 +1,29 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class RepeatedChar {
+    //@ requires s != null;
+    //@ ensures (\exists int i; 0 <= i && i < s.length(); s.charAt(i) == \result) && (\forall int i, j; 0 <= i && i < j && j < s.length(); s.charAt(i) != \result);
+    public char repeatedCharacter(String s) {
+        Set<Character> seen = new HashSet<Character>();
+        
+        //@ maintaining (\forall int i; 0 <= i && i < i; s.charAt(i) != \result);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!seen.add(ch)) {
+                return ch;
+            }
+        }
+        // impossible
+        return ' ';
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:10: error: variable i is already defined in method repeatedCharacter(String)
+        //@ maintaining (\forall int i; 0 <= i && i < i; s.charAt(i) != \result);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:10: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int i; 0 <= i && i < i; s.charAt(i) != \result);
+                                                                         ^
+2 errors
+

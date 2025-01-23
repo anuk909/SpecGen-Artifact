@@ -1,0 +1,17 @@
+class MyInteger {
+    int value;
+
+    //@ ensures \result == (obj == this || (obj instanceof MyInteger && this.value == ((MyInteger) obj).value));
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof MyInteger)) {
+            return false;
+        }
+        MyInteger other = (MyInteger) obj;
+        return this.value == other.value;
+    }
+}
+

@@ -1,0 +1,25 @@
+/**
+ * The class catch1 represents a class with a method fun that demonstrates exception handling.
+ */
+class catch1 {
+
+  /**
+   * This method throws an instance of some_exception2 and catches it to check its type.
+   * 
+   * @return true if the caught exception is an instance of some_exception2, false otherwise
+   */
+  public static boolean fun() 
+    //@ ensures \result == (\result == true) ==> (\result == false);
+  {
+    try {
+      throw new some_exception2();
+    } catch (some_exception1 e) {
+      //@ assume e != null; // e should not be null
+      if(!(e instanceof some_exception2)) return false;
+      //@ assert e instanceof some_exception2; // e is an instance of some_exception2
+      if (e instanceof some_exception2) return true;
+    }
+    return false;
+  }
+}
+

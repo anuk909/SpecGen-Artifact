@@ -1,0 +1,18 @@
+class A {
+  //@ public static model int i;
+  public static int i = 1;
+}
+;
+
+class putstatic_getstatic1 {
+  //@ requires A.i == 1;
+  //@ ensures A.i == 999;
+  public static boolean f() {
+    if(A.i != 1) return false;
+    A.i = 999;
+    if (A.i != 999)
+      return false;
+    return true;
+  }
+}
+

@@ -1,0 +1,57 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg != null;
+  //@ ensures \result ==> arg < 0 && field == arg && \result == inst.test(x, arg, field2);
+  //@ ensures !\result ==> arg >= 0;
+  public static boolean f(Short arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = arg;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires r == x + z;
+  //@ ensures \result ==> z <= x && field2 == r;
+  //@ ensures !\result ==> z > x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe14");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z <= x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x <= r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> arg < 0 && field == arg && \result == inst.test(x, arg, field2);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:6: error: cannot find symbol
+  //@ ensures \result ==> arg < 0 && field == arg && \result == inst.test(x, arg, field2);
+                                                                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> arg < 0 && field == arg && \result == inst.test(x, arg, field2);
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:6: error: cannot find symbol
+  //@ ensures \result ==> arg < 0 && field == arg && \result == inst.test(x, arg, field2);
+                                                                ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe14.java:19: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> z <= x && field2 == r;
+                                    ^
+5 errors
+

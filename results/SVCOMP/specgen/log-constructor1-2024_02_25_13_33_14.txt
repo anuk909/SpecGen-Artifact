@@ -1,0 +1,444 @@
+class sub {}
+;
+
+class A {
+  //@ invariant my_field >= 0;
+  //@ invariant my_sub == null;
+  //@ invariant something_static == 3;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  int my_field;
+  sub my_sub;
+
+  static int something_static = 3;
+}
+;
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+;
+/home/max/Documents/JMLGPT/tmp/constructor1.java:9: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/constructor1.java:7:) in method A
+  A() {}
+  ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/constructor1.java:9:
+  //@ invariant something_static == 3;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:11: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/constructor1.java:7:) in method A
+  A(int param) {
+  ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/constructor1.java:11:
+  //@ invariant something_static == 3;
+      ^
+4 verification failures
+
+class sub {}
+;
+
+class A {
+  //@ public invariant my_field >= 0;
+  //@ public invariant my_sub == null;
+  //@ public invariant something_static == 3;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  int my_field;
+  sub my_sub;
+
+  static int something_static = 3;
+}
+;
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+;
+/home/max/Documents/JMLGPT/tmp/constructor1.java:5: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public invariant my_field >= 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:6: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public invariant my_sub == null;
+                       ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:7: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public invariant something_static == 3;
+                       ^
+3 errors
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+  //@ public invariant my_sub == null;
+  //@ public invariant something_static == 3;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub;
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:8: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/constructor1.java:6:) in method A
+  A() {}
+  ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/constructor1.java:8:
+  //@ public invariant something_static == 3;
+             ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:10: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/constructor1.java:6:) in method A
+  A(int param) {
+  ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/constructor1.java:10:
+  //@ public invariant something_static == 3;
+             ^
+4 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+  //@ public invariant my_sub == null;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub;
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:18: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:18: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub;
+      ^
+2 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+  //@ public invariant my_sub == null;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub = null;
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:18: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub = null;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:18: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub = null;
+      ^
+2 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+  //@ public invariant my_sub == null;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub = new sub();
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:7: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/constructor1.java:5:) in method A
+  A() {}
+  ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/constructor1.java:7:
+  //@ public invariant my_sub == null;
+             ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:9: verify: The prover cannot establish an assertion (InvariantExit: /home/max/Documents/JMLGPT/tmp/constructor1.java:5:) in method A
+  A(int param) {
+  ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/constructor1.java:9:
+  //@ public invariant my_sub == null;
+             ^
+4 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub = null;
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:17: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub = null;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:17: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub = null;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:26: verify: The prover cannot establish an assertion (Assert) in method main
+    //@ assert some_a.my_field == 0;
+        ^
+3 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub;
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:17: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:17: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:26: verify: The prover cannot establish an assertion (Assert) in method main
+    //@ assert some_a.my_field == 0;
+        ^
+3 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub = null;
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:17: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub = null;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:17: verify: The prover cannot establish an assertion (NullField) in method A
+  sub my_sub = null;
+      ^
+/home/max/Documents/JMLGPT/tmp/constructor1.java:26: verify: The prover cannot establish an assertion (Assert) in method main
+    //@ assert some_a.my_field == 0;
+        ^
+3 verification failures
+
+class sub {}
+
+class A {
+  //@ public invariant my_field >= 0;
+
+  A() {}
+
+  A(int param) {
+    //@ assert my_field == 0;
+    my_field = 2;
+  }
+
+  //@ spec_public
+  int my_field;
+  
+  //@ spec_public
+  sub my_sub = new sub();
+
+  //@ spec_public
+  static int something_static = 3;
+}
+
+class Main {
+  public static void main(String[] args) {
+    A some_a = new A();
+    //@ assert some_a.my_field == 0;
+    //@ assert some_a.my_sub == null;
+    //@ assert some_a.something_static == 3;
+    A other_a = new A(1);
+    //@ assert other_a.my_field == 2;
+    //@ assert other_a.my_sub == null;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/constructor1.java:26: verify: The prover cannot establish an assertion (Assert) in method main
+    //@ assert some_a.my_field == 0;
+        ^
+1 verification failure
+

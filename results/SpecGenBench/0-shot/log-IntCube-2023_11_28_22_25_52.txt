@@ -1,0 +1,49 @@
+public class IntCube {
+
+    //@ requires true;
+    //@ ensures \result == (x < 0 ? -res : res);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if(x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ loop_invariant res == (\sum int i; 0 <= i && i < x; x * x * i);
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ loop_invariant res == (\sum int j; 0 <= j && j < x; x * x * i + x * j);
+            //@ decreases x - j;
+            for(int j = 0; j < x; j++) {
+                //@ loop_invariant res == (\sum int k; 0 <= k && k < x; x * x * i + x * j + k);
+                //@ decreases x - k;
+                for(int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        return (neg ? -res : res);
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:4: error: cannot find symbol
+    //@ ensures \result == (x < 0 ? -res : res);
+                                     ^
+  symbol:   variable res
+  location: class IntCube
+/home/max/Documents/JMLGPT/tmp/IntCube.java:4: error: cannot find symbol
+    //@ ensures \result == (x < 0 ? -res : res);
+                                           ^
+  symbol:   variable res
+  location: class IntCube
+/home/max/Documents/JMLGPT/tmp/IntCube.java:12: error: variable i is already defined in method cubeOf(int)
+        //@ loop_invariant res == (\sum int i; 0 <= i && i < x; x * x * i);
+                                            ^
+/home/max/Documents/JMLGPT/tmp/IntCube.java:15: error: variable j is already defined in method cubeOf(int)
+            //@ loop_invariant res == (\sum int j; 0 <= j && j < x; x * x * i + x * j);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/IntCube.java:18: error: variable k is already defined in method cubeOf(int)
+                //@ loop_invariant res == (\sum int k; 0 <= k && k < x; x * x * i + x * j + k);
+                                                    ^
+5 errors
+

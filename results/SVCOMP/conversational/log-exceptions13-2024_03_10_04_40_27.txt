@@ -1,0 +1,149 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures \result == \nothing;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ requires \typeof(args) == \type(String[]);
+  //@ ensures \result == \nothing;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:8: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \nothing;
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:8: error: No operator for <any> == none
+  //@ ensures \result == \nothing;
+                      ^
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:22: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == \nothing;
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:22: error: No operator for <any> == none
+  //@ ensures \result == \nothing;
+                      ^
+4 errors
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures true;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ requires \typeof(args) == \type(String[]);
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:28: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures true;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ requires \typeof(args) == \type(String[]);
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:28: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures true;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ requires \typeof(args) == \type(String[]);
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      // No assertion in this catch block
+    }
+  }
+}
+

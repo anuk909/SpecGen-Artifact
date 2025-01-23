@@ -1,0 +1,33 @@
+class StripLeadingAndTrailingQuotes {
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures !\result.contains("\"");
+    static String stripLeadingAndTrailingQuotes(String str) {
+        boolean temp_Boolean = false;
+        
+        //@ assert str != null;
+        //@ assert str.length() >= 0;
+        
+        temp_Boolean = str.startsWith("\"");
+        if (temp_Boolean)
+        {
+            //@ assert str.startsWith("\"");
+            //@ assert str.length() >= 1;
+            str = str.substring(1, str.length());
+        }
+        
+        temp_Boolean = str.endsWith("\"");
+        if (temp_Boolean)
+        {
+            //@ assert str.endsWith("\"");
+            //@ assert str.length() >= 1;
+            str = str.substring(0, str.length() - 1);
+        }
+        
+        //@ assert !str.contains("\"");
+        return str;
+    }
+    
+}
+

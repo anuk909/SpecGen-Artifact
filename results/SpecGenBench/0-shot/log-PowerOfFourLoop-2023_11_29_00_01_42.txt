@@ -1,0 +1,18 @@
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int i; i >= 0; n == (int)Math.pow(4, i)));
+    public boolean isPowerOfTwo(int n) {
+        //@ loop_invariant n >= 0;
+        //@ loop_invariant (\exists int i; i >= 0; n == (int)Math.pow(4, i));
+        //@ decreases n;
+        while (n % 4 == 0) {
+            n /= 4;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ loop_invariant (\exists int i; i >= 0; n == (int)Math.pow(4, i));
+            ^
+1 verification failure
+

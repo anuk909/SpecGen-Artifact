@@ -1,0 +1,40 @@
+class DominantIndex {
+    
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; nums[i] * 2 <= nums[\result]);
+    //@ ensures -1 < \result ==> nums[\result] >= (\max int i; 0 <= i && i < nums.length; nums[i] * 2);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ ghost int max_index;
+        //@ set max_index = -1;
+        //@ maintaining (\forall int i; 0 <= i && i < max_index; nums[i] * 2 <= nums[max_index]);
+        //@ maintaining -1 <= max_index && max_index < nums.length;
+        //@ maintaining (\forall int i; 0 <= i && i < index; nums[i] * 2 <= nums[max_index]);
+        //@ maintaining (\forall int i; 0 <= i && i < index; nums[i] <= nums[index]);
+        //@ decreases nums.length - index;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+                //@ set max_index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: error: variable i is already defined in method dominantIndex(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < max_index; nums[i] * 2 <= nums[max_index]);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:13: error: variable i is already defined in method dominantIndex(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < index; nums[i] * 2 <= nums[max_index]);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:14: error: variable i is already defined in method dominantIndex(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < index; nums[i] <= nums[index]);
+                                     ^
+3 errors
+

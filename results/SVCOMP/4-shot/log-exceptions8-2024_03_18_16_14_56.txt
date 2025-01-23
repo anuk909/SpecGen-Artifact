@@ -1,0 +1,39 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class Main {
+  //@ requires true;
+  //@ ensures (\exists A exc; exc != null; exc.getClass() == A.class);
+  static void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (C exc) {
+      int i = 0;
+    }
+  }
+
+  //@ requires true;
+  //@ ensures (\exists A exc; exc != null; exc.getClass() == A.class);
+  //@ ensures (\exists B exc; exc != null; exc.getClass() == B.class);
+  //@ ensures (\forall A exc; exc != null; exc.getClass() != C.class);
+  public static void main(String[] args) {
+    try {
+      A a = new A();
+      foo();
+      throw a;
+    } catch (B exc) {
+      assert false;
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:31: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+

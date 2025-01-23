@@ -1,0 +1,52 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions16 {
+  //@ requires x < 1;
+  //@ requires x <= 1;
+  //@ requires x == 1;
+  //@ requires x != 1;
+  //@ requires x >= 1;
+  //@ requires x > 1;
+  //@ requires x < 0;
+  //@ requires x <= 0;
+  //@ requires x == 0;
+  //@ requires x != 0;
+  //@ requires x >= 0;
+  //@ requires x > 0;
+  //@ requires x < -1;
+  //@ requires x <= -1;
+  //@ requires x == -1;
+  //@ requires x != -1;
+  //@ requires x >= -1;
+  //@ requires x > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures x >= 0 ==> \result;
+  //@ ensures x >= 0 ==> !\result;
+  public static boolean f(int x) {
+    try {
+      x++;
+    } catch (A exc) {
+      return false;
+    }
+
+    try {
+      throw new B();
+    } catch (B exc) {
+      return false;
+    }
+
+    return true;
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/exceptions16.java:43: error: unreachable statement
+    return true;
+    ^
+1 error
+

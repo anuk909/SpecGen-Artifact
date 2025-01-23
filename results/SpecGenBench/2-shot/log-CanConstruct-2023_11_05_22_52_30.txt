@@ -1,0 +1,49 @@
+class CanConstruct {
+    //@ requires ransomNote != null && magazine != null;
+    //@ ensures \result == (ransomNote.length() <= magazine.length() && canConstruct(ransomNote, magazine, new int[26]));
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires ransomNote != null && magazine != null && cnt != null;
+    //@ ensures \result == (cnt[c - 'a'] >= 0);
+    private boolean canConstruct(String ransomNote, String magazine, int[] cnt) {
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:3: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == (ransomNote.length() <= magazine.length() && canConstruct(ransomNote, magazine, new int[26]));
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:3: warning: A non-pure method is being called where it is not permitted: CanConstruct.canConstruct(java.lang.String,java.lang.String,int[])
+    //@ ensures \result == (ransomNote.length() <= magazine.length() && canConstruct(ransomNote, magazine, new int[26]));
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:22: error: cannot find symbol
+    //@ ensures \result == (cnt[c - 'a'] >= 0);
+                                ^
+  symbol:   variable c
+  location: class CanConstruct
+2 errors
+1 warning
+

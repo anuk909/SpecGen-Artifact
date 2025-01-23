@@ -1,0 +1,46 @@
+/**
+ * The Interface interface represents a boolean function b().
+ */
+interface Interface {
+  //@ ensures \result == true || \result == false;
+  boolean b();
+}
+
+/**
+ * The Inner class implements the Interface interface and provides the implementation for the b() function.
+ */
+class Inner implements Interface {
+  //@ ensures \result == false;
+  public boolean b() {
+    return false;
+  }
+}
+
+/**
+ * The Outer class implements the Interface interface and contains an instance of Interface.
+ */
+class Outer implements Interface {
+  private Interface inner;
+
+  //@ requires inner != null;
+  //@ ensures \result == !inner.b();
+  public Outer(Interface inner) {
+    this.inner = inner;
+  }
+
+  //@ ensures \result == !inner.b();
+  public boolean b() {
+    return !inner.b();
+  }
+}
+
+/**
+ * The virtual_function_unwinding class contains a static method fun that creates an instance of Outer with an Inner instance and calls the b() function.
+ */
+public class virtual_function_unwinding {
+  //@ ensures \result == false;
+  public static boolean fun(String[] args) {
+    return new Outer(new Inner()).b();
+  }
+}
+

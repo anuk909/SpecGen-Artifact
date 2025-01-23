@@ -1,0 +1,22 @@
+public class StringStartEnd02 {
+
+    //@ requires args != null;
+    //@ requires args.length >= 4;
+    //@ ensures \result == true || \result == false;
+    //@ ensures \result ==> (\exists int j; 0 <= j && j < 4; args[j].startsWith("te"));
+    //@ ensures \result ==> (\forall int j; 0 <= j && j < 4; args[j].startsWith("te") ==> j == 0);
+    public static boolean f(String[] args) {
+        if (args.length < 4)
+            return false;
+        int i = 0;
+
+        for (int j = 0; j < 4; j++) {
+            if (args[j].startsWith("te"))
+                ++i;
+        }
+
+        return i == 1;
+    }
+  
+}
+

@@ -1,0 +1,130 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  //@ public invariant Next != this;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    /*@
+      loop_invariant count >= 0;
+      loop_invariant (\forall int i; 0 <= i && i < count; 
+                      (\exists LinkedListEntry entry; 
+                       entry != null && entry == Head && 
+                       (\forall int j; 0 <= j && j < i; 
+                        entry == entry.Next)));
+      decreasing count;
+    @*/
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) {
+      ++count;
+    }
+    return count;
+  }
+
+  //@ requires index >= 0;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    /*@
+      loop_invariant entry != null;
+      loop_invariant (\forall int i; 0 <= i && i < index; 
+                      (\exists LinkedListEntry e; 
+                       e != null && e == Head && 
+                       (\forall int j; 0 <= j && j < i; 
+                        e == e.Next)));
+      loop_invariant (\exists LinkedListEntry e; 
+                      e != null && e == entry && 
+                      (\forall int j; 0 <= j && j < i; 
+                       e == e.Next));
+      decreasing index - i;
+    @*/
+    for (int i = 1; i < index; ++i) {
+      entry = entry.Next;
+    }
+    entry.Next = newEntry;
+  }
+
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0 && index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    /*@
+      loop_invariant entry != null;
+      loop_invariant (\forall int i; 0 <= i && i < index; 
+                      (\exists LinkedListEntry e; 
+                       e != null && e == Head && 
+                       (\forall int j; 0 <= j && j < i; 
+                        e == e.Next)));
+      loop_invariant (\exists LinkedListEntry e; 
+                      e != null && e == entry && 
+                      (\forall int j; 0 <= j && j < i; 
+                       e == e.Next));
+      decreasing index - i;
+    @*/
+    for (int i = 1; i < index; ++i) {
+      entry = entry.Next;
+    }
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0 && index < size();
+  //@ ensures \result == (\exists LinkedListEntry e; e != null && e == Head && e.Value == \result);
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    /*@
+      loop_invariant entry != null;
+      loop_invariant (\forall int i; 0 <= i && i < index; 
+                      (\exists LinkedListEntry e; 
+                       e != null && e == Head && 
+                       (\forall int j; 0 <= j && j < i; 
+                        e == e.Next)));
+      loop_invariant (\exists LinkedListEntry e; 
+                      e != null && e == entry && 
+                      (\forall int j; 0 <= j && j < i; 
+                       e == e.Next));
+      decreasing index - i;
+    @*/
+    for (int i = 0; i < index; ++i) {
+      entry = entry.Next;
+    }
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated || e % 2 != 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) {
+      if (aggregated < e) {
+        return e;
+      }
+    }
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+

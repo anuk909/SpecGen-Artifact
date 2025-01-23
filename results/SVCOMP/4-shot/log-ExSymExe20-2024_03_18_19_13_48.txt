@@ -1,0 +1,41 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ ensures \result ==> field2 == 0;
+  //@ ensures \result ==> field == 9;
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires r == 0;
+  //@ requires z == 9;
+  //@ requires x == 3;
+  //@ ensures \result ==> r == x + z;
+  //@ ensures \result ==> x == z - 3;
+  //@ ensures \result ==> z == r;
+  //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+  //@ ensures \result ==> (x >= r ==> return false) && (x < r ==> System.out.println("branch BOO2"));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:21: error: illegal start of expression
+  //@ ensures \result ==> (x >= r ==> return false) && (x < r ==> System.out.println("branch BOO2"));
+                                      ^
+1 error
+

@@ -1,0 +1,36 @@
+public class CopyArray {
+ 
+    //@ requires 0 <= iBegin && iBegin <= Integer.MAX_VALUE;
+    //@ requires 0 <= iEnd && iEnd <= Integer.MAX_VALUE;
+    //@ requires 0 <= b.length && b.length <= Integer.MAX_VALUE;
+    //@ requires 0 <= a.length && a.length <= Integer.MAX_VALUE;
+    //@ requires (\forall int k; 0 <= k && k < b.length; b[k] != null);
+    //@ requires (\forall int k; 0 <= k && k < a.length; a[k] != null);
+    //@ requires iBegin <= iEnd;
+    //@ requires iEnd <= b.length;
+    //@ requires iEnd - iBegin <= a.length;
+    //@ ensures (\forall int k; iBegin <= k && k < iEnd; a[k] == b[k]);
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+        int k = iBegin;
+
+        //@ maintaining iBegin <= k && k <= iEnd;
+        //@ maintaining (\forall int n; iBegin <= n && n < k; a[n] == b[n]);
+        //@ decreases iEnd - k;
+        while (iEnd - k > 0) {
+            a[k] = b[k];
+            k = k + 1 ;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:7: error: bad operand types for binary operator '!='
+    //@ requires (\forall int k; 0 <= k && k < b.length; b[k] != null);
+                                                              ^
+  first type:  int
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:8: error: bad operand types for binary operator '!='
+    //@ requires (\forall int k; 0 <= k && k < a.length; a[k] != null);
+                                                              ^
+  first type:  int
+  second type: <null>
+2 errors
+

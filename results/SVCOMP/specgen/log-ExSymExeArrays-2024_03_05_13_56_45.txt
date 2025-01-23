@@ -1,0 +1,70 @@
+class Main {
+  static int[] a;
+
+  //@ ensures \result == (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ modifies a[0];
+  //@ ensures a[0] == x && (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:14: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+  //@ modifies a[0];
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a[0] == x && (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a[0] == x && (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures a[0] == x && (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+                                                                                  ^
+6 errors
+
+class Main {
+  static /*@ spec_public @*/ int[] a;
+
+  //@ ensures \result == (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ modifies a[0];
+  //@ ensures a[0] == x && (\result == false && a[0] >= 0) || (\result == true && a[0] < 0);
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && (int)Math.pow(3, i) == n);
+    public boolean isPowerOfThree(int n) {
+        int temp = n;
+        //@ loop_invariant temp >= 0;
+        //@ loop_invariant (\exists int i; i >= 0 && (int)Math.pow(3, i) == n / temp);
+        //@ decreases temp;
+        while (temp != 0 && temp % 3 == 0) {
+            temp /= 3;
+        }
+        //@ assert (\exists int i; i >= 0 && (int)Math.pow(3, i) == n / temp);
+        return temp == 1;
+    }
+}

@@ -1,0 +1,41 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires true;
+  //@ ensures \result == true <==> field < 0;
+  public static boolean f(int arg) {
+    int x = 3; //@ symbolic
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires true;
+  //@ ensures \result == (x > 99 && r <= z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: not a statement
+    int x = 3; //@ symbolic
+                   ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: ';' expected
+    int x = 3; //@ symbolic
+                           ^
+2 errors
+

@@ -1,0 +1,355 @@
+public class StringStartEnd01 {
+    //@ requires strings != null && \nonnullelements(strings);
+    //@ ensures (\forall String string; \in strings; string.startsWith("te") ==> \result == 2);
+    //@ ensures (\forall String string; \in strings; string.startsWith("ste", 2) ==> \result == 1);
+    //@ ensures (\forall String string; \in strings; string.endsWith("ed") ==> \result == 2);
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int i = 0;
+        for (String string : strings) {
+            if (string.startsWith("te")) ++i;
+        }
+        assert i == 2;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.startsWith("ste", 2)) ++i;
+        }
+        assert i == 1;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.endsWith("ed")) ++i;
+        }
+        assert i == 2;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: This backslash token is unknown: \in
+    //@ ensures (\forall String string; \in strings; string.startsWith("te") ==> \result == 2);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: This backslash token is unknown: \in
+    //@ ensures (\forall String string; \in strings; string.startsWith("ste", 2) ==> \result == 1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: This backslash token is unknown: \in
+    //@ ensures (\forall String string; \in strings; string.endsWith("ed") ==> \result == 2);
+                                        ^
+3 errors
+
+public class StringStartEnd01 {
+    //@ requires strings != null && \nonnullelements(strings);
+    //@ ensures (\forall String string; string : strings; string.startsWith("te") ==> \result == 2);
+    //@ ensures (\forall String string; string : strings; string.startsWith("ste", 2) ==> \result == 1);
+    //@ ensures (\forall String string; string : strings; string.endsWith("ed") ==> \result == 2);
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int i = 0;
+        for (String string : strings) {
+            if (string.startsWith("te")) ++i;
+        }
+        assert i == 2;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.startsWith("ste", 2)) ++i;
+        }
+        assert i == 1;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.endsWith("ed")) ++i;
+        }
+        assert i == 2;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: ')' expected
+    //@ ensures (\forall String string; string : strings; string.startsWith("te") ==> \result == 2);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: <identifier> expected
+    //@ ensures (\forall String string; string : strings; string.startsWith("te") ==> \result == 2);
+                                                                           ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: illegal start of type
+    //@ ensures (\forall String string; string : strings; string.startsWith("te") ==> \result == 2);
+                                                                            ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: ';' expected
+    //@ ensures (\forall String string; string : strings; string.startsWith("te") ==> \result == 2);
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: ')' expected
+    //@ ensures (\forall String string; string : strings; string.startsWith("ste", 2) ==> \result == 1);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: <identifier> expected
+    //@ ensures (\forall String string; string : strings; string.startsWith("ste", 2) ==> \result == 1);
+                                                                           ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: illegal start of type
+    //@ ensures (\forall String string; string : strings; string.startsWith("ste", 2) ==> \result == 1);
+                                                                            ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: illegal start of type
+    //@ ensures (\forall String string; string : strings; string.startsWith("ste", 2) ==> \result == 1);
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: ';' expected
+    //@ ensures (\forall String string; string : strings; string.startsWith("ste", 2) ==> \result == 1);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: ')' expected
+    //@ ensures (\forall String string; string : strings; string.endsWith("ed") ==> \result == 2);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: <identifier> expected
+    //@ ensures (\forall String string; string : strings; string.endsWith("ed") ==> \result == 2);
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: illegal start of type
+    //@ ensures (\forall String string; string : strings; string.endsWith("ed") ==> \result == 2);
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: ';' expected
+    //@ ensures (\forall String string; string : strings; string.endsWith("ed") ==> \result == 2);
+                                                                               ^
+13 errors
+
+public class StringStartEnd01 {
+    //@ requires strings != null && \nonnullelements(strings);
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int i = 0;
+        for (String string : strings) {
+            if (string.startsWith("te")) ++i;
+        }
+        assert i == 2;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.startsWith("ste", 2)) ++i;
+        }
+        assert i == 1;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.endsWith("ed")) ++i;
+        }
+        assert i == 2;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:2: error: cannot find symbol
+    //@ requires strings != null && \nonnullelements(strings);
+                 ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:2: error: cannot find symbol
+    //@ requires strings != null && \nonnullelements(strings);
+                                                     ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+                                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+                                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+                                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+                                                                                             ^
+11 errors
+
+public class StringStartEnd01 {
+    //@ requires strings != null && \nonnullelements(strings);
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int i = 0;
+        for (String string : strings) {
+            if (string.startsWith("te")) ++i;
+        }
+        assert i == 2;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.startsWith("ste", 2)) ++i;
+        }
+        assert i == 1;
+
+        i = 0;
+        for (String string : strings) {
+            if (string.endsWith("ed")) ++i;
+        }
+        assert i == 2;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:2: error: cannot find symbol
+    //@ requires strings != null && \nonnullelements(strings);
+                 ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:2: error: cannot find symbol
+    //@ requires strings != null && \nonnullelements(strings);
+                                                     ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+                                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("te") ==> \result == 2);
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+                                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].startsWith("ste", 2) ==> \result == 1);
+                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+                                                              ^
+  symbol:   variable strings
+  location: class StringStartEnd01
+/home/max/Documents/JMLGPT/tmp/StringStartEnd01.java:5: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < strings.length; strings[i].endsWith("ed") ==> \result == 2);
+                                                                                             ^
+11 errors
+
+public class StringStartEnd01 {
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int countStartTe = 0;
+        int countStartSte = 0;
+        int countEndEd = 0;
+
+        for (String string : strings) {
+            if (string.startsWith("te")) {
+                countStartTe++;
+            }
+            if (string.startsWith("ste", 2)) {
+                countStartSte++;
+            }
+            if (string.endsWith("ed")) {
+                countEndEd++;
+            }
+        }
+
+        System.out.println("Number of strings starting with 'te': " + countStartTe);
+        System.out.println("Number of strings starting with 'ste' at index 2: " + countStartSte);
+        System.out.println("Number of strings ending with 'ed': " + countEndEd);
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 340787200 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid25979.log
+
+public class StringStartEnd01 {
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int countStartTe = 0;
+        int countStartSte = 0;
+        int countEndEd = 0;
+
+        for (String string : strings) {
+            if (string.startsWith("te")) {
+                countStartTe++;
+            }
+            if (string.startsWith("ste", 2)) {
+                countStartSte++;
+            }
+            if (string.endsWith("ed")) {
+                countEndEd++;
+            }
+        }
+
+        System.out.println("Number of strings starting with 'te': " + countStartTe);
+        System.out.println("Number of strings starting with 'ste' at index 2: " + countStartSte);
+        System.out.println("Number of strings ending with 'ed': " + countEndEd);
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 327155712 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid26010.log
+
+public class StringStartEnd01 {
+    public static void main(String[] args) {
+        String[] strings = {"tested", "testing", "passed", "passing"};
+
+        int countStartTe = 0;
+        int countStartSte = 0;
+        int countEndEd = 0;
+
+        for (String string : strings) {
+            if (string.startsWith("te")) {
+                countStartTe++;
+            }
+            if (string.startsWith("ste", 2)) {
+                countStartSte++;
+            }
+            if (string.endsWith("ed")) {
+                countEndEd++;
+            }
+        }
+
+        System.out.println("Number of strings starting with 'te': " + countStartTe);
+        System.out.println("Number of strings starting with 'ste' at index 2: " + countStartSte);
+        System.out.println("Number of strings ending with 'ed': " + countEndEd);
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 309329920 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid26042.log
+

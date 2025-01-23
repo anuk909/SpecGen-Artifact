@@ -1,0 +1,20 @@
+public class StringBuilderCapLen04 {
+  /*@ ensures (\result == true)  ==>  (\old(arg) != null); */
+  public static boolean f(String arg) {
+    StringBuilder buffer = new StringBuilder(arg);
+    return buffer.capacity() == 69;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("");
+    f("123");
+    f("&fgaes%");
+    f("<bad/>");
+    f("Diffblue  is leader in automatic test case generation");
+    f("aaaaaaaaaabbbbbbbbbbaaaaaaaaaabbbbbbbbbbcccccccccc1");
+  }
+}

@@ -1,0 +1,59 @@
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j])) ==> \result == -1;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j])) ==> \result == -1;
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+    public static int repeatedNum(int[] arr) {
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j])) ==> \result == -1;
+        //@ maintaining (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ maintaining (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j]) ==> \result == -1;
+            //@ maintaining (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:9: error: variable i is already defined in method repeatedNum(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j])) ==> \result == -1;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j])) ==> \result == -1;
+                                                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:10: error: variable i is already defined in method repeatedNum(int[])
+        //@ maintaining (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:10: error: variable i is already defined in method repeatedNum(int[])
+        //@ maintaining (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                                                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:10: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                                                                                                                                                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:13: error: variable j is already defined in method repeatedNum(int[])
+            //@ maintaining (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j]) ==> \result == -1;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:13: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j]) ==> \result == -1;
+                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:14: error: variable j is already defined in method repeatedNum(int[])
+            //@ maintaining (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:14: error: variable i is already defined in method repeatedNum(int[])
+            //@ maintaining (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:14: error: variable j is already defined in method repeatedNum(int[])
+            //@ maintaining (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                                                                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:14: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] == arr[j]) ==> \result == i);
+                                                                                                                                                                                                               ^
+11 errors
+

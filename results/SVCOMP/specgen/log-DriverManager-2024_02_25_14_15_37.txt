@@ -1,0 +1,167 @@
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:8: verify: The prover cannot establish an assertion (Assert) in method execute
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:22: verify: The prover cannot establish an assertion (Assert) in method executeQuery
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:15: verify: The prover cannot establish an assertion (Assert) in method executeUpdate
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:32: verify: The prover cannot establish an assertion (Assert) in method prepareStatement
+      assert false;
+      ^
+4 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:22: error: unreported exception SQLException; must be caught or declared to be thrown
+      throw new SQLException();
+      ^
+1 error
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+

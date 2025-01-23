@@ -1,0 +1,532 @@
+class Main {
+  static int field;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    Main inst = new Main();
+    field = arg % 100;
+    return inst.test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    int y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:5: error: non-static method test(int,int) cannot be referenced from a static context
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                              ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                    ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                ^
+9 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    Main inst = new Main();
+    field = arg % 100;
+    return inst.test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    int y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:6: error: non-static method test(int,int) cannot be referenced from a static context
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                  ^
+  symbol: variable y
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                             ^
+  symbol: variable y
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                          ^
+7 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == inst.test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    Main inst = new Main();
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    return inst.test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    int y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:6: error: cannot find symbol
+  //@ ensures \result ==> field == arg % 100 && \result == inst.test(3, field);
+                                                           ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                  ^
+  symbol: variable y
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                             ^
+  symbol: variable y
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                          ^
+7 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    Main inst = new Main();
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    return inst.test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    int y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:6: error: non-static method test(int,int) cannot be referenced from a static context
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                              ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                    ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:18: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                ^
+7 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == new Main().test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    return new Main().test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    int y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:6: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> field == arg % 100 && \result == new Main().test(3, field);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                  ^
+  symbol: variable y
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: cannot find symbol
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                             ^
+  symbol: variable y
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:17: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                          ^
+7 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+  int y;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    Main main = new Main();
+    return main.test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:7: error: non-static method test(int,int) cannot be referenced from a static context
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                          ^
+7 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+  //@ spec_public
+  int y;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == new Main().test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    Main main = new Main();
+    return main.test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:8: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> field == arg % 100 && \result == new Main().test(3, field);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:20: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:20: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:20: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:20: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                          ^
+5 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+  //@ spec_public
+  int y;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    return test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+  public static boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    Main main = new Main();
+    main.y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (main.y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: non-static variable this cannot be referenced from a static context
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: non-static variable this cannot be referenced from a static context
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: 'void' type not allowed here
+  //@ ensures \result ==> (z <= 0 ==> System.out.println("branch FOO1")) && (z > 0 ==> System.out.println("branch FOO2")) && (this.y <= 0 ==> System.out.println("branch BOO1") && \result == false) && (this.y > 0 ==> System.out.println("branch BOO2") && \result == true);
+                                                                                                                                                                                                                                          ^
+6 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+  //@ spec_public
+  int y;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    return test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0 ==> true) && (z > 0 ==> true) && (this.y <= 0 ==> false) && (this.y > 0 ==> true);
+  public static boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    Main main = new Main();
+    main.y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (main.y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: non-static variable this cannot be referenced from a static context
+  //@ ensures \result ==> (z <= 0 ==> true) && (z > 0 ==> true) && (this.y <= 0 ==> false) && (this.y > 0 ==> true);
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe11.java:19: error: non-static variable this cannot be referenced from a static context
+  //@ ensures \result ==> (z <= 0 ==> true) && (z > 0 ==> true) && (this.y <= 0 ==> false) && (this.y > 0 ==> true);
+                                                                                               ^
+2 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+  //@ spec_public
+  int y;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> field == arg % 100 && \result == test(3, field);
+  //@ ensures !\result ==> arg < 0;
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = 3;
+    field = arg % 100;
+    return test(x, field);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (z <= 0) && (z > 0) && (true) && (true);
+  public static boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe11");
+    Main main = new Main();
+    main.y = 3;
+    z = -x;
+    x = z * x;
+    if (z <= 0) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (main.y <= 0) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+    return true;
+  }
+}

@@ -1,0 +1,26 @@
+class SelfDeviding {
+    //@ requires num > 0;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num; num % (num / (int)Math.pow(10, i)) == 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining \forall int i; 0 <= i && i < temp; num % (num / (int)Math.pow(10, i)) == 0;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelfDividing.java:3:) in method isSelfDividable
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelfDividing.java:12:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num; num % (num / (int)Math.pow(10, i)) == 0);
+        ^
+2 verification failures
+

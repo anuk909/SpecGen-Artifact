@@ -1,0 +1,223 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \symbolic arg;
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+  public static boolean f(int arg) {
+    int x = 3;
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires \symbolic x;
+  //@ requires \symbolic z;
+  //@ requires \symbolic r;
+  //@ ensures \result <==> (x > 99 && r <= z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:5: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic arg;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:17: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic x;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:18: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:19: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic r;
+               ^
+4 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \forall int arg; true;
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+  public static boolean f(int arg) {
+    int x = 3;
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires \forall int x; true;
+  //@ requires \forall int z; true;
+  //@ requires \forall int r; true;
+  //@ ensures \result <==> (x > 99 && r <= z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: Incorrectly formed or terminated requires statement near here -- perhaps a missing semicolon
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: Token \result is not a type
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: ';' expected
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: illegal start of type
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: <identifier> expected
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: <identifier> expected
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: <identifier> expected
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:18: error: Incorrectly formed or terminated requires statement near here -- perhaps a missing semicolon
+  //@ requires \forall int z; true;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:18: error: Token \forall is not a type
+  //@ requires \forall int z; true;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:18: error: ';' expected
+  //@ requires \forall int z; true;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:18: error: illegal start of type
+  //@ requires \forall int z; true;
+                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:20: error: Incorrectly formed or terminated requires statement near here -- perhaps a missing semicolon
+  //@ ensures \result <==> (x > 99 && r <= z);
+             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:20: error: Token \result is not a type
+  //@ ensures \result <==> (x > 99 && r <= z);
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:20: error: ';' expected
+  //@ ensures \result <==> (x > 99 && r <= z);
+                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:20: error: <identifier> expected
+  //@ ensures \result <==> (x > 99 && r <= z);
+                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:20: error: <identifier> expected
+  //@ ensures \result <==> (x > 99 && r <= z);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:20: error: <identifier> expected
+  //@ ensures \result <==> (x > 99 && r <= z);
+                                            ^
+17 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires true;
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+  public static boolean f(int arg) {
+    int x = 3;
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires true;
+  //@ requires true;
+  //@ requires true;
+  //@ ensures \result <==> (x > 99 && r <= z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+                                                                     ^
+4 errors
+
+class Main {
+  //@ spec_public
+  static int field;
+  //@ spec_public
+  static int field2;
+
+  //@ requires true;
+  //@ ensures \result <==> (field < 0 || field % 10 > 99 || field2 > field);
+  public static boolean f(int arg) {
+    int x = 3;
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires true;
+  //@ requires true;
+  //@ requires true;
+  //@ ensures \result <==> (x > 99 && r <= z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}

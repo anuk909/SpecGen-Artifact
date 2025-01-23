@@ -1,0 +1,377 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ ensures \result ==> field == 9;
+  //@ ensures \result ==> field2 == 0;
+  //@ ensures \result ==> \result == inst.test(3, field, field2);
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires z >= 0 && r >= 0;
+  //@ ensures \result ==> System.out.println("Testing ExSymExe20");
+  //@ ensures \result ==> r == x + z;
+  //@ ensures \result ==> x == z - 3;
+  //@ ensures \result ==> z == r;
+  //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+  //@ ensures \result ==> (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field == 9;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field2 == 0;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> \result == inst.test(3, field, field2);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> \result == inst.test(3, field, field2);
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:7: error: cannot find symbol
+  //@ ensures \result ==> \result == inst.test(3, field, field2);
+                                     ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> System.out.println("Testing ExSymExe20");
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:20: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:20: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:21: error: 'void' type not allowed here
+  //@ ensures \result ==> (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+                                                                                        ^
+9 errors
+
+public class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ requires field2 == 0;
+    //@ ensures \result == inst.test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field, field2);
+    }
+
+    //@ requires z >= 0 && r >= 0;
+    //@ ensures \result ==> System.out.println("Testing ExSymExe20");
+    //@ ensures \result ==> r == x + z;
+    //@ ensures \result ==> x == z - 3;
+    //@ ensures \result ==> z == r;
+    //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+    //@ ensures \result ==> (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:1: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:9: error: cannot find symbol
+    //@ ensures \result == inst.test(3, field, field2);
+                           ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:18: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> System.out.println("Testing ExSymExe20");
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:22: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:22: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:23: error: 'void' type not allowed here
+    //@ ensures \result ==> (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+                                                                                          ^
+6 errors
+
+// File: Main.java
+
+public class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ requires field2 == 0;
+    //@ ensures \result == inst.test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field, field2);
+    }
+
+    //@ requires z >= 0 && r >= 0;
+    //@ ensures \result ==> System.out.println("Testing ExSymExe20");
+    //@ ensures \result ==> r == x + z;
+    //@ ensures \result ==> x == z - 3;
+    //@ ensures \result ==> z == r;
+    //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+    //@ ensures \result ==> (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:11: error: cannot find symbol
+    //@ ensures \result == inst.test(3, field, field2);
+                           ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:20: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> System.out.println("Testing ExSymExe20");
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:24: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:24: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:25: error: 'void' type not allowed here
+    //@ ensures \result ==> (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+                                                                                          ^
+6 errors
+
+// File: Main.java
+
+public class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ requires field2 == 0;
+    //@ ensures \result == new Main().test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        field = 9;
+        return new Main().test(x, field, field2);
+    }
+
+    //@ requires z >= 0 && r >= 0;
+    //@ ensures System.out.println("Testing ExSymExe20");
+    //@ ensures r == x + z;
+    //@ ensures x == z - 3;
+    //@ ensures z == r;
+    //@ ensures (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+    //@ ensures (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:11: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Main().test(3, field, field2);
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:19: error: incompatible types: void cannot be converted to boolean
+    //@ ensures System.out.println("Testing ExSymExe20");
+                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:24: error: 'void' type not allowed here
+    //@ ensures (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+                                                                              ^
+6 errors
+
+// File: Main.java
+
+public class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ requires field2 == 0;
+    //@ ensures \result == test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        field = 9;
+        return test(x, field, field2);
+    }
+
+    //@ requires z >= 0 && r >= 0;
+    //@ ensures System.out.println("Testing ExSymExe20");
+    //@ ensures r == x + z;
+    //@ ensures x == z - 3;
+    //@ ensures z == r;
+    //@ ensures (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+    //@ ensures (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+    public static boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:19: error: incompatible types: void cannot be converted to boolean
+    //@ ensures System.out.println("Testing ExSymExe20");
+                                  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:23: error: incompatible types: void cannot be converted to boolean
+    //@ ensures (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2"));
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:24: error: 'void' type not allowed here
+    //@ ensures (x >= r ==> \result == false) && (x < r ==> System.out.println("branch BOO2") && \result == true);
+                                                                              ^
+5 errors
+
+// File: Main.java
+
+public class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ requires field2 == 0;
+    //@ ensures \result == test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        field = 9;
+        return test(x, field, field2);
+    }
+
+    //@ requires z >= 0 && r >= 0;
+    //@ ensures \result;
+    public static boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// File: Main.java
+
+class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ requires field2 == 0;
+    //@ ensures \result == test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        field = 9;
+        return test(x, field, field2);
+    }
+
+    //@ requires z >= 0 && r >= 0;
+    //@ ensures \result;
+    public static boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}

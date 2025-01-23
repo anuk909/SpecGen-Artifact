@@ -1,0 +1,63 @@
+public class CharSequenceBug {
+  //@ non_null
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures s == null ==> \result;
+  //@ ensures s == null ==> !\result;
+  //@ ensures s != null ==> \result;
+  //@ ensures s != null ==> !\result;
+  public static boolean fun(String s) {
+    CharSequence target = "b";
+    String replaced = "";
+    if (target.length() == 1) replaced = s.replace('b', 'c');
+    return replaced.indexOf('b') != -1;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/CharSequenceBug.java:2: error: No modifiers are allowed prior to a lightweight specification case
+  //@ non_null
+      ^
+1 error
+
+public class CharSequenceBug {
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures s == null ==> \result;
+  //@ ensures s == null ==> !\result;
+  //@ ensures s != null ==> \result;
+  //@ ensures s != null ==> !\result;
+  public static boolean fun(String s) {
+    CharSequence target = "b";
+    String replaced = "";
+    if (target.length() == 1) replaced = s.replace('b', 'c');
+    return replaced.indexOf('b') != -1;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+  }
+}
+
+
+OpenJML not responding. Aborted.

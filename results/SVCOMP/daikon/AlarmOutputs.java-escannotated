@@ -1,0 +1,25 @@
+import java.util.Random;
+
+final class Verifier {
+  public static int nondetInt() {
+    return new Random().nextInt();
+  }
+}
+
+public class AlarmOutputs {
+  public int isAudioDisabled = Verifier.nondetInt();
+  public int notificationMessage = Verifier.nondetInt();
+  public int audioNotificationCommand = Verifier.nondetInt();
+  public int highestLevelAlarm = Verifier.nondetInt();
+  public int logMessageId = Verifier.nondetInt();
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = 0; i < 10; i++)
+      Verifier.nondetInt();
+    AlarmOutputs a;
+  }
+}

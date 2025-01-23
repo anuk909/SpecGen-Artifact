@@ -1,0 +1,28 @@
+class MySqrt {
+    //@ requires x >= 0;
+    //@ ensures \result >= 0 && \result <= x;
+    public int mySqrt(int x) {
+        int l = 0, r = x, ans = -1;
+        //@ maintaining l <= r + 1;
+        //@ maintaining ans == -1 || (long) ans * ans <= x;
+        //@ decreases r - l + 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if ((long) mid * mid <= x) {
+                ans = mid;
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MySqrt.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MySqrt.java:3:) in method mySqrt
+        return ans;
+        ^
+/home/max/Documents/JMLGPT/tmp/MySqrt.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MySqrt.java:18:
+    //@ ensures \result >= 0 && \result <= x;
+        ^
+2 verification failures
+

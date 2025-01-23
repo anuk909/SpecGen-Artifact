@@ -1,0 +1,38 @@
+class DominantIndex {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] <= \result * 2);
+    //@ ensures \result == -1 || (nums[\result] >= nums[i] * 2 && nums[\result] >= nums[j] * 2);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= m1 * 2);
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= m2 * 2);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:5: error: cannot find symbol
+    //@ ensures \result == -1 || (nums[\result] >= nums[i] * 2 && nums[\result] >= nums[j] * 2);
+                                                        ^
+  symbol:   variable i
+  location: class DominantIndex
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:5: error: cannot find symbol
+    //@ ensures \result == -1 || (nums[\result] >= nums[i] * 2 && nums[\result] >= nums[j] * 2);
+                                                                                        ^
+  symbol:   variable j
+  location: class DominantIndex
+2 errors
+

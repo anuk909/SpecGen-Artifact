@@ -1,0 +1,281 @@
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == \old(arr[\result]) && (\forall int i; 0 <= i && i < \result; arr[i] != \old(arr[\result]));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != \old(arr[i]));
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:5: error: A \result expression is not allowed in an old environment
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == \old(arr[\result]) && (\forall int i; 0 <= i && i < \result; arr[i] != \old(arr[\result]));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:5: error: A \result expression is not allowed in an old environment
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == \old(arr[\result]) && (\forall int i; 0 <= i && i < \result; arr[i] != \old(arr[\result]));
+                                                                                                                                                         ^
+2 errors
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:10: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method repeatedNum
+                if(arr[i] == arr[j])
+                      ^
+1 verification failure
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i < j && j <= arr.length;
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedNum
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+                ^
+1 verification failure
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedNum
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+                ^
+1 verification failure
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedNum
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+                ^
+1 verification failure
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedNum
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+                ^
+1 verification failure
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            for (int j = i + 1; j < arr.length; ++j) {
+                //@ loop_invariant i <= k && k < j;
+                //@ loop_invariant (\forall int m; i <= m && m < j; arr[i] != arr[m]);
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:16: error: Loop specifications must immediately precede a loop statement
+                //@ loop_invariant i <= k && k < j;
+                    ^
+1 error
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            for (int j = i + 1; j < arr.length; ++j) {
+                //@ loop_invariant i <= k && k < j;
+                //@ loop_invariant (\forall int m; i <= m && m < j; arr[i] != arr[m]);
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:16: error: Loop specifications must immediately precede a loop statement
+                //@ loop_invariant i <= k && k < j;
+                    ^
+1 error
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant i <= k && k < j;
+            //@ loop_invariant (\forall int m; i <= m && m < j; arr[i] != arr[m]);
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:15: error: cannot find symbol
+            //@ loop_invariant i <= k && k < j;
+                                    ^
+  symbol:   variable k
+  location: class RepeatedNumNested
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:15: error: cannot find symbol
+            //@ loop_invariant i <= k && k < j;
+                                         ^
+  symbol:   variable k
+  location: class RepeatedNumNested
+2 errors
+
+public class RepeatedNumNested {
+
+    //@ requires 0 <= arr.length && arr.length <= Integer.MAX_VALUE;
+    //@ ensures \result < arr.length;
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[\result] && (\forall int i; 0 <= i && i < \result; arr[i] != arr[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+            //@ loop_invariant (\forall int k; i <= k && k < j; (\forall int m; i <= m && m < j; arr[k] != arr[m]));
+            //@ loop_invariant i <= j && j < arr.length;
+            //@ loop_invariant (\forall int m; i <= m && m < j; arr[i] != arr[m]);
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedNum
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[i] != arr[k]);
+                ^
+1 verification failure
+

@@ -1,0 +1,70 @@
+import java.util.Arrays;
+
+public class ContainsDuplicate {
+    //@ requires nums != null;
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < nums.length; (\exists int j; i < j && j < nums.length; nums[i] == nums[j]));
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:10: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method containsDuplicate
+            if (nums[i] == nums[i + 1]) {
+                    ^
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:5:) in method containsDuplicate
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:14:
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < nums.length; (\exists int j; i < j && j < nums.length; nums[i] == nums[j]));
+        ^
+3 verification failures
+
+import java.util.Arrays;
+
+public class ContainsDuplicate {
+    //@ requires nums != null;
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < nums.length; (\exists int j; i < j && j < nums.length; nums[i] == nums[j]));
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            //@ assume i >= 0;
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:5:) in method containsDuplicate
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ContainsDuplicate.java:15:
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < nums.length; (\exists int j; i < j && j < nums.length; nums[i] == nums[j]));
+        ^
+2 verification failures
+
+import java.util.Arrays;
+
+public class ContainsDuplicate {
+    //@ requires nums != null;
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < nums.length; (\exists int j; i < j && j < nums.length; nums[i] == nums[j]));
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        for (int i = 0; i < n - 1; i++) {
+            //@ assume i >= 0;
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; (\forall int j; i < j && j < nums.length; nums[i] != nums[j])) ==> \result == false;
+        return false;
+    }
+}

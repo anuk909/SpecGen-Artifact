@@ -1,0 +1,53 @@
+import java.util.Random;
+
+public class ExGenSymExe {
+
+  public static void main(String[] args) {
+    Node n = new Node();
+    Node m = new Node();
+    n.next = m;
+    n.next.next = n;
+    Node na = n.swapNode();
+    n.elem = new Random().nextInt();
+    // Debug.printSymbolicRef(n);
+    // Debug.printPC("\nPC");
+    // Debug.printHeapPC("Heap PC");
+  }
+
+  static class Node {
+    int elem;
+    Node next;
+    static Node static_next;
+
+    Node swapNode() {
+      static_next = new Node();
+      static_next.next = new Node();
+      static_next.next.next = new Node();
+      // System.out.println("static_next "+static_next);
+      // System.out.println("static_next.next "+static_next.next);
+      // System.out.println("static_next.next.next "+static_next.next.next);
+      if (next != null)
+        if (elem > next.elem) {
+          assert next != null;
+          Node t = next;
+          next = t.next;
+          t.next = this;
+          return t;
+        }
+
+      if (elem == 0) assert false;
+
+      return this;
+    }
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:19: verify: The prover cannot establish an assertion (NullField) in method Node
+    Node next;
+         ^
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:38: verify: The prover cannot establish an assertion (Assert) in method swapNode
+      if (elem == 0) assert false;
+                     ^
+2 verification failures
+

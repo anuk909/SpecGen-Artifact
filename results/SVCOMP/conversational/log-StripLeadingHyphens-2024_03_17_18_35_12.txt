@@ -1,0 +1,169 @@
+import java.util.Arrays;
+
+class StripLeadingHyphens {
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str[0] == '-' && str[1] == '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str[0] == '-' && str[1] != '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    static char[] stripLeadingHyphens(char[] str) {
+        boolean temp_Boolean = false;
+        if (str == null) {
+            return null;
+        }
+        temp_Boolean = (str[0] == '-' && str[1] == '-');
+        if (temp_Boolean) {
+            return Arrays.copyOfRange(str, 2, str.length);
+        } else {
+            temp_Boolean = str[0] == '-';
+            if (temp_Boolean) {
+                return Arrays.copyOfRange(str, 1, str.length);
+            }
+        }
+        return str;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:15: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method stripLeadingHyphens
+        temp_Boolean = (str[0] == '-' && str[1] == '-');
+                           ^
+1 verification failure
+
+import java.util.Arrays;
+
+class StripLeadingHyphens {
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 2 ==> str[0] == '-' && str[1] == '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 1 ==> str[0] == '-' && str[1] != '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    static char[] stripLeadingHyphens(char[] str) {
+        boolean temp_Boolean = false;
+        if (str == null) {
+            return null;
+        }
+        temp_Boolean = (str.length >= 2 && str[0] == '-' && str[1] == '-');
+        if (temp_Boolean) {
+            return Arrays.copyOfRange(str, 2, str.length);
+        } else {
+            temp_Boolean = (str.length >= 1 && str[0] == '-');
+            if (temp_Boolean) {
+                return Arrays.copyOfRange(str, 1, str.length);
+            }
+        }
+        return str;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:7:) in method stripLeadingHyphens
+        return str;
+        ^
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:24:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+        ^
+2 verification failures
+
+import java.util.Arrays;
+
+class StripLeadingHyphens {
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 2 ==> str[0] == '-' && str[1] == '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 1 ==> str[0] == '-' && str[1] != '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    static char[] stripLeadingHyphens(char[] str) {
+        boolean temp_Boolean = false;
+        if (str == null) {
+            return null;
+        }
+        temp_Boolean = (str.length >= 2 && str[0] == '-' && str[1] == '-');
+        if (temp_Boolean) {
+            return Arrays.copyOfRange(str, 2, str.length);
+        } else {
+            temp_Boolean = (str.length >= 1 && str[0] == '-');
+            if (temp_Boolean) {
+                return Arrays.copyOfRange(str, 1, str.length);
+            } else {
+                return str;
+            }
+        }
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:7:) in method stripLeadingHyphens
+                return str;
+                ^
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:23:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+        ^
+2 verification failures
+
+import java.util.Arrays;
+
+class StripLeadingHyphens {
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 2 ==> str[0] == '-' && str[1] == '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 1 ==> str[0] == '-' && str[1] != '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    static char[] stripLeadingHyphens(char[] str) {
+        boolean temp_Boolean = false;
+        if (str == null) {
+            return null;
+        }
+        temp_Boolean = (str.length >= 2 && str[0] == '-' && str[1] == '-');
+        if (temp_Boolean) {
+            return Arrays.copyOfRange(str, 2, str.length);
+        } else {
+            temp_Boolean = (str.length >= 1 && str[0] == '-');
+            if (temp_Boolean) {
+                return Arrays.copyOfRange(str, 1, str.length);
+            } else {
+                return str;
+            }
+        }
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:7:) in method stripLeadingHyphens
+                return str;
+                ^
+/home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StripLeadingHyphens.java:23:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+        ^
+2 verification failures
+
+import java.util.Arrays;
+
+class StripLeadingHyphens {
+
+    //@ requires str != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 2 ==> str[0] == '-' && str[1] == '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    //@ ensures str.length >= 1 ==> str[0] == '-' && str[1] != '-' ==> (\forall int i; 0 <= i && i < \result.length; \result[i] != '-');
+    static char[] stripLeadingHyphens(char[] str) {
+        boolean temp_Boolean = false;
+        if (str == null) {
+            return null;
+        }
+        temp_Boolean = (str.length >= 2 && str[0] == '-' && str[1] == '-');
+        if (temp_Boolean) {
+            return Arrays.copyOfRange(str, 2, str.length);
+        } else {
+            temp_Boolean = (str.length >= 1 && str[0] == '-');
+            if (temp_Boolean) {
+                return Arrays.copyOfRange(str, 1, str.length);
+            } else {
+                char[] result = new char[str.length];
+                System.arraycopy(str, 0, result, 0, str.length);
+                return result;
+            }
+        }
+    }
+    
+}

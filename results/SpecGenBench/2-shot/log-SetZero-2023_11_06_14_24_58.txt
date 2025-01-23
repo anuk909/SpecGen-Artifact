@@ -1,0 +1,23 @@
+public class SetZero {
+    //@ requires a != null && 0 <= iBegin && iBegin <= iEnd && iEnd <= a.length;
+    //@ modifies a[*];
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == 0);
+    public static void SetZero(int[] a, int iBegin, int iEnd) {
+        int k = iBegin;
+
+        //@ maintaining iBegin <= k && k <= iEnd;
+        //@ decreasing iEnd - k;
+        while (k < iEnd) {
+            a[k] = 0;
+            k = k + 1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SetZero.java:5: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SetZero.java:4:) in method SetZero
+    public static void SetZero(int[] a, int iBegin, int iEnd) {
+                       ^
+/home/max/Documents/JMLGPT/tmp/SetZero.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SetZero.java:5:
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == 0);
+        ^
+2 verification failures
+

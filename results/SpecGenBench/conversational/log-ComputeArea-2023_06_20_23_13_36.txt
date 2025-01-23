@@ -1,0 +1,321 @@
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0));
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+        int overlapArea = Math.max(overlapWidth, 0) * Math.max(overlapHeight, 0);
+        return area1 + area2 - overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:5: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0));
+                                                                                                                                                                                                  ^
+1 error
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+        int overlapArea = Math.max(overlapWidth, 0) * Math.max(overlapHeight, 0);
+        return area1 + area2 - overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:7: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: overflow in int difference
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                         ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:7: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: overflow in int difference
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                       ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)ax2 - (long)ax1 <= Integer.MAX_VALUE && (long)ax2 - (long)ax1 >= Integer.MIN_VALUE;
+        //@ assume (long)ay2 - (long)ay1 <= Integer.MAX_VALUE && (long)ay2 - (long)ay1 >= Integer.MIN_VALUE;
+        //@ assume (long)bx2 - (long)bx1 <= Integer.MAX_VALUE && (long)bx2 - (long)bx1 >= Integer.MIN_VALUE;
+        //@ assume (long)by2 - (long)by1 <= Integer.MAX_VALUE && (long)by2 - (long)by1 >= Integer.MIN_VALUE;
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+        int overlapArea = Math.max(overlapWidth, 0) * Math.max(overlapHeight, 0);
+        return area1 + area2 - overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:11: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: int multiply overflow
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:11: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: int multiply overflow
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                                                   ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) * (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) * (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) * (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) * (long)(by2 - by1) >= Integer.MIN_VALUE;
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+        int overlapArea = Math.max(overlapWidth, 0) * Math.max(overlapHeight, 0);
+        return area1 + area2 - overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: int multiply overflow
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: int multiply overflow
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                                                   ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+        int overlapArea = Math.max(overlapWidth, 0) * Math.max(overlapHeight, 0);
+        return area1 + area2 - overlapArea;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:11: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: int multiply overflow
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:11: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: int multiply overflow
+        int area1 = (ax2 - ax1) * (ay2 - ay1), area2 = (bx2 - bx1) * (by2 - by1);
+                                                                   ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+        int overlapArea = Math.max(overlapWidth, 0) * Math.max(overlapHeight, 0);
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        int overlapWidth = Math.min(ax2, bx2) - Math.max(ax1, bx1), overlapHeight = Math.min(ay2, by2) - Math.max(ay1, by1);
+                                                                                                       ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        int overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+        int overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        int overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ComputeArea.java:5:) in method computeOverlapArea
+        return (int)(area1 + area2 - overlapArea);
+        ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ComputeArea.java:14:
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+        ^
+3 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        int overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+        long overlapArea = (long)overlapWidth * (long)overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ComputeArea.java:5:) in method computeOverlapArea
+        return (int)(area1 + area2 - overlapArea);
+        ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ComputeArea.java:14:
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        int overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+                                                       ^
+3 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+        long overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+                                                                                                                              ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+        long overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:14: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method computeOverlapArea
+        return (int)(area1 + area2 - overlapArea);
+               ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+                                                        ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+        long overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+                                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:14: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method computeOverlapArea
+        return (int)(area1 + area2 - overlapArea);
+               ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+        long overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+                                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:14: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method computeOverlapArea
+        return (int)(area1 + area2 - overlapArea);
+               ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+        long overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method computeOverlapArea: underflow in int difference
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+                                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ComputeArea.java:14: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method computeOverlapArea
+        return (int)(area1 + area2 - overlapArea);
+               ^
+2 verification failures
+
+import java.lang.Math;
+
+class ComputeArea {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == ((ax2 - ax1) * (ay2 - ay1)) + ((bx2 - bx1) * (by2 - by1)) - Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L) * Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        //@ assume (long)(ax2 - ax1) <= Integer.MAX_VALUE && (long)(ax2 - ax1) >= Integer.MIN_VALUE;
+        //@ assume (long)(ay2 - ay1) <= Integer.MAX_VALUE && (long)(ay2 - ay1) >= Integer.MIN_VALUE;
+        //@ assume (long)(bx2 - bx1) <= Integer.MAX_VALUE && (long)(bx2 - bx1) >= Integer.MIN_VALUE;
+        //@ assume (long)(by2 - by1) <= Integer.MAX_VALUE && (long)(by2 - by1) >= Integer.MIN_VALUE;
+        long area1 = (long)(ax2 - ax1) * (long)(ay2 - ay1), area2 = (long)(bx2 - bx1) * (long)(by2 - by1);
+        long overlapWidth = Math.max(Math.min(ax2, bx2) - Math.max(ax1, bx1), 0L), overlapHeight = Math.max(Math.min(ay2, by2) - Math.max(ay1, by1), 0L);
+        long overlapArea = overlapWidth * overlapHeight;
+        return (int)(area1 + area2 - overlapArea);
+    }
+}

@@ -1,0 +1,33 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 || (0 <= \result && \result < s.length());
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        //@ maintaining (\forall char ch; frequency.containsKey(ch); frequency.get(ch) >= 0);
+        //@ maintaining (\forall char ch; !frequency.containsKey(ch); frequency.get(ch) == 0);
+        //@ maintaining (\forall char ch; s.indexOf(ch) != -1; frequency.containsKey(ch));
+        //@ maintaining (\forall char ch; s.indexOf(ch) == -1; !frequency.containsKey(ch));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) >= 1);
+        //@ maintaining (\forall int j; i <= j && j < s.length(); frequency.get(s.charAt(j)) >= 0);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method firstUniqChar
+        //@ maintaining (\forall char ch; s.indexOf(ch) != -1; frequency.containsKey(ch));
+            ^
+1 verification failure
+

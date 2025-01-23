@@ -1,0 +1,70 @@
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+class D extends C {}
+
+class Main {
+  //@ requires \typeof(arg) == \type(String[]);
+  //@ ensures exc instanceof D ==> \result.equals("D");
+  //@ ensures exc instanceof C ==> \result.equals("C");
+  //@ ensures exc instanceof B ==> \result.equals("B");
+  //@ ensures exc instanceof A ==> \result.equals("A");
+  public static void main(String[] arg) {
+    try {
+      D d = new D();
+      C c = new C();
+      B b = new B();
+      A a = new A();
+      A e = a;
+      throw e;
+    } catch (D exc) {
+      System.out.println("D");
+      assert false;
+    } catch (C exc) {
+      System.out.println("C");
+      assert false;
+    } catch (B exc) {
+      System.out.println("B");
+      assert false;
+    } catch (A exc) {
+      System.out.println("A");
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:11: error: cannot find symbol
+  //@ ensures exc instanceof D ==> \result.equals("D");
+              ^
+  symbol:   variable exc
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:11: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures exc instanceof D ==> \result.equals("D");
+                                    ^
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:12: error: cannot find symbol
+  //@ ensures exc instanceof C ==> \result.equals("C");
+              ^
+  symbol:   variable exc
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:12: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures exc instanceof C ==> \result.equals("C");
+                                    ^
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:13: error: cannot find symbol
+  //@ ensures exc instanceof B ==> \result.equals("B");
+              ^
+  symbol:   variable exc
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:13: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures exc instanceof B ==> \result.equals("B");
+                                    ^
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:14: error: cannot find symbol
+  //@ ensures exc instanceof A ==> \result.equals("A");
+              ^
+  symbol:   variable exc
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions5.java:14: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures exc instanceof A ==> \result.equals("A");
+                                    ^
+8 errors
+

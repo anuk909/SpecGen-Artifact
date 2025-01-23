@@ -1,0 +1,164 @@
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private Cookie cookie = null;
+  private String tainted = null;
+
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == "name";
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name") == tainted;
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:5: error: cannot find symbol
+  private Cookie cookie = null;
+          ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:25: error: cannot find symbol
+  public Cookie[] getCookies() {
+         ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+              ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie != null && cookie.getName() == tainted && cookie.getValue() == tainted;
+                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:11: error: cannot find symbol
+    this.cookie = new Cookie(tainted, tainted);
+                      ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:19: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:24: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.length == 1 && \result[0] == cookie;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: error: cannot find symbol
+    return new Cookie[] {cookie};
+               ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:29: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:34: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:39: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:44: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:49: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:54: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.toString().equals(tainted);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:59: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:69: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.containsKey("name") && \result.get("name") == tainted;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:76: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:81: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+23 errors
+

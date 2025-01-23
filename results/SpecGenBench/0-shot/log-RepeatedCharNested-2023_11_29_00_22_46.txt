@@ -1,0 +1,28 @@
+public class RepeatedCharNested {
+    
+    //@ requires s != null;
+    //@ ensures \result >= -1 && \result < s.length();
+    public static int repeatedChar(String s) {
+        //@ loop_invariant i >= 0 && i <= s.length();
+        //@ loop_invariant (\forall int k; k >= 0 && k < i; s.charAt(k) != s.charAt(i));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ loop_invariant j >= i + 1 && j <= s.length();
+            //@ loop_invariant (\forall int k; k >= i + 1 && k < j; s.charAt(k) != c1);
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method repeatedChar
+        //@ loop_invariant (\forall int k; k >= 0 && k < i; s.charAt(k) != s.charAt(i));
+            ^
+1 verification failure
+

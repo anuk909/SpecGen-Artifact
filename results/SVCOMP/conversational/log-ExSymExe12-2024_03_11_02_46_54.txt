@@ -1,0 +1,89 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg < 0;
+  //@ ensures \result == true;
+  //@ ensures field == 9;
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  //@ ensures \result == true;
+  /*@ ensures r == x + z && x == z - 3 && z == x + z ==> (z < x ==> \result == true) && (x >= r ==> \result == false);
+    @ ensures z < x ==> (\exists int i; 0 <= i && i < 3; \result == true);
+    @ ensures x >= r ==> (\exists int i; 0 <= i && i < 3; \result == false); */
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe12.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == 9;
+              ^
+1 error
+
+class Main {
+  //@ spec_public
+  static int field;
+  //@ spec_public
+  static int field2;
+
+  //@ requires arg < 0;
+  //@ ensures \result == true;
+  //@ ensures field == 9;
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    if (arg < 0) return true;
+    return inst.test(x, arg, field2);
+    // test(x,x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  //@ ensures \result == true;
+  /*@ ensures r == x + z && x == z - 3 && z == x + z ==> (z < x ==> \result == true) && (x >= r ==> \result == false);
+    @ ensures z < x ==> (\exists int i; 0 <= i && i < 3; \result == true);
+    @ ensures x >= r ==> (\exists int i; 0 <= i && i < 3; \result == false); */
+  /*
+   * test IF_ICMPGE, IADD & ISUB  bytecodes
+   */
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe12");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z < x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < r) System.out.println("branch BOO1");
+    else {
+      System.out.println("branch BOO2");
+      return false;
+    }
+    return true;
+  }
+}

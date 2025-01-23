@@ -1,0 +1,41 @@
+enum enum1 {
+  VAL1,
+  VAL2,
+  VAL3,
+  VAL4,
+  VAL5;
+
+  static {
+    //@ loop_invariant (\forall enum1 e; enum1.VAL1 <= e && e <= enum1.VAL5; System.out.println(e));
+    for (enum1 e : enum1.values()) {
+      System.out.println(e);
+    }
+  }
+}
+
+class Main {
+  //@ requires args != null;
+  public static void main(String[] args) {
+    enum1 e = enum1.VAL5;
+    //@ assert e == enum1.VAL5;
+    assert (e == enum1.VAL5);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/enum1.java:9: error: variable e is already defined in static initializer of enum enum1
+    //@ loop_invariant (\forall enum1 e; enum1.VAL1 <= e && e <= enum1.VAL5; System.out.println(e));
+                                      ^
+/home/max/Documents/JMLGPT/tmp/enum1.java:9: error: bad operand types for binary operator '<='
+    //@ loop_invariant (\forall enum1 e; enum1.VAL1 <= e && e <= enum1.VAL5; System.out.println(e));
+                                                    ^
+  first type:  enum1
+  second type: enum1
+/home/max/Documents/JMLGPT/tmp/enum1.java:9: error: bad operand types for binary operator '<='
+    //@ loop_invariant (\forall enum1 e; enum1.VAL1 <= e && e <= enum1.VAL5; System.out.println(e));
+                                                              ^
+  first type:  enum1
+  second type: enum1
+/home/max/Documents/JMLGPT/tmp/enum1.java:9: error: incompatible types: void cannot be converted to boolean
+    //@ loop_invariant (\forall enum1 e; enum1.VAL1 <= e && e <= enum1.VAL5; System.out.println(e));
+                                                                                               ^
+4 errors
+

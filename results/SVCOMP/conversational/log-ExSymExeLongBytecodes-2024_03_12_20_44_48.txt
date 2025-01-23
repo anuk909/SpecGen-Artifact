@@ -1,0 +1,611 @@
+class Main {
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean f(long x) {
+    x = x > 0 ? -x : x;
+    long y = 5;
+    Main inst = new Main();
+    return inst.test(x, y);
+  }
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean test(long x, long z) { // invokestatic
+    long a = x;
+    long b = z;
+    long c = 34565;
+
+    long negate = -z; // LNEG
+
+    long sum = a + b; // LADD
+    long sum2 = z + 9090909L; // LADD
+    long sum3 = 90908877L + z; // LADD
+
+    long diff = a - b; // LSUB
+    long diff2 = b - 19999999999L; // LSUB
+    long diff3 = 9999999999L - a; // LSUB
+
+    long mul = a * b; // LMUL
+    long mul2 = a * 19999999999L; // LMUL
+    long mul3 = 19999999999L * b; // LMUL
+
+    if (diff > c) {
+      return false;
+    } else System.out.println("branch diff <= c");
+    if (sum < z) System.out.println("branch sum < z");
+    else
+      System.out.println("branch sum >= z");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:4: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:4: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+                        ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:5: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                           ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:5: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                               ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:6: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                            ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:6: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                                ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                                 ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                                   ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:18: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                           ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:18: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                               ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:19: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                            ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:19: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                                ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:20: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:21: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+16 errors
+
+class Main {
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (x - z <= 34565);
+  //@ ensures !\result ==> (x - z > 34565);
+  //@ ensures \result ==> (x + z < z);
+  //@ ensures !\result ==> (x + z >= z);
+  public static boolean f(long x) {
+    x = x > 0 ? -x : x;
+    long y = 5;
+    Main inst = new Main();
+    return inst.test(x, y);
+  }
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (x - z <= 34565);
+  //@ ensures !\result ==> (x - z > 34565);
+  //@ ensures \result ==> (x + z < z);
+  //@ ensures !\result ==> (x + z >= z);
+  public static boolean test(long x, long z) { // invokestatic
+    long a = x;
+    long b = z;
+    long c = 34565;
+
+    long negate = -z; // LNEG
+
+    long sum = a + b; // LADD
+    long sum2 = z + 9090909L; // LADD
+    long sum3 = 90908877L + z; // LADD
+
+    long diff = a - b; // LSUB
+    long diff2 = b - 19999999999L; // LSUB
+    long diff3 = 9999999999L - a; // LSUB
+
+    long mul = a * b; // LMUL
+    long mul2 = a * 19999999999L; // LMUL
+    long mul3 = 19999999999L * b; // LMUL
+
+    if (diff > c) {
+      return false;
+    } else System.out.println("branch diff <= c");
+    if (sum < z) System.out.println("branch sum < z");
+    else
+      System.out.println("branch sum >= z");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:4: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:4: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+                        ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:5: error: cannot find symbol
+  //@ ensures \result ==> (x - z <= 34565);
+                               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:6: error: cannot find symbol
+  //@ ensures !\result ==> (x - z > 34565);
+                                ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (x + z < z);
+                               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (x + z < z);
+                                   ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (x + z >= z);
+                                ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (x + z >= z);
+                                     ^
+  symbol:   variable z
+  location: class Main
+8 errors
+
+class Main {
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean f(long x) {
+    x = x > 0 ? -x : x;
+    long y = 5;
+    Main inst = new Main();
+    return inst.test(x, y);
+  }
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean test(long x, long z) { // invokestatic
+    long a = x;
+    long b = z;
+    long c = 34565;
+
+    long negate = -z; // LNEG
+
+    long sum = a + b; // LADD
+    long sum2 = z + 9090909L; // LADD
+    long sum3 = 90908877L + z; // LADD
+
+    long diff = a - b; // LSUB
+    long diff2 = b - 19999999999L; // LSUB
+    long diff3 = 9999999999L - a; // LSUB
+
+    long mul = a * b; // LMUL
+    long mul2 = a * 19999999999L; // LMUL
+    long mul3 = 19999999999L * b; // LMUL
+
+    if (diff > c) {
+      return false;
+    } else System.out.println("branch diff <= c");
+    if (sum < z) System.out.println("branch sum < z");
+    else
+      System.out.println("branch sum >= z");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:4: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:4: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+                        ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:5: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                           ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:5: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                               ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:6: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                            ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:6: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                                ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                                 ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                                   ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:18: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                           ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:18: error: cannot find symbol
+  //@ ensures \result ==> (a - b <= 34565);
+                               ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:19: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                            ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:19: error: cannot find symbol
+  //@ ensures !\result ==> (a - b > 34565);
+                                ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:20: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:21: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+16 errors
+
+class Main {
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (x - z <= 34565);
+  //@ ensures !\result ==> (x - z > 34565);
+  //@ ensures \result ==> (x + z < z);
+  //@ ensures !\result ==> (x + z >= z);
+  public static boolean f(long x, long z) {
+    x = x > 0 ? -x : x;
+    long y = 5;
+    Main inst = new Main();
+    return inst.test(x, z);
+  }
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean test(long a, long b) { // invokestatic
+    long c = 34565;
+
+    long negate = -b; // LNEG
+
+    long sum = a + b; // LADD
+    long diff = a - b; // LSUB
+
+    if (diff > c) {
+      return false;
+    } else System.out.println("branch diff <= c");
+    if (sum < b) System.out.println("branch sum < z");
+    else
+      System.out.println("branch sum >= z");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:16: error: cannot find symbol
+  //@ requires x > 0 || x <= 0;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:16: error: cannot find symbol
+  //@ requires x > 0 || x <= 0;
+                        ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:17: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:17: error: cannot find symbol
+  //@ requires z > 0 || z <= 0;
+                        ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:20: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:20: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                                 ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:21: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:21: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                                   ^
+  symbol:   variable z
+  location: class Main
+8 errors
+
+class Main {
+
+  //@ requires x > 0 || x <= 0;
+  //@ requires z > 0 || z <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean test(long a, long b, long z) {
+    long c = 34565;
+
+    long sum = a + b;
+    long diff = a - b;
+
+    if (diff > c) {
+      return false;
+    } else {
+      System.out.println("branch diff <= c");
+    }
+    if (sum < z) {
+      System.out.println("branch sum < z");
+    } else {
+      System.out.println("branch sum >= z");
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:3: error: cannot find symbol
+  //@ requires x > 0 || x <= 0;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:3: error: cannot find symbol
+  //@ requires x > 0 || x <= 0;
+                        ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+4 errors
+
+class Main {
+
+  //@ requires a > 0 || a <= 0;
+  //@ requires b > 0 || b <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (sum < z);
+  //@ ensures !\result ==> (sum >= z);
+  public static boolean test(long a, long b, long z) {
+    long c = 34565;
+
+    long sum = a + b;
+    long diff = a - b;
+
+    if (diff > c) {
+      return false;
+    } else {
+      System.out.println("branch diff <= c");
+    }
+    if (sum < z) {
+      System.out.println("branch sum < z");
+    } else {
+      System.out.println("branch sum >= z");
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:7: error: cannot find symbol
+  //@ ensures \result ==> (sum < z);
+                           ^
+  symbol:   variable sum
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeLongBytecodes.java:8: error: cannot find symbol
+  //@ ensures !\result ==> (sum >= z);
+                            ^
+  symbol:   variable sum
+  location: class Main
+2 errors
+
+class Main {
+
+  //@ requires a > 0 || a <= 0;
+  //@ requires b > 0 || b <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (a + b < z);
+  //@ ensures !\result ==> (a + b >= z);
+  public static boolean test(long a, long b, long z) {
+    long c = 34565;
+
+    long sum = a + b;
+    long diff = a - b;
+
+    if (diff > c) {
+      return false;
+    } else {
+      System.out.println("branch diff <= c");
+    }
+    if (sum < z) {
+      System.out.println("branch sum < z");
+    } else {
+      System.out.println("branch sum >= z");
+    }
+    return true;
+  }
+}
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+
+class Main {
+
+  //@ requires a > 0 || a <= 0;
+  //@ requires b > 0 || b <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (a + b < z);
+  //@ ensures !\result ==> (a + b >= z);
+  public static boolean test(long a, long b, long z) {
+    long c = 34565;
+
+    long sum = a + b;
+    long diff = a - b;
+
+    if (diff > c) {
+      return false;
+    } else {
+      System.out.println("branch diff <= c");
+    }
+    if (sum < z) {
+      System.out.println("branch sum < z");
+    } else {
+      System.out.println("branch sum >= z");
+    }
+    return true;
+  }
+}
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+
+class Main {
+
+  //@ requires a > 0 || a <= 0;
+  //@ requires b > 0 || b <= 0;
+  //@ ensures \result ==> (a - b <= 34565);
+  //@ ensures !\result ==> (a - b > 34565);
+  //@ ensures \result ==> (a + b < z);
+  //@ ensures !\result ==> (a + b >= z);
+  public static boolean test(long a, long b, long z) {
+    long c = 34565;
+
+    long sum = a + b;
+    long diff = a - b;
+
+    if (diff > c) {
+      return false;
+    } else {
+      System.out.println("branch diff <= c");
+    }
+    if (sum < z) {
+      System.out.println("branch sum < z");
+    } else {
+      System.out.println("branch sum >= z");
+    }
+    return true;
+  }
+}
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+

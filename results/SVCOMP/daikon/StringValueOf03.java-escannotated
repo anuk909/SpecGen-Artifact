@@ -1,0 +1,26 @@
+public class StringValueOf03 {
+  /*@ ensures \result == false; */
+  public static boolean f(String arg) {
+    if (arg.length() < 8)
+      return false;
+    char[] charArray = {
+      arg.charAt(0), arg.charAt(1), arg.charAt(2),
+      arg.charAt(3), arg.charAt(4), arg.charAt(5),
+      arg.charAt(6), arg.charAt(7)
+    };
+    String tmp = String.valueOf(charArray, 3, 3);
+    return tmp.equals("fbbl");
+  }
+  
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("diffblue");
+    f("diffb1ue");
+    f("");
+    f("123");
+    f("$%gdf");
+  }
+}

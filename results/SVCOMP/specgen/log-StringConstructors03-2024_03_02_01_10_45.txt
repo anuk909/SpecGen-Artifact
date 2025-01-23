@@ -1,0 +1,26 @@
+public class StringConstructors03 {
+    //@ requires arg0 != null;
+    //@ requires arg1 != null;
+    //@ ensures \result == (new String(arg0)).equals(arg1);
+    public static boolean f(String arg0, String arg1) {
+        String s = new String(arg0);
+        String s2 = new String(s);
+        return s2.equals(arg1);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConstructors03.java:4: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (new String(arg0)).equals(arg1);
+                            ^
+1 error
+
+public class StringConstructors03 {
+    //@ requires arg0 != null;
+    //@ requires arg1 != null;
+    //@ ensures \result == arg0.equals(arg1);
+    public static boolean f(String arg0, String arg1) {
+        String s = new String(arg0);
+        String s2 = new String(s);
+        return s2.equals(arg1);
+    }
+}
+

@@ -1,0 +1,71 @@
+class CalcDuration {
+    //@ requires timeSeries != null;
+    //@ requires timeSeries.length >= 0 && timeSeries.length <= Integer.MAX_VALUE;
+    //@ requires (\forall int i; 0 <= i && i < timeSeries.length; timeSeries[i] >= 0);
+    //@ ensures \result >= 0;
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+        //@ maintaining ans == \sum(int j; 0 <= j && j < i; calcDuration(timeSeries, duration, j));
+        //@ maintaining (\forall int j; 0 <= j && j < i; expired >= timeSeries[j] + duration);
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: illegal start of type
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                               ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: illegal start of type
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                       ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: <identifier> expected
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                             ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: > expected
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: invalid method declaration; return type required
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: <identifier> expected
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: <identifier> expected
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: <identifier> expected
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: ';' expected
+    //@ ensures \result == \sum(int i; 0 <= i && i < timeSeries.length; calcDuration(timeSeries, duration, i));
+                                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:11: error: illegal start of type
+        //@ maintaining ans == \sum(int j; 0 <= j && j < i; calcDuration(timeSeries, duration, j));
+                                   ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:11: error: not a statement
+        //@ maintaining ans == \sum(int j; 0 <= j && j < i; calcDuration(timeSeries, duration, j));
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+        //@ maintaining ans == \sum(int j; 0 <= j && j < i; calcDuration(timeSeries, duration, j));
+                                           ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:10: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:11: error: ';' expected
+        //@ maintaining ans == \sum(int j; 0 <= j && j < i; calcDuration(timeSeries, duration, j));
+                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+        //@ maintaining ans == \sum(int j; 0 <= j && j < i; calcDuration(timeSeries, duration, j));
+                                                            ^
+15 errors
+

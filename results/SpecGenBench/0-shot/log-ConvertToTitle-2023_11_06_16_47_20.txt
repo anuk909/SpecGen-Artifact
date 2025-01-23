@@ -1,0 +1,18 @@
+class ConvertToTitle {
+    //@ requires columnNumber >= 0;
+    //@ ensures \result != null;
+    //@ ensures \result.matches("[A-Z]+");
+    public String convertToTitle(int columnNumber) {
+        StringBuffer sb = new StringBuffer();
+        //@ loop_invariant columnNumber >= 0;
+        //@ loop_invariant sb != null;
+        //@ loop_invariant sb.toString().matches("[A-Z]*");
+        //@ decreases columnNumber;
+        while (columnNumber > 0) {
+            int a0 = (columnNumber - 1) % 26 + 1;
+            sb.append((char)(a0 - 1 + 'A'));
+            columnNumber = (columnNumber - a0) / 26;
+        }
+        return sb.reverse().toString();
+    }
+}

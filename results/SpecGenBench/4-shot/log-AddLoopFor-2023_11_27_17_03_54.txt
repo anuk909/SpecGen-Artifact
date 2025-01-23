@@ -1,0 +1,30 @@
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == y + x;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining sum == y + (x - n);
+            //@ maintaining n >= 0 && n <= x;
+            //@ decreases n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ maintaining sum == y - (n - x);
+            //@ maintaining n >= 0 && n <= -x;
+            //@ decreases n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:16: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method addLoop
+            //@ maintaining sum == y - (n - x);
+                ^
+1 verification failure
+

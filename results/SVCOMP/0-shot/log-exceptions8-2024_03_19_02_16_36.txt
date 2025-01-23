@@ -1,0 +1,39 @@
+class A extends RuntimeException {
+    // No additional JML specifications needed for class A
+}
+
+class B extends A {
+    // No additional JML specifications needed for class B
+}
+
+class C extends B {
+    // No additional JML specifications needed for class C
+}
+
+class Main {
+    //@ requires true;
+    //@ ensures true;
+    static void foo() {
+        try {
+            B b = new B();
+            throw b;
+        } catch (C exc) {
+            int i = 0;
+        }
+    }
+
+    //@ requires true;
+    //@ ensures true;
+    public static void main(String[] args) {
+        try {
+            A a = new A();
+            foo();
+            throw a;
+        } catch (B exc) {
+            assert false;
+        } catch (A exc) {
+            assert false;
+        }
+    }
+}
+

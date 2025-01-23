@@ -1,0 +1,174 @@
+class UglyNum {
+    /*@ requires n > 0;
+      @ ensures \result == true || \result == false; @*/
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 1 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+        //@ decreases n;
+        for (int j = 0; j < factors.length; j++) {
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method isUgly
+        //@ maintaining (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:11: verify: The prover cannot establish an assertion (LoopDecreases) in method isUgly
+        //@ decreases n;
+            ^
+2 verification failures
+
+class UglyNum {
+    /*@ requires n > 0;
+      @ ensures \result == true || \result == false; @*/
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 1 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+        //@ decreases n;
+        for (int j = 0; j < factors.length; j++) {
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:13: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isUgly
+            while (n % factors[j] == 0) {
+                              ^
+2 verification failures
+
+class UglyNum {
+    /*@ requires n > 0;
+      @ ensures \result == true || \result == false; @*/
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 1 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+        //@ decreases n;
+        for (int j = 0; j < factors.length; j++) {
+            //@ loop_invariant 0 <= j && j <= factors.length;
+            //@ loop_invariant (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+                //@ assume n >= 0;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+            //@ loop_invariant 0 <= j && j <= factors.length;
+                ^
+2 verification failures
+
+class UglyNum {
+    /*@ requires n > 0;
+      @ ensures \result == true || \result == false; @*/
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 1 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+        //@ decreases n;
+        for (int j = 0; j < factors.length; j++) {
+            //@ loop_invariant 0 <= j && j <= factors.length;
+            //@ loop_invariant (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+                //@ assume n >= 0;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+            //@ loop_invariant 0 <= j && j <= factors.length;
+                ^
+2 verification failures
+
+class UglyNum {
+    /*@ requires n > 0;
+      @ ensures \result == true || \result == false; @*/
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 1 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+        //@ decreases n;
+        for (int j = 0; j < factors.length; j++) {
+            //@ loop_invariant 0 <= j && j <= factors.length;
+            //@ loop_invariant (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+                //@ assume n >= 0;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+            //@ loop_invariant 0 <= j && j <= factors.length;
+                ^
+2 verification failures
+
+class UglyNum {
+    /*@ requires n > 0;
+      @ ensures \result == true || \result == false; @*/
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 1 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+        //@ decreases n;
+        for (int j = 0; j < factors.length; j++) {
+            //@ loop_invariant 0 <= j && j <= factors.length;
+            //@ loop_invariant (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+                //@ assume n >= 0;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\forall int i; 0 <= i && i < factors.length; n % factors[i] != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+            //@ loop_invariant 0 <= j && j <= factors.length;
+                ^
+2 verification failures
+

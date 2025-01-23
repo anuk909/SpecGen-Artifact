@@ -1,0 +1,30 @@
+public class ChangeCase {
+
+  //@ requires Character.isLetter(c);
+  //@ ensures Character.isLetter(\result);
+  //@ ensures Character.toLowerCase(c) == Character.toLowerCase(\result) || Character.toUpperCase(c) == Character.toUpperCase(\result);
+  public char changeCase(char c) {
+    char result = ' ';    
+    if (c > 'z') {
+      result = c;
+    } else if (c >= 'a') {
+      result =  (char)(c - 'a' + 'A');
+    } else if (c > 'Z') {
+      result =  c;
+    } else if (c >= 'A') {
+      result =  (char)(c - 'A' + 'a');
+    } else {
+      result = c;
+    }
+    return result;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/ChangeCase.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ChangeCase.java:4:) in method changeCase
+    return result;
+    ^
+/home/max/Documents/JMLGPT/tmp/ChangeCase.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ChangeCase.java:19:
+  //@ ensures Character.isLetter(\result);
+      ^
+2 verification failures
+

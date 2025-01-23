@@ -1,0 +1,44 @@
+public class TokenTest01 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    //@ assume true; // Assumption for non-JML expressions
+
+    String sentence = "automatic test case generation";
+    String[] tokens = sentence.split(" ");
+    
+    //@ loop_invariant 0 <= i && i <= tokens.length;
+    //@ loop_invariant (\forall int j; 0 <= j && j < i; tokens[j] != null);
+    //@ loop_invariant (\forall int j; 0 <= j && j < i; tokens[j].equals("automatic") || tokens[j].equals("test") || tokens[j].equals("case") || tokens[j].equals("generation"));
+    int i = 0;
+    for (String token : tokens) {
+      System.out.println(token);
+      
+      if (i == 0) {
+        //@ assert token.equals("automatic");
+        if (!token.equals("automatic"))
+          return false;
+      }
+      else if (i == 1) {
+        //@ assert token.equals("test");
+        if (!token.equals("test"))
+          return false;
+      }
+      else if (i == 2) {
+        //@ assert token.equals("case");
+        if (!token.equals("case"))
+          return false;
+      }
+      else if (i == 3) {
+        //@ assert token.equals("generation");
+        if (!token.equals("generation"))
+          return false;
+      }
+      ++i;
+    }
+    
+    //@ assert i == tokens.length;
+    return true;
+  }
+}
+

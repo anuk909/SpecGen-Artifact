@@ -1,0 +1,33 @@
+class DominantIndex {
+    
+    //@ requires nums != null;
+    //@ requires nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] <= \result * 2);
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < nums.length; nums[i] > nums[\result] * 2);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining (\forall int i; 0 <= i && i < k; nums[i] <= m1 * 2);
+        //@ maintaining (\forall int i; 0 <= i && i < k; nums[i] <= m2 * 2);
+        //@ maintaining (\forall int i; 0 <= i && i < k; i != index ==> nums[i] <= m1 * 2);
+        //@ maintaining (\forall int i; 0 <= i && i < k; i != index ==> nums[i] <= m2 * 2);
+        //@ decreases nums.length - k;
+        for (int k = 0; k < nums.length; k++) {
+            if (nums[k] > m1) {
+                m2 = m1;
+                m1 = nums[k];
+                index = k;
+            } else if (nums[k] > m2) {
+                m2 = nums[k];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int i; 0 <= i && i < k; nums[i] <= m1 * 2);
+            ^
+1 verification failure
+

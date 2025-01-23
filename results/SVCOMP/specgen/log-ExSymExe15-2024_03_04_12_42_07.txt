@@ -1,0 +1,145 @@
+class Main {
+    static int field;
+    static int field2;
+
+    //@ requires arg != null;
+    //@ ensures field == arg;
+    //@ ensures \result ==> field < 0;
+    //@ ensures !\result ==> field >= 0;
+    public static boolean f(Short arg) {
+        int x = 13000;
+        Main inst = new Main();
+        field = arg;
+        if (field < 0)
+            return true;
+        return inst.test(x, field, field2);
+    }
+
+    //@ ensures field2 == x + z;
+    //@ ensures z == x - 3 - 4;
+    //@ ensures \result ==> r <= 99;
+    //@ ensures !\result ==> r > 99;
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe15");
+        int y = 3;
+        r = x + z;
+        z = x - y - 4;
+        if (r <= 99) {
+            System.out.println("branch FOO1");
+            return false;
+        } else {
+            System.out.println("branch FOO2");
+        }
+        if (x <= z) {
+            System.out.println("branch BOO1");
+        } else {
+            System.out.println("branch BOO2");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures field == arg;
+                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> field < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> field >= 0;
+                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures field2 == x + z;
+                ^
+4 errors
+
+class Main {
+    static /*@ spec_public @*/ int field;
+    static /*@ spec_public @*/ int field2;
+
+    //@ requires arg != null;
+    //@ ensures field == arg;
+    //@ ensures \result ==> field < 0;
+    //@ ensures !\result ==> field >= 0;
+    public static boolean f(Short arg) {
+        int x = 13000;
+        Main inst = new Main();
+        field = arg;
+        if (field < 0)
+            return true;
+        return inst.test(x, field, field2);
+    }
+
+    //@ ensures field2 == x + z;
+    //@ ensures z == x - 3 - 4;
+    //@ ensures \result ==> r <= 99;
+    //@ ensures !\result ==> r > 99;
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe15");
+        int y = 3;
+        r = x + z;
+        z = x - y - 4;
+        if (r <= 99) {
+            System.out.println("branch FOO1");
+            return false;
+        } else {
+            System.out.println("branch FOO2");
+        }
+        if (x <= z) {
+            System.out.println("branch BOO1");
+        } else {
+            System.out.println("branch BOO2");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExe15.java:6:) in method f
+        return inst.test(x, field, field2);
+        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe15.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExe15.java:15:
+    //@ ensures field == arg;
+        ^
+error: An error while executing a proof script for test: (error "Solver has unexpectedly terminated")
+1 error
+2 verification failures
+
+class Main {
+    static /*@ spec_public @*/ int field;
+    static /*@ spec_public @*/ int field2;
+
+    //@ requires arg != null;
+    //@ ensures field == arg;  
+    //@ ensures \result ==> field < 0;
+    //@ ensures !\result ==> field >= 0;
+    public static boolean f(Short arg) {
+        int x = 13000;
+        Main inst = new Main();
+        field = arg;
+        if (field < 0)
+            return true;
+        return inst.test(x, field, field2);
+    }
+
+    //@ ensures field2 == x + z;
+    //@ ensures z == x - 3 - 4;
+    //@ ensures \result ==> r <= 99;
+    //@ ensures !\result ==> r > 99;
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe15");
+        int y = 3;
+        r = x + z;
+        z = x - y - 4;
+        if (r <= 99) {
+            System.out.println("branch FOO1");
+            return false;
+        } else {
+            System.out.println("branch FOO2");
+        }
+        if (x <= z) {
+            System.out.println("branch BOO1");
+        } else {
+            System.out.println("branch BOO2");
+        }
+        return true;
+    }
+}
+

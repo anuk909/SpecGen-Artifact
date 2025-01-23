@@ -1,0 +1,29 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions14 {
+  //@ requires true;
+  //@ ensures (\forall Exception exc; !(\old(exc) instanceof C) && !(\old(exc) instanceof B); \result == false);
+  public static void main(String[] args) {
+    try {
+      try {
+        C c = new C();
+        A a = new A();
+      } catch (C exc) {
+        assert false;
+      } catch (B exc) {
+        assert false;
+      }
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions14.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall Exception exc; !(\old(exc) instanceof C) && !(\old(exc) instanceof B); \result == false);
+                                                                                               ^
+1 error
+

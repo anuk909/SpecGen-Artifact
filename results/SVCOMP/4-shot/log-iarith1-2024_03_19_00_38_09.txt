@@ -1,0 +1,57 @@
+/*
+ * Origin of the benchmark:
+ *     license: 4-clause BSD (see /java/jbmc-regression/LICENSE)
+ *     repo: https://github.com/diffblue/cbmc.git
+ *     branch: develop
+ *     directory: regression/cbmc-java/iarith1
+ * The benchmark was taken from the repo: 24 January 2018
+ */
+class Main {
+  public static void main(String[] args) {
+    int i = 99;
+    //@ assert i == 100;
+    ++i;
+    //@ assert i == 101;
+    int tmp = i + 2;
+    i = tmp;
+    //@ assert i == 103;
+    tmp = i - 3;
+    i = tmp;
+    //@ assert i == 100;
+    i += 3;
+    //@ assert i == 103;
+    i -= 3;
+    //@ assert i == 100;
+    tmp = i * 2;
+    i = tmp;
+    //@ assert i == 200;
+    tmp = i / 3;
+    i = tmp;
+    //@ assert i == 66;
+    i %= 34;
+    //@ assert i == 32;
+    i = -i;
+    //@ assert i == -32;
+    long l = 99;
+    //@ assert l == 100L;
+    ++l;
+    //@ assert l == 101L;
+    l += 2L;
+    //@ assert l == 103L;
+    l -= 3L;
+    //@ assert l == 100L;
+    l *= 2L;
+    //@ assert l == 200L;
+    l /= 3L;
+    //@ assert l == 66L;
+    l %= 34L;
+    //@ assert l == 32L;
+    l = -l;
+    //@ assert l == -32L;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/iarith1.java:12: verify: The prover cannot establish an assertion (Assert) in method main
+    //@ assert i == 100;
+        ^
+1 verification failure
+

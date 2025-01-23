@@ -1,0 +1,18 @@
+public class ClassCastException1 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    //@ assume true; // assume block to satisfy JML syntax
+    try {
+      Object x = new Integer(0);
+      String y = (String) x;
+    } catch (ClassCastException exc) {
+      //@ assert exc != null;
+      //@ assert \result == false;
+      return false;
+    }
+    //@ assert \result == true;
+    return true;
+  }
+}
+

@@ -1,0 +1,1212 @@
+public class GCD {
+	
+        //@ ensures \result == n%d;
+        public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ ensures \result == (0 <= num) ? num : -num;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 >= 0 && num2 >= 0;
+	//@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+	//@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+	//@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+		//@ decreases num1 - i;
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+	//@ ensures \result == (0 <= num) ? num : -num;
+	                    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+	//@ ensures \result == (0 <= num) ? num : -num;
+	                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+	//@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+	                    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+	//@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+	                                                   ^
+  Reason: Unimplemented option in JmlAttr:isBooleanOrNumeric -- class org.jmlspecs.openjml.JmlTree$JmlBinary
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: bad type in conditional expression
+	//@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+	                                       ^
+    int cannot be converted to boolean
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+	//@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+	                                              ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+	                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+	                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+		                                                    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+		                                                                        ^
+6 errors
+4 warnings
+
+java
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:1: error: class, interface, enum, or record expected
+java
+^
+/home/max/Documents/JMLGPT/tmp/GCD.java:4: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:10: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+3 errors
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                                                       ^
+  Reason: Unimplemented option in JmlAttr:isBooleanOrNumeric -- class org.jmlspecs.openjml.JmlTree$JmlBinary
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: bad type in conditional expression
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                                           ^
+    int cannot be converted to boolean
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+6 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                                                       ^
+  Reason: Unimplemented option in JmlAttr:isBooleanOrNumeric -- class org.jmlspecs.openjml.JmlTree$JmlBinary
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: bad type in conditional expression
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                                           ^
+    int cannot be converted to boolean
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2 ==> (num1 == 0 || num2 == 0);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+6 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; GCD.div(num1,k) == 0 && GCD.div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; GCD.div(num1,k) == 0 && GCD.div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; GCD.div(num1,k) == 0 && GCD.div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+
+public class GCD {
+	
+    //@ pure
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ pure
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; GCD.div(num1,k) == 0 && GCD.div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (GCD.div(num1,i) == 0 && GCD.div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:3: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:9: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+2 errors
+
+public class GCD {
+	
+    //@ ensures \result == n%d;
+    public static int div(int n, int d) { 
+        return n%d; 
+    }
+
+    //@ ensures \result == (0 <= num) ? num : -num;
+    public int absolute(int num) {
+        return (0 <= num) ? num : -num;
+    }
+    
+    //@ requires num1 >= 0 && num2 >= 0;
+    //@ ensures \result == -1 ==> (num1 == 0 && num2 == 0);
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+    //@ ensures (num1 > num2) ==> (num1 == 0 || num2 == 0);
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+    public int gcd(int num1, int num2) throws IllegalArgumentException {
+        int result = 1; 
+        num1 = absolute(num1);
+        num2 = absolute(num2);
+
+        if (num1 == 0 && num2 == 0) {
+            return -1;	
+        }
+
+        if (num1 == 0 || num2 == 0) { 
+            return (num1 > num2) ? num1 : num2;
+        }
+
+        //@ maintaining 1 <= i && i <= num1 && i <= num2;
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+        //@ decreases num1 - i;
+        for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (div(num1,i) == 0 && div(num2,i) == 0) {
+                result = i;
+            }
+        }
+        return result;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incomparable types: int and boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (0 <= num) ? num : -num;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incomparable types: int and boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == (num1 > num2) ? num1 : num2;
+                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+    //@ ensures \result == 1 ==> (\forall int i; 1 <= i && i <= num1 && i <= num2; div(num1,i) == 0 && div(num2,i) == 0);
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+        //@ maintaining (\forall int k; 1 <= k && k < i; div(num1,k) == 0 && div(num2,k) == 0);
+                                                                                ^
+4 errors
+4 warnings
+

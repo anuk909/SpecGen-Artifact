@@ -1,0 +1,139 @@
+class UglyNum {
+    //@ requires n != 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == 2^k * 3^k * 5^k);
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == 3^k * 5^k);
+        //@ decreases n;
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == 5^k);
+        //@ decreases n;
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:9: error: bad operand types for binary operator '^'
+        //@ maintaining (\exists int k; k >= 0; n == 2^k * 3^k * 5^k);
+                                                      ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:15: error: bad operand types for binary operator '^'
+        //@ maintaining (\exists int k; k >= 0; n == 3^k * 5^k);
+                                                      ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:21: error: bad operand types for binary operator '^'
+        //@ maintaining (\exists int k; k >= 0; n == 5^k);
+                                                      ^
+  first type:  boolean
+  second type: int
+3 errors
+
+class UglyNum {
+    //@ requires n != 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+            ^
+1 verification failure
+
+class UglyNum {
+    //@ requires n != 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        return n == 1;
+    }
+}
+error: An error while executing a proof script for isUgly: (error "Solver has unexpectedly terminated")
+1 error
+
+class UglyNum {
+    //@ requires n != 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int k; k >= 0; n == (int)Math.pow(2, k) * (int)Math.pow(3, k) * (int)Math.pow(5, k));
+        //@ decreases n;
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        return n == 1;
+    }
+}
+
+aborted

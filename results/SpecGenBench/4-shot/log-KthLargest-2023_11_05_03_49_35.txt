@@ -1,0 +1,59 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires k > 0 && k <= nums.length;
+    //@ ensures \result == spec_kthLargest(nums, k);
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        //@ maintaining pq.size() <= k;
+        //@ maintaining (\forall int x; pq.contains(x); x <= pq.peek());
+        //@ decreases nums.length - pq.size();
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+
+    /*@ requires nums != null;
+      @ requires k > 0 && k <= nums.length;
+      @ ensures \result == spec_kthLargest(nums, k);
+      @ ensures (\forall int i; 0 <= i && i < \result; spec_kthLargest(nums, k) >= nums[i]);
+      @ ensures (\forall int i; \result < i && i < nums.length; spec_kthLargest(nums, k) <= nums[i]);
+      @*/
+    public static int spec_kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: warning: A non-pure method is being called where it is not permitted: KthLargest.spec_kthLargest(int[],int)
+    //@ ensures \result == spec_kthLargest(nums, k);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable x is already defined in method kthLargest(int[],int)
+        //@ maintaining (\forall int x; pq.contains(x); x <= pq.peek());
+                                     ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:25: warning: A non-pure method is being called where it is not permitted: KthLargest.spec_kthLargest(int[],int)
+      @ ensures \result == spec_kthLargest(nums, k);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:26: warning: A non-pure method is being called where it is not permitted: KthLargest.spec_kthLargest(int[],int)
+      @ ensures (\forall int i; 0 <= i && i < \result; spec_kthLargest(nums, k) >= nums[i]);
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:27: warning: A non-pure method is being called where it is not permitted: KthLargest.spec_kthLargest(int[],int)
+      @ ensures (\forall int i; \result < i && i < nums.length; spec_kthLargest(nums, k) <= nums[i]);
+                                                                               ^
+1 error
+4 warnings
+

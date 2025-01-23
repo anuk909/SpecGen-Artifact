@@ -1,0 +1,56 @@
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D != null && D.length == N * N;
+  //@ requires src >= 0 && src < N;
+  //@ ensures \result != null && \result.length == N;
+  static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    //@ loop_invariant 0 <= i && i <= N;
+    //@ loop_invariant (\forall int x; 0 <= x && x < i; dist[x] == INFINITY && infinite[x] == true);
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k;
+    //@ loop_invariant 0 <= k && k <= N;
+    //@ loop_invariant (\forall int x; 0 <= x && x < N; dist[x] >= 0 && dist[x] <= INFINITY);
+    //@ loop_invariant (\forall int x; 0 <= x && x < N; infinite[x] == (\exists int y; 0 <= y && y < k; dist[y] == INFINITY));
+    //@ loop_invariant (\forall int x; 0 <= x && x < N; (\forall int y; 0 <= y && y < N; dist[y] <= dist[x] + D[x * N + y]));
+    for (k = 0; k < N; k++) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+    }
+
+    if (k == N) {
+      // We relaxed during the N-th iteration, so there must be
+      // a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:24: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method runBellmanFord
+    //@ loop_invariant (\forall int x; 0 <= x && x < N; infinite[x] == (\exists int y; 0 <= y && y < k; dist[y] == INFINITY));
+        ^
+1 verification failure
+

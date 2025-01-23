@@ -1,0 +1,29 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions16 {
+    //@ ensures \result <==> true;
+  public static boolean f(int x) {
+    try {
+      x++;
+    } catch (A exc) {
+      return false;
+    }
+
+    try {
+      throw new B();
+    } catch (B exc) {
+      return false;
+    }
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions16.java:22: error: unreachable statement
+    return true;
+    ^
+1 error
+

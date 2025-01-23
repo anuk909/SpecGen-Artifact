@@ -1,0 +1,219 @@
+public class GCD {
+	
+	//@ requires d != 0;
+	//@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 >= Integer.MIN_VALUE && num1 <= Integer.MAX_VALUE;
+	//@ requires num2 >= Integer.MIN_VALUE && num2 <= Integer.MAX_VALUE;
+	//@ ensures \result >= 1 && \result <= Math.min(absolute(num1), absolute(num2));
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		//@ decreases Math.min(num1 - i, num2 - i);
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures \result >= 1 && \result <= Math.min(absolute(num1), absolute(num2));
+	                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures \result >= 1 && \result <= Math.min(absolute(num1), absolute(num2));
+	                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                                ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:17:) in method gcd
+			return (num1 > num2) ? num1 : num2;
+			^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:29:
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	    ^
+16 warnings
+2 verification failures
+
+public class GCD {
+	
+	//@ requires d != 0;
+	//@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ ensures \result >= 0;
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires num1 >= Integer.MIN_VALUE && num1 <= Integer.MAX_VALUE;
+	//@ requires num2 >= Integer.MIN_VALUE && num2 <= Integer.MAX_VALUE;
+	//@ ensures \result >= 1 && \result <= Math.min(absolute(num1), absolute(num2));
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		//@ decreases Math.min(num1 - i, num2 - i);
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures \result >= 1 && \result <= Math.min(absolute(num1), absolute(num2));
+	                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures \result >= 1 && \result <= Math.min(absolute(num1), absolute(num2));
+	                                                                        ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                                ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures (\forall int i; \result < i && i <= Math.min(absolute(num1), absolute(num2)); div(absolute(num1), i) != 0 || div(absolute(num2), i) != 0);
+	                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                             ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.absolute(int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int j; 1 <= j && j < i; div(absolute(num1), j) == 0 && div(absolute(num2), j) == 0);
+		                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:17:) in method gcd
+			return (num1 > num2) ? num1 : num2;
+			^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:29:
+	//@ ensures (\forall int i; 1 <= i && i <= \result; div(absolute(num1), i) == 0 && div(absolute(num2), i) == 0);
+	    ^
+16 warnings
+2 verification failures
+
+//@ pure
+public static int absolute(int num) {
+    // method implementation
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:2: error: class, interface, enum, or record expected
+public static int absolute(int num) {
+              ^
+1 error
+
+public class GCD {
+    //@ requires a >= 0 && b >= 0;
+    //@ ensures \result >= 0;
+    public static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+}
+

@@ -1,0 +1,23 @@
+class arraylength1 {
+  //@ requires size >= 0;
+  //@ ensures \result == -1 ==> size < 0;
+  //@ ensures \result == 0 ==> size >= 0 && \result == 0 && \result == size;
+  //@ ensures \result == 1 ==> size >= 0 && \result == 1 && \result == size;
+  public static int func(int size) {
+    if (size < 0) return -1;
+    int int_array[] = new int[size];
+
+    //@ assert int_array.length == size;
+    if(int_array.length != size)
+      return 0;
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arraylength1.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/arraylength1.java:5:) in method func
+    return 1;
+    ^
+/home/max/Documents/JMLGPT/tmp/arraylength1.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/arraylength1.java:13:
+  //@ ensures \result == 1 ==> size >= 0 && \result == 1 && \result == size;
+      ^
+2 verification failures
+

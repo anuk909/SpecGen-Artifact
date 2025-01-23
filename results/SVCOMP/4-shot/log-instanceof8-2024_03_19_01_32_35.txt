@@ -1,0 +1,16 @@
+class Main {
+    //@ requires i == null;
+    //@ ensures \result == false;
+    public static boolean test(Integer i) {
+        if (i instanceof Integer) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //@ ensures \result == (!test(null)) && (test(new Integer(1)));
+    public static boolean f() {
+        return (!test(null)) && (test(new Integer(1)));
+    }
+}

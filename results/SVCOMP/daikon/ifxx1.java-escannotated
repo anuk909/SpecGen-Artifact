@@ -1,0 +1,37 @@
+class ifxx1 {
+  /*@ ensures \result == true; */
+  public static boolean f() {
+    int i = 0;
+    if (i != 0) {
+      return false;
+    }
+    i = 1;
+    if (i == 0) {
+      return false;
+    }
+    if (i < 0) {
+      return false;
+    }
+    i = 0;
+    if (i > 0) {
+      return false;
+    }
+    i = 1;
+    if (i <= 0) {
+      return false;
+    }
+    i = -1;
+    if (i >= 0) {
+      return false;
+    }
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f();
+  }
+}

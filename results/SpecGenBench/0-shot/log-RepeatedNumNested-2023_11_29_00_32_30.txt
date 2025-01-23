@@ -1,0 +1,26 @@
+public class RepeatedNumNested {
+
+    //@ requires arr != null;
+    //@ ensures \result >= -1 && \result < arr.length;
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant i >= 0 && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k < i; (\forall int j; i <= j < arr.length; arr[k] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant j >= i + 1 && j <= arr.length;
+            //@ loop_invariant (\forall int k; i <= k < j; arr[i] != arr[k]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method repeatedNum
+            //@ loop_invariant (\forall int k; i <= k < j; arr[i] != arr[k]);
+                ^
+1 verification failure
+

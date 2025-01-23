@@ -1,0 +1,1555 @@
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private Node root; // root of trie
+  private int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:73: error: An identifier with private visibility may not be used in a assignable clause with public visibility
+  //@ assignable root, N;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:73: error: An identifier with private visibility may not be used in a assignable clause with public visibility
+  //@ assignable root, N;
+                       ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:81: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == N;
+                         ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:110: error: An identifier with private visibility may not be used in a assignable clause with public visibility
+  //@ assignable root, N;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:110: error: An identifier with private visibility may not be used in a assignable clause with public visibility
+  //@ assignable root, N;
+                       ^
+9 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    //@ ensures length() == DEFAULT_LENGTH;
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    //@ ensures length() == length;
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    //@ ensures \result == length;
+    public int length() {
+      return length;
+    }
+
+    //@ requires 0 <= i && i < length;
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    //@ requires 0 <= i && i < length;
+    //@ ensures \result == array[i];
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    //@ requires 0 <= start && start < end && end <= length;
+    //@ ensures \result.length() == end - start;
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == -1 <==> (\forall CharArray k; k != key; get(k) != -1);
+  //@ ensures \result != -1 ==> get(key) == \result;
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == (get(key) != -1);
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures get(key) == val;
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == N;
+  public int size() {
+    return N;
+  }
+
+  //@ ensures \result == (size() == 0);
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == null || \result.length() <= query.length();
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  //@ requires query != null;
+  //@ ensures \result == -1 || 0 <= \result && \result <= query.length();
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  //@ requires key != null;
+  //@ assignable root, N;
+  //@ ensures (\forall CharArray k; k != key; get(k) != -1);
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  //@ requires key != null;
+  //@ ensures \result == null || \result.val == -1;
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}
+/home/max/Documents/JMLGPT/tmp/Trie.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures length() == DEFAULT_LENGTH;
+                            ^
+/home/max/Documents/JMLGPT/tmp/Trie.java:61: error: cannot find symbol
+    Node x = get2(root, key, 0);
+             ^
+  symbol:   method get2(Node,CharArray,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:77: error: cannot find symbol
+    else root = put2(root, key, val, 0);
+                ^
+  symbol:   method put2(Node,CharArray,int,int)
+  location: class Trie
+/home/max/Documents/JMLGPT/tmp/Trie.java:80: error: cannot find symbol
+  //@ requires key != null;
+               ^
+  symbol:   variable key
+  location: class Trie
+4 errors
+

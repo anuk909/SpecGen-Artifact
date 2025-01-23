@@ -1,0 +1,22 @@
+class Main {
+  //@ requires \nothing;
+  //@ ensures \result == (\forall int i; 0 <= i && i < 2; !(as[i] instanceof B));
+  public static boolean f() {
+    A[] as = {new A(), new B()};
+    if (!(!(as[0] instanceof B)))
+      return false;
+    if (!(as[1] instanceof B))
+      return false;
+    return true;
+  }
+}
+;
+
+class A {
+  //@ invariant \nothing;
+}
+
+class B extends A {
+  //@ invariant \nothing;
+}
+

@@ -1,0 +1,26 @@
+static class Node {
+  int elem;
+  Node next;
+  static Node static_next;
+
+  /*@
+    requires next != null;
+    ensures next != null && \result != null && \result.elem == \old(next.elem) && \result.next == \old(this) && next == \old(this.next);
+    ensures \result.next != null;
+  @*/
+  Node swapNode() {
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+    if (next != null)
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    return this;
+  }
+}
+

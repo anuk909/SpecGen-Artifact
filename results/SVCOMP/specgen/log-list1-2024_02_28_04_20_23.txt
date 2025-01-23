@@ -1,0 +1,309 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires e == new LinkedListEntry().Value;
+  //@ ensures (\forall int i; 0 <= i && i < index; get(i) == \old(get(i)));
+  //@ ensures get(index) == e;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e == new LinkedListEntry().Value;
+  //@ ensures size() == \old(size()) + 1;
+  //@ ensures get(size() - 1) == e;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index && index < size();
+  //@ ensures size() == \old(size()) - 1;
+  //@ ensures (\forall int i; 0 <= i && i < index; get(i) == \old(get(i)));
+  //@ ensures (\forall int i; index <= i && i < size(); get(i) == \old(get(i + 1)));
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index && index < size();
+  //@ ensures \result == get(index);
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:17: error: Object allocation is not permitted in specification expressions
+  //@ requires e == new LinkedListEntry().Value;
+                    ^
+/home/max/Documents/JMLGPT/tmp/list1.java:32: error: Object allocation is not permitted in specification expressions
+  //@ requires e == new LinkedListEntry().Value;
+                    ^
+/home/max/Documents/JMLGPT/tmp/list1.java:60: error: cannot find symbol
+    return Verifier.nondetInt();
+           ^
+  symbol:   variable Verifier
+  location: class Utils_nondet
+3 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ ensures (\forall int i; 0 <= i && i < index; get(i) == \old(get(i)));
+  //@ ensures get(index) == e;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ ensures size() == \old(size()) + 1;
+  //@ ensures get(size() - 1) == e;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index && index < size();
+  //@ ensures size() == \old(size()) - 1;
+  //@ ensures (\forall int i; 0 <= i && i < index; get(i) == \old(get(i)));
+  //@ ensures (\forall int i; index <= i && i < size(); get(i) == \old(get(i + 1)));
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index && index < size();
+  //@ ensures \result == get(index);
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= 0;
+  public static int nondet_int() {
+    return 0; // Placeholder for nondeterministic int generation
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result == true;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list1.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires 0 <= index && index < size(); 
+  ensures size() == \old(size()) - 1; 
+  ensures (\forall int i; 0 <= i && i < index; get(i) == \old(get(i))); 
+  ensures (\forall int i; index <= i && i < size(); get(i) == \old(get(i + 1))); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires 0 <= index && index < size(); 
+  ensures \result == get(index); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list1.java:48: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+  //@ ensures \result == get(index);
+                            ^
+  Reason: No logical function for method get(index) get(int)
+error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+  Reason: Unexpected exception: APPLY-HELPER java.lang.NullPointerException: Cannot read field "type" because "rhs" is null
+java.lang.NullPointerException: Cannot read field "type" because "rhs" is null
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitBinary(JmlAssertionAdder.java:13632)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBinary.accept(JCTree.java:2111)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertJML(JmlAssertionAdder.java:1648)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.applyHelper(JmlAssertionAdder.java:10710)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitApply(JmlAssertionAdder.java:8031)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodInvocation.accept(JCTree.java:1752)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitBinary(JmlAssertionAdder.java:13597)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBinary.accept(JCTree.java:2111)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertJML(JmlAssertionAdder.java:1648)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.addPostConditions(JmlAssertionAdder.java:5428)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertMethodBodyNoInit(JmlAssertionAdder.java:1256)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlMethodDecl(JmlAssertionAdder.java:17247)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlMethodDecl.accept(JmlTree.java:1383)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlClassDecl(JmlAssertionAdder.java:15904)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlClassDecl.accept(JmlTree.java:1295)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlEsc.check(JmlEsc.java:112)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.esc(JmlCompiler.java:536)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.flow(JmlCompiler.java:362)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:936)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+java.lang.NullPointerException: Cannot read field "type" because "rhs" is null
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitBinary(JmlAssertionAdder.java:13632)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBinary.accept(JCTree.java:2111)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertJML(JmlAssertionAdder.java:1648)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.applyHelper(JmlAssertionAdder.java:10710)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitApply(JmlAssertionAdder.java:8031)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodInvocation.accept(JCTree.java:1752)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitBinary(JmlAssertionAdder.java:13597)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBinary.accept(JCTree.java:2111)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertJML(JmlAssertionAdder.java:1648)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.addPostConditions(JmlAssertionAdder.java:5428)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertMethodBodyNoInit(JmlAssertionAdder.java:1256)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlMethodDecl(JmlAssertionAdder.java:17247)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlMethodDecl.accept(JmlTree.java:1383)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlClassDecl(JmlAssertionAdder.java:15904)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlClassDecl.accept(JmlTree.java:1295)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlEsc.check(JmlEsc.java:112)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.esc(JmlCompiler.java:536)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.flow(JmlCompiler.java:362)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:936)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+java.lang.RuntimeException: MISMATCHED BLOCKS
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.popBlock(JmlAssertionAdder.java:1854)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.popBlock(JmlAssertionAdder.java:1838)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.applyHelper(JmlAssertionAdder.java:11040)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitApply(JmlAssertionAdder.java:8031)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCMethodInvocation.accept(JCTree.java:1752)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitBinary(JmlAssertionAdder.java:13597)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBinary.accept(JCTree.java:2111)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertJML(JmlAssertionAdder.java:1648)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.addPostConditions(JmlAssertionAdder.java:5428)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertMethodBodyNoInit(JmlAssertionAdder.java:1256)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlMethodDecl(JmlAssertionAdder.java:17247)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlMethodDecl.accept(JmlTree.java:1383)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlClassDecl(JmlAssertionAdder.java:15904)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlClassDecl.accept(JmlTree.java:1295)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlEsc.check(JmlEsc.java:112)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.esc(JmlCompiler.java:536)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.flow(JmlCompiler.java:362)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:936)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+2 errors
+1 verification failure
+

@@ -1,0 +1,418 @@
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output;
+
+        switch (operator)
+        {
+            case '+':
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	output = num1 / num2;
+		break;
+
+	    case '%':
+		output = num1 % num2;
+                break;
+
+            default:
+                return -1;
+        }
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:28: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method calculate
+		output = num1 % num2;
+		              ^
+1 verification failure
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output;
+
+        switch (operator)
+        {
+            case '+':
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	output = num1 / num2;
+		break;
+
+	    case '%':
+		output = num1 % num2;
+                break;
+
+            default:
+                return -1;
+        }
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:36: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Calculator.java:6:) in method calculate
+        return output;
+        ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Calculator.java:36:
+    //@ ensures \result == num1 + num2;
+        ^
+2 verification failures
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output = 0;
+
+        switch (operator)
+        {
+            case '+':
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	if (num2 != 0) {
+            		output = num1 / num2;
+            	} else {
+            		output = -1;
+            	}
+		break;
+
+	    case '%':
+		if (num2 != 0) {
+            		output = num1 % num2;
+            	} else {
+            		output = -1;
+            	}
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:22: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method calculate: int multiply overflow
+            	output = num1 * num2;
+            	              ^
+1 verification failure
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output = 0;
+
+        switch (operator)
+        {
+            case '+':
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	//@ assume num1 * num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 * num2;
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	if (num2 != 0) {
+            		output = num1 / num2;
+            	} else {
+            		output = -1;
+            	}
+		break;
+
+	    case '%':
+		if (num2 != 0) {
+            		output = num1 % num2;
+            	} else {
+            		output = -1;
+            	}
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:46: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Calculator.java:6:) in method calculate
+        return output;
+        ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Calculator.java:46:
+    //@ ensures \result == num1 + num2;
+        ^
+2 verification failures
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output = 0;
+
+        switch (operator)
+        {
+            case '+':
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	//@ assume num1 * num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 * num2;
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	if (num2 != 0) {
+            		output = num1 / num2;
+            	} else {
+            		output = -1;
+            	}
+		break;
+
+	    case '%':
+		if (num2 != 0) {
+            		output = num1 % num2;
+            	} else {
+            		output = -1;
+            	}
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        //@ assert output == num1 + num2;
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:14: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method calculate: overflow in int sum
+            	output = num1 + num2;
+            	              ^
+1 verification failure
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output = 0;
+
+        switch (operator)
+        {
+            case '+':
+            	//@ assume num1 + num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 + num2;
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	//@ assume num1 - num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 - num2;
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	//@ assume num1 * num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 * num2;
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	if (num2 != 0) {
+            		//@ assume num1 / num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 / num2;
+            		output = num1 / num2;
+            	} else {
+            		output = -1;
+            	}
+		break;
+
+	    case '%':
+		if (num2 != 0) {
+            		//@ assume num1 % num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 % num2;
+            		output = num1 % num2;
+            	} else {
+            		output = -1;
+            	}
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        //@ assert output == num1 + num2;
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:50: verify: The prover cannot establish an assertion (Assert) in method calculate
+        //@ assert output == num1 + num2;
+            ^
+1 verification failure
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output = 0;
+
+        switch (operator)
+        {
+            case '+':
+            	//@ assume num1 + num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 + num2;
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	//@ assume num1 - num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 - num2;
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	//@ assume num1 * num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 * num2;
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	if (num2 != 0) {
+            		//@ assume num1 / num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 / num2;
+            		output = num1 / num2;
+            	} else {
+            		output = -1;
+            	}
+		break;
+
+	    case '%':
+		if (num2 != 0) {
+            		//@ assume num1 % num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 % num2;
+            		output = num1 % num2;
+            	} else {
+            		output = -1;
+            	}
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        //@ assert output == num1 + num2 : "Output should be equal to the sum of num1 and num2";
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:50: verify: The prover cannot establish an assertion (Assert) in method calculate: Output should be equal to the sum of num1 and num2
+        //@ assert output == num1 + num2 : "Output should be equal to the sum of num1 and num2";
+            ^
+1 verification failure
+
+public class Calculator {
+    
+    //@ requires (operator == '+' || operator == '-' || operator == '*' || operator == '/' || operator == '%');
+    //@ requires (operator != '/' || num2 != 0);
+    //@ requires (operator != '%' || num2 != 0);
+    //@ ensures \result == num1 + num2;
+    public int calculate(int num1, int num2, char operator) {
+
+        int output = 0;
+
+        switch (operator)
+        {
+            case '+':
+            	//@ assume num1 + num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 + num2;
+            	output = num1 + num2;
+                break;
+
+            case '-':
+            	//@ assume num1 - num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 - num2;
+            	output = num1 - num2;
+                break;
+
+            case '*':
+            	//@ assume num1 * num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 * num2;
+            	output = num1 * num2;
+                break;
+
+            case '/':
+            	if (num2 != 0) {
+            		//@ assume num1 / num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 / num2;
+            		output = num1 / num2;
+            	} else {
+            		output = -1;
+            	}
+		break;
+
+	    case '%':
+		if (num2 != 0) {
+            		//@ assume num1 % num2 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num1 % num2;
+            		output = num1 % num2;
+            	} else {
+            		output = -1;
+            	}
+                break;
+
+            default:
+                output = -1;
+                break;
+        }
+        //@ assert output == num1 + num2 : "Output should be equal to the sum of num1 and num2";
+        return output;
+    }
+}

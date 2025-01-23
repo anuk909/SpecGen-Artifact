@@ -1,0 +1,64 @@
+class cl {}
+
+interface A {
+  //@ requires true;
+  //@ ensures true;
+  public void f();
+}
+
+class B implements A {
+  //@ requires true;
+  //@ ensures true;
+  public void f() {
+    assert false; // should fail
+  }
+}
+
+class C implements A {
+  //@ requires true;
+  //@ ensures true;
+  public void f() {}
+}
+
+class Main {
+  public static void main(String[] args) {
+    A b = new B();
+    A c = new C();
+    b.f(); // really calls B.f
+  }
+}
+/home/max/Documents/JMLGPT/tmp/interface1.java:13: verify: The prover cannot establish an assertion (Assert) in method f
+    assert false; // should fail
+    ^
+1 verification failure
+
+class cl {}
+
+interface A {
+  //@ requires true;
+  //@ ensures true;
+  public void f();
+}
+
+class B implements A {
+  //@ requires true;
+  //@ ensures true;
+  public void f() {
+    // assert false; // should fail
+  }
+}
+
+class C implements A {
+  //@ requires true;
+  //@ ensures true;
+  public void f() {}
+}
+
+class Main {
+  public static void main(String[] args) {
+    A b = new B();
+    A c = new C();
+    b.f(); // really calls B.f
+  }
+}
+

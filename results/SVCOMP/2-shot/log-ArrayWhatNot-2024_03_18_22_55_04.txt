@@ -1,0 +1,39 @@
+class ArrayWhatNot {
+
+  class what_not {
+  };
+
+  //@ requires size >= 8;
+  //@ ensures \result == 1;
+  public static int func(int size) {
+    if (size < 8) return -1;
+
+    int int_array[] = new int[size];
+
+    //@ maintaining 0 <= i && i <= size;
+    //@ maintaining (\forall int k; 0 <= k && k < i; int_array[k] == k);
+    for (int i = 0; i < size; i++)
+      int_array[i] = i;
+
+    if (int_array[7] != 7)
+      return 0;
+
+    what_not what_not_array[] = new what_not[size];
+
+    //@ ensuring what_not_array.length == size;
+    if (what_not_array.length != size)
+      return 0;
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:23: error: ';' expected
+    //@ ensuring what_not_array.length == size;
+                               ^
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:23: error: not a statement
+    //@ ensuring what_not_array.length == size;
+                                       ^
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:23: error: Expected a declaration or a JML construct inside the JML annotation here
+    //@ ensuring what_not_array.length == size;
+                                ^
+3 errors
+

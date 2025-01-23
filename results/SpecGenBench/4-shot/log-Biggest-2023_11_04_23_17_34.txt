@@ -1,0 +1,41 @@
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> a[\result] >= (\forall int i; 0 <= i && i < a.length; a[i]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= (\forall int j; 0 <= j && j < a.length; a[j]));
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ maintaining 0 <= index && index <= a.length;
+        //@ maintaining 0 <= biggest && biggest < a.length && (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:4: error: incompatible types: int cannot be converted to boolean
+    //@ ensures 0 <= \result && \result < a.length ==> a[\result] >= (\forall int i; 0 <= i && i < a.length; a[i]);
+                                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:4: error: bad operand types for binary operator '>='
+    //@ ensures 0 <= \result && \result < a.length ==> a[\result] >= (\forall int i; 0 <= i && i < a.length; a[i]);
+                                                                  ^
+  first type:  int
+  second type: boolean
+/home/max/Documents/JMLGPT/tmp/Biggest.java:5: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= (\forall int j; 0 <= j && j < a.length; a[j]));
+                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:5: error: bad operand types for binary operator '<='
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= (\forall int j; 0 <= j && j < a.length; a[j]));
+                                                                               ^
+  first type:  int
+  second type: boolean
+4 errors
+

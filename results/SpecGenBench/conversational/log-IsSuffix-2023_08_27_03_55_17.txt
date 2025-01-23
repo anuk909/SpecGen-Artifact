@@ -1,0 +1,90 @@
+public class IsSuffix {
+
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < pat.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\forall int i; 0 <= i && i < txt.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures \result <==> (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(k));
+      @ also
+      @ public normal_behavior
+      @    requires (\exists int i; 0 <= i && i < pat.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\forall int i; 0 <= i && i < txt.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures !\result;
+      @ also
+      @ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < pat.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\exists int i; 0 <= i && i < txt.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures !\result; @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+	
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i <= pat.length() - 1;
+        //@ maintaining 0 <= j && j <= txt.length() - 1;
+        //@ maintaining (\forall int k; i < k && k <= pat.length() - 1; pat.charAt(k) == txt.charAt(k));
+        //@ maintaining i < 0 ==> \result;
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:31: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining i < 0 ==> \result;
+                                   ^
+1 error
+
+public class IsSuffix {
+
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < pat.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\forall int i; 0 <= i && i < txt.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures \result <==> (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(k));
+      @ also
+      @ public normal_behavior
+      @    requires (\exists int i; 0 <= i && i < pat.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\forall int i; 0 <= i && i < txt.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures !\result;
+      @ also
+      @ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < pat.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+      @    requires (\exists int i; 0 <= i && i < txt.length(); 
+      @                        (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+      @    ensures !\result; @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+	
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i <= pat.length() - 1;
+        //@ maintaining 0 <= j && j <= txt.length() - 1;
+        //@ maintaining (\forall int k; i < k && k <= pat.length() - 1; pat.charAt(k) == txt.charAt(k));
+        //@ decreasing i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}

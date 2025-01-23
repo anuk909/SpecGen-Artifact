@@ -1,0 +1,60 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class Main {
+  //@ ensures (\exists int i; 0 <= i && i < args.length; args[i] instanceof A);
+  //@ ensures (\forall int i; 0 <= i && i < args.length; !(args[i] instanceof B));
+  static void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (C exc) {
+      int i = 0;
+    }
+  }
+
+  //@ ensures (\exists int i; 0 <= i && i < args.length; args[i] instanceof A);
+  //@ ensures (\forall int i; 0 <= i && i < args.length; !(args[i] instanceof B));
+  public static void main(String[] args) {
+    try {
+      A a = new A();
+      foo();
+      throw a;
+    } catch (B exc) {
+      assert false;
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:8: error: cannot find symbol
+  //@ ensures (\exists int i; 0 <= i && i < args.length; args[i] instanceof A);
+                                            ^
+  symbol:   variable args
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:8: error: cannot find symbol
+  //@ ensures (\exists int i; 0 <= i && i < args.length; args[i] instanceof A);
+                                                         ^
+  symbol:   variable args
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:9: error: cannot find symbol
+  //@ ensures (\forall int i; 0 <= i && i < args.length; !(args[i] instanceof B));
+                                            ^
+  symbol:   variable args
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:9: error: cannot find symbol
+  //@ ensures (\forall int i; 0 <= i && i < args.length; !(args[i] instanceof B));
+                                                           ^
+  symbol:   variable args
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:19: error: incompatible types: String cannot be converted to A
+  //@ ensures (\exists int i; 0 <= i && i < args.length; args[i] instanceof A);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/exceptions8.java:20: error: incompatible types: String cannot be converted to B
+  //@ ensures (\forall int i; 0 <= i && i < args.length; !(args[i] instanceof B));
+                                                               ^
+6 errors
+

@@ -1,0 +1,21 @@
+public class Main {
+  //@ requires args != null;
+  //@ requires args.length == 1;
+  //@ requires args[0] != null;
+  public static void main(String[] args) {
+    String[] strings = new String[4];
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ loop_invariant 0 <= i && i <= 4;
+    //@ loop_invariant (\forall int k; 0 <= k && k < i; strings[k].endsWith("ed"));
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+

@@ -1,0 +1,373 @@
+class Main {
+  static int field;
+
+  //@ requires \symbolic int x;
+  //@ requires \symbolic int z;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public static boolean f() {
+    int x = 3;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ requires \symbolic int x;
+  //@ requires \symbolic int z;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe10");
+    int y = 3;
+    x = x * z;
+    z = -x + y;
+    if (z <= 0) System.out.println("branch FOO1");
+    else {
+      System.out.println("branch FOO2");
+      return false;
+    }
+    if (x <= 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:4: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:5: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic int z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:16: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:17: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic int z;
+               ^
+4 errors
+
+class Main {
+  static int field;
+
+  //@ requires \forall int x; 
+  //@ requires \forall int z;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public static boolean f() {
+    int x = 3;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ requires \forall int x;
+  //@ requires \forall int z;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe10");
+    int y = 3;
+    x = x * z;
+    z = -x + y;
+    if (z <= 0) System.out.println("branch FOO1");
+    else {
+      System.out.println("branch FOO2");
+      return false;
+    }
+    if (x <= 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:5: error: Expected a semicolon to separate the parts of a JML quantified expression
+  //@ requires \forall int z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:8: error: Incorrectly formed or terminated requires statement near here
+  public static boolean f() {
+  ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:11: error: Method specs may not precede a variable declaration
+    Main inst = new Main();
+         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:12: error: <identifier> expected
+    field = 9;
+         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:13: error: illegal start of type
+    return inst.test(x, field);
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:13: error: <identifier> expected
+    return inst.test(x, field);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:13: error: <identifier> expected
+    return inst.test(x, field);
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:13: error: <identifier> expected
+    return inst.test(x, field);
+                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:16: error: Unexpected or misspelled JML token: requires
+  //@ requires \forall int x;
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:16: error: Unexpected or misspelled JML token: \forall
+  //@ requires \forall int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:16: error: Unexpected or misspelled JML token: int
+  //@ requires \forall int x;
+                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:16: error: Unexpected or misspelled JML token: x
+  //@ requires \forall int x;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:16: error: Unexpected or misspelled JML token: 
+  //@ requires \forall int x;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:17: error: Unexpected or misspelled JML token: requires
+  //@ requires \forall int z;
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:17: error: Unexpected or misspelled JML token: \forall
+  //@ requires \forall int z;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:17: error: Unexpected or misspelled JML token: int
+  //@ requires \forall int z;
+                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:17: error: Unexpected or misspelled JML token: z
+  //@ requires \forall int z;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:17: error: Unexpected or misspelled JML token: 
+  //@ requires \forall int z;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: ensures
+  //@ ensures \result ==> z <= 0;
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: \result
+  //@ ensures \result ==> z <= 0;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: ==
+  //@ ensures \result ==> z <= 0;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: z
+  //@ ensures \result ==> z <= 0;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: <=
+  //@ ensures \result ==> z <= 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: 0
+  //@ ensures \result ==> z <= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:18: error: Unexpected or misspelled JML token: 
+  //@ ensures \result ==> z <= 0;
+                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: ensures
+  //@ ensures !\result ==> x > 0;
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: !
+  //@ ensures !\result ==> x > 0;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: \result
+  //@ ensures !\result ==> x > 0;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: ==
+  //@ ensures !\result ==> x > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: x
+  //@ ensures !\result ==> x > 0;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: >
+  //@ ensures !\result ==> x > 0;
+                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: 0
+  //@ ensures !\result ==> x > 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:19: error: Unexpected or misspelled JML token: 
+  //@ ensures !\result ==> x > 0;
+                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:20: error: class, interface, enum, or record expected
+  public boolean test(int x, int z) {
+         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:22: error: class, interface, enum, or record expected
+    int y = 3;
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:23: error: class, interface, enum, or record expected
+    x = x * z;
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:24: error: class, interface, enum, or record expected
+    z = -x + y;
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:25: error: class, interface, enum, or record expected
+    if (z <= 0) System.out.println("branch FOO1");
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:26: error: class, interface, enum, or record expected
+    else {
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:28: error: class, interface, enum, or record expected
+      return false;
+      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:29: error: class, interface, enum, or record expected
+    }
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:31: error: class, interface, enum, or record expected
+    else System.out.println("branch BOO2");
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:32: error: class, interface, enum, or record expected
+    return true;
+    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:33: error: class, interface, enum, or record expected
+  }
+  ^
+44 errors
+
+class Main {
+  static int field;
+
+  //@ requires true;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public static boolean f() {
+    int x = 3;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ requires true;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe10");
+    int y = 3;
+    x = x * z;
+    z = -x + y;
+    if (z <= 0) System.out.println("branch FOO1");
+    else {
+      System.out.println("branch FOO2");
+      return false;
+    }
+    if (x <= 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:5: error: cannot find symbol
+  //@ ensures \result ==> z <= 0;
+                          ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:6: error: cannot find symbol
+  //@ ensures !\result ==> x > 0;
+                           ^
+  symbol:   variable x
+  location: class Main
+2 errors
+
+class Main {
+  static int field;
+
+  //@ requires true;
+  //@ ensures \result ==> field <= 0;
+  //@ ensures !\result ==> x > 0;
+  public static boolean f() {
+    int x = 3;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ requires true;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe10");
+    int y = 3;
+    x = x * z;
+    z = -x + y;
+    if (z <= 0) System.out.println("branch FOO1");
+    else {
+      System.out.println("branch FOO2");
+      return false;
+    }
+    if (x <= 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field <= 0;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:6: error: cannot find symbol
+  //@ ensures !\result ==> x > 0;
+                           ^
+  symbol:   variable x
+  location: class Main
+2 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures \result ==> field <= 0;
+  //@ ensures !\result ==> x > 0;
+  public static boolean f() {
+    int x = 3;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ requires true;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe10");
+    int y = 3;
+    x = x * z;
+    z = -x + y;
+    if (z <= 0) System.out.println("branch FOO1");
+    else {
+      System.out.println("branch FOO2");
+      return false;
+    }
+    if (x <= 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe10.java:6: error: cannot find symbol
+  //@ ensures !\result ==> x > 0;
+                           ^
+  symbol:   variable x
+  location: class Main
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+
+  //@ requires true;
+  //@ ensures \result ==> field <= 0;
+  //@ ensures !\result ==> field > 0;
+  public static boolean f() {
+    int x = 3;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  //@ requires true;
+  //@ ensures \result ==> z <= 0;
+  //@ ensures !\result ==> x > 0;
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe10");
+    int y = 3;
+    x = x * z;
+    z = -x + y;
+    if (z <= 0) System.out.println("branch FOO1");
+    else {
+      System.out.println("branch FOO2");
+      return false;
+    }
+    if (x <= 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}

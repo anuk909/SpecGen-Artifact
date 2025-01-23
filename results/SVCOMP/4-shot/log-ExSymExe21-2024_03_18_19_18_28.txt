@@ -1,0 +1,52 @@
+class Main {
+    static int field;
+    static int field2;
+
+    //@ requires x == 3;
+    //@ ensures \result == true <==> (r >= 99 && x >= z);
+    public static boolean f() {
+        int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field, field2);
+    }
+
+    //@ requires x == 3;
+    //@ ensures \result == true <==> (r >= 99 && x >= z);
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe21");
+        int y = 3;
+        r = x + z;
+        z = x - y - 4;
+        if (r >= 99) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= z) System.out.println("branch BOO1");
+        else {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:5: error: cannot find symbol
+    //@ requires x == 3;
+                 ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:6: error: cannot find symbol
+    //@ ensures \result == true <==> (r >= 99 && x >= z);
+                                      ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:6: error: cannot find symbol
+    //@ ensures \result == true <==> (r >= 99 && x >= z);
+                                                 ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:6: error: cannot find symbol
+    //@ ensures \result == true <==> (r >= 99 && x >= z);
+                                                      ^
+  symbol:   variable z
+  location: class Main
+4 errors
+

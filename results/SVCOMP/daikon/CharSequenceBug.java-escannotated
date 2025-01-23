@@ -1,0 +1,24 @@
+public class CharSequenceBug {
+  /*@ ensures \result == false; */
+  public static boolean fun(String s) {
+    CharSequence target = "b";
+    String replaced = "";
+    if (target.length() == 1) replaced = s.replace('b', 'c');
+    return replaced.indexOf('b') != -1;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+  }
+}

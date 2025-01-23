@@ -1,0 +1,29 @@
+class InetAddress {
+  // No JML specification provided as it is a placeholder class
+}
+
+class InetSocketAddress {
+  // No JML specification provided as it is a placeholder class
+}
+
+public class exceptions15 {
+  //@ ensures \result.equals("Foo");
+  public static String lookupPtrRecord(InetAddress address) {
+    return "Foo";
+  }
+
+  //@ ensures \result == address;
+  public static InetAddress reverse(InetAddress address) {
+    return address;
+  }
+
+  public static void main(String[] args) {
+    try {
+      InetAddress address = new InetAddress();
+      String domainName = lookupPtrRecord(reverse(address));
+    } catch (Exception e) {
+      assert false; // This is an assertion to indicate that the catch block should not be reached
+    }
+  }
+}
+

@@ -1,0 +1,32 @@
+class DigitRoot {
+    //@ requires 0 <= num && num <= Integer.MAX_VALUE;
+    //@ ensures \result >= 0 && \result < 10;
+    public int digitRoot(int num) {
+        //@ maintaining num >= 10 ==> (\exists int i; 0 <= i && i < num.length(); num == \old(num) / 10^i);
+        //@ maintaining num < 10;
+        while (num >= 10) {
+            int sum = 0;
+            //@ maintaining (\forall int i; 0 <= i && i < num.length(); sum == \sum int j; 0 <= j && j < i; \old(num) % 10);
+            //@ decreases num;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+        }
+        return num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitRoot.java:5: error: int cannot be dereferenced
+        //@ maintaining num >= 10 ==> (\exists int i; 0 <= i && i < num.length(); num == \old(num) / 10^i);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitRoot.java:5: error: bad operand types for binary operator '^'
+        //@ maintaining num >= 10 ==> (\exists int i; 0 <= i && i < num.length(); num == \old(num) / 10^i);
+                                                                                                       ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/DigitRoot.java:9: error: int cannot be dereferenced
+            //@ maintaining (\forall int i; 0 <= i && i < num.length(); sum == \sum int j; 0 <= j && j < i; \old(num) % 10);
+                                                             ^
+3 errors
+

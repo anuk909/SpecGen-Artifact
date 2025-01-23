@@ -1,0 +1,23 @@
+public class URLDecoder02 {
+
+  //@ requires arg != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(String arg) {
+    String s1 = Verifier.nondetString() + "some-url";
+
+    try {
+      //@ assert s1 != null;
+      String s2 = java.net.URLDecoder.decode(s1, "UTF-8");
+      //@ assert s2 != null;
+      //@ assert s2.equals(java.net.URLDecoder.decode(s1, "UTF-8"));
+      //@ assert s2.startsWith("some") ==> \result == true;
+      //@ assert !s2.startsWith("some") ==> \result == false;
+      if (!s2.startsWith("some")) {
+        return false;
+      }
+    } catch (java.io.UnsupportedEncodingException e) {
+    }
+    return true;
+  }
+}
+

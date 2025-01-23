@@ -1,0 +1,43 @@
+class UglyNum {
+    //@ requires n >= 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isUgly(int n) {
+        //@ assume n >= 0;
+        if (n <= 0) {
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert n > 0;
+        while (n % 2 == 0) {
+            //@ assert n % 2 == 0;
+            //@ assert n > 0;
+            n /= 2;
+            //@ assert n >= 0;
+        }
+        //@ assert n % 2 != 0;
+        //@ assert n > 0;
+        while (n % 3 == 0) {
+            //@ assert n % 3 == 0;
+            //@ assert n > 0;
+            n /= 3;
+            //@ assert n >= 0;
+        }
+        //@ assert n % 3 != 0;
+        //@ assert n > 0;
+        while (n % 5 == 0) {
+            //@ assert n % 5 == 0;
+            //@ assert n > 0;
+            n /= 5;
+            //@ assert n >= 0;
+        }
+        //@ assert n % 5 != 0;
+        //@ assert n > 0;
+        //@ assert n != 1 || n == 1;
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:7: error: A \result expression may not be in a assert clause
+            //@ assert \result == false;
+                        ^
+1 error
+

@@ -1,0 +1,22 @@
+class SelfDeviding {
+    //@ requires num >= 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; i >= 0 && i < temp; num % (temp % 10) == 0);
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit >= 0 && digit <= 9;
+            //@ assert temp % digit == 0;
+            if (digit == 0 || num % digit != 0) {
+                //@ assert \result == false;
+                return false;
+            }
+            temp /= 10;
+        }
+        //@ assert \result == true;
+        return true;
+    }
+}

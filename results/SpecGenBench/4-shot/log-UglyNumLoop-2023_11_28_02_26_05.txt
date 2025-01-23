@@ -1,0 +1,40 @@
+class UglyNum {
+    //@ ensures \result <==> n <= 0;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        //@ maintaining n % 2 == 0 ==> n == \old(n) / 2;
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        //@ maintaining n % 3 == 0 ==> n == \old(n) / 3;
+        //@ decreases n;
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        //@ maintaining n % 5 == 0 ==> n == \old(n) / 5;
+        //@ decreases n;
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        //@ ensures \result <==> n == 1;
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:22: warning: A refining statement is required for statement specifications
+        //@ ensures \result <==> n == 1;
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:13: verify: The prover cannot establish an assertion (LoopDecreases) in method isUgly
+        //@ decreases n;
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:22: warning: INTERNAL ERROR: Unexpected statements following a return statement are ignored
+        //@ ensures \result <==> n == 1;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:8: verify: The prover cannot establish an assertion (LoopDecreases) in method isUgly
+        //@ decreases n;
+            ^
+2 warnings
+2 verification failures
+

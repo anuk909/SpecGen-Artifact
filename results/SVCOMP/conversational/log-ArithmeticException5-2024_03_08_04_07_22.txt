@@ -1,0 +1,34 @@
+public class ArithmeticException5 {
+    //@ requires i != 0.0;
+    //@ ensures \result == true <==> 10 / i does not throw an ArithmeticException;
+    //@ ensures \result == false <==> 10 / i throws an ArithmeticException;
+    public static boolean arithmeticException5(double i) {
+        try {
+            double j = 10 / i;
+        } catch (ArithmeticException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ArithmeticException5.java:3: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result == true <==> 10 / i does not throw an ArithmeticException;
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ArithmeticException5.java:4: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result == false <==> 10 / i throws an ArithmeticException;
+                                             ^
+2 errors
+
+public class ArithmeticException5 {
+    //@ requires i != 0.0;
+    //@ ensures (\result == true && \old(i) != 0.0) || (\result == false && \old(i) == 0.0);
+    public static boolean arithmeticException5(double i) {
+        try {
+            double j = 10 / i;
+        } catch (ArithmeticException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+

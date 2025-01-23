@@ -1,0 +1,35 @@
+class PerfectNumber {
+    //@ requires num > 0;
+    //@ ensures \result <==> (\exists int d; 2 <= d && d * d <= num; (num % d == 0 && (\forall int k; 2 <= k && k < d; num % k != 0)) && (\forall int k; d * d < k && k <= num; num % k != 0) && (\forall int k; 2 <= k && k < num; num % k != 0));
+    public boolean isPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        int sum = 1;
+        //@ maintaining 2 <= d && d * d <= num + 1 && sum == 1 + (\sum int k; 2 <= k && k < d; (num % k == 0) ? k + (d * d < num ? num / k : 0) : 0);
+        //@ decreases num - d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum == num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:10: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 2 <= d && d * d <= num + 1 && sum == 1 + (\sum int k; 2 <= k && k < d; (num % k == 0) ? k + (d * d < num ? num / k : 0) : 0);
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:10: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 2 <= d && d * d <= num + 1 && sum == 1 + (\sum int k; 2 <= k && k < d; (num % k == 0) ? k + (d * d < num ? num / k : 0) : 0);
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:10: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 2 <= d && d * d <= num + 1 && sum == 1 + (\sum int k; 2 <= k && k < d; (num % k == 0) ? k + (d * d < num ? num / k : 0) : 0);
+                                                                  ^
+error: An error while executing a proof script for isPerfectNumber: (error "Solver has unexpectedly terminated")
+1 error
+3 warnings
+

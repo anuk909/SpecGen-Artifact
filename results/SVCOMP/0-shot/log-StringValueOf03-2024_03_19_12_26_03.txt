@@ -1,0 +1,25 @@
+public class StringValueOf03 {
+  //@ requires arg != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(String arg) {
+    //@ requires arg.length() >= 8;
+    //@ assignable \nothing;
+    //@ ensures \result == true ==> \result == true;
+    //@ ensures \result == false ==> \result == false;
+    if (arg.length() < 8)
+      return false;
+    
+    char[] charArray = {
+      arg.charAt(0), arg.charAt(1), arg.charAt(2),
+      arg.charAt(3), arg.charAt(4), arg.charAt(5),
+      arg.charAt(6), arg.charAt(7)
+    };
+    
+    String tmp = String.valueOf(charArray, 3, 3);
+    
+    //@ assignable \nothing;
+    //@ ensures \result == true || \result == false;
+    return tmp.equals("fbbl");
+  }
+}
+

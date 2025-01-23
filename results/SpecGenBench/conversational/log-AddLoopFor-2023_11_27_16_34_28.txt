@@ -1,0 +1,388 @@
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x;
+            //@ maintaining sum == y + (x - n);
+            //@ decreases n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x;
+            //@ maintaining sum == y - (x + n);
+            //@ decreases n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:17: verify: The prover cannot establish an assertion (LoopInvariant) in method addLoop
+            //@ maintaining sum == y - (x + n);
+                ^
+1 verification failure
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:17: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method addLoop
+            //@ maintaining sum == y - (n - 1);
+                ^
+1 verification failure
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+                //@ maintaining sum == y + (x - n);
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+                //@ maintaining sum == y - (-x + n);
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y + (x - n);
+                    ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:22: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y - (-x + n);
+                    ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+            //@ maintaining sum == y + (x - n);
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+            //@ maintaining sum == y - (-x + n);
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:16: error: illegal start of statement
+        } else {
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining sum == y + (x - n);
+                ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:24: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining sum == y - (-x + n);
+                ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+                //@ maintaining sum == y + (x - n);
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+                //@ maintaining sum == y - (-x + n);
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y + (x - n);
+                    ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:22: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y - (-x + n);
+                    ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+                //@ maintaining sum == y + (x - n);
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+                //@ maintaining sum == y - (-x + n);
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y + (x - n);
+                    ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:22: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y - (-x + n);
+                    ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+            //@ maintaining sum == y + (x - n);
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+            //@ maintaining sum == y - (-x + n);
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:16: error: illegal start of statement
+        } else {
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining sum == y + (x - n);
+                ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:24: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining sum == y - (-x + n);
+                ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+                //@ maintaining sum == y + (x - n);
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+                //@ maintaining sum == y - (-x + n);
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y + (x - n);
+                    ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:22: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y - (-x + n);
+                    ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+            //@ maintaining sum == y + (x - n);
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+            //@ maintaining sum == y - (-x + n);
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:16: error: illegal start of statement
+        } else {
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining sum == y + (x - n);
+                ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:24: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining sum == y - (-x + n);
+                ^
+4 errors
+
+public class AddLoopFor {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining 0 <= n && n <= x+1;
+            //@ maintaining sum == y + (n - 1);
+            //@ decreases x - n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+                //@ maintaining sum == y + (x - n);
+            }
+        } else {
+            //@ maintaining 0 <= n && n <= -x+1;
+            //@ maintaining sum == y - (n - 1);
+            //@ decreases -x - n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+                //@ maintaining sum == y - (-x + n);
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:15: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:14: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y + (x - n);
+                    ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:23: error: illegal start of statement
+            }
+            ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:22: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining sum == y - (-x + n);
+                    ^
+4 errors
+

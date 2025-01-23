@@ -1,0 +1,41 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final Map<String, Object> map = new HashMap<>();
+
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+
+  public static void main(String[] args) {
+    HttpSession s = new HttpSession();
+    s.setAttribute("1", 1);
+    s.setAttribute("123", "123");
+    s.setAttribute("1.0", "1.0");
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: verify: The prover cannot establish an assertion (PossiblyNullReturn: /home/max/Documents/JMLGPT/tmp/HttpSession.java:10:) in method getAttribute: getAttribute
+  public Object getAttribute(String name) {
+         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/HttpSession.java:10:
+  public Object getAttribute(String name) {
+                ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:11: verify: Associated method exit
+    return map.get(name);
+    ^
+3 verification failures
+

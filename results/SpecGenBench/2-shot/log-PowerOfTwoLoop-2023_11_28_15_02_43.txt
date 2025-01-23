@@ -1,0 +1,29 @@
+class PowerOfTwoLoop {
+    //@ ensures \result ==> n > 0 && (\forall int i; 0 <= i && i < \old(n); (\exists int j; 0 <= j; j++) \old(n) == 2^j);
+    //@ ensures !\result ==> n <= 0 || (\exists int i; 0 <= i && i < \old(n); \old(n) != 2^i);
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && (\exists int i; 0 <= i && i < \old(n); \old(n) == 2^i);
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoLoop.java:2: error: ')' expected
+    //@ ensures \result ==> n > 0 && (\forall int i; 0 <= i && i < \old(n); (\exists int j; 0 <= j; j++) \old(n) == 2^j);
+                                                                                                        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoLoop.java:2: error: Token \old is not a type
+    //@ ensures \result ==> n > 0 && (\forall int i; 0 <= i && i < \old(n); (\exists int j; 0 <= j; j++) \old(n) == 2^j);
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoLoop.java:2: error: <identifier> expected
+    //@ ensures \result ==> n > 0 && (\forall int i; 0 <= i && i < \old(n); (\exists int j; 0 <= j; j++) \old(n) == 2^j);
+                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoLoop.java:2: error: ';' expected
+    //@ ensures \result ==> n > 0 && (\forall int i; 0 <= i && i < \old(n); (\exists int j; 0 <= j; j++) \old(n) == 2^j);
+                                                                                                                ^
+4 errors
+

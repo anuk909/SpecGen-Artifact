@@ -1,0 +1,24 @@
+public class CopyArray {
+ 
+    //@ requires b != null;
+    //@ requires a != null;
+    //@ requires iBegin >= 0 && iBegin <= b.length;
+    //@ requires iEnd >= 0 && iEnd <= b.length;
+    //@ requires iBegin <= iEnd;
+    //@ requires iEnd <= a.length;
+    //@ ensures (\forall int i; i >= iBegin && i < iEnd; a[i] == b[i]);
+
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+        int k = iBegin;
+
+        //@ loop_invariant iEnd - k >= 0;
+        //@ loop_invariant k >= iBegin && k <= iEnd;
+        //@ loop_invariant (\forall int i; i >= iBegin && i < k; a[i] == b[i]);
+        //@ decreases iEnd - k;
+
+        while (iEnd - k > 0) {
+            a[k] = b[k];
+            k = k + 1 ;
+        }
+    }
+}

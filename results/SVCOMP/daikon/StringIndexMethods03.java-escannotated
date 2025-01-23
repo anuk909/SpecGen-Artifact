@@ -1,0 +1,18 @@
+public class StringIndexMethods03 {
+  /*@ ensures (\result == true)  ==>  (\old(letters) != null); */
+  public static boolean f(String letters) {
+    return letters.lastIndexOf('$') == 1;
+  }
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("aaaaaaaaaaa");
+    f("");
+    f("$");
+    f("0$");
+    f("bbbbbba");
+    f("hello world");
+  }
+}

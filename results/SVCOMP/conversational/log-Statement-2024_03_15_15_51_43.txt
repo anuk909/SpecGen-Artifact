@@ -1,0 +1,387 @@
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ ensures \result == null;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            assert false;
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ ensures \result == null;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            assert false;
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ ensures \result == null;
+    public void executeQuery(String s) {
+        if (s.contains("<bad/>")) {
+            assert false;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:6: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result == null;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:14: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result == null;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result == null;
+                 ^
+3 errors
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            assert false;
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            assert false;
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    public void executeQuery(String s) {
+        if (s.contains("<bad/>")) {
+            assert false;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:8: verify: The prover cannot establish an assertion (Assert) in method execute
+            assert false;
+            ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: The prover cannot establish an assertion (Assert) in method executeQuery
+            assert false;
+            ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:15: verify: The prover cannot establish an assertion (Assert) in method executeUpdate
+            assert false;
+            ^
+3 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) false;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) false;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:9: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:6:) in method execute
+            throw new SQLException();
+            ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:9:
+    //@ signals (SQLException e) false;
+        ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:17: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:14:) in method executeUpdate
+            throw new SQLException();
+            ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:14: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:17:
+    //@ signals (SQLException e) false;
+        ^
+6 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+2 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+2 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+2 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+2 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+2 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) true;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+2 verification failures
+
+class SQLException extends Exception {
+}
+
+public class Statement {
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) false;
+    public void execute(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals (SQLException e) false;
+    public void executeUpdate(String s, Object... o) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+
+    //@ requires !s.contains("<bad/>");
+    //@ signals_only SQLException;
+    public void executeQuery(String s) throws SQLException {
+        if (s.contains("<bad/>")) {
+            throw new SQLException();
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Statement.java:9: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:6:) in method execute
+            throw new SQLException();
+            ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:9:
+    //@ signals (SQLException e) false;
+        ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:24: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/Statement.java:22:) in method executeQuery
+        if (s.contains("<bad/>")) {
+                      ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:24:
+    //@ signals_only SQLException;
+        ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:17: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/Statement.java:14:) in method executeUpdate
+            throw new SQLException();
+            ^
+/home/max/Documents/JMLGPT/tmp/Statement.java:14: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Statement.java:17:
+    //@ signals (SQLException e) false;
+        ^
+6 verification failures
+

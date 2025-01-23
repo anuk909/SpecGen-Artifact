@@ -1,0 +1,38 @@
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \typeof(nums1) == \type(int[]) && \typeof(nums2) == \type(int[]);
+    //@ ensures \result != null && \typeof(\result) == \type(int[]);
+    public static int[] merge(int[] nums1, int[] nums2) {
+        //@ assert nums1 != null && nums2 != null;
+        //@ assert \typeof(nums1) == \type(int[]) && \typeof(nums2) == \type(int[]);
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ loop_invariant p1 >= 0 && p1 <= m;
+        //@ loop_invariant p2 >= 0 && p2 <= n;
+        //@ loop_invariant p1 + p2 <= m + n;
+        //@ loop_invariant (\forall int i; i >= 0 && i < p1 + p2; sorted[i] == nums1[0..p1-1]@+nums2[0..p2-1]);
+        //@ decreases m + n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            //@ assert p1 >= 0 && p1 <= m;
+            //@ assert p2 >= 0 && p2 <= n;
+            //@ assert p1 + p2 <= m + n;
+            //@ assert (\forall int i; i >= 0 && i < p1 + p2; sorted[i] == nums1[0..p1-1]@+nums2[0..p2-1]);
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ assert p1 >= m && p2 >= n;
+        //@ assert p1 + p2 >= m + n;
+        //@ assert (\forall int i; i >= 0 && i < p1 + p2; sorted[i] == nums1[0..m-1]@+nums2[0..n-1]);
+        return sorted;
+    }
+}

@@ -1,0 +1,42 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final Map<String, Object> map = new HashMap<>();
+
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result != null ==> \result.hasMoreElements() && (\forall String key; \result.hasMoreElements(); map.containsKey(\result.nextElement()));
+  //@ ensures \result != null ==> \result.hasMoreElements() && (\forall String key; map.containsKey(key); \result.hasMoreElements());
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ ensures map.containsKey(name) && map.get(name) == value;
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == map.get(name);
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result != null ==> \result.hasMoreElements() && (\forall String key; \result.hasMoreElements(); map.containsKey(\result.nextElement()));
+                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result != null ==> \result.hasMoreElements() && (\forall String key; map.containsKey(key); \result.hasMoreElements());
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:21: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures map.containsKey(name) && map.get(name) == value;
+              ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:21: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures map.containsKey(name) && map.get(name) == value;
+                                       ^
+5 errors
+

@@ -1,0 +1,42 @@
+public class charArray {
+  /*@ modifies c[*]; */
+  /*@ ensures \result == \old(c); */
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  /*@ ensures \result == -1 || \result == 1; */
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+
+    char[] c1 = {};
+    f(c1);
+    char[] c2 = {'1'};
+    f(c2);
+    char[] c3 = {'1', '2'};
+    f(c3);
+    char[] c4 = {'1', 'c', '$', 'g', 'u'};
+    f(c4);
+  }
+}

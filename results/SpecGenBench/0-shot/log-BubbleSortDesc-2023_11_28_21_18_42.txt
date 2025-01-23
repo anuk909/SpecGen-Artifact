@@ -1,0 +1,42 @@
+public class BubbleSortDesc { 
+
+    //@ requires array != null;
+    //@ requires x >= 0 && x < array.length;
+    //@ requires y >= 0 && y < array.length;
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires arr != null;
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; \result[i] >= \result[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ loop_invariant 0 <= i && i <= n-1;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; arr[k] >= arr[k+1]);
+        //@ decreases n - i;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ loop_invariant 0 <= j && j <= n-i-1;
+            //@ loop_invariant (\forall int k; 0 <= k && k < j; arr[k] >= arr[k+1]);
+            //@ decreases n - i - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] > arr[j]) {  
+                    swap(j, j + 1, arr); 
+                } 
+            }
+        } 
+        return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSortDesc.java:21: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method bubbleSort
+        //@ loop_invariant 0 <= i && i <= n-1;
+            ^
+1 verification failure
+

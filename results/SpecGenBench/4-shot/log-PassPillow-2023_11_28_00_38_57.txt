@@ -1,0 +1,34 @@
+class PassPillow {
+    //@ requires n > 0;
+    //@ requires time >= 0;
+    //@ ensures \result >= 1 && \result <= 2 * n;
+    //@ ensures \result == spec_passPillow(n, time);
+    public int passPillow(int n, int time) {
+        time %= (n - 1) * 2;
+        return time < n ? time + 1 : n * 2 - time - 1;
+    }
+
+    //@ requires n > 0;
+    //@ requires time >= 0;
+    //@ ensures \result >= 1 && \result <= 2 * n;
+    public static int spec_passPillow(int n, int time) {
+        int result = time % (2 * (n - 1));
+        if (result < n) {
+            return result + 1;
+        } else {
+            return 2 * n - result - 1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PassPillow.java:5: warning: A non-pure method is being called where it is not permitted: PassPillow.spec_passPillow(int,int)
+    //@ ensures \result == spec_passPillow(n, time);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/PassPillow.java:7: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method passPillow
+        time %= (n - 1) * 2;
+             ^
+/home/max/Documents/JMLGPT/tmp/PassPillow.java:15: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method spec_passPillow
+        int result = time % (2 * (n - 1));
+                          ^
+1 warning
+2 verification failures
+

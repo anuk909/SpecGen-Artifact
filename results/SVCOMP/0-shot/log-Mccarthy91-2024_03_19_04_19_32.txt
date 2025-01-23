@@ -1,0 +1,16 @@
+public class Mccarthy91 {
+  //@ requires true;
+  //@ ensures \result >= 91 && \result <= 100;
+  public static int f(int n) {
+    if (n > 100) {
+      //@ assert n > 100;
+      //@ assert \result == n - 10;
+      return n - 10;
+    } else {
+      //@ assert n <= 100;
+      //@ assert \result == f(f(n + 11));
+      return f(f(n + 11));
+    }
+  }
+}
+

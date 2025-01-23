@@ -1,0 +1,33 @@
+public class TokenTest01 {
+    //@ ensures \result <==> sentence.split(" ").length != 4 && (\forall int i; 0 <= i && i < sentence.split(" ").length; 
+    //@             (i == 0 && sentence.split(" ")[i].equals("automatic")) || (i == 1 && sentence.split(" ")[i].equals("test")) ||
+    //@             (i == 2 && sentence.split(" ")[i].equals("case")) || (i == 3 && sentence.split(" ")[i].equals("generation")));
+    public static boolean f() {
+        String sentence = "automatic test case generation";
+        String[] tokens = sentence.split(" ");
+        if(tokens.length == 4) return false;
+
+        int i = 0;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}

@@ -1,0 +1,589 @@
+class A1 {
+  //@ public model int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  //@ public model int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  //@ public model int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:7: error: cannot find symbol
+    some_member = 1;
+    ^
+  symbol:   variable some_member
+  location: class A1
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:18: error: cannot find symbol
+    some_other_member = 2;
+    ^
+  symbol:   variable some_other_member
+  location: class A2
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:29: error: cannot find symbol
+    yet_another_member = 3;
+    ^
+  symbol:   variable yet_another_member
+  location: class A3
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:37: error: cannot find symbol
+    assert a3.some_member == 1;
+             ^
+  symbol:   variable some_member
+  location: variable a3 of type A3
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:38: error: cannot find symbol
+    assert a3.some_other_member == 2;
+             ^
+  symbol:   variable some_other_member
+  location: variable a3 of type A3
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:39: error: cannot find symbol
+    assert a3.yet_another_member == 3;
+             ^
+  symbol:   variable yet_another_member
+  location: variable a3 of type A3
+9 errors
+
+class A1 {
+  //@ public model spec_public int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  //@ public model spec_public int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  //@ public model spec_public int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:2: error: This JML modifier is not allowed for a model field declaration
+  //@ public model spec_public int some_member;
+                   ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:7: error: cannot find symbol
+    some_member = 1;
+    ^
+  symbol:   variable some_member
+  location: class A1
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:13: error: This JML modifier is not allowed for a model field declaration
+  //@ public model spec_public int some_other_member;
+                   ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:18: error: cannot find symbol
+    some_other_member = 2;
+    ^
+  symbol:   variable some_other_member
+  location: class A2
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:24: error: This JML modifier is not allowed for a model field declaration
+  //@ public model spec_public int yet_another_member;
+                   ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:29: error: cannot find symbol
+    yet_another_member = 3;
+    ^
+  symbol:   variable yet_another_member
+  location: class A3
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:37: error: cannot find symbol
+    assert a3.some_member == 1;
+             ^
+  symbol:   variable some_member
+  location: variable a3 of type A3
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:38: error: cannot find symbol
+    assert a3.some_other_member == 2;
+             ^
+  symbol:   variable some_other_member
+  location: variable a3 of type A3
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:39: error: cannot find symbol
+    assert a3.yet_another_member == 3;
+             ^
+  symbol:   variable yet_another_member
+  location: variable a3 of type A3
+12 errors
+
+class A1 {
+  public /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  public /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  public /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+  public /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  public /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  public /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+  public /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  public /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  public /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+  /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+  /*@ spec_public @*/ int some_member;
+  //@ constraint \not_specified;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  /*@ spec_public @*/ int some_other_member;
+  //@ constraint \not_specified;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  /*@ spec_public @*/ int yet_another_member;
+  //@ constraint \not_specified;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: This backslash token is unknown: \not_specified
+  //@ constraint \not_specified;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: This backslash token is unknown: \not_specified
+  //@ constraint \not_specified;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: This backslash token is unknown: \not_specified
+  //@ constraint \not_specified;
+                 ^
+3 errors
+
+class A1 {
+  /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+  /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+
+class A1 {
+  /*@ spec_public @*/ int some_member;
+  //@ constraint some_member == 1;
+
+  //@ ensures some_member == 1;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  /*@ spec_public @*/ int some_other_member;
+  //@ constraint some_other_member == 2;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  /*@ spec_public @*/ int yet_another_member;
+  //@ constraint yet_another_member == 3;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:3: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_member == 1;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:14: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint some_other_member == 2;
+                 ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:25: error: An identifier with public visibility may not be used in a constraint clause with package visibility
+  //@ constraint yet_another_member == 3;
+                 ^
+3 errors
+

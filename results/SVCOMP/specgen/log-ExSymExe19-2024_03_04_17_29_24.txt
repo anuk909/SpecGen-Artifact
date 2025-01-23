@@ -1,0 +1,328 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires x == 3;
+  //@ requires z >= 0;
+  //@ requires r >= 0;
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == 3;
+  //@ requires z >= 0;
+  //@ requires r >= 0;
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:5: error: cannot find symbol
+  //@ requires x == 3;
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:6: error: cannot find symbol
+  //@ requires z >= 0;
+               ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:7: error: cannot find symbol
+  //@ requires r >= 0;
+               ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                    ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                        ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                              ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                                             ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                                                 ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                         ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                            ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                                    ^
+  symbol:   variable r
+  location: class Main
+15 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg == 3;
+  //@ requires \typeof(arg) == \type(int);
+  //@ assignable field;
+  //@ ensures field == arg;
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == 3;
+  //@ requires z >= 0;
+  //@ requires r >= 0;
+  //@ assignable \nothing;
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:7: error: An identifier with package visibility may not be used in a assignable clause with public visibility
+  //@ assignable field;
+                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == arg;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                    ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                        ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                              ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                                             ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                                                 ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                         ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                            ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                                    ^
+  symbol:   variable r
+  location: class Main
+14 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static int field2;
+
+  //@ requires arg == 3;
+  //@ requires \typeof(arg) == \type(int);
+  //@ assignable field;
+  //@ ensures field == arg;
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+  public static boolean f(int arg) {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == 3;
+  //@ requires z >= 0;
+  //@ requires r >= 0;
+  //@ assignable \nothing;
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                    ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                        ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                              ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                                             ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:9: error: cannot find symbol
+  //@ ensures \result == true <==> (x + r) * 3 > 99 && -((x + r) * 3) > 3 * (x + r);
+                                                                                 ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                     ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                         ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                            ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                ^
+  symbol:   variable r
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:10: error: cannot find symbol
+  //@ ensures \result == false <==> (x + r) * 3 <= 99 || -((x + r) * 3) <= 3 * (x + r);
+                                                                                    ^
+  symbol:   variable r
+  location: class Main
+12 errors
+

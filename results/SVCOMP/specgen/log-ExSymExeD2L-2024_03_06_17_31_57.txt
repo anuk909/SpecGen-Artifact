@@ -1,0 +1,69 @@
+class Main {
+
+  //@ ensures \result ==> \result == true || \result == false;
+  public static boolean f() {
+    double x = Verifier.nondetDouble();
+    //@ requires x >= 0.0 && x <= Long.MAX_VALUE / 2;
+    //@ ensures \result ==> \result == true || \result == false;
+    if (x >= 0.0 && x <= Long.MAX_VALUE / 2) {
+      Main inst = new Main();
+      return inst.test(x);
+    }
+    return true;
+  }
+
+  //@ requires x >= 0.0;
+  //@ ensures \result ==> \result == true || \result == false;
+  public boolean test(double x) {
+
+    long res = (long) ++x;
+    //@ assert res > 0 ==> System.out.println("x >0");
+    //@ assert res <= 0 ==> \result == false;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeD2L.java:5: error: cannot find symbol
+    double x = Verifier.nondetDouble();
+               ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeD2L.java:20: error: incompatible types: void cannot be converted to boolean
+    //@ assert res > 0 ==> System.out.println("x >0");
+                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeD2L.java:21: error: A \result expression may not be in a assert clause
+    //@ assert res <= 0 ==> \result == false;
+                             ^
+3 errors
+
+class Main {
+
+  //@ requires true;
+  //@ ensures \result ==> \result == true || \result == false;
+  public static boolean f() {
+    double x = Math.random() * (Long.MAX_VALUE / 2);
+    //@ requires x >= 0.0 && x <= Long.MAX_VALUE / 2;
+    //@ ensures \result ==> \result == true || \result == false;
+    if (x >= 0.0 && x <= Long.MAX_VALUE / 2) {
+      Main inst = new Main();
+      return inst.test(x);
+    }
+    return true;
+  }
+
+  //@ requires x >= 0.0;
+  //@ ensures \result ==> \result == true || \result == false;
+  public boolean test(double x) {
+
+    long res = (long) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+

@@ -1,0 +1,61 @@
+public class BugTestGen095 {
+  //@ non_null
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures arg == null ==> \result;
+  //@ ensures arg == null ==> !\result;
+  //@ ensures arg != null ==> \result;
+  //@ ensures arg != null ==> !\result;
+  public static boolean func(String arg) {
+    StringBuilder sb = new StringBuilder(arg);
+    sb.append("Z");
+    String s = sb.toString();
+    return (s.equals("fg"));
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    func("");
+    func("arg");
+    func("123");
+    func("a");
+    func("25");
+    func("114514");
+    func("12435fga@354");
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:2: error: No modifiers are allowed prior to a lightweight specification case
+  //@ non_null
+      ^
+1 error
+
+public class BugTestGen095 {
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures arg == null ==> \result;
+  //@ ensures arg == null ==> !\result;
+  //@ ensures arg != null ==> \result;
+  //@ ensures arg != null ==> !\result;
+  public static boolean func(String arg) {
+    StringBuilder sb = new StringBuilder(arg);
+    sb.append("Z");
+    String s = sb.toString();
+    return (s.equals("fg"));
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    func("");
+    func("arg");
+    func("123");
+    func("a");
+    func("25");
+    func("114514");
+    func("12435fga@354");
+  }
+}
+
+
+OpenJML not responding. Aborted.

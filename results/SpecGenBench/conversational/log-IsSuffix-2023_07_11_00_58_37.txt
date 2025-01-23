@@ -1,0 +1,620 @@
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length();
+        int j = txt.length();
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:13: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; i <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:5:) in method isSuffix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:22:
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+        ^
+2 verification failures
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    /*@ requires pat != null && txt != null;
+      @ requires 0 <= pat.length() && pat.length() <= txt.length();
+      @ ensures \result == (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k));
+    @*/
+    public /*@ pure @*/ boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j - (pat.length() - 1 - k)));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:22: verify: The prover cannot establish an assertion (Assert) in method isSuffix: Suffix property is maintained
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(txt.length() - pat.length() + k)) : "Suffix property is maintained";
+            ^
+1 verification failure
+

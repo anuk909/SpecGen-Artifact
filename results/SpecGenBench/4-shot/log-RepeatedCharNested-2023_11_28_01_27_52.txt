@@ -1,0 +1,25 @@
+public class RepeatedCharNested {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; i+1 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    //@ ensures -1 < \result ==> (\exists int i; 0 <= i && i < s.length(); (\exists int j; i+1 <= j && j < s.length(); s.charAt(i) == s.charAt(j)));
+    public static int repeatedChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining 0 <= i && i <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i+1 <= j && j < s.length(); s.charAt(k) != s.charAt(j)));
+            //@ decreases s.length() - i;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:9: error: variable j is already defined in method repeatedChar(String)
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i+1 <= j && j < s.length(); s.charAt(k) != s.charAt(j)));
+                                                                          ^
+1 error
+

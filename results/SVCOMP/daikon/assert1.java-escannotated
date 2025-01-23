@@ -1,0 +1,21 @@
+import java.util.Random;
+
+class assert1 {
+  public static void func() {
+    int i = new Random().nextInt();
+
+    if (i >= 10) assert i >= 10 : "my super assertion"; // should hold
+
+    if (i >= 20) assert i >= 10 : "my super assertion"; // should hold
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = 0; i < 10; i++) {
+      func();
+    }
+  }
+}

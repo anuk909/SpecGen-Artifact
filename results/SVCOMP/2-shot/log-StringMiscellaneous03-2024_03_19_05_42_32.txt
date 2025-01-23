@@ -1,0 +1,18 @@
+public class StringMiscellaneous03 {
+  //@ requires s1 != null && s2 != null;
+  //@ requires (\forall int i; 0 <= i && i < s1.length(); (int)Character.MIN_VALUE <= (int)s1.charAt(i) && (int)s1.charAt(i) <= (int)Character.MAX_VALUE);
+  //@ requires (\forall int i; 0 <= i && i < s2.length(); (int)Character.MIN_VALUE <= (int)s2.charAt(i) && (int)s2.charAt(i) <= (int)Character.MAX_VALUE);
+  //@ ensures \result <==> (\forall int count; 0 <= count && count < s1.length(); s1.charAt(count) != s2.charAt(count));
+  public static boolean f(String s1, String s2) {
+    int i = 0;
+    //@ maintaining (\forall int count; s1.length() - 1 >= count && count >= 0; s1.charAt(count) != s2.charAt(i));
+    //@ decreases s1.length() - count;
+    for (int count = s1.length() - 1; count >= 0; count--) {
+      if (s1.charAt(count) == s2.charAt(i))
+        return false;
+      ++i;
+    }
+    return true;
+  }
+}
+

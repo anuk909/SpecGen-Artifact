@@ -1,0 +1,62 @@
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N * N;
+  //@ requires src >= 0 && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0);
+  static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    //@ loop_invariant 0 <= i && i <= N;
+    //@ loop_invariant (\forall int j; 0 <= j && j < i; dist[j] == INFINITY);
+    //@ loop_invariant (\forall int j; 0 <= j && j < i; infinite[j] == true);
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k;
+    //@ loop_invariant 0 <= k && k <= N;
+    //@ loop_invariant (\forall int i; 0 <= i && i < N; dist[i] >= 0);
+    //@ loop_invariant (\forall int i; 0 <= i && i < N; infinite[i] == false ==> dist[i] < INFINITY);
+    for (k = 0; k < N; k++) {
+      boolean relaxed = false;
+      //@ loop_invariant 0 <= i && i <= N;
+      //@ loop_invariant (\forall int j; 0 <= j && j < i; (\forall int l; 0 <= l && l < N; dist[l] >= 0));
+      //@ loop_invariant (\forall int j; 0 <= j && j < i; (\forall int l; 0 <= l && l < N; infinite[l] == false ==> dist[l] < INFINITY));
+      for (int i = 0; i < N; i++) {
+        //@ loop_invariant 0 <= j && j <= N;
+        //@ loop_invariant (\forall int l; 0 <= l && l < j; (\forall int m; 0 <= m && m < N; dist[m] >= 0));
+        //@ loop_invariant (\forall int l; 0 <= l && l < j; (\forall int m; 0 <= m && m < N; infinite[m] == false ==> dist[m] < INFINITY));
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+    }
+
+    if (k == N) {
+      // We relaxed during the N-th iteration, so there must be a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:34: verify: The prover cannot establish an assertion (LoopInvariant) in method runBellmanFord
+        //@ loop_invariant (\forall int l; 0 <= l && l < j; (\forall int m; 0 <= m && m < N; dist[m] >= 0));
+            ^
+1 verification failure
+

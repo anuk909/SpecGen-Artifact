@@ -1,0 +1,40 @@
+class Main {
+
+  //@ requires 0.0f <= x && x <= Integer.MAX_VALUE / 2;
+  //@ ensures \result <==> test(x);
+  public static boolean f(float x) {
+    if (x >= 0.0f && x <= Integer.MAX_VALUE / 2) {
+      Main inst = new Main();
+      return inst.test(x);
+    }
+    return true;
+  }
+
+  //@ requires 0.0f <= x;
+  //@ ensures \result ==> res > 0;
+  //@ ensures !\result ==> res <= 0;
+  public boolean test(float x) {
+
+    int res = (int) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeF2I.java:4: error: non-static method test(float) cannot be referenced from a static context
+  //@ ensures \result <==> test(x);
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeF2I.java:14: error: cannot find symbol
+  //@ ensures \result ==> res > 0;
+                          ^
+  symbol:   variable res
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeF2I.java:15: error: cannot find symbol
+  //@ ensures !\result ==> res <= 0;
+                           ^
+  symbol:   variable res
+  location: class Main
+3 errors
+

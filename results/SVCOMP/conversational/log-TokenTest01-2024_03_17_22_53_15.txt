@@ -1,0 +1,302 @@
+public class TokenTest01 {
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && \forall int i; 0 <= i && i < 4; tokens[i].equals({"automatic", "test", "case", "generation"}[i]);
+    public static boolean f() {
+        String sentence = "automatic test case generation";
+        String[] tokens = sentence.split(" ");
+        if(tokens.length == 4) return false;
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= tokens.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+        //@ decreases tokens.length - i;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:2: error: illegal start of type
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && \forall int i; 0 <= i && i < 4; tokens[i].equals({"automatic", "test", "case", "generation"}[i]);
+                                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: illegal start of expression
+    public static boolean f() {
+    ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:5: error: Method specs may not precede a variable declaration
+        String[] tokens = sentence.split(" ");
+                 ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:6: error: illegal start of type
+        if(tokens.length == 4) return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:6: error: <identifier> expected
+        if(tokens.length == 4) return false;
+                        ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:9: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+        //@ maintaining 0 <= i && i <= tokens.length;
+            ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+            ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: illegal start of type
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                        ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: <identifier> expected
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: > expected
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: ']' expected
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                                                ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: ';' expected
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: invalid method declaration; return type required
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:10: error: illegal start of type
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals({"automatic", "test", "case", "generation"}[j]));
+                                                                           ^
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:12: error: illegal start of type
+        for (String token : tokens) {
+        ^
+15 errors
+
+public class TokenTest01 {
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; tokens[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+    public static boolean f() {
+        String sentence = "automatic test case generation";
+        String[] tokens = sentence.split(" ");
+        if(tokens.length == 4) return false;
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= tokens.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals(new String[]{"automatic", "test", "case", "generation"}[j]));
+        //@ decreases tokens.length - i;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:2: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; tokens[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                     ^
+  symbol:   variable sentence
+  location: class TokenTest01
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:2: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; tokens[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                                                                                         ^
+  symbol:   variable tokens
+  location: class TokenTest01
+2 errors
+
+public class TokenTest01 {
+    //@ requires true;
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; tokens[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+    public static boolean f() {
+        String sentence = "automatic test case generation";
+        String[] tokens = sentence.split(" ");
+        if(tokens.length == 4) return false;
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= tokens.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals(new String[]{"automatic", "test", "case", "generation"}[j]));
+        //@ decreases tokens.length - i;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; tokens[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                     ^
+  symbol:   variable sentence
+  location: class TokenTest01
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; tokens[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                                                                                         ^
+  symbol:   variable tokens
+  location: class TokenTest01
+2 errors
+
+public class TokenTest01 {
+    //@ requires true;
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; sentence.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+    public static boolean f() {
+        String sentence = "automatic test case generation";
+        String[] tokens = sentence.split(" ");
+        if(tokens.length == 4) return false;
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= tokens.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals(new String[]{"automatic", "test", "case", "generation"}[j]));
+        //@ decreases tokens.length - i;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; sentence.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                     ^
+  symbol:   variable sentence
+  location: class TokenTest01
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; sentence.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                                                                                         ^
+  symbol:   variable sentence
+  location: class TokenTest01
+2 errors
+
+public class TokenTest01 {
+    //@ requires true;
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; sentence.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+    public static boolean f() {
+        String sentence = "automatic test case generation";
+        String[] tokens = sentence.split(" ");
+        if(tokens.length == 4) return false;
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= tokens.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals(new String[]{"automatic", "test", "case", "generation"}[j]));
+        //@ decreases tokens.length - i;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; sentence.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                     ^
+  symbol:   variable sentence
+  location: class TokenTest01
+/home/max/Documents/JMLGPT/tmp/TokenTest01.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> sentence.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; sentence.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+                                                                                                         ^
+  symbol:   variable sentence
+  location: class TokenTest01
+2 errors
+
+public class TokenTest01 {
+    //@ requires true;
+    //@ ensures \result == true <==> s.split(" ").length == 4 && (\forall int i; 0 <= i && i < 4; s.split(" ")[i].equals(new String[]{"automatic", "test", "case", "generation"}[i]));
+    public static boolean f(String s) {
+        String[] tokens = s.split(" ");
+        if(tokens.length != 4) return false;
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= tokens.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; tokens[j].equals(new String[]{"automatic", "test", "case", "generation"}[j]));
+        //@ decreases tokens.length - i;
+        for (String token : tokens) {
+            System.out.println(token);
+            if (i == 0) {
+                if (!token.equals("automatic"))
+                    return false;
+            }
+            else if (i == 1) {
+                if (!token.equals("test"))
+                    return false;
+            }
+            else if (i == 2) {
+                if (!token.equals("case"))
+                    return false;
+            }
+            else if (i == 3) {
+                if (!token.equals("generation"))
+                    return false;
+            }
+            ++i;
+        }
+        return true;
+    }
+}

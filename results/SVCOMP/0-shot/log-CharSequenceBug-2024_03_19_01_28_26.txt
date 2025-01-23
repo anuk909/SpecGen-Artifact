@@ -1,0 +1,20 @@
+public class CharSequenceBug {
+  //@ requires s != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean main(String s) {
+    //@ assert target != null;
+    CharSequence target = "b";
+    //@ assert replaced != null;
+    String replaced = "";
+    
+    if (target.length() == 1) {
+      //@ assert replaced != null;
+      replaced = s.replace('b', 'c');
+    }
+    
+    //@ assert replaced != null;
+    //@ assert replaced.indexOf('b') != -1 || replaced.indexOf('b') == -1;
+    return replaced.indexOf('b') != -1;
+  }
+}
+

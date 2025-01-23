@@ -1,0 +1,53 @@
+public class RepeatedCharNested {
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; i < j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; i < k && k < j; s.charAt(i) != s.charAt(k));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j; i < j && j < s.length(); s.charAt(i) != s.charAt(j)));
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:4:) in method repeatedChar
+                    return i;
+                    ^
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:15:
+    //@ ensures 0 <= \result && \result < s.length() ==> s.charAt(\result) == s.charAt(\result+1);
+        ^
+2 verification failures
+
+public class RepeatedCharNested {
+    //@ requires s != null;
+    //@ ensures \result < s.length();
+    //@ ensures 0 <= \result && \result < s.length() ==> (\exists int j; \result < j && j < s.length(); s.charAt(\result) == s.charAt(j));
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; i < j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i+1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; i < k && k < j; s.charAt(i) != s.charAt(k));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        //@ assume (\forall int i; 0 <= i && i < s.length(); (\forall int j; i < j && j < s.length(); s.charAt(i) != s.charAt(j)));
+        return -1;
+    }
+    
+}
+

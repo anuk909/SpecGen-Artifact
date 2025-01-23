@@ -1,0 +1,25 @@
+public class ReLUSeq {
+    //@ ensures \result >= 0;
+    //@ ensures \result == x ==> x >= 0;
+    //@ ensures \result == 0 ==> x < 0;
+    public static double computeReLU(double x) {
+        return ((x >= 0) ? x : 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReLUSeq.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ReLUSeq.java:4:) in method computeReLU
+        return ((x >= 0) ? x : 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/ReLUSeq.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ReLUSeq.java:6:
+    //@ ensures \result == 0 ==> x < 0;
+        ^
+2 verification failures
+
+public class ReLUSeq {
+    //@ ensures \result >= 0;
+    //@ ensures (x >= 0) ==> (\result == x);
+    //@ ensures (x < 0) ==> (\result == 0);
+    public static double computeReLU(double x) {
+        return ((x >= 0) ? x : 0);
+    }
+}
+

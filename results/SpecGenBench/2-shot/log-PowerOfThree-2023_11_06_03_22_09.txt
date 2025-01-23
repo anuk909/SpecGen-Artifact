@@ -1,0 +1,21 @@
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (n != 0) && (\forall int i; 0 <= i && i < \result; i++) (int)Math.pow(3, i) == n;
+    public boolean isPowerOfThree(int n) {
+        int temp = n;
+        //@ maintaining (temp != 0) && (\forall int i; 0 <= i && i < \old(temp); i++) (int)Math.pow(3, i) == n;
+        //@ decreases temp;
+        while (temp != 0 && temp % 3 == 0) {
+            temp /= 3;
+        }
+        return temp == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result <==> (n != 0) && (\forall int i; 0 <= i && i < \result; i++) (int)Math.pow(3, i) == n;
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: error: Incorrectly formed or terminated loop_invariant statement near here
+        //@ maintaining (temp != 0) && (\forall int i; 0 <= i && i < \old(temp); i++) (int)Math.pow(3, i) == n;
+                                                                                      ^
+2 errors
+

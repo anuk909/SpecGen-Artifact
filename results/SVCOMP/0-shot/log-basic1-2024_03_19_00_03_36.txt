@@ -1,0 +1,33 @@
+class basic1 {
+  //@ requires System.out != null;
+  //@ ensures System.out != null;
+  //@ ensures System.out.println("Hello World!");
+  //@ requires System.err != null;
+  //@ ensures System.err != null;
+  //@ ensures System.err.println("Hello World!");
+  //@ requires System.in != null;
+  //@ ensures System.in != null;
+  //@ ensures \result >= 0;
+  public static void main(String[] args) {
+    assert (System.out != null);
+    System.out.println("Hello World!");
+    assert (System.err != null);
+    System.err.println("Hello World!");
+    assert (System.in != null);
+    try {
+      int avail = System.in.available();
+    } catch (java.io.IOException e) {
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/basic1.java:4: error: incompatible types: void cannot be converted to boolean
+  //@ ensures System.out.println("Hello World!");
+                                ^
+/home/max/Documents/JMLGPT/tmp/basic1.java:7: error: incompatible types: void cannot be converted to boolean
+  //@ ensures System.err.println("Hello World!");
+                                ^
+/home/max/Documents/JMLGPT/tmp/basic1.java:10: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result >= 0;
+               ^
+3 errors
+

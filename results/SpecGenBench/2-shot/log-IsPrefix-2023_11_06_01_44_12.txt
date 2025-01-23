@@ -1,0 +1,26 @@
+public class IsPrefix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:3:) in method isPrefix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:16:
+    //@ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+        ^
+2 verification failures
+

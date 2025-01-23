@@ -1,0 +1,20 @@
+public class TokenTest02 {
+  //@ requires sentence != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    String[] tokens = sentence.split(" ");
+
+    int i = 0;
+    //@ loop_invariant i >= 0 && i <= tokens.length;
+    //@ loop_invariant (\forall int k; 0 <= k && k < i; k != 3 || !tokens[k].equals("genneration"));
+    //@ decreases tokens.length - i;
+    for (String token : tokens) {
+      if (i == 3)
+        if (!token.equals("genneration"))
+          return false;
+      ++i;
+    }
+    return true;
+  }
+}
+

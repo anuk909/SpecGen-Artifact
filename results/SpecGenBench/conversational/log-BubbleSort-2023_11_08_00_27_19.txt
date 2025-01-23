@@ -1,0 +1,454 @@
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:20: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method bubbleSort
+                if (arr[j+1] < arr[j]) {  
+                       ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                                 ^
+2 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && y >= 0;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:22: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method bubbleSort
+                if (arr[j+1] < arr[j]) {  
+                       ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                                 ^
+2 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:14:) in method bubbleSort
+	return arr;
+	^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:27:
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                       ^
+3 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Assert) in method bubbleSort
+	//@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+	    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                       ^
+2 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]) : "Array is not sorted";
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Assert) in method bubbleSort: Array is not sorted
+	//@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]) : "Array is not sorted";
+	    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                       ^
+2 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert isSorted(arr) : "Array is not sorted";
+	return arr;
+    } 
+
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    public boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: warning: A non-pure method is being called where it is not permitted: BubbleSort.isSorted(int[])
+	//@ assert isSorted(arr) : "Array is not sorted";
+	                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:13:) in method bubbleSort: \everything
+	//@ assert isSorted(arr) : "Array is not sorted";
+	                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:27:
+    //@ modifies arr[*];
+        ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:34: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] > arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                       ^
+1 warning
+4 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert isSorted(arr) : "Array is not sorted";
+	return arr;
+    } 
+
+    //@ pure
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    public boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:31: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert isSorted(arr) : "Array is not sorted";
+	return arr;
+    } 
+
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    public boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: warning: A non-pure method is being called where it is not permitted: BubbleSort.isSorted(int[])
+	//@ assert isSorted(arr) : "Array is not sorted";
+	                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:13:) in method bubbleSort: \everything
+	//@ assert isSorted(arr) : "Array is not sorted";
+	                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:27:
+    //@ modifies arr[*];
+        ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:34: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] > arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                       ^
+1 warning
+4 verification failures
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert isSorted(arr) : "Array is not sorted";
+	return arr;
+    } 
+
+    //@ pure
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:31: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class BubbleSort { 
+    
+    //@ modifies array[x], array[y];
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y, int array[]) {
+        //@ assume x >= 0 && x < array.length && y >= 0 && y < array.length;
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ modifies arr[*];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+
+            for (int j = 0; j < n-i-1; j++) {
+                //@ assume j >= 0 && j+1 >= 0 && j < arr.length - i - 1 && j+1 < arr.length - i - 1;
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	//@ assert isSorted(arr) : "Array is not sorted";
+	return arr;
+    } 
+
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: warning: A non-pure method is being called where it is not permitted: BubbleSort.isSorted(int[])
+	//@ assert isSorted(arr) : "Array is not sorted";
+	                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:27: verify: The prover cannot establish an assertion (Assignable: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:13:) in method bubbleSort: \everything
+	//@ assert isSorted(arr) : "Array is not sorted";
+	                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:27:
+    //@ modifies arr[*];
+        ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:34: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] > arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: The prover cannot establish an assertion (UndefinedNegativeIndex) in method swap
+    //@ modifies array[x], array[y];
+                       ^
+1 warning
+4 verification failures
+

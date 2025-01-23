@@ -1,0 +1,32 @@
+/*
+ * Origin of the benchmark:
+ *     license: 4-clause BSD (see /java/jbmc-regression/LICENSE)
+ *     repo: https://github.com/diffblue/cbmc.git
+ *     branch: develop
+ *     directory: regression/jbmc-strings/StringStartEnd03
+ * The benchmark was taken from the repo: 24 January 2018
+ */
+import org.sosy_lab.sv_benchmarks.Verifier;
+
+public class Main {
+  //@ requires args != null;
+  //@ requires args.length == 1;
+  //@ requires args[0] != null;
+  //@ requires args[0].length() >= 2;
+  //@ requires \typeof(args) == \type(String[]);
+  //@ requires (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  //@ ensures \result == 3;
+  public static void main(String[] args) {
+    String[] strings = new String[4];
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}

@@ -1,0 +1,38 @@
+class Main {
+
+  //@ ensures \result <==> test(y, x);
+  public static boolean f() {
+    int x = 3;
+    boolean y = true;
+    Main inst = new Main();
+    return inst.test(y, x);
+  }
+
+  /*
+   * test IINC & IFLE bytecodes (Note: javac compiles ">" to IFLE)
+   */
+  //@ requires x == true;
+  //@ ensures \result <==> x ==> (\result == true);
+  //@ ensures \result <==> !x ==> (\result == false);
+  public boolean test(boolean x, int z) {
+    System.out.println("Testing ExSymExeBool");
+    z++;
+    if (x) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeBool.java:3: error: cannot find symbol
+  //@ ensures \result <==> test(y, x);
+                                ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeBool.java:3: error: cannot find symbol
+  //@ ensures \result <==> test(y, x);
+                                   ^
+  symbol:   variable x
+  location: class Main
+2 errors
+

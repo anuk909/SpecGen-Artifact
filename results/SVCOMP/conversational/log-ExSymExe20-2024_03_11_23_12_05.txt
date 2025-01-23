@@ -1,0 +1,173 @@
+class Main {
+    static int field;
+    static int field2;
+
+    //@ ensures \result ==> field == 9;
+    //@ ensures \result ==> \result == inst.test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field, field2);
+    }
+
+    //@ requires z == field;
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> field == 9;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> \result == inst.test(3, field, field2);
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> \result == inst.test(3, field, field2);
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:6: error: cannot find symbol
+    //@ ensures \result ==> \result == inst.test(3, field, field2);
+                                       ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:14: error: An identifier with package visibility may not be used in a requires clause with public visibility
+    //@ requires z == field;
+                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:15: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:15: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                                                                                                           ^
+8 errors
+
+class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ ensures \result == inst.test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, field, field2);
+    }
+
+    //@ requires z == field;
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:8: error: cannot find symbol
+    //@ ensures \result == inst.test(3, field, field2);
+                           ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:17: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:17: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                                                                                                           ^
+3 errors
+
+class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ ensures \result == test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        field = 9;
+        return test(x, field, field2);
+    }
+
+    //@ requires z == field;
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+    public static boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:16: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:16: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> x == z - 3 && z == x + field && (z >= x ==> System.out.println("branch FOO1")) && (z < x ==> System.out.println("branch FOO2")) && (x < z ==> \result == true) && (x >= z ==> \result == false);
+                                                                                                                                           ^
+2 errors
+
+class Main {
+    //@ spec_public
+    static int field;
+    //@ spec_public
+    static int field2;
+
+    //@ requires field == 9;
+    //@ ensures \result == test(3, field, field2);
+    public static boolean main() {
+        int x = 3;
+        field = 9;
+        return test(x, field, field2);
+    }
+
+    //@ requires z == field;
+    //@ ensures \result ==> (x == z - 3 && z == x + field && (z >= x ==> \result == true) && (z < x ==> \result == false) && (x >= z ==> \result == false));
+    public static boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe20");
+        int y = 3;
+        r = x + z;
+        x = z - y;
+        z = r;
+        if (z >= x) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x >= r) {
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}

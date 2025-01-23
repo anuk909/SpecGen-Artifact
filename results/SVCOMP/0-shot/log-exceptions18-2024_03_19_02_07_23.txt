@@ -1,0 +1,32 @@
+class A extends RuntimeException {
+  //@ ensures \result == this;
+  public A getMessage();
+}
+
+class B extends A {
+  //@ ensures \result == this;
+  public B getMessage();
+}
+
+public class exception18 {
+  //@ requires true;
+  //@ ensures \result == null;
+  private static void foo() throws A {
+    A a = new A();
+    throw a;
+  }
+
+  //@ requires true;
+  //@ ensures \result == null;
+  public static void main(String[] args) {
+    try {
+      foo();
+      assert false;
+    } catch (B e) {
+      assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+

@@ -1,0 +1,39 @@
+class A {
+    int i;
+}
+
+public class NullPointerException3 {
+    //@ ensures \result == false <==> (\exists A a; a == null);
+    //@ ensures \result == true <==> (\forall A a; a != null; a.i == 0);
+    public static boolean f() {
+        A a = null;
+        try {
+            int i = a.i;
+        } catch (NullPointerException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NullPointerException3.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\forall A a; a != null; a.i == 0);
+                                                               ^
+1 error
+
+class A {
+    /*@ spec_public @*/ int i;
+}
+
+public class NullPointerException3 {
+    //@ ensures \result == false <==> (\exists A a; a == null);
+    //@ ensures \result == true <==> (\forall A a; a != null; a.i == 0);
+    public static boolean f() {
+        A a = null;
+        try {
+            int i = a.i;
+        } catch (NullPointerException exc) {
+            return false;
+        }
+        return true;
+    }
+}

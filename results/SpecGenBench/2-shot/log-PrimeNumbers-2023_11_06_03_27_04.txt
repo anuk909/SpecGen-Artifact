@@ -1,0 +1,62 @@
+public class PrimeNumbers
+{
+    private /*@ spec_public @*/ int primeArray[];
+    
+    //@ requires n >= 1;
+    //@ ensures primeArray.length == n && (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ loop_invariant 2 <= count && count <= n+1 && (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+            //@ decreases n - count + 1;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+    
+    //@ requires n > 1;
+    //@ ensures \result == (\forall int i; 2 <= i && i < n; !div(n, i));
+    private /*@ pure @*/ boolean isPrime(int n)
+    {
+        for (int i = 2; i < n; i++)
+        {
+            if (div(n, i))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ requires d != 0;
+    //@ ensures \result == (n%d == 0);
+    private /*@ pure @*/ boolean div(int n, int d)
+    {
+        return n%d == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:6: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures primeArray.length == n && (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                                                                           ^
+1 error
+

@@ -1,0 +1,15 @@
+public class BugTestGen095 {
+  //@ requires arg != null;
+  //@ ensures \result == true || \result == false;
+  //@ ensures \result ==> arg.length() == \old(arg.length()) + 1;
+  //@ ensures \result ==> arg.equals("f");
+  //@ ensures !\result ==> arg.length() == \old(arg.length());
+  //@ ensures !\result ==> arg.equals("fg");
+  public static boolean fun(String arg) {
+    StringBuilder sb = new StringBuilder(arg);
+    sb.append("Z");
+    String s = sb.toString();
+    return (s.equals("fg"));
+  }
+}
+

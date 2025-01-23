@@ -1,0 +1,51 @@
+public class StartsWith {
+    //@ requires request != null;
+    //@ ensures \result == true || \result == false;
+    public boolean doPost(String request) throws IOException {
+        String param = request;
+
+        String[] argsEnv = {param};
+
+        //@ maintaining param != null;
+        //@ maintaining argsEnv != null;
+        //@ maintaining argsEnv.length == 1;
+        //@ maintaining argsEnv[0] == param;
+        //@ maintaining param.equals("") ==> argsEnv[0].equals("GOTCHA") ==> \result == false;
+        //@ maintaining \result == true || \result == false;
+        if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/startswith.java:9: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining param != null;
+            ^
+1 error
+
+public class StartsWith {
+    //@ requires request != null;
+    //@ ensures \result == true || \result == false;
+    public boolean doPost(String request) throws IOException {
+        String param = request;
+
+        String[] argsEnv = {param};
+
+        if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/startswith.java:1: error: class StartsWith is public, should be declared in a file named StartsWith.java
+public class StartsWith {
+       ^
+/home/max/Documents/JMLGPT/tmp/startswith.java:4: error: cannot find symbol
+    public boolean doPost(String request) throws IOException {
+                                                 ^
+  symbol:   class IOException
+  location: class StartsWith
+2 errors
+
+// There is an issue with the file name and IOException import, please correct it in your code
+

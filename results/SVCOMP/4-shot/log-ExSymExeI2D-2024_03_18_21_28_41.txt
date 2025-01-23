@@ -1,0 +1,32 @@
+class Main {
+
+  //@ requires x > 0 || x < 0;
+  //@ ensures \result <==> test(x);
+  public static boolean main(int x) {
+    x = x > 0 ? x % 10 : -(x % 10);
+
+    Main inst = new Main();
+    return inst.test(x);
+  }
+
+  //@ requires x > Integer.MIN_VALUE && x < Integer.MAX_VALUE;
+  //@ ensures \result <==> res > 0;
+  public boolean test(int x) {
+    double res = (double) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeI2D.java:4: error: non-static method test(int) cannot be referenced from a static context
+  //@ ensures \result <==> test(x);
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeI2D.java:13: error: cannot find symbol
+  //@ ensures \result <==> res > 0;
+                           ^
+  symbol:   variable res
+  location: class Main
+2 errors
+

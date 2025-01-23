@@ -1,0 +1,27 @@
+class Main {
+  static int[] a;
+
+  //@ requires true;
+  //@ ensures a != null && a.length == 1;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires x == -3 && a != null && a.length == 1;
+  //@ ensures \result == (a[0] < 0);
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+

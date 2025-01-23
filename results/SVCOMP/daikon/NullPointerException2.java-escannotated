@@ -1,0 +1,24 @@
+class A {
+  /*@ spec_public */ int i;
+}
+
+class NullPointerException2 {
+  /*@ ensures \result == false; */
+  public static boolean f() {
+    A a = null;
+    try {
+      a.i = 0;
+    } catch (NullPointerException exc) {
+      return false;
+    }
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f();
+  }
+}

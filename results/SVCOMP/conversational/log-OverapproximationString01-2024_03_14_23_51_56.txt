@@ -1,0 +1,147 @@
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures complete.equals("not possible") ==> true;
+    //@ ensures !complete.equals("not possible") ==> false;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 9437184 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid5832.log
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures complete.equals("not possible") ==> true;
+    //@ ensures !complete.equals("not possible") ==> false;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures complete.equals("not possible") ==> true;
+                ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+    //@ ensures !complete.equals("not possible") ==> false;
+                 ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+2 errors
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures prefix.equals("abc") && s != null && complete.equals(prefix + s);
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && complete.equals(prefix + s);
+                ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && complete.equals(prefix + s);
+                                                                     ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && complete.equals(prefix + s);
+                                                     ^
+  symbol:   variable complete
+  location: class OverapproximationString01
+3 errors
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures prefix.equals("abc") && s != null && (prefix + s).equals("not possible") ==> true;
+    //@ ensures prefix.equals("abc") && s != null && !(prefix + s).equals("not possible") ==> false;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && (prefix + s).equals("not possible") ==> true;
+                ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && (prefix + s).equals("not possible") ==> true;
+                                                      ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && !(prefix + s).equals("not possible") ==> false;
+                ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+    //@ ensures prefix.equals("abc") && s != null && !(prefix + s).equals("not possible") ==> false;
+                                                       ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+4 errors
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures "abc".equals("abc") && s != null && ("abc" + s).equals("not possible") ==> true;
+    //@ ensures "abc".equals("abc") && s != null && !("abc" + s).equals("not possible") ==> false;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+error: An internal JML error occurred, possibly recoverable.  Please report the bug with as much information as you can.
+  Reason: Error writing to solver: java.io.IOException: Stream closed
+verify: compiler message file broken: key=compiler.warn.jml.messsage arguments=Failed to obtain a block value BL_288Start_1, {1}, {2}, {3}, {4}, {5}, {6}, {7}
+verify: An internal JML error occurred, possibly recoverable.  Please report the bug with as much information as you can.
+  Reason: Could not find an invalid assertion even though the proof result was satisfiable: foo(java.lang.String)
+1 error
+2 verification failures
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures s == null || s.equals("not possible");
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}

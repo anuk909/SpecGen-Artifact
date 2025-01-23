@@ -1,0 +1,76 @@
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N * N;
+  //@ requires src >= 0 && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0);
+  static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    //@ loop_invariant (\forall int i; 0 <= i && i < \loop_count; dist[i] >= 0);
+    //@ loop_invariant (\forall int i; 0 <= i && i < \loop_count; infinite[i]);
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k;
+    //@ loop_invariant 0 <= k && k <= N;
+    //@ loop_invariant (\forall int i; 0 <= i && i < N; dist[i] >= 0);
+    //@ loop_invariant (\forall int i; 0 <= i && i < N; infinite[i]);
+    //@ decreases N - k;
+    for (k = 0; k < N; k++) {
+      boolean relaxed = false;
+      //@ loop_invariant 0 <= i && i <= N;
+      //@ loop_invariant (\forall int j; 0 <= j && j < N; dist[j] >= 0);
+      //@ loop_invariant (\forall int j; 0 <= j && j < N; infinite[j]);
+      //@ loop_invariant (\forall int j; 0 <= j && j < N; D[i * N + j] >= 0);
+      //@ decreases N - i;
+      for (int i = 0; i < N; i++) {
+        //@ loop_invariant 0 <= j && j <= N;
+        //@ loop_invariant (\forall int j; 0 <= j && j < N; dist[j] >= 0);
+        //@ loop_invariant (\forall int j; 0 <= j && j < N; infinite[j]);
+        //@ loop_invariant (\forall int j; 0 <= j && j < N; D[i * N + j] >= 0);
+        //@ decreases N - j;
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+    }
+
+    if (k == N) {
+      // We relaxed during the N-th iteration, so there must be
+      // a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:13: error: This backslash token is unknown: \loop_count
+    //@ loop_invariant (\forall int i; 0 <= i && i < \loop_count; dist[i] >= 0);
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:13: error: ')' expected
+    //@ loop_invariant (\forall int i; 0 <= i && i < \loop_count; dist[i] >= 0);
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:14: error: This backslash token is unknown: \loop_count
+    //@ loop_invariant (\forall int i; 0 <= i && i < \loop_count; infinite[i]);
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:14: error: ')' expected
+    //@ loop_invariant (\forall int i; 0 <= i && i < \loop_count; infinite[i]);
+                                                                              ^
+4 errors
+

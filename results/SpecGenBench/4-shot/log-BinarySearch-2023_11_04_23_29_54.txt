@@ -1,0 +1,35 @@
+public class BinarySearch {
+
+    //@ requires arr != null;
+    //@ ensures \result == -1 || (0 <= \result && \result < arr.length && arr[\result] == key);
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining low <= high && (low == high || arr[low] <= key) && (low == high || arr[high-1] >= key);
+            //@ maintaining 0 <= low && high <= arr.length;
+            //@ decreases high - low;
+            while (low < high && arr[mid] != key) {
+                if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+                mid = low + (high - low) / 2;
+            }
+            if (low >= high) {
+                return -1;
+            }
+            return mid;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining low <= high && (low == high || arr[low] <= key) && (low == high || arr[high-1] >= key);
+                ^
+1 verification failure
+

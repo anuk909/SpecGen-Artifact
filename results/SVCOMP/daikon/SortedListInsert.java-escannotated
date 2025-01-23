@@ -1,0 +1,60 @@
+public class SortedListInsert {
+
+  private static class List {
+    public int x;
+    public List next;
+
+    /*@ spec_public */ private static final int SENTINEL = Integer.MAX_VALUE;
+
+    private List(int x, List next) {
+      this.x = x;
+      this.next = next;
+    }
+
+    /*@ ensures this.x == 2147483647; */
+    /*@ ensures this.next == null; */
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    /*@ requires this.x != data; */
+    /*@ requires this.next.x != data; */
+    /*@ requires this.next.next.x != data; */
+    /*@ modifies this.x, this.next, this.next.x, this.next.next, this.next.next.x, this.next.next.next; */
+    /*@ ensures this.next != null; */
+    /*@ ensures this.x <= \old(this.x); */
+    /*@ ensures this.x < \old(this.next.x); */
+    /*@ ensures this.x < \old(this.next.next.x); */
+    /*@ ensures this.x <= \old(data); */
+    /*@ ensures this.next.x >= \old(this.x); */
+    /*@ ensures this.next.x <= \old(this.next.x); */
+    /*@ ensures this.next.x < \old(this.next.next.x); */
+    /*@ ensures this.next.next.x > \old(this.x); */
+    /*@ ensures this.next.next.x >= \old(this.next.x); */
+    /*@ ensures this.next.next.x <= \old(this.next.next.x); */
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    List lst = new List();
+    lst.insert(0);
+    lst.insert(4);
+    lst.insert(5);
+    lst.insert(114);
+    lst.insert(-514);
+    lst.insert(514);
+    lst.insert(1919810);
+  }
+  
+}

@@ -1,0 +1,40 @@
+public class RepeatedCharNested {
+
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < s.length(); (\exists int j; i + 1 <= j && j < s.length(); s.charAt(i) == s.charAt(j)));
+    //@ ensures !\result <==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; i + 1 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+    public static int repeatedChar(String s) {
+        //@ ghost int i_counter;
+        //@ set i_counter = 0;
+        //@ maintaining -1 <= i && i < s.length(); 
+        //@ decreases s.length() - i;
+        //@ maintaining i_counter + i + 1 == s.length();
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ ghost int j_counter;
+            //@ set j_counter = 0;
+            //@ maintaining i + 1 <= j && j < s.length(); 
+            //@ decreases s.length() - j;
+            //@ maintaining j_counter + j + 1 == s.length();
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+                //@ set j_counter = j_counter + 1;
+            }
+            //@ assert j_counter + i + 1 == s.length();
+            //@ set i_counter = i_counter + 1;
+        }
+        //@ assert i_counter == s.length();
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:4: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < s.length(); (\exists int j; i + 1 <= j && j < s.length(); s.charAt(i) == s.charAt(j)));
+                ^
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:5: error: bad operand type int for unary operator '!'
+    //@ ensures !\result <==> (\forall int i; 0 <= i && i < s.length(); (\forall int j; i + 1 <= j && j < s.length(); s.charAt(i) != s.charAt(j)));
+                ^
+2 errors
+

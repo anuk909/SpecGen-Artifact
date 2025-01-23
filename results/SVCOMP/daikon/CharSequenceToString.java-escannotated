@@ -1,0 +1,27 @@
+public class CharSequenceToString {
+
+  /*@ ensures \result == true; */
+  public static boolean fun(String arg) {
+    CharSequence cs = (CharSequence) arg;
+    String s = cs.toString();
+    int i = -1;
+    if (s.equals("case1")) i = cs.length();
+    return i == -1 || i == 5;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+  }
+  
+}

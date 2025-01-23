@@ -1,0 +1,354 @@
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:16: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method biggest
+            if (a[index] > a[biggest]) {
+                            ^
+1 verification failure
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Biggest.java:5:) in method biggest
+        return biggest;
+        ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Biggest.java:24:
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+        ^
+2 verification failures
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:19: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method biggest
+            if (a[index] > a[biggest]) {
+                            ^
+1 verification failure
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:21: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method biggest
+            if (a[index] > a[biggest]) {
+                            ^
+1 verification failure
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            //@ assume index < a.length;
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:22: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method biggest
+            if (a[index] > a[biggest]) {
+                            ^
+1 verification failure
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            //@ assume index < a.length;
+            if (a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:22: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method biggest
+            if (a[index] > a[biggest]) {
+                            ^
+1 verification failure
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            //@ assume index < a.length;
+            if (index != biggest && a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:22: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method biggest
+            if (index != biggest && a[index] > a[biggest]) {
+                                                ^
+1 verification failure
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            //@ assume index < a.length;
+            //@ assume biggest < a.length;
+            if (index != biggest && a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Biggest.java:5:) in method biggest
+        return biggest;
+        ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Biggest.java:28:
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+        ^
+2 verification failures
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            //@ assume index < a.length;
+            //@ assume biggest < a.length;
+            if (index != biggest && a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Biggest.java:5:) in method biggest
+        return biggest;
+        ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Biggest.java:28:
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+        ^
+2 verification failures
+
+public class Biggest {
+
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[i] <= a[\result]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+    static public int biggest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int biggest = 0;
+
+        //@ assume index >= 0;
+        //@ assume biggest >= 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[i] <= a[biggest]);
+        //@ maintaining (0 <= index && index <= a.length);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            //@ assume index >= 0;
+            //@ assume biggest >= 0;
+            //@ assume index < a.length;
+            //@ assume biggest < a.length;
+            if (index != biggest && a[index] > a[biggest]) {
+                biggest = index;
+            }
+            index = index + 1;
+        }
+        return biggest;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 4, 5};
+        int result = biggest(arr);
+        System.out.println("The index of the biggest element is: " + result);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Biggest.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Biggest.java:5:) in method biggest
+        return biggest;
+        ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Biggest.java:28:
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] <= 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/Biggest.java:34: verify: The prover cannot establish an assertion (InvariantLeaveCaller: /home/max/Documents/JMLGPT/openjml/specs/java/io/PrintStream.jml:35:) in method main: (Caller: Biggest.main(java.lang.String[]), Callee: java.io.PrintStream.println(java.lang.String))
+        System.out.println("The index of the biggest element is: " + result);
+                          ^
+/home/max/Documents/JMLGPT/openjml/specs/java/io/PrintStream.jml:35: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Biggest.java:34:
+    //-RAC@ public static invariant \invariant_for(eol) && eol.length() > 0;
+                          ^
+4 verification failures
+

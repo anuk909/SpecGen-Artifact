@@ -1,0 +1,78 @@
+class Main {
+    static int field;
+    static int field2;
+
+    //@ requires arg >= 0;
+    //@ ensures \result ==> field2 >= 0;
+    //@ ensures \result ==> field == 9;
+    public static boolean f(int arg) {
+        if (arg < 0)
+            return true;
+        int x = arg;
+
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, arg, field2);
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> r == x + z;
+    //@ ensures \result ==> z == x - 3 - 4;
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe13");
+        int y = 3;
+        r = x + z;
+        z = x - y - 4;
+        if (r < 99) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x < z) {
+            System.out.println("branch BOO1");
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> field2 >= 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> field == 9;
+                            ^
+2 errors
+
+class Main {
+    static /*@ spec_public @*/ int field;
+    static /*@ spec_public @*/ int field2;
+
+    //@ requires arg >= 0;
+    //@ ensures \result ==> field2 >= 0;
+    //@ ensures \result ==> field == 9;
+    public static boolean f(int arg) {
+        if (arg < 0)
+            return true;
+        int x = arg;
+
+        Main inst = new Main();
+        field = 9;
+        return inst.test(x, arg, field2);
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> r == x + z;
+    //@ ensures \result ==> z == x - 3 - 4;
+    public boolean test(int x, int z, int r) {
+        System.out.println("Testing ExSymExe13");
+        int y = 3;
+        r = x + z;
+        z = x - y - 4;
+        if (r < 99) System.out.println("branch FOO1");
+        else System.out.println("branch FOO2");
+        if (x < z) {
+            System.out.println("branch BOO1");
+            return false;
+        } else System.out.println("branch BOO2");
+
+        return true;
+    }
+}

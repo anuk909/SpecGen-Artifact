@@ -1,0 +1,143 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ ensures true;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.checkNoSymbolic(x);
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  //@ ensures s != null ==> !s.contains("<bad/>");
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:14: error: cannot find symbol
+  //@ ensures \result.checkNoSymbolic(x);
+                                      ^
+  symbol:   variable x
+  location: class HttpServletResponse
+1 error
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ ensures true;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result != null ==> !\result.contains("<bad/>");
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  //@ ensures s != null ==> !s.contains("<bad/>");
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:14: error: cannot find symbol
+  //@ ensures \result != null ==> !\result.contains("<bad/>");
+                                          ^
+  symbol:   method contains(String)
+  location: class PrintWriter
+1 error
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ ensures true;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result != null ==> !\result.toString().contains("<bad/>");
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  //@ ensures s != null ==> !s.contains("<bad/>");
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}

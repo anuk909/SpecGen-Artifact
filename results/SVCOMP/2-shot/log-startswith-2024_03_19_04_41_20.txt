@@ -1,0 +1,19 @@
+public class startswith {
+  /*@ public normal_behavior
+    @    requires (\forall int i; 0 <= i && i < request.length(); (int)Character.MIN_VALUE <= (int)request.charAt(i) && (int)request.charAt(i) <= (int)Character.MAX_VALUE);
+    @    assignable \nothing;
+    @    ensures \result <==> !(request.equals("") && argsEnv[0].equals("GOTCHA"));
+    @    signals_only IOException;
+    @*/
+  public boolean doPost(String request) throws IOException {
+    String param = request;
+
+    String[] argsEnv = {param};
+
+    if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+      return false;
+    }
+    return true;
+  }
+}
+

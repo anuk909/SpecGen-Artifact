@@ -1,0 +1,29 @@
+public class UniqueCharNested {
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < s.length() && i < j && j < s.length(); s.charAt(i) != s.charAt(j));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; \result < j && j < s.length(); s.charAt(\result) != s.charAt(j));
+    public static int uniqueChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            int j;
+            //@ maintaining i + 1 <= j && j <= s.length();
+            //@ maintaining (\forall int k; i < k && k < j; s.charAt(i) != s.charAt(k));
+            //@ decreases s.length() - j;
+            for (j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    break;
+            }
+            if(j == s.length())
+                return i;
+        }
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:2:) in method uniqueChar
+                return i;
+                ^
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:2: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:17:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < s.length() && i < j && j < s.length(); s.charAt(i) != s.charAt(j));
+        ^
+2 verification failures
+

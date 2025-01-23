@@ -1,0 +1,677 @@
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length();
+        int j = txt.length();
+
+        //@ maintaining i >= 0;
+        //@ maintaining j >= 0;
+        //@ maintaining (\forall int k; k >= i && k < pat.length(); txt.charAt(k) == pat.charAt(k));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i && k < pat.length(); txt.charAt(k) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining j >= 0;
+            ^
+2 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining i >= -1;
+        //@ maintaining j >= -1;
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreases i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreases i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat);
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:15:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:15:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:15:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i) == pat.charAt(k));
+            ^
+3 verification failures
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> txt.endsWith(pat);
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining -1 <= i && i < pat.length();
+        //@ maintaining -1 <= j && j < txt.length();
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+        //@ decreasing i+1;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSuffix
+        //@ maintaining (\forall int k; k >= i+1 && k < pat.length(); txt.charAt(k-j+i-1) == pat.charAt(k));
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:4:) in method isSuffix
+        return j == -1 || txt.substring(0, j+1).equals(pat.substring(pat.length()-j-1, pat.length()));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:20:
+    //@ ensures \result <==> txt.endsWith(pat);
+        ^
+3 verification failures
+

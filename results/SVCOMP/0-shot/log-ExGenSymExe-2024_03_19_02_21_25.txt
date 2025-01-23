@@ -1,0 +1,33 @@
+static class Node {
+  //@ public invariant elem >= 0;
+  //@ public invariant next != null ==> next.elem >= 0;
+  //@ public invariant static_next != null ==> static_next.elem >= 0;
+
+  int elem;
+  Node next;
+  static Node static_next;
+
+  //@ ensures \result != null;
+  Node swapNode() {
+    //@ assume static_next != null;
+    //@ assume static_next.next != null;
+    //@ assume static_next.next.next != null;
+
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+
+    if (next != null) {
+      //@ assume next != null;
+      if (elem > next.elem) {
+        //@ assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    }
+    return this;
+  }
+}
+

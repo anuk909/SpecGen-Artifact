@@ -1,0 +1,47 @@
+public class RepeatedCharNested {
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < s.length() && 0 <= j && j < s.length() && i != j; s.charAt(i) != s.charAt(j));
+    //@ ensures -1 < \result && \result < s.length() ==> s.charAt(\result) == (\exists int j; 0 <= j && j < s.length() && \result != j; s.charAt(\result) == s.charAt(j));
+    public static int repeatedChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining 0 <= i && i <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(i) != s.charAt(k));
+            //@ decreases s.length() - i;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedCharNested.java:4: error: incomparable types: char and boolean
+    //@ ensures -1 < \result && \result < s.length() ==> s.charAt(\result) == (\exists int j; 0 <= j && j < s.length() && \result != j; s.charAt(\result) == s.charAt(j));
+                                                                           ^
+1 error
+
+public class RepeatedCharNested {
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < s.length() && 0 <= j && j < s.length() && i != j; s.charAt(i) != s.charAt(j));
+    //@ ensures -1 < \result && \result < s.length() ==> (\exists int j; 0 <= j && j < s.length() && \result != j; s.charAt(\result) == s.charAt(j));
+    public static int repeatedChar(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining 0 <= i && i <= s.length();
+            //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(i) != s.charAt(k));
+            //@ decreases s.length() - i;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+
+aborted

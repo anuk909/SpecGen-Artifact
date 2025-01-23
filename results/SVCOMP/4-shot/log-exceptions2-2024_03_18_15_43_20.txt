@@ -1,0 +1,28 @@
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions2 {
+  //@ requires \fresh(new B());
+  //@ ensures \result == null;
+  public static void main(String[] args) {
+    try {
+      B b = new B();
+      throw b;
+    } catch (C exc) {
+      assert false;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions2.java:8: error: Object allocation is not permitted in specification expressions
+  //@ requires \fresh(new B());
+                      ^
+/home/max/Documents/JMLGPT/tmp/exceptions2.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+2 errors
+

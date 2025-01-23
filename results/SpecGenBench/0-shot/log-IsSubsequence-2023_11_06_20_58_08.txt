@@ -1,0 +1,52 @@
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result == true || \result == false;
+    public boolean isSubsequence(String s, String t) {
+        //@ assert s != null && t != null;
+        //@ assert (\forall int k; 0 <= k && k < s.length(); Character.isLetter(s.charAt(k)));
+        //@ assert (\forall int k; 0 <= k && k < t.length(); Character.isLetter(t.charAt(k)));
+
+        int n = s.length(), m = t.length();
+        //@ assert n >= 0 && m >= 0;
+
+        int i = 0, j = 0;
+        //@ assert i == 0 && j == 0;
+
+        //@ loop_invariant 0 <= i <= n;
+        //@ loop_invariant 0 <= j <= m;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k));
+        //@ loop_invariant (\forall int k; i <= k && k < n; s.charAt(k) != t.charAt(k));
+        //@ loop_invariant (\forall int k; j <= k && k < m; s.charAt(i) != t.charAt(k));
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; Character.isLetter(s.charAt(k)));
+        //@ loop_invariant (\forall int k; 0 <= k && k < j; Character.isLetter(t.charAt(k)));
+
+        while (i < n && j < m) {
+            //@ assert 0 <= i <= n;
+            //@ assert 0 <= j <= m;
+            //@ assert (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k));
+            //@ assert (\forall int k; i <= k && k < n; s.charAt(k) != t.charAt(k));
+            //@ assert (\forall int k; j <= k && k < m; s.charAt(i) != t.charAt(k));
+            //@ assert (\forall int k; 0 <= k && k < i; Character.isLetter(s.charAt(k)));
+            //@ assert (\forall int k; 0 <= k && k < j; Character.isLetter(t.charAt(k)));
+
+            if (s.charAt(i) == t.charAt(j)) {
+                //@ assert s.charAt(i) == t.charAt(j);
+                i++;
+                //@ assert i > 0;
+            }
+            j++;
+            //@ assert j > 0;
+        }
+
+        //@ assert 0 <= i <= n;
+        //@ assert 0 <= j <= m;
+        //@ assert (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k));
+        //@ assert (\forall int k; i <= k && k < n; s.charAt(k) != t.charAt(k));
+        //@ assert (\forall int k; j <= k && k < m; s.charAt(i) != t.charAt(k));
+        //@ assert (\forall int k; 0 <= k && k < i; Character.isLetter(s.charAt(k)));
+        //@ assert (\forall int k; 0 <= k && k < j; Character.isLetter(t.charAt(k)));
+
+        return i == n;
+        //@ assert \result == (i == n);
+    }
+}

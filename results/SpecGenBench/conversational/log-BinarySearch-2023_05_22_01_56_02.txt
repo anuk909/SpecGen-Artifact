@@ -1,0 +1,647 @@
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining low <= mid && mid < high;
+            //@ decreases high - low;
+            while (low < high && arr[mid] != key) {
+                if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+                mid = low + (high - low) / 2;
+            }
+            if (low >= high) {
+                return -1;
+            }
+            return mid;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:34: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:6:) in method Binary
+            return mid;
+            ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:34:
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+        ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:34: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:7:) in method Binary
+            return mid;
+            ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:34:
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+        ^
+4 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining low <= mid && mid < high;
+            //@ decreases high - low;
+            while (low < high) {
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+                mid = low + (high - low) / 2;
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:7:) in method Binary
+                    return mid;
+                    ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:25:
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+        ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:6:) in method Binary
+                    return mid;
+                    ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:25:
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+        ^
+4 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining low <= mid && mid < high;
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:21: verify: The prover cannot establish an assertion (LoopInvariant) in method Binary
+            //@ maintaining low <= mid && mid < high;
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:26: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:6:) in method Binary
+                    return mid;
+                    ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:26:
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+        ^
+3 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining low <= mid && mid < high;
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:21: verify: The prover cannot establish an assertion (LoopInvariant) in method Binary
+            //@ maintaining low <= mid && mid < high;
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:7:) in method Binary
+                    return mid;
+                    ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinarySearch.java:27:
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+        ^
+3 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining low <= mid && mid < high;
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariant) in method Binary
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:21: verify: The prover cannot establish an assertion (LoopInvariant) in method Binary
+            //@ maintaining low <= mid && mid < high;
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures (\result == -1) <==> (\forall int i; 0 <= i && i < arr.length; arr[i] != key);
+      @ ensures (\result != -1) <==> (0 <= \result && \result < arr.length && arr[\result] == key);
+      @ ensures (\result != -1) ==> (\forall int i; 0 <= i && i < \result; arr[i] < key);
+      @ ensures (\result != -1) ==> (\forall int i; \result < i && i < arr.length; arr[i] > key);
+      @ pure @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining 0 <= mid && mid < arr.length;
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ assert low <= mid && mid < high;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            //@ assert low == high;
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:20: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid <= i && i < high; arr[i] >= key);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                ^
+2 verification failures
+

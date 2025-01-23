@@ -1,0 +1,43 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j] && (\forall int k; j < k && k < nums2.length; nums2[j] < nums2[k]) ==> \result[i] == nums2[k]) && (\forall int j; 0 <= j && j < nums2.length; \forall int i; 0 <= i && i < nums1.length; nums1[i] != nums2[j]) ==> \result[i] == -1);
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ ghost int i_counter;
+        //@ set i_counter = 0;
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining i_counter + i == m;
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n && (\forall int k; 0 <= k && k < j; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n && (\forall int l; j <= l && l < k; nums2[l] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+            //@ set i_counter = i_counter + 1;
+        }
+        //@ assert i_counter == m;
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:5: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j] && (\forall int k; j < k && k < nums2.length; nums2[j] < nums2[k]) ==> \result[i] == nums2[k]) && (\forall int j; 0 <= j && j < nums2.length; \forall int i; 0 <= i && i < nums1.length; nums1[i] != nums2[j]) ==> \result[i] == -1);
+                                                                                                                                                                                                                        ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:5: error: variable i is already defined in method nextGreaterElement(int[],int[])
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j] && (\forall int k; j < k && k < nums2.length; nums2[j] < nums2[k]) ==> \result[i] == nums2[k]) && (\forall int j; 0 <= j && j < nums2.length; \forall int i; 0 <= i && i < nums1.length; nums1[i] != nums2[j]) ==> \result[i] == -1);
+                                                                                                                                                                                                                                                                                       ^
+2 errors
+

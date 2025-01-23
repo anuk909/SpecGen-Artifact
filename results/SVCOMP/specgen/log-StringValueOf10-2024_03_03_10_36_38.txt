@@ -1,0 +1,39 @@
+public class StringValueOf10 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result ==> \result == (arg + "s");
+    public static boolean f(String arg) {
+        Object objectRef = arg; // assign string to an Object reference
+        String tmp = String.valueOf(objectRef);
+        return tmp.equals(arg + "s");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringValueOf10.java:3: error: bad operand types for binary operator '=='
+    //@ ensures \result ==> \result ==> \result == (arg + "s");
+                                                ^
+  first type:  boolean
+  second type: String
+1 error
+
+public class StringValueOf10 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result.equals(arg + "s");
+    public static boolean f(String arg) {
+        Object objectRef = arg; // assign string to an Object reference
+        String tmp = String.valueOf(objectRef);
+        return tmp.equals(arg + "s");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringValueOf10.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result ==> \result.equals(arg + "s");
+                                   ^
+1 error
+
+public class StringValueOf10 {
+    //@ requires arg != null;
+    //@ ensures \result == (arg + "s").equals(\result);
+    public static boolean f(String arg) {
+        Object objectRef = arg; // assign string to an Object reference
+        String tmp = String.valueOf(objectRef);
+        return tmp.equals(arg + "s");
+    }
+}

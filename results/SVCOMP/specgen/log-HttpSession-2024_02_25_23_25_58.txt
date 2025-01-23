@@ -1,0 +1,62 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final Map<String, Object> map = new HashMap<>();
+
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result.equals(Collections.enumeration(map.keySet()));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ ensures map.get(name) == value && map.containsKey(name);
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == map.get(name);
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.equals(Collections.enumeration(map.keySet()));
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:20: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures map.get(name) == value && map.containsKey(name);
+              ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:20: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures map.get(name) == value && map.containsKey(name);
+                                        ^
+4 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final /*@ spec_public @*/ Map<String, Object> map = new HashMap<>();
+
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result.equals(Collections.enumeration(map.keySet()));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ ensures map.get(name) == value && map.containsKey(name);
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}

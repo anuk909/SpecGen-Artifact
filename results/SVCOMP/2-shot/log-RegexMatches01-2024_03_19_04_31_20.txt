@@ -1,0 +1,26 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches01 {
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < string1.length(); string1.charAt(i) == 'W' && string1.charAt(i+1) == 'W' && string1.charAt(i+2) == 'W' && string1.charAt(i+3) == 'W' && string1.charAt(i+4) == '\'' && string1.charAt(i+5) == 's' && string1.charAt(i+6) == ' ' && string1.charAt(i+7) == 'B' && string1.charAt(i+8) == 'i' && string1.charAt(i+9) == 'r' && string1.charAt(i+10) == 't' && string1.charAt(i+11) == 'h' && string1.charAt(i+12) == 'd' && string1.charAt(i+13) == 'a' && string1.charAt(i+14) == 'y' && string1.charAt(i+15) == ' ' && string1.charAt(i+16) == 'i' && string1.charAt(i+17) == 's' && string1.charAt(i+18) == ' ' && string1.charAt(i+19) == '1' && string1.charAt(i+20) == '2' && string1.charAt(i+21) == '-' && string1.charAt(i+22) == '1' && string1.charAt(i+23) == '7' && string1.charAt(i+24) == '-' && string1.charAt(i+25) == '7' && string1.charAt(i+26) == '7');
+    public static boolean f() {
+        Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+
+        String string1 =
+            "XXXX's Birthday is 05-12-75\n"
+                + "YYYY's Birthday is 11-04-68\n"
+                + "ZZZZ's Birthday is 04-28-73\n"
+                + "WWWW's Birthday is 12-17-77";
+
+        Matcher matcher = expression.matcher(string1);
+
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            String tmp = matcher.group();
+            if (!tmp.equals("WWWW's Birthday is 12-17-77"))
+                return false;
+        }
+        return true;
+    }
+}
+

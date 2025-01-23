@@ -1,0 +1,42 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires k >= 1 && k <= nums.length;
+    //@ ensures \result == (\num_of int i; i < nums.length; nums[i] > \result);
+    public static int kthLargest(int[] nums, int k) {
+        //@ assert nums != null;
+        //@ assert k >= 1 && k <= nums.length;
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        //@ loop_invariant pq.size() <= k;
+        //@ loop_invariant (\forall int i; i < pq.size(); pq.peek() <= pq.toArray()[i]);
+        //@ loop_invariant (\forall int i; i < nums.length; (\num_of int j; j < pq.size(); pq.toArray()[j] > nums[i]) >= k);
+        for (int x : nums) {
+            //@ assert pq.size() <= k;
+            //@ assert (\forall int i; i < pq.size(); pq.peek() <= pq.toArray()[i]);
+            //@ assert (\forall int i; i < nums.length; (\num_of int j; j < pq.size(); pq.toArray()[j] > nums[i]) >= k);
+            
+            pq.offer(x);
+            
+            //@ assert pq.size() <= k;
+            //@ assert (\forall int i; i < pq.size(); pq.peek() <= pq.toArray()[i]);
+            //@ assert (\forall int i; i < nums.length; (\num_of int j; j < pq.size(); pq.toArray()[j] > nums[i]) >= k);
+            
+            if (pq.size() > k) {
+                pq.poll();
+            }
+            
+            //@ assert pq.size() <= k;
+            //@ assert (\forall int i; i < pq.size(); pq.peek() <= pq.toArray()[i]);
+            //@ assert (\forall int i; i < nums.length; (\num_of int j; j < pq.size(); pq.toArray()[j] > nums[i]) >= k);
+        }
+
+        //@ assert pq.size() <= k;
+        //@ assert (\forall int i; i < pq.size(); pq.peek() <= pq.toArray()[i]);
+        //@ assert (\forall int i; i < nums.length; (\num_of int j; j < pq.size(); pq.toArray()[j] > nums[i]) >= k);
+        
+        return pq.peek();
+    }
+}

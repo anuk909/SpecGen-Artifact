@@ -1,0 +1,30 @@
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ modifies nums[*];
+    //@ ensures (\forall int i; i >= 0 && i < nums.length; nums[i] == 0 ==> i >= nums.length - (\old(nums.length) - \result));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant left <= right && right <= n;
+        //@ loop_invariant (\forall int i; i >= 0 && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; i >= right && i < n; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    //@ requires nums != null;
+    //@ requires left >= 0 && left < nums.length;
+    //@ requires right >= 0 && right < nums.length;
+    //@ modifies nums[left], nums[right];
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}

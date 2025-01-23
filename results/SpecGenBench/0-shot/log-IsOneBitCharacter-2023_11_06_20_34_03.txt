@@ -1,0 +1,28 @@
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result == true || \result == false;
+    public boolean isOneBitCharacter(int[] bits) {
+        //@ assert bits != null;
+        //@ assert bits.length >= 0;
+        int n = bits.length, i = 0;
+        //@ assert n >= 0;
+        //@ assert i == 0;
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant i <= n - 1;
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ loop_invariant (\forall int j; i <= j && j < n; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assert 0 <= i && i <= n;
+            //@ assert i <= n - 1;
+            //@ assert (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+            //@ assert (\forall int j; i <= j && j < n; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+            //@ assert 0 <= i && i <= n;
+            //@ assert i <= n - 1;
+            //@ assert (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+            //@ assert (\forall int j; i <= j && j < n; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1;
+        return i == n - 1;
+    }
+}

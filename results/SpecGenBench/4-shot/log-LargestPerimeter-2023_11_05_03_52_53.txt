@@ -1,0 +1,26 @@
+import java.util.Arrays;
+
+class LargestPerimeter {
+    //@ requires A != null;
+    //@ requires (\forall int i; 0 <= i && i < A.length; A[i] >= 0);
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 0 <= i && i < A.length; \result >= A[i]);
+    //@ ensures (\forall int i; 0 <= i && i < A.length; (\forall int j; 0 <= j && j < A.length; (i != j ==> \result >= A[i] + A[j])));
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        //@ maintaining A.length - 1 >= i && i >= 2;
+        //@ maintaining (\forall int k; i < k && k < A.length; A[i - 2] + A[i - 1] > A[i]);
+        //@ decreases i;
+        for (int i = A.length - 1; i >= 2; --i) {
+            if (A[i - 2] + A[i - 1] > A[i]) {
+                return A[i - 2] + A[i - 1] + A[i];
+            }
+        }
+        return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/LargestPerimeter.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method largestPerimeter
+        //@ maintaining A.length - 1 >= i && i >= 2;
+            ^
+1 verification failure
+

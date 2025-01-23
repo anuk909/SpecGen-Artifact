@@ -1,0 +1,66 @@
+class A extends RuntimeException {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  //@ also
+  //@ public exceptional_behavior
+  //@ signals_only A;
+  //@ signals (A e) true;
+  //@ assignable \nothing;
+  public boolean equals(Object obj) {
+    return true;
+  }
+}
+
+class B extends A {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  //@ also
+  //@ public exceptional_behavior
+  //@ signals_only B;
+  //@ signals (B e) true;
+  //@ assignable \nothing;
+  public boolean equals(Object obj) {
+    return true;
+  }
+}
+
+class C extends B {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  //@ also
+  //@ public exceptional_behavior
+  //@ signals_only C;
+  //@ signals (C e) true;
+  //@ assignable \nothing;
+  public boolean equals(Object obj) {
+    return true;
+  }
+}
+
+class F {
+  //@ requires true;
+  //@ ensures true;
+  //@ signals (B exc) false;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+
+public class exceptions12 {
+  //@ requires true;
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+

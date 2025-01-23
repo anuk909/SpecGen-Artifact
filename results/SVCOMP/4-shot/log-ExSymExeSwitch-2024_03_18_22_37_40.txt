@@ -1,0 +1,34 @@
+class Main {
+
+  //@ ensures \result == (x > 0) || test(x);
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  /*@ public normal_behavior
+    @   ensures \result == (x == 2 || x == 3000);
+    @ also
+    @ public exceptional_behavior
+    @   ensures \result == false;
+    @*/
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:12: error: Ensures clauses are not permitted in exceptional specification cases
+    @   ensures \result == false;
+        ^
+1 error
+

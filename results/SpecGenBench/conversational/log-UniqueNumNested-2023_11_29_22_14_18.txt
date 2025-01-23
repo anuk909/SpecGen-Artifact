@@ -1,0 +1,385 @@
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> \result == -1));
+        //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> \result == k));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> \result == -1);
+            //@ maintaining (\exists int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> \result == i);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j])
+                    break;
+                j++;
+            }
+            if(j == arr.length)
+                return i;
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:8: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> \result == -1));
+                                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> \result == k));
+                                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:14: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> \result == -1);
+                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:15: error: A \result expression may not be in a loop_invariant clause
+            //@ maintaining (\exists int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> \result == i);
+                                                                                               ^
+4 errors
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == k));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ maintaining (\exists int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == i);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method uniqueNum
+        //@ maintaining (\exists int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == k));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:4:) in method uniqueNum
+        return result;
+        ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:28:
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+        ^
+2 verification failures
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == -1));
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> \result == i));
+    public static int uniqueNum(int[] arr) {
+        int result = -1;
+        //@ maintaining 0 <= i && i <= arr.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < arr.length; (k != j && arr[k] == arr[j]) ==> result == -1));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= arr.length;
+            //@ maintaining (\forall int k; 0 <= k && k < j; (i != k && arr[i] == arr[k]) ==> result == -1);
+            //@ decreases arr.length - j;
+            while(j < arr.length) {
+                if(i != j && arr[i] == arr[j]) {
+                    result = -1;
+                    break;
+                }
+                j++;
+            }
+            if(j == arr.length) {
+                result = i;
+                break;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == -1));
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+        return result;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:29: verify: The prover cannot establish an assertion (Assert) in method uniqueNum
+        //@ assert (\exists int i; 0 <= i && i < arr.length; (\forall int j; 0 <= j && j < arr.length; (i != j && arr[i] == arr[j]) ==> result == i));
+            ^
+1 verification failure
+

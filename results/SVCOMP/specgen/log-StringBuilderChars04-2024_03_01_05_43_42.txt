@@ -1,0 +1,79 @@
+public class StringBuilderChars04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arg.length(); arg.charAt(i) != arg.charAt(i));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < arg.length(); arg.charAt(i) == arg.charAt(i));
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+
+        char[] charArray = new char[buffer.length()];
+        buffer.getChars(0, buffer.length(), charArray, 0);
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= charArray.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; charArray[j] == buffer.charAt(j));
+        //@ decreases charArray.length - i;
+        for (char character : charArray) {
+            System.out.print(character);
+            if (character == buffer.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+error: An error while executing a proof script for f: (error "Solver has unexpectedly terminated")
+1 error
+
+public class StringBuilderChars04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arg.length(); arg.charAt(i) != arg.charAt(i));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < arg.length(); arg.charAt(i) == arg.charAt(i));
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+
+        char[] charArray = new char[buffer.length()];
+        buffer.getChars(0, buffer.length(), charArray, 0);
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= charArray.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; charArray[j] == buffer.charAt(j));
+        //@ decreases charArray.length - i;
+        for (int j = 0; j < charArray.length; j++) {
+            char character = charArray[j];
+            System.out.print(character);
+            if (character == buffer.charAt(i))
+                return false;
+            i++;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderChars04.java:13: error: variable j is already defined in method f(String)
+        //@ maintaining (\forall int j; 0 <= j && j < i; charArray[j] == buffer.charAt(j));
+                                     ^
+1 error
+
+public class StringBuilderChars04 {
+    //@ requires arg != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arg.length(); arg.charAt(i) != arg.charAt(i));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < arg.length(); arg.charAt(i) == arg.charAt(i));
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+
+        char[] charArray = new char[buffer.length()];
+        buffer.getChars(0, buffer.length(), charArray, 0);
+
+        int i = 0;
+        //@ maintaining 0 <= i && i <= charArray.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; charArray[k] == buffer.charAt(k));
+        //@ decreases charArray.length - i;
+        for (int j = 0; j < charArray.length; j++) {
+            char character = charArray[j];
+            System.out.print(character);
+            if (character == buffer.charAt(i))
+                return false;
+            i++;
+        }
+        return true;
+    }
+}

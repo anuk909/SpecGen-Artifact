@@ -1,0 +1,202 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e >= 0;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE;
+  //@ ensures \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:57: error: cannot find symbol
+    return Verifier.nondetInt();
+           ^
+  symbol:   variable Verifier
+  location: class Utils_nondet
+1 error
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e >= 0;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  public void remove(int index) {
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index >= 0;
+  //@ requires index < size();
+  //@ ensures \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  //@ ensures \result >= Integer.MIN_VALUE;
+  //@ ensures \result <= Integer.MAX_VALUE;
+  public static int nondet_int() {
+    return 0; // placeholder for nondeterministic value
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated && \result >= e;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index <= size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires index >= 0; 
+  requires index < size(); 
+  ensures \result >= 0; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:34: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:18:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:34:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:17: verify: Precondition conjunct is false: index <= size()
+  //@ requires index <= size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:55: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:51:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:51: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:55:
+  //@ ensures \result >= 0;
+      ^
+7 verification failures
+

@@ -1,0 +1,63 @@
+public class PrimeNumbers
+{
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        int[] primeArray = new int[n];
+        primeArray[0] = 2;
+
+        //@ maintaining 2 <= count && count <= n+1;
+        //@ maintaining (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+        //@ maintaining (\forall int i; count <= i && i < n; primeArray[i] == 0);
+        //@ decreases n + 1 - count;
+        for (count = 2; count <= n;)
+        { 
+
+            //@ maintaining 2 <= j && j <= num/2+1;
+            //@ maintaining status == 1 ==> (\forall int i; 2 <= i && i < j; !div(num, i));
+            //@ decreases num/2 + 1 - j;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    public /*@ pure @*/ boolean isPrime(int n) {
+        for (int i = 2; i < n; i++) {
+            if (div(n, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result == (n % d == 0);
+    private /*@ pure @*/ boolean div(int n, int d) {
+        return n % d == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:43: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+1 error
+

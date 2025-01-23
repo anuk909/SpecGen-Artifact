@@ -1,0 +1,118 @@
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ Cookie cookie = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  /*@ public normal_behavior
+    @    requires (\forall int i; 0 <= i && i < value.length(); (int)Character.MIN_VALUE <= (int)value.charAt(i) && (int)value.charAt(i) <= (int)Character.MAX_VALUE);
+    @    assignable tainted, cookie;
+    @    ensures tainted.equals(value) && cookie.getName().equals(value) && cookie.getValue().equals(value);
+    @*/
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.length == 1 && \result[0].equals(tainted);
+    @*/
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getAuthType() {
+    return tainted;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.length == 1 && \result[0].equals(cookie);
+    @*/
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+    @*/
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+    @*/
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getQueryString() {
+    return tainted;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.toString().equals(tainted);
+    @*/
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+    @*/
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.get("name").equals(tainted);
+    @*/
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getProtocol() {
+    return tainted;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals(tainted);
+    @*/
+  public String getScheme() {
+    return tainted;
+  }
+}
+

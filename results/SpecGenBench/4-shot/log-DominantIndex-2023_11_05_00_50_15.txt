@@ -1,0 +1,33 @@
+class DominantIndex {
+    
+    //@ requires nums != null;
+    //@ requires (\forall int i; 0 <= i && i < nums.length; Integer.MIN_VALUE <= nums[i] && nums[i] <= Integer.MAX_VALUE);
+    //@ ensures \result == -1 || (0 <= \result && \result < nums.length && (\forall int i; 0 <= i && i < nums.length && i != \result; nums[\result] >= 2 * nums[i]));
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[index] >= 2 * nums[j]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:5:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:23:
+    //@ ensures \result == -1 || (0 <= \result && \result < nums.length && (\forall int i; 0 <= i && i < nums.length && i != \result; nums[\result] >= 2 * nums[i]));
+        ^
+2 verification failures
+

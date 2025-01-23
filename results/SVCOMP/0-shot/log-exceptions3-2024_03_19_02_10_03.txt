@@ -1,0 +1,44 @@
+class A extends Throwable {
+  //@ public normal_behavior
+  //@ ensures \result == this;
+  //@ signals_only A;
+  //@ signals (A a) true;
+  //@ also
+  //@ public exceptional_behavior
+  //@ signals (Exception e) false;
+}
+
+class B extends A {
+  //@ public normal_behavior
+  //@ ensures \result == this;
+  //@ signals_only B;
+  //@ signals (B b) true;
+  //@ also
+  //@ public exceptional_behavior
+  //@ signals (Exception e) false;
+}
+
+class C extends B {
+  //@ public normal_behavior
+  //@ ensures \result == this;
+  //@ signals_only C;
+  //@ signals (C c) true;
+  //@ also
+  //@ public exceptional_behavior
+  //@ signals (Exception e) false;
+}
+
+public class exceptions3 {
+  //@ requires true;
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      throw new B();
+    } catch (C exc) {
+      //@ assert false;
+    } catch (B exc) {
+      //@ assert false;
+    }
+  }
+}
+

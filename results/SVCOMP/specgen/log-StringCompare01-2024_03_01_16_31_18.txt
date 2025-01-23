@@ -1,0 +1,49 @@
+public class StringCompare01 {
+    public static void main(String[] args) {
+        String s1 = new String("test");
+        String s2 = "goodbye";
+        String s3 = "Automatic Test Generation";
+        String s4 = "automatic test generation";
+
+        // Test for String equality using equals method
+        //@ assert s1.equals("test") <==> true;
+        if (s1.equals("test")) assert true;
+        else assert false;
+
+        // Test for String reference equality
+        //@ assert s1 != "test" <==> true;
+        if (s1 != "test") assert true;
+        else assert false;
+
+        // Test for case-insensitive String equality using equalsIgnoreCase method
+        //@ assert s3.equalsIgnoreCase(s4) <==> true;
+        if (s3.equalsIgnoreCase(s4)) assert true;
+        else assert false;
+
+        // Test for lexicographical comparison using compareTo method
+        //@ assert s1.compareTo(s2) == 13 <==> true;
+        assert s1.compareTo(s2) == 13;
+
+        //@ assert s2.compareTo(s1) == -13 <==> true;
+        assert s2.compareTo(s1) == -13;
+
+        //@ assert s1.compareTo(s1) == 0 <==> true;
+        assert s1.compareTo(s1) == 0;
+
+        //@ assert s3.compareTo(s4) == -32 <==> true;
+        assert s3.compareTo(s4) == -32;
+
+        //@ assert s4.compareTo(s3) == 32 <==> true;
+        assert s4.compareTo(s3) == 32;
+
+        // Test for regionMatches method (case sensitive)
+        //@ assert !s3.regionMatches(0, s4, 0, 5) <==> true;
+        if (!s3.regionMatches(0, s4, 0, 5)) assert true;
+        else assert false;
+
+        // Test for regionMatches method (ignore case)
+        //@ assert s3.regionMatches(true, 0, s4, 0, 5) <==> true;
+        if (s3.regionMatches(true, 0, s4, 0, 5)) assert true;
+        else assert false;
+    }
+}

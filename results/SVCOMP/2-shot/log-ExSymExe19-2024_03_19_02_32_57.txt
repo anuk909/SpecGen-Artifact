@@ -1,0 +1,39 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \symbolic arg;
+  //@ ensures \result ==> field < 0;
+  //@ ensures \result ==> field == field % 10;
+  //@ ensures \result ==> test(3, field, field2);
+  //@ ensures !\result ==> !(\symbolic arg) || field >= 0 || field != field % 10 || !test(3, field, field2);
+  public static boolean f(int arg) {
+    int x = 3;
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires \symbolic x;
+  //@ requires \symbolic z;
+  //@ requires \symbolic r;
+  //@ ensures \result ==> x == z + r && z == 3 * (z + r) && r == -(3 * (z + r)) && (x > 99 ==> (\result ==> false)) && (r > z ==> (\result ==> false));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+

@@ -1,0 +1,20 @@
+class PassPillowBranch {
+    //@ requires n > 1;
+    //@ requires 0 <= time && time < 2 * (n - 1);
+    //@ ensures \result == time + 1 && time < n || \result == n * 2 - time - 1 && time >= n;
+    public int passPillow(int n, int time) {
+        time = time % (n - 1) * 2;
+        if (time < n) {
+            return time + 1;
+        }
+        return n * 2 - time - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:10: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:4:) in method passPillow
+        return n * 2 - time - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:10:
+    //@ ensures \result == time + 1 && time < n || \result == n * 2 - time - 1 && time >= n;
+        ^
+2 verification failures
+

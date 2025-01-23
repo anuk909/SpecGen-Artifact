@@ -1,0 +1,861 @@
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private Cookie cookie = null;
+  private String tainted = null;
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && cookie.getName() == value && cookie.getValue() == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == "name";
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.get("name") == tainted;
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:5: error: cannot find symbol
+  private Cookie cookie = null;
+          ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: error: cannot find symbol
+  public Cookie[] getCookies() {
+         ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a assignable clause with public visibility
+  //@ assignable tainted, cookie;
+                 ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: An identifier with private visibility may not be used in a assignable clause with public visibility
+  //@ assignable tainted, cookie;
+                          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie.getName() == value && cookie.getValue() == value;
+              ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie.getName() == value && cookie.getValue() == value;
+                                  ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures tainted == value && cookie.getName() == value && cookie.getValue() == value;
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:12: error: cannot find symbol
+    this.cookie = new Cookie(tainted, tainted);
+                      ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:20: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:25: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.length == 1 && \result[0] == cookie;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:27: error: cannot find symbol
+    return new Cookie[] {cookie};
+               ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:30: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:35: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:40: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:45: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:50: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:55: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.toString().equals(tainted);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:60: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:70: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.get("name") == tainted;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:77: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:82: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == tainted;
+                         ^
+22 errors
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ Cookie cookie = null;
+  private /*@ spec_public */ String tainted = null;
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && cookie.getName() == value && cookie.getValue() == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == "name";
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.get("name") == tainted;
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:4: error: cannot find symbol
+  private /*@ spec_public */ Cookie cookie = null;
+                             ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:25: error: cannot find symbol
+  public Cookie[] getCookies() {
+         ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:11: error: cannot find symbol
+    this.cookie = new Cookie(tainted, tainted);
+                      ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: error: cannot find symbol
+    return new Cookie[] {cookie};
+               ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+4 errors
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ Object cookie = null;
+  private /*@ spec_public */ String tainted = null;
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && ((Cookie)cookie).getName() == value && ((Cookie)cookie).getValue() == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == (Cookie)cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {(Cookie)cookie};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == "name";
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures ((Map)result).get("name") == tainted;
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:25: error: cannot find symbol
+  public Cookie[] getCookies() {
+         ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: cannot find symbol
+  //@ ensures tainted == value && ((Cookie)cookie).getName() == value && ((Cookie)cookie).getValue() == value;
+                                    ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: cannot find symbol
+  //@ ensures tainted == value && ((Cookie)cookie).getName() == value && ((Cookie)cookie).getValue() == value;
+                                                                           ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:11: error: cannot find symbol
+    this.cookie = new Cookie(tainted, tainted);
+                      ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:24: error: cannot find symbol
+  //@ ensures \result.length == 1 && \result[0] == (Cookie)cookie;
+                                                    ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: error: cannot find symbol
+    return new Cookie[] {(Cookie)cookie};
+               ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: error: cannot find symbol
+    return new Cookie[] {(Cookie)cookie};
+                          ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:69: error: cannot find symbol
+  //@ ensures ((Map)result).get("name") == tainted;
+                    ^
+  symbol:   variable result
+  location: class HttpServletRequest
+8 errors
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ Object cookie = null;
+  private /*@ spec_public */ String tainted = null;
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && ((String)cookie).equals(value);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = value;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getCookies() {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaders(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaderNames() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRequestURL() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals("name");
+  public String getParameterNames() {
+    return "name";
+  }
+
+  //@ ensures ((Map)result).get("name").equals(tainted);
+  public String getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map.get("name");
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:69: error: cannot find symbol
+  //@ ensures ((Map)result).get("name").equals(tainted);
+                    ^
+  symbol:   variable result
+  location: class HttpServletRequest
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ Object cookie = null;
+  private /*@ spec_public */ String tainted = null;
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && ((String)cookie).equals(value);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = value;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getCookies() {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaders(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaderNames() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRequestURL() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals("name");
+  public String getParameterNames() {
+    return "name";
+  }
+
+  //@ ensures ((Map)result).get("name").equals(tainted);
+  public String getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map.get("name");
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:69: error: cannot find symbol
+  //@ ensures ((Map)result).get("name").equals(tainted);
+                    ^
+  symbol:   variable result
+  location: class HttpServletRequest
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ Object cookie = null;
+  private /*@ spec_public */ String tainted = null;
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && ((String)cookie).equals(value);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = value;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getCookies() {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaders(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaderNames() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRequestURL() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals("name");
+  public String getParameterNames() {
+    return "name";
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map.get("name");
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:4: verify: The prover cannot establish an assertion (NullField) in method HttpServletRequest
+  private /*@ spec_public */ Object cookie = null;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:24:) in method getCookies
+    return new String[] {tainted};
+    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:24: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:26:
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+      ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:14:) in method getParameterValues
+    return new String[] {tainted};
+    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:14: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:16:
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+      ^
+5 verification failures
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ String cookie = "";
+  private /*@ spec_public */ String tainted = "";
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted.equals(value) && cookie.equals(value);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    cookie = value;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getCookies() {
+    return new String[] {cookie};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaders(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaderNames() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRequestURL() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals("name");
+  public String getParameterNames() {
+    return "name";
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map.get("name");
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:14:) in method getParameterValues
+    return new String[] {tainted};
+    ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:14: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:16:
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+      ^
+2 verification failures
+
+import java.util.*;
+
+public class HttpServletRequest {
+  private /*@ spec_public */ String cookie = "";
+  private /*@ spec_public */ String tainted = "";
+
+  //@ assignable tainted, cookie;
+  //@ ensures tainted.equals(value) && cookie.equals(value);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    cookie = value;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(tainted);
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookie);
+  public String[] getCookies() {
+    return new String[] {cookie};
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaders(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getHeaderNames() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getRequestURL() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.equals("name");
+  public String getParameterNames() {
+    return "name";
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map.get("name");
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+

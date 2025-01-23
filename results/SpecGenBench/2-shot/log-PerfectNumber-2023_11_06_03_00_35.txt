@@ -1,0 +1,41 @@
+class PerfectNumber {
+    //@ requires num > 0;
+    //@ ensures \result == true <==> (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ==> (d + (num / d)) == sum) && sum == num;
+    public boolean isPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        int sum = 1;
+        //@ maintaining 1 <= sum && sum <= num;
+        //@ maintaining (\forall int d; 2 <= d && d * d <= num; (num % d == 0) ==> (d + (num / d)) == sum);
+        //@ decreasing num - d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum == num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ==> (d + (num / d)) == sum) && sum == num;
+                                                                                                                ^
+  symbol:   variable sum
+  location: class PerfectNumber
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:3: error: The value expression of a sum or product expression must be a numeric type, not boolean
+    //@ ensures \result == true <==> (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ==> (d + (num / d)) == sum) && sum == num;
+                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ==> (d + (num / d)) == sum) && sum == num;
+                                                                                                                        ^
+  symbol:   variable sum
+  location: class PerfectNumber
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:11: error: variable d is already defined in method isPerfectNumber(int)
+        //@ maintaining (\forall int d; 2 <= d && d * d <= num; (num % d == 0) ==> (d + (num / d)) == sum);
+                                     ^
+4 errors
+

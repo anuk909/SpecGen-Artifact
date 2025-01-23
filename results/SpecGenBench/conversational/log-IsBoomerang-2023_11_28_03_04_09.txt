@@ -1,0 +1,191 @@
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result == (v1[0] * v2[1] - v1[1] * v2[0] != 0);
+    public boolean isBoomerang(int[][] points) {
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        return v1[0] * v2[1] - v1[1] * v2[0] != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: error: cannot find symbol
+    //@ ensures \result == (v1[0] * v2[1] - v1[1] * v2[0] != 0);
+                            ^
+  symbol:   variable v1
+  location: class IsBoomerang
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: error: cannot find symbol
+    //@ ensures \result == (v1[0] * v2[1] - v1[1] * v2[0] != 0);
+                                    ^
+  symbol:   variable v2
+  location: class IsBoomerang
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: error: cannot find symbol
+    //@ ensures \result == (v1[0] * v2[1] - v1[1] * v2[0] != 0);
+                                            ^
+  symbol:   variable v1
+  location: class IsBoomerang
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: error: cannot find symbol
+    //@ ensures \result == (v1[0] * v2[1] - v1[1] * v2[0] != 0);
+                                                    ^
+  symbol:   variable v2
+  location: class IsBoomerang
+4 errors
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result == (points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0;
+    public boolean isBoomerang(int[][] points) {
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        return v1[0] * v2[1] - v1[1] * v2[0] != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0;
+                        ^
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0;
+                                                                                                                                                         ^
+2 errors
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        return (v1[0] * v2[1] - v1[1] * v2[0]) != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:5: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method isBoomerang
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+                             ^
+1 verification failure
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        return (v1[0] * v2[1] - v1[1] * v2[0]) != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:9: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3:) in method isBoomerang
+        return (v1[0] * v2[1] - v1[1] * v2[0]) != 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsBoomerang.java:9:
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+        ^
+2 verification failures
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        int result = v1[0] * v2[1] - v1[1] * v2[0];
+        return result != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3:) in method isBoomerang
+        return result != 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10:
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+        ^
+2 verification failures
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        int result = v1[0] * v2[1] - v1[1] * v2[0];
+        //@ assert result != 0;
+        return result != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10: verify: The prover cannot establish an assertion (Assert) in method isBoomerang
+        //@ assert result != 0;
+            ^
+1 verification failure
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        int result = v1[0] * v2[1] - v1[1] * v2[0];
+        //@ assert result != 0 : "The points form a non-degenerate triangle.";
+        return result != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10: verify: The prover cannot establish an assertion (Assert) in method isBoomerang: The points form a non-degenerate triangle.
+        //@ assert result != 0 : "The points form a non-degenerate triangle.";
+            ^
+1 verification failure
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        int result = v1[0] * v2[1] - v1[1] * v2[0];
+        //@ assert result != 0;
+        return result != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10: verify: The prover cannot establish an assertion (Assert) in method isBoomerang
+        //@ assert result != 0;
+            ^
+1 verification failure
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        int result = v1[0] * v2[1] - v1[1] * v2[0];
+        //@ assert result != 0 : "The points form a non-degenerate triangle.";
+        return result != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10: verify: The prover cannot establish an assertion (Assert) in method isBoomerang: The points form a non-degenerate triangle.
+        //@ assert result != 0 : "The points form a non-degenerate triangle.";
+            ^
+1 verification failure
+
+class IsBoomerang {
+    //@ requires points != null && points.length == 3 && points[0] != null && points[1] != null && points[2] != null;
+    //@ ensures \result <==> ((points[1][0] - points[0][0]) * (points[2][1] - points[0][1]) - (points[1][1] - points[0][1]) * (points[2][0] - points[0][0]) != 0);
+    public boolean isBoomerang(int[][] points) {
+        //@ assume points.length == 3;
+        //@ assume points[0].length == 2 && points[1].length == 2 && points[2].length == 2;
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        int result = v1[0] * v2[1] - v1[1] * v2[0];
+        //@ assert result != 0;
+        return result != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:10: verify: The prover cannot establish an assertion (Assert) in method isBoomerang
+        //@ assert result != 0;
+            ^
+1 verification failure
+

@@ -1,0 +1,502 @@
+public class charArray {
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ assignable c[0];
+  //@ ensures c[0] == 's';
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's';
+  //@ ensures \result == 0 <==> (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == 1 <==> (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's';
+                                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == 1 <==> (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's';
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:16: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == 0 <==> (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) != 's';
+                                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:16: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == 0 <==> (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) != 's';
+                                                       ^
+4 errors
+
+public class charArray {
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ assignable c[0];
+  //@ ensures c[0] == 's';
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+  private static char funHelper(String arg) {
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return s.charAt(5);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:24: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:24: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                                                ^
+4 errors
+
+public class charArray {
+  private /*@ spec_public @*/ char[] reverse;
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ assignable reverse;
+  //@ ensures reverse[0] == 's';
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+  private static char funHelper(String arg) {
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return s.charAt(5);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:6: error: non-static variable reverse cannot be referenced from a static context
+  //@ assignable reverse;
+                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:7: error: non-static variable reverse cannot be referenced from a static context
+  //@ ensures reverse[0] == 's';
+              ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: non-static variable reverse cannot be referenced from a static context
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: incompatible types: String cannot be converted to char[]
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: Assignments are not allowed where pure expressions are expected
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                                  ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: cannot find symbol
+  //@ ensures \result == (reverse = new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5);
+                                                                                                                           ^
+  symbol:   method charAt(int)
+  location: class char[]
+10 errors
+
+public class charArray {
+  private /*@ spec_public @*/ char[] reverse;
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ assignable reverse;
+  //@ ensures reverse[0] == 's';
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == (funHelper(arg)).charAt(5);
+  private static String funHelper(String arg) {
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:6: error: non-static variable reverse cannot be referenced from a static context
+  //@ assignable reverse;
+                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:7: error: non-static variable reverse cannot be referenced from a static context
+  //@ ensures reverse[0] == 's';
+              ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:17: error: bad operand types for binary operator '=='
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                               ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:18: error: bad operand types for binary operator '!='
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                               ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:21: error: bad operand types for binary operator '=='
+    return (funHelper(arg) == 's') ? 1 : 0;
+                           ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:26: error: bad operand types for binary operator '=='
+  //@ ensures \result == (funHelper(arg)).charAt(5);
+                      ^
+  first type:  String
+  second type: char
+8 errors
+
+public class charArray {
+  private /*@ spec_public @*/ char[] reverse;
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures c[0] == 's';
+  public static void f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == funHelper(arg).charAt(5);
+  private static String funHelper(String arg) {
+    char[] c = arg.toCharArray();
+    f(c);
+    String s = "HELLO" + new String(c);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: bad operand types for binary operator '=='
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                               ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:16: error: bad operand types for binary operator '!='
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                               ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:19: error: bad operand types for binary operator '=='
+    return (funHelper(arg) == 's') ? 1 : 0;
+                           ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:24: error: bad operand types for binary operator '=='
+  //@ ensures \result == funHelper(arg).charAt(5);
+                      ^
+  first type:  String
+  second type: char
+6 errors
+
+public class charArray {
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures c[0] == 's';
+  public static void f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == funHelper(arg).charAt(5);
+  private static String funHelper(String arg) {
+    char[] c = arg.toCharArray();
+    f(c);
+    String s = "HELLO" + new String(c);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: bad operand types for binary operator '=='
+  //@ ensures \result == 1 <==> funHelper(arg) == 's';
+                                               ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: bad operand types for binary operator '!='
+  //@ ensures \result == 0 <==> funHelper(arg) != 's';
+                                               ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:18: error: bad operand types for binary operator '=='
+    return (funHelper(arg) == 's') ? 1 : 0;
+                           ^
+  first type:  String
+  second type: char
+/home/max/Documents/JMLGPT/tmp/charArray.java:23: error: bad operand types for binary operator '=='
+  //@ ensures \result == funHelper(arg).charAt(5);
+                      ^
+  first type:  String
+  second type: char
+6 errors
+
+public class charArray {
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures c[0] == 's';
+  public static void f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg).charAt(0) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == funHelper(arg).charAt(5);
+  private static String funHelper(String arg) {
+    char[] c = arg.toCharArray();
+    f(c);
+    String s = "HELLO" + new String(c);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:23: error: bad operand types for binary operator '=='
+  //@ ensures \result == funHelper(arg).charAt(5);
+                      ^
+  first type:  String
+  second type: char
+3 errors
+
+public class charArray {
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures c[0] == 's';
+  public static void f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg).charAt(0) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == funHelper(arg).charAt(5);
+  private static String funHelper(String arg) {
+    char[] c = arg.toCharArray();
+    f(c);
+    String s = "HELLO" + new String(c);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:23: error: bad operand types for binary operator '=='
+  //@ ensures \result == funHelper(arg).charAt(5);
+                      ^
+  first type:  String
+  second type: char
+3 errors
+
+public class charArray {
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures c[0] == 's';
+  public static void f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg).charAt(0) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == funHelper(arg).charAt(4);
+  private static String funHelper(String arg) {
+    char[] c = arg.toCharArray();
+    f(c);
+    String s = "HELLO" + new String(c);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:23: error: bad operand types for binary operator '=='
+  //@ ensures \result == funHelper(arg).charAt(4);
+                      ^
+  first type:  String
+  second type: char
+3 errors
+
+public class charArray {
+  
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures c[0] == 's';
+  public static void f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    return (funHelper(arg).charAt(0) == 's') ? 1 : 0;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == funHelper(arg).charAt(0);
+  private static String funHelper(String arg) {
+    char[] c = arg.toCharArray();
+    f(c);
+    String s = "HELLO" + new String(c);
+    return s;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 1 <==> funHelper(arg).charAt(0) == 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == 0 <==> funHelper(arg).charAt(0) != 's';
+                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:23: error: bad operand types for binary operator '=='
+  //@ ensures \result == funHelper(arg).charAt(0);
+                      ^
+  first type:  String
+  second type: char
+3 errors
+

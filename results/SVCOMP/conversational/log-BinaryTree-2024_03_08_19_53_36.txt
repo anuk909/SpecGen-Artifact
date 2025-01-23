@@ -1,0 +1,800 @@
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    int value;
+    Node left;
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \not_modified(root) && search(v);
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \not_modified(root);
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with private visibility may not be used in a requires clause with public visibility
+  //@ requires \not_modified(root);
+                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:19: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \not_modified(root) && search(v);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:50: error: An identifier with private visibility may not be used in a requires clause with public visibility
+  //@ requires \not_modified(root);
+                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:50: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:51: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \not_modified(root);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:52: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+                                                      ^
+7 errors
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \not_modified(root) && search(v);
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \not_modified(root);
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:54: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+2 errors
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root = null;
+
+  /** Inserts a value in to the tree. */
+  //@ ensures \not_modified(root) && search(v);
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:19: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root = null;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:22:) in method insert
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:23:
+  //@ ensures \not_modified(root) && search(v);
+      ^
+3 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root; // root should not be initialized to null
+
+  /** Inserts a value in to the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \not_modified(root) && search(v);
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:54: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+2 errors
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root;
+
+  /** Inserts a value in to the tree. */
+  //@ ensures \not_modified(root) && search(v);
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:19: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:22:) in method insert
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:23:
+  //@ ensures \not_modified(root) && search(v);
+      ^
+3 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root = new Node(0, null, null); // Initialize root with a dummy node
+
+  /** Inserts a value in to the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \not_modified(root) && search(v);
+  public void insert(int v) {
+
+    if (root.left == null) {
+      root.left = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root.left;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ requires \not_modified(root);
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root.left;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:54: error: A \not_modified expression may not be in a requires clause
+  //@ requires \not_modified(root);
+                            ^
+2 errors
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root;
+
+  /** Inserts a value in to the tree. */
+  //@ ensures search(v);
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) {
+      if (curr.value == v) {
+        return true;
+      } else if (curr.value < v) {
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:19: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+  private Node root;
+               ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:22:) in method insert
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:23:
+  //@ ensures search(v);
+      ^
+3 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root = new Node(0, null, null); // Initialize root with a dummy node
+
+  /** Inserts a value in to the tree. */
+  //@ ensures search(v);
+  public void insert(int v) {
+
+    if (root.left == null) {
+      root.left = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root.left;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    Node curr = root.left;
+    while (curr != null) {
+      if (curr.value == v) {
+        return true;
+      } else if (curr.value < v) {
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:19: verify: The prover cannot establish an assertion (NullFormal: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:11:) in method BinaryTree: l in Node(int,BinaryTree.Node,BinaryTree.Node)
+  private Node root = new Node(0, null, null); // Initialize root with a dummy node
+                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:19:
+    Node(int v, Node l, Node r) {
+                ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:22:) in method insert
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:23:
+  //@ ensures search(v);
+      ^
+4 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root;
+
+  /** Constructs an empty BinaryTree */
+  public BinaryTree() {
+    root = null;
+  }
+
+  /** Inserts a value into the tree. */
+  //@ ensures search(v);
+  public void insert(int v) {
+    root = insertRecursive(root, v);
+  }
+
+  private Node insertRecursive(Node node, int v) {
+    if (node == null) {
+      return new Node(v, null, null);
+    }
+
+    if (v < node.value) {
+      node.left = insertRecursive(node.left, v);
+    } else if (v > node.value) {
+      node.right = insertRecursive(node.right, v);
+    }
+
+    return node;
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    return searchRecursive(root, v);
+  }
+
+  private boolean searchRecursive(Node node, int v) {
+    if (node == null) {
+      return false;
+    }
+
+    if (node.value == v) {
+      return true;
+    } else if (v < node.value) {
+      return searchRecursive(node.left, v);
+    } else {
+      return searchRecursive(node.right, v);
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:23: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method BinaryTree
+    root = null;
+         ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:27:) in method insert
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:27: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:28:
+  //@ ensures search(v);
+      ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:49: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:47:) in method search
+    return searchRecursive(root, v);
+    ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:49:
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+      ^
+5 verification failures
+
+public class BinaryTree {
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    //@ spec_public
+    int value;
+    //@ spec_public
+    Node left;
+    //@ spec_public
+    Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  //@ spec_public
+  private Node root;
+
+  /** Constructs an empty BinaryTree */
+  public BinaryTree() {
+    root = null;
+  }
+
+  /** Inserts a value into the tree. */
+  //@ ensures search(v);
+  public void insert(int v) {
+    root = insertRecursive(root, v);
+  }
+
+  private Node insertRecursive(Node node, int v) {
+    if (node == null) {
+      return new Node(v, null, null);
+    }
+
+    if (v < node.value) {
+      node.left = insertRecursive(node.left, v);
+    } else if (v > node.value) {
+      node.right = insertRecursive(node.right, v);
+    }
+
+    return node;
+  }
+
+  /** Searches for a value in the tree. */
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+  public boolean search(int v) {
+    return searchRecursive(root, v);
+  }
+
+  private boolean searchRecursive(Node node, int v) {
+    if (node == null) {
+      return false;
+    }
+
+    if (node.value == v) {
+      return true;
+    } else if (v < node.value) {
+      return searchRecursive(node.left, v);
+    } else {
+      return searchRecursive(node.right, v);
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:23: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method BinaryTree
+    root = null;
+         ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:27:) in method insert
+  public void insert(int v) {
+              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:27: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:28:
+  //@ ensures search(v);
+      ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:49: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:47:) in method search
+    return searchRecursive(root, v);
+    ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BinaryTree.java:49:
+  //@ ensures \result == (\exists Node n; n != null; n.value == v);
+      ^
+5 verification failures
+

@@ -1,0 +1,85 @@
+class JewelsInStones {
+    //@ requires (\forall int i; 0 <= i && i < jewels.length(); (int)Character.MIN_VALUE <= (int)jewels.charAt(i) && (int)jewels.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ requires (\forall int i; 0 <= i && i < stones.length(); (int)Character.MIN_VALUE <= (int)stones.charAt(i) && (int)stones.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result >= 0;
+    //@ ensures \result == spec_numJewelsInStones(jewels, stones);
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining jewelsCount == spec_numJewelsInStones(jewels, stones.substring(0, i));
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining (\forall int k; 0 <= k && k < j; stones.charAt(i) != jewels.charAt(k));
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+    
+    /*@
+        requires (\forall int i; 0 <= i && i < jewels.length(); (int)Character.MIN_VALUE <= (int)jewels.charAt(i) && (int)jewels.charAt(i) <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < stones.length(); (int)Character.MIN_VALUE <= (int)stones.charAt(i) && (int)stones.charAt(i) <= (int)Character.MAX_VALUE);
+        ensures \result >= 0;
+        ensures \result == countJewels(jewels.toCharArray(), stones.toCharArray(), 0, 0);
+    */
+    private int spec_numJewelsInStones(String jewels, String stones) {
+        return countJewels(jewels.toCharArray(), stones.toCharArray(), 0, 0);
+    }
+    
+    /*@
+        requires (\forall int i; 0 <= i && i < jewels.length; (int)Character.MIN_VALUE <= (int)jewels[i] && (int)jewels[i] <= (int)Character.MAX_VALUE);
+        requires (\forall int i; 0 <= i && i < stones.length; (int)Character.MIN_VALUE <= (int)stones[i] && (int)stones[i] <= (int)Character.MAX_VALUE);
+        requires 0 <= i && i <= stones.length;
+        requires 0 <= j && j <= jewels.length;
+        requires (\forall int k; 0 <= k && k < j; stones[i] != jewels[k]);
+        ensures \result >= 0;
+        ensures \result == countJewels(jewels, stones, i+1, 0);
+        ensures (\forall int k; 0 <= k && k < j; stones[i] != jewels[k]);
+    */
+    private int countJewels(char[] jewels, char[] stones, int i, int j) {
+        if (i == stones.length) {
+            return 0;
+        } else if (j == jewels.length) {
+            return countJewels(jewels, stones, i+1, 0);
+        } else {
+            if (stones[i] == jewels[j]) {
+                return 1 + countJewels(jewels, stones, i, j+1);
+            } else {
+                return countJewels(jewels, stones, i, j+1);
+            }
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:5: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == spec_numJewelsInStones(jewels, stones);
+                           ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:5: warning: A non-pure method is being called where it is not permitted: JewelsInStones.spec_numJewelsInStones(java.lang.String,java.lang.String)
+    //@ ensures \result == spec_numJewelsInStones(jewels, stones);
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: warning: A non-pure method is being called where it is not permitted: JewelsInStones.spec_numJewelsInStones(java.lang.String,java.lang.String)
+        //@ maintaining jewelsCount == spec_numJewelsInStones(jewels, stones.substring(0, i));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:32: warning: A non-pure method is being called where it is not permitted: JewelsInStones.countJewels(char[],char[],int,int)
+        ensures \result == countJewels(jewels.toCharArray(), stones.toCharArray(), 0, 0);
+                                      ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:39: error: variable i is already defined in method countJewels(char[],char[],int,int)
+        requires (\forall int i; 0 <= i && i < jewels.length; (int)Character.MIN_VALUE <= (int)jewels[i] && (int)jewels[i] <= (int)Character.MAX_VALUE);
+                              ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:40: error: variable i is already defined in method countJewels(char[],char[],int,int)
+        requires (\forall int i; 0 <= i && i < stones.length; (int)Character.MIN_VALUE <= (int)stones[i] && (int)stones[i] <= (int)Character.MAX_VALUE);
+                              ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:45: warning: A non-pure method is being called where it is not permitted: JewelsInStones.countJewels(char[],char[],int,int)
+        ensures \result == countJewels(jewels, stones, i+1, 0);
+                                      ^
+3 errors
+4 warnings
+

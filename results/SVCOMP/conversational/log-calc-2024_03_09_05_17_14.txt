@@ -1,0 +1,27 @@
+public class calc {
+    //@ requires args != null;
+    //@ requires args.length >= 2;
+    //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; args[i].matches("\\d+"));
+    //@ ensures (\forall int i; 0 <= i && i < args.length; Integer.parseInt(args[i]) >= Integer.MIN_VALUE && Integer.parseInt(args[i]) <= Integer.MAX_VALUE);
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires a.matches("\\d+") && b.matches("\\d+");
+    //@ requires Integer.parseInt(a) >= Integer.MIN_VALUE && Integer.parseInt(a) <= Integer.MAX_VALUE;
+    //@ requires Integer.parseInt(b) >= Integer.MIN_VALUE && Integer.parseInt(b) <= Integer.MAX_VALUE;
+    public void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}

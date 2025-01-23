@@ -1,0 +1,11 @@
+public class CharSequenceBug {
+    //@ requires s != null;
+    //@ ensures \result ==> s.indexOf('b') != -1;
+    //@ ensures !\result ==> s.indexOf('b') == -1;
+    public static boolean main(String s) {
+        CharSequence target = "b";
+        String replaced = "";
+        if (target.length() == 1) replaced = s.replace('b', 'c');
+        return replaced.indexOf('b') != -1;
+    }
+}

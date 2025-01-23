@@ -1,0 +1,92 @@
+public class Smallest {
+
+    /*@ requires a != null;
+      @ ensures \result == -1 ==> a.length == 0;
+      @ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+      @ ensures (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+      @ pure function @*/
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining 0 <= index && index <= a.length;
+        //@ maintaining 0 <= smallest && smallest < index;
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[smallest] <= a[i]);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:7: error: Expected an identifier, found end of JML comment instead
+      @ pure function @*/
+                      ^
+/home/max/Documents/JMLGPT/tmp/Smallest.java:7: error: ';' expected
+      @ pure function @*/
+                         ^
+2 errors
+
+public class Smallest {
+
+    /*@ requires a != null;
+      @ ensures \result == -1 ==> a.length == 0;
+      @ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+      @ ensures (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+      @ pure @*/
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining 0 <= index && index <= a.length;
+        //@ maintaining 0 <= smallest && smallest < index;
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[smallest] <= a[i]);
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Smallest
+        //@ maintaining 0 <= smallest && smallest < index;
+            ^
+1 verification failure
+
+public class Smallest {
+
+    /*@ requires a != null;
+      @ ensures \result == -1 ==> a.length == 0;
+      @ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+      @ ensures (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+      @ pure @*/
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 1;
+        int smallest = 0;
+
+        //@ maintaining 1 <= index && index <= a.length;
+        //@ maintaining 0 <= smallest && smallest < index;
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[smallest] <= a[i]);
+        //@ decreases a.length - index;
+        while (index < a.length) {
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+

@@ -1,0 +1,32 @@
+public class calc {
+  void do_stuff(String a, String b) {
+    try {
+      int x = Integer.parseInt(a);
+      int y = Integer.parseInt(b);
+      assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+    } catch (java.lang.NumberFormatException e) {
+    }
+  }
+
+  /*@ modifies calc.$assertionsDisabled, args[*], args[].toString; */
+  public static void fun(String[] args) {
+    if (args.length < 2) {
+      System.out.println("need two arguments");
+      return;
+    }
+    new calc().do_stuff(args[0], args[1]);
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    new calc().do_stuff("1", "1");
+    new calc().do_stuff("12", "10");
+    new calc().do_stuff("0", "2");
+    new calc().do_stuff("114", "114");
+    new calc().do_stuff("15", "abcd");
+    new calc().do_stuff("$#a&", "1235");    
+  }
+}

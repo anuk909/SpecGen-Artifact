@@ -1,0 +1,36 @@
+class A extends RuntimeException {
+  int i;
+
+  //@ assignable i;
+  //@ ensures i == 1;
+  A() {
+    i = 1;
+  }
+}
+
+class B extends A {}
+
+class C extends B {}
+
+class Main {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    try {
+      try {
+        int i = 0;
+        throw new A();
+      } catch (A exc) {
+        //@ assert exc.i == 2;
+        assert exc.i == 2;
+      }
+    } catch (B exc) {
+      //@ assert exc.i == 2;
+      assert exc.i == 2;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions6.java:4: error: Implicit references to 'this' are not permitted in constructor assignable clauses: i
+  //@ assignable i;
+                 ^
+1 error
+

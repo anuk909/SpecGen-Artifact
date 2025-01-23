@@ -1,0 +1,248 @@
+public class GCD {
+	
+        //@ requires d != 0 && Integer.MIN_VALUE <= n && n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= d && d <= Integer.MAX_VALUE;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+	//@ ensures \result == (num >= 0 ? num : -num);
+	public  int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires Integer.MIN_VALUE <= num1 && num1 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num2 && num2 <= Integer.MAX_VALUE;
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			throw new IllegalArgumentException();
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		//@ decreases num1 + num2 - i;
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:16: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		                                                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (0 <= num) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:10:) in method absolute
+		return (0 <= num) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:10: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:12:
+	//@ ensures \result == (num >= 0 ? num : -num);
+	    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:20: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:17:) in method gcd
+	 	num1 = absolute(num1);
+	 	               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:20:
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		    ^
+4 warnings
+6 verification failures
+
+public class GCD {
+	
+        //@ requires d != 0 && Integer.MIN_VALUE <= n && n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= d && d <= Integer.MAX_VALUE;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+	//@ ensures \result == (num >= 0 ? num : -num);
+	public  int absolute(int num) {
+		//@ assume num > Integer.MIN_VALUE;
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires Integer.MIN_VALUE <= num1 && num1 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num2 && num2 <= Integer.MAX_VALUE;
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			throw new IllegalArgumentException();
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		//@ decreases num1 + num2 - i;
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		                                                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:21: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:18:) in method gcd
+	 	num1 = absolute(num1);
+	 	               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:21:
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		    ^
+4 warnings
+3 verification failures
+
+public class GCD {
+	
+        //@ requires d != 0 && Integer.MIN_VALUE <= n && n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= d && d <= Integer.MAX_VALUE;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+	//@ ensures \result == (num >= 0 ? num : -num);
+	public  int absolute(int num) {
+		//@ assume num > Integer.MIN_VALUE;
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires Integer.MIN_VALUE <= num1 && num1 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num2 && num2 <= Integer.MAX_VALUE;
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			throw new IllegalArgumentException();
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		//@ decreases num1 + num2 - i;
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		                                                     ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: warning: A non-pure method is being called where it is not permitted: GCD.div(int,int)
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		                                                                         ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:21: verify: The prover cannot establish an assertion (ExceptionalPostcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:18:) in method gcd
+	 	num1 = absolute(num1);
+	 	               ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:21:
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	    ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: The prover cannot establish an assertion (LoopInvariant) in method gcd
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		    ^
+4 warnings
+3 verification failures
+
+public class GCD {
+	
+        //@ requires d != 0 && Integer.MIN_VALUE <= n && n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= d && d <= Integer.MAX_VALUE;
+        //@ ensures \result == n % d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+	//@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+	//@ ensures \result == (num >= 0 ? num : -num);
+	public  int absolute(int num) {
+		//@ assume num > Integer.MIN_VALUE;
+		return (0 <= num) ? num : -num;
+	}
+    
+	//@ requires Integer.MIN_VALUE <= num1 && num1 <= Integer.MAX_VALUE && Integer.MIN_VALUE <= num2 && num2 <= Integer.MAX_VALUE;
+	//@ ensures \result == -1 || \result == (num1 > num2 ? num1 : num2) || (\result > 0 && div(num1, \result) == 0 && div(num2, \result) == 0);
+	//@ signals (IllegalArgumentException e) num1 == 0 && num2 == 0;
+	public  int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			throw new IllegalArgumentException();
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		//@ maintaining 1 <= i && i <= num1 && i <= num2;
+		//@ maintaining (\forall int k; 1 <= k && k < i; (div(num1,k) != 0 || div(num2,k) != 0) ==> result == k);
+		//@ decreases num1 + num2 - i;
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+}

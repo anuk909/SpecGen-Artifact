@@ -1,0 +1,24 @@
+class IsBoomerang {
+    //@ requires points != null;
+    //@ requires points.length == 3;
+    //@ requires points[0] != null && points[0].length == 2;
+    //@ requires points[1] != null && points[1].length == 2;
+    //@ requires points[2] != null && points[2].length == 2;
+    //@ ensures \result == true || \result == false;
+    public boolean isBoomerang(int[][] points) {
+        int[] v1 = {points[1][0] - points[0][0], points[1][1] - points[0][1]};
+        int[] v2 = {points[2][0] - points[0][0], points[2][1] - points[0][1]};
+        //@ assert v1.length == 2;
+        //@ assert v2.length == 2;
+        //@ assert v1[0] == points[1][0] - points[0][0];
+        //@ assert v1[1] == points[1][1] - points[0][1];
+        //@ assert v2[0] == points[2][0] - points[0][0];
+        //@ assert v2[1] == points[2][1] - points[0][1];
+        return v1[0] * v2[1] - v1[1] * v2[0] != 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsBoomerang.java:14: verify: The prover cannot establish an assertion (Assert) in method isBoomerang
+        //@ assert v1[1] == points[1][1] - points[0][1];
+            ^
+1 verification failure
+

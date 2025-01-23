@@ -1,0 +1,50 @@
+class TwoSum {
+    //@ requires nums != null;
+    //@ requires (\forall int i; 0 <= i && i < nums.length; nums[i] >= 0);
+    //@ requires target >= 0;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] >= 0 && \result[i] < nums.length);
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+        //@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+            //@ loop_invariant i + 1 <= j && j <= n;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[i] + nums[j] != target));
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[k] + nums[j] != target));
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[k] + nums[j] != target));
+            //@ decreases n - j;
+            for (int j = i + 1; j < n; ++j) {
+                //@ assert (\forall int k; 0 <= k && k < i; nums[k] + nums[j] != target);
+                //@ assert (\forall int k; 0 <= k && k < i; nums[i] + nums[k] != target);
+                //@ assert (\forall int k; 0 <= k && k < i; nums[k] + nums[j] != target);
+                //@ assert (\forall int k; 0 <= k && k < i; nums[i] + nums[k] != target);
+                if (nums[i] + nums[j] == target) {
+                    //@ assert (\forall int k; 0 <= k && k < i; nums[k] + nums[j] != target);
+                    //@ assert (\forall int k; 0 <= k && k < i; nums[i] + nums[k] != target);
+                    //@ assert (\forall int k; 0 <= k && k < i; nums[k] + nums[j] != target);
+                    //@ assert (\forall int k; 0 <= k && k < i; nums[i] + nums[k] != target);
+                    return new int[]{i, j};
+                }
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < n; (\forall int j; i <= j && j < n; nums[i] + nums[j] != target));
+        return new int[0];
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:14: error: variable j is already defined in method twoSum(int[],int)
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:15: error: variable j is already defined in method twoSum(int[],int)
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[i] + nums[j] != target));
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:16: error: variable j is already defined in method twoSum(int[],int)
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[k] + nums[j] != target));
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:17: error: variable j is already defined in method twoSum(int[],int)
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i + 1 <= j && j < n; nums[k] + nums[j] != target));
+                                                                             ^
+4 errors
+

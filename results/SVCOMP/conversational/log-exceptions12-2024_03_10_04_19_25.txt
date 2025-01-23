@@ -1,0 +1,146 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B ==> \result == false);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+
+public class exceptions12 {
+  //@ ensures (\forall Exception exc; exc instanceof B ==> \result == false);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:8: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall Exception exc; exc instanceof B ==> \result == false);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:20: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall Exception exc; exc instanceof B ==> \result == false);
+                                                            ^
+2 errors
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+
+public class exceptions12 {
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:14: verify: The prover cannot establish an assertion (Assert) in method foo
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:26: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+2 verification failures
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      // no assertion needed here
+    }
+  }
+}
+
+public class exceptions12 {
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      // no assertion needed here
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/exceptions12.java:8:) in method foo
+      throw b;
+      ^
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/exceptions12.java:12:
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+      ^
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/exceptions12.java:20:) in method main
+      f.foo();
+           ^
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:20: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/exceptions12.java:24:
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+      ^
+4 verification failures
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      // no assertion needed here
+    }
+  }
+}
+
+public class exceptions12 {
+  //@ ensures (\forall Exception exc; exc instanceof B; false);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (Exception exc) {
+      // no assertion needed here
+    }
+  }
+}

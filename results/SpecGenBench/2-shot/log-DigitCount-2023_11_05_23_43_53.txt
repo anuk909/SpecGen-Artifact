@@ -1,0 +1,46 @@
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result == true <==> (\forall int i; 0 <= i && i < num.length(); h.getOrDefault(i, 0) == num.charAt(i) - '0');
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining (\forall int i; 0 <= i && i < n; h.getOrDefault(i, 0) == num.charAt(i) - '0');
+        //@ decreasing n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < n; h.getOrDefault(i, 0) == num.charAt(i) - '0');
+        //@ decreasing n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:6: error: cannot find symbol
+    //@ ensures \result == true <==> (\forall int i; 0 <= i && i < num.length(); h.getOrDefault(i, 0) == num.charAt(i) - '0');
+                                                                                 ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:10: error: variable i is already defined in method digitCount(String)
+        //@ maintaining (\forall int i; 0 <= i && i < n; h.getOrDefault(i, 0) == num.charAt(i) - '0');
+                                     ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:10: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int i; 0 <= i && i < n; h.getOrDefault(i, 0) == num.charAt(i) - '0');
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:16: error: variable i is already defined in method digitCount(String)
+        //@ maintaining (\forall int i; 0 <= i && i < n; h.getOrDefault(i, 0) == num.charAt(i) - '0');
+                                     ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:16: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int i; 0 <= i && i < n; h.getOrDefault(i, 0) == num.charAt(i) - '0');
+                                                                       ^
+3 errors
+2 warnings
+

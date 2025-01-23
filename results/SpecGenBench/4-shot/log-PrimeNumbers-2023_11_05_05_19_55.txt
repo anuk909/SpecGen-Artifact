@@ -1,0 +1,75 @@
+public class PrimeNumbers
+{
+    private static /*@ spec_public @*/ boolean div(int n, int d) { return n%d == 0; }
+    private /*@ spec_public @*/ int primeArray[];
+    
+    //@ requires n > 0;
+    //@ ensures primeArray.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length-1; primeArray[i] < primeArray[i+1]);
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        //@ maintaining 2 <= count && count <= n+1;
+        //@ maintaining num >= 3;
+        //@ maintaining (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < count-2; primeArray[i] < primeArray[i+1]);
+        //@ decreases n - count;
+        for (count = 2; count <= n;)
+        { 
+
+            //@ maintaining 2 <= j && j <= num/2+1;
+            //@ maintaining status == 0 <==> (\exists int k; 2 <= k && k < j; div(num, k));
+            //@ decreases num/2 - j;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result <==> (\forall int i; 2 <= i && i < n; n % i != 0);
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:25: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.div(int,int)
+            //@ maintaining status == 0 <==> (\exists int k; 2 <= k && k < j; div(num, k));
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:4: verify: The prover cannot establish an assertion (NullField) in method PrimeNumbers
+    private /*@ spec_public @*/ int primeArray[];
+                                    ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:3: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method div
+    private static /*@ spec_public @*/ boolean div(int n, int d) { return n%d == 0; }
+                                                                           ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:51: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method isPrime
+            if (n % i == 0) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:25: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method primeList
+            //@ maintaining status == 0 <==> (\exists int k; 2 <= k && k < j; div(num, k));
+                ^
+1 warning
+4 verification failures
+

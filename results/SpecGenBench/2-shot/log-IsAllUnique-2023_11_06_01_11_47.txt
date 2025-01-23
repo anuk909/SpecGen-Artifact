@@ -1,0 +1,39 @@
+class IsAllUnique {
+    /*@ public normal_behavior
+      @    requires (\forall int i; 0 <= i && i < str.length(); (int)Character.MIN_VALUE <= (int)str.charAt(i) && (int)str.charAt(i) <= (int)Character.MAX_VALUE);
+      @    assignable \nothing;
+      @    ensures \result <==> (\forall int i, j; 0 <= i && i < str.length() && 0 <= j && j < str.length() && i != j; str.charAt(i) != str.charAt(j));
+      @*/
+    boolean isAllUnique(String str) {
+        int len = str.length();
+        if (len > 26) {
+            return false;
+        }
+        int num = 0;
+        //@ ghost int i_counter;
+        //@ set i_counter = 0;
+        //@ maintaining 0 <= i && i <= len;
+        //@ decreases len - i;
+        for (int i = 0; i < len; i++) {
+            char c = str.charAt(i);
+            int index = c - 'a';
+            if ((num & (1 << index)) != 0) {
+                return false;
+            } else {
+                num |= (1 << index);
+            }
+            //@ set i_counter = i_counter + 1;
+        }
+        //@ assert i_counter == len;
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsAllUnique.java:2: warning: There is no point to a specification case having more visibility than its method
+    /*@ public normal_behavior
+        ^
+/home/max/Documents/JMLGPT/tmp/IsAllUnique.java:27: verify: The prover cannot establish an assertion (Assert) in method isAllUnique
+        //@ assert i_counter == len;
+            ^
+1 warning
+1 verification failure
+

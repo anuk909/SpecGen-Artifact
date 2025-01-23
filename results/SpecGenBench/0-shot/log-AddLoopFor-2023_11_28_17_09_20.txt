@@ -1,0 +1,26 @@
+public class AddLoopFor {
+    //@ requires true;
+    //@ ensures \result == y + x;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ loop_invariant sum == y + (\old(x) - n);
+            //@ decreases n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ loop_invariant sum == y - (\old(x) + n);
+            //@ decreases n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:13: verify: The prover cannot establish an assertion (LoopInvariant) in method addLoop
+            //@ loop_invariant sum == y - (\old(x) + n);
+                ^
+1 verification failure
+

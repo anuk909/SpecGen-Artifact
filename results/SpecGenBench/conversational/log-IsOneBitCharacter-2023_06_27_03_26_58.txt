@@ -1,0 +1,483 @@
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:10: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isOneBitCharacter: overflow in int sum
+            i += bits[i] + 1;
+                         ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:8: verify: The prover cannot establish an assertion (LoopDecreases) in method isOneBitCharacter
+        //@ decreases n - i;
+            ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:8: verify: The prover cannot establish an assertion (LoopDecreases) in method isOneBitCharacter
+        //@ decreases n - i;
+            ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method isOneBitCharacter
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+            ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n - 1;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n - 1;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n - 1;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isOneBitCharacter
+        //@ maintaining 0 <= i && i <= n - 1;
+            ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:6: verify: The prover cannot establish an assertion (LoopInvariant) in method isOneBitCharacter
+        //@ maintaining 0 <= i && i <= n - 1;
+            ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+
+class IsOneBitCharacter {
+    //@ requires bits != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; i == 0 || bits[i-1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        //@ decreases n - i;
+        while (i < n - 1) {
+            //@ assume Integer.MIN_VALUE + 1 <= i + bits[i] + 1 && i + bits[i] + 1 <= Integer.MAX_VALUE - 1;
+            i += bits[i] + 1;
+            //@ maintaining 0 <= i && i <= n;
+            //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        }
+        //@ assert i == n - 1 || i == n - 2;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= n;
+                ^
+2 errors
+

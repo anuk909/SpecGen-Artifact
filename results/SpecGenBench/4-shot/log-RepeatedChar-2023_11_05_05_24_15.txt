@@ -1,0 +1,30 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class RepeatedChar {
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures (\exists int i; 0 <= i && i < s.length(); \result == s.charAt(i) && (\forall int j; 0 <= j && j < i; s.charAt(j) != \result));
+    public char repeatedCharacter(String s) {
+        Set<Character> seen = new HashSet<Character>();
+        
+        //@ maintaining (\forall int j; 0 <= j && j < i; !seen.contains(s.charAt(j)));
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!seen.add(ch)) {
+                return ch;
+            }
+        }
+        // impossible
+        return ' ';
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedChar.java:6:) in method repeatedCharacter
+        return ' ';
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedChar.java:20:
+    //@ ensures (\exists int i; 0 <= i && i < s.length(); \result == s.charAt(i) && (\forall int j; 0 <= j && j < i; s.charAt(j) != \result));
+        ^
+2 verification failures
+

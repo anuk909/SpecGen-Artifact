@@ -1,0 +1,29 @@
+class Main {
+
+  //@ ensures \result == true <==> x > 0;
+  //@ ensures \result == test(x);
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  /* we want to let the user specify that this method should be symbolic */
+
+  //@ ensures \result == false <==> x == 2;
+  //@ ensures \result == true <==> x != 2 && x != 3000;
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}
+

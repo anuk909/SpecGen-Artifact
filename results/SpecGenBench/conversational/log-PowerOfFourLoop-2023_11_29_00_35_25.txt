@@ -1,0 +1,215 @@
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == 4^k));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 4 == 0 ==> (\exists int k; k >= 0; n == 4^k);
+        //@ decreases n;
+        while (n % 4 == 0) {
+            n /= 4;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:3: error: bad operand types for binary operator '^'
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == 4^k));
+                                                                   ^
+  first type:  boolean
+  second type: int
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:8: error: bad operand types for binary operator '^'
+        //@ maintaining n > 0 && n % 4 == 0 ==> (\exists int k; k >= 0; n == 4^k);
+                                                                              ^
+  first type:  boolean
+  second type: int
+2 errors
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0; n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n; n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2; n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2 + 1; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2 + 1; n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2; n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2 + 1; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= n/2 + 1; n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= (int)(Math.log(n)/Math.log(2)); n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= (int)(Math.log(n)/Math.log(2)); n != Math.pow(2, k));
+            ^
+1 verification failure
+
+class PowerOfTwoLoop {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (n > 0 && (\exists int k; k >= 0; n == Math.pow(2, k)));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0 && n % 2 == 0 ==> (\exists int k; k >= 0; n == Math.pow(2, k));
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= (int)(Math.log(n)/Math.log(2)) + 1; n != Math.pow(2, k));
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfTwo
+        //@ maintaining n > 0 && n % 2 != 0 ==> (\forall int k; k >= 0 && k <= (int)(Math.log(n)/Math.log(2)) + 1; n != Math.pow(2, k));
+            ^
+1 verification failure
+

@@ -1,0 +1,17 @@
+public class NegativeArraySizeException1 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    //@ assume true;
+    try {
+      int a[] = new int[-1];
+    } catch (NegativeArraySizeException exc) {
+      //@ assert exc instanceof NegativeArraySizeException;
+      //@ assert \result == false;
+      return false;
+    }
+    //@ assert \result == true;
+    return true;
+  }
+}
+

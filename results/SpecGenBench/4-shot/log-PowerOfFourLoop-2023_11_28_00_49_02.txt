@@ -1,0 +1,22 @@
+class PowerOfTwoLoop {
+    //@ requires n != Integer.MIN_VALUE;
+    //@ ensures \result <==> (n > 0 && (\forall int i; 0 <= i && i <= \result; n % (int)Math.pow(2, i) == 0));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n % 4 == 0 ==> (\exists int i; 0 <= i && i <= \old(n); n % (int)Math.pow(2, i) != 0);
+        //@ decreases n;
+        while (n % 4 == 0) {
+            n /= 4;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:3: error: bad operand types for binary operator '<='
+    //@ ensures \result <==> (n > 0 && (\forall int i; 0 <= i && i <= \result; n % (int)Math.pow(2, i) == 0));
+                                                                   ^
+  first type:  int
+  second type: boolean
+1 error
+

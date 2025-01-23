@@ -1,0 +1,29 @@
+public class EchoIntLoop {
+    //@ requires true;
+    //@ ensures \result >= 0;
+    public static int echo(int x) {
+        //@ requires x >= 0;
+        int res = 0;
+        //@ loop_invariant res >= 0 && res <= x;
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ loop_invariant res == i;
+            //@ decreases x - i;
+            res = res + 1;
+        }
+        //@ ensures \result == x;
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/EchoIntLoop.java:5: warning: A refining statement is required for statement specifications
+        //@ requires x >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/EchoIntLoop.java:10: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant res == i;
+                ^
+/home/max/Documents/JMLGPT/tmp/EchoIntLoop.java:14: warning: A refining statement is required for statement specifications
+        //@ ensures \result == x;
+            ^
+1 error
+2 warnings
+

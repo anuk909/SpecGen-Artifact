@@ -1,0 +1,363 @@
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result == (\exists int i; 0 <= i; true);
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled = Verifier.nondetInt();
+    public int notificationMessage = Verifier.nondetInt();
+    public int audioNotificationCommand = Verifier.nondetInt();
+    public int highestLevelAlarm = Verifier.nondetInt();
+    public int logMessageId = Verifier.nondetInt();
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4: error: incomparable types: int and boolean
+    //@ ensures \result == (\exists int i; 0 <= i; true);
+                        ^
+1 error
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result == 0; // Return a nondeterministic integer value
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled = Verifier.nondetInt();
+    public int notificationMessage = Verifier.nondetInt();
+    public int audioNotificationCommand = Verifier.nondetInt();
+    public int highestLevelAlarm = Verifier.nondetInt();
+    public int logMessageId = Verifier.nondetInt();
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4:) in method nondetInt
+        return new Random().nextInt();
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6:
+    //@ ensures \result == 0; // Return a nondeterministic integer value
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:11: verify: The prover cannot establish an assertion (Assignable) in method AlarmOutputs: \everything
+    public int isAudioDisabled = Verifier.nondetInt();
+                                                   ^
+3 verification failures
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled = Verifier.nondetInt();
+    public int notificationMessage = Verifier.nondetInt();
+    public int audioNotificationCommand = Verifier.nondetInt();
+    public int highestLevelAlarm = Verifier.nondetInt();
+    public int logMessageId = Verifier.nondetInt();
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4:) in method nondetInt
+        return new Random().nextInt();
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6:
+    //@ ensures \result != 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:11: verify: The prover cannot establish an assertion (Assignable) in method AlarmOutputs: \everything
+    public int isAudioDisabled = Verifier.nondetInt();
+                                                   ^
+3 verification failures
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+    public AlarmOutputs() {
+        isAudioDisabled = Verifier.nondetInt();
+        notificationMessage = Verifier.nondetInt();
+        audioNotificationCommand = Verifier.nondetInt();
+        highestLevelAlarm = Verifier.nondetInt();
+        logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: isAudioDisabled
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: notificationMessage
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: audioNotificationCommand
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: highestLevelAlarm
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: logMessageId
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                                      ^
+5 errors
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+    public AlarmOutputs() {
+        isAudioDisabled = Verifier.nondetInt();
+        notificationMessage = Verifier.nondetInt();
+        audioNotificationCommand = Verifier.nondetInt();
+        highestLevelAlarm = Verifier.nondetInt();
+        logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: isAudioDisabled
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: notificationMessage
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: audioNotificationCommand
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: highestLevelAlarm
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: logMessageId
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                                      ^
+5 errors
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+    public AlarmOutputs() {
+        this.isAudioDisabled = Verifier.nondetInt();
+        this.notificationMessage = Verifier.nondetInt();
+        this.audioNotificationCommand = Verifier.nondetInt();
+        this.highestLevelAlarm = Verifier.nondetInt();
+        this.logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: isAudioDisabled
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: notificationMessage
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: audioNotificationCommand
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: highestLevelAlarm
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: logMessageId
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                                      ^
+5 errors
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+    public AlarmOutputs() {
+        isAudioDisabled = Verifier.nondetInt();
+        notificationMessage = Verifier.nondetInt();
+        audioNotificationCommand = Verifier.nondetInt();
+        highestLevelAlarm = Verifier.nondetInt();
+        logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: isAudioDisabled
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: notificationMessage
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: audioNotificationCommand
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: highestLevelAlarm
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: logMessageId
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                                      ^
+5 errors
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+    public AlarmOutputs() {
+        isAudioDisabled = Verifier.nondetInt();
+        notificationMessage = Verifier.nondetInt();
+        audioNotificationCommand = Verifier.nondetInt();
+        highestLevelAlarm = Verifier.nondetInt();
+        logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: isAudioDisabled
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: notificationMessage
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: audioNotificationCommand
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: highestLevelAlarm
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: error: Implicit references to 'this' are not permitted in constructor assignable clauses: logMessageId
+    //@ assignable isAudioDisabled, notificationMessage, audioNotificationCommand, highestLevelAlarm, logMessageId;
+                                                                                                      ^
+5 errors
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ ensures isAudioDisabled != 0 && notificationMessage != 0 && audioNotificationCommand != 0 && highestLevelAlarm != 0 && logMessageId != 0;
+    public AlarmOutputs() {
+        isAudioDisabled = Verifier.nondetInt();
+        notificationMessage = Verifier.nondetInt();
+        audioNotificationCommand = Verifier.nondetInt();
+        highestLevelAlarm = Verifier.nondetInt();
+        logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4:) in method nondetInt
+        return new Random().nextInt();
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6:
+    //@ ensures \result != 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17:) in method AlarmOutputs
+    public AlarmOutputs() {
+           ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:18:
+    //@ ensures isAudioDisabled != 0 && notificationMessage != 0 && audioNotificationCommand != 0 && highestLevelAlarm != 0 && logMessageId != 0;
+        ^
+4 verification failures
+
+import java.util.Random;
+
+final class Verifier {
+    //@ ensures \result != 0;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+}
+
+public class AlarmOutputs {
+    public int isAudioDisabled;
+    public int notificationMessage;
+    public int audioNotificationCommand;
+    public int highestLevelAlarm;
+    public int logMessageId;
+
+    //@ ensures isAudioDisabled != 0 && notificationMessage != 0 && audioNotificationCommand != 0 && highestLevelAlarm != 0 && logMessageId != 0;
+    public AlarmOutputs() {
+        isAudioDisabled = Verifier.nondetInt();
+        notificationMessage = Verifier.nondetInt();
+        audioNotificationCommand = Verifier.nondetInt();
+        highestLevelAlarm = Verifier.nondetInt();
+        logMessageId = Verifier.nondetInt();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4:) in method nondetInt
+        return new Random().nextInt();
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:6:
+    //@ ensures \result != 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17:) in method AlarmOutputs
+    public AlarmOutputs() {
+           ^
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:17: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:18:
+    //@ ensures isAudioDisabled != 0 && notificationMessage != 0 && audioNotificationCommand != 0 && highestLevelAlarm != 0 && logMessageId != 0;
+        ^
+4 verification failures
+

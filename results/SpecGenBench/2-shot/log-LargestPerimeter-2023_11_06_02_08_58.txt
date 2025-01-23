@@ -1,0 +1,23 @@
+import java.util.Arrays;
+
+class LargestPerimeter {
+    //@ requires A != null;
+    //@ ensures \result >= 0;
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        //@ maintaining A.length >= 0;
+        //@ maintaining (\forall int i; 0 <= i && i < A.length; (\forall int j; i <= j && j < A.length; A[i] <= A[j]));
+        //@ decreasing A.length;
+        for (int i = A.length - 1; i >= 2; --i) {
+            if (A[i - 2] + A[i - 1] > A[i]) {
+                return A[i - 2] + A[i - 1] + A[i];
+            }
+        }
+        return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/LargestPerimeter.java:9: error: variable i is already defined in method largestPerimeter(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < A.length; (\forall int j; i <= j && j < A.length; A[i] <= A[j]));
+                                     ^
+1 error
+

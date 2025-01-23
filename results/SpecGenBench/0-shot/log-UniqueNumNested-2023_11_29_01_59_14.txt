@@ -1,0 +1,29 @@
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures \result >= -1 && \result < arr.length;
+    public static int uniqueNum(int[] arr) {
+        //@ loop_invariant i >= 0 && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k < i; (\forall int j; i < j < arr.length; arr[k] != arr[j]));
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i >= 0 && i <= arr.length;
+            //@ loop_invariant (\forall int k; 0 <= k < i; arr[k] != arr[i]);
+            for (int j = i + 1; j < arr.length; ++j) {
+                if (arr[i] == arr[j])
+                    break;
+            }
+            //@ assert (\forall int k; i <= k < arr.length; arr[i] != arr[k]);
+            if (j == arr.length)
+                return i;
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:16: error: cannot find symbol
+            if (j == arr.length)
+                ^
+  symbol:   variable j
+  location: class UniqueNumNested
+1 error
+

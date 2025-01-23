@@ -1,0 +1,26 @@
+class CalcComplement {
+    //@ ensures 0 <= \result && \result <= num;
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining 0 <= highbit && highbit <= i;
+        //@ decreases 30 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:2:) in method calcComplement
+        return num ^ mask;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:2: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:16:
+    //@ ensures 0 <= \result && \result <= num;
+        ^
+2 verification failures
+

@@ -1,0 +1,40 @@
+class Main {
+
+  /*@ invariant this != null; */
+  public static boolean f() {
+    int x = 3;
+    boolean y = true;
+    Main inst = new Main();
+    return inst.test(y, x);
+  }
+
+  /*@ ensures (\result == false)  ==  (\old(x) == false); */
+  /*@ ensures (\result == true)  ==  (\old(x) == true); */
+  /*
+   * test IINC & IFLE bytecodes (Note: javac compiles ">" to IFLE)
+   */
+  public boolean test(boolean x, int z) {
+    System.out.println("Testing ExSymExeBool");
+    z++;
+    if (x) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+
+}
+
+class ExSymExeBool {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int i = -5; i <= 5; i++) {
+      e.test(true, i);
+      e.test(false, i);
+    }
+  }
+}

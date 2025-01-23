@@ -1,0 +1,34 @@
+interface Interface {
+  //@ ensures \result == true || \result == false;
+  boolean b();
+}
+
+class Inner implements Interface {
+  //@ ensures \result == false;
+  public boolean b() {
+    return false;
+  }
+}
+
+class Outer implements Interface {
+  private Interface inner;
+
+  //@ requires inner != null;
+  //@ ensures \result == true || \result == false;
+  public Outer(Interface inner) {
+    this.inner = inner;
+  }
+
+  //@ ensures \result == true || \result == false;
+  public boolean b() {
+    return !inner.b();
+  }
+}
+
+public class virtual_function_unwinding {
+  //@ ensures \result == true || \result == false;
+  public static boolean fun(String[] args) {
+    return new Outer(new Inner()).b();
+  }
+}
+

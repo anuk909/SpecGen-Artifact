@@ -1,0 +1,112 @@
+public class ExException {
+  //@ ensures \result == 0;
+  int zero() {
+    return 0;
+  }
+
+  //@ requires secret > 0;
+  //@ ensures \result == 0;
+  static int test(int secret) {
+    Main o = null;
+    if (secret > 0) {
+      o = new Main();
+    } else assert false;
+    int i = o.zero();
+    return i;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExException.java:10: error: cannot find symbol
+    Main o = null;
+    ^
+  symbol:   class Main
+  location: class ExException
+/home/max/Documents/JMLGPT/tmp/ExException.java:12: error: cannot find symbol
+      o = new Main();
+              ^
+  symbol:   class Main
+  location: class ExException
+2 errors
+
+public class ExException {
+  //@ ensures \result == 0;
+  int zero() {
+    return 0;
+  }
+
+  //@ requires secret > 0;
+  //@ ensures \result == 0;
+  static int test(int secret) {
+    ExException o = null;
+    if (secret > 0) {
+      o = new ExException();
+    } else assert false;
+    int i = o.zero();
+    return i;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExException.java:10: verify: The prover cannot establish an assertion (PossiblyNullInitialization) in method test: o
+    ExException o = null;
+                ^
+1 verification failure
+
+public class ExException {
+  //@ ensures \result == 0;
+  int zero() {
+    return 0;
+  }
+
+  //@ requires secret > 0;
+  //@ ensures \result == 0;
+  static int test(int secret) {
+    ExException o;
+    if (secret > 0) {
+      o = new ExException();
+    } else assert false;
+    int i = o.zero();
+    return i;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExException.java:14: error: variable o might not have been initialized
+    int i = o.zero();
+            ^
+1 error
+
+public class ExException {
+  //@ ensures \result == 0;
+  int zero() {
+    return 0;
+  }
+
+  //@ requires secret > 0;
+  //@ ensures \result == 0;
+  static int test(int secret) {
+    ExException o = null;
+    if (secret > 0) {
+      o = new ExException();
+    } else assert false;
+    int i = o.zero();
+    return i;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExException.java:10: verify: The prover cannot establish an assertion (PossiblyNullInitialization) in method test: o
+    ExException o = null;
+                ^
+1 verification failure
+
+public class ExException {
+  //@ ensures \result == 0;
+  int zero() {
+    return 0;
+  }
+
+  //@ requires secret > 0;
+  //@ ensures \result == 0;
+  static int test(int secret) {
+    ExException o;
+    //@ assume secret > 0;
+    o = new ExException();
+    int i = o.zero();
+    return i;
+  }
+}
+

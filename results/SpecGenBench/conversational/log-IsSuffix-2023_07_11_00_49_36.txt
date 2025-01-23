@@ -1,0 +1,546 @@
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length();
+        int j = txt.length();
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i <= k && k < pat.length(); pat.charAt(k) == txt.charAt(k));
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) != txt.charAt(k));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length();
+        int j = txt.length();
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i <= k && k < pat.length(); pat.charAt(k) == txt.charAt(k));
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) != txt.charAt(k));
+        //@ decreases i;
+        while(i > 0) {
+            i = i - 1;
+            j = j - 1;
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; 0 <= k && k <= i; pat.charAt(k) != txt.charAt(k + j - i));
+        //@ decreases i;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; 0 <= k && k <= i; pat.charAt(k) != txt.charAt(k + j - i));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) != txt.charAt(k + j - i));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; 0 <= k && k < i; pat.charAt(k) != txt.charAt(k + j - i));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; 0 <= k && k <= i; pat.charAt(k) != txt.charAt(k + j - i));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; 0 <= k && k <= i; pat.charAt(k) != txt.charAt(k + j - i));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= j && j < txt.length();
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k < j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= j && j <= txt.length();
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= j && j < txt.length();
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k < j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k < j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= j && j < txt.length();
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= j && j < txt.length();
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= j && j < txt.length();
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j <= txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i + 1) != txt.charAt(k + 1));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:12: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i <= pat.length(); pat.substring(i).equals(txt.substring(txt.length() - pat.length())));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+
+        //@ maintaining 0 <= i && i < pat.length();
+        //@ maintaining 0 <= j && j < txt.length();
+        //@ maintaining (\forall int k; i < k && k < pat.length(); pat.charAt(k) == txt.charAt(k + j - i));
+        //@ maintaining (\forall int k; i < k && k <= j; pat.charAt(k - j + i) != txt.charAt(k));
+        //@ decreases i;
+        while(i >= 0 && j >= 0) {
+            if(pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+
+        return i < 0;
+    }
+
+}

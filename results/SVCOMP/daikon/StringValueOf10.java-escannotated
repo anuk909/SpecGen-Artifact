@@ -1,0 +1,21 @@
+public class StringValueOf10 {
+  /*@ ensures \result == false; */
+  public static boolean f(String arg) {
+    Object objectRef = arg; // assign string to an Object reference
+    String tmp = String.valueOf(objectRef);
+    return tmp.equals(arg + "s");
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("33.3333");
+    f("343.3333");
+    f("343");
+    f("abc");
+    f("s");
+    f("");
+  }
+}

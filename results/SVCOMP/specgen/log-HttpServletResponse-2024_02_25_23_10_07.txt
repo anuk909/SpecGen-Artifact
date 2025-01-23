@@ -1,0 +1,86 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.checkNoSymbolic(s);
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ private normal_behavior
+  //@ requires s != null && s.contains("<bad/>");
+  //@ ensures false;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:12: error: cannot find symbol
+  //@ ensures \result.checkNoSymbolic(s);
+                                      ^
+  symbol:   variable s
+  location: class HttpServletResponse
+1 error
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null && !string.contains("<bad/>");
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ private normal_behavior
+  //@ requires s != null && s.contains("<bad/>");
+  //@ ensures false;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}

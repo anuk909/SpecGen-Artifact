@@ -1,0 +1,38 @@
+public class NegativeArraySizeException1 {
+    //@ ensures \result ==> (\exists NegativeArraySizeException exc);
+    //@ ensures !\result ==> (\forall NegativeArraySizeException exc);
+    public static boolean f() {
+        try {
+            int a[] = new int[-1];
+        } catch (NegativeArraySizeException exc) {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NegativeArraySizeException1.java:2: error: Expected a semicolon to separate the parts of a JML quantified expression
+    //@ ensures \result ==> (\exists NegativeArraySizeException exc);
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/NegativeArraySizeException1.java:2: error: ')' expected
+    //@ ensures \result ==> (\exists NegativeArraySizeException exc);
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/NegativeArraySizeException1.java:3: error: Expected a semicolon to separate the parts of a JML quantified expression
+    //@ ensures !\result ==> (\forall NegativeArraySizeException exc);
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/NegativeArraySizeException1.java:3: error: ')' expected
+    //@ ensures !\result ==> (\forall NegativeArraySizeException exc);
+                                                                     ^
+4 errors
+
+public class NegativeArraySizeException1 {
+    //@ ensures \result ==> (\exists NegativeArraySizeException exc; true);
+    //@ ensures !\result ==> (\forall NegativeArraySizeException exc; false);
+    public static boolean f() {
+        try {
+            int a[] = new int[-1];
+        } catch (NegativeArraySizeException exc) {
+            return false;
+        }
+        return true;
+    }
+}

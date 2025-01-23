@@ -1,0 +1,34 @@
+class Main {
+    //@ ensures \result <==> !(o instanceof String);
+    public static boolean f() {
+        Object o = new Object();
+        return !(o instanceof String);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/instanceof5.java:2: error: cannot find symbol
+    //@ ensures \result <==> !(o instanceof String);
+                               ^
+  symbol:   variable o
+  location: class Main
+1 error
+
+class Main {
+    //@ ensures \result <==> !(new Object() instanceof String);
+    public static boolean f() {
+        Object o = new Object();
+        return !(o instanceof String);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/instanceof5.java:2: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result <==> !(new Object() instanceof String);
+                               ^
+1 error
+
+class Main {
+    //@ ensures \result <==> true;
+    public static boolean f() {
+        Object o = new Object();
+        return !(o instanceof String);
+    }
+}
+

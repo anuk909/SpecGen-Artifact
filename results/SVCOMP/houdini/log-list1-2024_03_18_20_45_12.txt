@@ -1,0 +1,6390 @@
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value < 1;
+  //@ invariant Value <= 1;
+  //@ invariant Value == 1;
+  //@ invariant Value != 1;
+  //@ invariant Value >= 1;
+  //@ invariant Value > 1;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:16: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:17: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:18: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:19: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:21: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+18 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value <= 1;
+  //@ invariant Value == 1;
+  //@ invariant Value != 1;
+  //@ invariant Value >= 1;
+  //@ invariant Value > 1;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:16: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:17: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:18: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:19: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:20: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+17 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value == 1;
+  //@ invariant Value != 1;
+  //@ invariant Value >= 1;
+  //@ invariant Value > 1;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:16: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:17: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:18: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:19: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+16 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value != 1;
+  //@ invariant Value >= 1;
+  //@ invariant Value > 1;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:16: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:17: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:18: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+15 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value >= 1;
+  //@ invariant Value > 1;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:16: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:17: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+14 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value > 1;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:16: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+13 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value < 0;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:15: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+12 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value <= 0;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:14: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+11 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value == 0;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:13: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+10 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value != 0;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:12: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+9 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value >= 0;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:11: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+8 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value > 0;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:10: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+7 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value < -1;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value < -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+6 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value <= -1;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value <= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:8: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+5 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value == -1;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value == -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:7: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+4 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value != -1;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value != -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:6: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+3 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value >= -1;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value >= -1;
+                ^
+/home/max/Documents/JMLGPT/tmp/list1.java:5: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+2 errors
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  //@ invariant Value > -1;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:4: error: An identifier with public visibility may not be used in a invariant clause with package visibility
+  //@ invariant Value > -1;
+                ^
+1 error
+
+class LinkedListEntry {
+  //@ non_null
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  //@ non_null
+  public LinkedListEntry Head;
+
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ requires e < index;
+  //@ requires e <= index;
+  //@ requires e == index;
+  //@ requires e != index;
+  //@ requires e >= index;
+  //@ requires e > index;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires index < 1;
+  //@ requires index <= 1;
+  //@ requires index == 1;
+  //@ requires index != 1;
+  //@ requires index >= 1;
+  //@ requires index > 1;
+  //@ requires index < 0;
+  //@ requires index <= 0;
+  //@ requires index == 0;
+  //@ requires index != 0;
+  //@ requires index >= 0;
+  //@ requires index > 0;
+  //@ requires index < -1;
+  //@ requires index <= -1;
+  //@ requires index == -1;
+  //@ requires index != -1;
+  //@ requires index >= -1;
+  //@ requires index > -1;
+  //@ ensures \result < index;
+  //@ ensures \result <= index;
+  //@ ensures \result == index;
+  //@ ensures \result != index;
+  //@ ensures \result >= index;
+  //@ ensures \result > index;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures index >= 0 ==> \result >= 0;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_synthesis {
+  //@ requires aggregated < 1;
+  //@ requires aggregated <= 1;
+  //@ requires aggregated == 1;
+  //@ requires aggregated != 1;
+  //@ requires aggregated >= 1;
+  //@ requires aggregated > 1;
+  //@ requires aggregated < 0;
+  //@ requires aggregated <= 0;
+  //@ requires aggregated == 0;
+  //@ requires aggregated != 0;
+  //@ requires aggregated >= 0;
+  //@ requires aggregated > 0;
+  //@ requires aggregated < -1;
+  //@ requires aggregated <= -1;
+  //@ requires aggregated == -1;
+  //@ requires aggregated != -1;
+  //@ requires aggregated >= -1;
+  //@ requires aggregated > -1;
+  //@ requires e < aggregated;
+  //@ requires e <= aggregated;
+  //@ requires e == aggregated;
+  //@ requires e != aggregated;
+  //@ requires e >= aggregated;
+  //@ requires e > aggregated;
+  //@ requires e < 1;
+  //@ requires e <= 1;
+  //@ requires e == 1;
+  //@ requires e != 1;
+  //@ requires e >= 1;
+  //@ requires e > 1;
+  //@ requires e < 0;
+  //@ requires e <= 0;
+  //@ requires e == 0;
+  //@ requires e != 0;
+  //@ requires e >= 0;
+  //@ requires e > 0;
+  //@ requires e < -1;
+  //@ requires e <= -1;
+  //@ requires e == -1;
+  //@ requires e != -1;
+  //@ requires e >= -1;
+  //@ requires e > -1;
+  //@ ensures \result < aggregated;
+  //@ ensures \result <= aggregated;
+  //@ ensures \result == aggregated;
+  //@ ensures \result != aggregated;
+  //@ ensures \result >= aggregated;
+  //@ ensures \result > aggregated;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ ensures \result < e;
+  //@ ensures \result <= e;
+  //@ ensures \result == e;
+  //@ ensures \result != e;
+  //@ ensures \result >= e;
+  //@ ensures \result > e;
+  //@ ensures aggregated >= 0 ==> \result >= 0;
+  //@ ensures e >= 0 ==> \result >= 0;
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ requires lhs < 1;
+  //@ requires lhs <= 1;
+  //@ requires lhs == 1;
+  //@ requires lhs != 1;
+  //@ requires lhs >= 1;
+  //@ requires lhs > 1;
+  //@ requires lhs < 0;
+  //@ requires lhs <= 0;
+  //@ requires lhs == 0;
+  //@ requires lhs != 0;
+  //@ requires lhs >= 0;
+  //@ requires lhs > 0;
+  //@ requires lhs < -1;
+  //@ requires lhs <= -1;
+  //@ requires lhs == -1;
+  //@ requires lhs != -1;
+  //@ requires lhs >= -1;
+  //@ requires lhs > -1;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures lhs >= 0 ==> \result;
+  //@ ensures lhs >= 0 ==> !\result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+
+class list1 {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/list1.java:3: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list1.java:9: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+2 verification failures
+

@@ -1,0 +1,39 @@
+public class StringConstructors05 {
+    //@ requires arg != null;
+    //@ ensures \result ==> arg.equals(new String(new char[]{'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'}));
+    public static boolean f(String arg) {
+        char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+        String s3 = new String(charArray);
+        return s3.equals(arg);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConstructors05.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> arg.equals(new String(new char[]{'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'}));
+                                       ^
+1 error
+
+public class StringConstructors05 {
+    //@ requires arg != null;
+    //@ ensures \result ==> arg.equals(String.valueOf(new char[]{'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'}));
+    public static boolean f(String arg) {
+        char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+        String s3 = String.valueOf(charArray);
+        return s3.equals(arg);
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 52428800 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid2913.log
+
+public class StringConstructors05 {
+    //@ requires arg != null;
+    //@ ensures \result ==> arg.equals(String.copyValueOf(new char[]{'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'}));
+    public static boolean f(String arg) {
+        char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+        String s3 = String.copyValueOf(charArray);
+        return s3.equals(arg);
+    }
+}
+

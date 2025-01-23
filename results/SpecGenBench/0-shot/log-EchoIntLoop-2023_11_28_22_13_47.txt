@@ -1,0 +1,23 @@
+public class EchoIntLoop {
+    //@ requires true;
+    //@ ensures \result >= 0;
+    public static int echo(int x) {
+        //@ assert x >= 0;
+        int res = 0;
+        //@ loop_invariant res >= 0 && res <= x;
+        //@ loop_variant x - i;
+        for(int i = 0; i < x; i++) {
+            //@ assert i >= 0 && i < x;
+            //@ assert res >= 0 && res <= i;
+            res = res + 1;
+            //@ assert res >= 0 && res <= i + 1;
+        }
+        //@ assert res >= 0 && res <= x;
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/EchoIntLoop.java:8: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+        //@ loop_variant x - i;
+            ^
+1 error
+

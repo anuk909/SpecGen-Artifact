@@ -1,0 +1,44 @@
+public class UniqueNumNested {
+
+    //@ requires arr != null;
+    //@ ensures \result >= -1 && \result < arr.length;
+    public static int uniqueNum(int[] arr) {
+        //@ loop_invariant i >= 0 && i <= arr.length;
+        //@ loop_invariant (\forall int k; 0 <= k < i; arr[k] != arr[i]);
+        //@ loop_invariant (\forall int k, int l; 0 <= k < i && i < l < arr.length; arr[k] != arr[l]);
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant j >= i + 1 && j <= arr.length;
+            //@ loop_invariant (\forall int k; i <= k < j; arr[i] != arr[k]);
+            //@ loop_invariant (\forall int k, int l; i <= k < j && j < l < arr.length; arr[k] != arr[l]);
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    break;
+            }
+            //@ assert j >= arr.length || arr[i] != arr[j];
+            if(j == arr.length)
+                return i;
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:8: error: <identifier> expected
+        //@ loop_invariant (\forall int k, int l; 0 <= k < i && i < l < arr.length; arr[k] != arr[l]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:8: error: Expected a semicolon to separate the parts of a JML quantified expression
+        //@ loop_invariant (\forall int k, int l; 0 <= k < i && i < l < arr.length; arr[k] != arr[l]);
+                                           ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:8: error: ')' expected
+        //@ loop_invariant (\forall int k, int l; 0 <= k < i && i < l < arr.length; arr[k] != arr[l]);
+                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:12: error: <identifier> expected
+            //@ loop_invariant (\forall int k, int l; i <= k < j && j < l < arr.length; arr[k] != arr[l]);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:12: error: Expected a semicolon to separate the parts of a JML quantified expression
+            //@ loop_invariant (\forall int k, int l; i <= k < j && j < l < arr.length; arr[k] != arr[l]);
+                                               ^
+/home/max/Documents/JMLGPT/tmp/UniqueNumNested.java:12: error: ')' expected
+            //@ loop_invariant (\forall int k, int l; i <= k < j && j < l < arr.length; arr[k] != arr[l]);
+                                                                                                         ^
+6 errors
+

@@ -1,0 +1,261 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+public class exception18 {
+  //@ requires \fresh(new A());
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+  private static void foo() {
+    A a = new A();
+    throw a;
+  }
+
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+  public static void main(String[] args) {
+    try {
+      foo();
+      assert false;
+    } catch (B e) {
+      assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:5: error: class exception18 is public, should be declared in a file named exception18.java
+public class exception18 {
+       ^
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:6: error: Object allocation is not permitted in specification expressions
+  //@ requires \fresh(new A());
+                      ^
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:7: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:13: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+                                                                              ^
+4 errors
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+public class exception18 {
+  //@ requires \fresh;
+  private static void foo() {
+    A a = new A();
+    throw a;
+  }
+
+  public static void main(String[] args) {
+    try {
+      foo();
+      assert false;
+    } catch (B e) {
+      assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+  Reason: Unexpected exception: Exception during parsing near es \fresh;
+    private static void foo() {
+      A a = new A();
+   java.lang.NullPointerException: Cannot invoke "org.jmlspecs.openjml.JmlTokenKind.internedName()" because "jt" is null
+java.lang.NullPointerException: Cannot invoke "org.jmlspecs.openjml.JmlTokenKind.internedName()" because "jt" is null
+	at jdk.compiler/org.jmlspecs.openjml.IJmlClauseKind$FunctionLikeExpressionKind.parse(IJmlClauseKind.java:376)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term3(JmlParser.java:2568)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term2(JmlParser.java:3094)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term2Imp(JmlParser.java:2433)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term2Equiv(JmlParser.java:2410)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term1Cond(JmlParser.java:2396)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term1(JmlParser.java:2371)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.term(JavacParser.java:837)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.term(JavacParser.java:817)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.parseExpression(JavacParser.java:768)
+	at jdk.compiler/org.jmlspecs.openjml.ext.MethodClauseExprType.parse(MethodClauseExprType.java:43)
+	at jdk.compiler/org.jmlspecs.openjml.ext.MethodClauseExprType.parse(MethodClauseExprType.java:17)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseClause(JmlParser.java:1845)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseSpecificationCase(JmlParser.java:1717)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseMethodSpecs(JmlParser.java:1553)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classOrInterfaceOrRecordBodyDeclaration(JmlParser.java:1099)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.classInterfaceOrRecordBody(JavacParser.java:4154)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classInterfaceOrRecordBody(JmlParser.java:615)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.classDeclaration(JavacParser.java:3866)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classDeclaration(JmlParser.java:625)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.classOrRecordOrInterfaceOrEnumDeclaration(JavacParser.java:3806)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classOrRecordOrInterfaceOrEnumDeclaration(JmlParser.java:443)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.typeDeclaration(JavacParser.java:3791)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.parseCompilationUnit(JavacParser.java:3635)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseCompilationUnit(JmlParser.java:265)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parse(JavaCompiler.java:620)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.parse(JmlCompiler.java:211)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parseFiles(JavaCompiler.java:1009)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parseFiles(JavaCompiler.java:996)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:922)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+1 error
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+public class exception18 {
+  //@ requires \fresh;
+  private static void foo() {
+    A a = new A();
+    throw a;
+  }
+
+  public static void main(String[] args) {
+    try {
+      foo();
+      assert false;
+    } catch (B e) {
+      assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+  Reason: Unexpected exception: Exception during parsing near es \fresh;
+    private static void foo() {
+      A a = new A();
+   java.lang.NullPointerException: Cannot invoke "org.jmlspecs.openjml.JmlTokenKind.internedName()" because "jt" is null
+java.lang.NullPointerException: Cannot invoke "org.jmlspecs.openjml.JmlTokenKind.internedName()" because "jt" is null
+	at jdk.compiler/org.jmlspecs.openjml.IJmlClauseKind$FunctionLikeExpressionKind.parse(IJmlClauseKind.java:376)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term3(JmlParser.java:2568)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term2(JmlParser.java:3094)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term2Imp(JmlParser.java:2433)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term2Equiv(JmlParser.java:2410)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term1Cond(JmlParser.java:2396)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.term1(JmlParser.java:2371)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.term(JavacParser.java:837)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.term(JavacParser.java:817)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.parseExpression(JavacParser.java:768)
+	at jdk.compiler/org.jmlspecs.openjml.ext.MethodClauseExprType.parse(MethodClauseExprType.java:43)
+	at jdk.compiler/org.jmlspecs.openjml.ext.MethodClauseExprType.parse(MethodClauseExprType.java:17)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseClause(JmlParser.java:1845)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseSpecificationCase(JmlParser.java:1717)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseMethodSpecs(JmlParser.java:1553)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classOrInterfaceOrRecordBodyDeclaration(JmlParser.java:1099)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.classInterfaceOrRecordBody(JavacParser.java:4154)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classInterfaceOrRecordBody(JmlParser.java:615)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.classDeclaration(JavacParser.java:3866)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classDeclaration(JmlParser.java:625)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.classOrRecordOrInterfaceOrEnumDeclaration(JavacParser.java:3806)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.classOrRecordOrInterfaceOrEnumDeclaration(JmlParser.java:443)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.typeDeclaration(JavacParser.java:3791)
+	at jdk.compiler/com.sun.tools.javac.parser.JavacParser.parseCompilationUnit(JavacParser.java:3635)
+	at jdk.compiler/com.sun.tools.javac.parser.JmlParser.parseCompilationUnit(JmlParser.java:265)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parse(JavaCompiler.java:620)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.parse(JmlCompiler.java:211)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parseFiles(JavaCompiler.java:1009)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parseFiles(JavaCompiler.java:996)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:922)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+1 error
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+public class exception18 {
+  //@ requires true;
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+  private static void foo() {
+    A a = new A();
+    throw a;
+  }
+
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+  public static void main(String[] args) {
+    try {
+      foo();
+      assert false;
+    } catch (B e) {
+      assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:5: error: class exception18 is public, should be declared in a file named exception18.java
+public class exception18 {
+       ^
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:7: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:13: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; \result == e);
+                                                                              ^
+3 errors
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class exception18 {
+  //@ requires true;
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; true);
+  private static void foo() {
+    A a = new A();
+    throw a;
+  }
+
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; true);
+  public static void main(String[] args) {
+    try {
+      foo();
+      assert false;
+    } catch (B e) {
+      assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions18.java:17: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class exception18 {
+  //@ requires true;
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; true);
+  private static void foo() {
+    A a = new A();
+    throw a;
+  }
+
+  //@ ensures (\forall RuntimeException e; e instanceof A || e instanceof B; true);
+  public static void main(String[] args) {
+    try {
+      foo();
+      // assert false;
+    } catch (B e) {
+      // assert false;
+    } catch (A e) {
+      // expected here
+    }
+  }
+}
+

@@ -1,0 +1,34 @@
+class UglyNum {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == (\forall int i; i >= 0 && i < factors.length; n % factors[i] != 0) ==> n == 1;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining 0 <= i && i <= factors.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; n % factors[j] != 0);
+        for (int i = 0; i < factors.length; i++) {
+            int factor = factors[i];
+            //@ maintaining n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+            //@ maintaining (\forall int j; 0 <= j && j < i; n % factors[j] != 0);
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: error: cannot find symbol
+    //@ ensures \result == (\forall int i; i >= 0 && i < factors.length; n % factors[i] != 0) ==> n == 1;
+                                                         ^
+  symbol:   variable factors
+  location: class UglyNum
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: error: cannot find symbol
+    //@ ensures \result == (\forall int i; i >= 0 && i < factors.length; n % factors[i] != 0) ==> n == 1;
+                                                                             ^
+  symbol:   variable factors
+  location: class UglyNum
+2 errors
+

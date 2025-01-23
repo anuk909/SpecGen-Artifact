@@ -1,0 +1,394 @@
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix)
+    {
+        int m, n, p, q;
+        m = matrix.length;
+        n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        for (int c = 0; c < n; c++) {
+
+            for (int d = 0; d < m; d++) {
+                transpose[c][d] = matrix[d][c];
+            }
+
+        }
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:18: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                transpose[c][d] = matrix[d][c];
+                          ^
+  Reason: Double rewriting of ident: c c_670_670___30 c_670_684___33
+1 error
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        for (int c = 0; c < n; c++) {
+            for (int d = 0; d < m; d++) {
+                transpose[c][d] = matrix[d][c];
+            }
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:15: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                transpose[c][d] = matrix[d][c];
+                          ^
+  Reason: Double rewriting of ident: c c_650_650___26 c_650_664___29
+1 error
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ loop_variant n - c;
+          @*/
+        for (int c = 0; c < n; c++) {
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ loop_variant m - d;
+              @*/
+            for (int d = 0; d < m; d++) {
+                transpose[c][d] = matrix[d][c];
+            }
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:15: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+          @ loop_variant n - c;
+            ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:21: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+              @ loop_variant m - d;
+                ^
+2 errors
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ loop_variant n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ loop_variant m - d;
+              @*/
+            while (d < m) {
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:16: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+          @ loop_variant n - c;
+            ^
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:23: error: Expected loop specifications while in JML: loop_variant is not a loop specification keyword
+              @ loop_variant m - d;
+                ^
+2 errors
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ decreases n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ decreases m - d;
+              @*/
+            while (d < m) {
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:10: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method transposeMat
+        int n = matrix[0].length;
+                      ^
+1 verification failure
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        //@ assume m > 0;
+        int n = matrix[0].length;
+        //@ assume n > 0;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ decreases n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ decreases m - d;
+              @*/
+            while (d < m) {
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:28: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method transposeMat
+                transpose[c][d] = matrix[d][c];
+                                           ^
+1 verification failure
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        //@ assume m > 0;
+        int n = matrix[0].length;
+        //@ assume n > 0;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ decreases n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ decreases m - d;
+              @*/
+            while (d < m) {
+                //@ assume d >= 0 && d < m;
+                //@ assume c >= 0 && c < n;
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:30: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex) in method transposeMat
+                transpose[c][d] = matrix[d][c];
+                         ^
+1 verification failure
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        //@ assume m > 0;
+        int n = matrix[0].length;
+        //@ assume n > 0;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ decreases n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ decreases m - d;
+              @*/
+            while (d < m) {
+                //@ assume d >= 0 && d < m;
+                //@ assume c >= 0 && c < n;
+                //@ assume matrix[d] != null;
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:31: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex) in method transposeMat
+                transpose[c][d] = matrix[d][c];
+                         ^
+1 verification failure
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        //@ assume m > 0;
+        int n = matrix[0].length;
+        //@ assume n > 0;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ decreases n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ decreases m - d;
+              @*/
+            while (d < m) {
+                //@ assume d >= 0 && d < m;
+                //@ assume c >= 0 && c < n;
+                //@ assume matrix[d] != null;
+                //@ assume matrix[d].length > c;
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:32: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex) in method transposeMat
+                transpose[c][d] = matrix[d][c];
+                         ^
+1 verification failure
+
+public class TransposeMatrix {
+    //@ requires matrix != null;
+    //@ requires (\forall int i; 0 <= i && i < matrix.length; matrix[i] != null);
+    //@ ensures \result != null;
+    //@ ensures \result.length == matrix[0].length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i].length == matrix.length);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < \result[i].length; \result[i][j] == matrix[j][i]));
+    public int[][] transposeMat(int[][] matrix) {
+        int m = matrix.length;
+        //@ assume m > 0;
+        int n = matrix[0].length;
+        //@ assume n > 0;
+        int[][] transpose = new int[n][m];
+
+        int c = 0;
+        /*@ loop_invariant 0 <= c && c <= n;
+          @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < m; transpose[i][j] == matrix[j][i]));
+          @ decreases n - c;
+          @*/
+        while (c < n) {
+            int d = 0;
+            /*@ loop_invariant 0 <= d && d <= m;
+              @ loop_invariant (\forall int i; 0 <= i && i < c; (\forall int j; 0 <= j && j < d; transpose[i][j] == matrix[j][i]));
+              @ loop_invariant (\forall int j; 0 <= j && j < d; transpose[c][j] == matrix[j][c]);
+              @ decreases m - d;
+              @*/
+            while (d < m) {
+                //@ assume d >= 0 && d < m;
+                //@ assume c >= 0 && c < n;
+                //@ assume matrix[d] != null;
+                //@ assume matrix[d].length > c;
+                transpose[c][d] = matrix[d][c];
+                d = d + 1;
+            }
+            c = c + 1;
+        }
+
+        return transpose;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TransposeMatrix.java:32: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex) in method transposeMat
+                transpose[c][d] = matrix[d][c];
+                         ^
+1 verification failure
+

@@ -1,0 +1,826 @@
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ ensures true;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:9: verify: The prover cannot establish an assertion (Assert) in method execute
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:25: verify: The prover cannot establish an assertion (Assert) in method executeQuery
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:17: verify: The prover cannot establish an assertion (Assert) in method executeUpdate
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:36: verify: The prover cannot establish an assertion (Assert) in method prepareStatement
+      assert false;
+      ^
+4 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:25: error: unreported exception SQLException; must be caught or declared to be thrown
+      throw new SQLException();
+      ^
+1 error
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:28: error: unreported exception SQLException; must be caught or declared to be thrown
+      throw new SQLException();
+      ^
+1 error
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:9: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:7:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:9:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:27: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:25:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:25: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:27:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:16:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:16: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:39: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:37:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:39:
+  //@ signals_only SQLException;
+      ^
+8 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:9: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:7:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:9:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:27: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:25:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:25: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:27:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:16:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:16: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:39: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:37:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:39:
+  //@ signals_only SQLException;
+      ^
+8 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:10: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:8:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:10:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:30: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:28:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:30:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:20: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:20:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:43: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:41:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:43:
+  //@ signals_only SQLException;
+      ^
+8 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:10: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:8:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:10:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:30: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:28:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:30:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:20: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:20:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:43: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:41:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:43:
+  //@ signals_only SQLException;
+      ^
+8 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:10: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:8:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:10:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:30: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:28:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:30:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:20: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:20:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:43: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:41:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:43:
+  //@ signals_only SQLException;
+      ^
+8 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:10: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:8:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:10:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:30: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:28:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:30:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:20: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:20:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:43: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:41:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:43:
+  //@ signals_only SQLException;
+      ^
+8 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void executeQuery(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  //@ signals_only SQLException;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  //@ signals_only SQLException;
+  public static Connection getConnection(String connectionString) throws SQLException {
+    if (connectionString.contains("<bad/>")) {
+      throw new SQLException();
+    }
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:10: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:8:) in method execute
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:10:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:30: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:28:) in method executeQuery
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:28: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:30:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:20: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:18:) in method executeUpdate
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:20:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:43: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:41:) in method prepareStatement
+    if (s.contains("<bad/>")) {
+                  ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:43:
+  //@ signals_only SQLException;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:63: verify: The prover cannot establish an assertion (ExceptionList: /home/max/Documents/JMLGPT/tmp/DriverManager.java:61:) in method getConnection
+    if (connectionString.contains("<bad/>")) {
+                                 ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:61: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DriverManager.java:63:
+  //@ signals_only SQLException;
+      ^
+10 verification failures
+

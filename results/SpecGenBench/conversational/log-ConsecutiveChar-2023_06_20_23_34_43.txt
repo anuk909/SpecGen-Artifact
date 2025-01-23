@@ -1,0 +1,411 @@
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int i; 0 <= i && i < s.length() && i < cnt; s.charAt(i) == s.charAt(i-cnt+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: error: variable i is already defined in method maxConsecutiveChar(String)
+        //@ maintaining (\forall int i; 0 <= i && i < s.length() && i < cnt; s.charAt(i) == s.charAt(i-cnt+1));
+                                     ^
+1 error
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ assert (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:16: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method maxConsecutiveChar: overflow in int sum
+                ++cnt;
+                ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+                //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+                //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            }
+            //@ assert (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j < i; s.charAt(j) == s.charAt(j-cnt+i+1));
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+                //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            }
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+                //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            }
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+                //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            }
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            //@ assert 1 <= ans && ans <= s.length();
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: verify: The prover cannot establish an assertion (Assert) in method maxConsecutiveChar
+                //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+                    ^
+2 verification failures
+
+class ConsecutiveChar {
+    /*@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+      @ ensures 1 <= \result && \result <= s.length();
+      @ ensures (\forall int i; 0 <= i && i < s.length() - 1; s.charAt(i) != s.charAt(i+1) || \result <= 1 || (\exists int j; i < j && j < i + \result; s.charAt(j) == s.charAt(i)));
+      @*/
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+
+        //@ maintaining 1 <= ans && ans <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+        //@ decreases s.length() - cnt;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                //@ assume cnt < Integer.MAX_VALUE;
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+                //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            }
+            //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+            //@ assert 1 <= ans && ans <= s.length();
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= ans && ans <= s.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: verify: The prover cannot establish an assertion (Assert) in method maxConsecutiveChar
+                //@ assert (\forall int j; 0 <= j && j < cnt && j <= i; s.charAt(j) == s.charAt(j-cnt+i));
+                    ^
+2 verification failures
+

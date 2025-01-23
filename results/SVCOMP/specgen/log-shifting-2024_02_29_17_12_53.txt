@@ -1,0 +1,159 @@
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+  //@ ensures \result == 0 <==> (1L << i) > Integer.MAX_VALUE;
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && (1L << i) <= Integer.MAX_VALUE;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if ((1L << i) > Integer.MAX_VALUE) {
+      return 0;
+    }
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/shifting.java:11: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method f
+    if ((1L << i) > Integer.MAX_VALUE) {
+            ^
+1 verification failure
+
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+  //@ ensures \result == 0 <==> ((long)1 << i) > Integer.MAX_VALUE;
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && ((long)1 << i) <= Integer.MAX_VALUE;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if (((long)1 << i) > Integer.MAX_VALUE) {
+      return 0;
+    }
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/shifting.java:11: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method f
+    if (((long)1 << i) > Integer.MAX_VALUE) {
+                 ^
+1 verification failure
+
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+  //@ ensures \result == 0 <==> i >= 31;
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && i < 31;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if (i >= 31) {
+      return 0;
+    }
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/shifting.java:8: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/shifting.java:4:) in method f
+      return -1;
+      ^
+/home/max/Documents/JMLGPT/tmp/shifting.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/shifting.java:8:
+  //@ ensures \result == 0 <==> i >= 31;
+      ^
+2 verification failures
+
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+  //@ ensures \result == 0 <==> i > 31;  
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && i < 31;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if (i >= 31) {
+      return 0;
+    }
+    return 1;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/shifting.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/shifting.java:4:) in method f
+      return 0;
+      ^
+/home/max/Documents/JMLGPT/tmp/shifting.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/shifting.java:12:
+  //@ ensures \result == 0 <==> i > 31;  
+      ^
+2 verification failures
+
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+  //@ ensures \result == 0 <==> i >= 31;  
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && i < 31;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if (i >= 31) {
+      return 0;
+    }
+    return 1;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/shifting.java:8: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/shifting.java:4:) in method f
+      return -1;
+      ^
+/home/max/Documents/JMLGPT/tmp/shifting.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/shifting.java:8:
+  //@ ensures \result == 0 <==> i >= 31;  
+      ^
+2 verification failures
+
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+  //@ ensures \result == 0 <==> i + 1 >= 31;  
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && i < 31;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if (i >= 31) {
+      return 0;
+    }
+    return 1;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/shifting.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/shifting.java:4:) in method f
+    return 1;
+    ^
+/home/max/Documents/JMLGPT/tmp/shifting.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/shifting.java:14:
+  //@ ensures \result == 0 <==> i + 1 >= 31;  
+      ^
+2 verification failures
+
+public class shifting {
+
+  //@ ensures \result == -1 <==> (i < 0 || i > 100);
+ 
+  //@ ensures \result == 1 <==> !(i < 0 || i > 100) && i < 31;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    if (i >= 31) {
+      return 0;
+    }
+    return 1;
+  }
+}
+
+

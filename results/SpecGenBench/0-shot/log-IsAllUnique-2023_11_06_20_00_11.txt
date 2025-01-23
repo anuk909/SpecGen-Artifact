@@ -1,0 +1,41 @@
+class IsAllUnique {
+    //@ requires str != null;
+    //@ ensures \result == true || \result == false;
+    boolean isAllUnique(String str) {
+        //@ assert str != null;
+        //@ assert str.length() >= 0;
+        //@ assert str.length() <= 26;
+        int len = str.length();
+        //@ assert len >= 0;
+        //@ assert len <= 26;
+        if (len > 26) {
+            //@ assert len > 26;
+            //@ assert \result == false;
+            return false;
+        }
+        int num = 0;
+        //@ assert num == 0;
+        for (int i = 0; i < len; i++) {
+            //@ assert i >= 0;
+            //@ assert i < len;
+            char c = str.charAt(i);
+            //@ assert c != null;
+            //@ assert c >= 'a';
+            //@ assert c <= 'z';
+            int index = c - 'a';
+            //@ assert index >= 0;
+            //@ assert index <= 25;
+            if ((num & (1 << index)) != 0) {
+                //@ assert (num & (1 << index)) != 0;
+                //@ assert \result == false;
+                return false;
+            } else {
+                //@ assert (num & (1 << index)) == 0;
+                num |= (1 << index);
+                //@ assert (num & (1 << index)) != 0;
+            }
+        }
+        //@ assert \result == true;
+        return true;
+    }
+}

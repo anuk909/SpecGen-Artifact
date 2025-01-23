@@ -1,0 +1,83 @@
+public class Environment {
+
+    public enum WaterLevelEnum {
+        low,
+        normal,
+        high
+    }
+
+    private WaterLevelEnum waterLevel = WaterLevelEnum.normal;
+
+    private boolean methaneLevelCritical = false;
+
+    //@ ensures waterLevel == WaterLevelEnum.normal;
+    public void lowerWaterLevel() {
+        switch (waterLevel) {
+            case high:
+                waterLevel = WaterLevelEnum.normal;
+                break;
+            case normal:
+                waterLevel = WaterLevelEnum.low;
+                break;
+        }
+    }
+
+    //@ ensures waterLevel == WaterLevelEnum.high;
+    public void waterRise() {
+        switch (waterLevel) {
+            case low:
+                waterLevel = WaterLevelEnum.normal;
+                break;
+            case normal:
+                waterLevel = WaterLevelEnum.high;
+                break;
+        }
+    }
+
+    //@ ensures methaneLevelCritical != \old(methaneLevelCritical);
+    public void changeMethaneLevel() {
+        methaneLevelCritical = !methaneLevelCritical;
+    }
+
+    //@ ensures \result == methaneLevelCritical;
+    public boolean isMethaneLevelCritical() {
+        return methaneLevelCritical;
+    }
+
+    //@ ensures \result.equals("Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")");
+    @Override
+    public String toString() {
+        return "Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")";
+    }
+
+    //@ ensures \result == waterLevel;
+    public WaterLevelEnum getWaterLevel() {
+        return waterLevel;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Environment.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures waterLevel == WaterLevelEnum.normal;
+                ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:25: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures waterLevel == WaterLevelEnum.high;
+                ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:37: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures methaneLevelCritical != \old(methaneLevelCritical);
+                ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:37: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures methaneLevelCritical != \old(methaneLevelCritical);
+                                             ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:42: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == methaneLevelCritical;
+                           ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:47: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result.equals("Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")");
+                                              ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:47: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result.equals("Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")");
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Environment.java:53: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == waterLevel;
+                           ^
+8 errors
+

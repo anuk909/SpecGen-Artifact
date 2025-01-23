@@ -1,0 +1,24 @@
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == true || \result == false;
+    public boolean isSuffix (String pat, String txt) {
+	
+        //@ assert pat != null && txt != null;
+        int i = pat.length() - 1;
+
+        //@ loop_invariant i >= -1 && i <= pat.length() - 1;
+        //@ loop_variant i;
+        while(i >= 0) {
+            //@ assert i >= 0 && i <= pat.length() - 1;
+            int j = i - pat.length() + txt.length();
+            //@ assert j >= -1 && j <= txt.length() - 1;
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+        }
+
+        return true;
+    }
+
+}

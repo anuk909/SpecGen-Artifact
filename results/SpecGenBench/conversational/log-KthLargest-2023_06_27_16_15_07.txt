@@ -1,0 +1,166 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    PriorityQueue<Integer> pq;
+    int k;
+
+    //@ requires k > 0 && nums != null;
+    //@ ensures pq.size() <= k;
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq.size() <= k;
+    //@ ensures pq.size() <= k;
+    //@ ensures pq.size() == \old(pq.size()) + 1 ==> \result == pq.peek();
+    //@ ensures pq.size() == \old(pq.size()) ==> \result == pq.peek();
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:17: error: An identifier with package visibility may not be used in a requires clause with public visibility
+    //@ requires pq.size() <= k;
+                 ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:17: error: An identifier with package visibility may not be used in a requires clause with public visibility
+    //@ requires pq.size() <= k;
+                              ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                             ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:19: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == \old(pq.size()) + 1 ==> \result == pq.peek();
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:19: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == \old(pq.size()) + 1 ==> \result == pq.peek();
+                                  ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:19: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == \old(pq.size()) + 1 ==> \result == pq.peek();
+                                                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == \old(pq.size()) ==> \result == pq.peek();
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == \old(pq.size()) ==> \result == pq.peek();
+                                  ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == \old(pq.size()) ==> \result == pq.peek();
+                                                            ^
+11 errors
+
+import java.util.PriorityQueue;
+
+public class KthLargest {
+    //@ spec_public
+    PriorityQueue<Integer> pq;
+    //@ spec_public
+    int k;
+
+    //@ requires k > 0 && nums != null;
+    //@ ensures pq.size() <= k;
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq.size() <= k;
+    //@ ensures pq.size() <= k;
+    //@ ensures pq.size() == \old(pq.size()) + 1 ==> \result == pq.peek();
+    //@ ensures pq.size() == \old(pq.size()) ==> \result == pq.peek();
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:15: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/KthLargest.java:23:) in method KthLargest
+            add(x);
+               ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/KthLargest.java:15:
+    public int add(int val) {
+               ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:19: verify: Precondition conjunct is false: pq.size() <= k
+    //@ requires pq.size() <= k;
+                           ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: verify: The prover cannot establish an assertion (InvariantEntrance: /home/max/Documents/JMLGPT/openjml/specs/java/lang/Iterable.jml:10:) in method KthLargest: (Caller: KthLargest.KthLargest(int,int[]), Callee: java.util.PriorityQueue.size())
+    //@ ensures pq.size() <= k;
+                       ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/Iterable.jml:10: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/KthLargest.java:20:
+    //-RAC@ public invariant values.length >= 0;  // FIXME - should be implicit? (cf. gitbug686)
+                   ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:17: verify: Associated method exit
+    }
+     ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:24: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69:) in method add
+        pq.offer(val);
+                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/KthLargest.java:24:
+      @   requires e == null & !containsNull;
+          ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:57: verify: Precondition conjunct is false: false
+      @   requires  false && (* capacity restrictions respected *);
+                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:64: verify: Precondition conjunct is false: false
+      @   requires false && (* capacity restrictions violated *);
+                   ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69: verify: Precondition conjunct is false: e == null
+      @   requires e == null & !containsNull;
+                     ^
+11 verification failures
+
+import java.util.PriorityQueue;
+
+public class KthLargest {
+    //@ spec_public
+    PriorityQueue<Integer> pq;
+    //@ spec_public
+    int k;
+
+    //@ requires k > 0 && nums != null;
+    //@ ensures pq.size() <= k;
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires val != null;
+    //@ requires pq.size() <= k;
+    //@ ensures pq.size() <= k;
+    //@ ensures pq.size() == \old(pq.size()) + 1 ==> \result == pq.peek();
+    //@ ensures pq.size() == \old(pq.size()) ==> \result == pq.peek();
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:19: error: bad operand types for binary operator '!='
+    //@ requires val != null;
+                     ^
+  first type:  int
+  second type: <null>
+1 error
+

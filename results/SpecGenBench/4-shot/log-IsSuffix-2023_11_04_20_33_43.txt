@@ -1,0 +1,26 @@
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result <==> pat is a suffix of txt;
+    public boolean isSuffix (String pat, String txt) {
+	
+        int i = pat.length() - 1;
+
+        //@ maintaining i >= -1;
+        //@ maintaining (\forall int k; i+1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(k - pat.length() + txt.length()));
+        while(i >= 0) {
+	    int j = i - pat.length() + txt.length();
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:4: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures \result <==> pat is a suffix of txt;
+                                 ^
+1 error
+

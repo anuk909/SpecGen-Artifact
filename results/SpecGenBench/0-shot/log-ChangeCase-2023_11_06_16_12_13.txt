@@ -1,0 +1,27 @@
+public class ChangeCase {
+
+  //@ requires true;
+  //@ ensures \result >= 'A' && \result <= 'Z' || \result >= 'a' && \result <= 'z' || \result == c;
+  public char changeCase(char c) {
+    char result = ' ';
+
+    //@ if-else statements to handle different cases
+    if (c > 'z') {
+      result = c;
+    } else if (c >= 'a') {
+      result =  (char)(c - 'a' + 'A');
+    } else if (c > 'Z') {
+      result =  c;
+    } else if (c >= 'A') {
+      result =  (char)(c - 'A' + 'a');
+    } else {
+      result = c;
+    }
+
+    //@ the result should be a valid character
+    //@ assert result >= 'A' && result <= 'Z' || result >= 'a' && result <= 'z' || result == c;
+
+    return result;
+  }
+
+}

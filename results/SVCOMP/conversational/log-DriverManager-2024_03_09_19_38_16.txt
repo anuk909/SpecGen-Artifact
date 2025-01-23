@@ -1,0 +1,125 @@
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ ensures true;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:9: verify: The prover cannot establish an assertion (Assert) in method execute
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:25: verify: The prover cannot establish an assertion (Assert) in method executeQuery
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:17: verify: The prover cannot establish an assertion (Assert) in method executeUpdate
+      assert false;
+      ^
+/home/max/Documents/JMLGPT/tmp/DriverManager.java:36: verify: The prover cannot establish an assertion (Assert) in method prepareStatement
+      assert false;
+      ^
+4 verification failures
+
+class SQLException extends Exception {}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      throw new RuntimeException();
+    }
+  }
+}
+
+class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures true;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ ensures true;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  //@ requires connectionString != null;
+  //@ ensures \result != null;
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+}
+

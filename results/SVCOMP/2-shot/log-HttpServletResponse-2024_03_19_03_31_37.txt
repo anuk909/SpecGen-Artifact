@@ -1,0 +1,40 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void sendRedirect(String s) throws IOException {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires x != null && !x.contains("<bad/>");
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      //@ requires x != null && !x.contains("<bad/>");
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      //@ requires x != null && !String.valueOf(x).contains("<bad/>");
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null && !s.contains("<bad/>");
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+

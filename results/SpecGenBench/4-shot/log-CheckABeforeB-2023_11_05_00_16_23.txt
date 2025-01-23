@@ -1,0 +1,29 @@
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result <==> (\forall int k; 0 <= k && k < s.length(); s.charAt(k) == 'a') && (\forall int k; \result <= k && k < s.length(); s.charAt(k) == 'b');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining 0 <= i && i <= chars.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; chars[k] == 'a');
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        int j = i;
+        //@ maintaining i <= j && j <= chars.length;
+        //@ maintaining (\forall int k; i <= k && k < j; chars[k] == 'b');
+        //@ decreases chars.length - j;
+        while (j < chars.length && chars[j] == 'b') {
+            j++;
+        }
+        return j == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:3: error: bad operand types for binary operator '<='
+    //@ ensures \result <==> (\forall int k; 0 <= k && k < s.length(); s.charAt(k) == 'a') && (\forall int k; \result <= k && k < s.length(); s.charAt(k) == 'b');
+                                                                                                                      ^
+  first type:  boolean
+  second type: int
+1 error
+

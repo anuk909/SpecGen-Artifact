@@ -1,0 +1,137 @@
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ maintaining 1 <= i && i <= num;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 1; i < num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:5: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPerfectSquare
+        //@ maintaining 1 <= i && i <= num;
+            ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+            if(i * i == num)
+                 ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && num >= Integer.MIN_VALUE;
+        //@ maintaining 1 <= i && i <= num;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 1; i < num; i++) {
+            //@ assume i <= (int)Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPerfectSquare
+        //@ maintaining 1 <= i && i <= num;
+            ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:14:
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+        ^
+3 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && num >= Integer.MIN_VALUE;
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 1; i <= num + 1; i++) {
+            //@ assume i <= (int)Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: overflow in int sum
+        for(int i = 1; i <= num + 1; i++) {
+                                ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:8: verify: The prover cannot establish an assertion (LoopDecreasesNonNegative) in method isPerfectSquare
+        //@ decreases num - i;
+            ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && num >= Integer.MIN_VALUE;
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 1; i <= num + 1; i++) {
+            //@ assume i <= (int)Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: overflow in int sum
+        for(int i = 1; i <= num + 1; i++) {
+                                ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:8: verify: The prover cannot establish an assertion (LoopDecreasesNonNegative) in method isPerfectSquare
+        //@ decreases num - i;
+            ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && num >= Integer.MIN_VALUE;
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(int i = 1; i <= num + 1; i++) {
+            //@ assume i <= (int)Math.sqrt(Integer.MAX_VALUE);
+            if((long)i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: overflow in int sum
+        for(int i = 1; i <= num + 1; i++) {
+                                ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:8: verify: The prover cannot establish an assertion (LoopDecreasesNonNegative) in method isPerfectSquare
+        //@ decreases num - i;
+            ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == (\exists int i; i >= 0 && i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ assume num <= Integer.MAX_VALUE && num >= Integer.MIN_VALUE;
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j * j == num);
+        //@ decreases num - i;
+        for(long i = 1; i <= num + 1; i++) {
+            //@ assume i <= (long)Math.sqrt(Integer.MAX_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}

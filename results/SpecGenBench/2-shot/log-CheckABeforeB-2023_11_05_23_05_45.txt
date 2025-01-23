@@ -1,0 +1,55 @@
+class CheckABeforeB {
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); \result.charAt(i) == 'a');
+    //@ ensures \result.length() <= s.length();
+    //@ ensures \result.length() == 0 ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    //@ ensures \result.length() > 0 ==> s.charAt(\result.length() - 1) != 'a';
+    //@ ensures \result.length() == s.length() ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'b');
+    //@ ensures \result.length() < s.length() ==> s.charAt(\result.length()) != 'b';
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int k; 0 <= k && k < i; chars[k] == 'a');
+        //@ maintaining (0 <= i && i <= chars.length);
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        int j = i;
+        //@ maintaining (\forall int k; i <= k && k < j; chars[k] == 'b');
+        //@ maintaining (i <= j && j <= chars.length);
+        //@ decreases chars.length - j;
+        while (j < chars.length && chars[j] == 'b') {
+            j++;
+        }
+        return j == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:2: error: boolean cannot be dereferenced
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); \result.charAt(i) == 'a');
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:2: error: boolean cannot be dereferenced
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); \result.charAt(i) == 'a');
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result.length() <= s.length();
+                       ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:4: error: boolean cannot be dereferenced
+    //@ ensures \result.length() == 0 ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+                       ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:5: error: boolean cannot be dereferenced
+    //@ ensures \result.length() > 0 ==> s.charAt(\result.length() - 1) != 'a';
+                       ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:5: error: boolean cannot be dereferenced
+    //@ ensures \result.length() > 0 ==> s.charAt(\result.length() - 1) != 'a';
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:6: error: boolean cannot be dereferenced
+    //@ ensures \result.length() == s.length() ==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'b');
+                       ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:7: error: boolean cannot be dereferenced
+    //@ ensures \result.length() < s.length() ==> s.charAt(\result.length()) != 'b';
+                       ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:7: error: boolean cannot be dereferenced
+    //@ ensures \result.length() < s.length() ==> s.charAt(\result.length()) != 'b';
+                                                                  ^
+9 errors
+

@@ -1,0 +1,77 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+
+  /*@
+    assignable \nothing;
+    ensures \result == Value;
+  @*/
+  public int getValue() { }
+
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  /*@
+    ensures \result >= 0;
+  @*/
+  public int size() { }
+
+  /*@
+    requires index >= 0;
+    assignable Head;
+    ensures size() == \old(size()) + 1;
+    ensures (\forall int i; 0 <= i && i < size() - 1; get(i) == \old(get(i)));
+    ensures get(size() - 1) == e;
+  @*/
+  public void add(int index, int e) { }
+
+  /*@
+    requires e >= 0;
+    assignable \nothing;
+    ensures size() == \old(size()) + 1;
+    ensures (\forall int i; 0 <= i && i < size() - 1; get(i) == \old(get(i)));
+    ensures get(size() - 1) == e;
+  @*/
+  public void add(int e) { }
+
+  /*@
+    requires index >= 0 && index < size();
+    assignable Head;
+    ensures size() == \old(size()) - 1;
+    ensures (\forall int i; 0 <= i && i < index; get(i) == \old(get(i)));
+    ensures (\forall int i; index <= i && i < size(); get(i) == \old(get(i + 1)));
+  @*/
+  public void remove(int index) { }
+
+  /*@
+    requires index >= 0 && index < size();
+    assignable \nothing;
+    ensures \result == get(index);
+  @*/
+  public int get(int index) { }
+
+}
+
+class Utils_nondet {
+  /*@
+    ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+  @*/
+  public static int nondet_int() { }
+
+}
+
+class Utils_synthesis {
+  /*@
+    ensures \result >= aggregated && \result <= e && \result % 2 == 0;
+  @*/
+  public static int accumulator(int aggregated, int e) { }
+
+  /*@
+    ensures \result == true;
+  @*/
+  public static boolean predicate(int lhs) { }
+
+}
+

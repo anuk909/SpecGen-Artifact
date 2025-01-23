@@ -1,0 +1,36 @@
+public class StringValueOf02 {
+    //@ requires arg.length() >= 8;
+    //@ requires (\forall int i; 0 <= i && i < 8; (int)Character.MIN_VALUE <= (int)arg.charAt(i) && (int)arg.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result <==> tmp.equals("difffblue");
+    public static boolean f(String arg) {
+        char[] charArray = {
+            arg.charAt(0), arg.charAt(1), arg.charAt(2),
+            arg.charAt(3), arg.charAt(4), arg.charAt(5),
+            arg.charAt(6), arg.charAt(7)
+        };
+        String tmp = String.valueOf(charArray);
+        return tmp.equals("difffblue");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringValueOf02.java:4: error: cannot find symbol
+    //@ ensures \result <==> tmp.equals("difffblue");
+                             ^
+  symbol:   variable tmp
+  location: class StringValueOf02
+1 error
+
+public class StringValueOf02 {
+    //@ requires arg.length() >= 8;
+    //@ requires (\forall int i; 0 <= i && i < 8; (int)Character.MIN_VALUE <= (int)arg.charAt(i) && (int)arg.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result <==> String.valueOf(new char[]{arg.charAt(0), arg.charAt(1), arg.charAt(2), arg.charAt(3), arg.charAt(4), arg.charAt(5), arg.charAt(6), arg.charAt(7)}).equals("difffblue");
+    public static boolean f(String arg) {
+        char[] charArray = {
+            arg.charAt(0), arg.charAt(1), arg.charAt(2),
+            arg.charAt(3), arg.charAt(4), arg.charAt(5),
+            arg.charAt(6), arg.charAt(7)
+        };
+        String tmp = String.valueOf(charArray);
+        return tmp.equals("difffblue");
+    }
+}
+

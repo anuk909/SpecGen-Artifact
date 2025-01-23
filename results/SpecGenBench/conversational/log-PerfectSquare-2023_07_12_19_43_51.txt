@@ -1,0 +1,70 @@
+class PerfectSquare {
+    //@ ensures \result <==> (\exists int i; 1 <= i && i < num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ maintaining 1 <= i && i <= num;
+        //@ decreases num - i;
+        for(int i = 1; i < num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:4: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPerfectSquare
+        //@ maintaining 1 <= i && i <= num;
+            ^
+1 verification failure
+
+class PerfectSquare {
+    //@ ensures \result <==> (\exists int i; 1 <= i && i <= num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ decreases num - i + 1;
+        for(int i = 1; i <= num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:7: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+            if(i * i == num)
+                 ^
+1 verification failure
+
+class PerfectSquare {
+    //@ ensures \result <==> (\exists int i; 1 <= i && i <= num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ decreases num - i + 1;
+        for(int i = 1; i <= num; i++) {
+            //@ assume i <= Math.sqrt(Integer.MAX_VALUE) && i >= Math.sqrt(Integer.MIN_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Validity is unknown - no model available method PerfectSquare.isPerfectSquare - : (error "line 1861 column 18: model is not available")
+    public static boolean isPerfectSquare(int num) {
+                          ^
+1 verification failure
+
+class PerfectSquare {
+    //@ ensures \result <==> (\exists int i; 1 <= i && i <= num; i * i == num);
+    public static boolean isPerfectSquare(int num) {
+        //@ maintaining 1 <= i && i <= num + 1;
+        //@ decreases num - i + 1;
+        for(int i = 1; i <= num; i++) {
+            //@ assume i <= Math.sqrt(Integer.MAX_VALUE) && i >= Math.sqrt(Integer.MIN_VALUE);
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Validity is unknown - no model available method PerfectSquare.isPerfectSquare - : (error "line 1861 column 18: model is not available")
+    public static boolean isPerfectSquare(int num) {
+                          ^
+1 verification failure
+

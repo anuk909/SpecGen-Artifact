@@ -1,0 +1,23 @@
+public class BugTestGen095 {
+  /*@ ensures \result == false; */
+  public static boolean func(String arg) {
+    StringBuilder sb = new StringBuilder(arg);
+    sb.append("Z");
+    String s = sb.toString();
+    return (s.equals("fg"));
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    func("");
+    func("arg");
+    func("123");
+    func("a");
+    func("25");
+    func("114514");
+    func("12435fga@354");
+  }
+}

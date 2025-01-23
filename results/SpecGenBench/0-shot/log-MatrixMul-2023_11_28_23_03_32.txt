@@ -1,0 +1,32 @@
+public class MatrixMul {
+    
+    //@ requires a != null && b != null;
+    //@ requires a.length == 2 && b.length == 2;
+    //@ requires a[0].length == 2 && a[1].length == 2 && b[0].length == 2 && b[1].length == 2;
+    //@ ensures \result != null;
+    //@ ensures \result.length == 2 && \result[0].length == 2 && \result[1].length == 2;
+    public int[][] multiply(int[][] a, int[][] b) {
+        int[][] c = new int[2][2];
+        //@ loop_invariant i >= 0 && i <= 2;
+        //@ loop_invariant (\forall int k; k >= 0 && k < i; c[k][0] == a[k][0] * b[0][0] + a[k][1] * b[1][0]);
+        //@ loop_invariant (\forall int k; k >= 0 && k < i; c[k][1] == a[k][0] * b[0][1] + a[k][1] * b[1][1]);
+        //@ decreases 2 - i;
+        for (int i = 0; i < 2; i++) {
+            //@ loop_invariant j >= 0 && j <= 2;
+            //@ loop_invariant (\forall int k; k >= 0 && k < j; c[i][k] == a[i][0] * b[0][k] + a[i][1] * b[1][k]);
+            //@ decreases 2 - j;
+            for (int j = 0; j < 2; j++) {
+                c[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j];
+            }
+        }
+        //@ assert (\forall int i, j; i >= 0 && i < 2 && j >= 0 && j < 2; c[i][j] == a[i][0] * b[0][j] + a[i][1] * b[1][j]);
+        return c;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/MatrixMul.java:19: error: A catastrophic JML internal error occurred.  Please report the bug with as much information as you can.
+                c[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j];
+                  ^
+  Reason: Double rewriting of ident: i i_737_737___42 i_737_751___48
+1 error
+

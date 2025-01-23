@@ -1,0 +1,38 @@
+public class SortedListInsert {
+
+  private static class List {
+    //@ inductive sortedList: List | sortedList == null || (\forall List l; sortedList.next == l; sortedList.x <= l.x);
+    //@ invariant (\forall List l; l != null; l.next != null ==> l.x <= l.next.x);
+    //@ constraint (\forall List l; l != null; l.next != null ==> l.x <= l.next.x);
+    //@ constraint (\forall List l; l != null; l.next != null ==> (\forall List m; m != null; m.next != null ==> l.x <= m.x));
+    
+    public int x;
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    private List(int x, List next) {
+      this.x = x;
+      this.next = next;
+    }
+
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires (\forall List l; l != null; l.next != null ==> l.x <= data);
+    //@ ensures (\forall List l; l != null; l.next != null ==> l.x <= l.next.x);
+    //@ ensures (\forall List l; l != null; l.next != null ==> l.x <= data);
+    //@ ensures (\forall List l; l != null; l.next != null ==> (\forall List m; m != null; m.next != null ==> l.x <= m.x));
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+

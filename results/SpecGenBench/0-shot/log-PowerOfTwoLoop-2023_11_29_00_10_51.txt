@@ -1,0 +1,23 @@
+class PowerOfTwoLoop {
+    //@ requires n > 0;
+    //@ ensures \result == true || \result == false;
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ loop_invariant n > 0;
+        //@ loop_invariant n % 2 == 0 ==> (\exists int k; n == 2^k);
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoLoop.java:9: error: bad operand types for binary operator '^'
+        //@ loop_invariant n % 2 == 0 ==> (\exists int k; n == 2^k);
+                                                                ^
+  first type:  boolean
+  second type: int
+1 error
+

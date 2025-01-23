@@ -1,0 +1,86 @@
+public class PrimeNumbers {
+    private static boolean div(int n, int d) { return n%d == 0; }
+    private int primeArray[];
+    
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < i; !isDivisible(\result[i], \result[j])));
+    public int[] primeList(int n) {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+        
+        //@ maintaining 2 <= count && count <= n + 1;
+        //@ maintaining (\forall int i; 0 <= i && i < count - 1; isPrime(primeArray[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; !isDivisible(primeArray[i], primeArray[j])));
+        //@ decreases n + 1 - count;
+        for (count = 2; count <= n;) {
+            //@ maintaining 2 <= count && count <= n + 1;
+            //@ maintaining 2 <= j && j <= num/2;
+            //@ maintaining status == 0 ==> (\exists int k; 2 <= k && k <= j; isDivisible(num, k));
+            //@ decreases num/2 - j;
+            for (j = 2; j <= num/2; j++) {
+                if (div(num,j)) {
+                    status = 0;
+                    break;
+                }
+            }
+            
+            if (status != 0) {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+    
+    //@ requires n > 1;
+    //@ ensures \result == (\forall int i; 2 <= i && i < n; !isDivisible(n, i));
+    private boolean isPrime(int n) {
+        for (int i = 2; i < n; i++) {
+            if (isDivisible(n, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    //@ requires n > 1 && m > 1;
+    //@ ensures \result == (n % m == 0);
+    private boolean isDivisible(int n, int m) {
+        return n % m == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:7: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:7: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isPrime(int)
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < i; !isDivisible(\result[i], \result[j])));
+                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isDivisible(int,int)
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\forall int j; 0 <= j && j < i; !isDivisible(\result[i], \result[j])));
+                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:15: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isPrime(int)
+        //@ maintaining (\forall int i; 0 <= i && i < count - 1; isPrime(primeArray[i]));
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:16: error: variable j is already defined in method primeList(int)
+        //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; !isDivisible(primeArray[i], primeArray[j])));
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:16: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isDivisible(int,int)
+        //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; !isDivisible(primeArray[i], primeArray[j])));
+                                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:21: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isDivisible(int,int)
+            //@ maintaining status == 0 ==> (\exists int k; 2 <= k && k <= j; isDivisible(num, k));
+                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:41: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isDivisible(int,int)
+    //@ ensures \result == (\forall int i; 2 <= i && i < n; !isDivisible(n, i));
+                                                                        ^
+3 errors
+6 warnings
+

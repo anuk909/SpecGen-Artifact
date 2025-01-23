@@ -1,0 +1,74 @@
+class cast1 {
+  //@ requires -128 <= i && i <= 127;
+  //@ ensures (\byte)i == i;
+  //@ ensures (\short)i == i;
+  //@ ensures (\char)i == (0xffff & i);
+  //@ ensures (\long)i == i;
+  //@ ensures (\float)i == i;
+  //@ ensures (\double)i == i;
+  //@ ensures (\float)(\double)i == (\float)i;
+  //@ ensures (\int)(\double)i == i;
+  //@ ensures (\long)(\double)i == i;
+  public static void f(int i) {
+    if (i < -128 || i > 127) return;
+    byte b = (byte) i;
+    assert b == i;
+    short s = (short) i;
+    assert s == i;
+    char c = (char) i;
+    assert c == (0xffff & i);
+    long l = (long) i;
+    assert l == i;
+    float f = (float) i;
+    assert f == i;
+    double d = (double) i;
+    assert d == i;
+    f = (float) d;
+    assert (float) d == f;
+    i = (int) d;
+    assert (int) d == i;
+    l = (long) d;
+    assert i == l;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/cast1.java:3: error: This backslash token is unknown: \byte
+  //@ ensures (\byte)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:4: error: This backslash token is unknown: \short
+  //@ ensures (\short)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:5: error: This backslash token is unknown: \char
+  //@ ensures (\char)i == (0xffff & i);
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:6: error: This backslash token is unknown: \long
+  //@ ensures (\long)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:7: error: This backslash token is unknown: \float
+  //@ ensures (\float)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:8: error: This backslash token is unknown: \double
+  //@ ensures (\double)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:9: error: This backslash token is unknown: \float
+  //@ ensures (\float)(\double)i == (\float)i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:9: error: This backslash token is unknown: \double
+  //@ ensures (\float)(\double)i == (\float)i;
+                       ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:9: error: This backslash token is unknown: \float
+  //@ ensures (\float)(\double)i == (\float)i;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:10: error: This backslash token is unknown: \int
+  //@ ensures (\int)(\double)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:10: error: This backslash token is unknown: \double
+  //@ ensures (\int)(\double)i == i;
+                     ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:11: error: This backslash token is unknown: \long
+  //@ ensures (\long)(\double)i == i;
+               ^
+/home/max/Documents/JMLGPT/tmp/cast1.java:11: error: This backslash token is unknown: \double
+  //@ ensures (\long)(\double)i == i;
+                      ^
+13 errors
+

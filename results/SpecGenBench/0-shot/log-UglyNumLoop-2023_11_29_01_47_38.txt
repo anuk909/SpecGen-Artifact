@@ -1,0 +1,44 @@
+class UglyNum {
+    //@ requires n >= 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isUgly(int n) {
+        //@ loop_invariant n >= 0;
+        //@ loop_modifies n;
+        while (n % 2 == 0) {
+            //@ decreases n;
+            n /= 2;
+        }
+        
+        //@ loop_invariant n >= 0;
+        //@ loop_modifies n;
+        while (n % 3 == 0) {
+            //@ decreases n;
+            n /= 3;
+        }
+        
+        //@ loop_invariant n >= 0;
+        //@ loop_modifies n;
+        while (n % 5 == 0) {
+            //@ decreases n;
+            n /= 5;
+        }
+        
+        //@ ensures \result == (n == 1);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:8: error: Loop specifications must immediately precede a loop statement
+            //@ decreases n;
+                ^
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:15: error: Loop specifications must immediately precede a loop statement
+            //@ decreases n;
+                ^
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:22: error: Loop specifications must immediately precede a loop statement
+            //@ decreases n;
+                ^
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:26: warning: A refining statement is required for statement specifications
+        //@ ensures \result == (n == 1);
+            ^
+3 errors
+1 warning
+

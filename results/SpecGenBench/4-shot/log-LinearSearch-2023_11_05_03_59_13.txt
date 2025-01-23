@@ -1,0 +1,35 @@
+public class LinearSearch {
+     private static /*@ spec_public @*/ int location;
+
+      /*@ public normal_behavior
+        @    requires (\forall int i; 0 <= i && i < array.length; (int)Integer.MIN_VALUE <= array[i] && array[i] <= (int)Integer.MAX_VALUE);
+        @    assignable location;
+        @    ensures \result == -1 ==> (\forall int i; 0 <= i && i < array.length; array[i] != search);
+        @    ensures \result >= 0 && \result < array.length && array[\result] == search;
+        @*/
+      public static int linearSearch(int search, int array[]) {
+	      int c;
+
+        //@ maintaining 0 <= c && c <= array.length;
+        //@ maintaining (\forall int i; 0 <= i && i < c; array[i] != search);
+        //@ decreases array.length - c;
+        for (c = 0; c < array.length; c++) {  
+          if (array[c] == search) {
+	      location = c;
+              break;
+          }
+        }
+       if (c == array.length) {
+            location = -1;
+       }
+     return location;
+     }
+  }
+/home/max/Documents/JMLGPT/tmp/LinearSearch.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/LinearSearch.java:8:) in method linearSearch
+     return location;
+     ^
+/home/max/Documents/JMLGPT/tmp/LinearSearch.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/LinearSearch.java:25:
+        @    ensures \result >= 0 && \result < array.length && array[\result] == search;
+             ^
+2 verification failures
+

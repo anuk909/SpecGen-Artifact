@@ -1,0 +1,31 @@
+import java.util.Random;
+
+class assert1 {
+  //@ ensures i >= 10 ==> \result == true;
+  //@ ensures i < 10 ==> \result == false;
+  public static void func() {
+    int i = new Random().nextInt();
+
+    if (i >= 10) assert i >= 10 : "my super assertion"; // should hold
+
+    if (i >= 20) assert i >= 10 : "my super assertion"; // should hold
+  }
+}
+/home/max/Documents/JMLGPT/tmp/assert1.java:4: error: cannot find symbol
+  //@ ensures i >= 10 ==> \result == true;
+              ^
+  symbol:   variable i
+  location: class assert1
+/home/max/Documents/JMLGPT/tmp/assert1.java:4: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures i >= 10 ==> \result == true;
+                           ^
+/home/max/Documents/JMLGPT/tmp/assert1.java:5: error: cannot find symbol
+  //@ ensures i < 10 ==> \result == false;
+              ^
+  symbol:   variable i
+  location: class assert1
+/home/max/Documents/JMLGPT/tmp/assert1.java:5: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures i < 10 ==> \result == false;
+                          ^
+4 errors
+

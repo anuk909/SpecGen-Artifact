@@ -1,0 +1,34 @@
+public class UniqueCharNested {
+
+    //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < s.length() && i <= j && j < s.length(); s.charAt(i) != s.charAt(j));
+    //@ ensures -1 < \result ==> (\forall int j; \result <= j && j < s.length(); s.charAt(\result) != s.charAt(j));
+    //@ assignable \nothing;
+    public static int uniqueChar(String s) {
+        int j = 0;
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining 0 <= j && j <= s.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(j) != s.charAt(k));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ maintaining i < j && j <= s.length();
+            //@ maintaining (\forall int k; i <= k && k < j; s.charAt(j) != s.charAt(k));
+            //@ decreases s.length() - j;
+            for (j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    break;
+            }
+            if(j == s.length())
+                return i;
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:16: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method uniqueChar
+            //@ maintaining (\forall int k; i <= k && k < j; s.charAt(j) != s.charAt(k));
+                ^
+1 verification failure
+

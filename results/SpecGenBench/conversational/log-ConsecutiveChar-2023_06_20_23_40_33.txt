@@ -1,0 +1,385 @@
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= i && i <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= i && i <= s.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method maxConsecutiveChar: overflow in int sum
+                ++cnt;
+                ^
+2 verification failures
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= i && i <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            assume(ans <= Integer.MAX_VALUE - 1);
+            assume(cnt <= Integer.MAX_VALUE - 1);
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: error: cannot find symbol
+            assume(ans <= Integer.MAX_VALUE - 1);
+            ^
+  symbol:   method assume(boolean)
+  location: class ConsecutiveChar
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:12: error: cannot find symbol
+            assume(cnt <= Integer.MAX_VALUE - 1);
+            ^
+  symbol:   method assume(boolean)
+  location: class ConsecutiveChar
+2 errors
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= i && i <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            assert ans <= Integer.MAX_VALUE - 1;
+            assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= i && i <= s.length();
+            ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (Assert) in method maxConsecutiveChar
+            assert ans <= Integer.MAX_VALUE - 1;
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= i && i <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (Assert) in method maxConsecutiveChar
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= i && i <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= i && i <= s.length();
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:11: verify: The prover cannot establish an assertion (Assert) in method maxConsecutiveChar
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxConsecutiveChar
+        //@ maintaining 1 <= i && i <= s.length();
+            ^
+2 verification failures
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ maintaining 1 <= i && i <= s.length();
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:19: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:18: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= s.length();
+                ^
+2 errors
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+        }
+        //@ maintaining 1 <= i && i <= s.length();
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:19: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining 1 <= i && i <= s.length();
+            ^
+1 error
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ maintaining 1 <= i && i <= s.length();
+            //@ maintaining 1 <= cnt && cnt <= ans;
+            //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:18: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= s.length();
+                ^
+2 errors
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ maintaining 1 <= i && i <= s.length();
+            //@ maintaining 1 <= cnt && cnt <= ans;
+            //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        }
+        //@ assert 1 <= s.length();
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:18: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= s.length();
+                ^
+2 errors
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ maintaining 1 <= i && i <= s.length();
+            //@ maintaining 1 <= cnt && cnt <= ans;
+            //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        }
+        //@ assert s.length() >= 1;
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:18: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= s.length();
+                ^
+2 errors
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ maintaining 1 <= i && i <= s.length();
+            //@ maintaining 1 <= cnt && cnt <= ans;
+            //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        }
+        //@ assert s.length() >= 1;
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:18: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= s.length();
+                ^
+2 errors
+
+class ConsecutiveChar {
+    //@ requires s != null;
+    //@ ensures \result >= 1;
+    public int maxConsecutiveChar(String s) {
+        int ans = 1, cnt = 1;
+        //@ maintaining 1 <= cnt && cnt <= ans;
+        //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        //@ decreases s.length() - i;
+        for (int i = 1; i < s.length(); ++i) {
+            //@ assert ans <= Integer.MAX_VALUE - 1;
+            //@ assert cnt <= Integer.MAX_VALUE - 1;
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                ++cnt;
+                ans = ((ans>cnt)?ans:cnt);
+            } else {
+                cnt = 1;
+            }
+            //@ maintaining 1 <= i && i <= s.length();
+            //@ maintaining 1 <= cnt && cnt <= ans;
+            //@ maintaining (\forall int j; 0 <= j && j < i - cnt; s.charAt(j) != s.charAt(j+1));
+        }
+        //@ assert s.length() >= 1;
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:21: error: illegal start of statement
+        }
+        ^
+/home/max/Documents/JMLGPT/tmp/ConsecutiveChar.java:18: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= s.length();
+                ^
+2 errors
+

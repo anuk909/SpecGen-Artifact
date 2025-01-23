@@ -1,0 +1,26 @@
+public class Main {
+    //@ requires arg != null;
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < arg.length(); arg.charAt(i) == '+');
+    public static boolean f(String arg) {
+
+        String s1 = "some-url+" + arg;
+
+        try {
+            String s2 = java.net.URLDecoder.decode(s1, "UTF-8");
+            //@ assert s2 != null;
+            if (!s2.startsWith("some")) {
+                return false;
+            }
+        } catch (java.io.UnsupportedEncodingException e) {
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/URLDecoder01.java:1: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+1 error
+
+// JML specifications cannot be directly added to the source code. 
+// You can add the generated JML specifications to a separate JML file or use JML annotations in a tool that supports JML, such as ESC/Java or OpenJML.
+

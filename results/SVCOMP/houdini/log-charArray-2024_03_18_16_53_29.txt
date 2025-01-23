@@ -1,0 +1,787 @@
+public class charArray {
+  //@ non_null
+  //@ requires 5 < c.length;
+  //@ requires 5 <= c.length;
+  //@ requires 5 == c.length;
+  //@ requires 5 != c.length;
+  //@ requires 5 >= c.length;
+  //@ requires 5 > c.length;
+  //@ requires 2 < c.length;
+  //@ requires 2 <= c.length;
+  //@ requires 2 == c.length;
+  //@ requires 2 != c.length;
+  //@ requires 2 >= c.length;
+  //@ requires 2 > c.length;
+  //@ requires 1 < c.length;
+  //@ requires 1 <= c.length;
+  //@ requires 1 == c.length;
+  //@ requires 1 != c.length;
+  //@ requires 1 >= c.length;
+  //@ requires 1 > c.length;
+  //@ requires -1 < c.length;
+  //@ requires -1 <= c.length;
+  //@ requires -1 == c.length;
+  //@ requires -1 != c.length;
+  //@ requires -1 >= c.length;
+  //@ requires -1 > c.length;
+  //@ ensures \result != null;
+  //@ ensures 5 < \result.length;
+  //@ ensures 5 <= \result.length;
+  //@ ensures 5 == \result.length;
+  //@ ensures 5 != \result.length;
+  //@ ensures 5 >= \result.length;
+  //@ ensures 5 > \result.length;
+  //@ ensures 2 < \result.length;
+  //@ ensures 2 <= \result.length;
+  //@ ensures 2 == \result.length;
+  //@ ensures 2 != \result.length;
+  //@ ensures 2 >= \result.length;
+  //@ ensures 2 > \result.length;
+  //@ ensures 1 < \result.length;
+  //@ ensures 1 <= \result.length;
+  //@ ensures 1 == \result.length;
+  //@ ensures 1 != \result.length;
+  //@ ensures 1 >= \result.length;
+  //@ ensures 1 > \result.length;
+  //@ ensures -1 < \result.length;
+  //@ ensures -1 <= \result.length;
+  //@ ensures -1 == \result.length;
+  //@ ensures -1 != \result.length;
+  //@ ensures -1 >= \result.length;
+  //@ ensures -1 > \result.length;
+  //@ ensures c.length < \result.length;
+  //@ ensures c.length <= \result.length;
+  //@ ensures c.length == \result.length;
+  //@ ensures c.length != \result.length;
+  //@ ensures c.length >= \result.length;
+  //@ ensures c.length > \result.length;
+  //@ ensures \fresh(\result);
+  //@ ensures c == null ==> \result != null;
+  //@ ensures c != null ==> \result != null;
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+  //@ non_null
+  //@ ensures \result < 5;
+  //@ ensures \result <= 5;
+  //@ ensures \result == 5;
+  //@ ensures \result != 5;
+  //@ ensures \result >= 5;
+  //@ ensures \result > 5;
+  //@ ensures \result < 2;
+  //@ ensures \result <= 2;
+  //@ ensures \result == 2;
+  //@ ensures \result != 2;
+  //@ ensures \result >= 2;
+  //@ ensures \result > 2;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ exsures (java.lang.StringIndexOutOfBoundsException ex) (false);
+  //@ exsures (java.lang.NullPointerException ex) (false);
+  //@ ensures arg == null ==> \result >= 0;
+  //@ ensures arg != null ==> \result >= 0;
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+
+    char[] c1 = {};
+    f(c1);
+    char[] c2 = {'1'};
+    f(c2);
+    char[] c3 = {'1', '2'};
+    f(c3);
+    char[] c4 = {'1', 'c', '$', 'g', 'u'};
+    f(c4);
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:2: error: No modifiers are allowed prior to a lightweight specification case
+  //@ non_null
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:68: error: illegal start of type
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:68: error: <identifier> expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:68: error: ';' expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:68: error: Embedded block comment must terminate within the JML line comment
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:69: error: illegal start of type
+  //@ non_null
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:70: error: ';' expected
+  //@ ensures \result < 5;
+             ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:70: error: Token \result is not a type
+  //@ ensures \result < 5;
+              ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:70: error: ';' expected
+  //@ ensures \result < 5;
+                     ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:70: error: <identifier> expected
+  //@ ensures \result < 5;
+                       ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:70: error: illegal start of type
+  //@ ensures \result < 5;
+                        ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:111: error: illegal start of type
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:111: error: <identifier> expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:111: error: ';' expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:111: error: unclosed comment
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:134: error: reached end of file while parsing
+16 errors
+
+public class charArray {
+  //@ requires 5 < c.length;
+  //@ requires 5 <= c.length;
+  //@ requires 5 == c.length;
+  //@ requires 5 != c.length;
+  //@ requires 5 >= c.length;
+  //@ requires 5 > c.length;
+  //@ requires 2 < c.length;
+  //@ requires 2 <= c.length;
+  //@ requires 2 == c.length;
+  //@ requires 2 != c.length;
+  //@ requires 2 >= c.length;
+  //@ requires 2 > c.length;
+  //@ requires 1 < c.length;
+  //@ requires 1 <= c.length;
+  //@ requires 1 == c.length;
+  //@ requires 1 != c.length;
+  //@ requires 1 >= c.length;
+  //@ requires 1 > c.length;
+  //@ requires -1 < c.length;
+  //@ requires -1 <= c.length;
+  //@ requires -1 == c.length;
+  //@ requires -1 != c.length;
+  //@ requires -1 >= c.length;
+  //@ requires -1 > c.length;
+  //@ ensures \result != null;
+  //@ ensures 5 < \result.length;
+  //@ ensures 5 <= \result.length;
+  //@ ensures 5 == \result.length;
+  //@ ensures 5 != \result.length;
+  //@ ensures 5 >= \result.length;
+  //@ ensures 5 > \result.length;
+  //@ ensures 2 < \result.length;
+  //@ ensures 2 <= \result.length;
+  //@ ensures 2 == \result.length;
+  //@ ensures 2 != \result.length;
+  //@ ensures 2 >= \result.length;
+  //@ ensures 2 > \result.length;
+  //@ ensures 1 < \result.length;
+  //@ ensures 1 <= \result.length;
+  //@ ensures 1 == \result.length;
+  //@ ensures 1 != \result.length;
+  //@ ensures 1 >= \result.length;
+  //@ ensures 1 > \result.length;
+  //@ ensures -1 < \result.length;
+  //@ ensures -1 <= \result.length;
+  //@ ensures -1 == \result.length;
+  //@ ensures -1 != \result.length;
+  //@ ensures -1 >= \result.length;
+  //@ ensures -1 > \result.length;
+  //@ ensures c.length < \result.length;
+  //@ ensures c.length <= \result.length;
+  //@ ensures c.length == \result.length;
+  //@ ensures c.length != \result.length;
+  //@ ensures c.length >= \result.length;
+  //@ ensures c.length > \result.length;
+  //@ ensures \fresh(\result);
+  //@ ensures c == null ==> \result != null;
+  //@ ensures c != null ==> \result != null;
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+  //@ non_null
+  //@ ensures \result < 5;
+  //@ ensures \result <= 5;
+  //@ ensures \result == 5;
+  //@ ensures \result != 5;
+  //@ ensures \result >= 5;
+  //@ ensures \result > 5;
+  //@ ensures \result < 2;
+  //@ ensures \result <= 2;
+  //@ ensures \result == 2;
+  //@ ensures \result != 2;
+  //@ ensures \result >= 2;
+  //@ ensures \result > 2;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ exsures (java.lang.StringIndexOutOfBoundsException ex) (false);
+  //@ exsures (java.lang.NullPointerException ex) (false);
+  //@ ensures arg == null ==> \result >= 0;
+  //@ ensures arg != null ==> \result >= 0;
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+
+    char[] c1 = {};
+    f(c1);
+    char[] c2 = {'1'};
+    f(c2);
+    char[] c3 = {'1', '2'};
+    f(c3);
+    char[] c4 = {'1', 'c', '$', 'g', 'u'};
+    f(c4);
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:67: error: illegal start of type
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:67: error: <identifier> expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:67: error: ';' expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:67: error: Embedded block comment must terminate within the JML line comment
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:68: error: illegal start of type
+  //@ non_null
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:69: error: ';' expected
+  //@ ensures \result < 5;
+             ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:69: error: Token \result is not a type
+  //@ ensures \result < 5;
+              ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:69: error: ';' expected
+  //@ ensures \result < 5;
+                     ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:69: error: <identifier> expected
+  //@ ensures \result < 5;
+                       ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:69: error: illegal start of type
+  //@ ensures \result < 5;
+                        ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:110: error: illegal start of type
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:110: error: <identifier> expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:110: error: ';' expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:110: error: unclosed comment
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:133: error: reached end of file while parsing
+15 errors
+
+public class charArray {
+  //@ requires 5 < c.length;
+  //@ requires 5 <= c.length;
+  //@ requires 5 == c.length;
+  //@ requires 5 != c.length;
+  //@ requires 5 >= c.length;
+  //@ requires 5 > c.length;
+  //@ requires 2 < c.length;
+  //@ requires 2 <= c.length;
+  //@ requires 2 == c.length;
+  //@ requires 2 != c.length;
+  //@ requires 2 >= c.length;
+  //@ requires 2 > c.length;
+  //@ requires 1 < c.length;
+  //@ requires 1 <= c.length;
+  //@ requires 1 == c.length;
+  //@ requires 1 != c.length;
+  //@ requires 1 >= c.length;
+  //@ requires 1 > c.length;
+  //@ requires -1 < c.length;
+  //@ requires -1 <= c.length;
+  //@ requires -1 == c.length;
+  //@ requires -1 != c.length;
+  //@ requires -1 >= c.length;
+  //@ requires -1 > c.length;
+  //@ ensures \result != null;
+  //@ ensures 5 < \result.length;
+  //@ ensures 5 <= \result.length;
+  //@ ensures 5 == \result.length;
+  //@ ensures 5 != \result.length;
+  //@ ensures 5 >= \result.length;
+  //@ ensures 5 > \result.length;
+  //@ ensures 2 < \result.length;
+  //@ ensures 2 <= \result.length;
+  //@ ensures 2 == \result.length;
+  //@ ensures 2 != \result.length;
+  //@ ensures 2 >= \result.length;
+  //@ ensures 2 > \result.length;
+  //@ ensures 1 < \result.length;
+  //@ ensures 1 <= \result.length;
+  //@ ensures 1 == \result.length;
+  //@ ensures 1 != \result.length;
+  //@ ensures 1 >= \result.length;
+  //@ ensures 1 > \result.length;
+  //@ ensures -1 < \result.length;
+  //@ ensures -1 <= \result.length;
+  //@ ensures -1 == \result.length;
+  //@ ensures -1 != \result.length;
+  //@ ensures -1 >= \result.length;
+  //@ ensures -1 > \result.length;
+  //@ ensures c.length < \result.length;
+  //@ ensures c.length <= \result.length;
+  //@ ensures c.length == \result.length;
+  //@ ensures c.length != \result.length;
+  //@ ensures c.length >= \result.length;
+  //@ ensures c.length > \result.length;
+  //@ ensures \fresh(\result);
+  //@ ensures c == null ==> \result != null;
+  //@ ensures c != null ==> \result != null;
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ non_null
+  //@ ensures \result < 5;
+  //@ ensures \result <= 5;
+  //@ ensures \result == 5;
+  //@ ensures \result != 5;
+  //@ ensures \result >= 5;
+  //@ ensures \result > 5;
+  //@ ensures \result < 2;
+  //@ ensures \result <= 2;
+  //@ ensures \result == 2;
+  //@ ensures \result != 2;
+  //@ ensures \result >= 2;
+  //@ ensures \result > 2;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ exsures (java.lang.StringIndexOutOfBoundsException ex) (false);
+  //@ exsures (java.lang.NullPointerException ex) (false);
+  //@ ensures arg == null ==> \result >= 0;
+  //@ ensures arg != null ==> \result >= 0;
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+
+    char[] c1 = {};
+    f(c1);
+    char[] c2 = {'1'};
+    f(c2);
+    char[] c3 = {'1', '2'};
+    f(c3);
+    char[] c4 = {'1', 'c', '$', 'g', 'u'};
+    f(c4);
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:67: error: No modifiers are allowed prior to a lightweight specification case
+  //@ non_null
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:109: error: illegal start of type
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:109: error: <identifier> expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:109: error: ';' expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:109: error: unclosed comment
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:132: error: reached end of file while parsing
+6 errors
+
+public class charArray {
+  //@ requires 5 < c.length;
+  //@ requires 5 <= c.length;
+  //@ requires 5 == c.length;
+  //@ requires 5 != c.length;
+  //@ requires 5 >= c.length;
+  //@ requires 5 > c.length;
+  //@ requires 2 < c.length;
+  //@ requires 2 <= c.length;
+  //@ requires 2 == c.length;
+  //@ requires 2 != c.length;
+  //@ requires 2 >= c.length;
+  //@ requires 2 > c.length;
+  //@ requires 1 < c.length;
+  //@ requires 1 <= c.length;
+  //@ requires 1 == c.length;
+  //@ requires 1 != c.length;
+  //@ requires 1 >= c.length;
+  //@ requires 1 > c.length;
+  //@ requires -1 < c.length;
+  //@ requires -1 <= c.length;
+  //@ requires -1 == c.length;
+  //@ requires -1 != c.length;
+  //@ requires -1 >= c.length;
+  //@ requires -1 > c.length;
+  //@ ensures \result != null;
+  //@ ensures 5 < \result.length;
+  //@ ensures 5 <= \result.length;
+  //@ ensures 5 == \result.length;
+  //@ ensures 5 != \result.length;
+  //@ ensures 5 >= \result.length;
+  //@ ensures 5 > \result.length;
+  //@ ensures 2 < \result.length;
+  //@ ensures 2 <= \result.length;
+  //@ ensures 2 == \result.length;
+  //@ ensures 2 != \result.length;
+  //@ ensures 2 >= \result.length;
+  //@ ensures 2 > \result.length;
+  //@ ensures 1 < \result.length;
+  //@ ensures 1 <= \result.length;
+  //@ ensures 1 == \result.length;
+  //@ ensures 1 != \result.length;
+  //@ ensures 1 >= \result.length;
+  //@ ensures 1 > \result.length;
+  //@ ensures -1 < \result.length;
+  //@ ensures -1 <= \result.length;
+  //@ ensures -1 == \result.length;
+  //@ ensures -1 != \result.length;
+  //@ ensures -1 >= \result.length;
+  //@ ensures -1 > \result.length;
+  //@ ensures c.length < \result.length;
+  //@ ensures c.length <= \result.length;
+  //@ ensures c.length == \result.length;
+  //@ ensures c.length != \result.length;
+  //@ ensures c.length >= \result.length;
+  //@ ensures c.length > \result.length;
+  //@ ensures \fresh(\result);
+  //@ ensures c == null ==> \result != null;
+  //@ ensures c != null ==> \result != null;
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ ensures \result < 5;
+  //@ ensures \result <= 5;
+  //@ ensures \result == 5;
+  //@ ensures \result != 5;
+  //@ ensures \result >= 5;
+  //@ ensures \result > 5;
+  //@ ensures \result < 2;
+  //@ ensures \result <= 2;
+  //@ ensures \result == 2;
+  //@ ensures \result != 2;
+  //@ ensures \result >= 2;
+  //@ ensures \result > 2;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ exsures (java.lang.StringIndexOutOfBoundsException ex) (false);
+  //@ exsures (java.lang.NullPointerException ex) (false);
+  //@ ensures arg == null ==> \result >= 0;
+  //@ ensures arg != null ==> \result >= 0;
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+
+    char[] c1 = {};
+    f(c1);
+    char[] c2 = {'1'};
+    f(c2);
+    char[] c3 = {'1', '2'};
+    f(c3);
+    char[] c4 = {'1', 'c', '$', 'g', 'u'};
+    f(c4);
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:108: error: illegal start of type
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:108: error: <identifier> expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:108: error: ';' expected
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:108: error: unclosed comment
+  //@ */ throws java.lang.StringIndexOutOfBoundsException, java.lang.NullPointerException /* Houdini inferred exceptions
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:131: error: reached end of file while parsing
+5 errors
+
+public class charArray {
+  //@ requires 5 < c.length;
+  //@ requires 5 <= c.length;
+  //@ requires 5 == c.length;
+  //@ requires 5 != c.length;
+  //@ requires 5 >= c.length;
+  //@ requires 5 > c.length;
+  //@ requires 2 < c.length;
+  //@ requires 2 <= c.length;
+  //@ requires 2 == c.length;
+  //@ requires 2 != c.length;
+  //@ requires 2 >= c.length;
+  //@ requires 2 > c.length;
+  //@ requires 1 < c.length;
+  //@ requires 1 <= c.length;
+  //@ requires 1 == c.length;
+  //@ requires 1 != c.length;
+  //@ requires 1 >= c.length;
+  //@ requires 1 > c.length;
+  //@ requires -1 < c.length;
+  //@ requires -1 <= c.length;
+  //@ requires -1 == c.length;
+  //@ requires -1 != c.length;
+  //@ requires -1 >= c.length;
+  //@ requires -1 > c.length;
+  //@ ensures \result != null;
+  //@ ensures 5 < \result.length;
+  //@ ensures 5 <= \result.length;
+  //@ ensures 5 == \result.length;
+  //@ ensures 5 != \result.length;
+  //@ ensures 5 >= \result.length;
+  //@ ensures 5 > \result.length;
+  //@ ensures 2 < \result.length;
+  //@ ensures 2 <= \result.length;
+  //@ ensures 2 == \result.length;
+  //@ ensures 2 != \result.length;
+  //@ ensures 2 >= \result.length;
+  //@ ensures 2 > \result.length;
+  //@ ensures 1 < \result.length;
+  //@ ensures 1 <= \result.length;
+  //@ ensures 1 == \result.length;
+  //@ ensures 1 != \result.length;
+  //@ ensures 1 >= \result.length;
+  //@ ensures 1 > \result.length;
+  //@ ensures -1 < \result.length;
+  //@ ensures -1 <= \result.length;
+  //@ ensures -1 == \result.length;
+  //@ ensures -1 != \result.length;
+  //@ ensures -1 >= \result.length;
+  //@ ensures -1 > \result.length;
+  //@ ensures c.length < \result.length;
+  //@ ensures c.length <= \result.length;
+  //@ ensures c.length == \result.length;
+  //@ ensures c.length != \result.length;
+  //@ ensures c.length >= \result.length;
+  //@ ensures c.length > \result.length;
+  //@ ensures \fresh(\result);
+  //@ ensures c == null ==> \result != null;
+  //@ ensures c != null ==> \result != null;
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ ensures \result < 5;
+  //@ ensures \result <= 5;
+  //@ ensures \result == 5;
+  //@ ensures \result != 5;
+  //@ ensures \result >= 5;
+  //@ ensures \result > 5;
+  //@ ensures \result < 2;
+  //@ ensures \result <= 2;
+  //@ ensures \result == 2;
+  //@ ensures \result != 2;
+  //@ ensures \result >= 2;
+  //@ ensures \result > 2;
+  //@ ensures \result < 1;
+  //@ ensures \result <= 1;
+  //@ ensures \result == 1;
+  //@ ensures \result != 1;
+  //@ ensures \result >= 1;
+  //@ ensures \result > 1;
+  //@ ensures \result < 0;
+  //@ ensures \result <= 0;
+  //@ ensures \result == 0;
+  //@ ensures \result != 0;
+  //@ ensures \result >= 0;
+  //@ ensures \result > 0;
+  //@ ensures \result < -1;
+  //@ ensures \result <= -1;
+  //@ ensures \result == -1;
+  //@ ensures \result != -1;
+  //@ ensures \result >= -1;
+  //@ ensures \result > -1;
+  //@ exsures (java.lang.StringIndexOutOfBoundsException ex) (false);
+  //@ exsures (java.lang.NullPointerException ex) (false);
+  //@ ensures arg == null ==> \result >= 0;
+  //@ ensures arg != null ==> \result >= 0;
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    fun("a");
+    fun("abcde");
+
+    fun("146");
+    fun("32189");
+
+    fun("@eg^");
+    fun("re^&u9");
+
+    char[] c1 = {};
+    f(c1);
+    char[] c2 = {'1'};
+    f(c2);
+    char[] c3 = {'1', '2'};
+    f(c3);
+    char[] c4 = {'1', 'c', '$', 'g', 'u'};
+    f(c4);
+  }
+}
+
+
+OpenJML not responding. Aborted.

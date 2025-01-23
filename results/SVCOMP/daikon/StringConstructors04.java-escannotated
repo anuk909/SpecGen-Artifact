@@ -1,0 +1,20 @@
+public class StringConstructors04 {
+  /*@ ensures (\result == true)  ==>  (\old(arg) != null); */
+  public static boolean f(String arg) {
+    char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+    String s4 = new String(charArray, 4, 4);
+    return s4.equals(arg);
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("Happy  at");
+    f("");
+    f("diffblue");
+    f("blue");
+    f("diff");
+  }
+}

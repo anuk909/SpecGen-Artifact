@@ -1,0 +1,512 @@
+public class WBS {
+
+  // Internal state
+  private int WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+  private int WBS_Node_WBS_BSCU_rlt_PRE1;
+  private int WBS_Node_WBS_rlt_PRE2;
+
+  // Outputs
+  public int Nor_Pressure;
+  public int Alt_Pressure;
+  public int Sys_Mode;
+
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0 && WBS_Node_WBS_BSCU_rlt_PRE1 == 0 && WBS_Node_WBS_rlt_PRE2 == 100 && Nor_Pressure == 0 && Alt_Pressure == 0 && Sys_Mode == 0;
+  public WBS() {
+    WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = 0;
+    WBS_Node_WBS_BSCU_rlt_PRE1 = 0;
+    WBS_Node_WBS_rlt_PRE2 = 100;
+    Nor_Pressure = 0;
+    Alt_Pressure = 0;
+    Sys_Mode = 0;
+  }
+
+  //@ requires 0 <= PedalPos && PedalPos <= 4;
+  //@ requires \result == 0 ==> PedalPos == 0;
+  //@ requires \result == 1 ==> PedalPos == 1;
+  //@ requires \result == 2 ==> PedalPos == 2;
+  //@ requires \result == 3 ==> PedalPos == 3;
+  //@ requires \result == 4 ==> PedalPos == 4;
+  //@ ensures \result == 0 || \result == 1 || \result == 2 || \result == 3 || \result == 4;
+  //@ ensures \result == 0 ==> PedalPos == 0;
+  //@ ensures \result == 1 ==> PedalPos == 1;
+  //@ ensures \result == 2 ==> PedalPos == 2;
+  //@ ensures \result == 3 ==> PedalPos == 3;
+  //@ ensures \result == 4 ==> PedalPos == 4;
+  public int mapPedalPos(int PedalPos) {
+    if (PedalPos == 0) {
+      return 0;
+    } else if (PedalPos == 1) {
+      return 1;
+    } else if (PedalPos == 2) {
+      return 2;
+    } else if (PedalPos == 3) {
+      return 3;
+    } else if (PedalPos == 4) {
+      return 4;
+    } else {
+      return 0;
+    }
+  }
+
+  //@ requires PedalPos == 0 || PedalPos == 1 || PedalPos == 2 || PedalPos == 3 || PedalPos == 4;
+  //@ requires AutoBrake == true || AutoBrake == false;
+  //@ ensures WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == mapPedalPos(PedalPos);
+  //@ ensures WBS_Node_WBS_BSCU_Command_Switch == (AutoBrake && (WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay == 0)) ? 1 : 0;
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+  //@ ensures WBS_Node_WBS_BSCU_Switch3 == (WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 && Skid) ? 0 : 4;
+  //@ ensures WBS_Node_WBS_Green_Pump_IsolationValve_Switch == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 0 : 5;
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch1 == (WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1) ? 0 : 5;
+  //@ ensures WBS_Node_WBS_AccumulatorValve_Switch == (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+  //@ ensures WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch == Skid ? 0 : (WBS_Node_WBS_BSCU_Command_Switch + WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1);
+  //@ ensures Sys_Mode == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 1 : 0;
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : 0;
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+  public void update(int PedalPos, boolean AutoBrake, boolean Skid) {
+    int WBS_Node_WBS_AS_MeterValve_Switch; // 4
+    int WBS_Node_WBS_AccumulatorValve_Switch; // 5
+    int WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch; // 6
+    boolean WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator; // 7
+    int WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1; // 8
+    int WBS_Node_WBS_BSCU_Command_Switch; // 9
+    boolean WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6; // 10
+    int WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay; // 11
+    int WBS_Node_WBS_BSCU_Switch2; // 12
+    int WBS_Node_WBS_BSCU_Switch3; // 13
+    int WBS_Node_WBS_BSCU_Unit_Delay1; // 14
+    int WBS_Node_WBS_Green_Pump_IsolationValve_Switch; // 15
+    int WBS_Node_WBS_SelectorValve_Switch; // 16
+    int WBS_Node_WBS_SelectorValve_Switch1; // 17
+    int WBS_Node_WBS_Unit_Delay2; // 18
+
+    WBS_Node_WBS_Unit_Delay2 = WBS_Node_WBS_rlt_PRE2;
+    WBS_Node_WBS_BSCU_Unit_Delay1 = WBS_Node_WBS_BSCU_rlt_PRE1;
+    WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay = WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE;
+
+    WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator =
+        (WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay == 0);
+
+    WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 = mapPedalPos(PedalPos);
+
+    WBS_Node_WBS_BSCU_Command_Switch = (AutoBrake && WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator) ? 1 : 0;
+
+    WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 =
+        (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0)) && (WBS_Node_WBS_Unit_Delay2 <= 0)
+                && WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)
+            || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+
+    WBS_Node_WBS_BSCU_Switch3 = (WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 && Skid) ? 0 : 4;
+
+    WBS_Node_WBS_Green_Pump_IsolationValve_Switch = WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 0 : 5;
+
+    WBS_Node_WBS_SelectorValve_Switch1 = (WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1) ? 0 : 5;
+
+    WBS_Node_WBS_AccumulatorValve_Switch = (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+
+    WBS_Node_WBS_AS_MeterValve_Switch = (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+
+    WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch = Skid ? 0 : (WBS_Node_WBS_BSCU_Command_Switch + WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1);
+
+    Sys_Mode = WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 1 : 0;
+
+    WBS_Node_WBS_BSCU_Switch2 = WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+
+    WBS_Node_WBS_SelectorValve_Switch = WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : 0;
+
+    Nor_Pressure = (WBS_Node_WBS_BSCU_Switch2 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+
+    Alt_Pressure = (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0) ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+
+    WBS_Node_WBS_rlt_PRE2 = Nor_Pressure;
+
+    WBS_Node_WBS_BSCU_rlt_PRE1 = WBS_Node_WBS_BSCU_Switch2;
+
+    WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE = Sys_Mode;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/WBS.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0 && WBS_Node_WBS_BSCU_rlt_PRE1 == 0 && WBS_Node_WBS_rlt_PRE2 == 100 && Nor_Pressure == 0 && Alt_Pressure == 0 && Sys_Mode == 0;
+              ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0 && WBS_Node_WBS_BSCU_rlt_PRE1 == 0 && WBS_Node_WBS_rlt_PRE2 == 100 && Nor_Pressure == 0 && Alt_Pressure == 0 && Sys_Mode == 0;
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_rlt_PRE == 0 && WBS_Node_WBS_BSCU_rlt_PRE1 == 0 && WBS_Node_WBS_rlt_PRE2 == 100 && Nor_Pressure == 0 && Alt_Pressure == 0 && Sys_Mode == 0;
+                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:24: error: A \result expression may not be in a requires clause
+  //@ requires \result == 0 ==> PedalPos == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:25: error: A \result expression may not be in a requires clause
+  //@ requires \result == 1 ==> PedalPos == 1;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:26: error: A \result expression may not be in a requires clause
+  //@ requires \result == 2 ==> PedalPos == 2;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:27: error: A \result expression may not be in a requires clause
+  //@ requires \result == 3 ==> PedalPos == 3;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:28: error: A \result expression may not be in a requires clause
+  //@ requires \result == 4 ==> PedalPos == 4;
+                ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:53: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == mapPedalPos(PedalPos);
+              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:54: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Command_Switch == (AutoBrake && (WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay == 0)) ? 1 : 0;
+              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:54: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Command_Switch == (AutoBrake && (WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay == 0)) ? 1 : 0;
+                                                                 ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:54: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_BSCU_Command_Switch == (AutoBrake && (WBS_Node_WBS_BSCU_SystemModeSelCmd_Unit_Delay == 0)) ? 1 : 0;
+                                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:55: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+              ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:55: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Unit_Delay1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:55: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+                                                                                                                  ^
+  symbol:   variable WBS_Node_WBS_Unit_Delay2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:55: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+                                                                                                                                                     ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:55: error: illegal parenthesized expression
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+                                                                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:55: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 == (((!(WBS_Node_WBS_BSCU_Unit_Delay1 == 0) && WBS_Node_WBS_Unit_Delay2 <= 0) && (WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator)) || (!WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator));
+                                                                                                                                                                                                                    ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_Is_Normal_Relational_Operator
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:56: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch3 == (WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 && Skid) ? 0 : 4;
+              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch3
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:56: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch3 == (WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 && Skid) ? 0 : 4;
+                                            ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:56: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_BSCU_Switch3 == (WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 && Skid) ? 0 : 4;
+                                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:57: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_Green_Pump_IsolationValve_Switch == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 0 : 5;
+              ^
+  symbol:   variable WBS_Node_WBS_Green_Pump_IsolationValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:57: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_Green_Pump_IsolationValve_Switch == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 0 : 5;
+                                                               ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:57: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_Green_Pump_IsolationValve_Switch == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 0 : 5;
+                                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:58: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch1 == (WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1) ? 0 : 5;
+              ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:58: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch1 == (WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1) ? 0 : 5;
+                                                     ^
+  symbol:   variable WBS_Node_WBS_Green_Pump_IsolationValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:58: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch1 == (WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1) ? 0 : 5;
+                                                                                                         ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:59: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AccumulatorValve_Switch == (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+              ^
+  symbol:   variable WBS_Node_WBS_AccumulatorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:59: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AccumulatorValve_Switch == (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+                                                        ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:59: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AccumulatorValve_Switch == (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+                                                                                                                     ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:59: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AccumulatorValve_Switch == (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+                                                                                                                                                                ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:59: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_AccumulatorValve_Switch == (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_SelectorValve_Switch1 >= 1) ? WBS_Node_WBS_SelectorValve_Switch1 : 5;
+                                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+              ^
+  symbol:   variable WBS_Node_WBS_AS_MeterValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                    ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch3
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch3
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                              ^
+  symbol:   variable WBS_Node_WBS_AccumulatorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch3
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                                                                                                              ^
+  symbol:   variable WBS_Node_WBS_AccumulatorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                                                                                                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch3
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                                                                                                                                                                                               ^
+  symbol:   variable WBS_Node_WBS_AccumulatorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                                                 ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch3
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                                                                                   ^
+  symbol:   variable WBS_Node_WBS_AccumulatorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:60: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_AS_MeterValve_Switch == (WBS_Node_WBS_BSCU_Switch3 == 0) ? 0 : (WBS_Node_WBS_BSCU_Switch3 == 1) ? (WBS_Node_WBS_AccumulatorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch3 == 2) ? (WBS_Node_WBS_AccumulatorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch3 == 3) ? ((WBS_Node_WBS_AccumulatorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch3 == 4) ? WBS_Node_WBS_AccumulatorValve_Switch : 0;
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:61: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch == Skid ? 0 : (WBS_Node_WBS_BSCU_Command_Switch + WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1);
+              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:61: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch == Skid ? 0 : (WBS_Node_WBS_BSCU_Command_Switch + WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1);
+                                                                                     ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:61: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch == Skid ? 0 : (WBS_Node_WBS_BSCU_Command_Switch + WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1);
+                                                                                                                        ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:61: error: incompatible types: int cannot be converted to boolean
+  //@ ensures WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch == Skid ? 0 : (WBS_Node_WBS_BSCU_Command_Switch + WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:62: error: cannot find symbol
+  //@ ensures Sys_Mode == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 1 : 0;
+                          ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:62: error: incompatible types: int cannot be converted to boolean
+  //@ ensures Sys_Mode == WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6 ? 1 : 0;
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                           ^
+  symbol:   variable WBS_Node_WBS_Green_Pump_IsolationValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                ^
+  symbol:   variable WBS_Node_WBS_Green_Pump_IsolationValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                  ^
+  symbol:   variable WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                               ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                               ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                                                                                                   ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                                                                                                                                                                   ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:63: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_BSCU_Switch2 == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : (!WBS_Node_WBS_BSCU_SystemModeSelCmd_Logical_Operator6) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 0 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 1) ? 0 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 1 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 2) ? 1 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 2 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 3) ? 2 : (WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch >= 3 && WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch < 4) ? 3 : 4;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_AntiSkidCommand_Normal_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:64: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : 0;
+              ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:64: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : 0;
+                                                   ^
+  symbol:   variable WBS_Node_WBS_Green_Pump_IsolationValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:64: error: cannot find symbol
+  //@ ensures WBS_Node_WBS_SelectorValve_Switch == WBS_Node_WBS_Green_Pump_IsolationValve_Switch >= 1 ? WBS_Node_WBS_Green_Pump_IsolationValve_Switch : 0;
+                                                                                                        ^
+  symbol:   variable WBS_Node_WBS_Green_Pump_IsolationValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                    ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                       ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                                                                 ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                                                                                                    ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                                                                                                                                              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                                                                                                                                                                                  ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                 ^
+  symbol:   variable WBS_Node_WBS_BSCU_Switch2
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: cannot find symbol
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                                                   ^
+  symbol:   variable WBS_Node_WBS_SelectorValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:65: error: incompatible types: int cannot be converted to boolean
+  //@ ensures Nor_Pressure == WBS_Node_WBS_BSCU_Switch2 == 0 ? 0 : (WBS_Node_WBS_BSCU_Switch2 == 1) ? (WBS_Node_WBS_SelectorValve_Switch / 4) : (WBS_Node_WBS_BSCU_Switch2 == 2) ? (WBS_Node_WBS_SelectorValve_Switch / 2) : (WBS_Node_WBS_BSCU_Switch2 == 3) ? ((WBS_Node_WBS_SelectorValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Switch2 == 4) ? WBS_Node_WBS_SelectorValve_Switch : 0;
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                              ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                         ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                 ^
+  symbol:   variable WBS_Node_WBS_AS_MeterValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                                                           ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                                                                                                                   ^
+  symbol:   variable WBS_Node_WBS_AS_MeterValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                                                                                                                                                             ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                                                      ^
+  symbol:   variable WBS_Node_WBS_AS_MeterValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                     ^
+  symbol:   variable WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: cannot find symbol
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^
+  symbol:   variable WBS_Node_WBS_AS_MeterValve_Switch
+  location: class WBS
+/home/max/Documents/JMLGPT/tmp/WBS.java:66: error: incompatible types: int cannot be converted to boolean
+  //@ ensures Alt_Pressure == WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 0 ? 0 : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 1) ? (WBS_Node_WBS_AS_MeterValve_Switch / 4) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 2) ? (WBS_Node_WBS_AS_MeterValve_Switch / 2) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 3) ? ((WBS_Node_WBS_AS_MeterValve_Switch / 4) * 3) : (WBS_Node_WBS_BSCU_Command_PedalCommand_Switch1 == 4) ? WBS_Node_WBS_AS_MeterValve_Switch : 0;
+                                                                                  ^
+84 errors
+

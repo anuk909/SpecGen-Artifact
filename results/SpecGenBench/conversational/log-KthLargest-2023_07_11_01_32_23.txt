@@ -1,0 +1,1239 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    PriorityQueue<Integer> pq;
+    int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq != null;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+    //@ public invariant k > 0;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq.size() <= k;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq.size() <= k;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq != null;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:13: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures this.k == k;
+                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:14: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:24: error: An identifier with package visibility may not be used in a requires clause with public visibility
+    //@ requires pq != null;
+                 ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:25: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:25: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                             ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:26: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:26: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                ^
+16 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ spec_public non_null PriorityQueue<Integer> pq;
+    //@ spec_public int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    PriorityQueue<Integer> pq;
+    int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    PriorityQueue<Integer> pq;
+                           ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    int k;
+        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ spec_public non_null PriorityQueue<Integer> pq;
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ spec_public int k;
+                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: error: cannot find symbol
+        this.k = k;
+            ^
+  symbol: variable k
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:21: error: cannot find symbol
+        pq = new PriorityQueue<Integer>();
+        ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:31: error: cannot find symbol
+        pq.offer(val);
+        ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:32: error: cannot find symbol
+        if (pq.size() > k) {
+            ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:32: error: cannot find symbol
+        if (pq.size() > k) {
+                        ^
+  symbol:   variable k
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:33: error: cannot find symbol
+            pq.poll();
+            ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:35: error: cannot find symbol
+        return pq.peek();
+               ^
+  symbol:   variable pq
+  location: class KthLargest
+11 errors
+
+java
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    PriorityQueue<Integer> pq;
+    int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:1: error: class, interface, enum, or record expected
+java
+^
+1 error
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    PriorityQueue<Integer> pq;
+    int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    PriorityQueue<Integer> pq;
+                           ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    int k;
+        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: error: cannot find symbol
+        this.k = k;
+            ^
+  symbol: variable k
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:21: error: cannot find symbol
+        pq = new PriorityQueue<Integer>();
+        ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:31: error: cannot find symbol
+        pq.offer(val);
+        ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:32: error: cannot find symbol
+        if (pq.size() > k) {
+            ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:32: error: cannot find symbol
+        if (pq.size() > k) {
+                        ^
+  symbol:   variable k
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:33: error: cannot find symbol
+            pq.poll();
+            ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:35: error: cannot find symbol
+        return pq.peek();
+               ^
+  symbol:   variable pq
+  location: class KthLargest
+11 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    PriorityQueue<Integer> pq;
+    int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        this.pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    PriorityQueue<Integer> pq;
+                           ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    int k;
+        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:20: error: cannot find symbol
+        this.k = k;
+            ^
+  symbol: variable k
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:21: error: cannot find symbol
+        this.pq = new PriorityQueue<Integer>();
+            ^
+  symbol: variable pq
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:31: error: cannot find symbol
+        pq.offer(val);
+        ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:32: error: cannot find symbol
+        if (pq.size() > k) {
+            ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:32: error: cannot find symbol
+        if (pq.size() > k) {
+                        ^
+  symbol:   variable k
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:33: error: cannot find symbol
+            pq.poll();
+            ^
+  symbol:   variable pq
+  location: class KthLargest
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:35: error: cannot find symbol
+        return pq.peek();
+               ^
+  symbol:   variable pq
+  location: class KthLargest
+11 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private PriorityQueue<Integer> pq;
+    private int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private PriorityQueue<Integer> pq;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private int k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq != null;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:8: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant k > 0;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:9: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq.size() <= k;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:9: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq.size() <= k;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:10: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:10: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq != null;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures this.k == k;
+                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:27: error: An identifier with private visibility may not be used in a requires clause with public visibility
+    //@ requires pq != null;
+                 ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                             ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:29: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:29: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                ^
+20 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ spec_public instance non_null PriorityQueue<Integer> pq;
+    //@ spec_public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private PriorityQueue<Integer> pq;
+    private int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private PriorityQueue<Integer> pq;
+                                   ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private int k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ spec_public instance non_null PriorityQueue<Integer> pq;
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ spec_public instance int k;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq != null;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:8: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant k > 0;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:9: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq.size() <= k;
+                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:9: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant pq.size() <= k;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:10: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:10: error: An identifier with private visibility may not be used in a invariant clause with public visibility
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:15: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq != null;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures this.k == k;
+                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() == 0;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:27: error: An identifier with private visibility may not be used in a requires clause with public visibility
+    //@ requires pq != null;
+                 ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures pq.size() <= k;
+                             ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:29: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:29: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+                                                ^
+20 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ spec_public instance non_null PriorityQueue<Integer> pq;
+    //@ spec_public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ spec_public instance non_null PriorityQueue<Integer> pq;
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ spec_public instance int k;
+                                 ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+3 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+    //@ public instance int k;
+    
+    //@ public invariant priorityQueue != null;
+    //@ public invariant k > 0;
+    //@ public invariant priorityQueue.size() <= k;
+    //@ public invariant (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures priorityQueue != null;
+    //@ ensures this.k == k;
+    //@ ensures priorityQueue.size() == 0;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable priorityQueue is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.priorityQueue
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+    //@ public instance int k;
+    
+    //@ public invariant priorityQueue != null;
+    //@ public invariant k > 0;
+    //@ public invariant priorityQueue.size() <= k;
+    //@ public invariant (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures priorityQueue != null;
+    //@ ensures this.k == k;
+    //@ ensures priorityQueue.size() == 0;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable priorityQueue is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.priorityQueue
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+    //@ public instance int k;
+    
+    //@ public invariant priorityQueue != null;
+    //@ public invariant k > 0;
+    //@ public invariant priorityQueue.size() <= k;
+    //@ public invariant (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures priorityQueue != null;
+    //@ ensures this.k == k;
+    //@ ensures priorityQueue.size() == 0;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable priorityQueue is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.priorityQueue
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+    //@ public instance int k;
+    
+    //@ public invariant priorityQueue != null;
+    //@ public invariant k > 0;
+    //@ public invariant priorityQueue.size() <= k;
+    //@ public invariant (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures priorityQueue != null;
+    //@ ensures this.k == k;
+    //@ ensures priorityQueue.size() == 0;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable priorityQueue is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.priorityQueue
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+    //@ public instance int k;
+    
+    //@ public invariant priorityQueue != null;
+    //@ public invariant k > 0;
+    //@ public invariant priorityQueue.size() <= k;
+    //@ public invariant (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures priorityQueue != null;
+    //@ ensures this.k == k;
+    //@ ensures priorityQueue.size() == 0;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable priorityQueue is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.priorityQueue
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> pq;
+    //@ public instance int k;
+    
+    //@ public invariant pq != null;
+    //@ public invariant k > 0;
+    //@ public invariant pq.size() <= k;
+    //@ public invariant (\forall int x; pq.contains(x); pq.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures pq != null;
+    //@ ensures this.k == k;
+    //@ ensures pq.size() == 0;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        pq = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires pq != null;
+    //@ ensures pq.size() <= k;
+    //@ ensures (\forall int x; pq.contains(x); pq.peek() <= x);
+    public int add(int val) {
+        pq.offer(val);
+        if (pq.size() > k) {
+            pq.poll();
+        }
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable pq is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> pq;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.pq
+    //@ public instance non_null PriorityQueue<Integer> pq;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+    //@ public instance int k;
+    
+    //@ public invariant priorityQueue != null;
+    //@ public invariant k > 0;
+    //@ public invariant priorityQueue.size() <= k;
+    //@ public invariant (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+    private /*@ spec_public @*/ int k;
+
+    //@ requires k > 0;
+    //@ ensures priorityQueue != null;
+    //@ ensures this.k == k;
+    //@ ensures priorityQueue.size() == 0;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        priorityQueue = new PriorityQueue<Integer>();
+        for (int x : nums) {
+            add(x);
+        }
+    }
+    
+    //@ requires priorityQueue != null;
+    //@ ensures priorityQueue.size() <= k;
+    //@ ensures (\forall int x; priorityQueue.contains(x); priorityQueue.peek() <= x);
+    public int add(int val) {
+        priorityQueue.offer(val);
+        if (priorityQueue.size() > k) {
+            priorityQueue.poll();
+        }
+        return priorityQueue.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:11: error: variable priorityQueue is already defined in class KthLargest
+    private /*@ spec_public @*/ PriorityQueue<Integer> priorityQueue;
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: error: variable k is already defined in class KthLargest
+    private /*@ spec_public @*/ int k;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:4: error: A declaration within a JML annotation must be either ghost or model: KthLargest.priorityQueue
+    //@ public instance non_null PriorityQueue<Integer> priorityQueue;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:5: error: A declaration within a JML annotation must be either ghost or model: KthLargest.k
+    //@ public instance int k;
+                            ^
+4 errors
+

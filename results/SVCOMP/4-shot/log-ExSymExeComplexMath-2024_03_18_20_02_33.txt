@@ -1,0 +1,90 @@
+class Main {
+  static /*@ spec_public*/ int field;
+
+  //@ ensures \result ==> field == 9 && \result == test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ ensures \result <==> Math.round(in) > 16.0;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else
+      System.out.println("do2()");
+    return true;
+  }
+
+  //@ ensures x1 == x && y1 == y;
+  //@ ensures (x == 0 && y != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> 1"));
+  //@ ensures (x != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> LOOK!") && (x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???")) && (x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1")));
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> field == 9 && \result == test2(0.0);
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:21: error: cannot find symbol
+  //@ ensures x1 == x && y1 == y;
+                    ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:21: error: cannot find symbol
+  //@ ensures x1 == x && y1 == y;
+                               ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:22: error: cannot find symbol
+  //@ ensures (x == 0 && y != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> 1"));
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:22: error: cannot find symbol
+  //@ ensures (x == 0 && y != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> 1"));
+                         ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:22: error: cannot find symbol
+  //@ ensures (x == 0 && y != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> 1"));
+                                                                   ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:22: error: 'void' type not allowed here
+  //@ ensures (x == 0 && y != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> 1"));
+                                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: cannot find symbol
+  //@ ensures (x != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> LOOK!") && (x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???")) && (x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1")));
+               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: cannot find symbol
+  //@ ensures (x != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> LOOK!") && (x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???")) && (x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1")));
+                                                         ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: 'void' type not allowed here
+  //@ ensures (x != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> LOOK!") && (x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???")) && (x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1")));
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> LOOK!") && (x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???")) && (x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1")));
+                                                                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x != 0) ==> (\exists double x; x == x1 && y == y1 && System.out.println(">>>>>>>>>>>> LOOK!") && (x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???")) && (x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1")));
+                                                                                                                                                                                                      ^
+12 errors
+

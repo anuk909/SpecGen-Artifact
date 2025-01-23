@@ -1,0 +1,154 @@
+class Environment {
+
+  public enum WaterLevelEnum {
+    low,
+    normal,
+    high
+  }
+
+  /*@ spec_public */ private WaterLevelEnum waterLevel = WaterLevelEnum.normal;
+
+  /*@ spec_public */ private boolean methaneLevelCritical = false;
+
+  /*@ modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  void lowerWaterLevel() {
+    switch (waterLevel) {
+      case high:
+        waterLevel = WaterLevelEnum.normal;
+        break;
+      case normal:
+        waterLevel = WaterLevelEnum.low;
+        break;
+    }
+  }
+
+  /*@ modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  public void waterRise() {
+    switch (waterLevel) {
+      case low:
+        waterLevel = WaterLevelEnum.normal;
+        break;
+      case normal:
+        waterLevel = WaterLevelEnum.high;
+        break;
+    }
+  }
+
+  /*@ modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  public void changeMethaneLevel() {
+    methaneLevelCritical = !methaneLevelCritical;
+  }
+
+  /*@ modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  public boolean isMethaneLevelCritical() {
+    return methaneLevelCritical;
+  }
+
+  /*@ also_modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  @Override
+  public String toString() {
+    return "Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")";
+  }
+
+  /*@ modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  public WaterLevelEnum getWaterLevel() {
+    return waterLevel;
+  }
+}
+
+public class MinePump {
+
+  /*@ spec_public */ boolean pumpRunning = false;
+
+  /*@ spec_public */ boolean systemActive = true;
+
+  /*@ spec_public */ Environment env;
+
+  /*@ modifies Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], env.waterLevel, env.methaneLevelCritical; */
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  private void processEnvironment__wrappee__base() {}
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  void activatePump() {
+    pumpRunning = true;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public boolean isPumpRunning() {
+    return pumpRunning;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  /*@ also_modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public Environment getEnv() {
+    return env;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  /*@ modifies this.pumpRunning, this.systemActive, this.env, this.env.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.env.methaneLevelCritical, MinePump.$assertionsDisabled; */
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+
+  }
+}

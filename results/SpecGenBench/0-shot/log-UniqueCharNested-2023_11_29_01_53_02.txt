@@ -1,0 +1,31 @@
+public class UniqueCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result >= -1 && \result < s.length();
+    public static int uniqueChar(String s) {
+        //@ loop_invariant 0 <= i && i <= s.length();
+        //@ loop_invariant (\forall int k; 0 <= k < i; (\forall int j; i <= j < s.length(); s.charAt(k) != s.charAt(j)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            int j;
+            //@ loop_invariant i + 1 <= j && j <= s.length();
+            //@ loop_invariant (\forall int k; i <= k < j; s.charAt(k) != c1);
+            //@ decreases s.length() - j;
+            for (j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    break;
+            }
+            if(j == s.length())
+                return i;
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method uniqueChar
+            //@ loop_invariant (\forall int k; i <= k < j; s.charAt(k) != c1);
+                ^
+1 verification failure
+

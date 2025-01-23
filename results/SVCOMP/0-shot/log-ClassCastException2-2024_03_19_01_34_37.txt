@@ -1,0 +1,26 @@
+class A {
+  // No JML specifications needed for class A
+}
+
+class B extends A {
+  // No JML specifications needed for class B
+}
+
+class C extends B {
+  // No JML specifications needed for class C
+}
+
+public class ClassCastException2 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    try {
+      A c = new C();
+      B b = (B) c;
+    } catch (ClassCastException exc) {
+      return false;
+    }
+    return true;
+  }
+}
+

@@ -1,0 +1,28 @@
+public class startswith {
+  /*@ invariant this != null; */
+  /*@ ensures \result == true; */
+  public boolean doPost(String request){
+    String param = request;
+
+    String[] argsEnv = {param};
+
+    if (param.equals("") && argsEnv[0].equals("GOTCHA")) {
+      return false;
+    }
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    startswith s = new startswith();
+    s.doPost("");
+    s.doPost("123");
+    s.doPost("aesgr");
+    s.doPost("GOTCHA");
+    s.doPost("#$#%afg");
+    s.doPost("14ghj%a");
+  }
+}

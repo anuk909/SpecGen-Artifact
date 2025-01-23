@@ -1,0 +1,38 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable \nothing;
+    @    ensures (\forall Exception exc; exc instanceof B ==> false);
+    @*/
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+
+public class exceptions12 {
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable \nothing;
+    @    ensures (\forall Exception exc; exc instanceof B ==> false);
+    @*/
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+

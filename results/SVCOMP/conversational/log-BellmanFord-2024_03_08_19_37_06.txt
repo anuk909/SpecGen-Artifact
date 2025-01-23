@@ -1,0 +1,578 @@
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true);
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ maintaining (\forall int i; 0 <= i && i < N; (\forall int j; 0 <= j && j < N; dist[j] <= dist[i] + D[i * N + j]));
+    //@ decreases N - k;
+    int k;
+    for (k = 0; k < N; k++) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:27: error: variable declaration not allowed here
+    int k;
+        ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:22: error: Loop specifications must immediately precede a loop statement
+    //@ maintaining 0 <= k && k <= N;
+        ^
+2 errors
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ maintaining (\forall int i; 0 <= i && i < N; (\forall int j; 0 <= j && j < N; dist[j] <= dist[i] + D[i * N + j));
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:24: error: ']' expected
+    //@ maintaining (\forall int i; 0 <= i && i < N; (\forall int j; 0 <= j && j < N; dist[j] <= dist[i] + D[i * N + j));
+                                                                                                                      ^
+1 error
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ maintaining (\forall int i; 0 <= i && i < N; (\forall int j; 0 <= j && j < N; dist[j] <= dist[i] + D[i * N + j]));
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:22: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method runBellmanFord
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+        ^
+1 verification failure
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0;
+  //@ requires D.length == N*N;
+  //@ requires 0 <= src && src < N;
+  //@ ensures \result.length == N;
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+  public static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k = 0;
+    //@ maintaining 0 <= k && k <= N;
+    //@ maintaining (\forall int i; 0 <= i && i < N; dist[i] >= 0 && dist[i] <= Integer.MAX_VALUE);
+    //@ maintaining (\forall int i; 0 <= i && i < N; infinite[i] == true || infinite[i] == false);
+    //@ decreases N - k;
+    while (k < N) {
+      boolean relaxed = false;
+      for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+      k++;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:9:) in method runBellmanFord
+    return dist;
+    ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BellmanFord.java:48:
+  //@ ensures (\forall int i; 0 <= i && i < N; \result[i] >= 0 && \result[i] <= Integer.MAX_VALUE);
+      ^
+2 verification failures
+

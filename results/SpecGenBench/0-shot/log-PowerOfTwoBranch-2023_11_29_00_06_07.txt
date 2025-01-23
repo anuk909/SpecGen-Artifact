@@ -1,0 +1,32 @@
+class PowerOfTwoBranch {
+    //@ requires n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+    //@ ensures \result == true || \result == false;
+    public boolean isPowerOfTwo(int n) {
+        //@ assert n >= Integer.MIN_VALUE && n <= Integer.MAX_VALUE;
+        if (n <= 0) {
+            //@ assert n <= 0;
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert n > 0;
+        if ((n & (n - 1)) != 0) {
+            //@ assert (n & (n - 1)) != 0;
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert (n & (n - 1)) == 0;
+        //@ assert \result == true;
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoBranch.java:8: error: A \result expression may not be in a assert clause
+            //@ assert \result == false;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoBranch.java:14: error: A \result expression may not be in a assert clause
+            //@ assert \result == false;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoBranch.java:18: error: A \result expression may not be in a assert clause
+        //@ assert \result == true;
+                    ^
+3 errors
+

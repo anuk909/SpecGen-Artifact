@@ -1,0 +1,1201 @@
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:7: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:11: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:62: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:17: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+6 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:7: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:11: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:62: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:17: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:26: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+6 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:9: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:64: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                              ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:9: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:64: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                              ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:9: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:64: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                              ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:9: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:64: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                              ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  //@ ensures this.env == env;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> processEnvironment();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result ==> env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:9: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:13: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:64: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+  //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                              ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:19: error: incompatible types: void cannot be converted to boolean
+  //@ ensures systemActive ==> processEnvironment();
+                                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:28: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result ==> env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+    @Override
+    public String toString() {
+        return "Pump(System:"
+                + (systemActive ? "On" : "Off")
+                + ",Pump:"
+                + (pumpRunning ? "On" : "Off")
+                + ") "
+                + env.toString();
+    }
+
+    //@ ensures \result == env;
+    public Environment getEnv() {
+        return env;
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures systemActive;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:6: error: cannot find symbol
+    private /*@ spec_public @*/ Environment env;
+                                ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+    public MinePump(Environment env) {
+                    ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+    public Environment getEnv() {
+           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+    //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                                ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result ==> env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+    @Override
+    public String toString() {
+        return "Pump(System:"
+                + (systemActive ? "On" : "Off")
+                + ",Pump:"
+                + (pumpRunning ? "On" : "Off")
+                + ") "
+                + env.toString();
+    }
+
+    //@ ensures \result == env;
+    public Environment getEnv() {
+        return env;
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures systemActive;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:6: error: cannot find symbol
+    private /*@ spec_public @*/ Environment env;
+                                ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+    public MinePump(Environment env) {
+                    ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+    public Environment getEnv() {
+           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+    //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                                ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+8 errors
+
+import org.jmlspecs.models.JMLObjectHelper;
+
+public class MinePump {
+    private /*@ spec_public @*/ boolean pumpRunning = false;
+    private /*@ spec_public @*/ boolean systemActive = true;
+    private /*@ spec_public @*/ Environment env;
+
+    //@ requires env != null;
+    //@ ensures this.env == env;
+    public MinePump(Environment env) {
+        super();
+        this.env = env;
+    }
+
+    //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+    //@ ensures systemActive ==> processEnvironment();
+    public void timeShift() {
+        if (pumpRunning) env.lowerWaterLevel();
+        if (systemActive) processEnvironment();
+    }
+
+    private void processEnvironment__wrappee__base() {}
+
+    //@ ensures pumpRunning && isMethaneAlarm() ==> !pumpRunning;
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+    public void processEnvironment() {
+        if (pumpRunning && isMethaneAlarm()) {
+            deactivatePump();
+        } else {
+            processEnvironment__wrappee__base();
+        }
+    }
+
+    //@ ensures pumpRunning;
+    public void activatePump() {
+        pumpRunning = true;
+    }
+
+    //@ ensures !pumpRunning;
+    public void deactivatePump() {
+        pumpRunning = false;
+    }
+
+    //@ ensures \result ==> env.isMethaneLevelCritical();
+    public boolean isMethaneAlarm() {
+        return env.isMethaneLevelCritical();
+    }
+
+    //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+    @Override
+    public String toString() {
+        return "Pump(System:"
+                + (systemActive ? "On" : "Off")
+                + ",Pump:"
+                + (pumpRunning ? "On" : "Off")
+                + ") "
+                + env.toString();
+    }
+
+    //@ ensures \result == env;
+    public Environment getEnv() {
+        return env;
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures !systemActive;
+    public void stopSystem() {
+        if (pumpRunning) {
+            deactivatePump();
+        }
+        assert !pumpRunning;
+        systemActive = false;
+    }
+
+    //@ ensures !pumpRunning;
+    //@ ensures systemActive;
+    public void startSystem() {
+        assert !pumpRunning;
+        systemActive = true;
+    }
+
+    //@ ensures \result == systemActive;
+    public boolean isSystemActive() {
+        return systemActive;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLObjectHelper;
+                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:6: error: cannot find symbol
+    private /*@ spec_public @*/ Environment env;
+                                ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+    public MinePump(Environment env) {
+                    ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+    public Environment getEnv() {
+           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+    //@ ensures pumpRunning ==> JMLObjectHelper.getOld(env.getWaterLevel()) > env.getWaterLevel();
+                                ^
+  symbol:   variable JMLObjectHelper
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: incompatible types: void cannot be converted to boolean
+    //@ ensures systemActive ==> processEnvironment();
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                 ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: incompatible types: void cannot be converted to boolean
+    //@ ensures !pumpRunning ==> processEnvironment__wrappee__base();
+                                                                  ^
+8 errors
+

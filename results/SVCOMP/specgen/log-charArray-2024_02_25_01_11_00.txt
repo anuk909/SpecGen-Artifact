@@ -1,0 +1,1055 @@
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ modifies c;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (new String("HELLO") + new String(\result, 0, \result.length)).charAt(5) == 's';
+    //@ ensures \result == 0 <==> (new String("HELLO") + new String(\result, 0, \result.length)).charAt(5) != 's';
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = new String("HELLO") + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:4: error: An assignable clause may not contain method formal parameters: c
+    //@ modifies c;
+                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == 1 <==> (new String("HELLO") + new String(\result, 0, \result.length)).charAt(5) == 's';
+                                   ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: int cannot be dereferenced
+    //@ ensures \result == 1 <==> (new String("HELLO") + new String(\result, 0, \result.length)).charAt(5) == 's';
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == 0 <==> (new String("HELLO") + new String(\result, 0, \result.length)).charAt(5) != 's';
+                                   ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: int cannot be dereferenced
+    //@ ensures \result == 0 <==> (new String("HELLO") + new String(\result, 0, \result.length)).charAt(5) != 's';
+                                                                                       ^
+5 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = new String("HELLO") + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(java.lang.String)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(java.lang.String)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                             ^
+4 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(java.lang.String)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(java.lang.String)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && (new String("HELLO") + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                             ^
+4 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[],int,int)
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()), 0, f(arg.toCharArray()).length)).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                  ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                      ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                  ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\exists int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\exists int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                      ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 < i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                  ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                  ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i < 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i < 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i <= 5 && ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                      ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/charArray.java:13: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 1 <==> (\forall int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:14: error: Quantifier bodies may not contain constructors: String(char[])
+    //@ ensures \result == 0 <==> !(\forall int i; 0 - 1 <= i && i <= 5 || ("HELLO" + new String(f(arg.toCharArray()))).charAt(5) == 's');  
+                                                                                      ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c.length == \old(c.length) && c[0] == 's' && (\forall int i; 1 <= i && i < c.length; c[i] == \old(c[i]));
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ ensures \result == -1 <==> arg.length() != 5;
+ 
+ 
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = "HELLO" + new String(c);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+
+

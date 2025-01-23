@@ -1,0 +1,28 @@
+class NextGreaterElem {
+    // Precondition: nums1 and nums2 are not null
+    // Postcondition: the returned array is not null and has the same length as nums1
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) 
+        //@ requires nums1 != null && nums2 != null;
+        //@ ensures \result != null && \result.length == nums1.length;
+    {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:5: error: ';' expected
+        //@ requires nums1 != null && nums2 != null;
+           ^
+1 error
+

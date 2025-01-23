@@ -1,0 +1,39 @@
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result == true || \result == false;
+    public boolean isSubsequence(String s, String t) {
+        //@ assert s != null && t != null;
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ loop_invariant i >= 0 && i <= n && j >= 0 && j <= m;
+        //@ loop_invariant (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+        //@ loop_invariant (\forall int k; i <= k < n; s.charAt(k) != t.charAt(j - 1));
+        //@ decreases n - i;
+        while (i < n && j < m) {
+            //@ assert i >= 0 && i <= n && j >= 0 && j <= m;
+            //@ assert (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+            //@ assert (\forall int k; i <= k < n; s.charAt(k) != t.charAt(j - 1));
+            if (s.charAt(i) == t.charAt(j)) {
+                //@ assert i >= 0 && i <= n && j >= 0 && j <= m;
+                //@ assert (\forall int k; 0 <= k < i + 1; s.charAt(k) == t.charAt(k));
+                //@ assert (\forall int k; i + 1 <= k < n; s.charAt(k) != t.charAt(j - 1));
+                i++;
+                //@ assert i >= 0 && i <= n && j >= 0 && j <= m;
+                //@ assert (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+                //@ assert (\forall int k; i <= k < n; s.charAt(k) != t.charAt(j - 1));
+            }
+            j++;
+            //@ assert i >= 0 && i <= n && j >= 0 && j <= m;
+            //@ assert (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+            //@ assert (\forall int k; i <= k < n; s.charAt(k) != t.charAt(j - 1));
+        }
+        //@ assert i >= 0 && i <= n && j >= 0 && j <= m;
+        //@ assert (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+        //@ assert (\forall int k; i <= k < n; s.charAt(k) != t.charAt(j - 1));
+        //@ assert i >= 0 && i <= n && j >= 0 && j <= m;
+        //@ assert (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+        //@ assert (\forall int k; i <= k < n; s.charAt(k) != t.charAt(j - 1));
+        return i == n;
+    }
+}

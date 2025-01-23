@@ -1,0 +1,25 @@
+class CalcComplement {
+    //@ ensures \result >= 0;
+    //@ ensures \result <= num;
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining highbit >= 0;
+        //@ maintaining highbit <= 30;
+        //@ maintaining (\forall int i; 1 <= i && i <= highbit; num >= 1 << i);
+        //@ decreases 30 - highbit;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:8: error: variable i is already defined in method calcComplement(int)
+        //@ maintaining (\forall int i; 1 <= i && i <= highbit; num >= 1 << i);
+                                     ^
+1 error
+

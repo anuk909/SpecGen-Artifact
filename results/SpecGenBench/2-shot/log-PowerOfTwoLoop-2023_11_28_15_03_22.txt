@@ -1,0 +1,20 @@
+class PowerOfTwoLoop {
+    //@ ensures \result <==> (n > 0 && (\forall int i; 0 <= i && i < n; n % 2 == 0));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\forall int i; 0 <= i && i < n; n % 2 == 0);
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfTwoLoop.java:8: verify: The prover cannot establish an assertion (LoopInvariant) in method isPowerOfTwo
+        //@ maintaining (\forall int i; 0 <= i && i < n; n % 2 == 0);
+            ^
+1 verification failure
+

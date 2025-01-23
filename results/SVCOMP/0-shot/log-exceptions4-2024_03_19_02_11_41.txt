@@ -1,0 +1,29 @@
+class A extends Throwable {
+    //@ public invariant true;
+}
+
+class B extends A {
+    //@ public invariant true;
+}
+
+class C extends B {
+    //@ public invariant true;
+}
+
+public class exceptions4 {
+    //@ requires true;
+    //@ ensures true;
+    public static void main(String[] args) {
+        //@ assert true;
+        try {
+            B b = new B();
+            throw b;
+        } catch (C exc) {
+            System.out.println("C");
+            //@ assert false;
+        } catch (B exc) {
+            System.out.println("B");
+        }
+    }
+}
+

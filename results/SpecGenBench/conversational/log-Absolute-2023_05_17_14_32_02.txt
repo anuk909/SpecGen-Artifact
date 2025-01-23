@@ -1,0 +1,130 @@
+
+public class Absolute {
+	
+	//@ requires num >= Short.MIN_VALUE;
+	//@ ensures \result >= 0;
+	//@ ensures \result == num || \result == -num;
+	public /*@ pure @*/ short Absolute(short num) {
+		if (0 <= num)
+			return num;
+		else
+			return (short)-num;	
+	}
+
+	//@ requires num >= Integer.MIN_VALUE;
+	//@ ensures \result >= 0;
+	//@ ensures \result == num || \result == -num;
+	public /*@ pure @*/ int Absolute(int num) {
+		if (0 <= num)
+			return num;
+		else
+			return -num;
+	}
+
+	//@ requires num >= Long.MIN_VALUE;
+	//@ ensures \result >= 0;
+	//@ ensures \result == num || \result == -num;
+	public /*@ pure @*/ long Absolute(long num) {
+		if (0 <= num)
+			return num;
+		else
+			return -num;	
+	}
+}
+
+
+/home/max/Documents/JMLGPT/tmp/Absolute.java:11: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method Absolute
+			return (short)-num;	
+			       ^
+/home/max/Documents/JMLGPT/tmp/Absolute.java:21: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method Absolute: int negation
+			return -num;
+			       ^
+/home/max/Documents/JMLGPT/tmp/Absolute.java:31: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method Absolute: long negation
+			return -num;	
+			       ^
+3 verification failures
+
+
+public class Absolute {
+	
+	/*@ requires num >= Short.MIN_VALUE;
+	  @ ensures \result >= 0;
+	  @ ensures num >= 0 ==> \result == num;
+	  @ ensures num < 0 ==> \result == -num;
+	  @*/
+	public short Absolute(short num) {
+		if (0 <= num)
+			return num;
+		else
+			return (short)-num;	
+	}
+
+	/*@ requires num >= Integer.MIN_VALUE;
+	  @ ensures \result >= 0;
+	  @ ensures num >= 0 ==> \result == num;
+	  @ ensures num < 0 ==> \result == -num;
+	  @*/
+	public int Absolute(int num) {
+		if (0 <= num)
+			return num;
+		else
+			return -num;
+	}
+
+	/*@ requires num >= Long.MIN_VALUE;
+	  @ ensures \result >= 0;
+	  @ ensures num >= 0 ==> \result == num;
+	  @ ensures num < 0 ==> \result == -num;
+	  @*/
+	public long Absolute(long num) {
+		if (0 <= num)
+			return num;
+		else
+			return -num;	
+	}
+}
+
+
+/home/max/Documents/JMLGPT/tmp/Absolute.java:13: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method Absolute
+			return (short)-num;	
+			       ^
+/home/max/Documents/JMLGPT/tmp/Absolute.java:25: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method Absolute: int negation
+			return -num;
+			       ^
+/home/max/Documents/JMLGPT/tmp/Absolute.java:37: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method Absolute: long negation
+			return -num;	
+			       ^
+3 verification failures
+
+
+public class Absolute {
+	
+	//@ requires num >= Short.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public /*@ pure @*/ short Absolute(short num) {
+		if (0 <= num)
+			return num;
+		else
+			return (short)-num;	
+	}
+
+	//@ requires num >= Integer.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public /*@ pure @*/ int Absolute(int num) {
+		if (0 <= num)
+			return num;
+		else
+			return -num;
+	}
+
+	//@ requires num >= Long.MIN_VALUE;
+	//@ ensures \result >= 0;
+	public /*@ pure @*/ long Absolute(long num) {
+		if (0 <= num)
+			return num;
+		else
+			return -num;	
+	}
+}
+
+

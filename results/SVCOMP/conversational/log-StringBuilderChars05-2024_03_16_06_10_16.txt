@@ -1,0 +1,42 @@
+public class StringBuilderChars05 {
+    //@ requires arg != null;
+    //@ ensures \result ==> buffer.toString().equals("HiffBllTe Limited");
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+        buffer.setCharAt(0, 'H');
+        buffer.setCharAt(6, 'T');
+        return buffer.toString().equals("HiffBllTe Limited");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderChars05.java:3: error: cannot find symbol
+    //@ ensures \result ==> buffer.toString().equals("HiffBllTe Limited");
+                            ^
+  symbol:   variable buffer
+  location: class StringBuilderChars05
+1 error
+
+public class StringBuilderChars05 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result == (new StringBuilder(arg).replace(0, 1, "H").replace(6, 7, "T").toString().equals("HiffBllTe Limited"));
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+        buffer.setCharAt(0, 'H');
+        buffer.setCharAt(6, 'T');
+        return buffer.toString().equals("HiffBllTe Limited");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringBuilderChars05.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> \result == (new StringBuilder(arg).replace(0, 1, "H").replace(6, 7, "T").toString().equals("HiffBllTe Limited"));
+                                        ^
+1 error
+
+public class StringBuilderChars05 {
+    //@ requires arg != null;
+    //@ ensures \result ==> (\result == (arg.substring(1, 6).equals("iffBll")));
+    public static boolean f(String arg) {
+        StringBuilder buffer = new StringBuilder(arg);
+        buffer.setCharAt(0, 'H');
+        buffer.setCharAt(6, 'T');
+        return buffer.toString().equals("HiffBllTe Limited");
+    }
+}

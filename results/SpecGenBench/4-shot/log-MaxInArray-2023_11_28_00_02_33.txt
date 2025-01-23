@@ -1,0 +1,24 @@
+class MaxInArray {
+    //@ ensures \result == -1 <==> arr.length == 0;
+    //@ ensures -1 < \result ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; arr[i] <= res);
+        //@ decreases arr.length - i;
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:7: error: variable i is already defined in method maxElementInArray(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; arr[i] <= res);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:7: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < a.length; arr[i] <= res);
+                                                      ^
+  symbol:   variable a
+  location: class MaxInArray
+2 errors
+

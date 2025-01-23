@@ -1,0 +1,26 @@
+class DominantIndex {
+    //@ requires nums.length > 0;
+    //@ ensures \result < nums.length;
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length; nums[i] <= nums[\result]);
+    //@ ensures \result == -1 ==> (\exists int i; 0 <= i && i < nums.length; 2 * nums[i] > nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:10: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method dominantIndex
+            if (nums[i] > nums[biggest_index])
+                              ^
+1 verification failure
+

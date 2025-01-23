@@ -1,0 +1,17 @@
+public class shifting {
+  
+  //@ requires i >= 0 && i <= 100;
+  //@ ensures \result == 1 || \result == 0 || \result == -1;
+  public static int f(int i) {
+    if (i < 0 || i > 100) {
+      return -1;
+    }
+
+    //@ assert (1L << i) <= Integer.MAX_VALUE;
+    if ((1L << i) > Integer.MAX_VALUE) {
+      return 0;
+    }
+    return 1;
+  }
+}
+

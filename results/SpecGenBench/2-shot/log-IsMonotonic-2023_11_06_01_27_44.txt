@@ -1,0 +1,58 @@
+class IsMonotonic {
+    //@ requires nums != null;
+    //@ ensures \result == isMonotonic(nums);
+    public boolean isMonotonic(int[] nums) {
+        boolean inc = true, dec = true;
+        int n = nums.length;
+        //@ maintaining 0 <= i && i <= n-1;
+        //@ maintaining inc ==> (\forall int j; 0 <= j && j < i; nums[j] <= nums[j+1]);
+        //@ maintaining dec ==> (\forall int j; 0 <= j && j < i; nums[j] >= nums[j+1]);
+        //@ decreases n - i;
+        for (int i = 0; i < n - 1; ++i) {
+            if (nums[i] > nums[i + 1]) {
+                inc = false;
+            }
+            if (nums[i] < nums[i + 1]) {
+                dec = false;
+            }
+        }
+        return inc || dec;
+    }
+
+    //@ requires nums != null;
+    //@ ensures \result == (isIncreasing(nums) || isDecreasing(nums));
+    public /*@ pure @*/ boolean isMonotonic(int[] nums) {
+        return isIncreasing(nums) || isDecreasing(nums);
+    }
+
+    //@ requires nums != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < nums.length - 1; nums[i] <= nums[i+1]);
+    public /*@ pure @*/ boolean isIncreasing(int[] nums) {
+        for (int i = 0; i < nums.length - 1; ++i) {
+            if (nums[i] > nums[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires nums != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < nums.length - 1; nums[i] >= nums[i+1]);
+    public /*@ pure @*/ boolean isDecreasing(int[] nums) {
+        for (int i = 0; i < nums.length - 1; ++i) {
+            if (nums[i] < nums[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsMonotonic.java:24: error: method isMonotonic(int[]) is already defined in class IsMonotonic
+    public /*@ pure @*/ boolean isMonotonic(int[] nums) {
+                                ^
+/home/max/Documents/JMLGPT/tmp/IsMonotonic.java:3: warning: A non-pure method is being called where it is not permitted: IsMonotonic.isMonotonic(int[])
+    //@ ensures \result == isMonotonic(nums);
+                                      ^
+1 error
+1 warning
+

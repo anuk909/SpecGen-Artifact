@@ -1,0 +1,28 @@
+static class Node {
+    int elem;
+    Node next;
+    static Node static_next;
+
+    //@ ensures \result != null ==> \result.elem == this.elem && \result.next == this.next;
+    //@ ensures \result != null ==> \result.next != null ==> \result.elem > \result.next.elem;
+    //@ ensures \result == null ==> this.next == null || this.elem <= this.next.elem;
+    Node swapNode() {
+        static_next = new Node();
+        static_next.next = new Node();
+        static_next.next.next = new Node();
+        if (next != null)
+            if (elem > next.elem) {
+                assert next != null;
+                Node t = next;
+                next = t.next;
+                t.next = this;
+                return t;
+            }
+        return this;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExGenSymExe.java:1: error: modifier static not allowed here
+static class Node {
+       ^
+1 error
+

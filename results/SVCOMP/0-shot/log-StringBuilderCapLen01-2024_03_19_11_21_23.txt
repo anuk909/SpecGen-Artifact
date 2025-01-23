@@ -1,0 +1,35 @@
+public class StringBuilderCapLen01 {
+  private /*@ spec_public @*/ StringBuilder buffer;
+
+  //@ ensures buffer.toString().equals("Diffblue is leader in automatic test case generation");
+  //@ ensures buffer.length() == 52;
+  //@ ensures buffer.capacity() == 68;
+  public void initializeBuffer() {
+    buffer = new StringBuilder("Diffblue is leader in automatic test case generation");
+    assert buffer.toString().equals("Diffblue is leader in automatic test case generation");
+    assert buffer.length() == 52;
+    assert buffer.capacity() == 68;
+  }
+
+  //@ ensures buffer.capacity() == 138;
+  public void testEnsureCapacity() {
+    buffer.ensureCapacity(75);
+    assert buffer.capacity() == 138;
+  }
+
+  //@ ensures buffer.length() == 8;
+  //@ ensures buffer.toString().equals("Diffblue");
+  public void testSetLength() {
+    buffer.setLength(8);
+    assert buffer.length() == 8;
+    assert buffer.toString().equals("Diffblue");
+  }
+
+  public static void main(String[] args) {
+    StringBuilderCapLen01 instance = new StringBuilderCapLen01();
+    instance.initializeBuffer();
+    instance.testEnsureCapacity();
+    instance.testSetLength();
+  }
+}
+

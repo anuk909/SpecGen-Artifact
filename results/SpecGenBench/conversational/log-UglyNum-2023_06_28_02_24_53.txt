@@ -1,0 +1,19 @@
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; n % (new int[]{2, 3, 5}[i]) == 0);
+    public /*@ pure @*/ boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        //@ maintaining n > 0;
+        //@ maintaining (\forall int i; 0 <= i && i < j; n % factors[i] != 0);
+        //@ maintaining (\forall int i; j <= i && i < 3; (\exists int k; 0 <= k && k < j; factors[k] * n % factors[i] != 0));
+        for (int j = 0; j < factors.length; j++) {
+            while (n % factors[j] == 0) {
+                n /= factors[j];
+            }
+        }
+        return n == 1;
+    }
+}

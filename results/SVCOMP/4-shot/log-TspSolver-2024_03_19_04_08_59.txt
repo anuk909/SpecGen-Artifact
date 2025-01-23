@@ -1,0 +1,61 @@
+public class TspSolver {
+    private final int N;
+    private int D[][];
+    private boolean visited[];
+    private int best;
+
+    public int nCalls;
+
+    //@ requires N > 0;
+    //@ requires D != null;
+    //@ requires (\forall int i, j; 0 <= i && i < N && 0 <= j && j < N; D[i][j] >= 0);
+    //@ ensures \result >= 0;
+    public TspSolver(int N, int D[][]) {
+        this.N = N;
+        this.D = D;
+        this.visited = new boolean[N];
+        this.nCalls = 0;
+    }
+
+    //@ ensures \result >= 0;
+    public int solve() {
+        best = Integer.MAX_VALUE;
+
+        for (int i = 0; i < N; i++) visited[i] = false;
+
+        visited[0] = true;
+        search(0, 0, N - 1);
+
+        return best;
+    }
+
+    //@ requires 0 <= src && src < N;
+    //@ requires 0 <= length;
+    //@ requires 0 <= nLeft && nLeft <= N;
+    //@ ensures \result >= 0;
+    private int bound(int src, int length, int nLeft) {
+        return length;
+    }
+
+    //@ requires 0 <= src && src < N;
+    //@ requires 0 <= length;
+    //@ requires 0 <= nLeft && nLeft <= N;
+    private void search(int src, int length, int nLeft) {
+        nCalls++;
+
+        if (nLeft == 0) {
+            if (length + D[src][0] < best) best = length + D[src][0];
+            return;
+        }
+
+        if (bound(src, length, nLeft) >= best) return;
+
+        for (int i = 0; i < N; i++) {
+            if (visited[i]) continue;
+
+            visited[i] = true;
+            search(i, length + D[src][i], nLeft - 1);
+            visited[i] = false;
+        }
+    }
+}

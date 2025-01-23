@@ -1,0 +1,34 @@
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result ==> (\forall int i; i >= 0 && i < 32; n % (2^i) != 0) && n == 1;
+    //@ ensures !\result ==> (\exists int i; i >= 0 && i < 32; n % (2^i) == 0) || n != 1;
+    public static boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\forall int i; i >= 0 && i < 32; n % (2^i) != 0);
+        //@ decreases n;
+        while (n % 2 == 0) {
+            n /= 2;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\forall int i; i >= 0 && i < 32; n % (2^i) != 0);
+        //@ decreases n;
+        while (n % 3 == 0) {
+            n /= 3;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\forall int i; i >= 0 && i < 32; n % (2^i) != 0);
+        //@ decreases n;
+        while (n % 5 == 0) {
+            n /= 5;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNumLoop.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+        //@ maintaining (\forall int i; i >= 0 && i < 32; n % (2^i) != 0);
+            ^
+1 verification failure
+

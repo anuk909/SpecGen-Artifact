@@ -1,0 +1,24 @@
+public class exceptions16 {
+  //@ requires x >= 0;
+  //@ ensures \result ==> x >= 0;
+  //@ signals (A exc) true;
+  //@ signals_only A;
+  //@ signals (B exc) true;
+  //@ signals_only B;
+  public static boolean f(int x) {
+    try {
+      x++;
+    } catch (A exc) {
+      return false;
+    }
+
+    try {
+      throw new B();
+    } catch (B exc) {
+      return false;
+    }
+
+    return true;
+  }
+}
+

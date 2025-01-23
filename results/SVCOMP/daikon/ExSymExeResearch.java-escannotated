@@ -1,0 +1,41 @@
+class Main {
+
+  /*@ ensures \result == true; */
+  public static boolean f(int arg) {
+    int x = arg > 0 ? arg : -arg;
+    int y = 5;
+    Main inst = new Main();
+    return inst.test(x, y) != x + y;
+  }
+
+  public int test(int a, int b) { // invokevirtual
+    int result = 0;
+    if (a >= 0 && a < 100 && b >= 0 && b < 100) {
+      int sum = a + b;
+      int diff = a - b;
+      int temp;
+
+      if (sum > 0) temp = a;
+      else temp = b;
+      if (temp < diff) result = temp;
+      else result = diff;
+    }
+    return result;
+  }
+}
+
+class ExSymExeResearch {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int x = -4; x <= 4; x += 1) {
+      for(int y = -4; y <= 4; y += 1) {
+        Main.f(x);
+        e.test(x, y);
+      }
+    }
+  }
+}

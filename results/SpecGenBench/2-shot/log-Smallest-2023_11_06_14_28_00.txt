@@ -1,0 +1,31 @@
+public class Smallest {
+    //@ ensures a.length == 0 ==> \result == -1;
+    //@ ensures 0 <= \result && \result < a.length ==> (\forall int i; 0 <= i && i < a.length; a[\result] <= a[i]);
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] != a[0]);
+    //@ ensures \result == -1 ==> a.length == 0;
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ maintaining (\forall int i; 0 <= i && i < index; a[smallest] <= a[i]);
+        //@ maintaining 0 <= index && index <= a.length;
+        //@ decreases a.length - index;
+        while (a.length - index > 0) {
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Smallest.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Smallest.java:4:) in method Smallest
+        return smallest;
+        ^
+/home/max/Documents/JMLGPT/tmp/Smallest.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Smallest.java:21:
+    //@ ensures \result == -1 ==> (\forall int i; 0 <= i && i < a.length; a[i] != a[0]);
+        ^
+2 verification failures
+

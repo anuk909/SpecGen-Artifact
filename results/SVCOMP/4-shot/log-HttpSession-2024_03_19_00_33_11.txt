@@ -1,0 +1,34 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+    private final Map<String, Object> map = new HashMap<>();
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:9: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == map.get(name);
+                           ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.hasMoreElements() && \result.nextElement().equals(key));
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:19: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures map.get(name) == value;
+                ^
+3 errors
+

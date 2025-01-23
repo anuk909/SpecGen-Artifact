@@ -1,0 +1,189 @@
+class Main {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result ==> method_a(x, y) <= 0;
+    //@ ensures !\result ==> method_a(x, y) > 0;
+    public boolean test(int x, int y) {
+
+        int v = method_a(x, y);
+
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result == (x > 10 ? x : (y > 10 ? y : 0));
+    public int method_a(int x, int y) {
+
+        if (x > 10) return x;
+
+        if (y > 10) return y;
+
+        return 0;
+    }
+
+    //@ requires z >= Integer.MIN_VALUE && z <= Integer.MAX_VALUE;
+    //@ ensures \result == (z > 10 ? z++ : z--);
+    public int method_b(int z) {
+
+        if (z > 10) return z++;
+        else return z--;
+    }
+
+    //@ requires arg >= Integer.MIN_VALUE && arg <= Integer.MAX_VALUE;
+    //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+    public static boolean f(int arg) {
+
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:37: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+                                                   ^
+1 error
+
+class Main {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result ==> method_a(x, y) <= 0;
+    //@ ensures !\result ==> method_a(x, y) > 0;
+    public boolean test(int x, int y) {
+
+        int v = method_a(x, y);
+
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result == (x > 10 ? x : (y > 10 ? y : 0));
+    public int method_a(int x, int y) {
+
+        if (x > 10) return x;
+
+        if (y > 10) return y;
+
+        return 0;
+    }
+
+    //@ requires z >= Integer.MIN_VALUE && z <= Integer.MAX_VALUE;
+    //@ ensures \result == (z > 10 ? z++ : z--);
+    public int method_b(int z) {
+
+        if (z > 10) return z++;
+        else return z--;
+    }
+
+    //@ requires arg >= Integer.MIN_VALUE && arg <= Integer.MAX_VALUE;
+    //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+    public boolean f(int arg) {
+
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:29: error: INTERNAL ERROR: Unexpected kind of AST in JmlAssertionAdder.visitAssignOp: class com.sun.tools.javac.tree.JCTree$JCAssignOp
+    //@ ensures \result == (z > 10 ? z++ : z--);
+                                      ^
+org.jmlspecs.openjml.JmlInternalError: Unexpected kind of AST in JmlAssertionAdder.visitAssignOp: class com.sun.tools.javac.tree.JCTree$JCAssignOp
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.error(JmlAssertionAdder.java:1977)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitAssignopHelper(JmlAssertionAdder.java:13132)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitUnary(JmlAssertionAdder.java:13162)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCUnary.accept(JCTree.java:2076)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitConditional(JmlAssertionAdder.java:6925)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCConditional.accept(JCTree.java:1472)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitParens(JmlAssertionAdder.java:12077)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCParens.accept(JCTree.java:1969)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitBinary(JmlAssertionAdder.java:13597)
+	at jdk.compiler/com.sun.tools.javac.tree.JCTree$JCBinary.accept(JCTree.java:2111)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertExpr(JmlAssertionAdder.java:1554)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertJML(JmlAssertionAdder.java:1648)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.addPostConditions(JmlAssertionAdder.java:5428)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convertMethodBodyNoInit(JmlAssertionAdder.java:1256)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlMethodDecl(JmlAssertionAdder.java:17247)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlMethodDecl.accept(JmlTree.java:1383)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.visitJmlClassDecl(JmlAssertionAdder.java:15904)
+	at jdk.compiler/org.jmlspecs.openjml.JmlTree$JmlClassDecl.accept(JmlTree.java:1295)
+	at jdk.compiler/com.sun.tools.javac.tree.TreeScanner.scan(TreeScanner.java:49)
+	at jdk.compiler/org.jmlspecs.openjml.visitors.JmlTreeScanner.scan(JmlTreeScanner.java:70)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlAssertionAdder.convert(JmlAssertionAdder.java:1441)
+	at jdk.compiler/org.jmlspecs.openjml.esc.JmlEsc.check(JmlEsc.java:112)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.esc(JmlCompiler.java:536)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.flow(JmlCompiler.java:362)
+	at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:936)
+	at jdk.compiler/com.sun.tools.javac.main.JmlCompiler.compile(JmlCompiler.java:197)
+	at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:321)
+	at jdk.compiler/org.jmlspecs.openjml.Main.compile(Main.java:534)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:374)
+	at jdk.compiler/org.jmlspecs.openjml.Main.execute(Main.java:332)
+	at jdk.compiler/org.jmlspecs.openjml.Main.main(Main.java:295)
+	at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:53)
+1 error
+
+class Main {
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result ==> method_a(x, y) <= 0;
+    //@ ensures !\result ==> method_a(x, y) > 0;
+    public boolean test(int x, int y) {
+
+        int v = method_a(x, y);
+
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ requires x >= Integer.MIN_VALUE && x <= Integer.MAX_VALUE;
+    //@ requires y >= Integer.MIN_VALUE && y <= Integer.MAX_VALUE;
+    //@ ensures \result == (x > 10 ? x : (y > 10 ? y : 0));
+    public int method_a(int x, int y) {
+
+        if (x > 10) return x;
+
+        if (y > 10) return y;
+
+        return 0;
+    }
+
+    //@ requires z >= Integer.MIN_VALUE && z <= Integer.MAX_VALUE;
+    //@ ensures \result == (z > 10 ? z + 1 : z - 1);
+    public int method_b(int z) {
+
+        if (z > 10) return z + 1;
+        else return z - 1;
+    }
+
+    //@ requires arg >= Integer.MIN_VALUE && arg <= Integer.MAX_VALUE;
+    //@ ensures \result ==> arg < 0 || arg > 10 || test(arg, 0);
+    public boolean f(int arg) {
+
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+

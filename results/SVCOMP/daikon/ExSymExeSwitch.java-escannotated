@@ -1,0 +1,43 @@
+class Main {
+
+  /*@ invariant this != null; */
+  /*@ ensures \result == true; */
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  /*@ ensures (\result == false)  ==>  (\old(x) == 1); */
+  /*@ ensures (\result == false)  ==>  (x == 2); */
+  /*@ ensures (\result == true)  ==>  (x - \old(x) - 1 == 0); */
+  /* we want to let the user specify that this method should be symbolic */
+
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}
+
+class ExSymExeSwitch {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int x = -4; x <= 4; x += 1) {
+      Main.f(x);
+      Main.test(x);
+    }
+  }
+}

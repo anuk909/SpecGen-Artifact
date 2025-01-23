@@ -1,0 +1,722 @@
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != null);
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != null);
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: error: bad operand types for binary operator '!='
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != null);
+                                                                          ^
+  first type:  char
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: error: bad operand types for binary operator '!='
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != null);
+                                                                                     ^
+  first type:  char
+  second type: <null>
+2 errors
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; stones.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                //@ assert (\forall int k; 0 <= k && k < j; jewels.charAt(k) != '\u0000');
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < jewelsLength; jewels.charAt(k) != '\u0000');
+            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method numJewelsInStones
+        //@ maintaining (\forall int k; 0 <= k && k < i; stones.charAt(k) != '\u0000');
+            ^
+2 verification failures
+

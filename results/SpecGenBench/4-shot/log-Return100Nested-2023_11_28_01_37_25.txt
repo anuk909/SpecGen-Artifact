@@ -1,0 +1,27 @@
+public class Return100Nested {
+    //@ ensures \result == 100;
+    public static int return100 () {
+        int res = 0;
+        //@ maintaining 0 <= i && i <= 10;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < 10; res == 10 * k + j));
+        //@ decreases 10 - i;
+        for(int i = 0; i < 10; i++) {
+            //@ maintaining 0 <= j && j <= 10;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < 10; res == 10 * k + j));
+            //@ maintaining (\forall int j; 0 <= j && j < i; res == 10 * i + j);
+            //@ decreases 10 - j;
+            for(int j = 0; j < 10; j++) {
+                res = res + 1;
+            }
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Return100Nested.java:10: error: variable j is already defined in method return100()
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < 10; res == 10 * k + j));
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/Return100Nested.java:11: error: variable j is already defined in method return100()
+            //@ maintaining (\forall int j; 0 <= j && j < i; res == 10 * i + j);
+                                         ^
+2 errors
+

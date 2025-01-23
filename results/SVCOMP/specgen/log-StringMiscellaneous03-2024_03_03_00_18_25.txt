@@ -1,0 +1,1105 @@
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int count; 0 <= count && count < s1.length(); s1.charAt(count) != s2.charAt(count)) ==> \result == true;
+    //@ ensures (\exists int count; 0 <= count && count < s1.length(); s1.charAt(count) == s2.charAt(count)) ==> \result == false;
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= count && count <= s1.length();
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int count; 0 <= count && count < i; s1.charAt(count) != s2.charAt(count));
+        //@ decreases count;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:10: error: variable count is already defined in method f(String,String)
+        //@ maintaining (\forall int count; 0 <= count && count < i; s1.charAt(count) != s2.charAt(count));
+                                     ^
+1 error
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 < i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 < i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 < i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 < i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\exists int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\exists int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\forall int i; 0 < i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\forall int i; 0 < i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\forall int i; 0 < i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\forall int i; 0 < i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\forall int i; 0 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\forall int i; 0 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\forall int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\forall int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+    //@ ensures (\forall int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5:) in method f
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:16:
+    //@ ensures (\forall int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) == s2.charAt(i)) ==> \result == false;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:10: verify: The prover cannot establish an assertion (LoopDecreases) in method f
+        //@ decreases i;
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+        //@ decreases i;  
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:10: verify: The prover cannot establish an assertion (LoopDecreases) in method f
+        //@ decreases i;  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method f
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 < j && j < i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method f
+        //@ maintaining (\forall int j; 0 < j && j < i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 < j && j <= i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method f
+        //@ maintaining (\forall int j; 0 < j && j <= i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method f
+        //@ maintaining (\forall int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\forall int j; 0 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 - 1 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\forall int j; 0 - 1 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\forall int j; 0 - 1 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\forall int j; 0 - 1 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\exists int j; 0 < j && j < i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\exists int j; 0 < j && j < i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\exists int j; 0 < j && j <= i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\exists int j; 0 < j && j <= i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\exists int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\exists int j; 0 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\exists int j; 0 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\exists int j; 0 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\exists int j; 0 - 1 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\exists int j; 0 - 1 <= j && j < i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+        //@ maintaining (\exists int j; 0 - 1 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method f
+        //@ maintaining (\exists int j; 0 - 1 <= j && j <= i; s1.charAt(j) != s2.charAt(j));  
+            ^
+1 verification failure
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 < i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 < i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 < i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 < i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\forall int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\forall int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\exists int i; 0 < i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\exists int i; 0 < i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\exists int i; 0 < i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\exists int i; 0 < i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\exists int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\exists int i; 0 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\exists int i; 0 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\exists int i; 0 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\exists int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\exists int i; 0 - 1 <= i && i < s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+    //@ ensures (\exists int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4:) in method f
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StringMiscellaneous03.java:13:
+    //@ ensures (\exists int i; 0 - 1 <= i && i <= s1.length(); s1.charAt(i) != s2.charAt(i)) ==> \result == true;  
+        ^
+2 verification failures
+
+public class StringMiscellaneous03 {
+    //@ requires s1 != null && s2 != null;
+    //@ requires s1.length() == s2.length();
+ 
+ 
+    public static boolean f(String s1, String s2) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= s1.length();
+ 
+ 
+        for (int count = s1.length() - 1; count >= 0; count--) {
+            if (s1.charAt(count) == s2.charAt(i))
+                return false;
+            ++i;
+        }
+        return true;
+    }
+}
+
+

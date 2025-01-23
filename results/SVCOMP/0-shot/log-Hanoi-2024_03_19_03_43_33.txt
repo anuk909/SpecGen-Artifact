@@ -1,0 +1,30 @@
+class Hanoi {
+
+    //@ public static invariant counter >= 0;
+
+    //@ requires n > 0;
+    //@ ensures \result >= 1;
+    static int hanoi(int n) {
+        // The method calculates the number of moves needed to solve the Tower of Hanoi problem with n disks.
+        // The result is always greater than or equal to 1.
+        if (n == 1) {
+            return 1;
+        }
+        return 2 * (hanoi(n - 1)) + 1;
+    }
+
+    //@ requires n >= 0;
+    //@ requires from != to && from != via && to != via;
+    //@ ensures counter >= 0;
+    static void applyHanoi(int n, int from, int to, int via) {
+        // The method applies the Tower of Hanoi algorithm to move n disks from 'from' pole to 'to' pole using 'via' pole.
+        // The number of steps taken is stored in the counter variable.
+        if (n == 0) {
+            return;
+        }
+        counter++;
+        applyHanoi(n - 1, from, via, to);
+        applyHanoi(n - 1, via, to, from);
+    }
+}
+

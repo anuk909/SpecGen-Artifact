@@ -1,0 +1,35 @@
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions4 {
+  //@ requires true;
+  //@ ensures (\exists B b; b != null; \result == b);
+  //@ signals_only B;
+  //@ signals (B b) true;
+  //@ signals (C c) false;
+  public static void main(String[] args) {
+    try {
+      B b = new B();
+      throw b;
+    } catch (C exc) {
+      System.out.println("C");
+      assert false;
+    } catch (B exc) {
+      System.out.println("B");
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions4.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\exists B b; b != null; \result == b);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/exceptions4.java:11: error: incompatible types: B cannot be converted to Exception
+  //@ signals (B b) true;
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions4.java:12: error: incompatible types: C cannot be converted to Exception
+  //@ signals (C c) false;
+               ^
+3 errors
+

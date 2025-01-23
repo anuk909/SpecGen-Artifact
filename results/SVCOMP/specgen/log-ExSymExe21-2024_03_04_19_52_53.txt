@@ -1,0 +1,260 @@
+class Main {
+  static int field;
+  static int field2;
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == inst.test(3, field, field2);
+    @*/
+  public static boolean f() {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable r, z;
+    @    ensures r == x + \old(z) && z == x - 3 - 4;
+    @    ensures \result ==> (r >= 99 && x >= z);
+    @    ensures !\result ==> (x < z);
+    @*/
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe21");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r >= 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= z) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result == inst.test(3, field, field2);
+                                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    @    ensures \result == inst.test(3, field, field2);
+                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: cannot find symbol
+    @    ensures \result == inst.test(3, field, field2);
+                            ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:19: error: An assignable clause may not contain method formal parameters: r
+    @    assignable r, z;
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:19: error: An assignable clause may not contain method formal parameters: z
+    @    assignable r, z;
+                       ^
+5 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == test(3, field, field2);
+    @*/
+  public static boolean f() {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable field, field2;
+    @    ensures field == x + \old(field2) && field2 == x - 3 - 4;
+    @    ensures \result ==> (field >= 99 && x >= field2);
+    @    ensures !\result ==> (x < field2);
+    @*/
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe21");
+    int y = 3;
+    field = x + z;
+    field2 = x - y - 4;
+    if (field >= 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= field2) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: non-static method test(int,int,int) cannot be referenced from a static context
+    @    ensures \result == test(3, field, field2);
+                            ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == new Main().test(3, field, field2);
+    @*/
+  public static boolean f() {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable field, field2;
+    @    ensures field == x + \old(field2) && field2 == x - 3 - 4;
+    @    ensures \result ==> (field >= 99 && x >= field2);
+    @    ensures !\result ==> (x < field2);
+    @*/
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe21");
+    int y = 3;
+    field = x + z;
+    field2 = x - y - 4;
+    if (field >= 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= field2) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: Object allocation is not permitted in specification expressions
+    @    ensures \result == new Main().test(3, field, field2);
+                            ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == test(3, field, field2);
+    @*/
+  public static boolean f() {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable field, field2;
+    @    ensures field == x + \old(field2) && field2 == x - 3 - 4;
+    @    ensures \result ==> (field >= 99 && x >= field2);
+    @    ensures !\result ==> (x < field2);
+    @*/
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe21");
+    int y = 3;
+    field = x + z;
+    field2 = x - y - 4;
+    if (field >= 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= field2) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: non-static method test(int,int,int) cannot be referenced from a static context
+    @    ensures \result == test(3, field, field2);
+                            ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == new Main().test(3, field, field2);
+    @*/
+  public static boolean f() {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable field, field2;
+    @    ensures field == x + \old(field2) && field2 == x - 3 - 4;
+    @    ensures \result ==> (field >= 99 && x >= field2);
+    @    ensures !\result ==> (x < field2);
+    @*/
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe21");
+    int y = 3;
+    field = x + z;
+    field2 = x - y - 4;
+    if (field >= 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= field2) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe21.java:7: error: Object allocation is not permitted in specification expressions
+    @    ensures \result == new Main().test(3, field, field2);
+                            ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == test(3, field, field2);
+    @*/
+  public static boolean f() {
+    int x = 3; /* we want to specify in an annotation that this param should be symbolic */
+
+    field = 9;
+    return test(x, field, field2);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable field, field2;
+    @    ensures field == x + \old(field2) && field2 == x - 3 - 4;
+    @    ensures \result ==> (field >= 99 && x >= field2);
+    @    ensures !\result ==> (x < field2);
+    @*/
+  public static boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe21");
+    int y = 3;
+    field = x + z;
+    field2 = x - y - 4;
+    if (field >= 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= field2) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}

@@ -1,0 +1,109 @@
+public class HttpServletRequest {
+
+  private Cookie cookie = null;
+  private String tainted = null;
+
+  //@ requires value != null;
+  //@ assignable tainted, cookie;
+  //@ ensures tainted.equals(value);
+  //@ ensures cookie.getName().equals(value);
+  //@ ensures cookie.getValue().equals(value);
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ requires name != null;
+  //@ ensures \result != null;
+  //@ ensures \result.length == 1;
+  //@ ensures \result[0].equals(tainted);
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.length == 1;
+  //@ ensures \result[0] == cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.hasMoreElements();
+  //@ ensures \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.hasMoreElements();
+  //@ ensures \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.hasMoreElements();
+  //@ ensures \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.containsKey("name");
+  //@ ensures \result.containsValue(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result.equals(tainted);
+  public String getScheme() {
+    return tainted;
+  }
+}
+

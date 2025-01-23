@@ -1,0 +1,106 @@
+public class AddTwoLoop {
+    //@ ensures \result == a + b;
+    public static int add(int a, int b) {
+        int m = ((a < 0) ? -a : a);
+        int n = ((b < 0) ? -b : b);
+        int res = 0;
+        //@ maintaining 0 <= i && i <= m && res == (\sum int j; 0 <= j && j < i; ((a < 0) ? -1 : 1));
+        //@ decreases m - i;
+        for(int i = 0; i < m; i++){
+            res = res + ((a < 0) ? -1 : 1);
+        }
+        //@ maintaining 0 <= i && i <= n && res == (\sum int j; 0 <= j && j < i + m; ((a < 0) ? -1 : 1));
+        //@ decreases n - i;
+        for(int i = 0; i < n; i++){
+            res = res + ((b < 0) ? -1 : 1);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 0 <= i && i <= m && res == (\sum int j; 0 <= j && j < i; ((a < 0) ? -1 : 1));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 0 <= i && i <= m && res == (\sum int j; 0 <= j && j < i; ((a < 0) ? -1 : 1));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 0 <= i && i <= m && res == (\sum int j; 0 <= j && j < i; ((a < 0) ? -1 : 1));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:12: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 0 <= i && i <= n && res == (\sum int j; 0 <= j && j < i + m; ((a < 0) ? -1 : 1));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:12: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 0 <= i && i <= n && res == (\sum int j; 0 <= j && j < i + m; ((a < 0) ? -1 : 1));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:12: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining 0 <= i && i <= n && res == (\sum int j; 0 <= j && j < i + m; ((a < 0) ? -1 : 1));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method add
+        //@ maintaining 0 <= i && i <= m && res == (\sum int j; 0 <= j && j < i; ((a < 0) ? -1 : 1));
+            ^
+6 warnings
+1 verification failure
+
+public class AddTwoLoop {
+    //@ ensures \result == a + b;
+    public static int add(int a, int b) {
+        int m = ((a < 0) ? -a : a);
+        int n = ((b < 0) ? -b : b);
+        int res = 0;
+        //@ maintaining res == (\sum int j; 0 <= j && j < m; ((a < 0) ? -1 : 1));
+        //@ decreases m;
+        for(int i = 0; i < m; i++){
+            res = res + ((a < 0) ? -1 : 1);
+        }
+        //@ maintaining res == (\sum int j; 0 <= j && j < n + m; ((a < 0) ? -1 : 1));
+        //@ decreases n;
+        for(int i = 0; i < n; i++){
+            res = res + ((b < 0) ? -1 : 1);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining res == (\sum int j; 0 <= j && j < m; ((a < 0) ? -1 : 1));
+                                ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining res == (\sum int j; 0 <= j && j < m; ((a < 0) ? -1 : 1));
+                                ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining res == (\sum int j; 0 <= j && j < m; ((a < 0) ? -1 : 1));
+                                ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:12: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining res == (\sum int j; 0 <= j && j < n + m; ((a < 0) ? -1 : 1));
+                                ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:12: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining res == (\sum int j; 0 <= j && j < n + m; ((a < 0) ? -1 : 1));
+                                ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:12: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining res == (\sum int j; 0 <= j && j < n + m; ((a < 0) ? -1 : 1));
+                                ^
+/home/max/Documents/JMLGPT/tmp/AddTwoLoop.java:7: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method add
+        //@ maintaining res == (\sum int j; 0 <= j && j < m; ((a < 0) ? -1 : 1));
+            ^
+6 warnings
+1 verification failure
+
+public class AddTwoLoop {
+    //@ ensures \result == a + b;
+    public static int add(int a, int b) {
+        int m = ((a < 0) ? -a : a);
+        int n = ((b < 0) ? -b : b);
+        int res = 0;
+        //@ maintaining 0 <= i && i <= m && res == i * ((a < 0) ? -1 : 1);
+        //@ decreases m - i;
+        for(int i = 0; i < m; i++){
+            res = res + ((a < 0) ? -1 : 1);
+        }
+        //@ maintaining 0 <= i && i <= n && res == m * ((a < 0) ? -1 : 1) + i * ((b < 0) ? -1 : 1);
+        //@ decreases n - i;
+        for(int i = 0; i < n; i++){
+            res = res + ((b < 0) ? -1 : 1);
+        }
+        return res;
+    }
+}
+

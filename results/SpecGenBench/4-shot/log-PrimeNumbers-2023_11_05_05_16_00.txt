@@ -1,0 +1,90 @@
+public class PrimeNumbers {
+    private static /*@ spec_public @*/ boolean div(int n, int d) { return n%d == 0; }
+    private /*@ spec_public @*/ int primeArray[];
+    
+    /*@ public normal_behavior
+      @    requires n > 0;
+      @    assignable primeArray;
+      @    ensures primeArray.length == n;
+      @    ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+      @    ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 2 <= j && j <= primeArray[i]/2; !div(primeArray[i], j)));
+      @    ensures (\forall int i; 0 <= i && i < primeArray.length - 1; primeArray[i] < primeArray[i+1]);
+      @    ensures (\forall int i; 0 <= i && i < primeArray.length; (\forall int j; 0 <= j && j < i; primeArray[j] < primeArray[i]));
+      @    ensures (\forall int i; 0 <= i && i < primeArray.length; primeArray[i] > 1);
+      @ also
+      @    requires n <= 0;
+      @    ensures \result == null;
+      @*/
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      if (n <= 0) {
+          return null;
+      }
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count >= 2 && count <= n+1;
+      //@ maintaining (\forall int i; 0 <= i && i < count - 1; isPrime(primeArray[i]));
+      //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 2 <= j && j <= primeArray[i]/2; !div(primeArray[i], j)));
+      //@ maintaining (\forall int i; 0 <= i && i < count - 2; primeArray[i] < primeArray[i+1]);
+      //@ maintaining (\forall int i; 0 <= i && i < count - 1; (\forall int j; 0 <= j && j < i; primeArray[j] < primeArray[i]));
+      //@ maintaining (\forall int i; 0 <= i && i < count - 1; primeArray[i] > 1);
+      //@ decreases n - count;
+      for (count = 2; count <= n;) { 
+
+         //@ maintaining 2 <= j && j <= num/2;
+         //@ maintaining status == 0 <==> (\exists int k; 2 <= k && k <= j; div(num, k));
+         //@ decreases num/2 - j;
+         for (j = 2; j <= num/2; j++) { 
+            if (div(num,j)) {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0) {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         
+         num++;
+      } 
+      return primeArray; 
+   }
+   
+   //@ requires n > 1;
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+   private static /*@ pure @*/ boolean isPrime(int n) {
+       for (int i = 2; i <= Math.sqrt(n); i++) {
+           if (div(n, i)) {
+               return false;
+           }
+       }
+       return true;
+   }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: This backslash token is unknown: \sqrt
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: ')' expected
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: illegal start of type
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: invalid method declaration; return type required
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: <identifier> expected
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                                           ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: <identifier> expected
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: ';' expected
+   //@ ensures \result <==> (\forall int i; 2 <= i && i <= \sqrt(n); !div(n, i));
+                                                                               ^
+7 errors
+

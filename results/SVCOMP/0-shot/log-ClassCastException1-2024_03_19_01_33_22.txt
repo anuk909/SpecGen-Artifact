@@ -1,0 +1,17 @@
+public class ClassCastException1 {
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    //@ ensures \result == true || \result == false;
+    try {
+      Object x = new Integer(0);
+      String y = (String) x;
+    } catch (ClassCastException exc) {
+      //@ assert exc instanceof ClassCastException;
+      //@ assert \result == false;
+      return false;
+    }
+    //@ assert \result == true;
+    return true;
+  }
+}
+

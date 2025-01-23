@@ -1,0 +1,32 @@
+public class SelectionSortDesc {
+
+    //@ requires arr != null;
+    //@ ensures \forall int i; 0 <= i && i < arr.length; \forall int j; 0 <= j && j < i; arr[i] >= arr[j];
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[index] >= arr[k]);
+            //@ maintaining (\forall int k; index < k && k < arr.length; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:5: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:4:) in method selectionSort
+    public static void selectionSort(int[] arr){  
+                       ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:5:
+    //@ ensures \forall int i; 0 <= i && i < arr.length; \forall int j; 0 <= j && j < i; arr[i] >= arr[j];
+        ^
+2 verification failures
+

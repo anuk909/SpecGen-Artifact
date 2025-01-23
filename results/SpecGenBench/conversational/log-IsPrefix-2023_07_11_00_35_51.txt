@@ -1,0 +1,590 @@
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ pure function @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k >= txt.length() || pat.charAt(k) != txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:5: error: Expected an identifier, found end of JML comment instead
+      @ pure function @*/
+                      ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:5: error: ';' expected
+      @ pure function @*/
+                         ^
+2 errors
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k >= txt.length() || pat.charAt(k) != txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isPrefix
+        //@ maintaining (\forall int k; 0 <= k && k < i; k >= txt.length() || pat.charAt(k) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:4:) in method isPrefix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:19:
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+        ^
+2 verification failures
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k >= txt.length() || pat.charAt(k) != txt.charAt(k));
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:19: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k >= txt.length() || pat.charAt(k) != txt.charAt(k));
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:4:) in method isPrefix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:20:
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+        ^
+2 verification failures
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ assert i == pat.length();
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:4:) in method isPrefix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:21:
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+        ^
+2 verification failures
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ assert i == pat.length() || i == txt.length();
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:4:) in method isPrefix
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:21:
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+        ^
+2 verification failures
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ assert i == pat.length() || i == txt.length();
+        //@ assert i <= pat.length() && i <= txt.length();
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:4:) in method isPrefix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:15:
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+        ^
+2 verification failures
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert (\forall int k; 0 <= k && k < pat.length(); k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ assert i <= pat.length() && i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= pat.length() && i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+
+public class IsPrefix {
+
+    /*@ requires pat != null && txt != null;
+      @ ensures \result == (\forall int i; 0 <= i && i < pat.length(); i >= txt.length() || pat.charAt(i) != txt.charAt(i));
+      @ ensures \result == true || \result == false;
+      @ pure @*/
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                break;
+            i = i + 1;
+        }
+
+        //@ assert i <= pat.length();
+        //@ assert i <= txt.length();
+        return i == pat.length();
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:20: verify: The prover cannot establish an assertion (Assert) in method isPrefix
+        //@ assert i <= txt.length();
+            ^
+1 verification failure
+

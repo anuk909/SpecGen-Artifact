@@ -1,0 +1,25 @@
+class Main {
+
+    //@ ensures \result == true || \result == false;
+    public static boolean f() {
+        int x = 3;
+        boolean y = true;
+        Main inst = new Main();
+        return inst.test(y, x);
+    }
+
+    //@ requires x == true || x == false;
+    //@ requires z >= Integer.MIN_VALUE && z <= Integer.MAX_VALUE;
+    //@ ensures \result == true || \result == false;
+    public boolean test(boolean x, int z) {
+        System.out.println("Testing ExSymExeBool");
+        z++;
+        if (x) {
+            System.out.println("branch FOO1");
+        } else {
+            return false;
+        }
+        return true;
+    }
+}
+

@@ -1,0 +1,411 @@
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \fresh(nums1) && \fresh(nums2);
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:3: error: A \fresh expression may not be in a requires clause
+    //@ requires \fresh(nums1) && \fresh(nums2);
+                        ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:3: error: A \fresh expression may not be in a requires clause
+    //@ requires \fresh(nums1) && \fresh(nums2);
+                                         ^
+2 errors
+
+java
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:1: error: class, interface, enum, or record expected
+java
+^
+1 error
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:16: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method merge: overflow in int sum
+        int[] sorted = new int[m + n];
+                                 ^
+1 verification failure
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= m + n;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:43: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method merge
+            nums1[i] = sorted[i];
+                 ^
+1 verification failure
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= m + n;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ assume 0 <= m + n && m + n <= sorted.length;
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            //@ assume 0 <= i && i < nums1.length;
+            nums1[i] = sorted[i];
+        }
+    }
+}
+error: An error while executing a proof script for merge: (error "Solver has unexpectedly terminated")
+1 error
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= m + n;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ assume 0 <= m + n && m + n <= sorted.length;
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            //@ assume 0 <= i && i < nums1.length;
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:22: verify: The prover cannot establish an assertion (LoopInvariant) in method merge
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+            ^
+1 verification failure
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= m + n;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ assume 0 <= m + n && m + n <= sorted.length;
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            //@ assume 0 <= i && i < nums1.length;
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:22: verify: The prover cannot establish an assertion (LoopInvariant) in method merge
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+            ^
+1 verification failure
+
+class Merge {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; nums1[i] != Integer.MIN_VALUE;
+    //@ requires \forall int i; 0 <= i && i < nums2.length; nums2[i] != Integer.MIN_VALUE;
+    //@ ensures \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums1[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length; (\exists int j; 0 <= j && j < nums1.length; nums2[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length - 1; nums1[i] <= nums1[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums2.length - 1; nums2[i] <= nums2[i+1];
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums1.length; nums1[i] == nums1[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\exists int j; 0 <= j && j < nums2.length; nums2[i] == nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums1.length && nums1[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums2.length; nums1[i] != nums2[j]);
+    //@ ensures \forall int i; 0 <= i && i < nums2.length && nums2[i] != Integer.MIN_VALUE; (\forall int j; 0 <= j && j < nums1.length; nums2[i] != nums1[j]);
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        //@ assume m + n <= Integer.MAX_VALUE && Integer.MIN_VALUE <= m + n;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining \forall int i; 0 <= i && i < p1; nums1[i] <= nums2[p2];
+        //@ maintaining \forall int i; 0 <= i && i < p2; nums2[i] <= nums1[p1];
+        //@ maintaining \forall int i; p1 <= i && i < m; nums1[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; p2 <= i && i < n; nums2[i] != Integer.MIN_VALUE;
+        //@ maintaining \forall int i; 0 <= i && i < p1 + p2; sorted[i] == nums1[i] || sorted[i] == nums2[i];
+        //@ decreases m + n - (p1 + p2);
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ assume 0 <= m + n && m + n <= sorted.length;
+        //@ maintaining 0 <= i && i <= m + n;
+        //@ maintaining \forall int j; 0 <= j && j < i; nums1[j] == sorted[j];
+        //@ decreases m + n - i;
+        for (int i = 0; i != m + n; ++i) {
+            //@ assume 0 <= i && i < nums1.length;
+            nums1[i] = sorted[i];
+        }
+    }
+}

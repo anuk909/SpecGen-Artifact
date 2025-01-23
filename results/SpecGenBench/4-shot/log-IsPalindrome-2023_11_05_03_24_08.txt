@@ -1,0 +1,22 @@
+class IsPalindrome {
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < s.length(); s.charAt(i) == s.charAt(s.length() - 1 - i));
+    public static boolean isPalindrome(String s) {
+        int n = s.length();
+
+        //@ maintaining (\forall int i; 0 <= i && i < i; s.charAt(i) == s.charAt(n - 1 - i));
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ decreases s.length() - i;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) != s.charAt(n - 1 - i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsPalindrome.java:6: error: variable i is already defined in method isPalindrome(String)
+        //@ maintaining (\forall int i; 0 <= i && i < i; s.charAt(i) == s.charAt(n - 1 - i));
+                                     ^
+1 error
+

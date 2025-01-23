@@ -1,0 +1,94 @@
+class LinkedListEntry {
+  public /*@ spec_public @*/ LinkedListEntry Next;
+  public /*@ spec_public @*/ int Value;
+}
+
+class LinkedList {
+  public /*@ spec_public @*/ LinkedListEntry Head;
+
+  /*@ public normal_behavior
+    @    ensures \result == (\num_of LinkedListEntry entry; entry != null; true);
+    @*/
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  /*@ public normal_behavior
+    @    requires index >= 0;
+    @    assignable Head;
+    @    ensures (\forall int i; 0 <= i && i < index; (\exists LinkedListEntry entry; entry != null; entry == Head));
+    @*/
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable Head;
+    @    ensures (\forall int i; 0 <= i && i < size(); (\exists LinkedListEntry entry; entry != null; entry == Head));
+    @*/
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable Head;
+    @    ensures (\forall int i; 0 <= i && i < size(); (\exists LinkedListEntry entry; entry != null; entry == Head));
+    @*/
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == (\exists LinkedListEntry entry; entry != null; entry == Head);
+    @*/
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == Verifier.nondetInt();
+    @*/
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == ((e % 2 == 0 && aggregated < e) ? e : aggregated);
+    @*/
+  public static int accumulator(int aggregated, int e) {
+    if (e % 2 == 0) if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  /*@ public normal_behavior
+    @    requires true;
+    @    ensures \result == true;
+    @*/
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+

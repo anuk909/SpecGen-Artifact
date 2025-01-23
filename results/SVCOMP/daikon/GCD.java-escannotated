@@ -1,0 +1,28 @@
+class GCD {
+    /*@ ensures \result >= 0; */
+    static int gcd(int y1, int y2) {
+        if (y1 <= 0 || y2 <= 0) {
+          return 0;
+        }
+        if (y1 == y2) {
+          return y1;
+        }
+        if (y1 > y2) {
+          return gcd(y1 - y2, y2);
+        }
+        return gcd(y1, y2 - y1);
+    }
+
+    /*@ requires args != null; */
+    /*@ requires \typeof(args) == \type(java.lang.String[]); */
+    /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+    /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+    public static void main(String[] args) {
+      for(int i = -5; i <= 10; i += 1) {
+        for(int j = -5; j <= 10; j += 1) {
+          gcd(i,j);
+          gcd(j,i);
+        }
+      }
+    }
+}

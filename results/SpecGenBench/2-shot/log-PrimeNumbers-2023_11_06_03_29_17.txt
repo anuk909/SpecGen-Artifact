@@ -1,0 +1,82 @@
+public class PrimeNumbers
+{
+    private  static boolean div(int n, int d) { return n%d == 0; }
+
+    private  int primeArray[];
+
+    //@ requires n > 0;
+    //@ ensures \result != null && \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < n; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        primeArray = new int[n];
+        primeArray[0] = 2;
+
+        //@ maintaining count >= 2 && count <= n+1;
+        //@ maintaining num >= 3 && num <= Integer.MAX_VALUE;
+        //@ maintaining (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+        //@ maintaining (\forall int i; count <= i && i < n; primeArray[i] == 0);
+        //@ decreases n - count;
+        for (count = 2; count <= n;)
+        { 
+
+            //@ maintaining j >= 2 && j <= num/2 + 1;
+            //@ maintaining status == 0 ==> (\exists int k; 2 <= k && k <= j-1; div(num, k));
+            //@ decreases num - j;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+
+    //@ requires n > 0;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i <= n-1; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i <= n-1; div(n, i));
+    public /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0 || n == 1) {
+            return false;
+        }
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:25: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.div(int,int)
+            //@ maintaining status == 0 ==> (\exists int k; 2 <= k && k <= j-1; div(num, k));
+                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:48: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i <= n-1; !div(n, i));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:48: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.div(int,int)
+    //@ ensures \result ==> (\forall int i; 2 <= i && i <= n-1; !div(n, i));
+                                                                    ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:49: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i <= n-1; div(n, i));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:49: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.div(int,int)
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i <= n-1; div(n, i));
+                                                                    ^
+2 errors
+3 warnings
+

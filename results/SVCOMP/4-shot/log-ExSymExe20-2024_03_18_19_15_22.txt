@@ -1,0 +1,44 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ ensures \result == (z >= (z - 3));
+  public static boolean main() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == 3;
+  //@ requires z == 9;
+  //@ requires r == 0;
+  //@ ensures \result == true <==> (z >= (z - 3));
+  //@ ensures \result == false <==> (z < (z - 3));
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe20");
+    int y = 3;
+    r = x + z;
+    x = z - y;
+    z = r;
+    if (z >= x) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x >= r) {
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ ensures \result == (z >= (z - 3));
+                          ^
+  symbol:   variable z
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe20.java:5: error: cannot find symbol
+  //@ ensures \result == (z >= (z - 3));
+                                ^
+  symbol:   variable z
+  location: class Main
+2 errors
+

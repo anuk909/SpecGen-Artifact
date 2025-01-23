@@ -1,0 +1,22 @@
+class Main {
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < as.length; !(as[i] instanceof B));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < as.length; as[i] instanceof B);
+    public static boolean f() {
+        A[] as = {new A(), new B()};
+        if (!(!(as[0] instanceof B)))
+            return false;
+        if (!(as[1] instanceof B))
+            return false;
+        return true;
+    }
+}
+
+class A {}
+
+class B extends A {}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 33554432 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid21149.log
+

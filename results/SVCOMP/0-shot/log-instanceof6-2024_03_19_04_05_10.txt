@@ -1,0 +1,24 @@
+class Main {
+  //@ requires true;
+  //@ ensures \result == (\result == true);
+  public static boolean f() {
+    A[] as = {new A(), new B()};
+    //@ assert as.length == 2;
+    if(!(as[0] instanceof A)) return false;
+    //@ assert as[0] instanceof A;
+    if (!(as[1] instanceof A))
+      return false;
+    //@ assert as[1] instanceof A;
+    return true;
+    //@ ensures \result == true;
+  }
+}
+
+class A {
+  //@ invariant true;
+}
+
+class B extends A {
+  //@ invariant true;
+}
+

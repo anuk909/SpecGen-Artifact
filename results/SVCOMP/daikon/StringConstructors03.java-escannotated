@@ -1,0 +1,22 @@
+public class StringConstructors03 {
+  /*@ ensures (\result == true)  ==>  (\old(arg0) == \old(arg1)); */
+  public static boolean f(String arg0, String arg1) {
+    String s = new String(arg0);
+    String s2 = new String(s);
+    return s2.equals(arg1);
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("#$%^&*123", "#$%^&*123");
+    f("#$%^#*123", "#$%^#*123");
+    f("fsgdhj", "fsgdhj");
+    f("fsgdhj", "fsadhj");
+    f("DiffBlue L1mitted", "DiffBlue L1mitted");
+    f("DiffBlue Limitted", "DiffBlue L1mitted");
+    f("HiiffblTe Limited", "");
+  }
+}

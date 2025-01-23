@@ -1,0 +1,171 @@
+class Merge {
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; nums1[i] <= nums2[0]);
+        //@ maintaining (\forall int i; 0 <= i && i < p2; nums2[i] <= nums2[0]);
+        //@ maintaining (\forall int i; p1 <= i && i < m; nums1[i] <= nums1[m-1]);
+        //@ maintaining (\forall int i; p2 <= i && i < n; nums2[i] <= nums2[n-1]);
+        //@ maintaining (\forall int i; p1 + p2 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+        //@ decreases m+n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums2[i]));
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:27: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:28: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums2[i]));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:29: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+                                     ^
+3 errors
+
+class Merge {
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; nums1[i] <= nums2[0]);
+        //@ maintaining (\forall int i; 0 <= i && i < p2; nums2[i] <= nums2[0]);
+        //@ maintaining (\forall int i; p1 <= i && i < m; nums1[i] <= nums1[m-1]);
+        //@ maintaining (\forall int i; p2 <= i && i < n; nums2[i] <= nums2[n-1]);
+        //@ maintaining (\forall int i; p1 + p2 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+        //@ decreases m+n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+        //@ maintaining (\forall int k; 0 <= k && k < m + n; (\exists int l; 0 <= l && l < m + n; sorted[l] == nums2[k]));
+        //@ maintaining (\forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < m; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:27: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:29: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < m; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+                                     ^
+2 errors
+
+class Merge {
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; nums1[i] <= nums2[0]);
+        //@ maintaining (\forall int i; 0 <= i && i < p2; nums2[i] <= nums2[0]);
+        //@ maintaining (\forall int i; p1 <= i && i < m; nums1[i] <= nums1[m-1]);
+        //@ maintaining (\forall int i; p2 <= i && i < n; nums2[i] <= nums2[n-1]);
+        //@ maintaining (\forall int i; p1 + p2 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+        //@ decreases m+n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+        //@ maintaining (\forall int k; 0 <= k && k < m + n; (\exists int l; 0 <= l && l < m + n; sorted[l] == nums2[k]));
+        //@ maintaining (\forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < m; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+        for (int i = 0; i != m + n; ++i) {
+            nums1[i] = sorted[i];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:27: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:29: error: variable i is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < m; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+                                     ^
+2 errors
+
+class Merge {
+    public void merge(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int p1 = 0, p2 = 0;
+        int[] sorted = new int[m + n];
+        int cur;
+        //@ maintaining 0 <= p1 && p1 <= m;
+        //@ maintaining 0 <= p2 && p2 <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < p1; nums1[i] <= nums2[0]);
+        //@ maintaining (\forall int i; 0 <= i && i < p2; nums2[i] <= nums2[0]);
+        //@ maintaining (\forall int i; p1 <= i && i < m; nums1[i] <= nums1[m-1]);
+        //@ maintaining (\forall int i; p2 <= i && i < n; nums2[i] <= nums2[n-1]);
+        //@ maintaining (\forall int i; p1 + p2 <= i && i < p1 + p2 - 1; sorted[i] <= sorted[i+1]);
+        //@ decreases m+n - p1 - p2;
+        while (p1 < m || p2 < n) {
+            if (p1 == m) {
+                cur = nums2[p2++];
+            } else if (p2 == n) {
+                cur = nums1[p1++];
+            } else if (nums1[p1] < nums2[p2]) {
+                cur = nums1[p1++];
+            } else {
+                cur = nums2[p2++];
+            }
+            sorted[p1 + p2 - 1] = cur;
+        }
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+        //@ maintaining (\forall int k; 0 <= k && k < m + n; (\exists int l; 0 <= l && l < m + n; sorted[l] == nums2[k]));
+        //@ maintaining (\forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < m; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+        for (int j = 0; j != m + n; ++j) {
+            nums1[j] = sorted[j];
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Merge.java:27: error: variable j is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m + n; (\exists int j; 0 <= j && j < m + n; sorted[j] == nums1[i]));
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/Merge.java:29: error: variable j is already defined in method merge(int[],int[])
+        //@ maintaining (\forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < m; nums1[j] == nums2[i] || nums2[j] == nums1[i]));
+                                                                      ^
+2 errors
+

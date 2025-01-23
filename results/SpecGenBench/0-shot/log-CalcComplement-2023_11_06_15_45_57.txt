@@ -1,0 +1,26 @@
+class CalcComplement {
+    /**
+     * Calculates the bitwise complement of the given number.
+     * The result is obtained by flipping all the bits of the number.
+     * 
+     * @param num the input number
+     * @return the bitwise complement of the input number
+     * @ensures \result >= 0
+     */
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ loop_invariant 1 <= i && i <= 31
+        //@ loop_invariant highbit >= 0 && highbit <= 30
+        //@ loop_invariant (\forall int j; 1 <= j && j < i; num >= 1 << j ==> highbit == j)
+        //@ decreases 30 - i
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}

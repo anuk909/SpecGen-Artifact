@@ -1,0 +1,209 @@
+class Main {
+  static int field;
+
+  //@ ensures field == 9 && \result == true;
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result == true;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ ensures (x1 == 0 && y1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> 1"))) &&
+  //@         (x1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> LOOK!"))) &&
+  //@         (x1 < 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> ???"))) &&
+  //@         (x1 > 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> !!!1")));
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures field == 9 && \result == true;
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x1 == 0 && y1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> 1"))) &&
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:24: error: incompatible types: void cannot be converted to boolean
+  //@         (x1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> LOOK!"))) &&
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: incompatible types: void cannot be converted to boolean
+  //@         (x1 < 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> ???"))) &&
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: incompatible types: void cannot be converted to boolean
+  //@         (x1 > 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> !!!1")));
+                                                                              ^
+5 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+
+  //@ ensures field == 9 && \result == true;
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result == true;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ ensures (x1 == 0 && y1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> 1"))) &&
+  //@         (x1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> LOOK!"))) &&
+  //@         (x1 < 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> ???"))) &&
+  //@         (x1 > 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> !!!1")));
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x1 == 0 && y1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> 1"))) &&
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:24: error: incompatible types: void cannot be converted to boolean
+  //@         (x1 != 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> LOOK!"))) &&
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: incompatible types: void cannot be converted to boolean
+  //@         (x1 < 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> ???"))) &&
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: incompatible types: void cannot be converted to boolean
+  //@         (x1 > 0 ==> (\exists int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> !!!1")));
+                                                                              ^
+4 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+
+  //@ ensures field == 9 && \result == true;
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result == true;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ ensures (x1 == 0 && y1 != 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> 1"));
+  //@ ensures (x1 != 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> LOOK!"));
+  //@ ensures (x1 < 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> ???"));
+  //@ ensures (x1 > 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> !!!1"));
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:23: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x1 == 0 && y1 != 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> 1"));
+                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:24: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x1 != 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>> LOOK!"));
+                                                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x1 < 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> ???"));
+                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (x1 > 0) ==> (\forall int i; 0 <= i && i < 13; System.out.println(">>>>>>>>>>>>>>> !!!1"));
+                                                                               ^
+4 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+
+  //@ ensures field == 9 && \result == true;
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result == true;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ ensures (x1 == 0 && y1 != 0);
+  //@ ensures (x1 != 0);
+  //@ ensures (x1 < 0);
+  //@ ensures (x1 > 0);
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}

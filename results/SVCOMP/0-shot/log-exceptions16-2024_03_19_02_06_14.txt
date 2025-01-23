@@ -1,0 +1,31 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions16 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(int x) {
+    //@ assume true; // Placeholder for assume statement
+
+    try {
+      x++;
+    } catch (A exc) {
+      //@ assert false; // Unreachable code
+      return false;
+    }
+
+    try {
+      throw new B();
+    } catch (B exc) {
+      //@ assert true; // This block will be executed
+      return false;
+    }
+
+    //@ assert false; // Unreachable code
+    return true;
+  }
+}
+

@@ -1,0 +1,109 @@
+public class Environment {
+
+  /*@ invariant this != null; */
+  /*@ invariant this.waterLevel != null; */
+  /*@ invariant Environment$WaterLevelEnum.low != null; */
+  /*@ invariant Environment$WaterLevelEnum.low != null; */
+  /*@ invariant Environment$WaterLevelEnum.normal != null; */
+  /*@ invariant Environment$WaterLevelEnum.normal != null; */
+  /*@ invariant Environment$WaterLevelEnum.high != null; */
+  /*@ invariant Environment$WaterLevelEnum.high != null; */
+  /*@ invariant Environment$WaterLevelEnum.$VALUES != null; */
+  /*@ invariant Environment$WaterLevelEnum.$VALUES != null; */
+  /*@ invariant \typeof(Environment$WaterLevelEnum.$VALUES) == \type(Environment.WaterLevelEnum[]); */
+  /*@ invariant (Environment$WaterLevelEnum.$VALUES.length == 3) && ((\forall int i; (0 <= i && i <= Environment$WaterLevelEnum.$VALUES.length-1) ==> (Environment$WaterLevelEnum.$VALUES[i] != null))); */
+  /*@ invariant \nonnullelements(Environment$WaterLevelEnum.$VALUES); */
+  /*@ invariant \elemtype(Environment$WaterLevelEnum.$VALUES) == \type(Environment.WaterLevelEnum); */
+  /*@ invariant (\forall int i; (0 <= i && i <= Environment$WaterLevelEnum.$VALUES.length-1) ==> (\typeof(Environment$WaterLevelEnum.$VALUES[i]) == \type(Environment.WaterLevelEnum))); */
+  /*@ invariant Environment$WaterLevelEnum.$VALUES.length == 3; */
+  public enum WaterLevelEnum {
+    low,
+    normal,
+    high
+  }
+
+  /*@ spec_public */ private WaterLevelEnum waterLevel = WaterLevelEnum.normal;
+
+  /*@ spec_public */ private boolean methaneLevelCritical = false;
+
+  /*@ modifies this.waterLevel, Environment$WaterLevelEnum.low, Environment$WaterLevelEnum.normal, Environment$WaterLevelEnum.high, Environment$WaterLevelEnum.$VALUES, Environment$WaterLevelEnum.$VALUES[*], this.methaneLevelCritical; */
+  void lowerWaterLevel() {
+    switch (waterLevel) {
+      case high:
+        waterLevel = WaterLevelEnum.normal;
+        break;
+      case normal:
+        waterLevel = WaterLevelEnum.low;
+        break;
+    }
+  }
+
+  /*@ modifies this.waterLevel; */
+  public void waterRise() {
+    switch (waterLevel) {
+      case low:
+        waterLevel = WaterLevelEnum.normal;
+        break;
+      case normal:
+        waterLevel = WaterLevelEnum.high;
+        break;
+    }
+  }
+
+  /*@ modifies this.methaneLevelCritical; */
+  public void changeMethaneLevel() {
+    methaneLevelCritical = !methaneLevelCritical;
+  }
+
+  /*@ ensures this.methaneLevelCritical == \result; */
+  /*@ ensures \result == \old(this.methaneLevelCritical); */
+  public boolean isMethaneLevelCritical() {
+    return methaneLevelCritical;
+  }
+
+  @Override
+  public String toString() {
+    return "Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")";
+  }
+
+  /*@ ensures this.waterLevel == \result; */
+  /*@ ensures \result == \old(this.waterLevel); */
+  public WaterLevelEnum getWaterLevel() {
+    return waterLevel;
+  }
+
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Environment e = new Environment();
+    e.waterLevel = WaterLevelEnum.low;
+    e.getWaterLevel();
+    e.isMethaneLevelCritical();
+    e.toString();
+    e.changeMethaneLevel();
+    e.getWaterLevel();
+    e.isMethaneLevelCritical();
+    e.toString();
+
+    e.waterRise();
+    e.getWaterLevel();
+    e.isMethaneLevelCritical();
+    e.toString();
+    e.changeMethaneLevel();
+    e.getWaterLevel();
+    e.isMethaneLevelCritical();
+    e.toString();
+
+    e.waterRise();
+    e.getWaterLevel();
+    e.isMethaneLevelCritical();
+    e.toString();
+    e.changeMethaneLevel();
+    e.getWaterLevel();
+    e.isMethaneLevelCritical();
+    e.toString();
+  }
+}

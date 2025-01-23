@@ -1,0 +1,35 @@
+class Main {
+
+  /*@ ensures \result == true; */
+  public static boolean f(int x) {
+    x = x > 0 ? x % 10 : -(x % 10);
+
+    Main inst = new Main();
+    return inst.test(x);
+  }
+
+  /*@ ensures (x >= 1)  ==  (\old(x) >= 0); */
+  /*@ ensures (x >= 1)  ==  (\result == true); */
+  public boolean test(int x) {
+    double res = (double) ++x;
+    if (res > 0) System.out.println("x >0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+
+class ExSymExeI2D {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int x = -10; x <= 10; x += 1) {
+      Main.f(x);
+      e.test(x);
+    }
+  }
+}

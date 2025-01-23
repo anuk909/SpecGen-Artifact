@@ -1,0 +1,27 @@
+class A extends Throwable {
+    //@ public invariant true;
+}
+
+class B extends A {
+    //@ public invariant true;
+}
+
+class C extends B {
+    //@ public invariant true;
+}
+
+public class exceptions3 {
+    //@ requires args != null;
+    //@ ensures true;
+    public static void main(String[] args) {
+        //@ assert args != null;
+        try {
+            throw new B();
+        } catch (C exc) {
+            //@ assert false;
+        } catch (B exc) {
+            //@ assert false;
+        }
+    }
+}
+

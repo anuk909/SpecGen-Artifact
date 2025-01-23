@@ -1,0 +1,166 @@
+class PlusOne {
+    //@ requires digits.length > 0 && (\forall int i; 0 <= i && i < digits.length; 0 <= digits[i] && digits[i] <= 9);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> \result[\result.length-1] == 0;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> \result[\result.length-1] == 0;
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:12: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method plusOne
+            digits[i]++;
+                  ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:16: verify: The prover cannot establish an assertion (PossiblyNegativeSize) in method plusOne
+        digits = new int[digits.length + 1];
+                                       ^
+2 verification failures
+
+class PlusOne {
+    //@ requires digits.length > 0 && (\forall int i; 0 <= i && i < digits.length; 0 <= digits[i] && digits[i] <= 9);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> \result[\result.length-1] == 0;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> \result[\result.length-1] == 0;
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            //@ assume 0 <= i && i < digits.length;
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        //@ assume digits.length >= 0;
+        int[] newDigits = new int[digits.length + 1];
+        newDigits[0] = 1;
+        return newDigits;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:18: verify: The prover cannot establish an assertion (PossiblyNegativeSize) in method plusOne
+        int[] newDigits = new int[digits.length + 1];
+                                                ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:18: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method plusOne: overflow in int sum
+        int[] newDigits = new int[digits.length + 1];
+                                                ^
+2 verification failures
+
+class PlusOne {
+    //@ requires digits.length > 0 && (\forall int i; 0 <= i && i < digits.length; 0 <= digits[i] && digits[i] <= 9);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> \result[\result.length-1] == 0;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> \result[\result.length-1] == 0;
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            //@ assume 0 <= i && i < digits.length;
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        //@ assume digits.length >= 0 && digits.length < Integer.MAX_VALUE;
+        int[] newDigits = new int[digits.length + 1];
+        newDigits[0] = 1;
+        return newDigits;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:13: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method plusOne: overflow in int sum
+            digits[i]++;
+                     ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PlusOne.java:3:) in method plusOne
+            if (digits[i] != 0) return digits;
+                                ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PlusOne.java:15:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+        ^
+3 verification failures
+
+class PlusOne {
+    //@ requires digits.length > 0 && (\forall int i; 0 <= i && i < digits.length; 0 <= digits[i] && digits[i] <= 9);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> \result[\result.length-1] == 0;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> \result[\result.length-1] == 0;
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            //@ assume 0 <= i && i < digits.length && digits[i] < Integer.MAX_VALUE;
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        //@ assume digits.length >= 0 && digits.length < Integer.MAX_VALUE;
+        int[] newDigits = new int[digits.length + 1];
+        newDigits[0] = 1;
+        return newDigits;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PlusOne.java:3:) in method plusOne
+            if (digits[i] != 0) return digits;
+                                ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PlusOne.java:15:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PlusOne.java:7:) in method plusOne
+            if (digits[i] != 0) return digits;
+                                ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PlusOne.java:15:
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+        ^
+4 verification failures
+
+class PlusOne {
+    //@ requires digits.length > 0 && (\forall int i; 0 <= i && i < digits.length; 0 <= digits[i] && digits[i] <= 9);
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] == \old(digits[i])) ==> \result[\result.length-1] == 0;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> (\forall int i; 0 <= i && i < \result.length-1; \result[i] == digits[i]+1);
+    //@ ensures digits[digits.length-1] == \old(digits[digits.length-1]) ==> \result[\result.length-1] == 0;
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            //@ assume 0 <= i && i < digits.length && digits[i] < Integer.MAX_VALUE;
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) break;
+            if (i == 0) {
+                //@ assume digits.length >= 0 && digits.length < Integer.MAX_VALUE;
+                int[] newDigits = new int[digits.length + 1];
+                newDigits[0] = 1;
+                return newDigits;
+            }
+        }
+        return digits;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PlusOne.java:3:) in method plusOne
+        return digits;
+        ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PlusOne.java:23:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length-1; 0 <= \result[i] && \result[i] <= 9) && \result[\result.length-1] == 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PlusOne.java:7:) in method plusOne
+        return digits;
+        ^
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PlusOne.java:23:
+    //@ ensures (\forall int i; 0 <= i && i < digits.length-1; digits[i] != \old(digits[i])) ==> (\forall int i; 0 <= i && i < \result.length; \result[i] == 0);
+        ^
+4 verification failures
+

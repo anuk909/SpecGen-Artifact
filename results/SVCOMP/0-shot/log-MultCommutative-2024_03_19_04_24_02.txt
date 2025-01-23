@@ -1,0 +1,25 @@
+public class MultCommutative {
+
+  //@ requires true;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ decreases m;
+    if (m < 0) {
+      return mult(n, -m);
+    }
+    //@ assert m >= 0;
+    
+    //@ loop_invariant \result == n * (m + \old(m) - m);
+    //@ decreases m;
+    while (m > 0) {
+      //@ assert \result == n * (m + \old(m) - m);
+      m--;
+      //@ assert \result == n * (m + \old(m) - m);
+    }
+    //@ assert \result == n * (0 + \old(m) - 0);
+    
+    return 0;
+  }
+  
+}
+

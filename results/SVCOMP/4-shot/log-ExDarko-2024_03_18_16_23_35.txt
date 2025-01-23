@@ -1,0 +1,63 @@
+class MyInteger {
+  int value;
+
+  //@ ensures \result <==> obj == this;
+  //@ ensures !\result <==> !(obj instanceof MyInteger);
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+  public MyInteger(int value) {
+    this.value = value;
+  }
+
+  //@ ensures \result <==> obj == this;
+  //@ ensures !\result <==> !(obj instanceof MyInteger);
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof MyInteger)) {
+      return false;
+    }
+    MyInteger other = (MyInteger) obj;
+    return this.value == other.value;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:4: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result <==> obj == this;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:4: error: cannot find symbol
+  //@ ensures \result <==> obj == this;
+                           ^
+  symbol:   variable obj
+  location: class MyInteger
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:5: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures !\result <==> !(obj instanceof MyInteger);
+                ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:5: error: cannot find symbol
+  //@ ensures !\result <==> !(obj instanceof MyInteger);
+                              ^
+  symbol:   variable obj
+  location: class MyInteger
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:6: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+                               ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:6: error: cannot find symbol
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+                                                     ^
+  symbol:   variable obj
+  location: class MyInteger
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:13: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+                               ^
+/home/max/Documents/JMLGPT/tmp/ExDarko.java:13: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> this.value == ((MyInteger)obj).value;
+                                                         ^
+10 errors
+

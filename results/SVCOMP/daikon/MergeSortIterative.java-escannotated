@@ -1,0 +1,198 @@
+public class MergeSortIterative {
+
+  /*@ modifies a[*]; */
+  /////////////////////////////////////////
+  // Iterative mergeSort
+  /////////////////////////////////////////
+
+  public static void iterativeMergesort(int[] a) {
+    int[] aux = new int[a.length];
+    for (int blockSize = 1; blockSize < a.length; blockSize *= 2)
+      for (int start = 0; start < a.length; start += 2 * blockSize)
+        merge(a, aux, start, start + blockSize, start + 2 * blockSize);
+  }
+
+  /*@ modifies a[*]; */
+  /////////////////////////////////////////
+  // Iterative mergeSort without copy
+  /////////////////////////////////////////
+
+  public static void iterativeMergesortWithoutCopy(int[] a) {
+    int[] from = a, to = new int[a.length];
+    for (int blockSize = 1; blockSize < a.length; blockSize *= 2) {
+      for (int start = 0; start < a.length; start += 2 * blockSize)
+        mergeWithoutCopy(from, to, start, start + blockSize, start + 2 * blockSize);
+      int[] temp = from;
+      from = to;
+      to = temp;
+    }
+    if (a != from)
+      // copy back
+      for (int k = 0; k < a.length; k++) a[k] = from[k];
+  }
+
+  /*@ modifies from[*], to[*]; */
+  private static void mergeWithoutCopy(int[] from, int[] to, int lo, int mid, int hi) {
+    // DK: cannot just return if mid >= a.length, but must still copy remaining elements!
+    // DK: add two tests to first verify "mid" and "hi" are in range
+    if (mid > from.length) mid = from.length;
+    if (hi > from.length) hi = from.length;
+    int i = lo, j = mid;
+    for (int k = lo; k < hi; k++) {
+      if (i == mid) to[k] = from[j++];
+      else if (j == hi) to[k] = from[i++];
+      else if (from[j] < from[i]) to[k] = from[j++];
+      else to[k] = from[i++];
+    }
+    // DO NOT copy back
+    // for (int k = lo; k < hi; k++)
+    //   a[k] = aux[k];
+  }
+
+  /*@ requires a.length == aux.length; */
+  /*@ requires a != null; */
+  /*@ requires aux != null; */
+  /*@ requires lo >= 0; */
+  /*@ requires mid >= 1; */
+  /*@ requires aux[lo] == -23 || aux[lo] == -8 || aux[lo] == 0; */
+  /*@ requires aux[mid-1] >= 0; */
+  /*@ requires aux[hi-1] >= 0; */
+  /*@ requires lo < mid; */
+  /*@ requires lo < hi; */
+  /*@ requires lo < a.length-1; */
+  /*@ requires mid < hi; */
+  /*@ requires mid <= a.length-1; */
+  /*@ requires hi <= a.length; */
+  /*@ requires hi != a.length-1; */
+  /*@ requires a[lo] <= a[mid-1]; */
+  /*@ requires a[mid] <= a[hi-1]; */
+  /*@ requires aux[lo] <= aux[mid-1]; */
+  /*@ requires aux[lo] <= aux[hi-1]; */
+  /*@ requires aux[mid] <= aux[hi-1]; */
+  /*@ modifies a[*], aux[*]; */
+  /*@ ensures a[\old(lo)] == aux[\old(lo)]; */
+  /*@ ensures a[\old(mid)] == aux[\old(mid)]; */
+  /*@ ensures a[\old(mid)-1] == aux[\old(mid)-1]; */
+  /*@ ensures a[\old(hi)-1] == aux[\old(hi)-1]; */
+  /*@ ensures a[\old(mid)] >= 1; */
+  /*@ ensures a[\old(hi)-1] >= 1; */
+  /*@ ensures !(\forall int i; (0 <= i && i <= a.length-1) ==> (a[i] != \old(a[lo]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= a.length-1) ==> (a[i] != \old(a[mid]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= a.length-1) ==> (a[i] != \old(a[mid-1]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= a.length-1) ==> (a[i] != \old(a[hi-1]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= aux.length-1) ==> (aux[i] != \old(a[lo]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= aux.length-1) ==> (aux[i] != \old(a[mid]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= aux.length-1) ==> (aux[i] != \old(a[mid-1]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= aux.length-1) ==> (aux[i] != \old(a[hi-1]))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= \old(a.length-1)) ==> (\old(a[i]) != a[\old(lo)])); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= \old(a.length-1)) ==> (\old(a[i]) != a[\old(mid)])); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= \old(a.length-1)) ==> (\old(a[i]) != a[\old(mid)-1])); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= \old(a.length-1)) ==> (\old(a[i]) != a[\old(hi)-1])); */
+  /*@ ensures \old(lo) < a.length-1; */
+  /*@ ensures \old(mid) <= a.length-1; */
+  /*@ ensures \old(hi) != a.length-1; */
+  /*@ ensures a[\old(lo)] <= a[\old(mid)]; */
+  /*@ ensures a[\old(lo)] <= a[\old(mid)-1]; */
+  /*@ ensures a[\old(lo)] <= a[\old(hi)-1]; */
+  /*@ ensures a[\old(lo)] <= \old(a[lo]); */
+  /*@ ensures a[\old(lo)] <= \old(a[mid]); */
+  /*@ ensures a[\old(lo)] <= \old(a[mid-1]); */
+  /*@ ensures a[\old(lo)] <= \old(a[hi-1]); */
+  /*@ ensures a[\old(mid)] >= a[\old(mid)-1]; */
+  /*@ ensures a[\old(mid)] <= a[\old(hi)-1]; */
+  /*@ ensures a[\old(mid)] >= \old(a[mid]); */
+  /*@ ensures a[\old(mid)] > \old(aux[lo]); */
+  /*@ ensures a[\old(mid)] >= \old(aux[mid]); */
+  /*@ ensures a[\old(mid)-1] <= a[\old(hi)-1]; */
+  /*@ ensures a[\old(mid)-1] <= \old(a[mid-1]); */
+  /*@ ensures a[\old(mid)-1] <= \old(a[hi-1]); */
+  /*@ ensures a[\old(hi)-1] >= \old(a[lo]); */
+  /*@ ensures a[\old(hi)-1] >= \old(a[mid]); */
+  /*@ ensures a[\old(hi)-1] >= \old(a[mid-1]); */
+  /*@ ensures a[\old(hi)-1] >= \old(a[hi-1]); */
+  /*@ ensures a[\old(hi)-1] > \old(aux[lo]); */
+  /*@ ensures a[\old(hi)-1] > \old(aux[mid]); */
+  /*@ ensures a[\old(hi)-1] >= \old(aux[mid-1]); */
+  /*@ ensures a[\old(hi)-1] >= \old(aux[hi-1]); */
+  /////////////////////////////////////////
+  // Recursive mergeSort, adapted from:
+  // Sedgewick and Wayne, Introduction to Programming in Java
+  // http://www.cs.princeton.edu/introcs/42sort/MergeSort.java.html
+  /////////////////////////////////////////
+
+  private static void merge(int[] a, int[] aux, int lo, int mid, int hi) {
+    // DK: add two tests to first verify "mid" and "hi" are in range
+    if (mid >= a.length) return;
+    if (hi > a.length) hi = a.length;
+    int i = lo, j = mid;
+    for (int k = lo; k < hi; k++) {
+      if (i == mid) aux[k] = a[j++];
+      else if (j == hi) aux[k] = a[i++];
+      else if (a[j] < a[i]) aux[k] = a[j++];
+      else aux[k] = a[i++];
+    }
+    // copy back
+    for (int k = lo; k < hi; k++) a[k] = aux[k];
+  }
+
+  /*@ requires a.length == aux.length; */
+  /*@ requires a != null; */
+  /*@ requires aux != null; */
+  /*@ requires lo >= 0; */
+  /*@ requires lo <= hi; */
+  /*@ requires lo <= a.length; */
+  /*@ requires hi <= a.length; */
+  /*@ modifies a[*], aux[*]; */
+  public static void recursiveMergesort(int[] a, int[] aux, int lo, int hi) {
+    // base case
+    if (hi - lo <= 1) return;
+    // sort each half, recursively
+    int mid = lo + (hi - lo) / 2;
+    recursiveMergesort(a, aux, lo, mid);
+    recursiveMergesort(a, aux, mid, hi);
+    // merge back together
+    merge(a, aux, lo, mid, hi);
+  }
+
+  /*@ requires a != null; */
+  /*@ modifies a[*]; */
+  /*@ ensures (\forall int i, j; (0 <= i && i <= a.length-1 && 0 <= j && j <= a.length-1) ==> ((i+1 == j) ==> (a[i] <= a[j]))); */
+  public static void recursiveMergesort(int[] a) {
+    int n = a.length;
+    int[] aux = new int[n];
+    recursiveMergesort(a, aux, 0, n);
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    int[] arr = new int[]{};
+    recursiveMergesort(arr);
+    arr = new int[]{1};
+    recursiveMergesort(arr);
+    arr = new int[]{1, -2};
+    recursiveMergesort(arr);
+    arr = new int[]{1, 1};
+    recursiveMergesort(arr);
+    arr = new int[]{1, 2, -7};
+    recursiveMergesort(arr);
+    arr = new int[]{1, 1, 2};
+    recursiveMergesort(arr);
+    arr = new int[]{7, 1, 3};
+    recursiveMergesort(arr);
+    arr = new int[]{7, 3, 1};
+    recursiveMergesort(arr);
+    arr = new int[]{-8, 1, 0, 1};
+    recursiveMergesort(arr);
+    arr = new int[]{9, 0, 8, -1, 8};
+    recursiveMergesort(arr);
+    arr = new int[]{9, 0, 114, -1, 114};
+    recursiveMergesort(arr);
+    arr = new int[]{9, -23, 8, -23, 8};
+    recursiveMergesort(arr);
+    arr = new int[]{9, -23, 8, 23, -8, 3, 514};
+    recursiveMergesort(arr);
+}
+}

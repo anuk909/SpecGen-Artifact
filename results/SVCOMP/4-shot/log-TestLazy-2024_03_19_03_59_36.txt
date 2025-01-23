@@ -1,0 +1,22 @@
+class Main {
+    //@ ensures \result ==> this.f(0, arg);
+    //@ ensures !\result ==> arg != 0;
+    public static boolean g (int arg) {
+        if (arg == 0)
+            return (new Main()).f(0, arg);
+        return true;
+    }
+
+    //@ requires a == 0 && b == arg;
+    //@ ensures \result ==> (a < 5 && i != null && i.intValue() == 4);
+    //@ ensures !\result ==> (a >= 5 || i == null || i.intValue() != 4);
+    public boolean f(int a, int b) {
+        Integer i = null;
+        if (a < 5) {
+            i = Integer.valueOf(4);
+            i.floatValue();
+        } else
+            return false;
+        return true;
+    }
+}

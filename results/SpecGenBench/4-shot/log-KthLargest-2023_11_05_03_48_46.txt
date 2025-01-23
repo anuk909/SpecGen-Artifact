@@ -1,0 +1,44 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires (\forall int i; 0 <= i && i < nums.length; (int)Integer.MIN_VALUE <= nums[i] && nums[i] <= (int)Integer.MAX_VALUE);
+    //@ requires 1 <= k && k <= nums.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; (\exists int j; 0 <= j && j < nums.length; nums[i] <= nums[j]));
+    //@ ensures \result == (\max int i; 0 <= i && i < k; (\min int j; 0 <= j && j < nums.length; nums[j]));
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \min
+    //@ ensures \result == (\max int i; 0 <= i && i < k; (\min int j; 0 <= j && j < nums.length; nums[j]));
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \max
+    //@ ensures \result == (\max int i; 0 <= i && i < k; (\min int j; 0 <= j && j < nums.length; nums[j]));
+                            ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:12: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69:) in method kthLargest
+            pq.offer(x);
+                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/KthLargest.java:12:
+      @   requires e == null & !containsNull;
+          ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:57: verify: Precondition conjunct is false: false
+      @   requires  false && (* capacity restrictions respected *);
+                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:64: verify: Precondition conjunct is false: false
+      @   requires false && (* capacity restrictions violated *);
+                   ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69: verify: Precondition conjunct is false: e == null
+      @   requires e == null & !containsNull;
+                     ^
+2 warnings
+5 verification failures
+

@@ -1,0 +1,38 @@
+class CanConstruct {
+    //@ requires ransomNote != null && magazine != null;
+    //@ ensures \result == true || \result == false;
+    public boolean canConstruct(String ransomNote, String magazine) {
+        //@ assert ransomNote != null && magazine != null;
+        
+        if (ransomNote.length() > magazine.length()) {
+            //@ assert ransomNote.length() > magazine.length();
+            //@ ensures \result == false;
+            return false;
+        }
+        
+        int[] cnt = new int[26];
+        //@ assert cnt != null && cnt.length == 26;
+        
+        for (char c : magazine.toCharArray()) {
+            //@ assert c != null;
+            //@ assert c >= 'a' && c <= 'z';
+            cnt[c - 'a']++;
+        }
+        
+        for (char c : ransomNote.toCharArray()) {
+            //@ assert c != null;
+            //@ assert c >= 'a' && c <= 'z';
+            cnt[c - 'a']--;
+            
+            if(cnt[c - 'a'] < 0) {
+                //@ assert cnt[c - 'a'] < 0;
+                //@ ensures \result == false;
+                return false;
+            }
+        }
+        
+        //@ assert \forall int i; 0 <= i && i < cnt.length; cnt[i] >= 0;
+        //@ ensures \result == true;
+        return true;
+    }
+}

@@ -1,0 +1,22 @@
+public class StrPalindrome {
+   
+   //@ requires str != null;
+   //@ ensures \result == true || \result == false;
+   public boolean isPalindrome(String str) {
+      String reverse = "";
+      
+      int length = str.length();
+
+      //@ loop_invariant reverse.length() == str.length() - i;
+      //@ loop_invariant 0 <= i <= str.length();
+      //@ loop_invariant reverse.equals(str.substring(i + 1, str.length()));
+      //@ decreases i;
+      for (int i = length - 1; 0 <= i; i--) {
+         reverse = reverse + str.charAt(i);
+      }
+      
+      //@ assert reverse.equals(str.substring(0, str.length()));
+      return reverse.equals(str);
+   }
+
+}

@@ -1,0 +1,322 @@
+class Main {
+    //@ ensures \result ==> (v <= 0);
+    //@ ensures !\result ==> (v > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result == z + 1 && z > 10 || \result == z - 1 && z <= 10;
+    public int method_b(int z) {
+        if (z > 10) return z++;
+        else return z--;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:2: error: cannot find symbol
+    //@ ensures \result ==> (v <= 0);
+                             ^
+  symbol:   variable v
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:3: error: cannot find symbol
+    //@ ensures !\result ==> (v > 0);
+                              ^
+  symbol:   variable v
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:25: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+                                                                               ^
+3 errors
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result == z + 1 && z > 10 || \result == z - 1 && z <= 10;
+    public int method_b(int z) {
+        if (z > 10) return z++;
+        else return z--;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:25: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: non-static method test(int,int) cannot be referenced from a static context
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && test(arg, 0));
+                                                                               ^
+1 error
+
+class Main {
+    //@ ensures \result ==> (method_a(x, y) <= 0);
+    //@ ensures !\result ==> (method_a(x, y) > 0);
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result == x && x > 10 || \result == y && y > 10 || \result == 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:19: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result ==> (arg < 0 || arg > 10) || (arg >= 0 && arg <= 10 && new Main().test(arg, 0));
+                                                                               ^
+1 error
+

@@ -1,0 +1,18 @@
+class if_expr1 {
+  //@ requires true;
+  //@ ensures \result == (x == 10 ? 11 == 11 : 9 == 11) || (x != 10 && 9 == 9);
+  public static boolean main(int x) {
+    int y = x == 10 ? 11 : 9;
+    //@ assert y == (x == 10 ? 11 : 9);
+    if (x == 10) {
+      //@ assert x == 10;
+      //@ assert y == 11;
+      return y == 11;
+    } else {
+      //@ assert x != 10;
+      //@ assert y == 9;
+      return y == 9;
+    }
+  }
+}
+

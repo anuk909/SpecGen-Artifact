@@ -1,0 +1,46 @@
+public class AddLoopFor {
+    //@ ensures \result == x + y;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < x; 1);
+            //@ maintaining 0 <= x;
+            //@ decreases x;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < -x; -1);
+            //@ maintaining 0 <= -x;
+            //@ decreases -x;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:6: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < x; 1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:6: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < x; 1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:6: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < x; 1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < -x; -1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < -x; -1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < -x; -1);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:13: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method addLoop
+            //@ maintaining sum == y + (\sum int i; 0 <= i && i < -x; -1);
+                ^
+6 warnings
+1 verification failure
+

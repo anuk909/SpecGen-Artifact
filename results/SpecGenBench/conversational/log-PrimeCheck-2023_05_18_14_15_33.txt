@@ -1,0 +1,50 @@
+
+class PrimeCheck {
+   /*@ public normal_behavior
+     @    requires a > 0;
+     @    ensures (\result <==> (\forall int i; 2 <= i && i <= a/2; a%i != 0)); @*/
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:12: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method isPrime
+	   if (a%i == 0)
+	        ^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:5:) in method isPrime
+	return true;
+	^
+/home/max/Documents/JMLGPT/tmp/PrimeCheck.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PrimeCheck.java:16:
+     @    ensures (\result <==> (\forall int i; 2 <= i && i <= a/2; a%i != 0)); @*/
+          ^
+3 verification failures
+
+
+class PrimeCheck {
+   
+   /*@ requires a >= 2;
+     @ ensures (\result <==> (\forall int i; 2 <= i && i <= a/2; a%i != 0)); @*/
+   public boolean isPrime(int a) {
+	
+	int i = 2;
+	int mid = a/2;
+
+	while (i <= mid) {
+	   if (a%i == 0)
+		return false;
+	   i++;
+	}
+	return true;
+   }
+}
+
+

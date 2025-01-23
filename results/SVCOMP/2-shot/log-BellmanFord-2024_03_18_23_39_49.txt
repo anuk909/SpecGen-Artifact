@@ -1,0 +1,57 @@
+public class BellmanFord {
+
+  static final int INFINITY = Integer.MAX_VALUE;
+
+  //@ requires N > 0 && D.length == N*N && src >= 0 && src < N;
+  //@ ensures \result.length == N && (\forall int i; 0 <= i && i < N; \result[i] == INFINITY || \result[i] >= 0);
+  static int[] runBellmanFord(int N, int D[], int src) {
+    int dist[] = new int[N];
+    boolean infinite[] = new boolean[N];
+    //@ maintaining (\forall int i; 0 <= i && i < N; (infinite[i] ==> dist[i] == INFINITY) && (!infinite[i] ==> dist[i] >= 0));
+    for (int i = 0; i < N; i++) {
+      dist[i] = INFINITY;
+      infinite[i] = true;
+    }
+    dist[src] = 0;
+    infinite[src] = false;
+
+    int k;
+    //@ maintaining 0 <= k && k <= N;
+    for (k = 0; k < N; k++) {
+      boolean relaxed = false;
+      //@ maintaining (\forall int i; 0 <= i && i < N; (infinite[i] ==> dist[i] == INFINITY) && (!infinite[i] ==> dist[i] >= 0));
+      for (int i = 0; i < N; i++) {
+        //@ maintaining (\forall int j; 0 <= j && j < N; (infinite[j] ==> dist[j] == INFINITY) && (!infinite[j] ==> dist[j] >= 0));
+        for (int j = 0; j < N; j++) {
+          if (i == j) continue;
+          if (!infinite[i]) {
+            if (dist[j] > dist[i] + D[i * N + j]) {
+              dist[j] = dist[i] + D[i * N + j];
+              infinite[j] = false;
+              relaxed = true;
+            }
+          }
+        }
+      }
+      if (!relaxed)
+        break;
+    }
+
+    if (k == N) {
+      // There is a negative-weight cycle.
+    }
+
+    return dist;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:10: error: variable i is already defined in method runBellmanFord(int,int[],int)
+    //@ maintaining (\forall int i; 0 <= i && i < N; (infinite[i] ==> dist[i] == INFINITY) && (!infinite[i] ==> dist[i] >= 0));
+                                 ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:22: error: variable i is already defined in method runBellmanFord(int,int[],int)
+      //@ maintaining (\forall int i; 0 <= i && i < N; (infinite[i] ==> dist[i] == INFINITY) && (!infinite[i] ==> dist[i] >= 0));
+                                   ^
+/home/max/Documents/JMLGPT/tmp/BellmanFord.java:24: error: variable j is already defined in method runBellmanFord(int,int[],int)
+        //@ maintaining (\forall int j; 0 <= j && j < N; (infinite[j] ==> dist[j] == INFINITY) && (!infinite[j] ==> dist[j] >= 0));
+                                     ^
+3 errors
+

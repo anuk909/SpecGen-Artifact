@@ -1,0 +1,31 @@
+class basic1 {
+  //@ requires System.out != null;
+  //@ ensures \result == "Hello World!";
+  public static void main(String[] args) {
+    assert (System.out != null);
+    System.out.println("Hello World!");
+    
+    //@ requires System.err != null;
+    //@ ensures \result == "Hello World!";
+    assert (System.err != null);
+    System.err.println("Hello World!");
+    
+    //@ requires System.in != null;
+    //@ ensures \result == System.in.available();
+    try {
+      int avail = System.in.available();
+    } catch (java.io.IOException e) {
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/basic1.java:3: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == "Hello World!";
+               ^
+/home/max/Documents/JMLGPT/tmp/basic1.java:9: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result == "Hello World!";
+                 ^
+/home/max/Documents/JMLGPT/tmp/basic1.java:14: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result == System.in.available();
+                 ^
+3 errors
+

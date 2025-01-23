@@ -1,0 +1,30 @@
+class CheckABeforeB {
+    //@ requires s != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+    public boolean checkString(String s) {
+        char[] chars = s.toCharArray();
+        int i = 0;
+        //@ maintaining (\forall int k; 0 <= k && k < i; chars[k] == 'a');
+        //@ maintaining (0 <= i && i <= chars.length);
+        //@ decreases chars.length - i;
+        while (i < chars.length && chars[i] == 'a') {
+            i++;
+        }
+        int j = i;
+        //@ maintaining (\forall int k; i <= k && k < j; chars[k] == 'b');
+        //@ maintaining (i <= j && j <= chars.length);
+        //@ decreases chars.length - j;
+        while (j < chars.length && chars[j] == 'b') {
+            j++;
+        }
+        return j == chars.length;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:3:) in method checkString
+        return j == chars.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CheckABeforeB.java:20:
+    //@ ensures \result == (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != 'a');
+        ^
+2 verification failures
+

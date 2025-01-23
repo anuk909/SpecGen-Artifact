@@ -1,0 +1,74 @@
+public class Environment {
+
+  public enum WaterLevelEnum {
+    low,
+    normal,
+    high
+  }
+
+  private /*@ spec_public @*/ WaterLevelEnum waterLevel = WaterLevelEnum.normal;
+
+  private /*@ spec_public @*/ boolean methaneLevelCritical = false;
+
+  /*@ public normal_behavior
+    @    assignable waterLevel;
+    @    ensures waterLevel == WaterLevelEnum.normal ==> waterLevel == WaterLevelEnum.low;
+    @    ensures waterLevel == WaterLevelEnum.high ==> waterLevel == WaterLevelEnum.normal;
+    @*/
+  void lowerWaterLevel() {
+    switch (waterLevel) {
+      case high:
+        waterLevel = WaterLevelEnum.normal;
+        break;
+      case normal:
+        waterLevel = WaterLevelEnum.low;
+        break;
+    }
+  }
+
+  /*@ public normal_behavior
+    @    assignable waterLevel;
+    @    ensures waterLevel == WaterLevelEnum.low ==> waterLevel == WaterLevelEnum.normal;
+    @    ensures waterLevel == WaterLevelEnum.normal ==> waterLevel == WaterLevelEnum.high;
+    @*/
+  public void waterRise() {
+    switch (waterLevel) {
+      case low:
+        waterLevel = WaterLevelEnum.normal;
+        break;
+      case normal:
+        waterLevel = WaterLevelEnum.high;
+        break;
+    }
+  }
+
+  /*@ public normal_behavior
+    @    assignable methaneLevelCritical;
+    @    ensures methaneLevelCritical == !\old(methaneLevelCritical);
+    @*/
+  public void changeMethaneLevel() {
+    methaneLevelCritical = !methaneLevelCritical;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result <==> methaneLevelCritical;
+    @*/
+  public boolean isMethaneLevelCritical() {
+    return methaneLevelCritical;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result.equals("Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")");
+    @*/
+  @Override
+  public String toString() {
+    return "Env(Water:" + waterLevel + ",Meth:" + (methaneLevelCritical ? "CRIT" : "OK") + ")";
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result == waterLevel;
+    @*/
+  public WaterLevelEnum getWaterLevel() {
+    return waterLevel;
+  }
+}

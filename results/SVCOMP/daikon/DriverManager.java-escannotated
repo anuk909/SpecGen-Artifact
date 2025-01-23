@@ -1,0 +1,82 @@
+class SQLException extends Exception {}
+
+class Statement {
+
+  /*@ invariant this != null; */
+  /*@ requires s != null; */
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  /*@ modifies Statement.$assertionsDisabled, s.toString; */
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+class Connection {
+
+  /*@ modifies Connection.$assertionsDisabled, s.toString; */
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  /*@ modifies Connection.$assertionsDisabled; */
+  public void close() throws SQLException {}
+
+  /*@ requires this != null; */
+  /*@ ensures \result != null; */
+  /*@ ensures Statement.$assertionsDisabled == false; */
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+
+public class DriverManager {
+  /*@ ensures Connection.$assertionsDisabled == false; */
+  public static Connection getConnection(String connectionString) {
+    return new Connection();
+  }
+
+  /*@ modifies args[*], args[].toString; */
+  public static void main(String[] args) {
+    Connection c = getConnection("abcde");
+    Connection c1 = getConnection("@$#%^&*fa1");
+    Statement s = c.createStatement();
+    try {
+    s.execute("<dab/>");
+    s.execute("<bad/>");
+    s.execute("<bad>");
+    s.execute("<bad/>afesgrthyjkiuytre");
+    s.execute("bhefhuirjny&2");
+    s.executeQuery("<dab/>");
+    s.executeQuery("<bad/>");
+    s.executeQuery("<bad>");
+    s.executeQuery("<bad/>afesgrthyjkiuytre");
+    s.executeQuery("bhefhuirjny&2");
+    s.executeUpdate("<dab/>");
+    s.executeUpdate("<bad/>");
+    s.executeUpdate("<bad>");
+    s.executeUpdate("<bad/>afesgrthyjkiuytre");
+    s.executeUpdate("bhefhuirjny&2");
+    c.prepareStatement("<dab/>");
+    c.prepareStatement("<bad/>");
+    c.prepareStatement("<bad>");
+    c.prepareStatement("<bad/>afesgrthyjkiuytre");
+    c.prepareStatement("bhefhuirjny&2");
+    } catch (SQLException e) {
+    }
+  }
+}

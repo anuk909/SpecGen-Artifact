@@ -1,0 +1,54 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result >= -1 && \result < s.length();
+    public int firstUniqChar(String s) {
+        //@ assert s != null;
+        //@ assert s.length() >= 0;
+        
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        
+        //@ loop_invariant i >= 0 && i <= s.length();
+        //@ loop_invariant (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) >= 0);
+        //@ loop_invariant (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) <= i);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            //@ assert i >= 0 && i <= s.length();
+            //@ assert (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) >= 0);
+            //@ assert (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) <= i);
+            //@ assert s.charAt(i) != null;
+            
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+            
+            //@ assert frequency.get(ch) >= 0;
+            //@ assert frequency.get(ch) <= i + 1;
+        }
+        
+        //@ assert (\forall int j; j >= 0 && j < s.length(); frequency.get(s.charAt(j)) >= 0);
+        //@ assert (\forall int j; j >= 0 && j < s.length(); frequency.get(s.charAt(j)) <= s.length());
+        
+        //@ loop_invariant i >= 0 && i <= s.length();
+        //@ loop_invariant (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) >= 0);
+        //@ loop_invariant (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) <= i);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            //@ assert i >= 0 && i <= s.length();
+            //@ assert (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) >= 0);
+            //@ assert (\forall int j; j >= 0 && j < i; frequency.get(s.charAt(j)) <= i);
+            //@ assert s.charAt(i) != null;
+            
+            if (frequency.get(s.charAt(i)) == 1) {
+                //@ assert frequency.get(s.charAt(i)) == 1;
+                return i;
+            }
+        }
+        
+        //@ assert (\forall int j; j >= 0 && j < s.length(); frequency.get(s.charAt(j)) >= 0);
+        //@ assert (\forall int j; j >= 0 && j < s.length(); frequency.get(s.charAt(j)) <= s.length());
+        
+        return -1;
+    }
+}

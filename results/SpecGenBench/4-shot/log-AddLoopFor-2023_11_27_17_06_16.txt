@@ -1,0 +1,28 @@
+public class AddLoopFor {
+    //@ ensures \result == y + x;
+    public static int addLoop(int x, int y) {
+        int sum = y;
+        if (x > 0) {
+            //@ maintaining sum == y + (x - n);
+            //@ decreasing n;
+            for(int n = x; n > 0; n = n - 1) {
+                sum = sum + 1;
+            }
+        } else {
+            //@ maintaining sum == y - (-x - n);
+            //@ decreasing n;
+            for(int n = -x; n > 0; n = n - 1) {
+                sum = sum - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/AddLoopFor.java:2:) in method addLoop
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoopFor.java:2: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/AddLoopFor.java:18:
+    //@ ensures \result == y + x;
+        ^
+2 verification failures
+

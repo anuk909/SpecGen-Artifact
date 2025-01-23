@@ -1,0 +1,1732 @@
+
+public class PrimeNumbers
+{
+    private  static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    private  int primeArray[];
+    
+    //@ requires n > 0;
+    //@ ensures primeArray.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:9: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures primeArray.length == n;
+                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:48: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:49: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+5 errors
+
+
+public class PrimeNumbers
+{
+    //@ private instance model field
+    private int primeArray[];
+    
+    //@ private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures primeArray.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:4: error: Expected an identifier, found end of JML comment instead
+    //@ private instance model field
+                                    ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:5: error: ';' expected
+    private int primeArray[];
+^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:7: error: Expected an identifier, found end of JML comment instead
+    //@ private static method
+                             ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:8: error: ';' expected
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+^
+4 errors
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures primeArray.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures primeArray.length == n;
+                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:51: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:52: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+5 errors
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures primeArray.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:12: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures primeArray.length == n;
+                ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:13: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < primeArray.length; isPrime(primeArray[i]));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:51: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:52: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+5 errors
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:52: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:53: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:52: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:53: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:53: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:54: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:53: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:54: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:54: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:55: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:55: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:56: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:55: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:56: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:56: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:57: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:57: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:57: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:58: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:59: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:59: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:60: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:61: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:62: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:62: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:63: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:65: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:66: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class PrimeNumbers
+{
+    // private instance model field
+    private int[] primeArray;
+    
+    // private static method
+    private static /*@ pure @*/ boolean div(int n, int d) { return n%d == 0; }
+
+    //@ requires n > 0;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+      int status = 1, num = 3, count, j;
+      primeArray = new int[n];
+      primeArray[0] = 2;
+
+      //@ maintaining count <= n;
+      //@ maintaining (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+      //@ decreases n - count;
+      for (count = 2; count <= n;)
+      { 
+         //@ loop_invariant 2 <= num && (\forall int i; 2 <= i && i < num; !div(num, i) ==> isPrime(i));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count; isPrime(primeArray[i]));
+         //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+         //@ loop_invariant count <= n;
+         //@ decreases num;
+         for (j = 2; j <= num/2; j++)
+         { 
+            if (div(num,j))
+            {
+               status = 0;
+               break;
+            }
+         }
+
+         if (status != 0)
+         {  
+            primeArray[count - 1] = num;
+            count++;
+         }
+         status = 1;
+         num++;
+      } 
+      return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+    public static /*@ pure @*/ boolean isPrime(int n) {
+        if (n == 2) {
+            return true;
+        }
+        if (n % 2 == 0) {
+            return false;
+        }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:65: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> (\forall int i; 2 <= i && i < n; !div(n, i));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:66: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> (\exists int i; 2 <= i && i < n; div(n, i));
+                                                              ^
+2 errors
+

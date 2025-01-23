@@ -1,0 +1,27 @@
+class IsMonotonic {
+    //@ requires nums != null;
+    //@ requires nums.length > 0;
+    //@ ensures \result == true || \result == false;
+    public boolean isMonotonic(int[] nums) {
+        boolean inc = true, dec = true;
+        int n = nums.length;
+        //@ loop_invariant 0 <= i && i <= n - 1;
+        //@ loop_invariant inc == (\forall int k; 0 <= k && k < i; nums[k] <= nums[k + 1]);
+        //@ loop_invariant dec == (\forall int k; 0 <= k && k < i; nums[k] >= nums[k + 1]);
+        for (int i = 0; i < n - 1; ++i) {
+            //@ assert inc == (\forall int k; 0 <= k && k < i; nums[k] <= nums[k + 1]);
+            //@ assert dec == (\forall int k; 0 <= k && k < i; nums[k] >= nums[k + 1]);
+            if (nums[i] > nums[i + 1]) {
+                inc = false;
+            }
+            if (nums[i] < nums[i + 1]) {
+                dec = false;
+            }
+            //@ assert inc == (\forall int k; 0 <= k && k <= i; nums[k] <= nums[k + 1]);
+            //@ assert dec == (\forall int k; 0 <= k && k <= i; nums[k] >= nums[k + 1]);
+        }
+        //@ assert inc == (\forall int k; 0 <= k && k <= n - 2; nums[k] <= nums[k + 1]);
+        //@ assert dec == (\forall int k; 0 <= k && k <= n - 2; nums[k] >= nums[k + 1]);
+        return inc || dec;
+    }
+}

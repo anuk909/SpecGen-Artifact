@@ -1,0 +1,37 @@
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    //@ ensures \result == (\sum int i; 0 <= i && i < stones.length(); (\exists int j; 0 <= j && j < jewels.length(); stones.charAt(i) == jewels.charAt(j)) ? 1 : 0);
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining 0 <= jewelsCount && jewelsCount <= i;
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:4: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == (\sum int i; 0 <= i && i < stones.length(); (\exists int j; 0 <= j && j < jewels.length(); stones.charAt(i) == jewels.charAt(j)) ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/JewelsInStones.java:4:) in method numJewelsInStones
+        return jewelsCount;
+        ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/JewelsInStones.java:23:
+    //@ ensures \result == (\sum int i; 0 <= i && i < stones.length(); (\exists int j; 0 <= j && j < jewels.length(); stones.charAt(i) == jewels.charAt(j)) ? 1 : 0);
+        ^
+1 warning
+2 verification failures
+

@@ -1,0 +1,28 @@
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result <==> \result.equals(arg + "Z") && \result.equals("fg");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result <==> \result.equals(arg + "Z") && \result.equals("fg");
+                                    ^
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result <==> \result.equals(arg + "Z") && \result.equals("fg");
+                                                                 ^
+2 errors
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result <==> (arg + "Z").equals("fg");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}

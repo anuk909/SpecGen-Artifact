@@ -1,0 +1,115 @@
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+    public static boolean isPerfectSquare(int num) {
+        for(int i = 1; i < num; i++) {
+            //@ maintaining 1 <= i && i <= num;
+            //@ maintaining !(\exists int j; 1 <= j && j < i; j*j == num);
+            //@ decreases num - i;
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 1 <= i && i <= num;
+                ^
+1 error
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+    public static boolean isPerfectSquare(int num) {
+        int i = 1;
+        //@ maintaining 1 <= i && i <= num;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j*j == num);
+        //@ decreases num - i;
+        while(i < num) {
+            if(i * i == num)
+                return true;
+            i++;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPerfectSquare
+        //@ maintaining 1 <= i && i <= num;
+            ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:14:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+        ^
+3 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+    public static boolean isPerfectSquare(int num) {
+        int i = 1;
+        //@ maintaining 1 <= i && i <= num+1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j*j == num);
+        //@ decreases num - i;
+        while(i <= num) {
+            if(i * i == num)
+                return true;
+            i++;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: overflow in int sum
+            i++;
+             ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:10: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+            if(i * i == num)
+                 ^
+2 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+    public static boolean isPerfectSquare(int num) {
+        int i = 1;
+        //@ maintaining 1 <= i && i <= num+1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j*j == num);
+        //@ decreases num - i;
+        while(i <= num/i) {
+            //@ assume i <= Integer.MAX_VALUE / 2 && i >= Integer.MIN_VALUE / 2;
+            if(i * i == num)
+                return true;
+            i++;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:11: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isPerfectSquare: int multiply overflow
+            if(i * i == num)
+                 ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3:) in method isPerfectSquare
+        return false;
+        ^
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PerfectSquare.java:15:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+        ^
+3 verification failures
+
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i == num);
+    public static boolean isPerfectSquare(int num) {
+        int i = 1;
+        //@ maintaining 1 <= i && i <= num+1;
+        //@ maintaining !(\exists int j; 1 <= j && j < i; j*j == num);
+        //@ decreases num - i;
+        while(i <= num/i) {
+            //@ assume i <= Integer.MAX_VALUE / 2 && i >= Integer.MIN_VALUE / 2;
+            if(i == num/i && i * i == num)
+                return true;
+            i++;
+        }
+        return false;
+    }
+}

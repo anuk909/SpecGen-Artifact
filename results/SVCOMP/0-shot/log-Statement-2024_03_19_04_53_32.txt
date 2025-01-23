@@ -1,0 +1,33 @@
+import java.util.Objects;
+
+public class Statement {
+
+  //@ requires s != null;
+  //@ ensures !s.contains("<bad/>");
+  //@ signals (SQLException e) s.contains("<bad/>");
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ requires o != null;
+  //@ ensures !s.contains("<bad/>");
+  //@ signals (SQLException e) s.contains("<bad/>");
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      throw new SQLException();
+    }
+  }
+
+  //@ requires s != null;
+  //@ ensures !s.contains("<bad/>");
+  //@ signals (SQLException e) s.contains("<bad/>");
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+

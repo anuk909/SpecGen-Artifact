@@ -1,0 +1,69 @@
+public class PrimeNumbers
+{
+    //@ requires n > 0;
+    //@ ensures \result != null;
+    //@ ensures \result.length == n;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+    public int[] primeList(int n)
+    {
+        int status = 1, num = 3, count, j;
+        int[] primeArray = new int[n];
+        primeArray[0] = 2;
+
+        for (count = 2; count <= n;)
+        { 
+            //@ loop_invariant 2 <= count && count <= n+1;
+            //@ loop_invariant (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+            //@ loop_invariant (\forall int i; count <= i && i < n; primeArray[i] == 0);
+            //@ loop_invariant (\forall int i; 0 <= i && i < count-1; primeArray[i] < num);
+            //@ loop_invariant (\forall int i; count <= i && i < n; num < primeArray[i]);
+            //@ decreases n - count;
+            for (j = 2; j <= num/2; j++)
+            { 
+                if (div(num,j))
+                {
+                    status = 0;
+                    break;
+                }
+            }
+
+            if (status != 0)
+            {  
+                primeArray[count - 1] = num;
+                count++;
+            }
+            status = 1;
+            num++;
+        } 
+        return primeArray; 
+    }
+
+    //@ requires n > 1;
+    //@ ensures \result <==> (\forall int i; 2 <= i && i < n; n % i != 0);
+    private static boolean isPrime(int n) {
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires d != 0;
+    //@ ensures \result <==> n % d == 0;
+    private static boolean div(int n, int d) {
+        return n % d == 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:6: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:6: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isPrime(int)
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; isPrime(\result[i]));
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/PrimeNumbers.java:16: warning: A non-pure method is being called where it is not permitted: PrimeNumbers.isPrime(int)
+            //@ loop_invariant (\forall int i; 0 <= i && i < count-1; isPrime(primeArray[i]));
+                                                                             ^
+1 error
+2 warnings
+

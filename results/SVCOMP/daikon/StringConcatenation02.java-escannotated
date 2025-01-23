@@ -1,0 +1,28 @@
+public class StringConcatenation02 {
+  /*@ ensures \result == false; */
+  public static boolean f(String arg1, String arg2) {
+    String[] args = new String[2];
+    args[0] = arg1;
+    args[1] = arg2;
+
+    String s1 = args[0];
+    String s2 = args[1];
+    if(!s1.equals(args[0] + " ")) return false;
+    if(!s2.equals(args[1])) return false;
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("#$%^&*123", "#$%^&*123");
+    f("#$%^#*123", "#$%^#*123");
+    f("fsgdhj", "fsgdhj");
+    f("fsgdhj", "fsadhj");
+    f("DiffBlue L1mitted", "DiffBlue L1mitted");
+    f("DiffBlue Limitted", "DiffBlue L1mitted");
+    f("HiiffblTe Limited", "");
+  }
+}

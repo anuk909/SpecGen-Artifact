@@ -1,0 +1,63 @@
+class A extends RuntimeException {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public boolean equals(Object obj);
+
+  //@ public normal_behavior
+  //@ ensures \result == this.hashCode();
+  public int hashCode();
+
+  //@ public normal_behavior
+  //@ ensures \result == "A";
+  public String toString();
+}
+
+class B extends A {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public boolean equals(Object obj);
+
+  //@ public normal_behavior
+  //@ ensures \result == this.hashCode();
+  public int hashCode();
+
+  //@ public normal_behavior
+  //@ ensures \result == "B";
+  public String toString();
+}
+
+class C extends B {
+  //@ public normal_behavior
+  //@ ensures \result == true;
+  public boolean equals(Object obj);
+
+  //@ public normal_behavior
+  //@ ensures \result == this.hashCode();
+  public int hashCode();
+
+  //@ public normal_behavior
+  //@ ensures \result == "C";
+  public String toString();
+}
+
+class exceptions7 {
+  //@ requires args != null;
+  //@ requires (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      try {
+        C c = new C();
+        A a = new A();
+        throw a;
+      } catch (C exc) {
+        assert false;
+      } catch (B exc) {
+        assert false;
+      }
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+

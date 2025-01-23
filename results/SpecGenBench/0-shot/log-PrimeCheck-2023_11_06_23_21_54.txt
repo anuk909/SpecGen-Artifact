@@ -1,0 +1,19 @@
+class PrimeCheck {
+   
+	//@ requires a > 0;
+	//@ ensures \result == (\forall int i; 2 <= i && i <= a/2; a % i != 0);
+	public boolean isPrime(int a) {
+		int i = 2;
+		int mid = a/2;
+
+		//@ loop_invariant 2 <= i && i <= mid + 1;
+		//@ loop_invariant (\forall int j; 2 <= j && j < i; a % j != 0);
+		//@ decreases mid + 1 - i;
+		while (i <= mid) {
+			if (a%i == 0)
+				return false;
+			i++;
+		}
+		return true;
+	}
+}

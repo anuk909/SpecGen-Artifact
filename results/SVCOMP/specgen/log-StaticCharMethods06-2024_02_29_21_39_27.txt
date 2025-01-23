@@ -1,0 +1,396 @@
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        //@ assert c1.equals(c2) ==> \result == 1;
+        //@ assert !c1.equals(c2) ==> \result == 0;
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:11: error: A \result expression may not be in a assert clause
+        //@ assert c1.equals(c2) ==> \result == 1;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:12: error: A \result expression may not be in a assert clause
+        //@ assert !c1.equals(c2) ==> \result == 0;
+                                       ^
+2 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c1.equals(c2);
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                           ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                 ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                            ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                  ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c.equals(c);
+    //@ ensures \result == 0 ==> !c.equals(c);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                          ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                 ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                           ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                  ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c1.equals(c2);
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                           ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                 ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                            ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                  ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c.equals(c);
+    //@ ensures \result == 0 ==> !c.equals(c);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                          ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                 ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                           ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                  ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c1.equals(c2);
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                           ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                 ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                            ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                  ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c.equals(c);
+    //@ ensures \result == 0 ==> !c.equals(c);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                          ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                 ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                           ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                  ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c1.equals(c2);
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                           ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                 ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                            ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                  ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c.equals(c);
+    //@ ensures \result == 0 ==> !c.equals(c);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                          ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c.equals(c);
+                                 ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                           ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c.equals(c);
+                                  ^
+  symbol:   variable c
+  location: class StaticCharMethods06
+4 errors
+
+public class StaticCharMethods06 {
+    //@ requires arg != null && arg.length() >= 1;
+    //@ ensures \result == 1 ==> c1.equals(c2);
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+    //@ ensures \result == 1 || \result == 0;
+    public static int main(String arg) {
+        if (arg.length() < 1) return -1;
+
+        char c = arg.charAt(0);
+        Character c1 = c;
+        Character c2 = c;
+
+        if (c1.equals(c2)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                           ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:3: error: cannot find symbol
+    //@ ensures \result == 1 ==> c1.equals(c2);
+                                 ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                            ^
+  symbol:   variable c2
+  location: class StaticCharMethods06
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods06.java:4: error: cannot find symbol
+    //@ ensures \result == 0 ==> !c1.equals(c2);
+                                  ^
+  symbol:   variable c1
+  location: class StaticCharMethods06
+4 errors
+

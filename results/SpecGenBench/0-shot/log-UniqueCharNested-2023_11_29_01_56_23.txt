@@ -1,0 +1,43 @@
+public class UniqueCharNested {
+
+    //@ requires s != null;
+    //@ ensures \result >= -1 && \result < s.length();
+    public static int uniqueChar(String s) {
+        //@ loop_invariant i >= 0 && i <= s.length();
+        //@ loop_invariant (\forall int k; k >= 0 && k < i; (\forall int j; j > k && j < s.length(); s.charAt(k) != s.charAt(j)));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            char c1 = s.charAt(i);
+            //@ loop_invariant j >= i + 1 && j <= s.length();
+            //@ loop_invariant (\forall int k; k >= i && k < j; s.charAt(i) != s.charAt(k));
+            //@ decreases s.length() - j;
+            for (int j = i + 1; j < s.length(); ++j) {
+                char c2 = s.charAt(j);
+                if(c1 == c2)
+                    break;
+            }
+            //@ assert j >= s.length() || s.charAt(i) == s.charAt(j);
+            if(j == s.length())
+                return i;
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:19: error: cannot find symbol
+            //@ assert j >= s.length() || s.charAt(i) == s.charAt(j);
+                       ^
+  symbol:   variable j
+  location: class UniqueCharNested
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:19: error: cannot find symbol
+            //@ assert j >= s.length() || s.charAt(i) == s.charAt(j);
+                                                                  ^
+  symbol:   variable j
+  location: class UniqueCharNested
+/home/max/Documents/JMLGPT/tmp/UniqueCharNested.java:20: error: cannot find symbol
+            if(j == s.length())
+               ^
+  symbol:   variable j
+  location: class UniqueCharNested
+3 errors
+

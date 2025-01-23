@@ -1,0 +1,26 @@
+public class Main {
+
+  //@ requires arg != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(String arg) {
+    // Concatenate the input argument with a prefix
+    String s1 = "some-url+" + arg;
+
+    try {
+      // Decode the concatenated string using UTF-8 encoding
+      String s2 = java.net.URLDecoder.decode(s1, "UTF-8");
+      
+      // Check if the decoded string starts with "some"
+      //@ assert s2.startsWith("some") ==> \result == true;
+      if (!s2.startsWith("some")) {
+        return false;
+      }
+    } catch (java.io.UnsupportedEncodingException e) {
+      // Exception handling for unsupported encoding
+    }
+    
+    // Return true if the decoded string starts with "some", otherwise return false
+    return true;
+  }
+}
+

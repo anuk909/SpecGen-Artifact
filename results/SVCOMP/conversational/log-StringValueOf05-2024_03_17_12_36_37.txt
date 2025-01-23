@@ -1,0 +1,34 @@
+public class StringValueOf05 {
+    //@ requires arg != null;
+    //@ requires arg.length() >= 1;
+    //@ requires (int)Character.MIN_VALUE <= (int)arg.charAt(0) && (int)arg.charAt(0) <= (int)Character.MAX_VALUE;
+    //@ ensures \result <==> tmp.equals("A");
+    public static boolean f(String arg) {
+        if (arg.length() < 1) return false;
+
+        char characterValue = arg.charAt(0);
+        String tmp = String.valueOf(characterValue);
+        return tmp.equals("A");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringValueOf05.java:5: error: cannot find symbol
+    //@ ensures \result <==> tmp.equals("A");
+                             ^
+  symbol:   variable tmp
+  location: class StringValueOf05
+1 error
+
+public class StringValueOf05 {
+    //@ requires arg != null;
+    //@ requires arg.length() >= 1;
+    //@ requires (int)Character.MIN_VALUE <= (int)arg.charAt(0) && (int)arg.charAt(0) <= (int)Character.MAX_VALUE;
+    //@ ensures \result <==> String.valueOf(arg.charAt(0)).equals("A");
+    public static boolean f(String arg) {
+        if (arg.length() < 1) return false;
+
+        char characterValue = arg.charAt(0);
+        String tmp = String.valueOf(characterValue);
+        return tmp.equals("A");
+    }
+}
+

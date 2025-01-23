@@ -1,0 +1,36 @@
+public class bitwise1 {
+  /*@ spec_public */ static char c;
+
+  /*@ modifies bitwise1.c; */
+  /*@ ensures \result == true; */
+  /*@ ensures bitwise1.c != \old(bitwise1.c); */
+  /*@ ensures bitwise1.c > \old(input); */
+  public static boolean func(int input) {
+    c = (char) (input * 2 + 1);
+    int i = (c | 2);
+    return (i & 3) == 3;
+  }
+
+  /*@ requires bitwise1.c == 0; */
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ modifies bitwise1.c; */
+  /*@ ensures bitwise1.c == 64509; */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    func(-2);
+    func(-1);
+    func(0);
+    func(1);
+    func(2);
+    func(3);
+    func(4);
+    func(114);
+    func(514);    
+    func(580);
+    func(1919);
+    func(810);
+    func(-514);
+  }
+}

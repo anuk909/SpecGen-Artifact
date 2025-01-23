@@ -1,0 +1,41 @@
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    public int numJewelsInStones(String jewels, String stones) {
+        //@ assert jewels != null && stones != null;
+        //@ assert jewels.length() >= 0 && stones.length() >= 0;
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ assert jewelsCount == 0;
+        //@ assert jewelsLength >= 0 && stonesLength >= 0;
+        //@ loop_invariant 0 <= i && i <= stonesLength;
+        //@ loop_invariant 0 <= j && j <= jewelsLength;
+        //@ loop_invariant jewelsCount >= 0;
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            //@ assert 0 <= i && i < stonesLength;
+            char stone = stones.charAt(i);
+            //@ assert stone == stones.charAt(i);
+            //@ loop_invariant 0 <= j && j <= jewelsLength;
+            //@ loop_invariant jewelsCount >= 0;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                //@ assert 0 <= j && j < jewelsLength;
+                char jewel = jewels.charAt(j);
+                //@ assert jewel == jewels.charAt(j);
+                if (stone == jewel) {
+                    //@ assert stone == jewel;
+                    jewelsCount++;
+                    //@ assert jewelsCount > 0;
+                    break;
+                }
+                //@ assert stone != jewel;
+            }
+            //@ assert \forall int k; 0 <= k && k < j; stones.charAt(i) != jewels.charAt(k);
+        }
+        //@ assert \forall int i; 0 <= i && i < stonesLength; \exists int j; 0 <= j && j < jewelsLength; stones.charAt(i) == jewels.charAt(j);
+        //@ assert jewelsCount == (\num_of int i; 0 <= i && i < stonesLength; \exists int j; 0 <= j && j < jewelsLength; stones.charAt(i) == jewels.charAt(j));
+        return jewelsCount;
+        //@ assert jewelsCount == (\num_of int i; 0 <= i && i < stonesLength; \exists int j; 0 <= j && j < jewelsLength; stones.charAt(i) == jewels.charAt(j));
+    }
+}

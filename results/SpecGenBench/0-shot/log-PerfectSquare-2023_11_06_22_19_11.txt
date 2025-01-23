@@ -1,0 +1,17 @@
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result == true || \result == false;
+    public static boolean isPerfectSquare(int num) {
+        //@ loop_invariant i >= 1 && i <= num;
+        //@ loop_variant num - i * i;
+        for(int i = 1; i * i <= num; i++) {
+            //@ assert i * i <= num;
+            //@ assert i * i > num ==> \result == false;
+            if(i * i == num)
+                //@ assert \result == true;
+                return true;
+        }
+        //@ assert \result == false;
+        return false;
+    }
+}

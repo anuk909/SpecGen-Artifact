@@ -1,0 +1,40 @@
+import java.util.Random;
+
+public class aastore_aaload1 {
+  static class A {
+    int value = 0;
+  }
+
+  /*@ public normal_behavior
+    @    requires size >= 0;
+    @    assignable \nothing;
+    @    ensures \result != null;
+    @*/
+  public static A[] createArray(int size) {
+    A[] array = new A[size];
+    for (int i = 0; i < size; i++) {
+      array[i] = new A();
+    }
+    return array;
+  }
+
+  public static void main(String[] args) {
+    int size = new Random().nextInt();
+    if (size < 0) return;
+    A[] array = createArray(size);
+
+    /*@ loop_invariant 0 <= i && i <= size;
+      @ loop_invariant (\forall int j; 0 <= j && j < i; array[j] != null);
+      @ assignable \nothing;
+      @ decreases size - i;
+      @*/
+    for (int i = 0; i < size; i++) {
+      assert array[i] != null;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:28: error: Expected loop specifications while in JML: assignable is not a loop specification keyword
+      @ assignable \nothing;
+        ^
+1 error
+

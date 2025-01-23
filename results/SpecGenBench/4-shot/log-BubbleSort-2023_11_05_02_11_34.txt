@@ -1,0 +1,48 @@
+public class BubbleSort { 
+    
+    //@ requires array.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public void swap(int x, int y,  int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires arr.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ maintaining (\forall int i; 0 <= i && i < n-1; (\forall int j; 0 <= j && j < n-i-1; arr[j] <= arr[j+1]));
+        //@ decreases n - 1 - i;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ maintaining (\forall int j; 0 <= j && j < n-i-1; arr[j] <= arr[j+1]);
+            //@ decreases n - i - 1 - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+                                               ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+                                                                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:17: error: variable i is already defined in method bubbleSort(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < n-1; (\forall int j; 0 <= j && j < n-i-1; arr[j] <= arr[j+1]));
+                                     ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:21: error: variable j is already defined in method bubbleSort(int[])
+            //@ maintaining (\forall int j; 0 <= j && j < n-i-1; arr[j] <= arr[j+1]);
+                                         ^
+5 errors
+

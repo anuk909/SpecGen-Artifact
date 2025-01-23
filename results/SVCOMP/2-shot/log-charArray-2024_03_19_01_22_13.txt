@@ -1,0 +1,25 @@
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures \result == c;
+    //@ ensures c.length == \old(c.length);
+    //@ ensures c[0] == 's';
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ requires arg != null;
+    //@ requires arg.length() == 5;
+    //@ ensures \result == 1 <==> (new String("HELLO") + new String(\result, 0, \result.length())).charAt(5) == 's';
+    //@ ensures \result == 0 <==> (new String("HELLO") + new String(\result, 0, \result.length())).charAt(5) != 's';
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = new String("HELLO") + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+

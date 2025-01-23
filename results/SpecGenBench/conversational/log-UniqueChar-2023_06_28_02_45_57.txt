@@ -1,0 +1,320 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length() && j != i; s.charAt(i) != s.charAt(j)));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; 0 <= j && j < s.length() && j != \result; s.charAt(\result) != s.charAt(j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:15: verify: The prover cannot establish an assertion (LoopInvariant) in method firstUniqChar
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) > 1);
+            ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UniqueChar.java:6:) in method firstUniqChar
+                return i;
+                ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UniqueChar.java:19:
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length() && j != i; s.charAt(i) != s.charAt(j)));
+        ^
+3 verification failures
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j)));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; 0 <= j && j < s.length() && j != \result; s.charAt(\result) != s.charAt(j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method firstUniqChar: overflow in int sum
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:15: verify: The prover cannot establish an assertion (LoopInvariant) in method firstUniqChar
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) > 1);
+            ^
+2 verification failures
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j)));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; 0 <= j && j < s.length() && j != \result; s.charAt(\result) != s.charAt(j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            //@ assume frequency.getOrDefault(ch, 0) + 1 <= Integer.MAX_VALUE;
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (frequency.get(s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:12: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+            //@ assume frequency.getOrDefault(ch, 0) + 1 <= Integer.MAX_VALUE;
+                                             ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:13: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method firstUniqChar: overflow in int sum
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:16: verify: The prover cannot establish an assertion (LoopInvariant) in method firstUniqChar
+        //@ maintaining (\forall int j; 0 <= j && j < i; frequency.get(s.charAt(j)) > 1);
+            ^
+1 warning
+2 verification failures
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j)));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; 0 <= j && j < s.length() && j != \result; s.charAt(\result) != s.charAt(j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            //@ assume getOrDefault(frequency, ch, 0) + 1 <= Integer.MAX_VALUE;
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (get(frequency, s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    //@ pure
+    public static <K,V> V getOrDefault(Map<K,V> map, K key, V defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    
+    //@ pure
+    public static <K,V> V get(Map<K,V> map, K key) {
+        return map.get(key);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:13: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method firstUniqChar: overflow in int sum
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:16: verify: The prover cannot establish an assertion (LoopInvariant) in method firstUniqChar
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+            ^
+2 verification failures
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j)));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; 0 <= j && j < s.length() && j != \result; s.charAt(\result) != s.charAt(j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            //@ assume getOrDefault(frequency, ch, 0) < Integer.MAX_VALUE;
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (get(frequency, s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    //@ pure
+    public static <K,V> V getOrDefault(Map<K,V> map, K key, V defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    
+    //@ pure
+    public static <K,V> V get(Map<K,V> map, K key) {
+        return map.get(key);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:13: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method firstUniqChar: overflow in int sum
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UniqueChar.java:6:) in method firstUniqChar
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UniqueChar.java:23:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j)));
+        ^
+3 verification failures
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j)));
+    //@ ensures 0 <= \result && \result < s.length() ==> (\forall int j; 0 <= j && j < s.length() && j != \result; s.charAt(\result) != s.charAt(j));
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            //@ assume getOrDefault(frequency, ch, 0) < Integer.MAX_VALUE;
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (get(frequency, s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j))) ==> \result == -1;
+        return -1;
+    }
+    
+    //@ pure
+    public static <K,V> V getOrDefault(Map<K,V> map, K key, V defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    
+    //@ pure
+    public static <K,V> V get(Map<K,V> map, K key) {
+        return map.get(key);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:23: error: A \result expression may not be in a assert clause
+        //@ assert (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j))) ==> \result == -1;
+                                                                                                                                                   ^
+1 error
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j))) ==> \result == -1;
+    //@ ensures (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length() && j != i; s.charAt(i) != s.charAt(j))) ==> (0 <= \result && \result < s.length());
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            //@ assume getOrDefault(frequency, ch, 0) < Integer.MAX_VALUE;
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (get(frequency, s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    //@ pure
+    public static <K,V> V getOrDefault(Map<K,V> map, K key, V defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    
+    //@ pure
+    public static <K,V> V get(Map<K,V> map, K key) {
+        return map.get(key);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:16: verify: The prover cannot establish an assertion (LoopInvariant) in method firstUniqChar
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+            ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:13: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method firstUniqChar: overflow in int sum
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+                                                             ^
+2 verification failures
+
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures (\forall int i; 0 <= i && i < s.length(); (\exists int j; 0 <= j && j < s.length() && j != i; s.charAt(i) == s.charAt(j))) ==> \result == -1;
+    //@ ensures (\forall int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < s.length() && j != i; s.charAt(i) != s.charAt(j))) ==> (0 <= \result && \result < s.length());
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); ++i) {
+            char ch = s.charAt(i);
+            //@ assume getOrDefault(frequency, ch, 0) < Integer.MAX_VALUE;
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= s.length();
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            if (get(frequency, s.charAt(i)) == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    //@ pure
+    public static <K,V> V getOrDefault(Map<K,V> map, K key, V defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    
+    //@ pure
+    public static <K,V> V get(Map<K,V> map, K key) {
+        return map.get(key);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:13: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method firstUniqChar: overflow in int sum
+            frequency.put(ch, getOrDefault(frequency, ch, 0) + 1);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/UniqueChar.java:16: verify: The prover cannot establish an assertion (LoopInvariant) in method firstUniqChar
+        //@ maintaining (\forall int j; 0 <= j && j < i; get(frequency, s.charAt(j)) > 1);
+            ^
+2 verification failures
+

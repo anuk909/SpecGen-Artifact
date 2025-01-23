@@ -1,0 +1,190 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ ensures IOException if an I/O error occurs.
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result != null ==> \result.checkNoSymbolic(x);
+  //@ ensures IOException if an I/O error occurs.
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:8: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures IOException if an I/O error occurs.
+                          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:15: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures IOException if an I/O error occurs.
+                          ^
+2 errors
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ ensures IOException if an I/O error occurs.
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result != null ==> \result.checkNoSymbolic(x);
+  //@ ensures IOException if an I/O error occurs.
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:8: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures IOException if an I/O error occurs.
+                          ^
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:15: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures IOException if an I/O error occurs.
+                          ^
+2 errors
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ signals (IOException e) e.getMessage().equals("I/O error") || e.getCause() != null;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures \result != null ==> \result.checkNoSymbolic(x);
+  //@ signals (IOException e) e.getMessage().equals("I/O error") || e.getCause() != null;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletResponse.java:14: error: cannot find symbol
+  //@ ensures \result != null ==> \result.checkNoSymbolic(x);
+                                                          ^
+  symbol:   variable x
+  location: class HttpServletResponse
+1 error
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires !string.contains("<bad/>");
+  //@ signals (IOException e) e.getMessage().equals("I/O error") || e.getCause() != null;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ signals (IOException e) e.getMessage().equals("I/O error") || e.getCause() != null;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires !s.contains("<bad/>");
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}

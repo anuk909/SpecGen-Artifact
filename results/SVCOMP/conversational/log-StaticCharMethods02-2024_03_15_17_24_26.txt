@@ -1,0 +1,29 @@
+public class StaticCharMethods02 {
+    //@ requires arg != null;
+    //@ ensures \result == -1 || \result == 0 || \result == 1;
+    public static int f(String arg) {
+        if (arg.length() < 1) return -1;
+        char c = arg.charAt(0);
+        //@ assert Character.toUpperCase(c) != Character.toLowerCase(c) ==> \result == 1;
+        //@ assert Character.toUpperCase(c) == Character.toLowerCase(c) ==> \result == 0;
+        return (Character.toUpperCase(c) != Character.toLowerCase(c)) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods02.java:7: error: A \result expression may not be in a assert clause
+        //@ assert Character.toUpperCase(c) != Character.toLowerCase(c) ==> \result == 1;
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/StaticCharMethods02.java:8: error: A \result expression may not be in a assert clause
+        //@ assert Character.toUpperCase(c) == Character.toLowerCase(c) ==> \result == 0;
+                                                                             ^
+2 errors
+
+public class StaticCharMethods02 {
+    //@ requires arg != null;
+    //@ ensures \result == -1 || \result == 0 || \result == 1;
+    public static int f(String arg) {
+        if (arg.length() < 1) return -1;
+        char c = arg.charAt(0);
+        return (Character.toUpperCase(c) != Character.toLowerCase(c)) ? 1 : 0;
+    }
+}
+

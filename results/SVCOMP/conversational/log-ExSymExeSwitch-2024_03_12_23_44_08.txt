@@ -1,0 +1,149 @@
+class Main {
+  //@ requires x > 0 ==> \result == true;
+  //@ requires x <= 0 ==> \result == test(x);
+  //@ ensures \result == true || \result == false;
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  
+  /*@
+    @ requires true;
+    @ ensures \result == (x == 2 ? false : (x == 3000 ? true : true));
+    @ assignable \nothing;
+  */
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:2: error: A \result expression may not be in a requires clause
+  //@ requires x > 0 ==> \result == true;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:3: error: A \result expression may not be in a requires clause
+  //@ requires x <= 0 ==> \result == test(x);
+                           ^
+2 errors
+
+class Main {
+  //@ requires x > 0 ==> \result == true;
+  //@ requires x <= 0 ==> \result == \result == test(x);
+  //@ ensures \result == true || \result == false;
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  
+  /*@
+    @ requires true;
+    @ ensures \result == (x == 2 ? false : (x == 3000 ? true : true));
+    @ assignable \nothing;
+  */
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:2: error: A \result expression may not be in a requires clause
+  //@ requires x > 0 ==> \result == true;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:3: error: A \result expression may not be in a requires clause
+  //@ requires x <= 0 ==> \result == \result == test(x);
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:3: error: A \result expression may not be in a requires clause
+  //@ requires x <= 0 ==> \result == \result == test(x);
+                                      ^
+3 errors
+
+class Main {
+  //@ requires x > 0 ==> (\result == true);
+  //@ requires x <= 0 ==> (\result == test(x));
+  //@ ensures (\result == true) || (\result == false);
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  
+  /*@
+    @ requires true;
+    @ ensures (\result == (x == 2 ? false : (x == 3000 ? true : true)));
+    @ assignable \nothing;
+  */
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:2: error: A \result expression may not be in a requires clause
+  //@ requires x > 0 ==> (\result == true);
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSwitch.java:3: error: A \result expression may not be in a requires clause
+  //@ requires x <= 0 ==> (\result == test(x));
+                            ^
+2 errors
+
+class Main {
+  //@ requires x > 0;
+  //@ ensures \result == true;
+  //@ requires x <= 0;
+  //@ ensures \result == test(x);
+  //@ ensures \result == true || \result == false;
+  public static boolean f(int x) {
+    if (x > 0) return true;
+    return test(x);
+  }
+  
+  /*@
+    @ requires true;
+    @ ensures \result == (x == 2 ? false : (x == 3000 ? true : true));
+    @ assignable \nothing;
+  */
+  public static boolean test(int x) {
+    x = x + 1;
+    switch (x) {
+      case 2:
+        System.out.println("branch Foo2");
+        return false;
+      case 3000:
+        System.out.println("branch Foo3000");
+        break;
+      default:
+        System.out.println("default2");
+        break;
+    }
+    return true;
+  }
+}

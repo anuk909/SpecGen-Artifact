@@ -1,0 +1,226 @@
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+        //@ maintaining (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:8: error: variable i is already defined in method maxElementInArray(int[])
+        //@ maintaining (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:9: error: variable i is already defined in method maxElementInArray(int[])
+        //@ maintaining (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+                                     ^
+2 errors
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:4:) in method maxElementInArray
+        if (arr.length == 0) return -1;
+                             ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:6:
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+        ^
+2 verification failures
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = Integer.MIN_VALUE;
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 0; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxElementInArray
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+            ^
+1 verification failure
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 1 <= j && j <= i; arr[j-1] <= res);
+        //@ maintaining (\exists int j; 1 <= j && j <= i; arr[j-1] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:10: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method maxElementInArray
+        //@ maintaining (\exists int j; 1 <= j && j <= i; arr[j-1] == res);
+            ^
+1 verification failure
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 1 <= j && j < i; arr[j-1] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method maxElementInArray
+        //@ maintaining (\forall int j; 1 <= j && j < i; arr[j-1] <= res);
+            ^
+1 verification failure
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:5:) in method maxElementInArray
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:14:
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+        ^
+2 verification failures
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:5:) in method maxElementInArray
+        return res;
+        ^
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MaxInArray.java:14:
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+        ^
+2 verification failures
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+        //@ assert (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:15: verify: The prover cannot establish an assertion (Assert) in method maxElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length; arr[i] == res);
+            ^
+1 verification failure
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:15: verify: The prover cannot establish an assertion (Assert) in method maxElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+            ^
+1 verification failure
+
+class MaxInArray {
+    //@ requires arr != null;
+    //@ ensures arr.length == 0 ==> \result == -1;
+    //@ ensures arr.length > 0 ==> (\forall int i; 0 <= i && i < arr.length; arr[i] <= \result);
+    //@ ensures arr.length > 0 ==> (\exists int i; 0 <= i && i < arr.length; arr[i] == \result);
+    public int maxElementInArray(int[] arr) {
+        if (arr.length == 0) return -1;
+        int res = arr[0];
+        //@ maintaining (\forall int j; 0 <= j && j < i; arr[j] <= res);
+        //@ maintaining (\exists int j; 0 <= j && j < i; arr[j] == res);
+        for(int i = 1; i < arr.length; i++) {
+            res = ((arr[i] > res) ? arr[i] : res);
+        }
+        //@ assert (\forall int i; 0 <= i && i < arr.length; arr[i] <= res);
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MaxInArray.java:15: verify: The prover cannot establish an assertion (Assert) in method maxElementInArray
+        //@ assert (\exists int i; 0 <= i && i < arr.length && arr[i] == res);
+            ^
+1 verification failure
+

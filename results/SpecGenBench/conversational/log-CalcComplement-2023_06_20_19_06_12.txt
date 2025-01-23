@@ -1,0 +1,150 @@
+class CalcComplement {
+    /*@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+      @ ensures \result == ~num;
+      @*/
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 31;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num < (1 << j));
+        //@ decreases 31 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method calcComplement
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:3:) in method calcComplement
+        return num ^ mask;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:18:
+      @ ensures \result == ~num;
+        ^
+3 verification failures
+
+class CalcComplement {
+    /*@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+      @ ensures \result == ~num;
+      @*/
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 31;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num < (1 << j));
+        //@ decreases 31 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << (highbit + 1)) - 1);
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method calcComplement
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << (highbit + 1)) - 1);
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:3:) in method calcComplement
+        return num ^ mask;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:18:
+      @ ensures \result == ~num;
+        ^
+3 verification failures
+
+class CalcComplement {
+    /*@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+      @ ensures \result == ~num;
+      @*/
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 31;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num < (1 << j));
+        //@ decreases 31 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << (highbit + 1)) - 1);
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method calcComplement
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << (highbit + 1)) - 1);
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:3:) in method calcComplement
+        return num ^ mask;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:18:
+      @ ensures \result == ~num;
+        ^
+3 verification failures
+
+class CalcComplement {
+    /*@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+      @ ensures \result == ~num;
+      @*/
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 31;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num < (1 << j));
+        //@ decreases 31 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << highbit) - 1) << 1 | 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method calcComplement: underflow in int difference
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << highbit) - 1) << 1 | 1;
+                                                                ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method calcComplement
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << highbit) - 1) << 1 | 1;
+                                                    ^
+2 verification failures
+
+class CalcComplement {
+    /*@ requires Integer.MIN_VALUE <= num && num <= Integer.MAX_VALUE;
+      @ ensures \result == ~num;
+      @*/
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 31;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num < (1 << j));
+        //@ decreases 31 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << highbit) - 1) << 1 | 1;
+        //@ assume mask >= Integer.MIN_VALUE && mask <= Integer.MAX_VALUE;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method calcComplement: underflow in int difference
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << highbit) - 1) << 1 | 1;
+                                                                ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method calcComplement
+        int mask = highbit == 30 ? 0x7fffffff : ((1 << highbit) - 1) << 1 | 1;
+                                                    ^
+2 verification failures
+

@@ -1,0 +1,38 @@
+class sub {
+  // No specifications provided
+}
+
+class A {
+  private int my_field;
+  private sub my_sub;
+
+  //@ ensures my_field == 0 && my_sub == null;
+  A() {
+    my_field = 0;
+    my_sub = null;
+  }
+
+  //@ requires param == 1;
+  //@ ensures my_field == 2 && my_sub == null;
+  A(int param) {
+    assert (my_field == 0);
+    my_field = 2;
+    my_sub = null;
+  }
+
+  static int something_static = 3;
+}
+
+class Main {
+  //@ requires args != null;
+  public static void main(String[] args) {
+    A some_a = new A();
+    assert some_a.my_field == 0;
+    assert some_a.my_sub == null;
+    assert some_a.something_static == 3;
+    A other_a = new A(1);
+    assert other_a.my_field == 2;
+    assert other_a.my_sub == null;
+  }
+}
+

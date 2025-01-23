@@ -1,0 +1,37 @@
+/**
+ * @invariant enum1.values().length == 5
+ */
+enum enum1 {
+  /**
+   * @invariant this == VAL1 || this == VAL2 || this == VAL3 || this == VAL4 || this == VAL5
+   */
+  VAL1,
+  VAL2,
+  VAL3,
+  VAL4,
+  VAL5;
+
+  static {
+    /**
+     * @loop_invariant i >= 0 && i <= enum1.values().length
+     * @loop_invariant (\forall int j; 0 <= j && j < i; enum1.values()[j] != null)
+     * @loop_invariant (\forall int j; 0 <= j && j < i; enum1.values()[j] == VAL1 || enum1.values()[j] == VAL2 || enum1.values()[j] == VAL3 || enum1.values()[j] == VAL4 || enum1.values()[j] == VAL5)
+     */
+    for (enum1 e : enum1.values()) {
+      System.out.println(e);
+    }
+  }
+}
+
+class Main {
+  /**
+   * @requires e != null
+   * @requires e == enum1.VAL1 || e == enum1.VAL2 || e == enum1.VAL3 || e == enum1.VAL4 || e == enum1.VAL5
+   * @ensures e == enum1.VAL5
+   */
+  public static void main(String[] args) {
+    enum1 e = enum1.VAL5;
+    assert (e == enum1.VAL5);
+  }
+}
+

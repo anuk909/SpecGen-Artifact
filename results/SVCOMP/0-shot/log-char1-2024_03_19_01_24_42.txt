@@ -1,0 +1,36 @@
+/**
+ * The class char1 provides a method fun that performs certain operations on a given string.
+ */
+class char1 {
+
+  /**
+   * This method takes a string as input and performs certain operations on it.
+   * 
+   * @param arg the input string
+   * @return -1 if the length of the input string is less than 1, 0 if the character value is not within the valid range, 0 if the incremented character value becomes 0, 1 otherwise
+   */
+  public static int fun(String arg) {
+    //@ requires arg != null;
+    //@ ensures \result == -1 || \result == 0 || \result == 1;
+    //@ ensures \result == -1 ==> arg.length() < 1;
+    //@ ensures \result == 0 ==> !(arg.charAt(0) >= 0 && arg.charAt(0) <= '\uffff');
+    //@ ensures \result == 0 ==> (\old(arg.charAt(0)) == '\uffff' && arg.charAt(0) == 0);
+    //@ ensures \result == 1 ==> arg.charAt(0) == '\uffff' && arg.charAt(0) == 0;
+    //@ assignable \nothing;
+    
+    if (arg.length() < 1)
+      return -1;
+    char my_char = arg.charAt(0);
+    int x = my_char;
+    if (!(x >= 0 && x <= '\uffff'))
+      return 0;
+
+    my_char = '\uffff';
+    my_char++;
+    if (my_char == 0)
+      return 0;
+    return 1;
+  }
+  
+}
+

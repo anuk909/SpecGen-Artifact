@@ -1,0 +1,57 @@
+class A1 {
+  //@ public instance invariant some_member == 1;
+  int some_member;
+
+  //@ ensures some_other_member == 2;
+  A1() {
+    some_member = 1;
+  }
+}
+;
+
+class A2 extends A1 {
+  //@ public instance invariant some_other_member == 2;
+  int some_other_member;
+
+  //@ ensures some_other_member == 2;
+  A2() {
+    some_other_member = 2;
+  }
+}
+;
+
+class A3 extends A2 {
+  //@ public instance invariant yet_another_member == 3;
+  int yet_another_member;
+
+  //@ ensures yet_another_member == 3;
+  A3() {
+    yet_another_member = 3;
+  }
+}
+;
+
+class Inheritance1 {
+  public static void main(String[] args) {
+    A3 a3 = new A3();
+    assert a3.some_member == 1;
+    assert a3.some_other_member == 2;
+    assert a3.yet_another_member == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:2: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public instance invariant some_member == 1;
+                                ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:5: error: cannot find symbol
+  //@ ensures some_other_member == 2;
+              ^
+  symbol:   variable some_other_member
+  location: class A1
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:13: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public instance invariant some_other_member == 2;
+                                ^
+/home/max/Documents/JMLGPT/tmp/Inheritance1.java:24: error: An identifier with package visibility may not be used in a invariant clause with public visibility
+  //@ public instance invariant yet_another_member == 3;
+                                ^
+4 errors
+

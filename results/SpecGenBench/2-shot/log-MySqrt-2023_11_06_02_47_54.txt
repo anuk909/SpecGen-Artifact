@@ -1,0 +1,27 @@
+class MySqrt {
+    //@ requires x >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\result * \result <= x) && ((\result + 1) * (\result + 1) > x);
+    public int mySqrt(int x) {
+        int l = 0, r = x, ans = -1;
+        //@ maintaining l <= r;
+        //@ maintaining (\forall int i; l <= i && i <= r; (long)i*i <= x);
+        //@ maintaining (\forall int i; l <= i && i < ans; (long)i*i < x);
+        //@ decreasing r - l + 1;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            if ((long) mid * mid <= x) {
+                ans = mid;
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MySqrt.java:8: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method mySqrt
+        //@ maintaining (\forall int i; l <= i && i <= r; (long)i*i <= x);
+            ^
+1 verification failure
+

@@ -1,0 +1,22 @@
+public class RepeatedNumNested {
+
+    //@ requires arr != null;
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j])) ==> \result == -1;
+    //@ ensures (\exists int i; 0 <= i && i < arr.length; (\forall int j; i + 1 <= j && j < arr.length; arr[i] != arr[j]) && 0 <= \result && \result < arr.length && (\forall int j; \result + 1 <= j && j < arr.length; arr[\result] != arr[j])) ==> arr[\result] == arr[\result + 1];
+    //@ ensures (\forall int i; 0 <= i && i < arr.length; (\exists int j; i + 1 <= j && j < arr.length; arr[i] == arr[j])) ==> 0 <= \result && \result < arr.length;
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:10: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method repeatedNum
+                if(arr[i] == arr[j])
+                      ^
+1 verification failure
+

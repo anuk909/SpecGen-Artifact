@@ -1,0 +1,24 @@
+class Problem {
+  private static final Object[] DEFAULT = {};
+  private Object data;
+
+  //@ public invariant data != null;
+
+  //@ ensures data == DEFAULT;
+  Problem() {
+    this.data = DEFAULT;
+  }
+
+  //@ ensures \result == (data != null);
+  boolean checkInvariant() {
+    return data != null;
+  }
+}
+
+public class lazyloading4 {
+  //@ ensures \result == Problem().checkInvariant();
+  public static boolean f() {
+    return Problem().checkInvariant();
+  }
+}
+

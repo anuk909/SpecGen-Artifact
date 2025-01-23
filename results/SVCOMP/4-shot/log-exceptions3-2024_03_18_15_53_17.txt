@@ -1,0 +1,24 @@
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions3 {
+    //@ requires true;
+    //@ ensures (\exists A exc; exc instanceof B; false) || (\exists A exc; exc instanceof C; false);
+    public static void main(String[] args) {
+        try {
+            throw new B();
+        } catch (C exc) {
+            assert false;
+        } catch (B exc) {
+            assert false;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions3.java:16: verify: The prover cannot establish an assertion (Assert) in method main
+            assert false;
+            ^
+1 verification failure
+

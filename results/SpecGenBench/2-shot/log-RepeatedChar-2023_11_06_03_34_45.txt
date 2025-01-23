@@ -1,0 +1,28 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class RepeatedChar {
+    //@ requires s != null;
+    //@ ensures (\exists int i; 0 <= i && i < s.length(); \result == s.charAt(i) && (\forall int j; 0 <= j && j < i; s.charAt(j) != \result));
+    //@ ensures \result == ' ' || (\forall int i; 0 <= i && i < s.length(); s.charAt(i) != \result);
+    public char repeatedCharacter(String s) {
+        Set<Character> seen = new HashSet<Character>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!seen.add(ch)) {
+                return ch;
+            }
+        }
+        // impossible
+        return ' ';
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedChar.java:6:) in method repeatedCharacter
+        return ' ';
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedChar.java:18:
+    //@ ensures (\exists int i; 0 <= i && i < s.length(); \result == s.charAt(i) && (\forall int j; 0 <= j && j < i; s.charAt(j) != \result));
+        ^
+2 verification failures
+

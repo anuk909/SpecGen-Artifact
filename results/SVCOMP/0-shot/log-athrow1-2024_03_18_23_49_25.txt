@@ -1,0 +1,16 @@
+class A extends Exception {}
+
+class athrow1 {
+  //@ requires true;
+  //@ ensures \result == false;
+  public static boolean func() {
+    A a = new A();
+    try {
+      //@ assert false; // This line will always throw A, so the following code will not be executed
+      throw a;
+    } catch (Exception e) {
+      if(true) return false;
+    }
+    return true;
+  }
+}

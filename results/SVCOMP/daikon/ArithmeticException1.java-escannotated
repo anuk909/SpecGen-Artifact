@@ -1,0 +1,28 @@
+public class ArithmeticException1 {
+
+  /*@ ensures (\result == false)  ==  (\old(i) == 0); */
+  public static boolean arithmeticException1(int i) {
+    try {
+      int j = 10 / i;
+    } catch (ArithmeticException exc) {
+      return false;
+    }
+    return true;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    arithmeticException1(-2);
+    arithmeticException1(-1);
+    arithmeticException1(0);
+    arithmeticException1(1);
+    arithmeticException1(2);
+    arithmeticException1(3);
+    arithmeticException1(4);
+    arithmeticException1(114);
+    arithmeticException1(-514);
+  }
+}

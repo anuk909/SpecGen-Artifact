@@ -1,0 +1,17 @@
+class Main {
+  //@ ensures \result ==> (\forall int i; 0 <= i && i < as.length; !(as[i] instanceof B));
+  //@ ensures !\result ==> (\exists int i; 0 <= i && i < as.length; as[i] instanceof B);
+  public static boolean f() {
+    A[] as = {new A(), new B()};
+    if (!(!(as[0] instanceof B)))
+      return false;
+    if (!(as[1] instanceof B))
+      return false;
+    return true;
+  }
+}
+;
+
+class A {}
+
+class B extends A {}

@@ -1,0 +1,65 @@
+class SQLException extends Exception {
+}
+
+class Statement {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \result == null;
+  public void execute(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \result == null;
+  public void executeUpdate(String s, Object... o) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \result == null;
+  public void executeQuery(String s) {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}
+
+public class Connection {
+
+  //@ requires !s.contains("<bad/>");
+  //@ ensures \result == null;
+  public void prepareStatement(String s) throws SQLException {
+    if (s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+
+  //@ ensures \result == null;
+  public void close() throws SQLException {}
+
+  //@ ensures \result != null;
+  public Statement createStatement() {
+    return new Statement();
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Connection.java:7: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:15: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:23: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:34: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+/home/max/Documents/JMLGPT/tmp/Connection.java:41: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == null;
+               ^
+5 errors
+

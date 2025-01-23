@@ -1,0 +1,49 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HttpServletResponse {
+
+  //@ requires string != null;
+  //@ requires (\forall int i; 0 <= i && i < string.length(); (int)Character.MIN_VALUE <= (int)string.charAt(i) && (int)string.charAt(i) <= (int)Character.MAX_VALUE);
+  //@ ensures true;
+  public void sendRedirect(String string) throws IOException {
+    checkNoSymbolic(string);
+  }
+
+  //@ ensures \result != null;
+  //@ ensures true;
+  public PrintWriter getWriter() throws IOException {
+    return new PrintWriter(System.out) {
+      //@ requires x != null;
+      //@ requires (\forall int i; 0 <= i && i < x.length(); (int)Character.MIN_VALUE <= (int)x.charAt(i) && (int)x.charAt(i) <= (int)Character.MAX_VALUE);
+      //@ ensures true;
+      @Override
+      public void println(String x) {
+        checkNoSymbolic(x);
+      }
+
+      //@ requires x != null;
+      //@ ensures true;
+      @Override
+      public void println(Object x) {
+        checkNoSymbolic(String.valueOf(x));
+      }
+    };
+  }
+
+  //@ requires s != null;
+  //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+  //@ ensures true;
+  public void setContentType(String s) {
+    checkNoSymbolic(s);
+  }
+
+  //@ requires s != null;
+  //@ requires (\forall int i; 0 <= i && i < s.length(); (int)Character.MIN_VALUE <= (int)s.charAt(i) && (int)s.charAt(i) <= (int)Character.MAX_VALUE);
+  //@ ensures true;
+  private void checkNoSymbolic(String s) {
+    if (s != null && s.contains("<bad/>")) {
+      assert false;
+    }
+  }
+}

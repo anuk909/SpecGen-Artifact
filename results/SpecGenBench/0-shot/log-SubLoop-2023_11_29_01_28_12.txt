@@ -1,0 +1,33 @@
+public class SubLoop {
+    //@ requires true;
+    //@ ensures \result == x - y;
+    public static int subLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ loop_invariant sum == x - (\old(y) - n);
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ loop_invariant sum == x + (\old(y) + n);
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SubLoop.java:23: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SubLoop.java:3:) in method subLoop
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/SubLoop.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SubLoop.java:23:
+    //@ ensures \result == x - y;
+        ^
+2 verification failures
+

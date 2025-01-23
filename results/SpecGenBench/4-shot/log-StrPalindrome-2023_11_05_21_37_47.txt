@@ -1,0 +1,32 @@
+public class StrPalindrome {
+   
+   //@ ensures \result ==> (\forall int i; 0 <= i && i < str.length(); str.charAt(i) == str.charAt(str.length() - 1 - i));
+   //@ ensures !\result ==> (\exists int i; 0 <= i && i < str.length(); str.charAt(i) != str.charAt(str.length() - 1 - i));
+   public boolean isPalindrome(String str) {
+      String reverse = "";
+      
+      int length = str.length();
+
+      //@ maintaining reverse == str.substring(length - i, length);
+      //@ maintaining 0 <= i && i <= length;
+      //@ decreases i;
+      for (int i = length - 1; 0 <= i; i--) {
+         reverse = reverse + str.charAt(i);
+	 
+      }
+      
+      return reverse.equals(str);
+   }
+
+}
+/home/max/Documents/JMLGPT/tmp/StrPalindrome.java:10: verify: The prover cannot establish an assertion (UndefinedCalledMethodPrecondition: /home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:834:) in method isPalindrome
+      //@ maintaining reverse == str.substring(length - i, length);
+                                              ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:834: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/StrPalindrome.java:10:
+    public /*@ pure @*/ /*@ non_null @*/ String substring(int beginIndex,
+                                                ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:821: verify: Precondition conjunct is false: 0 <= beginIndex <= endIndex <= length()
+      @   requires 0 <= beginIndex <= endIndex <= length();
+                                               ^
+3 verification failures
+

@@ -1,0 +1,74 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+    //@ requires string1 != null;
+    //@ ensures \result == true <==> (\exists String tmp; tmp.equals("WWWWW's Birthday is 12-17-77"));
+    public static boolean f(String string1) {
+        Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+        Matcher matcher = expression.matcher(string1);
+
+        //@ maintaining (\forall String tmp; matcher.find(); tmp.equals("WWWWW's Birthday is 12-17-77") ==> \result == true);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            String tmp = matcher.group();
+            if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+                return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RegexMatches02.java:11: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall String tmp; matcher.find(); tmp.equals("WWWWW's Birthday is 12-17-77") ==> \result == true);
+                                                                                                             ^
+1 error
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+    //@ requires string1 != null;
+    //@ ensures (\forall String tmp; (\exists matcher.find(); tmp.equals("WWWWW's Birthday is 12-17-77")) ==> \result == true);
+    public static boolean f(String string1) {
+        Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+        Matcher matcher = expression.matcher(string1);
+
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            String tmp = matcher.group();
+            if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+                return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RegexMatches02.java:6: error: <identifier> expected
+    //@ ensures (\forall String tmp; (\exists matcher.find(); tmp.equals("WWWWW's Birthday is 12-17-77")) ==> \result == true);
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/RegexMatches02.java:6: error: ')' expected
+    //@ ensures (\forall String tmp; (\exists matcher.find(); tmp.equals("WWWWW's Birthday is 12-17-77")) ==> \result == true);
+                                                            ^
+/home/max/Documents/JMLGPT/tmp/RegexMatches02.java:6: error: Incorrectly formed or terminated ensures statement near here
+    //@ ensures (\forall String tmp; (\exists matcher.find(); tmp.equals("WWWWW's Birthday is 12-17-77")) ==> \result == true);
+                                                                                                                             ^
+3 errors
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+    //@ requires string1 != null;
+    //@ ensures \result == true <==> (\exists String tmp; tmp.equals("WWWWW's Birthday is 12-17-77"));
+    public static boolean f(String string1) {
+        Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+        Matcher matcher = expression.matcher(string1);
+
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            String tmp = matcher.group();
+            if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+                return false;
+        }
+        return true;
+    }
+}

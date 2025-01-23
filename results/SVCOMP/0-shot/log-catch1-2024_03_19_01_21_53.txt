@@ -1,0 +1,30 @@
+/**
+ * JML specification for class some_exception1
+ */
+class some_exception1 extends Throwable {}
+
+/**
+ * JML specification for class some_exception2
+ */
+class some_exception2 extends some_exception1 {}
+
+/**
+ * JML specification for class catch1
+ */
+class catch1 {
+  /**
+   * JML specification for the fun method
+   * @ensures \result == (\exists some_exception1 e; true; 
+   *                   (e instanceof some_exception2) ? \result == true : \result == false)
+   */
+  public static boolean fun() {
+    try {
+      throw new some_exception2();
+    } catch (some_exception1 e) {
+      if(!(e instanceof some_exception2)) return false;
+      if (e instanceof some_exception2) return true;
+    }
+    return false;
+  }
+}
+

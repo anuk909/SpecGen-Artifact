@@ -1,0 +1,51 @@
+public class charArray {
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ modifies c;
+  //@ ensures c[0] == 's';
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> arg.charAt(5) == 's';
+  //@ ensures \result == 0 <==> arg.charAt(5) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:4: error: An assignable clause may not contain method formal parameters: c
+  //@ modifies c;
+               ^
+1 error
+
+public class charArray {
+  //@ requires c != null;
+  //@ requires c.length > 0;
+  //@ ensures \result != null ==> \result.length == c.length;
+  //@ ensures \result != null ==> \result[0] == 's';
+  public static char[] f(char c[]) {
+    if (c != null && c.length > 0) {
+      c[0] = 's';
+    }
+    return c;
+  }
+
+  //@ requires arg != null;
+  //@ requires arg.length() == 5;
+  //@ ensures \result == 1 <==> arg.charAt(5) == 's';
+  //@ ensures \result == 0 <==> arg.charAt(5) != 's';
+  public static int fun(String arg) {
+    if (arg.length() != 5) return -1;
+    char[] c = f(arg.toCharArray());
+    String s = new String("HELLO") + new String(c, 0, c.length);
+    return (s.charAt(5) == 's') ? 1 : 0;
+  }
+}

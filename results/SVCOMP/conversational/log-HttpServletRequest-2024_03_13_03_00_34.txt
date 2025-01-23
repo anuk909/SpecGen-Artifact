@@ -1,0 +1,968 @@
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ Cookie cookie = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String value; value != null);
+  //@ assignable tainted, cookie;
+  //@ ensures tainted == value && cookie.getName() == value && cookie.getValue() == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0] == cookie;
+  public Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == tainted;
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement() == "name";
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name") == tainted;
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:5: error: cannot find symbol
+  private /*@ spec_public @*/ Cookie cookie = null;
+                              ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:28: error: cannot find symbol
+  public Cookie[] getCookies() {
+         ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:8: error: variable value is already defined in method setTaintedValue(String)
+  //@ requires (\forall String value; value != null);
+                               ^
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:13: error: cannot find symbol
+    this.cookie = new Cookie(tainted, tainted);
+                      ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:29: error: cannot find symbol
+    return new Cookie[] {cookie};
+               ^
+  symbol:   class Cookie
+  location: class HttpServletRequest
+5 errors
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String value; value != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == value && cookieName == value && cookieValue == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable value is already defined in method setTaintedValue(String)
+  //@ requires (\forall String value; value != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String val; val != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == val && cookieName == val && cookieValue == val;
+  public void setTaintedValue(String val) {
+    tainted = val;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable val is already defined in method setTaintedValue(String)
+  //@ requires (\forall String val; val != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String value; value != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == value && cookieName == value && cookieValue == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable value is already defined in method setTaintedValue(String)
+  //@ requires (\forall String value; value != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String val; val != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == val && cookieName == val && cookieValue == val;
+  public void setTaintedValue(String val) {
+    tainted = val;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable val is already defined in method setTaintedValue(String)
+  //@ requires (\forall String val; val != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String value; value != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == value && cookieName == value && cookieValue == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable value is already defined in method setTaintedValue(String)
+  //@ requires (\forall String value; value != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String val; val != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == val && cookieName == val && cookieValue == val;
+  public void setTaintedValue(String val) {
+    tainted = val;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable val is already defined in method setTaintedValue(String)
+  //@ requires (\forall String val; val != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String value; value != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == value && cookieName == value && cookieValue == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable value is already defined in method setTaintedValue(String)
+  //@ requires (\forall String value; value != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String val; val != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == val && cookieName == val && cookieValue == val;
+  public void setTaintedValue(String val) {
+    tainted = val;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable val is already defined in method setTaintedValue(String)
+  //@ requires (\forall String val; val != null);
+                               ^
+1 error
+
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private /*@ spec_public @*/ String cookieName = null;
+  private /*@ spec_public @*/ String cookieValue = null;
+  private /*@ spec_public @*/ String tainted = null;
+
+  //@ requires (\forall String value; value != null);
+  //@ assignable tainted, cookieName, cookieValue;
+  //@ ensures tainted == value && cookieName == value && cookieValue == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookieName = tainted;
+    this.cookieValue = tainted;
+  }
+
+  //@ requires name != null;
+  //@ ensures \result.length == 1 && \result[0] == tainted;
+  public String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result.length == 1 && \result[0].equals(cookieName + "=" + cookieValue);
+  public String[] getCookies() {
+    return new String[] {cookieName + "=" + cookieValue};
+  }
+
+  //@ ensures \result == tainted;
+  public String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals(tainted);
+  public Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result.toString().equals(tainted);
+  public StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result.hasMoreElements() && \result.nextElement().equals("name");
+  public Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result.containsKey("name") && \result.get("name").equals(tainted);
+  public Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public String getScheme() {
+    return tainted;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpServletRequest.java:9: error: variable value is already defined in method setTaintedValue(String)
+  //@ requires (\forall String value; value != null);
+                               ^
+1 error
+

@@ -1,0 +1,68 @@
+import java.util.Random;
+
+public final class Verifier {
+    //@ ensures \result ==> Runtime.getRuntime().halt(1);
+    public static void assume(boolean condition) {
+        if (!condition) {
+            Runtime.getRuntime().halt(1);
+        }
+    }
+
+    //@ ensures \result ==> \result == new Random().nextBoolean();
+    public static boolean nondetBoolean() {
+        return new Random().nextBoolean();
+    }
+
+    //@ ensures \result ==> \result == (byte) (new Random().nextInt());
+    public static byte nondetByte() {
+        return (byte) (new Random().nextInt());
+    }
+
+    //@ ensures \result ==> \result == (char) (new Random().nextInt());
+    public static char nondetChar() {
+        return (char) (new Random().nextInt());
+    }
+
+    //@ ensures \result ==> \result == (short) (new Random().nextInt());
+    public static short nondetShort() {
+        return (short) (new Random().nextInt());
+    }
+
+    //@ ensures \result ==> \result == new Random().nextInt();
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures \result ==> \result == new Random().nextLong();
+    public static long nondetLong() {
+        return new Random().nextLong();
+    }
+
+    //@ ensures \result ==> \result == new Random().nextFloat();
+    public static float nondetFloat() {
+        return new Random().nextFloat();
+    }
+
+    //@ ensures \result ==> \result == new Random().nextDouble();
+    public static double nondetDouble() {
+        return new Random().nextDouble();
+    }
+
+    //@ ensures \result ==> {
+    //@     Random random = new Random();
+    //@     int size = random.nextInt();
+    //@     assume(size >= 0);
+    //@     byte[] bytes = new byte[size];
+    //@     random.nextBytes(bytes);
+    //@     return new String(bytes);
+    //@ }
+    public static String nondetString() {
+        Random random = new Random();
+        int size = random.nextInt();
+        assume(size >= 0);
+        byte[] bytes = new byte[size];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+}
+

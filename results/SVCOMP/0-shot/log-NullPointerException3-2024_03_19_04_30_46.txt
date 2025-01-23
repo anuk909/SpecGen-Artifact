@@ -1,0 +1,24 @@
+class A {
+  int i;
+}
+
+public class NullPointerException3 {
+  //@ requires true;
+  //@ ensures \result == true || \result == false;
+  public static boolean f() {
+    A a = null;
+    try {
+      //@ assert a == null;
+      int i = a.i;
+    } catch (NullPointerException exc) {
+      //@ assert exc instanceof NullPointerException;
+      //@ assert a == null;
+      //@ assert \result == false;
+      return false;
+    }
+    //@ assert a != null;
+    //@ assert \result == true;
+    return true;
+  }
+}
+

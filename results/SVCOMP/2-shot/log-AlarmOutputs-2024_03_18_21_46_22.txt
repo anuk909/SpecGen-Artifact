@@ -1,0 +1,23 @@
+import java.util.Random;
+
+final class Verifier {
+  /*@ public normal_behavior
+    @    ensures \result == new Random().nextInt();
+    @*/
+  public static int nondetInt() {
+    return new Random().nextInt();
+  }
+}
+
+public class AlarmOutputs {
+  public /*@ spec_public @*/ int isAudioDisabled = Verifier.nondetInt();
+  public /*@ spec_public @*/ int notificationMessage = Verifier.nondetInt();
+  public /*@ spec_public @*/ int audioNotificationCommand = Verifier.nondetInt();
+  public /*@ spec_public @*/ int highestLevelAlarm = Verifier.nondetInt();
+  public /*@ spec_public @*/ int logMessageId = Verifier.nondetInt();
+}
+/home/max/Documents/JMLGPT/tmp/AlarmOutputs.java:5: error: Object allocation is not permitted in specification expressions
+    @    ensures \result == new Random().nextInt();
+                            ^
+1 error
+

@@ -1,0 +1,49 @@
+//@ public normal_behavior
+//@ requires true;
+//@ ensures true;
+class A extends RuntimeException {}
+
+//@ public normal_behavior
+//@ requires true;
+//@ ensures true;
+class B extends A {}
+
+//@ public normal_behavior
+//@ requires true;
+//@ ensures true;
+class C extends B {}
+
+//@ public normal_behavior
+//@ requires true;
+//@ ensures true;
+class F {
+  //@ public normal_behavior
+  //@ requires true;
+  //@ ensures true;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+
+//@ public normal_behavior
+//@ requires true;
+//@ ensures true;
+public class exceptions12 {
+  //@ public normal_behavior
+  //@ requires true;
+  //@ ensures true;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+

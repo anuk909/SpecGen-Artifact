@@ -1,0 +1,138 @@
+public class calc {
+    //@ requires args != null && args.length >= 2;
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+    //@ ensures args.length >= 2 ==> new calc().do_stuff(args[0], args[1]);
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires \typeof(a) == \type(String) && \typeof(b) == \type(String);
+    //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures \result ==> Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    //@ ensures !\result ==> true; // No exception thrown
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: incompatible types: void cannot be converted to boolean
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/calc.java:4: error: Object allocation is not permitted in specification expressions
+    //@ ensures args.length >= 2 ==> new calc().do_stuff(args[0], args[1]);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/calc.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures args.length >= 2 ==> new calc().do_stuff(args[0], args[1]);
+                                               ^
+/home/max/Documents/JMLGPT/tmp/calc.java:4: error: incompatible types: void cannot be converted to boolean
+    //@ ensures args.length >= 2 ==> new calc().do_stuff(args[0], args[1]);
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/calc.java:17: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result ==> Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+                 ^
+/home/max/Documents/JMLGPT/tmp/calc.java:18: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures !\result ==> true; // No exception thrown
+                  ^
+6 errors
+
+public class calc {
+    //@ requires args != null && args.length >= 2;
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+    //@ ensures args.length >= 2 ==> \result == true;
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires \typeof(a) == \type(String) && \typeof(b) == \type(String);
+    //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures true; // No exception thrown
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: incompatible types: void cannot be converted to boolean
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/calc.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures args.length >= 2 ==> \result == true;
+                                      ^
+2 errors
+
+public class calc {
+    //@ requires args != null && args.length >= 2;
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+    //@ ensures args.length >= 2;
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires \typeof(a) == \type(String) && \typeof(b) == \type(String);
+    //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures true; // No exception thrown
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: incompatible types: void cannot be converted to boolean
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+                                                      ^
+1 error
+
+public class calc {
+    //@ requires args != null && args.length >= 2;
+    //@ ensures args.length < 2 ==> true;
+    //@ ensures args.length >= 2;
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires \typeof(a) == \type(String) && \typeof(b) == \type(String);
+    //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures true; // No exception thrown
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}

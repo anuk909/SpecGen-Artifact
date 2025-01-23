@@ -1,0 +1,16 @@
+public class StaticCharMethods02 {
+  //@ requires arg != null;
+  //@ ensures \result == -1 || \result == 0 || \result == 1;
+  public static int f(String arg) {
+    // Ensures the argument is not null
+    if (arg.length() < 1) return -1;
+    
+    char c = arg.charAt(0);
+    
+    // Checks if the character is a letter
+    //@ assert Character.isLetter(c) ==> (Character.toUpperCase(c) != Character.toLowerCase(c));
+    
+    return (Character.toUpperCase(c) != Character.toLowerCase(c)) ? 1 : 0;
+  }
+}
+

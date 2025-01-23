@@ -1,0 +1,47 @@
+class PassPillowBranch {
+    //@ requires n >= 0;
+    //@ requires time >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures \result <= n;
+    public int passPillow(int n, int time) {
+        //@ assert n >= 0;
+        //@ assert time >= 0;
+        
+        time = time % (n - 1) * 2;
+        
+        //@ assert time >= 0;
+        //@ assert time <= (n - 1) * 2;
+        
+        if (time < n) {
+            //@ assert time >= 0;
+            //@ assert time < n;
+            
+            return time + 1;
+            
+            //@ assert \result >= 1;
+            //@ assert \result <= n;
+        }
+        
+        //@ assert time >= n;
+        //@ assert time <= (n - 1) * 2;
+        
+        return n * 2 - time - 1;
+        
+        //@ assert \result >= 1;
+        //@ assert \result <= n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:21: error: A \result expression may not be in a assert clause
+            //@ assert \result >= 1;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:22: error: A \result expression may not be in a assert clause
+            //@ assert \result <= n;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:30: error: A \result expression may not be in a assert clause
+        //@ assert \result >= 1;
+                    ^
+/home/max/Documents/JMLGPT/tmp/PassPillowBranch.java:31: error: A \result expression may not be in a assert clause
+        //@ assert \result <= n;
+                    ^
+4 errors
+

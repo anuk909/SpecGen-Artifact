@@ -1,0 +1,722 @@
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int v; search(v) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root == null ==> (\forall int v; search(v) == false);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: variable v is already defined in method insert(int)
+    //@ ensures root == null ==> (\forall int v; search(v) == false);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+6 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ spec_public
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ spec_public
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: No modifiers are allowed prior to a lightweight specification case
+    //@ spec_public
+        ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: No modifiers are allowed prior to a lightweight specification case
+    //@ spec_public
+        ^
+2 errors
+
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private /*@ spec_public @*/ Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:46: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+                                                                              ^
+3 errors
+
+public class BinaryTree {
+    private class Node {
+        /*@ spec_public @*/ int value;
+        /*@ spec_public @*/ Node left;
+        /*@ spec_public @*/ Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    /*@ spec_public @*/ private Node root = null;
+
+    //@ ensures root != null ==> (\forall Node curr; curr != null; search(curr.value) == true);
+    //@ ensures root == null ==> (\forall int val; search(val) == false);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result == true <==> (\exists Node curr; curr != null && curr.value == v);
+    //@ ensures \result == false <==> (\forall Node curr; curr != null && curr.value != v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:14: verify: The prover cannot establish an assertion (NullField) in method BinaryTree
+    /*@ spec_public @*/ private Node root = null;
+                                     ^
+1 verification failure
+

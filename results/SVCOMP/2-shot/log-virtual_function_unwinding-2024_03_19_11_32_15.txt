@@ -1,0 +1,38 @@
+interface Interface {
+  //@ public model boolean b();
+}
+
+class Inner implements Interface {
+  //@ public normal_behavior
+  //@    ensures \result == false;
+  public boolean b() {
+    return false;
+  }
+}
+
+class Outer implements Interface {
+  private Interface inner;
+
+  //@ public normal_behavior
+  //@    requires inner != null;
+  //@    assignable this.inner;
+  //@    ensures this.inner == inner;
+  public Outer(Interface inner) {
+    this.inner = inner;
+  }
+
+  //@ public normal_behavior
+  //@    ensures \result == !inner.b();
+  public boolean b() {
+    return !inner.b();
+  }
+}
+
+public class virtual_function_unwinding {
+  //@ public normal_behavior
+  //@    ensures \result == new Outer(new Inner()).b();
+  public static boolean fun(String[] args) {
+    return new Outer(new Inner()).b();
+  }
+}
+

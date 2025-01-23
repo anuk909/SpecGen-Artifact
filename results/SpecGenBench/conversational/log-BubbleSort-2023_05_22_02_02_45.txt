@@ -1,0 +1,140 @@
+public class BubbleSort { 
+    //@ requires array != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:2: error: cannot find symbol
+    //@ requires array != null;
+                 ^
+  symbol:   variable array
+  location: class BubbleSort
+1 error
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:8: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method bubbleSort: underflow in int difference
+            for (int j = 0; j < n-i-1; j++) {
+                                   ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:3:) in method bubbleSort
+	    return arr;
+	    ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:14:
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+        ^
+3 verification failures
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n-1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; arr[k] <= arr[j]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-1-i; j++) {
+                //@ maintaining 0 <= j && j <= n-2-i;
+                //@ maintaining (\forall int k; 0 <= k && k < j; arr[k] <= arr[j]);
+                //@ decreases n - j;
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= j && j <= n-2-i;
+                    ^
+1 error
+
+public class BubbleSort { 
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining 0 <= i && i <= n-1;
+            //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; arr[k] <= arr[j]));
+            //@ decreases n - i;
+            for (int j = 0; j < n-1-i; j++) {
+                //@ maintaining 0 <= j && j <= n-2-i;
+                //@ maintaining (\forall int k; 0 <= k && k < j; arr[k] <= arr[j]);
+                //@ decreases n - j;
+                if (arr[j+1] < arr[j]) {  
+		            swap(j, j + 1, arr); 
+                } 
+	        }
+	    } 
+	    return arr;
+    } 
+
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+	   int temp;     
+       temp = array[x];
+       array[x] = array[y];
+       array[y] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= j && j <= n-2-i;
+                    ^
+1 error
+

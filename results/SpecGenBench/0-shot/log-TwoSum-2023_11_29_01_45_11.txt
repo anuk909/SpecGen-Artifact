@@ -1,0 +1,57 @@
+class TwoSum {
+    //@ requires nums != null;
+    //@ requires (\forall int i; 0 <= i && i < nums.length; nums[i] != null);
+    //@ requires target != null;
+    //@ ensures \result != null;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != null);
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+        for (int i = 0; i < n; ++i) {
+            //@ loop_invariant i < j && j <= n;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+            //@ loop_invariant (\forall int k; i <= k && k < j; nums[i] + nums[k] != target);
+            //@ loop_invariant (\forall int k; j <= k && k < n; nums[i] + nums[k] != target);
+            for (int j = i + 1; j < n; ++j) {
+                //@ assert (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+                //@ assert (\forall int k; i <= k && k < j; nums[i] + nums[k] != target);
+                //@ assert (\forall int k; j <= k && k < n; nums[i] + nums[k] != target);
+                if (nums[i] + nums[j] == target) {
+                    //@ assert (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+                    //@ assert (\forall int k; i <= k && k < j; nums[i] + nums[k] != target);
+                    //@ assert (\forall int k; j <= k && k < n; nums[i] + nums[k] != target);
+                    return new int[]{i, j};
+                }
+            }
+        }
+        //@ assert (\forall int i; 0 <= i && i < n; (\forall int j; i <= j && j < n; nums[i] + nums[j] != target));
+        return new int[0];
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:3: error: bad operand types for binary operator '!='
+    //@ requires (\forall int i; 0 <= i && i < nums.length; nums[i] != null);
+                                                                    ^
+  first type:  int
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:4: error: bad operand types for binary operator '!='
+    //@ requires target != null;
+                        ^
+  first type:  int
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:6: error: bad operand types for binary operator '!='
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; \result[i] != null);
+                                                                         ^
+  first type:  int
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:13: error: variable j is already defined in method twoSum(int[],int)
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:17: error: variable j is already defined in method twoSum(int[],int)
+                //@ assert (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:21: error: variable j is already defined in method twoSum(int[],int)
+                    //@ assert (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+                                                                             ^
+6 errors
+

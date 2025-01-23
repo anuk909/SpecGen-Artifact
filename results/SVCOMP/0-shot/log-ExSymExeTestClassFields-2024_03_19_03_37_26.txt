@@ -1,0 +1,24 @@
+class Main {
+  //@ public static int field;
+  //@ public int field2;
+
+  //@ requires true;
+  //@ ensures \result == ((arg == 2) ? this.test() : true);
+  public static boolean f(int arg) {
+    if (arg == 2)
+      return (new Main()).test();
+    return true;
+  }
+
+  //@ requires true;
+  //@ ensures (\old(field) == 0 && \old(field2) == 0) ==> System.out.println("br 0");
+  //@ ensures \result == ((field == 0 && field2 == 0) ? true : false);
+  public boolean test() {
+    if (field == 0 && field2 == 0) System.out.println("br 0");
+    else {
+      return false;
+    }
+    return true;
+  }
+}
+

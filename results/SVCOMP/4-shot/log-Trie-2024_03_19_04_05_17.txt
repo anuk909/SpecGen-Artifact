@@ -1,0 +1,207 @@
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private /*@ spec_public @*/ Node root; // root of trie
+  private /*@ spec_public @*/ int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public /*@ spec_public @*/ char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    /*@ public normal_behavior
+      @    ensures length == DEFAULT_LENGTH;
+      @    ensures (\forall int i; 0 <= i && i < DEFAULT_LENGTH; array[i] == '\u0000');
+      @*/
+    public CharArray() {
+      this(DEFAULT_LENGTH);
+    }
+
+    /*@ public normal_behavior
+      @    requires length >= 0;
+      @    ensures this.length == length;
+      @    ensures (\forall int i; 0 <= i && i < length; array[i] == '\u0000');
+      @*/
+    public CharArray(int length) {
+      this.length = length;
+      array = new char[length];
+    }
+
+    /*@ public normal_behavior
+      @    ensures \result == length;
+      @*/
+    public int length() {
+      return length;
+    }
+
+    /*@ public normal_behavior
+      @    requires 0 <= i && i < length;
+      @    assignable array[i];
+      @    ensures array[i] == c;
+      @*/
+    public void set(int i, char c) {
+      if (i < length) array[i] = c;
+      else throw new ArrayIndexOutOfBoundsException("Error while setting char!");
+    }
+
+    /*@ public normal_behavior
+      @    requires 0 <= i && i < length;
+      @    ensures \result == array[i];
+      @*/
+    public char get(int i) {
+      if (i < length) return array[i];
+      else throw new ArrayIndexOutOfBoundsException("Error while getting char!");
+    }
+
+    /*@ public normal_behavior
+      @    requires 0 <= start && start <= end && end <= length;
+      @    ensures \result.length() == end - start;
+      @    ensures (\forall int i; 0 <= i && i < end - start; \result.get(i) == this.get(i));
+      @*/
+    public CharArray substring(int start, int end) {
+      int subLength = end - start;
+      CharArray substr = new CharArray(subLength);
+      for (int i = 0; i < subLength; i++) substr.set(i, this.get(i));
+      return substr;
+    }
+  }
+
+  /*@ public normal_behavior
+    @    requires key != null;
+    @    ensures \result == -1 <==> get2(root, key, 0) == null;
+    @    ensures \result != -1 ==> get2(root, key, 0).val == \result;
+    @*/
+  public int get(CharArray key) {
+    Node x = get2(root, key, 0);
+    if (x == null) return -1;
+    return x.val;
+  }
+
+  /*@ public normal_behavior
+    @    requires key != null;
+    @    ensures \result <==> get(key) != -1;
+    @*/
+  public boolean contains(CharArray key) {
+    return get(key) != -1;
+  }
+
+  /*@ public normal_behavior
+    @    requires x != null && key != null && 0 <= d && d <= key.length();
+    @    ensures \result == get2(x, key, d);
+    @*/
+  private Node get2(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) return x;
+    char c = key.get(d);
+    return get2(x.next[c], key, d + 1);
+  }
+
+  /*@ public normal_behavior
+    @    requires key != null && -1 <= val;
+    @    assignable root, N;
+    @    ensures val == -1 ==> delete(key);
+    @    ensures val != -1 ==> root == put2(root, key, val, 0);
+    @*/
+  public void put(CharArray key, int val) {
+    if (val == -1) delete(key);
+    else root = put2(root, key, val, 0);
+  }
+
+  /*@ public normal_behavior
+    @    requires x != null && key != null && -1 <= val && 0 <= d && d <= key.length();
+    @    ensures \result != null;
+    @    ensures \result.val == val <==> x.val == -1;
+    @    ensures \result.val == val ==> N == \old(N) + 1;
+    @    ensures \result.val == val ==> \result.next == \old(x.next);
+    @    ensures \result.val != val ==> \result == x;
+    @*/
+  private Node put2(Node x, CharArray key, int val, int d) {
+    if (x == null) x = new Node();
+    if (d == key.length()) {
+      if (x.val == -1) N++;
+      x.val = val;
+      return x;
+    }
+
+    char c = key.get(d);
+    x.next[c] = put2(x.next[c], key, val, d + 1);
+    return x;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result == N;
+    @*/
+  public int size() {
+    return N;
+  }
+
+  /*@ public normal_behavior
+    @    ensures \result <==> size() == 0;
+    @*/
+  public boolean isEmpty() {
+    return size() == 0;
+  }
+
+  /*@ public normal_behavior
+    @    requires query != null;
+    @    ensures \result == null <==> longestPrefixOf(root, query, 0, -1) == -1;
+    @    ensures \result != null ==> \result.length() == longestPrefixOf(root, query, 0, -1);
+    @*/
+  public CharArray longestPrefixOf(CharArray query) {
+    int length = longestPrefixOf(root, query, 0, -1);
+    if (length == -1) return null;
+    else return query.substring(0, length);
+  }
+
+  /*@ public normal_behavior
+    @    requires x != null && query != null && 0 <= d && d <= query.length();
+    @    ensures \result == longestPrefixOf(x, query, d, -1);
+    @*/
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) {
+    if (x == null) return length;
+    if (x.val != -1) length = d;
+    if (d == query.length()) return length;
+    char c = query.get(d);
+    return longestPrefixOf(x.next[c], query, d + 1, length);
+  }
+
+  /*@ public normal_behavior
+    @    requires key != null;
+    @    assignable root, N;
+    @    ensures root == delete(root, key, 0);
+    @*/
+  public void delete(CharArray key) {
+    root = delete(root, key, 0);
+  }
+
+  /*@ public normal_behavior
+    @    requires x != null && key != null && 0 <= d && d <= key.length();
+    @    ensures \result != null;
+    @    ensures \result.val == -1 <==> x.val != -1;
+    @    ensures \result.val == -1 ==> N == \old(N) - 1;
+    @    ensures \result.val == -1 ==> \result.next == \old(x.next);
+    @    ensures \result.val != -1 ==> \result == x;
+    @*/
+  private Node delete(Node x, CharArray key, int d) {
+    if (x == null) return null;
+    if (d == key.length()) {
+      if (x.val != -1) N--;
+      x.val = -1;
+    } else {
+      char c = key.get(d);
+      x.next[c] = delete(x.next[c], key, d + 1);
+    }
+
+    // remove subtrie rooted at x if it is completely empty
+    if (x.val != -1) return x;
+    for (int c = 0; c < R; c++) if (x.next[c] != null) return x;
+    return null;
+  }
+
+}

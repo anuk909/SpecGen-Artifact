@@ -1,0 +1,145 @@
+class CalcDuration {
+    /*@ requires timeSeries != null;
+      @ requires duration >= 0;
+      @ ensures \result >= 0;
+      @ ensures \result == (\sum int i; 0 <= i && i < timeSeries.length; 
+      @                     (timeSeries[i] >= (\sum int j; 0 <= j && j < i; timeSeries[j] + duration)) ? duration : 
+      @                     (timeSeries[i] + duration - (\sum int j; 0 <= j && j < i; timeSeries[j] + duration)));
+      @*/
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+        //@ maintaining ans == (\sum int j; 0 <= j && j < i; 
+        //@                     (timeSeries[j] >= (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)) ? duration : 
+        //@                     (timeSeries[j] + duration - (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)));
+        //@ maintaining expired == (\sum int j; 0 <= j && j < i; timeSeries[j] + duration);
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:14: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@                     (timeSeries[j] >= (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)) ? duration : 
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:15: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@                     (timeSeries[j] + duration - (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining ans == (\sum int j; 0 <= j && j < i; 
+                                ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:16: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining expired == (\sum int j; 0 <= j && j < i; timeSeries[j] + duration);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:14: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@                     (timeSeries[j] >= (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)) ? duration : 
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:15: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@                     (timeSeries[j] + duration - (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining ans == (\sum int j; 0 <= j && j < i; 
+                                ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:16: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining expired == (\sum int j; 0 <= j && j < i; timeSeries[j] + duration);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:14: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@                     (timeSeries[j] >= (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)) ? duration : 
+                                                   ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:15: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@                     (timeSeries[j] + duration - (\sum int k; 0 <= k && k < j; timeSeries[k] + duration)));
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining ans == (\sum int j; 0 <= j && j < i; 
+                                ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:16: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining expired == (\sum int j; 0 <= j && j < i; timeSeries[j] + duration);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+      @                     (timeSeries[i] >= (\sum int j; 0 <= j && j < i; timeSeries[j] + duration)) ? duration : 
+                                               ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+      @                     (timeSeries[i] + duration - (\sum int j; 0 <= j && j < i; timeSeries[j] + duration)));
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:5: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+      @ ensures \result == (\sum int i; 0 <= i && i < timeSeries.length; 
+                            ^
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:16: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method calcDuration
+        //@ maintaining expired == (\sum int j; 0 <= j && j < i; timeSeries[j] + duration);
+            ^
+15 warnings
+1 verification failure
+
+class CalcDuration {
+    /*@ requires timeSeries != null;
+      @ requires duration >= 0;
+      @ ensures \result >= 0;
+      @ ensures \result == (\sum int i; 0 <= i && i < timeSeries.length; 
+      @                     (timeSeries[i] >= expired) ? duration : 
+      @                     (timeSeries[i] + duration - expired));
+      @*/
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+        //@ maintaining ans == (\sum int j; 0 <= j && j < i; 
+        //@                     (timeSeries[j] >= expired) ? duration : 
+        //@                     (timeSeries[j] + duration - expired));
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:6: error: cannot find symbol
+      @                     (timeSeries[i] >= expired) ? duration : 
+                                              ^
+  symbol:   variable expired
+  location: class CalcDuration
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:7: error: cannot find symbol
+      @                     (timeSeries[i] + duration - expired));
+                                                        ^
+  symbol:   variable expired
+  location: class CalcDuration
+2 errors
+
+class CalcDuration {
+    /*@ requires timeSeries != null;
+      @ requires duration >= 0;
+      @ ensures \result >= 0;
+      @ ensures \result == (\sum int i; 0 <= i && i < timeSeries.length; 
+      @                     (timeSeries[i] >= expired) ? duration : 
+      @                     (timeSeries[i] + duration - (timeSeries[i-1] + duration)));
+      @*/
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining 0 <= i && i <= timeSeries.length;
+        //@ maintaining ans == (\sum int j; 0 <= j && j < i; 
+        //@                     (timeSeries[j] >= expired) ? duration : 
+        //@                     (timeSeries[j] + duration - (timeSeries[j-1] + duration)));
+        //@ decreases timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - (timeSeries[i-1] + duration);
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+}

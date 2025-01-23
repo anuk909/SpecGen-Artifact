@@ -1,0 +1,69 @@
+public class Trie {
+  private static final int R = 256; // extended ASCII
+
+  private Node root; // root of trie
+  private int N = 0; // number of keys in trie
+
+  // R-way trie node
+  private static class Node {
+    private int val = -1;
+    private Node[] next = new Node[R];
+  }
+
+  private static class CharArray {
+    private int length = 0;
+    public char[] array;
+    private static final int DEFAULT_LENGTH = 42;
+
+    public CharArray() ensures array != null && length == DEFAULT_LENGTH;
+    public CharArray(int length) requires length >= 0 ensures array != null && this.length == length;
+
+    public int length() ensures \result == length;
+
+    public void set(int i, char c) 
+      requires i >= 0 && i < length
+      ensures array[i] == c;
+      
+    public char get(int i) 
+      requires i >= 0 && i < length
+      ensures \result == array[i];
+
+    public CharArray substring(int start, int end) 
+      requires start >= 0 && end >= start && end <= length
+      ensures \result.length == end - start && (\forall int i; 0 <= i && i < \result.length; \result.array[i] == this.array[start + i]);
+  }
+
+  public int get(CharArray key) 
+    ensures \result == -1 || (\exists Node x; x != null && x == get2(root, key, 0) && x.val == \result);
+
+  public boolean contains(CharArray key) 
+    ensures \result == (get(key) != -1);
+
+  private Node get2(Node x, CharArray key, int d) 
+    ensures \result == null || (\exists char c; c == key.get(d) && \result == get2(x.next[c], key, d + 1));
+
+  public void put(CharArray key, int val) 
+    ensures (\forall CharArray k; k != key; get(k) == get(\old(k))) && (val == -1 ==> (\forall CharArray k; get(k) == -1));
+    
+  private Node put2(Node x, CharArray key, int val, int d) 
+    ensures \result != null && (\forall char c; c != key.get(d) ==> x.next[c] == \old(x).next[c]);
+
+  public int size() 
+    ensures \result == N;
+
+  public boolean isEmpty() 
+    ensures \result == (size() == 0);
+
+  public CharArray longestPrefixOf(CharArray query) 
+    ensures \result == null || (\exists int length; length >= 0 && length == longestPrefixOf(root, query, 0, -1) && \result == query.substring(0, length));
+
+  private int longestPrefixOf(Node x, CharArray query, int d, int length) 
+    ensures \result == length || (\exists char c; c == query.get(d) && \result == longestPrefixOf(x.next[c], query, d + 1, length));
+
+  public void delete(CharArray key) 
+    ensures (\forall CharArray k; k != key; get(k) == \old(get(k))) && (get(key) == -1);
+
+  private Node delete(Node x, CharArray key, int d) 
+    ensures \result != null || (\forall int c; 0 <= c && c < R; x.next[c] == \old(x).next[c]);
+}
+

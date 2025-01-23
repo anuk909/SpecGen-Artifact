@@ -1,0 +1,22 @@
+class PerfectSquare {
+    //@ ensures \result ==> (num >= 0 && (\exists int i; 0 <= i && i * i <= num; i * i == num));
+    //@ ensures !\result ==> (num < 0 || (\forall int i; 0 <= i && i * i <= num; i * i != num));
+    public static boolean isPerfectSquare(int num) {
+        if(num == 0)
+            return true;
+
+        //@ maintaining (\forall int i; 1 <= i && i * i <= num; i * i != num);
+        //@ maintaining (1 <= i && i <= num + 1);
+        //@ decreases num - i * i;
+        for(int i = 1; i * i <= num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:8: error: variable i is already defined in method isPerfectSquare(int)
+        //@ maintaining (\forall int i; 1 <= i && i * i <= num; i * i != num);
+                                     ^
+1 error
+

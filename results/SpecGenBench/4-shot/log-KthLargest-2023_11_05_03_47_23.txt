@@ -1,0 +1,28 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires 1 <= k && k <= nums.length;
+    //@ ensures \result == \max int i; (\forall int j; 0 <= j && j < nums.length; nums[i] >= nums[j]) && (\forall int j; 0 <= j && j < k-1; (\forall int l; 0 <= l && l < nums.length; nums[i] >= nums[l]));
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+    //@ ensures \result == \max int i; (\forall int j; 0 <= j && j < nums.length; nums[i] >= nums[j]) && (\forall int j; 0 <= j && j < k-1; (\forall int l; 0 <= l && l < nums.length; nums[i] >= nums[l]));
+                                                                                                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: warning: Inserting missing semicolon at the end of a ensures statement
+    //@ ensures \result == \max int i; (\forall int j; 0 <= j && j < nums.length; nums[i] >= nums[j]) && (\forall int j; 0 <= j && j < k-1; (\forall int l; 0 <= l && l < nums.length; nums[i] >= nums[l]));
+                                                                                                                                                                                                            ^
+1 error
+1 warning
+

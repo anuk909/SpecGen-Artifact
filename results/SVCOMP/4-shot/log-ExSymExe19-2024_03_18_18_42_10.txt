@@ -1,0 +1,43 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires \symbolic int arg;
+  //@ ensures \result ==> field < 0;
+  //@ ensures \result ==> field == (arg % 10);
+  //@ ensures \result ==> test(3, field, field2);
+  public static boolean f(int arg) {
+    int x = 3;
+
+    Main inst = new Main();
+    field = arg;
+    if (field < 0) return true;
+    field = field % 10;
+    return inst.test(x, field, field2);
+  }
+
+  //@ requires x == z + r && z == 3 * x && r == -z;
+  //@ ensures \result ==> x > 99 ==> field == 99;
+  //@ ensures \result ==> x <= 99 ==> field == x;
+  //@ ensures \result ==> r > z ==> field2 == z;
+  //@ ensures \result ==> r <= z ==> field2 == r;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe19");
+    int y = 3;
+    x = z + r;
+    z = y * x;
+    r = -z;
+    if (x > 99) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (r > z) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe19.java:5: error: This backslash token is unknown: \symbolic
+  //@ requires \symbolic int arg;
+               ^
+1 error
+

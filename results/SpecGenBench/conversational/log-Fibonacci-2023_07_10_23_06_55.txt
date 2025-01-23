@@ -1,0 +1,860 @@
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+	
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+                        
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:38: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method fibCompute: underflow in long sum
+			fib[index] = fib[index - 2] + fib[index - 1];
+			                            ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+                        
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method fibCompute
+		//@ maintaining 2 <= index && index <= fib.length;
+		    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:23: verify: The prover cannot establish an assertion (UndefinedNullDeReference) in method getFib
+	//@ requires 0 <= index && index < fib.length;
+	                                      ^
+2 verification failures
+
+public class Fibonacci {
+   	private /*@ spec_public nullable @*/ long fib[];
+
+	//@ ensures fib.length == 2 && fib[0] == 0 && fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size && fib[0] == 0 && fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		//@ assume fib != null && 0 <= index && index < fib.length;
+		return fib[index];
+	}
+
+	//@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+	public void fibCompute() {
+		int index = 2;
+      
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			//@ assume fib != null && 0 <= index - 2 && index - 2 < fib.length && 0 <= index - 1 && index - 1 < fib.length && fib[index - 2] + fib[index - 1] <= Long.MAX_VALUE && Long.MIN_VALUE <= fib[index - 2] + fib[index - 1];
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+		}
+	}
+}

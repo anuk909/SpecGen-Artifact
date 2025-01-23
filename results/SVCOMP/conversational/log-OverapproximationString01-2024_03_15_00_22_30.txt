@@ -1,0 +1,75 @@
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures (prefix + s).equals("not possible") ==> \result == true;
+    //@ ensures !(prefix + s).equals("not possible") ==> \result == false;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures (prefix + s).equals("not possible") ==> \result == true;
+                 ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures (prefix + s).equals("not possible") ==> \result == true;
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+    //@ ensures !(prefix + s).equals("not possible") ==> \result == false;
+                  ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures !(prefix + s).equals("not possible") ==> \result == false;
+                                                          ^
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 44040192 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid6061.log
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures (prefix + s).equals("not possible") ==> true;
+    //@ ensures !(prefix + s).equals("not possible") ==> false;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:3: error: cannot find symbol
+    //@ ensures (prefix + s).equals("not possible") ==> true;
+                 ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+/home/max/Documents/JMLGPT/tmp/OverapproximationString01.java:4: error: cannot find symbol
+    //@ ensures !(prefix + s).equals("not possible") ==> false;
+                  ^
+  symbol:   variable prefix
+  location: class OverapproximationString01
+2 errors
+
+public class OverapproximationString01 {
+    //@ requires s != null;
+    //@ ensures true;
+    public static void foo(String s) {
+        String prefix = "abc";
+        String complete = prefix + s;
+        if (complete.equals("not possible")) {
+            assert (true);
+        } else {
+            assert (false);
+        }
+    }
+}

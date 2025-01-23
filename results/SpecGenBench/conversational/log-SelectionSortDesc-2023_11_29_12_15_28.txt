@@ -1,0 +1,382 @@
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int j; i <= j && j < index; arr[j] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:9: error: variable j is already defined in method selectionSort(int[])
+            //@ maintaining (\forall int j; i <= j && j < index; arr[j] >= arr[index]);
+                                         ^
+1 error
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:4: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:3:) in method selectionSort
+    public static void selectionSort(int[] arr){  
+                       ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:4:
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        ^
+2 verification failures
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:20: verify: The prover cannot establish an assertion (Assert) in method selectionSort
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+            ^
+1 verification failure
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:21: warning: A non-pure method is being called where it is not permitted: SelectionSortDesc.isSorted(int[])
+        //@ assert isSorted(arr);
+                           ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:27: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] < arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:20: verify: The prover cannot establish an assertion (Assert) in method selectionSort
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+            ^
+1 warning
+2 verification failures
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ pure
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:24: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:21: warning: A non-pure method is being called where it is not permitted: SelectionSortDesc.isSorted(int[])
+        //@ assert isSorted(arr);
+                           ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:27: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] < arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:20: verify: The prover cannot establish an assertion (Assert) in method selectionSort
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+            ^
+1 warning
+2 verification failures
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ pure
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:24: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:21: warning: A non-pure method is being called where it is not permitted: SelectionSortDesc.isSorted(int[])
+        //@ assert isSorted(arr);
+                           ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:27: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] < arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:20: verify: The prover cannot establish an assertion (Assert) in method selectionSort
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+            ^
+1 warning
+2 verification failures
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ pure
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:24: error: No modifiers are allowed prior to a lightweight specification case
+    //@ pure
+        ^
+1 error
+
+public class SelectionSortDesc {
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static void selectionSort(int[] arr){  
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ maintaining i <= index && index < arr.length;
+            //@ maintaining (\forall int k; i <= k && k < index; arr[k] >= arr[index]);
+            //@ decreases arr.length - index;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] > arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+        //@ assert isSorted(arr);
+    }
+    
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+    public static boolean isSorted(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] < arr[i+1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:21: warning: A non-pure method is being called where it is not permitted: SelectionSortDesc.isSorted(int[])
+        //@ assert isSorted(arr);
+                           ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:27: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method isSorted
+            if (arr[i] < arr[i+1]) {
+                   ^
+/home/max/Documents/JMLGPT/tmp/SelectionSortDesc.java:20: verify: The prover cannot establish an assertion (Assert) in method selectionSort
+        //@ assert (\forall int i; 0 <= i && i < arr.length - 1; arr[i] >= arr[i+1]);
+            ^
+1 warning
+2 verification failures
+

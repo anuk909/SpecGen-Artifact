@@ -1,0 +1,139 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; \result instanceof B);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ ensures (\forall Exception exc; exc instanceof B; \result instanceof B);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:8: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall Exception exc; exc instanceof B; \result instanceof B);
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:21: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures (\forall Exception exc; exc instanceof B; \result instanceof B);
+                                                         ^
+2 errors
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; exc instanceof B);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ ensures (\forall Exception exc; exc instanceof B; exc instanceof B);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:27: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; exc instanceof B);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ ensures (\forall Exception exc; exc instanceof B; exc instanceof B);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:27: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures (\forall Exception exc; exc instanceof B; exc instanceof B);
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ ensures (\forall Exception exc; exc instanceof B; exc instanceof B);
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      // No assertion to verify
+    }
+  }
+}
+

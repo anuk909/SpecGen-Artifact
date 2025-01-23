@@ -1,0 +1,58 @@
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result == true || \result == false;
+    public boolean digitCount(String num) {
+        //@ assert num != null;
+        //@ assert num.length() >= 0;
+        //@ assert num.length() == num.length();
+        //@ assert (\forall int i; 0 <= i && i < num.length(); Character.isDigit(num.charAt(i)));
+
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        //@ assert h != null;
+
+        int n = num.length();
+        //@ assert n >= 0;
+
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; Character.isDigit(num.charAt(j)));
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.containsKey(num.charAt(j) - '0'));
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.get(num.charAt(j) - '0') != null);
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.get(num.charAt(j) - '0') >= 0);
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.get(num.charAt(j) - '0') <= j + 1);
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            //@ assert 0 <= digit && digit <= 9;
+
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+            //@ assert h.containsKey(digit);
+            //@ assert h.get(digit) != null;
+            //@ assert h.get(digit) >= 0;
+            //@ assert h.get(digit) <= i + 1;
+        }
+
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; Character.isDigit(num.charAt(j)));
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.containsKey(num.charAt(j) - '0'));
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.get(num.charAt(j) - '0') != null);
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.get(num.charAt(j) - '0') >= 0);
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; h.get(num.charAt(j) - '0') <= j + 1);
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            //@ assert 0 <= v && v <= 9;
+
+            if (h.getOrDefault(i, 0) != v) {
+                //@ assert h.getOrDefault(i, 0) != v;
+                //@ assert \result == false;
+                return false;
+            }
+        }
+
+        //@ assert \result == true;
+        return true;
+    }
+}

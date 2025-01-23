@@ -1,0 +1,526 @@
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:16: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method AddLoop
+            //@ maintaining sum == x - (y - n);
+                ^
+1 verification failure
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x + (y - n);
+                //@ invariant n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x - (n - y);
+                //@ invariant n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: ';' expected
+                //@ invariant sum == x + (y - n);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: not a statement
+                //@ invariant sum == x + (y - n);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x + (y - n);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:16: error: illegal start of type
+        } else {
+          ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: ';' expected
+                //@ invariant sum == x - (n - y);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: not a statement
+                //@ invariant sum == x - (n - y);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x - (n - y);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:28: error: class, interface, enum, or record expected
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:29: error: class, interface, enum, or record expected
+    }
+    ^
+13 errors
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x + (y - n);
+                //@ invariant n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x - (n - y);
+                //@ invariant n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: ';' expected
+                //@ invariant sum == x + (y - n);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: not a statement
+                //@ invariant sum == x + (y - n);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x + (y - n);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:16: error: illegal start of type
+        } else {
+          ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: ';' expected
+                //@ invariant sum == x - (n - y);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: not a statement
+                //@ invariant sum == x - (n - y);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x - (n - y);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:28: error: class, interface, enum, or record expected
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:29: error: class, interface, enum, or record expected
+    }
+    ^
+13 errors
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x + (y - n);
+                //@ assert n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x - (n - y);
+                //@ assert n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:18: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method AddLoop
+            //@ maintaining sum == x - (n - y);
+                ^
+1 verification failure
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x + (y - n);
+                //@ invariant n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n + y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x - (n + y);
+                //@ invariant n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: ';' expected
+                //@ invariant sum == x + (y - n);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: not a statement
+                //@ invariant sum == x + (y - n);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x + (y - n);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:16: error: illegal start of type
+        } else {
+          ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: ';' expected
+                //@ invariant sum == x - (n + y);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: not a statement
+                //@ invariant sum == x - (n + y);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x - (n + y);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:28: error: class, interface, enum, or record expected
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:29: error: class, interface, enum, or record expected
+    }
+    ^
+13 errors
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x + (y - n);
+                //@ assert n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n + y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x - (n + y);
+                //@ assert n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:18: verify: The prover cannot establish an assertion (LoopInvariant) in method AddLoop
+            //@ maintaining sum == x - (n + y);
+                ^
+1 verification failure
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x + (y - n);
+                //@ invariant n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x - (n - y);
+                //@ invariant n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: ';' expected
+                //@ invariant sum == x + (y - n);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: not a statement
+                //@ invariant sum == x + (y - n);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x + (y - n);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:16: error: illegal start of type
+        } else {
+          ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: ';' expected
+                //@ invariant sum == x - (n - y);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: not a statement
+                //@ invariant sum == x - (n - y);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x - (n - y);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:28: error: class, interface, enum, or record expected
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:29: error: class, interface, enum, or record expected
+    }
+    ^
+13 errors
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x + (y - n);
+                //@ assert n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n + y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x - (n + y);
+                //@ assert n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:18: verify: The prover cannot establish an assertion (LoopInvariant) in method AddLoop
+            //@ maintaining sum == x - (n + y);
+                ^
+1 verification failure
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x + (y - n);
+                //@ invariant n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ invariant sum == x - (n - y);
+                //@ invariant n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: ';' expected
+                //@ invariant sum == x + (y - n);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: not a statement
+                //@ invariant sum == x + (y - n);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:11: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x + (y - n);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:12: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:16: error: illegal start of type
+        } else {
+          ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: ';' expected
+                //@ invariant sum == x - (n - y);
+                                 ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: not a statement
+                //@ invariant sum == x - (n - y);
+                                       ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:22: error: Expected a declaration or a JML construct inside the JML annotation here
+                //@ invariant sum == x - (n - y);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: ';' expected
+                //@ invariant n >= 0;
+                               ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:23: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+                //@ invariant n >= 0;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:28: error: class, interface, enum, or record expected
+        return sum;
+        ^
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:29: error: class, interface, enum, or record expected
+    }
+    ^
+13 errors
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x + (y - n);
+                //@ assert n >= 0;
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n + y);
+            //@ maintaining n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                //@ assert sum == x - (n + y);
+                //@ assert n >= 0;
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:18: verify: The prover cannot establish an assertion (LoopInvariant) in method AddLoop
+            //@ maintaining sum == x - (n + y);
+                ^
+1 verification failure
+

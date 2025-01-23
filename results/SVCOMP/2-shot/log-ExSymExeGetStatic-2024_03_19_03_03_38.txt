@@ -1,0 +1,37 @@
+class Main {
+
+  /*@ public normal_behavior
+    @ requires true;
+    @ assignable \nothing;
+    @ ensures \result != null;
+    @*/
+  public static void main(String[] args) {
+    SNode sn = new SNode();
+    SNode sn2 = sn.swap();
+  }
+}
+
+class SNode {
+  //@ public invariant (\forall SNode n; n != null; n.next != n);
+  //@ public invariant head != null ==> head.next != head;
+  int elem;
+  SNode next;
+  static SNode head; // = new SNode(); //change is here
+
+  /*@ public normal_behavior
+    @ requires true;
+    @ assignable \nothing;
+    @ ensures head != null ==> head.next != head;
+    @ ensures head == null;
+    @*/
+  SNode swap() {
+    if (head != null) {
+      assert false;
+      System.out.println("head is not null");
+    } else {
+      System.out.println("head is null");
+    }
+    return this;
+  }
+}
+

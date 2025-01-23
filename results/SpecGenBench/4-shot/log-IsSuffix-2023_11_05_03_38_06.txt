@@ -1,0 +1,27 @@
+public class IsSuffix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (\forall int i; 0 <= i && i < pat.length(); pat.charAt(i) == txt.charAt(txt.length() - pat.length() + i));
+    public boolean isSuffix (String pat, String txt) {
+	
+        int i = pat.length() - 1;
+
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int j; i < j && j < pat.length(); pat.charAt(j) == txt.charAt(txt.length() - pat.length() + j));
+        //@ decreases i;
+        while(i >= 0) {
+	    int j = i - pat.length() + txt.length();
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isSuffix
+        //@ maintaining 0 <= i && i <= pat.length();
+            ^
+1 verification failure
+

@@ -1,0 +1,68 @@
+public class StringConcatenation04 {
+    //@ requires s1 != null;
+    //@ ensures \result <==> tmp.equals("Happy  at");
+    public static boolean f(String s1){
+        String tmp = s1;
+        return tmp.equals("Happy  at");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConcatenation04.java:3: error: cannot find symbol
+    //@ ensures \result <==> tmp.equals("Happy  at");
+                             ^
+  symbol:   variable tmp
+  location: class StringConcatenation04
+1 error
+
+public class StringConcatenation04 {
+    private /*@ spec_public @*/ String tmp;
+    
+    //@ requires s1 != null;
+    //@ assignable tmp;
+    //@ ensures \result <==> tmp.equals("Happy  at");
+    public static boolean f(String s1){
+        tmp = s1;
+        return tmp.equals("Happy  at");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConcatenation04.java:5: error: non-static variable tmp cannot be referenced from a static context
+    //@ assignable tmp;
+                   ^
+/home/max/Documents/JMLGPT/tmp/StringConcatenation04.java:6: error: non-static variable tmp cannot be referenced from a static context
+    //@ ensures \result <==> tmp.equals("Happy  at");
+                             ^
+/home/max/Documents/JMLGPT/tmp/StringConcatenation04.java:8: error: non-static variable tmp cannot be referenced from a static context
+        tmp = s1;
+        ^
+/home/max/Documents/JMLGPT/tmp/StringConcatenation04.java:9: error: non-static variable tmp cannot be referenced from a static context
+        return tmp.equals("Happy  at");
+               ^
+4 errors
+
+public class StringConcatenation04 {
+    private /*@ spec_public @*/ String tmp;
+    
+    //@ requires s1 != null;
+    //@ assignable tmp;
+    //@ ensures \result <==> tmp.equals("Happy  at");
+    public boolean f(String s1){
+        tmp = s1;
+        return tmp.equals("Happy  at");
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConcatenation04.java:2: verify: The prover cannot establish an assertion (NullField) in method StringConcatenation04
+    private /*@ spec_public @*/ String tmp;
+                                       ^
+1 verification failure
+
+public class StringConcatenation04 {
+    private /*@ spec_public @*/ String tmp = "";
+    
+    //@ requires s1 != null;
+    //@ assignable tmp;
+    //@ ensures \result <==> tmp.equals("Happy  at");
+    public boolean f(String s1){
+        tmp = s1;
+        return tmp.equals("Happy  at");
+    }
+}
+

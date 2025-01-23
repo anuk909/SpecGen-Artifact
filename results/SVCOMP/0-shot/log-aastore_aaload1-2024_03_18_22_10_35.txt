@@ -1,0 +1,27 @@
+import java.util.Random;
+
+public class aastore_aaload1 {
+  static class A {
+    int value = 0;
+  }
+
+  //@ requires args != null;
+  //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  public static void main(String[] args) {
+    int size = new Random().nextInt();
+    //@ assume size >= 0; // assume size is non-negative
+    if (size < 0) return;
+    A[] array = new A[size];
+
+    //@ loop_invariant (\forall int i; 0 <= i && i < size; array[i] != null);
+    for (int i = 0; i < size; i++) {
+      array[i] = new A();
+    }
+    //@ assert (\forall int i; 0 <= i && i < size; array[i] != null);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:16: error: variable i is already defined in method main(String[])
+    //@ loop_invariant (\forall int i; 0 <= i && i < size; array[i] != null);
+                                    ^
+1 error
+

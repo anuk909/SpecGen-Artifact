@@ -1,0 +1,289 @@
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[i] && (\forall int j; 0 <= j && j < \result; arr[j] != arr[i]);
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:5: error: cannot find symbol
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[i] && (\forall int j; 0 <= j && j < \result; arr[j] != arr[i]);
+                                                                             ^
+  symbol:   variable i
+  location: class RepeatedNumNested
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:5: error: cannot find symbol
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[i] && (\forall int j; 0 <= j && j < \result; arr[j] != arr[i]);
+                                                                                                                                        ^
+  symbol:   variable i
+  location: class RepeatedNumNested
+2 errors
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[i] && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:5: error: cannot find symbol
+    //@ ensures 0 <= \result && \result < arr.length ==> arr[\result] == arr[i] && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+                                                                             ^
+  symbol:   variable i
+  location: class RepeatedNumNested
+1 error
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        for (int i = 0; i < arr.length; ++i) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:9: verify: The prover cannot establish an assertion (PossiblyNegativeIndex) in method repeatedNum
+                if(arr[i] == arr[j])
+                      ^
+1 verification failure
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+
+public class RepeatedNumNested {
+
+    //@ requires 0 < arr.length;
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+    //@ ensures 0 <= \result && \result < arr.length ==> (\exists int i; 0 <= i && i < arr.length; arr[\result] == arr[i]) && (\forall int j; 0 <= j && j < \result; arr[j] != arr[\result]);
+    public static int repeatedNum(int[] arr) {
+        //@ loop_invariant 0 <= i && i <= arr.length;
+        //@ loop_invariant (\forall int x; 0 <= x && x < i; (\forall int j; i+1 <= j && j < arr.length; arr[x] != arr[j]));
+        //@ decreases arr.length - i;
+        for (int i = 0; i < arr.length; ++i) {
+            //@ loop_invariant i+1 <= j && j <= arr.length;
+            //@ loop_invariant (\forall int x; 0 <= x && x < i; arr[x] != arr[i]);
+            //@ loop_invariant (\forall int x; i+1 <= x && x < j; arr[i] != arr[x]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; ++j) {
+                if(arr[i] == arr[j])
+                    return i;
+            }
+        }
+        return -1;
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4:) in method repeatedNum
+        return -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/RepeatedNumNested.java:20:
+    //@ ensures \result == -1 <==> (\forall int i, j; 0 <= i && i < arr.length && i+1 <= j && j < arr.length; arr[i] != arr[j]);
+        ^
+2 verification failures
+

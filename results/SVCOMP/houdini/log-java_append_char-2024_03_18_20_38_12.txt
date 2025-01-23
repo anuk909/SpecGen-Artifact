@@ -1,0 +1,75 @@
+class Main {
+  //@ requires b;
+  //@ requires !b;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures b ==> \result;
+  //@ ensures b ==> !\result;
+  //@ ensures !b ==> \result;
+  //@ ensures !b ==> !\result;
+  public static boolean f(boolean b) {
+    char[] diff = {'d', 'i', 'f', 'f'};
+    char[] blue = {'b', 'l', 'u', 'e'};
+
+    StringBuilder buffer = new StringBuilder();
+
+    buffer.append(diff).append(blue);
+
+    String tmp = buffer.toString();
+    if (b) return (tmp.equals("diffblue"));
+    else return (!tmp.equals("diffblue"));
+  }
+}
+
+class java_append_char {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    Main.f(true);
+    Main.f(false);
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/java_append_char.java:27: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/java_append_char.java:10:) in method main
+    Main.f(true);
+          ^
+/home/max/Documents/JMLGPT/tmp/java_append_char.java:10: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/java_append_char.java:27:
+  public static boolean f(boolean b) {
+                        ^
+/home/max/Documents/JMLGPT/tmp/java_append_char.java:3: verify: Precondition conjunct is false: !b
+  //@ requires !b;
+               ^
+3 verification failures
+
+class Main {
+  //@ requires b;
+  //@ ensures \result;
+  //@ ensures !\result;
+  //@ ensures b ==> \result;
+  //@ ensures b ==> !\result;
+  //@ ensures !b ==> \result;
+  //@ ensures !b ==> !\result;
+  public static boolean f(boolean b) {
+    char[] diff = {'d', 'i', 'f', 'f'};
+    char[] blue = {'b', 'l', 'u', 'e'};
+
+    StringBuilder buffer = new StringBuilder();
+
+    buffer.append(diff).append(blue);
+
+    String tmp = buffer.toString();
+    if (b) return (tmp.equals("diffblue"));
+    else return (!tmp.equals("diffblue"));
+  }
+}
+
+class java_append_char {
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    Main.f(true);
+    Main.f(false);
+  }
+}
+
+
+OpenJML not responding. Aborted.

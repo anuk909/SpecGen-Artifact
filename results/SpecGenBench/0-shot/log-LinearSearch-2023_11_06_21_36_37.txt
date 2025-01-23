@@ -1,0 +1,31 @@
+public class LinearSearch {
+    private static  int location;
+
+    //@ requires array != null;
+    //@ ensures \result >= -1;
+    //@ ensures \result < array.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result; array[i] != search);
+    //@ ensures (\result == -1) ==> (\forall int i; 0 <= i && i < array.length; array[i] != search);
+    public static int linearSearch(int search, int array[]) {
+        int c;
+
+        //@ loop_invariant 0 <= c && c <= array.length;
+        //@ loop_invariant (\forall int i; 0 <= i && i < c; array[i] != search);
+        //@ decreases array.length - c;
+        for (c = 0; c < array.length; c++) {  
+            if (array[c] == search) {
+                location = c;
+                break;
+            }
+        }
+        
+        //@ assert (c == array.length) ==> (\forall int i; 0 <= i && i < array.length; array[i] != search);
+        if (c == array.length) {
+            location = -1;
+        }
+        
+        //@ assert location >= -1;
+        //@ assert location < array.length;
+        return location;
+    }
+}

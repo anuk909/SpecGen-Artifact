@@ -1,0 +1,26 @@
+class A {}
+
+class B {}
+
+public class ClassCastException3 {
+  /*@ public normal_behavior
+    @    requires true;
+    @    assignable \nothing;
+    @    ensures \result <==> true;
+    @ also
+    @ public exceptional_behavior
+    @    requires true;
+    @    assignable \nothing;
+    @    signals_only ClassCastException;
+    @    ensures \result <==> false; @*/
+  public static boolean f() {
+    try {
+      Object a = new A();
+      B b = (B) a;
+    } catch (Exception exc) {
+      return false;
+    }
+    return true;
+  }
+}
+

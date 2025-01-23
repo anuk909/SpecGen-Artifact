@@ -1,0 +1,20 @@
+class PrimeCheck {
+   
+	//@ requires a >= 0;
+	//@ ensures \result == (\forall int i; 2 <= i && i <= a/2; a % i != 0);
+	public boolean isPrime(int a) {
+		int i = 2;
+		int mid = a/2;
+
+		//@ loop_invariant 2 <= i && i <= mid+1;
+		//@ loop_variant mid - i;
+		while (i <= mid) {
+			//@ assert (\forall int j; 2 <= j && j < i; a % j != 0);
+			if (a%i == 0)
+				return false;
+			i++;
+		}
+		//@ assert (\forall int j; 2 <= j && j <= a/2; a % j != 0);
+		return true;
+	}
+}

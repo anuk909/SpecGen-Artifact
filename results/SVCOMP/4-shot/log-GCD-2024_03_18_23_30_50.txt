@@ -1,0 +1,27 @@
+class GCD {
+    //@ requires y1 > 0 && y2 > 0;
+    //@ ensures \result > 0;
+    //@ ensures (\forall int i; i > 0 && y1 % i == 0 && y2 % i == 0; i <= \result);
+    //@ ensures \result == y1 <==> (\forall int i; i > 0 && y1 % i == 0 && y2 % i == 0; i <= y1);
+    //@ ensures \result == y2 <==> (\forall int i; i > 0 && y1 % i == 0 && y2 % i == 0; i <= y2);
+    public static int gcd(int y1, int y2) {
+        if (y1 <= 0 || y2 <= 0) {
+          return 0;
+        }
+        if (y1 == y2) {
+          return y1;
+        }
+        if (y1 > y2) {
+          return gcd(y1 - y2, y2);
+        }
+        return gcd(y1, y2 - y1);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:5:) in method gcd
+          return gcd(y1 - y2, y2);
+          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:15:
+    //@ ensures \result == y1 <==> (\forall int i; i > 0 && y1 % i == 0 && y2 % i == 0; i <= y1);
+        ^
+2 verification failures
+

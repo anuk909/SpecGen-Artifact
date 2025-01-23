@@ -1,0 +1,38 @@
+import java.util.HashSet;
+import java.util.Set;
+
+class RepeatedChar {
+    //@ ensures \result == ' ' || (\exists int i; 0 <= i && i < s.length(); (\forall int j; 0 <= j && j < i; s.charAt(j) != \result) && s.charAt(i) == \result);
+    public char repeatedCharacter(String s) {
+        Set<Character> seen = new HashSet<Character>();
+        
+        //@ maintaining (\forall int i; 0 <= i && i < j; s.charAt(i) != \result);
+        //@ decreases s.length() - j;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!seen.add(ch)) {
+                return ch;
+            }
+        }
+        // impossible
+        return ' ';
+    }
+}
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:9: error: variable i is already defined in method repeatedCharacter(String)
+        //@ maintaining (\forall int i; 0 <= i && i < j; s.charAt(i) != \result);
+                                     ^
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:9: error: cannot find symbol
+        //@ maintaining (\forall int i; 0 <= i && i < j; s.charAt(i) != \result);
+                                                      ^
+  symbol:   variable j
+  location: class RepeatedChar
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:9: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\forall int i; 0 <= i && i < j; s.charAt(i) != \result);
+                                                                         ^
+/home/max/Documents/JMLGPT/tmp/RepeatedChar.java:10: error: cannot find symbol
+        //@ decreases s.length() - j;
+                                   ^
+  symbol:   variable j
+  location: class RepeatedChar
+4 errors
+

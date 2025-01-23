@@ -1,0 +1,244 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ ensures \result ==> field == 9 && (\exists int x, int z, int r; x == 3 && z == field && r == field2 && test(x, z, r));
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+  
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    int y = 3;
+    x = x * r;
+    z = z * x;
+    r = y * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:5: error: <identifier> expected
+  //@ ensures \result ==> field == 9 && (\exists int x, int z, int r; x == 3 && z == field && r == field2 && test(x, z, r));
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:5: error: Expected a semicolon to separate the parts of a JML quantified expression
+  //@ ensures \result ==> field == 9 && (\exists int x, int z, int r; x == 3 && z == field && r == field2 && test(x, z, r));
+                                                        ^
+2 errors
+
+class Main {
+  static int field;
+  static int field2;
+
+  //@ ensures \result ==> field == 9 && (\exists int x; \exists int z; \exists int r; x == 3 && z == field && r == field2 && test(x, z, r));
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+  
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    int y = 3;
+    x = x * r;
+    z = z * x;
+    r = y * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field == 9 && (\exists int x; \exists int z; \exists int r; x == 3 && z == field && r == field2 && test(x, z, r));
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field == 9 && (\exists int x; \exists int z; \exists int r; x == 3 && z == field && r == field2 && test(x, z, r));
+                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> field == 9 && (\exists int x; \exists int z; \exists int r; x == 3 && z == field && r == field2 && test(x, z, r));
+                                                                                                                   ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:5: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> field == 9 && (\exists int x; \exists int z; \exists int r; x == 3 && z == field && r == field2 && test(x, z, r));
+                                                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:13: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires x == 3 && z == field && r == field2;
+                              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:13: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires x == 3 && z == field && r == field2;
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:14: error: 'void' type not allowed here
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:14: error: cannot find symbol
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                                                                     ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:14: error: 'void' type not allowed here
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:14: error: 'void' type not allowed here
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                                                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: 'void' type not allowed here
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: 'void' type not allowed here
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: cannot find symbol
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                                                                                                              ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                                                                                                                                        ^
+14 errors
+
+class Main {
+  private static /*@ spec_public */ int field;
+  private static /*@ spec_public */ int field2;
+
+  //@ requires field == 9;
+  //@ ensures \result ==> (\exists int x; x == 3 && test(x, field, field2));
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+  
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    int y = 3;
+    x = x * r;
+    z = z * x;
+    r = y * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> (\exists int x; x == 3 && test(x, field, field2));
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: 'void' type not allowed here
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: cannot find symbol
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                                                                     ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: 'void' type not allowed here
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:15: error: 'void' type not allowed here
+  //@ ensures \result ==> System.out.println("Testing ExSymExe18") && z*x > x && x > y*x ==> System.out.println("branch FOO1") && System.out.println("branch BOO2");
+                                                                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:16: error: 'void' type not allowed here
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:16: error: 'void' type not allowed here
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:16: error: cannot find symbol
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                                                                                                              ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures !\result ==> System.out.println("Testing ExSymExe18") && z*x <= x ==> System.out.println("branch FOO2") && x <= y*x ==> System.out.println("branch BOO1");
+                                                                                                                                                        ^
+9 errors
+
+class Main {
+  private static /*@ spec_public */ int field;
+  private static /*@ spec_public */ int field2;
+
+  //@ requires field == 9;
+  //@ ensures \result ==> (\exists int x; x == 3 && test(x, field, field2));
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+  
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> z*x > x && x > r*x;
+  //@ ensures !\result ==> z*x <= x && x <= r*x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    x = x * r;
+    z = z * x;
+    r = 3 * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe18.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> (\exists int x; x == 3 && test(x, field, field2));
+                                                    ^
+1 error
+
+class Main {
+  private /*@ spec_public */ int field;
+  private /*@ spec_public */ int field2;
+
+  //@ requires field == 9;
+  //@ ensures \result ==> (\exists int x; x == 3 && test(x, field, field2));
+  public boolean f() {
+    int x = 3;
+    field = 9;
+    return test(x, field, field2);
+  }
+  
+  //@ requires x == 3 && z == field && r == field2;
+  //@ ensures \result ==> z*x > x && x > r*x;
+  //@ ensures !\result ==> z*x <= x && x <= r*x;
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    x = x * r;
+    z = z * x;
+    r = 3 * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}

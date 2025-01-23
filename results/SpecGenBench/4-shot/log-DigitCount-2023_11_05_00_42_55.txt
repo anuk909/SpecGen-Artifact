@@ -1,0 +1,71 @@
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ requires (\forall int i; 0 <= i && i < num.length(); (int)Character.MIN_VALUE <= (int)num.charAt(i) && (int)num.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); num.charAt(i) == num.charAt(j) ==> i == j));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.containsKey((int)num.charAt(k)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < i; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.containsKey((int)num.charAt(k)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < n; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(k, 0) == (\sum int j; 0 <= j && j < n; (k == (int)num.charAt(j) ? 1 : 0)));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(i, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:22: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(k, 0) == (\sum int j; 0 <= j && j < n; (k == (int)num.charAt(j) ? 1 : 0)));
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < i; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < i; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:13: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < i; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < n; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:22: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(k, 0) == (\sum int j; 0 <= j && j < n; (k == (int)num.charAt(j) ? 1 : 0)));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < n; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:22: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(k, 0) == (\sum int j; 0 <= j && j < n; (k == (int)num.charAt(j) ? 1 : 0)));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:21: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.get((int)num.charAt(k)) == (\sum int j; 0 <= j && j < n; (num.charAt(k) == num.charAt(j) ? 1 : 0)));
+                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:22: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(k, 0) == (\sum int j; 0 <= j && j < n; (k == (int)num.charAt(j) ? 1 : 0)));
+                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:30: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DigitCount.java:7:) in method digitCount
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DigitCount.java:30:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < num.length(); (\forall int j; 0 <= j && j < num.length(); num.charAt(i) == num.charAt(j) ==> i == j));
+        ^
+10 warnings
+2 verification failures
+

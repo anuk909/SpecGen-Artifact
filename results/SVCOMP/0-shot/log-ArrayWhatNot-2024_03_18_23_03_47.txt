@@ -1,0 +1,36 @@
+import org.jmlspecs.models.JMLValueSequence;
+
+public class ArrayWhatNot {
+
+  //@ requires size >= 0;
+  //@ ensures \result == -1 || \result == 0 || \result == 1;
+  public static int func(int size) {
+    if (size < 8) return -1;
+
+    int int_array[] = new int[size];
+
+    //@ loop_invariant 0 <= i && i <= size;
+    //@ loop_invariant (\forall int j; 0 <= j && j < i; int_array[j] == j);
+    for (int i = 0; i < size; i++)
+      int_array[i] = i;
+
+    if (int_array[7] != 7)
+      return 0;
+
+    what_not what_not_array[] = new what_not[size];
+
+    //@ assert what_not_array.length == size;
+    if (what_not_array.length != size)
+      return 0;
+    return 1;
+  }
+
+  class what_not {
+    // Add specifications for what_not class if needed
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ArrayWhatNot.java:1: error: package org.jmlspecs.models does not exist
+import org.jmlspecs.models.JMLValueSequence;
+                          ^
+1 error
+

@@ -1,0 +1,33 @@
+class PerfectNumber {
+    //@ requires num >= 1;
+    //@ ensures \result == (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ? (d + ((d * d < num) ? (num / d) : 0)) : 0) == num;
+    public boolean isPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        int sum = 1;
+        //@ maintaining sum == (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ? (d + ((d * d < num) ? (num / d) : 0)) : 0);
+        //@ decreasing num - d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum == num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ? (d + ((d * d < num) ? (num / d) : 0)) : 0) == num;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ? (d + ((d * d < num) ? (num / d) : 0)) : 0) == num;
+                                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:10: error: variable d is already defined in method isPerfectNumber(int)
+        //@ maintaining sum == (\sum int d; 2 <= d && d * d <= num; (num % d == 0) ? (d + ((d * d < num) ? (num / d) : 0)) : 0);
+                                         ^
+3 errors
+

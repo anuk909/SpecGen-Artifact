@@ -1,0 +1,35 @@
+public class GCD {
+	
+	//@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+	//@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+	//@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+	//@ ensures \result == 1 <==> (num1 != 0 && num2 != 0 && \forall int i; 1 <= i && i <= num1 && i <= num2; (num1 % i == 0 && num2 % i == 0) ==> \forall int j; 1 <= j && j <= i; (num1 % j == 0 && num2 % j == 0));
+	public static int gcd(int num1, int num2){
+		int result = 1; 
+	 	num1 = (0 <= num1) ? num1 : -num1;
+		num2 = (0 <= num2) ? num2 : -num2;
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            if (num1 % i == 0 && num2 % i == 0) {
+       			result = i;
+			}
+        }
+		return result;
+	}
+}
+/home/max/Documents/JMLGPT/tmp/GCD.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:5:) in method gcd
+			return (num1 > num2) ? num1 : num2;
+			^
+/home/max/Documents/JMLGPT/tmp/GCD.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:17:
+	//@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+	    ^
+2 verification failures
+

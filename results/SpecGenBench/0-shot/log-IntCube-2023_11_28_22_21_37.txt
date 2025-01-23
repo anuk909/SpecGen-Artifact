@@ -1,0 +1,39 @@
+public class IntCube {
+
+    //@ requires true;
+    //@ ensures \result == (x >= 0 ? x * x * x : -(x * x * x));
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if(x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ loop_invariant 0 <= i && i <= x;
+        //@ loop_invariant res == i * i * i;
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ loop_invariant 0 <= j && j <= x;
+            //@ loop_invariant res == i * i * i + j * j * j;
+            //@ decreases x - j;
+            for(int j = 0; j < x; j++) {
+                //@ loop_invariant 0 <= k && k <= x;
+                //@ loop_invariant res == i * i * i + j * j * j + k * k * k;
+                //@ decreases x - k;
+                for(int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        return (neg ? -res : res);
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IntCube.java:4:) in method cubeOf
+        return (neg ? -res : res);
+        ^
+/home/max/Documents/JMLGPT/tmp/IntCube.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IntCube.java:28:
+    //@ ensures \result == (x >= 0 ? x * x * x : -(x * x * x));
+        ^
+2 verification failures
+

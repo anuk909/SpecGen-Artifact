@@ -1,0 +1,23 @@
+class PerfectSquare {
+    //@ requires num >= 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i*i <= num; i*i == num);
+    public static boolean isPerfectSquare(int num) {
+        if(num == 0)
+            return true;
+	
+	//@ maintaining 1 <= i && i <= num+1;
+	//@ maintaining (\exists int k; 1 <= k && k*k <= num; k*k == num) ==> (\exists int j; 1 <= j && j*j <= num; j*j == num);
+	//@ maintaining (\forall int k; 1 <= k && k < i; k*k != num);
+	//@ decreases num - i*i;
+        for(int i = 1; i * i <= num; i++) {
+            if(i * i == num)
+                return true;
+        }
+        return false;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectSquare.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method isPerfectSquare
+	//@ maintaining (\forall int k; 1 <= k && k < i; k*k != num);
+	    ^
+1 verification failure
+

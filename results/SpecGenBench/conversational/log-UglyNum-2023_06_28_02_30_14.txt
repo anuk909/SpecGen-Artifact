@@ -1,0 +1,568 @@
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(factors[i], j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        for (int factor : factors) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: error: cannot find symbol
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(factors[i], j) != 0));
+                                                                                                                  ^
+  symbol:   variable factors
+  location: class UglyNum
+1 error
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(factors[i], j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        int[] factors = {2, 3, 5};
+        for (int factor : factors) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: error: cannot find symbol
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(factors[i], j) != 0));
+                                                                                                                  ^
+  symbol:   variable factors
+  location: class UglyNum
+1 error
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:15:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:9: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isUgly
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+                ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || n % 2 != 0 || n % 3 != 0 || n % 5 != 0;
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || n % 2 != 0 || n % 3 != 0 || n % 5 != 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:9: verify: The prover cannot establish an assertion (LoopInvariant) in method isUgly
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+                ^
+2 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || n % 2 != 0 && n % 3 != 0 && n % 5 != 0;
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || n % 2 != 0 && n % 3 != 0 && n % 5 != 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+
+class UglyNum {
+    //@ requires n > 0;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+    public boolean isUgly(int n) {
+        if (n <= 0) {
+            return false;
+        }
+        for (int factor : new int[]{2, 3, 5}) {
+            //@ maintaining (\forall int j; j >= 0; n % (int)Math.pow(factor, j) != 0) || n == 1;
+            //@ decreases n;
+            while (n % factor == 0) {
+                n /= factor;
+            }
+        }
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:15: verify: The prover cannot establish an assertion (Assert) in method isUgly
+        //@ assert n == 1 || (n % 2 != 0 && n % 3 != 0 && n % 5 != 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/UglyNum.java:3:) in method isUgly
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/UglyNum.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/UglyNum.java:16:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < 3; (\forall int j; j >= 0; n == 1 || n % (int)Math.pow(2, j) != 0 || n % (int)Math.pow(3, j) != 0 || n % (int)Math.pow(5, j) != 0));
+        ^
+3 verification failures
+

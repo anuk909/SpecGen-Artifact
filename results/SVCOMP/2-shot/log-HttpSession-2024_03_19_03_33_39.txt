@@ -1,0 +1,26 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final Map<String, Object> map = new HashMap<>();
+
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result != null ==> (\forall String key; map.containsKey(key) <==> \result.hasMoreElements() && \result.nextElement().equals(key));
+  //@ ensures \result != null ==> (\forall String key; \result.hasMoreElements() ==> map.containsKey(\result.nextElement()));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ ensures map.get(name) == value;
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}
+

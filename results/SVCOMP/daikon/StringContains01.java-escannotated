@@ -1,0 +1,20 @@
+public class StringContains01 {
+  public static boolean f (String ab, String b) {
+    return (ab.contains(b));
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("#$%^&*123", "123");
+    f("#$%^#*123", "#$%^#*123");
+    f("#$%^#*123", "#$%^#*123aesf");
+    f("fsgdhj", "fsgdhj");
+    f("fsgdhj", "fsadhj");
+    f("DiffBlue L1mitted", "DiffBlue L1mitted");
+    f("DiffBlue Limitted", "DiffBlue");
+    f("HiiffblTe Limited", "");
+  }
+}

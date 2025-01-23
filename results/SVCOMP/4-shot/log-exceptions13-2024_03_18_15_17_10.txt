@@ -1,0 +1,38 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures \result == true;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      throw exc;
+    }
+  }
+}
+
+public class exceptions13 {
+
+  //@ ensures \result == true;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:8: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == true;
+               ^
+/home/max/Documents/JMLGPT/tmp/exceptions13.java:21: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == true;
+               ^
+2 errors
+

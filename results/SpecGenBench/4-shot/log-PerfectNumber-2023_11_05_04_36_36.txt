@@ -1,0 +1,28 @@
+class PerfectNumber {
+    //@ requires num > 0;
+    //@ ensures \result <==> (\sum int d; 2 <= d && d*d <= num; (num % d == 0 ==> (\exists int k; 2 <= k && k <= num; (d * k == num))));
+    public boolean isPerfectNumber(int num) {
+        if (num == 1) {
+            return false;
+        }
+
+        int sum = 1;
+        //@ maintaining 2 <= d && d*d <= num+1;
+        //@ maintaining (\forall int k; 2 <= k && k < d; sum % k == 0);
+        //@ decreases num - d*d;
+        for (int d = 2; d * d <= num; ++d) {
+            if (num % d == 0) {
+                sum += d;
+                if (d * d < num) {
+                    sum += num / d;
+                }
+            }
+        }
+        return sum == num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PerfectNumber.java:3: error: The value expression of a sum or product expression must be a numeric type, not boolean
+    //@ ensures \result <==> (\sum int d; 2 <= d && d*d <= num; (num % d == 0 ==> (\exists int k; 2 <= k && k <= num; (d * k == num))));
+                                                                ^
+1 error
+

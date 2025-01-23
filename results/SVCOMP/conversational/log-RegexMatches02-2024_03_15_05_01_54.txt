@@ -1,0 +1,51 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+  //@ requires string1 != null;
+  //@ ensures \result ==> \exists String tmp; tmp.equals("WWWWW's Birthday is 12-17-77");
+  public static boolean f(String string1) {
+    Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+    Matcher matcher = expression.matcher(string1);
+
+    //@ maintaining \forall int i; 0 <= i && i < matcher.start(); string1.charAt(i) != 'W';
+    //@ maintaining \forall int i; matcher.start() <= i && i < matcher.end(); string1.charAt(i) == 'W';
+    //@ maintaining \forall int i; matcher.end() <= i && i < string1.length(); string1.charAt(i) != 'W';
+    //@ decreases string1.length() - matcher.end();
+    while (matcher.find()) {
+      System.out.println(matcher.group());
+      String tmp = matcher.group();
+      if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+        return false;
+    }
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/RegexMatches02.java:6: error: The type or expression near here is invalid (or not implemented): ( token ? in JmlParser.term3())
+  //@ ensures \result ==> \exists String tmp; tmp.equals("WWWWW's Birthday is 12-17-77");
+                                                                                         ^
+1 error
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+  //@ requires string1 != null;
+  //@ ensures \result ==> (\exists String tmp; tmp.equals("WWWWW's Birthday is 12-17-77"));
+  public static boolean f(String string1) {
+    Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+    Matcher matcher = expression.matcher(string1);
+
+    //@ maintaining \forall int i; 0 <= i && i < matcher.start(); string1.charAt(i) != 'W';
+    //@ maintaining \forall int i; matcher.start() <= i && i < matcher.end(); string1.charAt(i) == 'W';
+    //@ maintaining \forall int i; matcher.end() <= i && i < string1.length(); string1.charAt(i) != 'W';
+    //@ decreases string1.length() - matcher.end();
+    while (matcher.find()) {
+      System.out.println(matcher.group());
+      String tmp = matcher.group();
+      if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+        return false;
+    }
+    return true;
+  }
+}

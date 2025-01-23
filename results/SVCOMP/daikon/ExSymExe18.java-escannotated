@@ -1,0 +1,83 @@
+class Main {
+  /*@ spec_public */ static int field;
+  /*@ spec_public */ static int field2;
+
+  /*@ modifies Main.field; */
+  /*@ ensures Main.field == 9; */
+  /*@ ensures \result == true; */
+  /*@ ensures Main.field >= \old(Main.field); */
+  /*@ ensures Main.field2 <= \old(Main.field); */
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field, field2);
+  }
+  
+  /*@ requires Main.field == 9; */
+  /*@ requires Main.field > x; */
+  /*@ requires Main.field >= z; */
+  /*@ ensures (\result == false)  ==  (x < z); */
+  /*@ ensures (\result == false)  ==>  (Main.field != x); */
+  /*@ ensures (\result == false)  ==>  (Main.field > \old(z)); */
+  /*@ ensures (\result == false)  ==>  (Main.field2 != \old(r)); */
+  /*@ ensures (\result == false)  ==>  (Main.field2 != \old(x)); */
+  /*@ ensures (\result == false)  ==>  (Main.field2 != \old(z)); */
+  /*@ ensures (\result == false)  ==>  (Main.field2 != r); */
+  /*@ ensures (\result == false)  ==>  (Main.field2 != x); */
+  /*@ ensures (\result == false)  ==>  (Main.field2 < z); */
+  /*@ ensures (\result == false)  ==>  (\old(this) != null); */
+  /*@ ensures (\result == false)  ==>  (\old(x) != 0); */
+  /*@ ensures (\result == false)  ==>  (\old(x) != \old(r)); */
+  /*@ ensures (\result == false)  ==>  (\old(z) != 0); */
+  /*@ ensures (\result == false)  ==>  (r != \old(r)); */
+  /*@ ensures (\result == false)  ==>  (r != \old(x)); */
+  /*@ ensures (\result == false)  ==>  (r != \old(z)); */
+  /*@ ensures (\result == false)  ==>  (r % \old(r) == 0); */
+  /*@ ensures (\result == false)  ==>  (r % \old(x) == 0); */
+  /*@ ensures (\result == false)  ==>  (x != r); */
+  /*@ ensures (\result == false)  ==>  (x % \old(r) == 0); */
+  /*@ ensures (\result == false)  ==>  (x % \old(x) == 0); */
+  /*@ ensures (\result == false)  ==>  (z % \old(r) == 0); */
+  /*@ ensures (\result == false)  ==>  (z % \old(x) == 0); */
+  /*@ ensures (\result == false)  ==>  (z % \old(z) == 0); */
+  /*@ ensures (\result == false)  ==>  (z % x == 0); */
+  /*@ ensures (\result == false)  ==>  (z > \old(r)); */
+  /*@ ensures (\result == false)  ==>  (z > \old(x)); */
+  /*@ ensures (\result == false)  ==>  (z > \old(z)); */
+  /*@ ensures (\result == true)  ==  (x >= z); */
+  /*@ ensures Main.field == 9; */
+  /*@ ensures Main.field > \old(x); */
+  /*@ ensures Main.field >= \old(z); */
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe18");
+    int y = 3;
+    x = x * r;
+    z = z * x;
+    r = y * x;
+    if (z > x) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (x > r) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+    return true;
+  }
+}
+
+class ExSymExe18 {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int i = -5; i <= 5; i++) {
+      for(int j = -5; j <= 5; j++) {
+        Main.f();
+        e.test(i, j, i-j);
+        e.test(j, i, j+i);
+      }
+    }
+  }
+}

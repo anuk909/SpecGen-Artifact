@@ -1,0 +1,281 @@
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: warning: A non-pure method is being called where it is not permitted: IsSubsequence.isSubsequence(java.lang.String,java.lang.String)
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: warning: A non-pure method is being called where it is not permitted: IsSubsequence.isSubsequence(java.lang.String,java.lang.String)
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSubsequence
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+            ^
+2 warnings
+3 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:19:
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+        ^
+4 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert i == n || i < n;
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSubsequence
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+            ^
+3 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert i == n || i < n;
+        //@ assert j == m || j < m;
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:21: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:21:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSubsequence
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+            ^
+3 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert i == n || i < n;
+        //@ assert j == m || j < m;
+        //@ assert i == n || s.charAt(i) != t.charAt(j);
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:22: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:22:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:21: verify: The prover cannot establish an assertion (UndefinedCalledMethodPrecondition: /home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:333:) in method isSubsequence
+        //@ assert i == n || s.charAt(i) != t.charAt(j);
+                                                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:333: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:21:
+    public /*@ pure @*/ char charAt(int index)
+                             ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/CharSequence.jml:79: verify: Precondition conjunct is false: 0 <= index < charArray.length
+      @      requires 0 <= index < charArray.length;
+                                 ^
+5 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert i == n || i < n && j < m && s.charAt(i) != t.charAt(j);
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSubsequence
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+            ^
+3 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert i == n || i < n && j < m && s.charAt(i) != t.charAt(j);
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSubsequence
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+            ^
+3 verification failures
+
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+    //@ ensures !\result ==> (\forall int i; 0 <= i && i <= s.length(); !isSubsequence(s.substring(i), t));
+    public /*@ pure @*/ boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining 0 <= j && j <= m;
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+        //@ decreases n - i + m - j;
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+        //@ assert i == n || i < n && j < m && s.charAt(i) != t.charAt(j);
+        return i == n;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3:) in method isSubsequence
+        return i == n;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSubsequence.java:20:
+    //@ ensures \result ==> (\exists int i; 0 <= i && i <= s.length(); isSubsequence(s.substring(i), t));
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSubsequence.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method isSubsequence
+        //@ maintaining (\forall int k; 0 <= k && k < i; s.charAt(k) == t.charAt(k+j-i));
+            ^
+3 verification failures
+

@@ -1,0 +1,36 @@
+class basic1 {
+    //@ ensures \result == null;
+    public static void main(String[] args) {
+        assert (System.out != null);
+        System.out.println("Hello World!");
+        assert (System.err != null);
+        System.err.println("Hello World!");
+        assert (System.in != null);
+        try {
+            int avail = System.in.available();
+        } catch (java.io.IOException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/basic1.java:2: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result == null;
+                 ^
+1 error
+
+class basic1 {
+    //@ ensures System.out != null;
+    //@ ensures System.err != null;
+    //@ ensures System.in != null;
+    public static void main(String[] args) {
+        assert (System.out != null);
+        System.out.println("Hello World!");
+        assert (System.err != null);
+        System.err.println("Hello World!");
+        assert (System.in != null);
+        try {
+            int avail = System.in.available();
+        } catch (java.io.IOException e) {
+        }
+    }
+}
+

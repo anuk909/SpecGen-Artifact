@@ -1,0 +1,34 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class UniqueChar {
+    //@ requires s != null;
+    //@ ensures \result >= -1 && \result < s.length();
+    public int firstUniqChar(String s) {
+        //@ assert s != null;
+        Map<Character, Integer> frequency = new HashMap<Character, Integer>();
+        //@ loop_invariant i >= 0 && i <= s.length();
+        //@ loop_invariant (\forall int j; 0 <= j < i; frequency.get(s.charAt(j)) == (\old(frequency.get(s.charAt(j))) + 1));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            //@ assert i >= 0 && i < s.length();
+            char ch = s.charAt(i);
+            //@ assert ch == s.charAt(i);
+            frequency.put(ch, frequency.getOrDefault(ch, 0) + 1);
+            //@ assert frequency.get(ch) == (\old(frequency.getOrDefault(ch, 0)) + 1);
+        }
+        //@ assert (\forall int i; 0 <= i < s.length(); frequency.get(s.charAt(i)) == (\old(frequency.getOrDefault(s.charAt(i), 0)) + 1));
+        //@ loop_invariant i >= 0 && i <= s.length();
+        //@ loop_invariant (\forall int j; 0 <= j < i; frequency.get(s.charAt(j)) == (\old(frequency.get(s.charAt(j))) + 1));
+        //@ decreases s.length() - i;
+        for (int i = 0; i < s.length(); ++i) {
+            //@ assert i >= 0 && i < s.length();
+            if (frequency.get(s.charAt(i)) == 1) {
+                //@ assert frequency.get(s.charAt(i)) == 1;
+                return i;
+            }
+        }
+        //@ assert (\forall int i; 0 <= i < s.length(); frequency.get(s.charAt(i)) != 1);
+        return -1;
+    }
+}

@@ -1,0 +1,28 @@
+class IsAllUnique {
+    //@ requires str != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < str.length(); (\forall int j; 0 <= j && j < str.length() && i != j; str.charAt(i) != str.charAt(j)));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < str.length(); (\exists int j; 0 <= j && j < str.length() && i != j; str.charAt(i) == str.charAt(j)));
+    boolean isAllUnique(String str) {
+        int len = str.length();
+        if (len > 26) {
+            return false;
+        }
+        int num = 0;
+        for (int i = 0; i < len; i++) {
+            char c = str.charAt(i);
+            int index = c - 'a';
+            //@ assert (\forall int j; 0 <= j && j < i; (num & (1 << (str.charAt(j) - 'a'))) == 0);
+            if ((num & (1 << index)) != 0) {
+                return false;
+            } else {
+                num |= (1 << index);
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsAllUnique.java:15: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method isAllUnique
+            if ((num & (1 << index)) != 0) {
+                          ^
+1 verification failure
+

@@ -1,0 +1,50 @@
+enum enum1 {
+  VAL1,
+  VAL2,
+  VAL3,
+  VAL4,
+  VAL5;
+
+  //@ ensures (\forall enum1 e; e == enum1.VAL1 || e == enum1.VAL2 || e == enum1.VAL3 || e == enum1.VAL4 || e == enum1.VAL5; System.out.println(e));
+  static {
+    for (enum1 e : enum1.values()) {
+      System.out.println(e);
+    }
+  }
+}
+
+class Main {
+  //@ requires args != null;
+  public static void main(String[] args) {
+    enum1 e = enum1.VAL5;
+    assert (e == enum1.VAL5);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/enum1.java:8: error: incompatible types: void cannot be converted to boolean
+  //@ ensures (\forall enum1 e; e == enum1.VAL1 || e == enum1.VAL2 || e == enum1.VAL3 || e == enum1.VAL4 || e == enum1.VAL5; System.out.println(e));
+                                                                                                                                               ^
+1 error
+
+enum enum1 {
+  VAL1,
+  VAL2,
+  VAL3,
+  VAL4,
+  VAL5;
+
+  //@ ensures (\forall enum1 e; e == enum1.VAL1 || e == enum1.VAL2 || e == enum1.VAL3 || e == enum1.VAL4 || e == enum1.VAL5; true);
+  static {
+    for (enum1 e : enum1.values()) {
+      System.out.println(e);
+    }
+  }
+}
+
+class Main {
+  //@ requires args != null;
+  public static void main(String[] args) {
+    enum1 e = enum1.VAL5;
+    assert (e == enum1.VAL5);
+  }
+}
+

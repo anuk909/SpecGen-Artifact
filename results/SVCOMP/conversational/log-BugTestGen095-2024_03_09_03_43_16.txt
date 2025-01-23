@@ -1,0 +1,59 @@
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result == arg+"Z" && \result.equals("fg");
+    //@ ensures !\result ==> \result != arg+"Z";
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: bad operand types for binary operator '=='
+    //@ ensures \result ==> \result == arg+"Z" && \result.equals("fg");
+                                    ^
+  first type:  boolean
+  second type: String
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result ==> \result == arg+"Z" && \result.equals("fg");
+                                                         ^
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:4: error: bad operand types for binary operator '!='
+    //@ ensures !\result ==> \result != arg+"Z";
+                                     ^
+  first type:  boolean
+  second type: String
+3 errors
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result ==> \result.equals(arg+"Z") && \result.equals("fg");
+    //@ ensures !\result ==> !\result.equals(arg+"Z");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result ==> \result.equals(arg+"Z") && \result.equals("fg");
+                                   ^
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:3: error: boolean cannot be dereferenced
+    //@ ensures \result ==> \result.equals(arg+"Z") && \result.equals("fg");
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/BugTestGen095.java:4: error: boolean cannot be dereferenced
+    //@ ensures !\result ==> !\result.equals(arg+"Z");
+                                     ^
+3 errors
+
+public class BugTestGen095 {
+    //@ requires arg != null;
+    //@ ensures \result ==> arg.equals("fg");
+    //@ ensures !\result ==> !arg.equals("fg");
+    public static boolean fun(String arg) {
+        StringBuilder sb = new StringBuilder(arg);
+        sb.append("Z");
+        String s = sb.toString();
+        return (s.equals("fg"));
+    }
+}

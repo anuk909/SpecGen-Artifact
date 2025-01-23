@@ -1,0 +1,359 @@
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x*x*x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if(x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x*x));
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for(int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for(int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IntCube.java:3:) in method cubeOf
+        return (neg ? -res : res);
+        ^
+/home/max/Documents/JMLGPT/tmp/IntCube.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IntCube.java:27:
+    //@ ensures \result == (x*x*x);
+        ^
+2 verification failures
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x);
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf
+        //@ assert res == (x * x * x);
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert res >= 0 : "Result is negative";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert !neg || res == -(x * x * x) : "Result is not equal to the negative cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert !neg || res == -(x * x * x) : "Result is not equal to the negative cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert !neg || res == -(x * x * x) : "Result is not equal to the negative cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert !neg || res == -(x * x * x) : "Result is not equal to the negative cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert !neg || res == -(x * x * x) : "Result is not equal to the negative cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+
+public class IntCube {
+    //@ requires true;
+    //@ ensures \result == (x * x * x);
+    public static int cubeOf(int x) {
+        boolean neg = false;
+        if (x < 0) {
+            neg = true;
+            x = -x;
+        }
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining (\forall int a; 0 <= a && a < i; res == res + (x * x));
+        //@ decreases x - i;
+        for (int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining (\forall int b; 0 <= b && b < j; res == res + x);
+            //@ decreases x - j;
+            for (int j = 0; j < x; j++) {
+                //@ maintaining 0 <= k && k <= x;
+                //@ maintaining (\forall int c; 0 <= c && c < k; res == res + 1);
+                //@ decreases x - k;
+                for (int k = 0; k < x; k++) {
+                    res = res + 1;
+                }
+            }
+        }
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+        //@ assert !neg || res == -(x * x * x) : "Result is not equal to the negative cube of x";
+        return (neg ? -res : res);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IntCube.java:27: verify: The prover cannot establish an assertion (Assert) in method cubeOf: Result is not equal to the cube of x
+        //@ assert res == (x * x * x) : "Result is not equal to the cube of x";
+            ^
+1 verification failure
+

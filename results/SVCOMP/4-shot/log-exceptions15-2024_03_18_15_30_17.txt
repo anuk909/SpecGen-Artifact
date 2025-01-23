@@ -1,0 +1,31 @@
+class InetAddress {}
+
+class InetSocketAddress {}
+
+public class exceptions15 {
+    //@ requires address != null;
+    //@ ensures \result.equals("Foo");
+    public static String lookupPtrRecord(InetAddress address) {
+        return "Foo";
+    }
+
+    //@ requires address != null;
+    //@ ensures \result == address;
+    public static InetAddress reverse(InetAddress address) {
+        return address;
+    }
+
+    public static void main(String[] args) {
+        try {
+            InetAddress address = new InetAddress();
+            String domainName = lookupPtrRecord(reverse(address));
+        } catch (Exception e) {
+            assert false;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions15.java:23: verify: The prover cannot establish an assertion (Assert) in method main
+            assert false;
+            ^
+1 verification failure
+

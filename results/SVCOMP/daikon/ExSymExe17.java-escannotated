@@ -1,0 +1,52 @@
+class Main {
+  /*@ spec_public */ static int field;
+
+  /*@ modifies Main.field; */
+  /*@ ensures Main.field == 9; */
+  /*@ ensures \result == true; */
+  /*@ ensures Main.field >= \old(Main.field); */
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, field);
+  }
+
+  /*@ requires Main.field == 9; */
+  /*@ ensures (z != 0)  ==  (\result == true); */
+  /*@ ensures (z != 0)  ==>  (z - \old(x) + 4 == 0); */
+  /*@ ensures (z == 0)  ==  (\result == false); */
+  /*@ ensures (z == 0)  ==>  (\old(this) != null); */
+  /*@ ensures (z == 0)  ==>  (\old(x) == 4); */
+  /*@ ensures Main.field == 9; */
+  public boolean test(int x, int z) {
+    System.out.println("Testing ExSymExe17");
+    int y = 0;
+    z = x - y - 4;
+    if (z == 0) {
+      System.out.println("branch FOO1");
+      return false;
+    } else System.out.println("branch FOO2");
+    if (y == 0) System.out.println("branch BOO1");
+    else
+      System.out.println("branch BOO2");
+    return true;
+  }
+}
+
+class ExSymExe17 {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int i = -5; i <= 5; i++) {
+      for(int j = -5; j <= 5; j++) {
+        Main.f();
+        e.test(i, j);
+        e.test(j, i);
+      }
+    }
+  }
+}

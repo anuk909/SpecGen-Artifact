@@ -1,0 +1,574 @@
+class Main {
+    static int field;
+
+    //@ ensures \result ==> \result == false && field == 9;
+    //@ ensures !\result ==> field == 9;
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (\lnot (Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures \lnot \result ==> (Math.round(in) > 16.0 ==> \result == false) && (\lnot (Math.round(in) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else
+            System.out.println("do2()");
+        return true;
+    }
+
+    //@ requires true;
+    //@ ensures x == 0 && y != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+    //@ ensures x != 0 ==> System.out.println(">>>>>>>>>>>> LOOK!");
+    //@ ensures x != 0 && x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+    //@ ensures x != 0 && x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+    public void angleXY_(double x1, double y1) {
+        double x = x1;
+        double y = y1;
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:14: error: This backslash token is unknown: \lnot
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (\lnot (Math.round(in) > 16.0) ==> \result == true);
+                                                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:15: error: This backslash token is unknown: \lnot
+    //@ ensures \lnot \result ==> (Math.round(in) > 16.0 ==> \result == false) && (\lnot (Math.round(in) > 16.0) ==> \result == true);
+                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:15: error: This backslash token is unknown: \lnot
+    //@ ensures \lnot \result ==> (Math.round(in) > 16.0 ==> \result == false) && (\lnot (Math.round(in) > 16.0) ==> \result == true);
+                                                                                   ^
+3 errors
+
+class Main {
+    static int field;
+
+    //@ ensures \result ==> \result == false && field == 9;
+    //@ ensures !\result ==> field == 9;
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else
+            System.out.println("do2()");
+        return true;
+    }
+
+    //@ requires true;
+    //@ ensures x == 0 && y != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+    //@ ensures x != 0 ==> System.out.println(">>>>>>>>>>>> LOOK!");
+    //@ ensures x != 0 && x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+    //@ ensures x != 0 && x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+    public void angleXY_(double x1, double y1) {
+        double x = x1;
+        double y = y1;
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result ==> \result == false && field == 9;
+                                                ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:5: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures !\result ==> field == 9;
+                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: cannot find symbol
+    //@ ensures x == 0 && y != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: cannot find symbol
+    //@ ensures x == 0 && y != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+                          ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: incompatible types: void cannot be converted to boolean
+    //@ ensures x == 0 && y != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: cannot find symbol
+    //@ ensures x != 0 ==> System.out.println(">>>>>>>>>>>> LOOK!");
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: incompatible types: void cannot be converted to boolean
+    //@ ensures x != 0 ==> System.out.println(">>>>>>>>>>>> LOOK!");
+                                             ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: error: cannot find symbol
+    //@ ensures x != 0 && x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: error: cannot find symbol
+    //@ ensures x != 0 && x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: error: incompatible types: void cannot be converted to boolean
+    //@ ensures x != 0 && x < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:28: error: cannot find symbol
+    //@ ensures x != 0 && x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:28: error: cannot find symbol
+    //@ ensures x != 0 && x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:28: error: incompatible types: void cannot be converted to boolean
+    //@ ensures x != 0 && x > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+                                                      ^
+13 errors
+
+class Main {
+    spec_public static int field;
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures x == 0 && y != 0 ==> \result == true;
+    //@ ensures x != 0 ==> \result == true;
+    //@ ensures x != 0 && x < 0 ==> \result == true;
+    //@ ensures x != 0 && x > 0 ==> \result == true;
+    public void angleXY_(double x1, double y1) {
+        double x = x1;
+        double y = y1;
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else {
+            System.out.println("do2()");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:2: error: <identifier> expected
+    spec_public static int field;
+               ^
+1 error
+
+class Main {
+    //@ spec_public
+    static int field;
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures x == 0 && y != 0 ==> \result == true;
+    //@ ensures x != 0 ==> \result == true;
+    //@ ensures x != 0 && x < 0 ==> \result == true;
+    //@ ensures x != 0 && x > 0 ==> \result == true;
+    public void angleXY_(double x1, double y1) {
+        double x = x1;
+        double y = y1;
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else {
+            System.out.println("do2()");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:6: error: cannot find symbol
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                        ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:6: error: cannot find symbol
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                                                                          ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                         ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                                                                           ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:16: error: cannot find symbol
+    //@ ensures x == 0 && y != 0 ==> \result == true;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:16: error: cannot find symbol
+    //@ ensures x == 0 && y != 0 ==> \result == true;
+                          ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:16: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures x == 0 && y != 0 ==> \result == true;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:17: error: cannot find symbol
+    //@ ensures x != 0 ==> \result == true;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:17: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures x != 0 ==> \result == true;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:18: error: cannot find symbol
+    //@ ensures x != 0 && x < 0 ==> \result == true;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:18: error: cannot find symbol
+    //@ ensures x != 0 && x < 0 ==> \result == true;
+                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:18: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures x != 0 && x < 0 ==> \result == true;
+                                     ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:19: error: cannot find symbol
+    //@ ensures x != 0 && x > 0 ==> \result == true;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:19: error: cannot find symbol
+    //@ ensures x != 0 && x > 0 ==> \result == true;
+                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:19: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures x != 0 && x > 0 ==> \result == true;
+                                     ^
+15 errors
+
+class Main {
+    //@ spec_public
+    static int field;
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures x == 0 && y != 0;
+    //@ ensures x != 0;
+    //@ ensures x != 0 && x < 0;
+    //@ ensures x != 0 && x > 0;
+    public void angleXY_(double x1, double y1) {
+        double x = x1;
+        double y = y1;
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else {
+            System.out.println("do2()");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:6: error: cannot find symbol
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                        ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:6: error: cannot find symbol
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                                                                          ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                         ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                                                                           ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:16: error: cannot find symbol
+    //@ ensures x == 0 && y != 0;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:16: error: cannot find symbol
+    //@ ensures x == 0 && y != 0;
+                          ^
+  symbol:   variable y
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:17: error: cannot find symbol
+    //@ ensures x != 0;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:18: error: cannot find symbol
+    //@ ensures x != 0 && x < 0;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:18: error: cannot find symbol
+    //@ ensures x != 0 && x < 0;
+                          ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:19: error: cannot find symbol
+    //@ ensures x != 0 && x > 0;
+                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:19: error: cannot find symbol
+    //@ ensures x != 0 && x > 0;
+                          ^
+  symbol:   variable x
+  location: class Main
+11 errors
+
+class Main {
+    //@ spec_public
+    static int field;
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures true;
+    public void angleXY_(double x, double y) {
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else {
+            System.out.println("do2()");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:6: error: cannot find symbol
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                        ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:6: error: cannot find symbol
+    //@ ensures \result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                                                                          ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                         ^
+  symbol:   variable in
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (Math.round(in) > 16.0 ==> \result == false) && (!(Math.round(in) > 16.0) ==> \result == true);
+                                                                                           ^
+  symbol:   variable in
+  location: class Main
+4 errors
+
+class Main {
+    //@ spec_public
+    static int field;
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures true;
+    public void angleXY_(double x, double y) {
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else {
+            System.out.println("do2()");
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:35: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:32:) in method test2
+            return false;
+            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:32: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:35:
+    //@ ensures !\result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+        ^
+2 verification failures
+
+class Main {
+    //@ spec_public
+    static int field;
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(0.0) <= 16.0);
+    public static boolean f() {
+        int x = 3;
+        Main inst = new Main();
+        field = 9;
+        return inst.test2(0.0);
+    }
+
+    //@ requires true;
+    //@ ensures true;
+    public void angleXY_(double x, double y) {
+        if (x == 0 && y != 0) {
+            System.out.println(">>>>>>>>>>>> 1");
+        } else {
+            System.out.println(">>>>>>>>>>>> LOOK!");
+            if (x < 0) {
+                System.out.println(">>>>>>>>>>>>>>> ???");
+            } else if (x > 0) {
+                System.out.println(">>>>>>>>>>>>>>> !!!1");
+            }
+        }
+    }
+
+    //@ requires true;
+    //@ ensures \result ==> (Math.round(0.0) > 16.0 ==> \result == false) && (!(Math.round(0.0) > 16.0) ==> \result == true);
+    //@ ensures !\result ==> (Math.round(0.0) <= 16.0);
+    public boolean test2(double in) {
+        if (Math.round(in) > 16.0) {
+            return false;
+        } else {
+            System.out.println("do2()");
+        }
+        return true;
+    }
+}
+

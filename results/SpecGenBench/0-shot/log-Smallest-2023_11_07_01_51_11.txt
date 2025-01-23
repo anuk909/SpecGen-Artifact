@@ -1,0 +1,23 @@
+public class Smallest {
+
+    //@ requires a != null;
+    //@ ensures \result >= -1 && \result < a.length;
+    static public int Smallest(int[] a) {
+        if (a.length == 0) return -1;
+
+        int index = 0;
+        int smallest = 0;
+
+        //@ loop_invariant index >= 0 && index <= a.length;
+        //@ loop_invariant smallest >= 0 && smallest < a.length;
+        //@ loop_variant a.length - index;
+        while (a.length - index > 0) {
+            //@ loop_invariant \forall int i; 0 <= i < index ==> a[i] >= a[smallest];
+            if (a[index] < a[smallest]) {
+                smallest = index;
+            }
+            index = index + 1;
+        }
+        return smallest;
+    }
+}

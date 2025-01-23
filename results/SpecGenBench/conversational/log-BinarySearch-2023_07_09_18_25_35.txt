@@ -1,0 +1,279 @@
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures arr.length == 0 ==> \result == -1;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == key) ==> arr[\result] == key;
+      @ ensures (\forall int i; 0 <= i && i < \result; arr[i] != key);
+      @ ensures (\forall int i; \result < i && i < arr.length; arr[i] != key);
+      @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining low <= mid && mid < high;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid < i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high && arr[mid] != key) {
+                if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+                mid = low + (high - low) / 2;
+            }
+            if (low >= high) {
+                return -1;
+            }
+            return mid;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:22: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method Binary
+            //@ maintaining (\forall int i; mid < i && i < high; arr[i] >= key);
+                ^
+1 verification failure
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures arr.length == 0 ==> \result == -1;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == key) ==> arr[\result] == key;
+      @ ensures (\forall int i; 0 <= i && i < \result; arr[i] != key);
+      @ ensures (\forall int i; \result < i && i < arr.length; arr[i] != key);
+      @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= high && high <= arr.length;
+            //@ maintaining low <= mid && mid < high;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid < i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                mid = low + (high - low) / 2;
+                //@ maintaining 0 <= low && low <= mid && mid < high && high <= arr.length;
+                //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+                //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+                //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                //@ maintaining (\forall int i; mid < i && i < high; arr[i] >= key);
+                //@ decreases high - mid;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:26: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= low && low <= mid && mid < high && high <= arr.length;
+                    ^
+1 error
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures arr.length == 0 ==> \result == -1;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == key) ==> arr[\result] == key;
+      @ ensures (\forall int i; 0 <= i && i < \result; arr[i] != key);
+      @ ensures (\forall int i; \result < i && i < arr.length; arr[i] != key);
+      @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ maintaining 0 <= low && low <= mid && mid < high && high <= arr.length;
+            //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ maintaining (\forall int i; mid < i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                //@ maintaining 0 <= low && low <= mid && mid < high && high <= arr.length;
+                //@ maintaining (\forall int i; 0 <= i && i < low; arr[i] < key);
+                //@ maintaining (\forall int i; high <= i && i < arr.length; arr[i] > key);
+                //@ maintaining (\forall int i; low <= i && i < mid; arr[i] < key);
+                //@ maintaining (\forall int i; mid < i && i < high; arr[i] >= key);
+                //@ decreases high - mid;
+                mid = low + (high - low) / 2;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:24: error: Loop specifications must immediately precede a loop statement
+                //@ maintaining 0 <= low && low <= mid && mid < high && high <= arr.length;
+                    ^
+1 error
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures arr.length == 0 ==> \result == -1;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == key) ==> arr[\result] == key;
+      @ ensures (\forall int i; 0 <= i && i < \result; arr[i] != key);
+      @ ensures (\forall int i; \result < i && i < arr.length; arr[i] != key);
+      @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ loop_invariant 0 <= low && low <= mid && mid < high && high <= arr.length;
+            //@ loop_invariant (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ loop_invariant (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ loop_invariant (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ loop_invariant (\forall int i; mid < i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                //@ loop_invariant 0 <= low && low <= mid && mid < high && high <= arr.length;
+                //@ loop_invariant (\forall int i; 0 <= i && i < low; arr[i] < key);
+                //@ loop_invariant (\forall int i; high <= i && i < arr.length; arr[i] > key);
+                //@ loop_invariant (\forall int i; low <= i && i < mid; arr[i] < key);
+                //@ loop_invariant (\forall int i; mid < i && i < high; arr[i] >= key);
+                //@ decreases high - mid;
+                mid = low + (high - low) / 2;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:24: error: Loop specifications must immediately precede a loop statement
+                //@ loop_invariant 0 <= low && low <= mid && mid < high && high <= arr.length;
+                    ^
+1 error
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures arr.length == 0 ==> \result == -1;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == key) ==> arr[\result] == key;
+      @ ensures (\forall int i; 0 <= i && i < \result; arr[i] != key);
+      @ ensures (\forall int i; \result < i && i < arr.length; arr[i] != key);
+      @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ assert 0 <= low && low <= mid && mid < high && high <= arr.length;
+            //@ assert (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ assert (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ assert (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ assert (\forall int i; mid < i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                //@ assert 0 <= low && low <= mid && mid < high && high <= arr.length;
+                //@ assert (\forall int i; 0 <= i && i < low; arr[i] < key);
+                //@ assert (\forall int i; high <= i && i < arr.length; arr[i] > key);
+                //@ assert (\forall int i; low <= i && i < mid; arr[i] < key);
+                //@ assert (\forall int i; mid < i && i < high; arr[i] >= key);
+                //@ decreases high - mid;
+                mid = low + (high - low) / 2;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:29: error: Loop specifications must immediately precede a loop statement
+                //@ decreases high - mid;
+                    ^
+1 error
+
+public class BinarySearch {
+
+    /*@ requires arr != null;
+      @ ensures arr.length == 0 ==> \result == -1;
+      @ ensures (\exists int i; 0 <= i && i < arr.length; arr[i] == key) ==> arr[\result] == key;
+      @ ensures (\forall int i; 0 <= i && i < \result; arr[i] != key);
+      @ ensures (\forall int i; \result < i && i < arr.length; arr[i] != key);
+      @*/
+    public static int Binary(int[] arr, int key) {
+        if (arr.length == 0) {
+            return -1;
+        } else {
+            int low = 0;
+            int high = arr.length;
+            int mid =  high / 2;
+
+            //@ assert 0 <= low && low <= mid && mid < high && high <= arr.length;
+            //@ assert (\forall int i; 0 <= i && i < low; arr[i] < key);
+            //@ assert (\forall int i; high <= i && i < arr.length; arr[i] > key);
+            //@ assert (\forall int i; low <= i && i < mid; arr[i] < key);
+            //@ assert (\forall int i; mid < i && i < high; arr[i] >= key);
+            //@ decreases high - low;
+            while (low < high) {
+                //@ assert 0 <= low && low <= mid && mid < high && high <= arr.length;
+                //@ assert (\forall int i; 0 <= i && i < low; arr[i] < key);
+                //@ assert (\forall int i; high <= i && i < arr.length; arr[i] > key);
+                //@ assert (\forall int i; low <= i && i < mid; arr[i] < key);
+                //@ assert (\forall int i; mid < i && i < high; arr[i] >= key);
+                //@ decreases high - mid;
+                mid = low + (high - low) / 2;
+                if (arr[mid] == key) {
+                    return mid;
+                } else if (arr[mid] < key) {
+                    low = mid + 1;
+                } else {
+                    high = mid;
+                }
+            }
+            return -1;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinarySearch.java:29: error: Loop specifications must immediately precede a loop statement
+                //@ decreases high - mid;
+                    ^
+1 error
+

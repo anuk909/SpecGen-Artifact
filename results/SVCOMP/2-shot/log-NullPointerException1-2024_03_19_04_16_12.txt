@@ -1,0 +1,16 @@
+class NullPointerException1 {
+	//@ ensures \result == true || \result == false;
+	//@ ensures \result == true ==> (\exists Exception e; e != null; true);
+	//@ ensures \result == false ==> (\forall Exception e; e != null; false);
+	public static boolean f() {
+		Object o = null;
+		try {
+			o.hashCode();
+			// should pass
+			return false;
+		} catch (Exception e) {
+		}
+		return true;
+	}
+}
+

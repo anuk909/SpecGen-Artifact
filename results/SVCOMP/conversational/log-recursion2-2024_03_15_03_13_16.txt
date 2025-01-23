@@ -1,0 +1,67 @@
+public class recursion2 {
+    //@ ensures \result == 10;
+    public static boolean f() {
+        return recursion_test(0) == 10;
+    }
+
+    //@ ensures \result == 10 - depth;
+    public static int recursion_test(int depth) {
+        if (depth < 10) return recursion_test(depth + 1) + 1;
+        else return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/recursion2.java:2: error: incomparable types: boolean and int
+    //@ ensures \result == 10;
+                        ^
+1 error
+
+public class recursion2 {
+    //@ ensures \result == true;
+    public static boolean f() {
+        return recursion_test(0) == 10;
+    }
+
+    //@ ensures \result == 10 - depth;
+    public static int recursion_test(int depth) {
+        if (depth < 10) return recursion_test(depth + 1) + 1;
+        else return 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/recursion2.java:10: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/recursion2.java:7:) in method recursion_test
+        else return 0;
+             ^
+/home/max/Documents/JMLGPT/tmp/recursion2.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/recursion2.java:10:
+    //@ ensures \result == 10 - depth;
+        ^
+2 verification failures
+
+public class recursion2 {
+    //@ ensures \result == 10;
+    public static boolean f() {
+        return recursion_test(0) == 10;
+    }
+
+    //@ ensures \result == 10 - depth;
+    public static int recursion_test(int depth) {
+        if (depth < 10) return recursion_test(depth + 1) + 1;
+        else return 10 - depth;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/recursion2.java:2: error: incomparable types: boolean and int
+    //@ ensures \result == 10;
+                        ^
+1 error
+
+public class recursion2 {
+    //@ ensures \result == true;
+    public static boolean f() {
+        return recursion_test(0) == 10;
+    }
+
+    //@ ensures \result == 10 - depth;
+    public static int recursion_test(int depth) {
+        if (depth < 10) return recursion_test(depth + 1) + 1;
+        else return 10 - depth;
+    }
+}
+

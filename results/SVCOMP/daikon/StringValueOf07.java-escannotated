@@ -1,0 +1,18 @@
+public class StringValueOf07 {
+  /*@ ensures (\result == true)  ==>  (\old(longValue) == 100000000000L); */
+  public static boolean f(long longValue) {
+    String tmp = String.valueOf(longValue);
+    return tmp.equals("100000000000");
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(long i = -5; i <= 5; i++)
+    f(i);
+    for(long i = 100000000000L - 5; i <= 100000000000L + 5; i++)
+      f(i);
+  }
+}

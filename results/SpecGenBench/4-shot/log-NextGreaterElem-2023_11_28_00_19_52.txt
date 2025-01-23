@@ -1,0 +1,35 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires \forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i]);
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j <= k && k < nums2.length; \result[i] == -1 || nums2[k] > \result[i])));
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int j; 0 <= j && j < n; nums2[j] == nums1[x] && (\forall int k; j <= k && k < n; res[x] == -1 || nums2[k] > res[x])));
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining j < n ==> nums2[j] != nums1[i];
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < n && k <= n && nums2[k-1] < nums2[j] ==> (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method nextGreaterElement
+            //@ maintaining j < n ==> nums2[j] != nums1[i];
+                ^
+1 verification failure
+

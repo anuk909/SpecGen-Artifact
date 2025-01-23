@@ -1,0 +1,23 @@
+public class BugTestGen095 {
+  //@ requires arg != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean fun(String arg) {
+    //@ assert arg != null;
+    //@ assert \fresh(arg);
+    //@ assert arg.equals("");
+    //@ assert \fresh(sb);
+    //@ assert \typeof(sb) == \type(StringBuilder);
+    //@ assert sb.toString().equals(arg);
+    //@ assert \typeof(s) == \type(String);
+    //@ assert s.equals(sb.toString());
+    //@ assert s.equals(arg + "Z");
+    //@ assert s.equals("fg");
+    //@ assert \result == true || \result == false;
+
+    StringBuilder sb = new StringBuilder(arg);
+    sb.append("Z");
+    String s = sb.toString();
+    return (s.equals("fg"));
+  }
+}
+

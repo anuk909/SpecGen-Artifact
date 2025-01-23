@@ -1,0 +1,37 @@
+class A extends RuntimeException {}
+
+class B extends A {}
+
+class C extends B {}
+
+class F {
+  //@ ensures \nothing;
+  void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+
+public class exceptions12 {
+  //@ ensures \nothing;
+  public static void main(String[] args) {
+    try {
+      F f = new F();
+      f.foo();
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:8: error: incompatible types: <none> cannot be converted to boolean
+  //@ ensures \nothing;
+              ^
+/home/max/Documents/JMLGPT/tmp/exceptions12.java:20: error: incompatible types: <none> cannot be converted to boolean
+  //@ ensures \nothing;
+              ^
+2 errors
+

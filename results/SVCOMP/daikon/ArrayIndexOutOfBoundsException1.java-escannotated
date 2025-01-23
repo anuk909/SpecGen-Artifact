@@ -1,0 +1,36 @@
+public class ArrayIndexOutOfBoundsException1 {
+
+  /*@ ensures \result == -1 || \result == 0 || \result == 1; */
+  public static int func(int size) {
+    if (size < 0)
+      return -1;
+    try {
+      int[] a = new int[4];
+      a[size] = 0;
+    } catch (ArrayIndexOutOfBoundsException exc) {
+      return 0;
+    }
+    return 1;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    func(-2);
+    func(-1);
+    func(0);
+    func(1);
+    func(2);
+    func(3);
+    func(4);
+    func(114);
+    func(514);    
+    func(580);
+    func(1919);
+    func(810);
+    func(-514);
+  }
+  
+}

@@ -1,0 +1,543 @@
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:10: verify: The prover cannot establish an assertion (LoopDecreasesNonNegative) in method isSuffix
+        //@ decreases i + j;
+            ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:13:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+3 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                return false;
+            i = i - 1;
+            j = j - 1;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:13:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && txt.length() >= pat.length();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && txt.length() >= pat.length();
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+
+public class IsSuffix {
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (txt.endsWith(pat));
+    public boolean isSuffix (String pat, String txt) {
+        int i = pat.length() - 1;
+        int j = txt.length() - 1;
+        //@ maintaining i >= -1 && j >= -1;
+        //@ maintaining i + 1 <= pat.length() && j + 1 <= txt.length();
+        //@ maintaining (\forall int k; i + 1 <= k && k < pat.length(); pat.charAt(k) == txt.charAt(j + k - i));
+        //@ decreases i + j + 2;
+        while(i >= 0) {
+            if(j < 0 || pat.charAt(i) != txt.charAt(j))
+                break;
+            i = i - 1;
+            j = j - 1;
+        }
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:3:) in method isSuffix
+        return i == -1 && (txt.length() >= pat.length() || pat.length() == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/IsSuffix.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsSuffix.java:17:
+    //@ ensures \result == (txt.endsWith(pat));
+        ^
+2 verification failures
+

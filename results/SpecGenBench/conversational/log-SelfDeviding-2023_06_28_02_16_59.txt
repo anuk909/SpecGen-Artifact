@@ -1,0 +1,105 @@
+class SelfDeviding {
+    //@ requires 0 <= num && num <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Integer.parseInt(Character.toString(Integer.toString(num).charAt(i))) == 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining 0 <= temp && temp <= num;
+        //@ maintaining \forall int i; 0 <= i && i < Integer.toString(num).length() - Integer.toString(temp).length(); Integer.toString(num).charAt(i) != '0' && num % Integer.parseInt(Character.toString(Integer.toString(num).charAt(i))) == 0;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelfDeviding.java:3:) in method isSelfDividable
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelfDeviding.java:16:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Integer.parseInt(Character.toString(Integer.toString(num).charAt(i))) == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method isSelfDividable
+        //@ maintaining \forall int i; 0 <= i && i < Integer.toString(num).length() - Integer.toString(temp).length(); Integer.toString(num).charAt(i) != '0' && num % Integer.parseInt(Character.toString(Integer.toString(num).charAt(i))) == 0;
+            ^
+3 verification failures
+
+class SelfDeviding {
+    //@ requires 0 <= num && num <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining 0 <= temp && temp <= num;
+        //@ maintaining \forall int i; 0 <= i && i < Integer.toString(num).length() - Integer.toString(temp).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:16: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelfDeviding.java:3:) in method isSelfDividable
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelfDeviding.java:16:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0);
+        ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method isSelfDividable
+        //@ maintaining \forall int i; 0 <= i && i < Integer.toString(num).length() - Integer.toString(temp).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0;
+            ^
+3 verification failures
+
+class SelfDeviding {
+    //@ requires 0 <= num && num <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining 0 <= temp && temp <= num;
+        //@ maintaining \forall int i; 0 <= i && i < Integer.toString(num).length() - Integer.toString(temp).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit == Character.getNumericValue(Integer.toString(temp).charAt(Integer.toString(temp).length() - 1));
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelfDeviding.java:3:) in method isSelfDividable
+        return true;
+        ^
+/home/max/Documents/JMLGPT/tmp/SelfDeviding.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelfDeviding.java:17:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0);
+        ^
+2 verification failures
+
+class SelfDeviding {
+    //@ requires 0 <= num && num <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < Integer.toString(num).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining 0 <= temp && temp <= num;
+        //@ maintaining \forall int i; 0 <= i && i < Integer.toString(num).length() - Integer.toString(temp).length(); Integer.toString(num).charAt(i) != '0' && num % Character.getNumericValue(Integer.toString(num).charAt(i)) == 0;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            //@ assert digit == Character.getNumericValue(Integer.toString(temp).charAt(Integer.toString(temp).length() - 1));
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        //@ assert temp == 0;
+        return true;
+    }
+}

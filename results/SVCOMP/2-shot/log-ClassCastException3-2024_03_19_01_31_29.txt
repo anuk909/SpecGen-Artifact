@@ -1,0 +1,18 @@
+class A {}
+
+class B {}
+
+public class ClassCastException3 {
+    //@ ensures \result == true <==> (\exists Exception exc; true; \old(\result) == false);
+    //@ ensures \result == false <==> (\forall Exception exc; true; \old(\result) == true);
+    public static boolean f() {
+        try {
+            Object a = new A();
+            B b = (B) a;
+        } catch (Exception exc) {
+            return false;
+        }
+        return true;
+    }
+}
+

@@ -1,0 +1,39 @@
+public class StringConstructors04 {
+    //@ requires arg != null && arg.length() == 4 && \forall int i; 0 <= i && i < arg.length(); (int)Character.MIN_VALUE <= (int)arg.charAt(i) && (int)arg.charAt(i) <= (int)Character.MAX_VALUE;
+    //@ ensures \result <==> s4.equals(arg);
+    public static boolean f(String arg) {
+        char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+        String s4 = new String(charArray, 4, 4);
+        return s4.equals(arg);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConstructors04.java:3: error: cannot find symbol
+    //@ ensures \result <==> s4.equals(arg);
+                             ^
+  symbol:   variable s4
+  location: class StringConstructors04
+1 error
+
+public class StringConstructors04 {
+    //@ requires arg != null && arg.length() == 4 && \forall int i; 0 <= i && i < arg.length(); (int)Character.MIN_VALUE <= (int)arg.charAt(i) && (int)arg.charAt(i) <= (int)Character.MAX_VALUE;
+    //@ ensures \result <==> new String(new char[]{'b', 'l', 'u', 'e'}).equals(arg);
+    public static boolean f(String arg) {
+        char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+        String s4 = new String(charArray, 4, 4);
+        return s4.equals(arg);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringConstructors04.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result <==> new String(new char[]{'b', 'l', 'u', 'e'}).equals(arg);
+                             ^
+1 error
+
+public class StringConstructors04 {
+    //@ requires arg != null && arg.length() == 4 && \forall int i; 0 <= i && i < arg.length(); (int)Character.MIN_VALUE <= (int)arg.charAt(i) && (int)arg.charAt(i) <= (int)Character.MAX_VALUE;
+    //@ ensures \result <==> arg.equals("blue");
+    public static boolean f(String arg) {
+        char[] charArray = {'d', 'i', 'f', 'f', 'b', 'l', 'u', 'e'};
+        String s4 = new String(charArray, 4, 4);
+        return s4.equals(arg);
+    }
+}

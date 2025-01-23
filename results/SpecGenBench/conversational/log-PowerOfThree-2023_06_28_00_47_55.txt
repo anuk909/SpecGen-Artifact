@@ -1,0 +1,148 @@
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result ==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    //@ ensures !\result ==> (\forall int i; i >= 0; n != Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        //@ maintaining n >= 0;
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) || (\forall int i; i >= 0; n != Math.pow(3, i));
+        //@ decreases n;
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:4:) in method isPowerOfThree
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12:
+    //@ ensures !\result ==> (\forall int i; i >= 0; n != Math.pow(3, i));
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3:) in method isPowerOfThree
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12:
+    //@ ensures \result ==> (\exists int i; i >= 0; n == Math.pow(3, i));
+        ^
+4 verification failures
+
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        //@ maintaining n >= 0;
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3); n == Math.pow(3, i));
+        //@ decreases n;
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfThree
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3); n == Math.pow(3, i));
+            ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopInvariant) in method isPowerOfThree
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3); n == Math.pow(3, i));
+            ^
+2 verification failures
+
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        //@ maintaining n >= 0;
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        //@ decreases n;
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfThree
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+            ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:11: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3:) in method isPowerOfThree
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:11:
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+        ^
+3 verification failures
+
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        //@ maintaining n >= 0;
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        //@ decreases n;
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+        //@ assert (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfThree
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+            ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3:) in method isPowerOfThree
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12:
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+        ^
+3 verification failures
+
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        //@ maintaining n >= 0;
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        //@ decreases n;
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+        //@ assert (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfThree
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+            ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3:) in method isPowerOfThree
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12:
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+        ^
+3 verification failures
+
+class PowerOfThree {
+    //@ requires n >= 0;
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+    public boolean isPowerOfThree(int n) {
+        //@ maintaining n >= 0;
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        //@ decreases n;
+        while (n != 0 && n % 3 == 0) {
+            n /= 3;
+        }
+        //@ assert (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isPowerOfThree
+        //@ maintaining (\exists int i; i >= 0; n == Math.pow(3, i)) <==> (\forall int i; i >= 0 && i <= Math.log(n)/Math.log(3) + 1e-10; n == Math.pow(3, i));
+            ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3:) in method isPowerOfThree
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfThree.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfThree.java:12:
+    //@ ensures \result <==> (\exists int i; i >= 0; n == Math.pow(3, i));
+        ^
+3 verification failures
+

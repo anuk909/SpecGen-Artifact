@@ -1,0 +1,24 @@
+public class RegexMatches02 {
+  //@ requires string1 != null;
+  //@ ensures \result == true || \result == false;
+  public static boolean f(String string1) {
+    //@ requires string1 != null;
+    //@ ensures \result == true || \result == false;
+    Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+    Matcher matcher = expression.matcher(string1);
+
+    //@ loop_invariant (\forall int i; 0 <= i && i < matcher.start(); string1.charAt(i) != 'W');
+    //@ loop_invariant (\forall int i; matcher.start() <= i && i < matcher.end(); string1.charAt(i) == 'W' || ('0' <= string1.charAt(i) && string1.charAt(i) <= '9'));
+    //@ loop_invariant (\forall int i; matcher.end() <= i && i < string1.length(); string1.charAt(i) != 'W');
+    while (matcher.find()) {
+      System.out.println(matcher.group());
+      String tmp = matcher.group();
+      //@ assert tmp != null;
+      //@ assert tmp.equals(matcher.group());
+      if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+        return false;
+    }
+    return true;
+  }
+}
+

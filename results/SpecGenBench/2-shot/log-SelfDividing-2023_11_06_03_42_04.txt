@@ -1,0 +1,24 @@
+class SelfDeviding {
+    //@ ensures \result ==> (\forall int i; i > 0 && i <= num; i != 0 && num % i == 0);
+    //@ ensures !\result ==> (\exists int i; i > 0 && i <= num; i == 0 || num % i != 0);
+    public static boolean isSelfDividable(int num) {
+        int temp = num;
+        //@ maintaining temp >= 0;
+        //@ maintaining (\forall int i; i > 0 && i <= temp; i != 0 && num % i == 0);
+        //@ maintaining (\exists int i; i > 0 && i <= temp; i == 0 || num % i != 0) ==> \result == false;
+        //@ decreases temp;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0 || num % digit != 0) {
+                return false;
+            }
+            temp /= 10;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/SelfDividing.java:8: error: A \result expression may not be in a loop_invariant clause
+        //@ maintaining (\exists int i; i > 0 && i <= temp; i == 0 || num % i != 0) ==> \result == false;
+                                                                                         ^
+1 error
+

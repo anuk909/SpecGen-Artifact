@@ -1,0 +1,61 @@
+import java.util.Random;
+
+public final class Verifier {
+    //@ ensures !condition ==> (\exists int i; 0 <= i && i < \infty; \result == 1);
+    public static void assume(boolean condition) {
+        if (!condition) {
+            Runtime.getRuntime().halt(1);
+        }
+    }
+
+    //@ ensures \result == \old(\result);
+    public static boolean nondetBoolean() {
+        return new Random().nextBoolean();
+    }
+
+    //@ ensures \result == \old(\result);
+    public static byte nondetByte() {
+        return (byte) (new Random().nextInt());
+    }
+
+    //@ ensures \result == \old(\result);
+    public static char nondetChar() {
+        return (char) (new Random().nextInt());
+    }
+
+    //@ ensures \result == \old(\result);
+    public static short nondetShort() {
+        return (short) (new Random().nextInt());
+    }
+
+    //@ ensures \result == \old(\result);
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures \result == \old(\result);
+    public static long nondetLong() {
+        return new Random().nextLong();
+    }
+
+    //@ ensures \result == \old(\result);
+    public static float nondetFloat() {
+        return new Random().nextFloat();
+    }
+
+    //@ ensures \result == \old(\result);
+    public static double nondetDouble() {
+        return new Random().nextDouble();
+    }
+
+    //@ ensures \result != null && \result.length() == size;
+    public static String nondetString() {
+        Random random = new Random();
+        int size = random.nextInt();
+        assume(size >= 0);
+        byte[] bytes = new byte[size];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+}
+

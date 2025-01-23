@@ -1,0 +1,15 @@
+public class CharSequenceToString {
+
+    //@ requires arg != null;
+    //@ requires arg instanceof CharSequence;
+    //@ ensures \result ==> (arg.toString().equals("case1") && ((CharSequence)arg).length() == 5);
+    //@ ensures !\result ==> (arg.toString().equals("case1") ==> ((CharSequence)arg).length() != 5) || !arg.toString().equals("case1");
+    public static boolean main(String arg) {
+        CharSequence cs = (CharSequence) arg;
+        String s = cs.toString();
+        int i = -1;
+        if (s.equals("case1")) i = cs.length();
+        return i == -1 || i == 5;
+    }
+  
+}

@@ -1,0 +1,45 @@
+public class Main {
+    //@ requires x >= 0 && y >= 0;
+    //@ ensures \result == 0 || \result > 0;
+    public boolean test(int x, int y) {
+        int v = method_a(x, y);
+        if (v > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    //@ ensures \result >= 0;
+    public int method_a(int x, int y) {
+        if (x > 10) return x;
+        if (y > 10) return y;
+        return 0;
+    }
+
+    //@ ensures \result == z + 1 || \result == z - 1;
+    public int method_b(int z) {
+        if (z > 10) return z++;
+        else return z--;
+    }
+
+    //@ requires arg >= 0 && arg <= 10;
+    //@ ensures \result == true || \result == false;
+    public static boolean f(int arg) {
+        Main ex = new Main();
+        if (arg < 0 || arg > 10) return true;
+        return ex.test(arg, 0);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:1: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == 0 || \result > 0;
+                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeSuzette.java:3: error: bad operand types for binary operator '>'
+    //@ ensures \result == 0 || \result > 0;
+                                        ^
+  first type:  boolean
+  second type: int
+3 errors
+

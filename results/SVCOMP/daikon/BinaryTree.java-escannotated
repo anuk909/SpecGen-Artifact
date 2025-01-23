@@ -1,0 +1,119 @@
+public class BinaryTree {
+  /*@ invariant this.root == BinaryTree.this.root; */
+  /*@ invariant this != null; */
+  /*@ invariant this.root.value == -5; */
+  /*@ invariant this.root.left == null; */
+  /*@ invariant this.root.right.value == -4; */
+  /*@ invariant this.root.right.left == null; */
+  /*@ invariant BinaryTree.this.root != null; */
+  /*@ invariant BinaryTree.this.root != null; */
+  /** Internal class representing a Node in the tree. */
+  private class Node {
+    /*@ spec_public */ int value;
+    /*@ spec_public */ Node left;
+    /*@ spec_public */ Node right;
+
+    Node(int v, Node l, Node r) {
+      value = v;
+      left = l;
+      right = r;
+    }
+  }
+
+  /*@ spec_public */ private Node root = null;
+
+  /*@ requires this.root.value < v; */
+  /*@ requires this.root.right.value < v; */
+  /*@ modifies this.root, this.root.left.value, this.root.left.left, this.root.left.right, BinaryTree.this, this.root.right, this.root.right.right; */
+  /*@ ensures this.root == \old(BinaryTree.this.root); */
+  /*@ ensures (this.root.right == null)  ==  (\old(this.root) == null); */
+  /*@ ensures (this.root.right == null)  ==  (\old(v) == -5); */
+  /*@ ensures (this.root.right == null)  ==  (this.root.value == \old(v)); */
+  /*@ ensures (this.root.right != null)  ==  (\old(this.root) != null); */
+  /*@ ensures (this.root.right != null)  ==  (this.root.value < \old(v)); */
+  /*@ ensures (this.root.right != null)  ==>  (\old(BinaryTree.this.root) != null); */
+  /*@ ensures (this.root.right != null)  ==>  (\old(this.root.left) == null); */
+  /*@ ensures (this.root.right != null)  ==>  (\old(this.root.right.left) == null); */
+  /*@ ensures (this.root.right != null)  ==>  (\old(this.root.right.value) < \old(v)); */
+  /*@ ensures (this.root.right != null)  ==>  (\old(this.root.value) < \old(v)); */
+  /*@ ensures (this.root.right != null)  ==>  (this.root == \old(BinaryTree.this.root)); */
+  /*@ ensures (this.root.right != null)  ==>  (this.root == \old(this.root)); */
+  /*@ ensures (this.root.right != null)  ==>  (this.root.left == \old(this.root.left)); */
+  /*@ ensures (this.root.right != null)  ==>  (this.root.right.left == null); */
+  /*@ ensures (this.root.right != null)  ==>  (this.root.right.left == \old(this.root.right.left)); */
+  /*@ ensures (this.root.right != null)  ==>  (this.root.right.value <= \old(v)); */
+  /*@ ensures this.root != null; */
+  /*@ ensures this.root.value <= \old(v); */
+  /*@ ensures this.root.right.value <= \old(v); */
+  /** Inserts a value in to the tree. */
+  public void insert(int v) {
+
+    if (root == null) {
+      root = new Node(v, null, null);
+      return;
+    }
+
+    Node curr = root;
+    while (true) {
+      if (curr.value < v) {
+        if (curr.right != null) {
+          curr = curr.right;
+        } else {
+          curr.right = new Node(v, null, null);
+          break;
+        }
+      } else if (curr.value > v) {
+        if (curr.left != null) {
+          curr = curr.left;
+        } else {
+          curr.left = new Node(v, null, null);
+          break;
+        }
+      } else {
+        break;
+      }
+    }
+  }
+
+  /*@ requires this.root != null; */
+  /*@ requires this.root.right != null; */
+  /*@ requires this.root.right.right != null; */
+  /*@ requires this.root.value != v; */
+  /*@ requires this.root.right.value != v; */
+  /*@ modifies this.root.left.value, this.root.left.left, this.root.left.right, BinaryTree.this; */
+  /*@ ensures this.root == \old(BinaryTree.this.root); */
+  /*@ ensures (\result == true)  ==>  (\old(v) == -3 || \old(v) == 2); */
+  /*@ ensures this.root != null; */
+  /*@ ensures this.root.right != null; */
+  /*@ ensures this.root.right.right != null; */
+  /*@ ensures this.root.value != \old(v); */
+  /*@ ensures this.root.right.value != \old(v); */
+  /** Searches for a value in the tree. */
+  public boolean search(int v) {
+    Node curr = root;
+    while (curr != null) { // N branches
+      if (curr.value == v) { // N-1 branches
+        return true;
+      } else if (curr.value < v) { // N-1 branches
+        curr = curr.right;
+      } else {
+        curr = curr.left;
+      }
+    }
+    return false;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    BinaryTree t1 = new BinaryTree();
+    for(int i = -5; i <= 5; i++) {
+      t1.insert(i);
+    }
+    for(int i = -28; i <= 20; i += 5) {
+      t1.search(i);
+    }
+  }
+}

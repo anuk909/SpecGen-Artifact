@@ -1,0 +1,31 @@
+/**
+ * The GCD class provides a method to calculate the greatest common divisor (GCD) of two integers.
+ */
+class GCD {
+    /**
+     * Calculates the greatest common divisor (GCD) of two integers.
+     * 
+     * @param y1 the first integer
+     * @param y2 the second integer
+     * @requires y1 >= 0 && y2 >= 0
+     * @ensures \result >= 0
+     * @ensures (\result == 0) <==> (y1 <= 0 || y2 <= 0)
+     * @ensures (\result == y1) <==> (y1 == y2)
+     * @ensures (\result == gcd(y1 - y2, y2)) <==> (y1 > y2)
+     * @ensures (\result == gcd(y1, y2 - y1)) <==> (y1 < y2)
+     * @return the greatest common divisor of y1 and y2
+     */
+    static int gcd(int y1, int y2) {
+        if (y1 <= 0 || y2 <= 0) {
+            return 0;
+        }
+        if (y1 == y2) {
+            return y1;
+        }
+        if (y1 > y2) {
+            return gcd(y1 - y2, y2);
+        }
+        return gcd(y1, y2 - y1);
+    }
+}
+

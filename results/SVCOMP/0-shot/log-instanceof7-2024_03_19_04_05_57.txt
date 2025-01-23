@@ -1,0 +1,21 @@
+class Main {
+  //@ requires true;
+  //@ ensures \result == ((!(as[0] instanceof B)) ? false : (!(as[1] instanceof B) ? false : true));
+  public static boolean f() {
+    A[] as = {new A(), new B()};
+    if (!(!(as[0] instanceof B)))
+      return false;
+    if (!(as[1] instanceof B))
+      return false;
+    return true;
+  }
+}
+
+class A {
+  //@ invariant true;
+}
+
+class B extends A {
+  //@ invariant true;
+}
+

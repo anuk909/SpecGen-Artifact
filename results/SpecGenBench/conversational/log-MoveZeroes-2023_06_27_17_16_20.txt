@@ -1,0 +1,833 @@
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ maintaining 0 <= left && left <= right && right <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ maintaining (\forall int i; right <= i && i < n; nums[i] == 0);
+        //@ maintaining (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method moveZeroes
+        //@ maintaining (\forall int i; right <= i && i < n; nums[i] == 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MoveZeroes.java:6:) in method moveZeroes
+    public void moveZeroes(int[] nums) {
+                ^
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MoveZeroes.java:7:
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+        ^
+3 verification failures
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ maintaining 0 <= left && left <= right && right <= n;
+        //@ maintaining (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ maintaining (\forall int i; right <= i && i < n; nums[i] == 0);
+        //@ maintaining (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:15: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method moveZeroes
+        //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MoveZeroes.java:6:) in method moveZeroes
+    public void moveZeroes(int[] nums) {
+                ^
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MoveZeroes.java:7:
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+        ^
+3 verification failures
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:15: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:11: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method moveZeroes
+        //@ loop_invariant (\forall int i; right <= i && i < n; nums[i] == 0);
+            ^
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:7: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/MoveZeroes.java:6:) in method moveZeroes
+    public void moveZeroes(int[] nums) {
+                ^
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:6: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/MoveZeroes.java:7:
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+        ^
+3 verification failures
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+
+class MoveZeroes {
+    //@ requires nums != null;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) == 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; \old(nums[i]) != 0);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] != 0) ==> (\forall int i; 0 <= i && i < nums.length; nums[i] == \old(nums[i]));
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; nums[i] == 0) ==> (\exists int i; 0 <= i && i < nums.length; nums[i] != \old(nums[i]));
+    public void moveZeroes(int[] nums) {
+        int n = nums.length, left = 0, right = 0;
+        //@ loop_invariant 0 <= left && left <= right && right <= n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+        //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+        //@ decreases n - right;
+        while (right < n) {
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+            //@ loop_invariant (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ loop_invariant (\forall int i; left <= i && i < right; nums[i] == 0);
+            if (nums[right] != 0) {
+                swap(nums, left, right);
+                left++;
+            }
+            right++;
+            //@ assert (\forall int i; 0 <= i && i < left; nums[i] != 0);
+            //@ assert (\forall int i; right <= i && i < n; nums[i] == 0);
+            //@ assert (\forall int i; left <= i && i < right; nums[i] == 0);
+        }
+        //@ assert (\forall int i; 0 <= i && i < nums.length; nums[i] == 0 || nums[i] != 0 && i >= left);
+    }
+
+    //@ requires nums != null;
+    //@ requires 0 <= left && left < nums.length && 0 <= right && right < nums.length;
+    //@ ensures nums[left] == \old(nums[right]) && nums[right] == \old(nums[left]);
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MoveZeroes.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ loop_invariant 0 <= left && left <= right && right <= n;
+                ^
+1 error
+

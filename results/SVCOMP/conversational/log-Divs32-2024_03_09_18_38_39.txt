@@ -1,0 +1,476 @@
+public class Divs32 {
+
+  static final int MAX_INT = 2147483647;
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      int calcDenominator;
+
+      /* replacing this computation
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) /
+              (denominator >= 0 ? denominator : -denominator);*/
+
+      if (denominator >= 0) calcDenominator = denominator;
+      else calcDenominator = -denominator;
+
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+      quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:8: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+                         ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+                         ^
+2 errors
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      int calcDenominator;
+
+      /* replacing this computation
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) /
+              (denominator >= 0 ? denominator : -denominator);*/
+
+      if (denominator >= 0) calcDenominator = denominator;
+      else calcDenominator = -denominator;
+
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+      quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:40: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Divs32.java:9:) in method divS32
+    return quotient;
+    ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Divs32.java:40:
+  //@ ensures \result == numerator / denominator;
+      ^
+2 verification failures
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      int calcDenominator;
+
+      /* replacing this computation
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) /
+              (denominator >= 0 ? denominator : -denominator);*/
+
+      if (denominator >= 0) calcDenominator = denominator;
+      else calcDenominator = -denominator;
+
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) / calcDenominator;
+      quotient = quotientNeedsNegation ? -(int) tempAbsQuotient : (int) tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:40: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Divs32.java:9:) in method divS32
+    return quotient;
+    ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Divs32.java:40:
+  //@ ensures \result == numerator / denominator;
+      ^
+2 verification failures
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      int calcDenominator;
+
+      /* replacing this computation
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) /
+              (denominator >= 0 ? denominator : -denominator);*/
+
+      if (denominator >= 0) calcDenominator = denominator;
+      else calcDenominator = -denominator;
+
+      tempAbsQuotient = (int) Math.abs((long)numerator) / Math.abs((long)denominator);
+      quotient = quotientNeedsNegation ? -tempAbsQuotient : tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:36: error: incompatible types: possible lossy conversion from long to int
+      tempAbsQuotient = (int) Math.abs((long)numerator) / Math.abs((long)denominator);
+                                                        ^
+1 error
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      int calcDenominator;
+
+      /* replacing this computation
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) /
+              (denominator >= 0 ? denominator : -denominator);*/
+
+      if (denominator >= 0) calcDenominator = denominator;
+      else calcDenominator = -denominator;
+
+      tempAbsQuotient = Math.abs(numerator) / Math.abs(denominator);
+      quotient = quotientNeedsNegation ? -tempAbsQuotient : tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:40: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Divs32.java:9:) in method divS32
+    return quotient;
+    ^
+/home/max/Documents/JMLGPT/tmp/Divs32.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Divs32.java:40:
+  //@ ensures \result == numerator / denominator;
+      ^
+2 verification failures
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      int calcDenominator;
+
+      /* replacing this computation
+      tempAbsQuotient = (int) (numerator >= 0 ? numerator : -numerator) /
+              (denominator >= 0 ? denominator : -denominator);*/
+
+      if (denominator >= 0) calcDenominator = denominator;
+      else calcDenominator = -denominator;
+
+      tempAbsQuotient = Math.abs((long)numerator) / Math.abs((long)denominator);
+      quotient = quotientNeedsNegation ? -(int)tempAbsQuotient : (int)tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:36: error: incompatible types: possible lossy conversion from long to int
+      tempAbsQuotient = Math.abs((long)numerator) / Math.abs((long)denominator);
+                                                  ^
+1 error
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      long tempNumerator = (long)numerator;
+      long tempDenominator = (long)denominator;
+
+      long tempAbsNumerator = Math.abs(tempNumerator);
+      long tempAbsDenominator = Math.abs(tempDenominator);
+
+      tempAbsQuotient = tempAbsNumerator / tempAbsDenominator;
+
+      quotient = quotientNeedsNegation ? -(int)tempAbsQuotient : (int)tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:33: error: incompatible types: possible lossy conversion from long to int
+      tempAbsQuotient = tempAbsNumerator / tempAbsDenominator;
+                                         ^
+1 error
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      long tempNumerator = (long)numerator;
+      long tempDenominator = (long)denominator;
+
+      long tempAbsNumerator = Math.abs(tempNumerator);
+      long tempAbsDenominator = Math.abs(tempDenominator);
+
+      tempAbsQuotient = tempAbsNumerator / tempAbsDenominator;
+
+      quotient = quotientNeedsNegation ? -(int)tempAbsQuotient : (int)tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:33: error: incompatible types: possible lossy conversion from long to int
+      tempAbsQuotient = tempAbsNumerator / tempAbsDenominator;
+                                         ^
+1 error
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      long tempNumerator = (long)numerator;
+      long tempDenominator = (long)denominator;
+
+      long tempAbsNumerator = Math.abs(tempNumerator);
+      long tempAbsDenominator = Math.abs(tempDenominator);
+
+      tempAbsQuotient = (int)(tempAbsNumerator / tempAbsDenominator);
+
+      quotient = quotientNeedsNegation ? -tempAbsQuotient : tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:33: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method divS32
+      tempAbsQuotient = (int)(tempAbsNumerator / tempAbsDenominator);
+                        ^
+1 verification failure
+
+public class Divs32 {
+
+  //@ spec_public
+  static final int MAX_INT = 2147483647;
+  //@ spec_public
+  static final int MIN_INT = -2147483648;
+
+  //@ requires denominator != 0;
+  //@ ensures \result == numerator / denominator;
+  //@ ensures \result == MAX_INT ==> (numerator >= 0 && denominator > 0) || (numerator < 0 && denominator < 0);
+  //@ ensures \result == MIN_INT ==> (numerator >= 0 && denominator < 0) || (numerator < 0 && denominator > 0);
+  public static int divS32(int numerator, int denominator) {
+    int quotient;
+    int tempAbsQuotient;
+    boolean quotientNeedsNegation = false;
+    if (denominator == 0) {
+      quotient = numerator >= 0 ? MAX_INT : MIN_INT;
+
+      /* Divide by zero handler */
+    } else {
+      // quotientNeedsNegation = ((numerator < 0) != (denominator < 0));
+
+      if ((numerator < 0) && (denominator > 0)) quotientNeedsNegation = true;
+      else if ((numerator > 0) && (denominator < 0)) quotientNeedsNegation = true;
+      else quotientNeedsNegation = false;
+
+      long tempNumerator = (long)numerator;
+      long tempDenominator = (long)denominator;
+
+      long tempAbsNumerator = Math.abs(tempNumerator);
+      long tempAbsDenominator = Math.abs(tempDenominator);
+
+      if (tempAbsDenominator == 1) {
+        tempAbsQuotient = (int)tempAbsNumerator * (int)tempAbsDenominator;
+      } else {
+        tempAbsQuotient = (int)(tempAbsNumerator / tempAbsDenominator);
+      }
+
+      quotient = quotientNeedsNegation ? -tempAbsQuotient : tempAbsQuotient;
+    }
+
+    return quotient;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/Divs32.java:34: verify: The prover cannot establish an assertion (ArithmeticCastRange) in method divS32
+        tempAbsQuotient = (int)tempAbsNumerator * (int)tempAbsDenominator;
+                          ^
+1 verification failure
+

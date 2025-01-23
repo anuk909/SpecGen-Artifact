@@ -1,0 +1,35 @@
+class A extends RuntimeException {
+  //@ public invariant i == 1;
+  public int i;
+
+  //@ ensures i == 1;
+  A() {
+    i = 1;
+  }
+}
+
+class B extends A {}
+
+class C extends B {}
+
+class Main {
+  //@ requires args != null;
+  //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  public static void main(String[] args) {
+    try {
+      try {
+        int i = 0;
+        throw new A();
+      } catch (A exc) {
+        //@ assert exc.i == 2;
+      }
+    } catch (B exc) {
+      //@ assert exc.i == 2;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions6.java:24: verify: The prover cannot establish an assertion (Assert) in method main
+        //@ assert exc.i == 2;
+            ^
+1 verification failure
+

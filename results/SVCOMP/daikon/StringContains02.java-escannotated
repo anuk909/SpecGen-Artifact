@@ -1,0 +1,21 @@
+class StringContains02 {
+  public static boolean f(String arg) {
+    return (arg.contains("Hello"));
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f("#$%^&*123");
+    f("#$%^#*123");
+    f("#$%^#*123");
+    f("fsgdhj");
+    f("fsgdhj");
+    f("");
+    f("Hellow world");
+    f("Hello world");
+    f("Hello");
+  }
+}

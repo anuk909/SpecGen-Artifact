@@ -1,0 +1,86 @@
+import java.util.*;
+
+public class HttpServletRequest {
+
+  private Cookie cookie = null;
+  private /*@ nullable @*/ String tainted = null;
+
+  //@ ensures tainted == value && cookie != null && cookie.getName() == value && cookie.getValue() == value;
+  public void setTaintedValue(String value) {
+    tainted = value;
+    this.cookie = new Cookie(tainted, tainted);
+  }
+
+  //@ ensures \result != null && \result.length == 1 && \result[0] == tainted;
+  public /*@ pure @*/ String[] getParameterValues(String name) {
+    return new String[] {tainted};
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getAuthType() {
+    return tainted;
+  }
+
+  //@ ensures \result != null && \result.length == 1 && \result[0] == cookie;
+  public /*@ pure @*/ Cookie[] getCookies() {
+    return new Cookie[] {cookie};
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getHeader(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result != null && \result.hasMoreElements() && \result.nextElement() == tainted;
+  public /*@ pure @*/ Enumeration getHeaders(String string) {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result != null && \result.hasMoreElements() && \result.nextElement() == tainted;
+  public /*@ pure @*/ Enumeration getHeaderNames() {
+    return Collections.enumeration(Collections.singleton(tainted));
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getQueryString() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getRemoteUser() {
+    return tainted;
+  }
+
+  //@ ensures \result != null && \result.toString().equals(tainted);
+  public /*@ pure @*/ StringBuffer getRequestURL() {
+    return new StringBuffer(tainted);
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getParameter(String string) {
+    return tainted;
+  }
+
+  //@ ensures \result != null && \result.hasMoreElements() && \result.nextElement().equals("name");
+  public /*@ pure @*/ Enumeration getParameterNames() {
+    return Collections.enumeration(Collections.singleton("name"));
+  }
+
+  //@ ensures \result != null && \result.containsKey("name") && \result.get("name") == tainted;
+  public /*@ pure @*/ Map getParameterMap() {
+    Map<String, String> map = new HashMap<>();
+    map.put("name", tainted);
+    return map;
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getProtocol() {
+    return tainted;
+  }
+
+  //@ ensures \result == tainted;
+  public /*@ pure @*/ String getScheme() {
+    return tainted;
+  }
+}
+

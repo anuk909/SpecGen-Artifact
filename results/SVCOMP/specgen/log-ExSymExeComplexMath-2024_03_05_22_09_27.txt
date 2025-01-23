@@ -1,0 +1,859 @@
+class Main {
+  static int field;
+
+  //@ ensures \result ==> test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+  //@ ensures x1 != 0 ==> System.out.println(">>>>>>>>>>>> LOOK!");
+  //@ ensures x1 > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+  //@ ensures x1 < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> test2(0.0);
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: incompatible types: void cannot be converted to boolean
+  //@ ensures x1 == 0 && y1 != 0 ==> System.out.println(">>>>>>>>>>>> 1");
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: incompatible types: void cannot be converted to boolean
+  //@ ensures x1 != 0 ==> System.out.println(">>>>>>>>>>>> LOOK!");
+                                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: error: incompatible types: void cannot be converted to boolean
+  //@ ensures x1 > 0 ==> System.out.println(">>>>>>>>>>>>>>> !!!1");
+                                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:28: error: incompatible types: void cannot be converted to boolean
+  //@ ensures x1 < 0 ==> System.out.println(">>>>>>>>>>>>>>> ???");
+                                           ^
+5 errors
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0 ==> \result == true;
+  //@ ensures x1 != 0 ==> \result == true;
+  //@ ensures x1 > 0 ==> \result == true;
+  //@ ensures x1 < 0 ==> \result == true;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> test2(0.0);
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures x1 == 0 && y1 != 0 ==> \result == true;
+                                      ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:26: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures x1 != 0 ==> \result == true;
+                           ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures x1 > 0 ==> \result == true;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:28: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures x1 < 0 ==> \result == true;
+                          ^
+5 errors
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> inst.test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: cannot find symbol
+  //@ ensures \result ==> inst.test2(0.0);
+                          ^
+  symbol:   variable inst
+  location: class Main
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> new Main().test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> new Main().test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: non-static method test2(double) cannot be referenced from a static context
+  //@ ensures \result ==> test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> new Main().test2(0.0);
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test2(0.0);
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+  //@ ensures \result ==> new Main().test2(0.0);  
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:4: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test2(0.0);  
+                          ^
+1 error
+
+class Main {
+  static int field;
+
+ 
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25:) in method angleXY_
+  public void angleXY_(double x1, double y1) {
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29:
+  //@ ensures x1 == 0 && y1 != 0;
+      ^
+2 verification failures
+
+class Main {
+  static int field;
+
+ 
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+  //@ ensures x1 == 0 && y1 != 0;  
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25:) in method angleXY_
+  public void angleXY_(double x1, double y1) {
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:25: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29:
+  //@ ensures x1 == 0 && y1 != 0;  
+      ^
+2 verification failures
+
+class Main {
+  static int field;
+
+ 
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+ 
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27:) in method angleXY_
+  public void angleXY_(double x1, double y1) {
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29:
+  //@ ensures x1 > 0;
+      ^
+2 verification failures
+
+class Main {
+  static int field;
+
+ 
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+ 
+  //@ ensures x1 != 0;
+  //@ ensures x1 > 0;  
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27:) in method angleXY_
+  public void angleXY_(double x1, double y1) {
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29:
+  //@ ensures x1 > 0;  
+      ^
+2 verification failures
+
+class Main {
+  static int field;
+
+ 
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+ 
+  //@ ensures x1 != 0;
+  //@ ensures x1 >= 0;  
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27:) in method angleXY_
+  public void angleXY_(double x1, double y1) {
+              ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:27: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeComplexMath.java:29:
+  //@ ensures x1 >= 0;  
+      ^
+2 verification failures
+
+class Main {
+  static int field;
+
+ 
+  public static boolean f() {
+    int x = 3;
+    Main inst = new Main();
+    field = 9;
+    return inst.test2(0.0);
+  }
+
+  //@ requires Math.round(in) <= 16.0;
+  //@ ensures \result ==> true;
+  //@ ensures !\result ==> false;
+  public boolean test2(double in) {
+    if (Math.round(in) > 16.0) {
+      return false;
+    } else {
+      System.out.println("do2()");
+      return true;
+    }
+  }
+
+  //@ requires x1 != 0 || y1 == 0;
+ 
+  //@ ensures x1 != 0;
+ 
+  //@ ensures x1 < 0;
+  public void angleXY_(double x1, double y1) {
+    double x = x1;
+    double y = y1;
+    if (x == 0 && y != 0) {
+      System.out.println(">>>>>>>>>>>> 1");
+    } else {
+      System.out.println(">>>>>>>>>>>> LOOK!");
+      if (x < 0) {
+        System.out.println(">>>>>>>>>>>>>>> ???");
+      } else if (x > 0) {
+        System.out.println(">>>>>>>>>>>>>>> !!!1");
+      }
+    }
+  }
+}
+

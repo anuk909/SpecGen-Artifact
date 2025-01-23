@@ -1,0 +1,34 @@
+class Main {
+    //@ requires x > 0;
+    //@ ensures \result == true <==> (\result == true ==> x > 0) && (\result == false ==> x <= 0);
+    public static boolean main(int x) {
+        x = x > 0 ? x % 10 : -(x % 10);
+
+        Main inst = new Main();
+        return inst.test(x);
+    }
+
+    //@ requires x > 0;
+    //@ ensures \result == true <==> res > 0;
+    //@ ensures \result == false <==> res <= 0;
+    public boolean test(int x) {
+        double res = (double) ++x;
+        if (res > 0) System.out.println("x >0");
+        else {
+            return false;
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeI2D.java:12: error: cannot find symbol
+    //@ ensures \result == true <==> res > 0;
+                                     ^
+  symbol:   variable res
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeI2D.java:13: error: cannot find symbol
+    //@ ensures \result == false <==> res <= 0;
+                                      ^
+  symbol:   variable res
+  location: class Main
+2 errors
+

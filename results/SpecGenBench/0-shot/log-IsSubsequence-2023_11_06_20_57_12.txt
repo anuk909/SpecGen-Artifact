@@ -1,0 +1,23 @@
+class IsSubsequence {
+    //@ requires s != null && t != null;
+    //@ ensures \result == (\forall int k; 0 <= k < s.length(); s.charAt(k) == t.charAt(\result + k));
+    public boolean isSubsequence(String s, String t) {
+        int n = s.length(), m = t.length();
+        int i = 0, j = 0;
+
+        //@ loop_invariant 0 <= i <= n && 0 <= j <= m;
+        //@ loop_invariant (\forall int k; 0 <= k < i; s.charAt(k) == t.charAt(k));
+        //@ loop_invariant (\forall int k; i <= k < n; s.charAt(k) != t.charAt(k));
+        //@ loop_invariant (\forall int k; 0 <= k < j; s.charAt(k) != t.charAt(k));
+        //@ loop_invariant (\forall int k; j <= k < m; s.charAt(i) != t.charAt(k));
+        while (i < n && j < m) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;
+            }
+            j++;
+        }
+
+        //@ assert i == n ==> (\forall int k; 0 <= k < s.length(); s.charAt(k) == t.charAt(j - n + k));
+        return i == n;
+    }
+}

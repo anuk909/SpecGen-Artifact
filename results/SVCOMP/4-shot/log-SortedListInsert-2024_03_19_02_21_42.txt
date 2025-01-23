@@ -1,0 +1,27 @@
+public class SortedListInsert {
+
+    private static class List {
+        public int x;
+        public List next;
+
+        private static final int SENTINEL = Integer.MAX_VALUE;
+
+        //@ ensures \result.x == Integer.MAX_VALUE && \result.next == null;
+        public List() {
+            this(SENTINEL, null);
+        }
+
+        //@ requires data != Integer.MAX_VALUE;
+        //@ ensures (\forall List l; l != null; l.x >= data ==> \result.next == l && \result.x == data && \result.next.x == l.x);
+        //@ ensures (\exists List l; l != null; l.x < data ==> \result.x == data && \result.next == l);
+        public void insert(int data) {
+            if (data > this.x) {
+                next.insert(data);
+            } else {
+                next = new List(x, next);
+                x = data;
+            }
+        }
+    }
+
+}

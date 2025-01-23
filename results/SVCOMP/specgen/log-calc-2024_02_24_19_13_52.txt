@@ -1,0 +1,227 @@
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> \result == "need two arguments";
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) ==> \result == true;
+    //@ ensures Integer.parseInt(a) == Integer.parseInt(b) ==> \result == true;
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures args.length < 2 ==> \result == "need two arguments";
+                                     ^
+/home/max/Documents/JMLGPT/tmp/calc.java:17: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) ==> \result == true;
+                                                                ^
+/home/max/Documents/JMLGPT/tmp/calc.java:18: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures Integer.parseInt(a) == Integer.parseInt(b) ==> \result == true;
+                                                                ^
+3 errors
+
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: incompatible types: void cannot be converted to boolean
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+                                                      ^
+1 error
+
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> (\result == "need two arguments");
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures args.length < 2 ==> (\result == "need two arguments");
+                                      ^
+1 error
+
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/calc.java:3: error: incompatible types: void cannot be converted to boolean
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+                                                      ^
+1 error
+
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> true;
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 147849216 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid2531.log
+
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> true;
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 203423744 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid2590.log
+
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> true;
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\exists int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\exists int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ ensures (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ ensures Integer.parseInt(a) != Integer.parseInt(b) || Integer.parseInt(a) == Integer.parseInt(b);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 156237824 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid2675.log
+

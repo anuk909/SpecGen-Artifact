@@ -1,0 +1,39 @@
+public class BubbleSort { 
+    //@ requires array != null;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < array.length; array[i] <= array[j]);
+    void swap(int x, int y,  int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires arr != null;
+    //@ ensures \result != null;
+    //@ ensures \result.length == arr.length;
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < \result.length; \result[i] <= \result[j]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n-1; i++) {	
+            //@ maintaining (\forall int x, y; 0 <= x && x < y && y < n-i-1; arr[x] <= arr[y]);
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+                    swap(j, j + 1, arr); 
+                } 
+            }
+        } 
+        return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:19: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method bubbleSort
+            //@ maintaining (\forall int x, y; 0 <= x && x < y && y < n-i-1; arr[x] <= arr[y]);
+                ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:4: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:3:) in method swap
+    void swap(int x, int y,  int array[]) {
+         ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/BubbleSort.java:4:
+    //@ ensures (\forall int i, j; 0 <= i && i < j && j < array.length; array[i] <= array[j]);
+        ^
+3 verification failures
+

@@ -1,0 +1,142 @@
+public class BinaryTree {
+    private class Node {
+        int value;
+        Node left;
+        Node right;
+
+        Node(int v, Node l, Node r) {
+            value = v;
+            left = l;
+            right = r;
+        }
+    }
+
+    private Node root = null;
+
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.value != v);
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+    public void insert(int v) {
+        if (root == null) {
+            root = new Node(v, null, null);
+            return;
+        }
+
+        Node curr = root;
+        while (true) {
+            if (curr.value < v) {
+                if (curr.right != null) {
+                    curr = curr.right;
+                } else {
+                    curr.right = new Node(v, null, null);
+                    break;
+                }
+            } else if (curr.value > v) {
+                if (curr.left != null) {
+                    curr = curr.left;
+                } else {
+                    curr.left = new Node(v, null, null);
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
+    //@ ensures \result <==> (\exists Node n; containsNode(n, root); n.value == v);
+    public boolean search(int v) {
+        Node curr = root;
+        while (curr != null) {
+            if (curr.value == v) {
+                return true;
+            } else if (curr.value < v) {
+                curr = curr.right;
+            } else {
+                curr = curr.left;
+            }
+        }
+        return false;
+    }
+
+    //@ ensures \result ==> (n == null || n.value == v || containsNode(n.left, root) || containsNode(n.right, root));
+    private boolean containsNode(Node n, Node root) {
+        if (n == null) {
+            return true;
+        }
+        if (n.value == root.value) {
+            return true;
+        }
+        return containsNode(n.left, root) || containsNode(n.right, root);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.value != v);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.value != v);
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.value != v);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.value != v);
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                                                                                             ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                                                                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:17: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.left != null ==> n.left.value < n.value);
+                                                                                                            ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                                                  ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:18: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures root != null ==> (\forall Node n; containsNode(n, root); n.right != null ==> n.right.value > n.value);
+                                                                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result <==> (\exists Node n; containsNode(n, root); n.value == v);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result <==> (\exists Node n; containsNode(n, root); n.value == v);
+                                              ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:47: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result <==> (\exists Node n; containsNode(n, root); n.value == v);
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/BinaryTree.java:62: error: cannot find symbol
+    //@ ensures \result ==> (n == null || n.value == v || containsNode(n.left, root) || containsNode(n.right, root));
+                                                     ^
+  symbol:   variable v
+  location: class BinaryTree
+22 errors
+

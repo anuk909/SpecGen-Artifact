@@ -1,0 +1,549 @@
+/*
+ * Origin of the benchmark:
+ *     license: 4-clause BSD (see /java/jbmc-regression/LICENSE)
+ *     repo: https://github.com/diffblue/cbmc.git
+ *     branch: develop
+ *     directory: regression/jbmc-strings/StringStartEnd03
+ * The benchmark was taken from the repo: 24 January 2018
+ */
+import org.sosy_lab.sv_benchmarks.Verifier;
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures \result == 3;
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: package org.sosy_lab.sv_benchmarks does not exist
+import org.sosy_lab.sv_benchmarks.Verifier;
+                                 ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:15: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == 3;
+               ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:17: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:18: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:19: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:20: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:21: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+8 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+// Error: package org.sosy_lab.sv_benchmarks does not exist
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures \result == 3;
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    // Error: variable strings is already defined in method main(String[])
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:5: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: A \result expression may not be used in the specification of a method that returns void
+  //@ ensures \result == 3;
+               ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:15: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:16: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:17: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+7 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+
+// Error: class Main is public, should be declared in a file named Main.java
+
+public class Main {
+  //@ requires strings.length == 4;
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i] != null);
+  //@ requires (\forall int i; 0 <= i && i < strings.length; strings[i].length() <= Integer.MAX_VALUE);
+  //@ ensures true; // Placeholder for the assertion
+  public static void main(String[] strings) {
+    String[] strings = new String[4];
+    // Error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+    strings[1] = Verifier.nondetString();
+    strings[2] = Verifier.nondetString();
+    strings[3] = Verifier.nondetString();
+
+    int i = 0;
+    //@ maintaining 0 <= i && i <= strings.length;
+    //@ maintaining 0 <= i ==> i <= 3;
+    //@ decreases strings.length - i;
+    for (String string : strings) {
+      if (string.endsWith("ed")) ++i;
+    }
+    assert i == 3;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:3: error: class Main is public, should be declared in a file named Main.java
+public class Main {
+       ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:9: error: variable strings is already defined in method main(String[])
+    String[] strings = new String[4];
+             ^
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:11: error: cannot find symbol
+    strings[0] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:12: error: cannot find symbol
+    strings[1] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:13: error: cannot find symbol
+    strings[2] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/StringStartEnd03.java:14: error: cannot find symbol
+    strings[3] = Verifier.nondetString();
+                 ^
+  symbol:   variable Verifier
+  location: class Main
+6 errors
+

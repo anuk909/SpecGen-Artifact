@@ -1,0 +1,99 @@
+public class CopyArray {
+    //@ requires b != null && a != null;
+    //@ requires 0 <= iBegin && iBegin <= iEnd && iEnd <= b.length;
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == \old(b[i]));
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+        int k = iBegin;
+
+        while (iEnd - k > 0) {
+            a[k] = b[k];
+            k = k + 1 ;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:8: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method CopyArray: overflow in int difference
+        while (iEnd - k > 0) {
+                    ^
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:5: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CopyArray.java:4:) in method CopyArray
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+                       ^
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CopyArray.java:5:
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == \old(b[i]));
+        ^
+3 verification failures
+
+public class CopyArray {
+    //@ requires b != null && a != null;
+    //@ requires 0 <= iBegin && iBegin <= iEnd && iEnd <= b.length;
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == \old(b[i]));
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+        int k = iBegin;
+
+        //@ maintaining iEnd - k >= 0;
+        //@ maintaining iBegin <= k && k <= iEnd;
+        //@ maintaining (\forall int i; iBegin <= i && i < k; a[i] == \old(b[i]));
+        //@ decreases iEnd - k;
+        while (iEnd - k > 0) {
+            a[k] = b[k];
+            k = k + 1 ;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:13: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method CopyArray
+            a[k] = b[k];
+             ^
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method CopyArray
+        //@ maintaining (\forall int i; iBegin <= i && i < k; a[i] == \old(b[i]));
+            ^
+2 verification failures
+
+public class CopyArray {
+    //@ requires b != null && a != null;
+    //@ requires 0 <= iBegin && iBegin <= iEnd && iEnd <= b.length;
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == \old(b[i]));
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+        int k = iBegin;
+
+        //@ maintaining iEnd - k >= 0;
+        //@ maintaining iBegin <= k && k <= iEnd;
+        //@ maintaining (\forall int i; iBegin <= i && i < k; a[i] == \old(b[i]));
+        //@ decreasing iEnd - k;
+        while (k < iEnd) {
+            a[k] = b[k];
+            k = k + 1 ;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:13: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method CopyArray
+            a[k] = b[k];
+             ^
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method CopyArray
+        //@ maintaining (\forall int i; iBegin <= i && i < k; a[i] == \old(b[i]));
+            ^
+2 verification failures
+
+public class CopyArray {
+    //@ requires b != null && a != null;
+    //@ requires 0 <= iBegin && iBegin <= iEnd && iEnd <= b.length;
+    //@ ensures (\forall int i; iBegin <= i && i < iEnd; a[i] == \old(b[i]));
+    public static void CopyArray(int[] b, int iBegin, int iEnd, int[] a) {
+        int k = iBegin;
+
+        //@ maintaining iEnd - k >= 0;
+        //@ maintaining iBegin <= k && k <= iEnd;
+        //@ maintaining (\forall int i; iBegin <= i && i < k; a[i] == \old(b[i]));
+        //@ decreases iEnd - k;
+        while (k < iEnd) {
+            a[k] = b[k];
+            k = k + 1 ;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:13: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method CopyArray
+            a[k] = b[k];
+             ^
+/home/max/Documents/JMLGPT/tmp/CopyArray.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method CopyArray
+        //@ maintaining (\forall int i; iBegin <= i && i < k; a[i] == \old(b[i]));
+            ^
+2 verification failures
+

@@ -1,0 +1,19 @@
+public class StringStartEnd02 {
+    //@ ensures !\result ==> args.length < 4;
+    //@ ensures \result ==> args.length >= 4 && (\exists int j; 0 <= j && j < 4; args[j].startsWith("te")) && (\forall int j; 0 <= j && j < 4; args[j].startsWith("te") ==> j == 1);
+    public static boolean f(String[] args) {
+        if (args.length < 4)
+            return false;
+        int i = 0;
+        //@ maintaining 0 <= j && j <= 4;
+        //@ maintaining 0 <= i && i <= 4;
+        //@ maintaining (\forall int k; 0 <= k && k < j; args[k].startsWith("te"));
+        //@ decreases 4 - j;
+        for (int j = 0; j < 4; j++) {
+            if (args[j].startsWith("te"))
+                ++i;
+        }
+        return i == 1;
+    }
+}
+

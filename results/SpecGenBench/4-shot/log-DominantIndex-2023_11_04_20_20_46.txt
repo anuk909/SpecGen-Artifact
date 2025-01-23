@@ -1,0 +1,40 @@
+class DominantIndex {
+    
+    //@ requires nums != null;
+    //@ requires 0 < nums.length && nums.length <= Integer.MAX_VALUE;
+    //@ ensures (\forall int i; 0 <= i && i < \result && \result < nums.length; nums[\result] >= 2 * nums[i]);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length && i != \result; nums[\result] >= nums[i]);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length && i != \result; nums[\result] >= 2 * nums[i]);
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; nums[0] >= 2 * nums[i]);
+    public int dominantIndex(int[] nums) {
+        int m1 = -1, m2 = -1;
+        int index = -1;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining m1 >= -1 && m2 >= -1;
+        //@ maintaining index >= -1 && index < nums.length;
+        //@ maintaining (\forall int k; 0 <= k && k < i; nums[index] >= 2 * nums[k]);
+        //@ maintaining (\forall int k; 0 <= k && k < i && k != index; nums[index] >= nums[k]);
+        //@ maintaining (\forall int k; 0 <= k && k < i && k != index; nums[index] >= 2 * nums[k]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > m1) {
+                m2 = m1;
+                m1 = nums[i];
+                index = i;
+            } else if (nums[i] > m2) {
+                m2 = nums[i];
+            }
+        }
+
+        return m1 >= m2 * 2 ? index : -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:30: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:8:) in method dominantIndex
+        return m1 >= m2 * 2 ? index : -1;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:8: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:30:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; nums[0] >= 2 * nums[i]);
+        ^
+2 verification failures
+

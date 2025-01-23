@@ -1,0 +1,73 @@
+class CanConstruct {
+    //@ requires ransomNote != null && magazine != null;
+    //@ ensures \result == true <==> (\forall int i; 0 <= i && i < ransomNote.length(); cnt[ransomNote.charAt(i) - 'a'] > 0);
+    public boolean canConstruct(String ransomNote, String magazine) {
+        if (ransomNote.length() > magazine.length()) {
+            return false;
+        }
+        int[] cnt = new int[26];
+        //@ loop_invariant 0 <= i && i <= magazine.length();
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; cnt[magazine.charAt(j) - 'a'] >= 0);
+        //@ decreases magazine.length() - i;
+        for (char c : magazine.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        //@ loop_invariant 0 <= i && i <= ransomNote.length();
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; cnt[ransomNote.charAt(j) - 'a'] >= -1);
+        //@ decreases ransomNote.length() - i;
+        for (char c : ransomNote.toCharArray()) {
+            cnt[c - 'a']--;
+            if(cnt[c - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:3: error: cannot find symbol
+    //@ ensures \result == true <==> (\forall int i; 0 <= i && i < ransomNote.length(); cnt[ransomNote.charAt(i) - 'a'] > 0);
+                                                                                        ^
+  symbol:   variable cnt
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:9: error: cannot find symbol
+        //@ loop_invariant 0 <= i && i <= magazine.length();
+                                ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:9: error: cannot find symbol
+        //@ loop_invariant 0 <= i && i <= magazine.length();
+                                     ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:10: error: cannot find symbol
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; cnt[magazine.charAt(j) - 'a'] >= 0);
+                                                         ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:11: error: cannot find symbol
+        //@ decreases magazine.length() - i;
+                                          ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:15: error: cannot find symbol
+        //@ loop_invariant 0 <= i && i <= ransomNote.length();
+                                ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:15: error: cannot find symbol
+        //@ loop_invariant 0 <= i && i <= ransomNote.length();
+                                     ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:16: error: cannot find symbol
+        //@ loop_invariant (\forall int j; 0 <= j && j < i; cnt[ransomNote.charAt(j) - 'a'] >= -1);
+                                                         ^
+  symbol:   variable i
+  location: class CanConstruct
+/home/max/Documents/JMLGPT/tmp/CanConstruct.java:17: error: cannot find symbol
+        //@ decreases ransomNote.length() - i;
+                                            ^
+  symbol:   variable i
+  location: class CanConstruct
+9 errors
+

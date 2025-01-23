@@ -1,0 +1,1201 @@
+public class Fibonacci {
+   	private  long fib[];
+
+	//@ ensures fib.length == 2;
+	//@ ensures fib[0] == 0;
+	//@ ensures fib[1] == 1;
+	Fibonacci() {
+		fib = new long[2];
+		fib[0] = 0;
+		fib[1] = 1;
+	}
+	 	
+	//@ requires 2 <= size && size <= 93;
+	//@ ensures fib.length == size;
+	//@ ensures fib[0] == 0;
+	//@ ensures fib[1] == 1;
+	Fibonacci(int size) {
+		if (2 <= size && size <= 93) {
+			fib = new long[size];	
+			fib[0] = 0;
+			fib[1] = 1;
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	//@ requires 0 <= index && index < fib.length;
+	//@ ensures \result == fib[index];
+	public /*@ pure @*/ long getFib(int index) {
+		return fib[index];
+	}
+
+	//@ maintaining 2 <= index && index <= fib.length;
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	//@ decreases fib.length - index;
+	public void fibCompute() {
+		int index = 2;
+      
+		while (index < fib.length) {
+	
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;
+                        
+		}
+	}
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:33: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+	//@ maintaining 2 <= index && index <= fib.length;
+	    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: illegal start of type
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: <identifier> expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                      ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: > expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                   ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: ']' expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                         ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: ';' expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: ']' expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                                   ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: ';' expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: ']' expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:34: error: ';' expected
+	//@ maintaining (\forall int i; 0 <= i && i < index; fib[i] == fib[i-2] + fib[i-1]);
+	                                                                               ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:35: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+	//@ decreases fib.length - index;
+	    ^
+12 errors
+
+java
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:1: error: class, interface, enum, or record expected
+java
+^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: Method specifications without a following method declaration
+    //@ ensures (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+3 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+
+public class Fibonacci {
+    private long fib[];
+
+    //@ invariant fib != null;
+    //@ invariant fib.length >= 2;
+    //@ invariant fib[0] == 0;
+    //@ invariant fib[1] == 1;
+    //@ invariant (\forall int i; 2 <= i && i < fib.length; fib[i] == fib[i - 2] + fib[i - 1]);
+
+    //@ ensures fib.length == 2;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci() {
+        fib = new long[2];
+        fib[0] = 0;
+        fib[1] = 1;
+    }
+
+    //@ requires 2 <= size && size <= 93;
+    //@ ensures fib.length == size;
+    //@ ensures fib[0] == 0;
+    //@ ensures fib[1] == 1;
+    public Fibonacci(int size) {
+        if (2 <= size && size <= 93) {
+            fib = new long[size];
+            fib[0] = 0;
+            fib[1] = 1;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    //@ requires 0 <= index && index < fib.length;
+    //@ ensures \result == fib[index];
+    public /*@ pure @*/ long getFib(int index) {
+        return fib[index];
+    }
+
+    //@ maintaining 2 <= index && index <= fib.length;
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+    //@ decreases fib.length - index;
+    public void fibCompute() {
+        int index = 2;
+
+        while (index < fib.length) {
+            fib[index] = fib[index - 2] + fib[index - 1];
+            index++;
+        }
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:39: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining 2 <= index && index <= fib.length;
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: The token maintaining is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: illegal start of type
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: <identifier> expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                          ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: > expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                             ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                       ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ']' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:40: error: ';' expected
+    //@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fib[i - 2] + fib[i - 1]);
+                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:41: error: The token decreases is illegal or not implemented for a type or method clause (JmlParser.classOrInterfaceBodyDeclaration)
+    //@ decreases fib.length - index;
+        ^
+12 errors
+

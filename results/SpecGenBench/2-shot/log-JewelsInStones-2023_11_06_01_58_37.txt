@@ -1,0 +1,42 @@
+class JewelsInStones {
+    //@ requires jewels != null && stones != null;
+    //@ ensures \result >= 0;
+    //@ ensures \result == (\num_of int i; 0 <= i && i < stones.length(); isJewel(jewels, stones.charAt(i)));
+    public int numJewelsInStones(String jewels, String stones) {
+        int jewelsCount = 0;
+        int jewelsLength = jewels.length(), stonesLength = stones.length();
+        //@ maintaining 0 <= i && i <= stonesLength;
+        //@ maintaining jewelsCount == (\num_of int k; 0 <= k && k < i; isJewel(jewels, stones.charAt(k)));
+        //@ decreases stonesLength - i;
+        for (int i = 0; i < stonesLength; i++) {
+            char stone = stones.charAt(i);
+            //@ maintaining 0 <= j && j <= jewelsLength;
+            //@ decreases jewelsLength - j;
+            for (int j = 0; j < jewelsLength; j++) {
+                char jewel = jewels.charAt(j);
+                if (stone == jewel) {
+                    jewelsCount++;
+                    break;
+                }
+            }
+        }
+        return jewelsCount;
+    }
+    
+    //@ ensures \result == (jewels.indexOf(c) != -1);
+    private boolean isJewel(String jewels, char c) {
+        return jewels.indexOf(c) != -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:4: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == (\num_of int i; 0 <= i && i < stones.length(); isJewel(jewels, stones.charAt(i)));
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:4: warning: A non-pure method is being called where it is not permitted: JewelsInStones.isJewel(java.lang.String,char)
+    //@ ensures \result == (\num_of int i; 0 <= i && i < stones.length(); isJewel(jewels, stones.charAt(i)));
+                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/JewelsInStones.java:9: warning: A non-pure method is being called where it is not permitted: JewelsInStones.isJewel(java.lang.String,char)
+        //@ maintaining jewelsCount == (\num_of int k; 0 <= k && k < i; isJewel(jewels, stones.charAt(k)));
+                                                                               ^
+1 error
+2 warnings
+

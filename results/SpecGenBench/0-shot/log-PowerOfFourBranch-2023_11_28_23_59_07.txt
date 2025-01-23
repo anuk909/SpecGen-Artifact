@@ -1,0 +1,41 @@
+class PowerOfFourBranch {
+    //@ requires n >= 0;
+    //@ ensures \result == true || \result == false;
+    public boolean isPowerOfFour(int n) {
+        //@ assume n >= 0;
+        if(n <= 0) {
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert n > 0;
+        
+        if((n & (n - 1)) != 0) {
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert n > 0 && (n & (n - 1)) == 0;
+        
+        if((n & 0xaaaaaaaa) != 0) {
+            //@ assert \result == false;
+            return false;
+        }
+        //@ assert n > 0 && (n & (n - 1)) == 0 && (n & 0xaaaaaaaa) == 0;
+        
+        //@ assert \result == true;
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourBranch.java:7: error: A \result expression may not be in a assert clause
+            //@ assert \result == false;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfFourBranch.java:13: error: A \result expression may not be in a assert clause
+            //@ assert \result == false;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfFourBranch.java:19: error: A \result expression may not be in a assert clause
+            //@ assert \result == false;
+                        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfFourBranch.java:24: error: A \result expression may not be in a assert clause
+        //@ assert \result == true;
+                    ^
+4 errors
+

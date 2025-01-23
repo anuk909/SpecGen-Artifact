@@ -1,0 +1,51 @@
+class TwoSum {
+    //@ requires nums != null;
+    //@ requires (\forall int i; 0 <= i && i < nums.length; nums[i] != null);
+    //@ requires target >= 0;
+    //@ ensures \result != null;
+    //@ ensures \result.length <= 2;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; 0 <= \result[i] && \result[i] < nums.length);
+    public int[] twoSum(int[] nums, int target) {
+        int n = nums.length;
+        //@ loop_invariant 0 <= i && i <= n;
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < n; nums[k] + nums[j] != target));
+        //@ decreases n - i;
+        for (int i = 0; i < n; ++i) {
+            //@ loop_invariant i + 1 <= j && j <= n;
+            //@ loop_invariant (\forall int k; 0 <= k && k < i; nums[k] + nums[j] != target);
+            //@ loop_invariant (\forall int k; i <= k && k < j; nums[i] + nums[k] != target);
+            //@ decreases n - j;
+            for (int j = i + 1; j < n; ++j) {
+                if (nums[i] + nums[j] == target) {
+                    //@ assert \result != null;
+                    //@ assert \result.length == 2;
+                    //@ assert 0 <= i && i < nums.length;
+                    //@ assert 0 <= j && j < nums.length;
+                    return new int[]{i, j};
+                }
+            }
+        }
+        //@ assert \result != null;
+        //@ assert \result.length == 0;
+        return new int[0];
+    }
+}
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:3: error: bad operand types for binary operator '!='
+    //@ requires (\forall int i; 0 <= i && i < nums.length; nums[i] != null);
+                                                                    ^
+  first type:  int
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:20: error: A \result expression may not be in a assert clause
+                    //@ assert \result != null;
+                                ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:21: error: A \result expression may not be in a assert clause
+                    //@ assert \result.length == 2;
+                                ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:28: error: A \result expression may not be in a assert clause
+        //@ assert \result != null;
+                    ^
+/home/max/Documents/JMLGPT/tmp/TwoSum.java:29: error: A \result expression may not be in a assert clause
+        //@ assert \result.length == 0;
+                    ^
+5 errors
+

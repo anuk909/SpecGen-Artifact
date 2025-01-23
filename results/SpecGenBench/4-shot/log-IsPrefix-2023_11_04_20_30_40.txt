@@ -1,0 +1,29 @@
+public class IsPrefix {
+
+    //@ requires (\forall int i; 0 <= i && i < pat.length(); (int)Character.MIN_VALUE <= (int)pat.charAt(i) && (int)pat.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ requires (\forall int i; 0 <= i && i < txt.length(); (int)Character.MIN_VALUE <= (int)txt.charAt(i) && (int)txt.charAt(i) <= (int)Character.MAX_VALUE);
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < pat.length(); (i >= txt.length() || pat.charAt(i) != txt.charAt(i)) ==> \result == false);
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < pat.length(); i < txt.length() && pat.charAt(i) == txt.charAt(i));
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+        //@ maintaining 0 <= i && i <= pat.length();
+        //@ maintaining (\forall int k; 0 <= k && k < i; k < txt.length() && pat.charAt(k) == txt.charAt(k));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        return true;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:5:) in method isPrefix
+                return false;
+                ^
+/home/max/Documents/JMLGPT/tmp/IsPrefix.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsPrefix.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < pat.length(); (i >= txt.length() || pat.charAt(i) != txt.charAt(i)) ==> \result == false);
+        ^
+2 verification failures
+

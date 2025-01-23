@@ -1,0 +1,31 @@
+public class calc {
+    //@ requires args.length >= 2;
+    //@ ensures args.length < 2 ==> System.out.println("need two arguments");
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+
+    //@ requires a != null && b != null;
+    //@ requires (\forall int i; 0 <= i && i < a.length(); Character.isDigit(a.charAt(i)));
+    //@ requires (\forall int i; 0 <= i && i < b.length(); Character.isDigit(b.charAt(i)));
+    //@ requires Integer.parseInt(a) != Integer.parseInt(b) ==> Integer.parseInt(a) == Integer.parseInt(b);
+    //@ requires Integer.parseInt(a) == Integer.parseInt(b) ==> Integer.parseInt(a) != Integer.parseInt(b);
+    public void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 33554432 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid22625.log
+

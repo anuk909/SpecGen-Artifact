@@ -1,0 +1,33 @@
+class cast1 {
+  public static void f(int i) {
+    if (i < -128 || i > 127) return;
+    byte b = (byte) i;
+    assert b == i;
+    short s = (short) i;
+    assert s == i;
+    char c = (char) i;
+    assert c == (0xffff & i);
+    long l = (long) i;
+    assert l == i;
+    float f = (float) i;
+    assert f == i;
+    double d = (double) i;
+    assert d == i;
+    f = (float) d;
+    assert (float) d == f;
+    i = (int) d;
+    assert (int) d == i;
+    l = (long) d;
+    assert i == l;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = -5; i <= 130; i += 10) {
+      f(i);
+    }
+  }
+}

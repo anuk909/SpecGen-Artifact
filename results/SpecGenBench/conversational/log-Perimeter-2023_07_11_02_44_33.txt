@@ -1,0 +1,112 @@
+public class Perimeter
+{   
+    //@ requires 0 <= x && x <= Short.MAX_VALUE;
+    //@ ensures \result == 4 * (long)x;
+    public /*@ pure @*/ long Perimeter(short x)
+    {
+        long squarePerimeter = 4 * (long)x;
+        return squarePerimeter;
+    }
+
+    //@ requires 0 <= x && x <= Integer.MAX_VALUE;
+    //@ ensures \result == 5 * (long)x;
+    public /*@ pure @*/ long Perimeter(int x)
+    {
+        long pentagonPerimeter = 5 * (long)x;
+        return pentagonPerimeter;
+    }
+
+    //@ requires 0 <= x;
+    //@ ensures \result == 6 * x;
+    public /*@ pure @*/ long Perimeter(long x)
+    {
+        long hexagonalPerimeter = 6 * x;
+        return hexagonalPerimeter;
+    }
+
+    //@ requires 0 <= x && 0 <= y;
+    //@ ensures \result == 2 * ((long)x + (long)y);
+    public /*@ pure @*/ long Perimeter(int x, int y)
+    {
+        long perimeterRectangle = 2 * ((long)x + (long)y);
+        return perimeterRectangle;
+    }
+
+    //@ requires 0 <= x && 0 <= y && 0 <= z;
+    //@ ensures \result == (long)x + (long)y + (long)z;
+    public /*@ pure @*/ long Perimeter(int x, int y, int z)
+    {
+        long trianglePerimeter = (long)x + (long)y + (long)z;
+        return trianglePerimeter;
+    }
+
+    //@ requires 0 <= w && 0 <= x && 0 <= y && 0 <= z;
+    //@ ensures \result == (long)w + (long)x + (long)y + (long)z;
+    public /*@ pure @*/ long Perimeter(int w, int x, int y, int z)
+    {
+        long trapeziumPerimeter = (long)w + (long)x + (long)y + (long)z;
+        return trapeziumPerimeter;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Perimeter.java:23: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method Perimeter: long multiply overflow
+        long hexagonalPerimeter = 6 * x;
+                                    ^
+1 verification failure
+
+public class Perimeter
+{   
+    //@ requires 0 <= x && x <= Short.MAX_VALUE;
+    //@ ensures \result == 4 * (long)x;
+    public /*@ pure @*/ long Perimeter(short x)
+    {
+        //@ assume 4 * (long)x <= Long.MAX_VALUE && Long.MIN_VALUE <= 4 * (long)x;
+        long squarePerimeter = 4 * (long)x;
+        return squarePerimeter;
+    }
+
+    //@ requires 0 <= x && x <= Integer.MAX_VALUE;
+    //@ ensures \result == 5 * (long)x;
+    public /*@ pure @*/ long Perimeter(int x)
+    {
+        //@ assume 5 * (long)x <= Long.MAX_VALUE && Long.MIN_VALUE <= 5 * (long)x;
+        long pentagonPerimeter = 5 * (long)x;
+        return pentagonPerimeter;
+    }
+
+    //@ requires 0 <= x;
+    //@ ensures \result == 6 * x;
+    public /*@ pure @*/ long Perimeter(long x)
+    {
+        //@ assume 6 * x <= Long.MAX_VALUE && Long.MIN_VALUE <= 6 * x;
+        long hexagonalPerimeter = 6 * x;
+        return hexagonalPerimeter;
+    }
+
+    //@ requires 0 <= x && 0 <= y;
+    //@ ensures \result == 2 * ((long)x + (long)y);
+    public /*@ pure @*/ long Perimeter(int x, int y)
+    {
+        //@ assume 2 * ((long)x + (long)y) <= Long.MAX_VALUE && Long.MIN_VALUE <= 2 * ((long)x + (long)y);
+        long perimeterRectangle = 2 * ((long)x + (long)y);
+        return perimeterRectangle;
+    }
+
+    //@ requires 0 <= x && 0 <= y && 0 <= z;
+    //@ ensures \result == (long)x + (long)y + (long)z;
+    public /*@ pure @*/ long Perimeter(int x, int y, int z)
+    {
+        //@ assume (long)x + (long)y + (long)z <= Long.MAX_VALUE && Long.MIN_VALUE <= (long)x + (long)y + (long)z;
+        long trianglePerimeter = (long)x + (long)y + (long)z;
+        return trianglePerimeter;
+    }
+
+    //@ requires 0 <= w && 0 <= x && 0 <= y && 0 <= z;
+    //@ ensures \result == (long)w + (long)x + (long)y + (long)z;
+    public /*@ pure @*/ long Perimeter(int w, int x, int y, int z)
+    {
+        //@ assume (long)w + (long)x + (long)y + (long)z <= Long.MAX_VALUE && Long.MIN_VALUE <= (long)w + (long)x + (long)y + (long)z;
+        long trapeziumPerimeter = (long)w + (long)x + (long)y + (long)z;
+        return trapeziumPerimeter;
+    }
+}
+

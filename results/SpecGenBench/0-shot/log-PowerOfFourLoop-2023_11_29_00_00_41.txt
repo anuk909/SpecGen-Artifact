@@ -1,0 +1,23 @@
+class PowerOfTwoLoop {
+    //@ ensures \result == (n > 0 && (\forall int i; i >= 0 && i < 32; (n == 1 << i) == false));
+    public boolean isPowerOfTwo(int n) {
+        if(n <= 0) {
+            return false;
+        }
+        //@ maintaining n > 0;
+        //@ maintaining (\exists int i; i >= 0 && i < 32; n == 1 << i) == false;
+        //@ decreasing n;
+        while (n % 4 == 0) {
+            n /= 4;
+        }
+        return n == 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:2:) in method isPowerOfTwo
+        return n == 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:2: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/PowerOfFourLoop.java:13:
+    //@ ensures \result == (n > 0 && (\forall int i; i >= 0 && i < 32; (n == 1 << i) == false));
+        ^
+2 verification failures
+

@@ -1,0 +1,41 @@
+class MyInteger {
+  /*@ spec_public */ int value;
+
+  /*@ ensures this.value == \old(value); */
+  public MyInteger(int value) {
+    this.value = value;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof MyInteger)) {
+      return false;
+    }
+    MyInteger other = (MyInteger) obj;
+    return this.value == other.value;
+  }
+  
+}
+
+class ExDarko {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+
+    MyInteger myInt1, myInt2;
+    for(int i = -3; i <= 3; i++) {
+      for(int j = -3; j <= 3; j++) {
+        myInt1 = new MyInteger(i);
+        myInt2 = new MyInteger(j);
+        myInt1.equals(myInt2);
+        myInt2.equals(myInt1);
+      }
+    }
+
+  }
+}

@@ -1,0 +1,60 @@
+class A {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class ClassCastException2 {
+  //@ ensures \result;
+  //@ ensures !\result;
+  public static boolean f() {
+    try {
+      A c = new C();
+      B b = (B) c;
+    } catch (ClassCastException exc) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/ClassCastException2.java:17: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ClassCastException2.java:9:) in method f
+    return true;
+    ^
+/home/max/Documents/JMLGPT/tmp/ClassCastException2.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ClassCastException2.java:17:
+  //@ ensures !\result;
+      ^
+2 verification failures
+
+class A {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class ClassCastException2 {
+  //@ ensures \result;
+  public static boolean f() {
+    try {
+      A c = new C();
+      B b = (B) c;
+    } catch (ClassCastException exc) {
+      return false;
+    }
+    return true;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+

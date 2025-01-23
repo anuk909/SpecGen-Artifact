@@ -1,0 +1,31 @@
+import java.util.Random;
+
+public class aastore_aaload1 {
+  static class A {
+    int value = 0;
+  }
+
+  //@ requires args != null;
+  //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+  public static void main(String[] args) {
+    int size = new Random().nextInt();
+    if (size < 0) return;
+    A[] array = new A[size];
+
+    //@ loop_invariant 0 <= i && i <= size && (\forall int j; 0 <= j && j < i; array[j] != null);
+    //@ decreases size - i;
+    for (int i = 0; i < size; i++) {
+      array[i] = new A();
+    }
+
+    //@ assert (\forall int i; 0 <= i && i < size; array[i] != null);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:9:) in method main
+    if (size < 0) return;
+                  ^
+/home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:9: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/aastore_aaload1.java:12:
+  //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+      ^
+2 verification failures
+

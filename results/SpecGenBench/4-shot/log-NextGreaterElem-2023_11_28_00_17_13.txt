@@ -1,0 +1,42 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires 0 <= nums1.length && nums1.length <= Integer.MAX_VALUE;
+    //@ requires 0 <= nums2.length && nums2.length <= Integer.MAX_VALUE;
+    //@ ensures \result != null && \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j <= k && k < nums2.length; (\forall int l; j <= l && l <= k; nums2[l] < nums2[j])) ==> (\forall int m; j <= m && m < nums2.length; \result[i] == nums2[m])));
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ assume \forall int i; 0 <= i && i < res.length; res[i] == -1;
+        //@ assume \forall int i; 0 <= i && i < m; (\exists int j; 0 <= j && j < n; nums2[j] == nums1[i]);
+        //@ assume \forall int i; 0 <= i && i < m; (\forall int j; 0 <= j && j < n; (\forall int k; j <= k && k < n; nums2[k] < nums2[j]) ==> (\forall int l; j <= l && l <= k; nums2[l] < nums1[i]));
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int y; 0 <= y && y < n; nums2[y] == nums1[x] && (\forall int z; y <= z && z < n; (\forall int w; y <= w && w <= z; nums2[w] < nums2[y])) ==> (\forall int v; y <= v && v < n; res[x] == nums2[v])));
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining j < n ==> nums2[j] != nums1[i];
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < n ==> k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:12: error: cannot find symbol
+        //@ assume \forall int i; 0 <= i && i < m; (\forall int j; 0 <= j && j < n; (\forall int k; j <= k && k < n; nums2[k] < nums2[j]) ==> (\forall int l; j <= l && l <= k; nums2[l] < nums1[i]));
+                                                                                                                                                                             ^
+  symbol:   variable k
+  location: class NextGreaterElem
+1 error
+

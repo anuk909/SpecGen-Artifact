@@ -1,0 +1,26 @@
+class CalcComplement {
+    //@ requires 0 <= num && num <= Integer.MAX_VALUE;
+    //@ ensures \result == num ^ mask;
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+        //@ decreases 30 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:3: error: cannot find symbol
+    //@ ensures \result == num ^ mask;
+                                 ^
+  symbol:   variable mask
+  location: class CalcComplement
+1 error
+

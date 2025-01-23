@@ -1,0 +1,18 @@
+class IsOneBitCharacter {
+    //@ requires bits.length >= 0 && (\forall int i; 0 <= i && i < bits.length; bits[i] == 0 || bits[i] == 1);
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; bits[i] == 1 && bits[i+1] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ decreases n - i;
+        while (i < n - 1) {
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isOneBitCharacter
+        //@ maintaining 0 <= i && i <= n - 1;
+            ^
+1 verification failure
+

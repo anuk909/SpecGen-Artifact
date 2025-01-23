@@ -1,0 +1,20 @@
+public class IsPrefix {
+
+    //@ requires pat != null && txt != null;
+    //@ ensures \result == (\forall int i; i >= 0 && i < pat.length(); i; pat.charAt(i) == txt.charAt(i));
+    public boolean isPrefix (String pat, String txt) {
+        int i = 0;
+
+        //@ loop_invariant i >= 0 && i <= pat.length();
+        //@ loop_invariant (\forall int j; j >= 0 && j < i; j; pat.charAt(j) == txt.charAt(j));
+        //@ decreases pat.length() - i;
+        while(i < pat.length()) {
+            if(i >= txt.length() || pat.charAt(i) != txt.charAt(i))
+                return false;
+            i = i + 1;
+        }
+
+        return true;
+    }
+
+}

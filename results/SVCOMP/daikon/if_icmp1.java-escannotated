@@ -1,0 +1,47 @@
+class if_icmp1 {
+  /*@ ensures (\result == false)  ==  (\old(i) >= \old(j)); */
+  /*@ ensures (\result == true)  ==  (\old(i) < \old(j)); */
+  private static boolean f(int i, int j) {
+    if (i == j) {
+      return false;
+    }
+    if (i >= j) {
+      return false;
+    }
+    if (2 > 1) {
+      if (j > i) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    if (j <= i) {
+      return false;
+    }
+    if (j < i) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /*@ ensures \result == true; */
+  public static boolean fun(int i) {
+    if (i + 1 < 0) return true;
+    return f(i, i + 1);
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = -5; i <= 5; i++) {
+      fun(i);
+      for(int j = -5; j <= 5; j++) {
+        f(i, j);
+        f(j, i);
+      }
+    }
+  }
+}

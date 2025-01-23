@@ -1,0 +1,1685 @@
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (0 <= num) ? num : -num;
+	}
+}
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (0 <= num) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:37:) in method absolute
+		return (0 <= num) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:39:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:32:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:34:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:24: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:33:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:24:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:23: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:37:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:39:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:32:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:34:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:24: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:33:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:24:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:23: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:38:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:40:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:33:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:35:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:34:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:25:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:24: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:39:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:41:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:34:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:36:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:26: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:35:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:26:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:25: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:42:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:35:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:37:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:36:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:27:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:26: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:42:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:35:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:37:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:36:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:27:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:26: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:41:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:43:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:36:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:38:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:28: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:37:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:28:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:42:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:44:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:37:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:39:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:29: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:38:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:29:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:28: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:42:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:44:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:37:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:39:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:29: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:38:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:29:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:28: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:45: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:45: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:43:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:45:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:38:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:40:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:30: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:39:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:30:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:37: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:29: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:44:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:46:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:39:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:41:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:31:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:30: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:44:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:46:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:39:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:41:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:31:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:30: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:47: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:47: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:45:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:45: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:47:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:42:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:41:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:32:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:48: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:46:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:48:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:41:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:43:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:42:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:33:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:44:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:46:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:39:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:41:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:31: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:31:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:38: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:27: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:12:) in method gcd
+			return (num1 > num2) ? num1 : num2;
+			^
+/home/max/Documents/JMLGPT/tmp/GCD.java:12: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:27:
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+            ^
+10 verification failures
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:47: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:47: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:45:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:45: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:47:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:40:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:42:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:41:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:32:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:39: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:28: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:13:) in method gcd
+			return (num1 > num2) ? num1 : num2;
+			^
+/home/max/Documents/JMLGPT/tmp/GCD.java:13: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:28:
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+            ^
+10 verification failures
+
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:48: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:48: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:46:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:48:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:41:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:43:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:42:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:33:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:40: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:32: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:49: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:49: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:47:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:47: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:49:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:42:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:44:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:43:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:34:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:41: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:33: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:50: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:50: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:48:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:48: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:50:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:45: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:43:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:45:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:44:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:35:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:42: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:34: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class GCD {
+	
+        //@ requires num1 != Integer.MIN_VALUE && num2 != Integer.MIN_VALUE;
+        //@ ensures \result == -1 <==> (num1 == 0 && num2 == 0);
+        //@ ensures \result == num1 <==> (num1 != 0 && num2 == 0);
+        //@ ensures \result == num2 <==> (num1 == 0 && num2 != 0);
+        //@ ensures \result > 0 ==> (num1 % \result == 0 && num2 % \result == 0);
+        //@ ensures \result > 0 ==> (\forall int i; i > 0 && i < \result; (num1 % i != 0 || num2 % i != 0));
+        public int gcd(int num1, int num2) throws IllegalArgumentException {
+		int result = 1; 
+	 	num1 = absolute(num1);
+		num2 = absolute(num2);
+
+		if (num1 == 0 && num2 == 0) {
+			return -1;	
+		}
+
+		if (num1 == 0 || num2 == 0) { 
+			return (num1 > num2) ? num1 : num2;
+		}
+
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+               			result = i;
+			}
+        }
+		return result;
+	} 
+
+        //@ requires d > 0;
+        //@ ensures \result >= 0 && \result < d;
+	public static int div(int n, int d) { 
+		return n%d; 
+	}
+
+        //@ ensures \result >= 0;
+	public int absolute(int num) {
+		return (num >= 0) ? num : -num;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/home/max/Documents/JMLGPT/tmp/GCD.java:51: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method absolute: int negation
+		return (num >= 0) ? num : -num;
+		                          ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:51: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:49:) in method absolute
+		return (num >= 0) ? num : -num;
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:49: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:51:
+        //@ ensures \result >= 0;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:46: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/GCD.java:44:) in method div
+		return n%d; 
+		^
+/home/max/Documents/JMLGPT/tmp/GCD.java:44: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:46:
+        //@ ensures \result >= 0 && \result < d;
+            ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:36: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/GCD.java:45:) in method gcd
+            		if (div(num1,i) == 0 && div(num2,i) == 0) {
+            		       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:45: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/GCD.java:36:
+	public static int div(int n, int d) { 
+	                  ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:43: verify: Precondition conjunct is false: d > 0
+        //@ requires d > 0;
+                       ^
+/home/max/Documents/JMLGPT/tmp/GCD.java:35: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method gcd: overflow in int sum
+		for (int i = 1; i <= num1 && i <= num2; i++) {
+		                                         ^
+9 verification failures
+

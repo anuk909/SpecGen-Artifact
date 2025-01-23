@@ -1,0 +1,360 @@
+class if_icmp1 {
+    //@ ensures \result == -1 <==> i + 1 < 0;
+    //@ ensures \result == false <==> i == i + 1 || i >= i + 1 || i <= i + 1;
+    //@ ensures \result == true <==> i < i + 1;
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        } else {
+            return false;
+        }
+        if (j <= i) {
+            return false;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == f(i, i + 1);
+    public static int fun(int i) {
+        if (i + 1 < 0) return -1;
+        return f(i, i + 1);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:2: error: incomparable types: boolean and int
+    //@ ensures \result == -1 <==> i + 1 < 0;
+                        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:29: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == f(i, i + 1);
+                           ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:29: error: incomparable types: int and boolean
+    //@ ensures \result == f(i, i + 1);
+                        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:32: error: incompatible types: boolean cannot be converted to int
+        return f(i, i + 1);
+                ^
+4 errors
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        } else {
+            return false;
+        }
+        if (j <= i) {
+            return false;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        if (i + 1 < 0) return -1;
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:15: error: unreachable statement
+        if (j <= i) {
+        ^
+1 error
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        if (i + 1 < 0) return -1;
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:22:) in method fun
+        if (i + 1 < 0) return -1;
+                       ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:21:) in method fun
+        return f(i, i + 1) ? 1 : 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == -1;
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        if (i + 1 < 0) return -1;
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:22:) in method fun
+        if (i + 1 < 0) return -1;
+                       ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:21:) in method fun
+        return f(i, i + 1) ? 1 : 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == -1;
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        if (i + 1 < 0) return -1;
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:22:) in method fun
+        if (i + 1 < 0) return -1;
+                       ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:22: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:21:) in method fun
+        return f(i, i + 1) ? 1 : 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == -1;
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:21:) in method fun
+        return f(i, i + 1) ? 1 : 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == -1;
+        ^
+2 verification failures
+
+class if_icmp1 {
+    //@ spec_public
+    private static boolean f(int i, int j) {
+        if (i == j) {
+            return false;
+        }
+        if (i >= j) {
+            return false;
+        }
+        if (j > i) {
+            return true;
+        }
+        if (j < i) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //@ requires i + 1 < 0;
+    //@ ensures \result == -1;
+    //@ ensures \result == (f(i, i + 1) ? 1 : 0);
+    public static int fun(int i) {
+        return f(i, i + 1) ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:21:) in method fun
+        return f(i, i + 1) ? 1 : 0;
+        ^
+/home/max/Documents/JMLGPT/tmp/if_icmp1.java:21: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/if_icmp1.java:24:
+    //@ ensures \result == -1;
+        ^
+2 verification failures
+

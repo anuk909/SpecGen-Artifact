@@ -1,0 +1,134 @@
+public class Calculator {
+    /*@ public normal_behavior
+      @    requires (int)Character.MIN_VALUE <= (int)operator && (int)operator <= (int)Character.MAX_VALUE;
+      @    ensures \result == num1 + num2; @*/
+    public  int add(int num1, int num2, char operator) {
+        return num1 + num2;
+    }
+    /*@ public normal_behavior
+      @    requires (int)Character.MIN_VALUE <= (int)operator && (int)operator <= (int)Character.MAX_VALUE;
+      @    ensures \result == num1 - num2; @*/
+    public  int subtract(int num1, int num2, char operator) {
+        return num1 - num2;
+    }
+    /*@ public normal_behavior
+      @    requires (int)Character.MIN_VALUE <= (int)operator && (int)operator <= (int)Character.MAX_VALUE;
+      @    ensures \result == num1 * num2; @*/
+    public  int multiply(int num1, int num2, char operator) {
+        return num1 * num2;
+    }
+    /*@ public normal_behavior
+      @    requires (int)Character.MIN_VALUE <= (int)operator && (int)operator <= (int)Character.MAX_VALUE;
+      @    requires num2 != 0;
+      @    ensures \result == num1 / num2; @*/
+    public  int divide(int num1, int num2, char operator) {
+        return num1 / num2;
+    }
+    /*@ public normal_behavior
+      @    requires (int)Character.MIN_VALUE <= (int)operator && (int)operator <= (int)Character.MAX_VALUE;
+      @    requires num2 != 0;
+      @    ensures \result == num1 % num2; @*/
+    public  int modulo(int num1, int num2, char operator) {
+        return num1 % num2;
+    }
+    /*@ public normal_behavior
+      @    requires (int)Character.MIN_VALUE <= (int)operator && (int)operator <= (int)Character.MAX_VALUE;
+      @    ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator) || \result == -1; @*/
+    public  int calculate(int num1, int num2, char operator) {
+
+        int output;
+
+        switch (operator)
+        {
+            case '+':
+            	output = add(num1, num2, operator);
+                break;
+
+            case '-':
+            	output = subtract(num1, num2, operator);
+                break;
+
+            case '*':
+            	output = multiply(num1, num2, operator);
+                break;
+
+            case '/':
+            	output = divide(num1, num2, operator);
+		break;
+
+	    case '%':
+		output = modulo(num1, num2, operator);
+                break;
+
+            default:
+                return -1;
+        }
+        return output;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Calculator.java:36: warning: A non-pure method is being called where it is not permitted: Calculator.add(int,int,char)
+      @    ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator) || \result == -1; @*/
+                                 ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:36: warning: A non-pure method is being called where it is not permitted: Calculator.subtract(int,int,char)
+      @    ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator) || \result == -1; @*/
+                                                                              ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:36: warning: A non-pure method is being called where it is not permitted: Calculator.multiply(int,int,char)
+      @    ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator) || \result == -1; @*/
+                                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:36: warning: A non-pure method is being called where it is not permitted: Calculator.divide(int,int,char)
+      @    ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator) || \result == -1; @*/
+                                                                                                                                                                      ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:36: warning: A non-pure method is being called where it is not permitted: Calculator.modulo(int,int,char)
+      @    ensures \result == add(num1, num2, operator) || \result == subtract(num1, num2, operator) || \result == multiply(num1, num2, operator) || \result == divide(num1, num2, operator) || \result == modulo(num1, num2, operator) || \result == -1; @*/
+                                                                                                                                                                                                                 ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:6: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method add: underflow in int sum
+        return num1 + num2;
+                    ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:6: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method add: overflow in int sum
+        return num1 + num2;
+                    ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:56: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/Calculator.java:24:) in method calculate
+            	output = divide(num1, num2, operator);
+            	               ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:24: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Calculator.java:56:
+    public  int divide(int num1, int num2, char operator) {
+                ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:22: verify: Precondition conjunct is false: num2 != 0
+      @    requires num2 != 0;
+                         ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:60: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/Calculator.java:31:) in method calculate
+		output = modulo(num1, num2, operator);
+		               ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:31: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Calculator.java:60:
+    public  int modulo(int num1, int num2, char operator) {
+                ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:29: verify: Precondition conjunct is false: num2 != 0
+      @    requires num2 != 0;
+                         ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:25: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method divide: overflow in int divide
+        return num1 / num2;
+                    ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Calculator.java:23:) in method divide
+        return num1 / num2;
+        ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Calculator.java:25:
+      @    ensures \result == num1 / num2; @*/
+           ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:18: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method multiply: int multiply overflow
+        return num1 * num2;
+                    ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:18: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Calculator.java:16:) in method multiply
+        return num1 * num2;
+        ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:16: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Calculator.java:18:
+      @    ensures \result == num1 * num2; @*/
+           ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method subtract: underflow in int difference
+        return num1 - num2;
+                    ^
+/home/max/Documents/JMLGPT/tmp/Calculator.java:12: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method subtract: overflow in int difference
+        return num1 - num2;
+                    ^
+5 warnings
+16 verification failures
+

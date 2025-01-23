@@ -1,0 +1,1210 @@
+public class MinePump {
+
+  boolean pumpRunning = false;
+
+  boolean systemActive = true;
+
+  Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:7: error: cannot find symbol
+  Environment env;
+  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+              ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                   ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+              ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                    ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                                           ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:24: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+              ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:24: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+                                    ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:25: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+                                                    ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:34: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures pumpRunning;
+              ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:39: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning;
+               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:44: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == env.isMethaneLevelCritical();
+                         ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:49: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+                                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:49: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+                                                                                          ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:49: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+                                                                                                                               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:60: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == env;
+                         ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:65: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning;
+               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:66: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !systemActive;
+               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:75: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures !pumpRunning;
+               ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:76: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures systemActive;
+              ^
+/home/max/Documents/JMLGPT/tmp/MinePump.java:82: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == systemActive;
+                         ^
+25 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:7: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+3 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:7: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+3 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Object env;
+
+  //@ requires env != null;
+  public MinePump(Object env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+  //@ ensures systemActive ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) ((Environment)env).lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == ((Environment)env).isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return ((Environment)env).isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + ((Environment)env).toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + ((Environment)env).toString();
+  }
+
+  //@ ensures \result == env;
+  public Object getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                     ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                                                           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: cannot find symbol
+  //@ ensures systemActive ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                      ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: cannot find symbol
+  //@ ensures systemActive ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                                                            ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+    if (pumpRunning) ((Environment)env).lowerWaterLevel();
+                       ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:44: error: cannot find symbol
+  //@ ensures \result == ((Environment)env).isMethaneLevelCritical();
+                           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:46: error: cannot find symbol
+    return ((Environment)env).isMethaneLevelCritical();
+             ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:49: error: cannot find symbol
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + ((Environment)env).toString());
+                                                                                                                                 ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:57: error: cannot find symbol
+        + ((Environment)env).toString();
+            ^
+  symbol:   class Environment
+  location: class MinePump
+9 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Object env;
+
+  //@ requires env != null;
+  public MinePump(Object env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+  //@ ensures systemActive ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) ((Environment)env).lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == ((Environment)env).isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return ((Environment)env).isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + ((Environment)env).toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + ((Environment)env).toString();
+  }
+
+  //@ ensures \result == env;
+  public Object getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                     ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                                                           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: cannot find symbol
+  //@ ensures systemActive ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                      ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: cannot find symbol
+  //@ ensures systemActive ==> \old(((Environment)env).getWaterLevel()) > ((Environment)env).getWaterLevel();
+                                                                            ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+    if (pumpRunning) ((Environment)env).lowerWaterLevel();
+                       ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:44: error: cannot find symbol
+  //@ ensures \result == ((Environment)env).isMethaneLevelCritical();
+                           ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:46: error: cannot find symbol
+    return ((Environment)env).isMethaneLevelCritical();
+             ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:49: error: cannot find symbol
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + ((Environment)env).toString());
+                                                                                                                                 ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:57: error: cannot find symbol
+        + ((Environment)env).toString();
+            ^
+  symbol:   class Environment
+  location: class MinePump
+9 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Object env;
+
+  //@ requires env != null;
+  public MinePump(Object env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(((Object)env).getWaterLevel()) > ((Object)env).getWaterLevel();
+  //@ ensures systemActive ==> \old(((Object)env).getWaterLevel()) > ((Object)env).getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) ((Object)env).lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == ((Object)env).isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return ((Object)env).isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + ((Object)env).toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + ((Object)env).toString();
+  }
+
+  //@ ensures \result == env;
+  public Object getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(((Object)env).getWaterLevel()) > ((Object)env).getWaterLevel();
+                                                ^
+  symbol:   method getWaterLevel()
+  location: class Object
+/home/max/Documents/JMLGPT/tmp/MinePump.java:15: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(((Object)env).getWaterLevel()) > ((Object)env).getWaterLevel();
+                                                                                 ^
+  symbol:   method getWaterLevel()
+  location: class Object
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: cannot find symbol
+  //@ ensures systemActive ==> \old(((Object)env).getWaterLevel()) > ((Object)env).getWaterLevel();
+                                                 ^
+  symbol:   method getWaterLevel()
+  location: class Object
+/home/max/Documents/JMLGPT/tmp/MinePump.java:16: error: cannot find symbol
+  //@ ensures systemActive ==> \old(((Object)env).getWaterLevel()) > ((Object)env).getWaterLevel();
+                                                                                  ^
+  symbol:   method getWaterLevel()
+  location: class Object
+/home/max/Documents/JMLGPT/tmp/MinePump.java:18: error: cannot find symbol
+    if (pumpRunning) ((Object)env).lowerWaterLevel();
+                                  ^
+  symbol:   method lowerWaterLevel()
+  location: class Object
+/home/max/Documents/JMLGPT/tmp/MinePump.java:44: error: cannot find symbol
+  //@ ensures \result == ((Object)env).isMethaneLevelCritical();
+                                      ^
+  symbol:   method isMethaneLevelCritical()
+  location: class Object
+/home/max/Documents/JMLGPT/tmp/MinePump.java:46: error: cannot find symbol
+    return ((Object)env).isMethaneLevelCritical();
+                        ^
+  symbol:   method isMethaneLevelCritical()
+  location: class Object
+7 errors
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:7: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:10: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:61: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+3 errors
+
+// Assuming Environment class exists with necessary methods
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:9: error: cannot find symbol
+  private /*@ spec_public @*/ Environment env;
+                              ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:12: error: cannot find symbol
+  public MinePump(Environment env) {
+                  ^
+  symbol:   class Environment
+  location: class MinePump
+/home/max/Documents/JMLGPT/tmp/MinePump.java:63: error: cannot find symbol
+  public Environment getEnv() {
+         ^
+  symbol:   class Environment
+  location: class MinePump
+3 errors
+
+// Placeholder for Environment class
+class Environment {
+    // Define necessary methods here
+}
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/MinePump.java:20: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                      ^
+  symbol:   method getWaterLevel()
+  location: variable env of type Environment
+/home/max/Documents/JMLGPT/tmp/MinePump.java:20: error: cannot find symbol
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                                             ^
+  symbol:   method getWaterLevel()
+  location: variable env of type Environment
+/home/max/Documents/JMLGPT/tmp/MinePump.java:21: error: cannot find symbol
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                       ^
+  symbol:   method getWaterLevel()
+  location: variable env of type Environment
+/home/max/Documents/JMLGPT/tmp/MinePump.java:21: error: cannot find symbol
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+                                                              ^
+  symbol:   method getWaterLevel()
+  location: variable env of type Environment
+/home/max/Documents/JMLGPT/tmp/MinePump.java:23: error: cannot find symbol
+    if (pumpRunning) env.lowerWaterLevel();
+                        ^
+  symbol:   method lowerWaterLevel()
+  location: variable env of type Environment
+/home/max/Documents/JMLGPT/tmp/MinePump.java:49: error: cannot find symbol
+  //@ ensures \result == env.isMethaneLevelCritical();
+                            ^
+  symbol:   method isMethaneLevelCritical()
+  location: variable env of type Environment
+/home/max/Documents/JMLGPT/tmp/MinePump.java:51: error: cannot find symbol
+    return env.isMethaneLevelCritical();
+              ^
+  symbol:   method isMethaneLevelCritical()
+  location: variable env of type Environment
+7 errors
+
+// Placeholder for Environment class
+class Environment {
+    // Define necessary methods here
+    public int getWaterLevel() {
+        // Implementation here
+        return 0;
+    }
+
+    public void lowerWaterLevel() {
+        // Implementation here
+    }
+
+    public boolean isMethaneLevelCritical() {
+        // Implementation here
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        // Implementation here
+        return "";
+    }
+}
+
+public class MinePump {
+
+  private /*@ spec_public @*/ boolean pumpRunning = false;
+
+  private /*@ spec_public @*/ boolean systemActive = true;
+
+  private /*@ spec_public @*/ Environment env;
+
+  //@ requires env != null;
+  public MinePump(Environment env) {
+    super();
+    this.env = env;
+  }
+
+  //@ ensures pumpRunning ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  //@ ensures systemActive ==> \old(env.getWaterLevel()) > env.getWaterLevel();
+  public void timeShift() {
+    if (pumpRunning) env.lowerWaterLevel();
+    if (systemActive) processEnvironment();
+  }
+
+  private void processEnvironment__wrappee__base() {}
+
+  //@ ensures pumpRunning ==> isMethaneAlarm() ==> !pumpRunning;
+  //@ ensures !isMethaneAlarm() ==> pumpRunning ==> pumpRunning;
+  public void processEnvironment() {
+    if (pumpRunning && isMethaneAlarm()) {
+      deactivatePump();
+    } else {
+      processEnvironment__wrappee__base();
+    }
+  }
+
+  //@ ensures pumpRunning;
+  public void activatePump() {
+    pumpRunning = true;
+  }
+
+  //@ ensures !pumpRunning;
+  public void deactivatePump() {
+    pumpRunning = false;
+  }
+
+  //@ ensures \result == env.isMethaneLevelCritical();
+  public boolean isMethaneAlarm() {
+    return env.isMethaneLevelCritical();
+  }
+
+  //@ ensures \result.equals("Pump(System:" + (systemActive ? "On" : "Off") + ",Pump:" + (pumpRunning ? "On" : "Off") + ") " + env.toString());
+  @Override
+  public String toString() {
+    return "Pump(System:"
+        + (systemActive ? "On" : "Off")
+        + ",Pump:"
+        + (pumpRunning ? "On" : "Off")
+        + ") "
+        + env.toString();
+  }
+
+  //@ ensures \result == env;
+  public Environment getEnv() {
+    return env;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures !systemActive;
+  public void stopSystem() {
+    if (pumpRunning) {
+      deactivatePump();
+    }
+    assert !pumpRunning;
+    systemActive = false;
+  }
+
+  //@ ensures !pumpRunning;
+  //@ ensures systemActive;
+  public void startSystem() {
+    assert !pumpRunning;
+    systemActive = true;
+  }
+
+  //@ ensures \result == systemActive;
+  public boolean isSystemActive() {
+    return systemActive;
+  }
+}

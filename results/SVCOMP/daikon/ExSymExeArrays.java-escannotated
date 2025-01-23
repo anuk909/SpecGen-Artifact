@@ -1,0 +1,48 @@
+class Main {
+  /*@ invariant a.owner == this; */
+  /*@ spec_public */ static int[] a;
+
+  /*@ modifies Main.a, Main.a[*]; */
+  /*@ ensures (\forall int i; (0 <= i && i <= Main.a.length-1) ==> (Main.a[i] == -3)); */
+  /*@ ensures \result == true; */
+  public static boolean f() {
+    a = new int[1];
+    /*@ set a.owner = this; */
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  /*@ requires Main.a != null; */
+  /*@ requires (\forall int i; (0 <= i && i <= Main.a.length-1) ==> (Main.a[i] == -3 || Main.a[i] == 0)); */
+  /*@ modifies Main.a[*]; */
+  /*@ ensures (\result == false)  ==>  ((\forall int i; (0 <= i && i <= \old(Main.a.length-1)) ==> (\old(Main.a[i]) == -3))); */
+  /*@ ensures (\result == false)  ==>  (\old(this) != null); */
+  /*@ ensures (\result == true)  ==>  ((\forall int i; (0 <= i && i <= \old(Main.a.length-1)) ==> (\old(Main.a[i]) == -3 || \old(Main.a[i]) == 0))); */
+  /*@ ensures Main.a != null; */
+  /*@ ensures (\forall int i; (0 <= i && i <= Main.a.length-1) ==> (Main.a[i] == \old(x))); */
+  /*@ ensures !(\forall int i; (0 <= i && i <= Main.a.length-1) ==> (Main.a[i] != \old(x))); */
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else System.out.println("branch2 <0");
+    return true;
+  }
+}
+
+class ExSymExeArrays {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int i = -5; i <= 5; i++) {
+        Main.f();
+        e.test(i);
+    }
+  }
+}

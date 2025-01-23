@@ -1,0 +1,388 @@
+class Main {
+
+  //@ ensures \result == test(a, b, a);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: cannot find symbol
+  //@ ensures \result == test(a, b, a);
+                              ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: cannot find symbol
+  //@ ensures \result == test(a, b, a);
+                                 ^
+  symbol:   variable b
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: cannot find symbol
+  //@ ensures \result == test(a, b, a);
+                                    ^
+  symbol:   variable a
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                                                                   ^
+5 errors
+
+class Main {
+
+  //@ ensures \result == test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result == test(3, 8, 3);
+                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                                                                   ^
+3 errors
+
+class Main {
+
+  //@ ensures \result == inst.test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: cannot find symbol
+  //@ ensures \result == inst.test(3, 8, 3);
+                         ^
+  symbol:   variable inst
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                                                                   ^
+3 errors
+
+class Main {
+
+  //@ ensures \result == test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result == test(3, 8, 3);
+                         ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                 ^
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:16: error: incompatible types: void cannot be converted to boolean
+  //@ ensures \result <==> x < y && (z > 0 ==> System.out.println("branch BOO1")) && (z <= 0 ==> System.out.println("branch BOO2"));
+                                                                                                                   ^
+3 errors
+
+class Main {
+
+  //@ ensures \result == test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> true) && (z <= 0 ==> true);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result == test(3, 8, 3);
+                         ^
+1 error
+
+class Main {
+
+  //@ ensures \result == inst.test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> true) && (z <= 0 ==> true);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: cannot find symbol
+  //@ ensures \result == inst.test(3, 8, 3);
+                         ^
+  symbol:   variable inst
+  location: class Main
+1 error
+
+class Main {
+
+  //@ ensures \result == test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> true) && (z <= 0 ==> true);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result == test(3, 8, 3);
+                         ^
+1 error
+
+class Main {
+
+  //@ ensures \result == new Main().test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    int b = 8;
+    return new Main().test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> true) && (z <= 0 ==> true);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == new Main().test(3, 8, 3);
+                         ^
+1 error
+
+class Main {
+
+  //@ ensures \result == test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    int b = 8;
+    Main inst = new Main();
+    return inst.test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> true) && (z <= 0 ==> true);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result == test(3, 8, 3);
+                         ^
+1 error
+
+class Main {
+
+  //@ ensures \result == new Main().test(3, 8, 3);
+  public static boolean f() {
+    int a = 3;
+    int b = 8;
+    return new Main().test(a, b, a);
+  }
+
+  /*
+   * test concrete = symbolic
+   * (con#sym#sym)
+   */
+  //@ requires x == z && y == z + x;
+  //@ ensures \result <==> x < y && (z > 0 ==> true) && (z <= 0 ==> true);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe27");
+    x = z;
+    y = z + x;
+    if (x < y) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (z > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe27.java:3: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result == new Main().test(3, 8, 3);
+                         ^
+1 error
+

@@ -1,0 +1,28 @@
+public class IntSquare {
+
+    //@ requires x >= 0;
+    //@ ensures \result == x * x;
+    public static int squareOf(int x) {
+        if(x < 0)
+            x = -x;
+        int res = 0;
+        //@ maintaining 0 <= i && i <= x;
+        //@ maintaining res == i * i;
+        //@ decreases x - i;
+        for(int i = 0; i < x; i++) {
+            //@ maintaining 0 <= j && j <= x;
+            //@ maintaining res == i * i + j;
+            //@ decreases x - j;
+            for(int j = 0; j < x; j++) {
+                res = res + 1;
+            }
+        }
+        return res;
+    }
+
+}
+/home/max/Documents/JMLGPT/tmp/IntSquare.java:10: verify: The prover cannot establish an assertion (LoopInvariant) in method squareOf
+        //@ maintaining res == i * i;
+            ^
+1 verification failure
+

@@ -1,0 +1,595 @@
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    if (m < 0) {
+      return mult(n, -m);
+    }
+    if (m == 0) {
+      return 0;
+    }
+    if (m == 1) {
+      return 1;
+    }
+    return n + mult(n, m - 1);
+  }
+
+  // Is n a multiple of m?
+  //@ requires m >= 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    if (m < 0) {
+      return multiple_of(n, -m);
+    }
+    if (n < 0) {
+      return multiple_of(-n, m); // false
+    }
+    if (m == 0) {
+      return 0; // false
+    }
+    if (n == 0) {
+      return 1; // true
+    }
+    return multiple_of(n - m, m);
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (multiple_of(n, m) == 0) {
+          return 0; // false
+        }
+        return is_prime_(n, m - 1);
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/Primes.java:43: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:41:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:41: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:43:
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));
+      ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:5:) in method mult
+      return 1;
+      ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:5: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:14:
+  //@ ensures \result == n * m;
+      ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:22: verify: The prover cannot establish an assertion (UndefinedDivideByZero) in method multiple_of
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+                            ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:31: verify: Associated method exit
+      return 0; // false
+      ^
+6 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m >= 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m >= 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (multiple_of(n, m) == 0) {
+          return 0; // false
+        }
+        return is_prime_(n, m - 1);
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));
+      ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:18: verify: The prover cannot establish an assertion (PossiblyDivideByZero) in method multiple_of
+    return n % m == 0 ? 1 : 0;
+             ^
+3 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n < 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));  
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n < 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));  
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));  
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));  
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n - 1 <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));  
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n - 1 <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n - 1)));  
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n < 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n + 1)));  
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n < 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n + 1)));  
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n + 1)));  
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n + 1)));  
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+  //@ ensures \result == (n - 1 <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n + 1)));  
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/Primes.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Primes.java:23:) in method is_prime
+    return is_prime_(n, n - 1);
+    ^
+/home/max/Documents/JMLGPT/tmp/Primes.java:23: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Primes.java:25:
+  //@ ensures \result == (n - 1 <= 1 ? 0 : (n == 2 ? 1 : is_prime_(n, n + 1)));  
+      ^
+2 verification failures
+
+public class Primes {
+
+  // Multiplies two integers n and m
+  //@ requires m >= 0;
+  //@ ensures \result == n * m;
+  static int mult(int n, int m) {
+    //@ assume m >= 0;
+    return n * m;
+  }
+
+  // Is n a multiple of m?
+  //@ requires m > 0;
+  //@ requires n >= 0;
+  //@ ensures \result == (n % m == 0 ? 1 : 0);
+  static int multiple_of(int n, int m) {
+    //@ assume m > 0;
+    //@ assume n >= 0;
+    return n % m == 0 ? 1 : 0;
+  }
+
+  // Is n prime?
+  //@ requires n >= 0;
+ 
+  static int is_prime(int n) {
+    return is_prime_(n, n - 1);
+  }
+
+  static int is_prime_(int n, int m) {
+    if (n <= 1) {
+      return 0; // false
+    } else if (n == 2) {
+      return 1; // true
+    } else {
+      if (m <= 1) {
+        return 1; // true
+      } else {
+        if (m == 1) {
+          return 1; // true
+        } else {
+          if (multiple_of(n, m) == 1) {
+            return 0; // false
+          }
+          return is_prime_(n, m - 1);
+        }
+      }
+    }
+  }
+  
+}
+
+

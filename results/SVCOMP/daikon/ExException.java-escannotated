@@ -1,0 +1,24 @@
+class Main {
+  /*@ ensures \result == 0; */
+  int zero() {
+    return 0;
+  }
+
+  /*@ ensures \result == 0; */
+  static int test(int secret) {
+    Main o = null;
+    if (secret > 0) {
+      o = new Main();
+    } else assert false;
+    int i = o.zero();
+    return i;
+  }
+}
+
+class ExException {
+  /*@ modifies args[*], args[].toString; */
+  public static void main(String[] args) {
+    for(int i = 5; i >= -5; i--)
+      Main.test(i);
+  }
+}

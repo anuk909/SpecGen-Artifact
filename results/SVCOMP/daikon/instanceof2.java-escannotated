@@ -1,0 +1,22 @@
+/*
+ * Origin of the benchmark:
+ *     license: 4-clause BSD (see /java/jbmc-regression/LICENSE)
+ *     repo: https://github.com/diffblue/cbmc.git
+ *     branch: develop
+ *     directory: regression/cbmc-java/instanceof2
+ * The benchmark was taken from the repo: 24 January 2018
+ */
+class instanceof2 {
+  /*@ ensures \result == true; */
+  public static boolean f() {
+    return int.class instanceof Object;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    f();
+  }
+}

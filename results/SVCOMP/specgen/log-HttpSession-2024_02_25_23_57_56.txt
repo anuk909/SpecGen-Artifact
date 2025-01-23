@@ -1,0 +1,107 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final Map<String, Object> map = new HashMap<>();
+
+  //@ requires name != null;
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result != null ==> \result.hasMoreElements();
+  //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.contains(key));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ requires name != null;
+  //@ requires value != null;
+  //@ ensures map.get(name) == value;
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result == map.get(name);
+                         ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:17: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.contains(key));
+                                                       ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:17: error: cannot find symbol
+  //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.contains(key));
+                                                                                          ^
+  symbol:   method contains(String)
+  location: interface Enumeration<String>
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:24: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+  //@ ensures map.get(name) == value;
+              ^
+4 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final /*@ spec_public @*/ Map<String, Object> map = new HashMap<>();
+
+  //@ requires name != null;
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result != null ==> \result.hasMoreElements();
+  //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.contains(key));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ requires name != null;
+  //@ requires value != null;
+  //@ ensures map.get(name) == value;
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:17: error: cannot find symbol
+  //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.contains(key));
+                                                                                          ^
+  symbol:   method contains(String)
+  location: interface Enumeration<String>
+1 error
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+  private final /*@ spec_public @*/ Map<String, Object> map = new HashMap<>();
+
+  //@ requires name != null;
+  //@ ensures \result == map.get(name);
+  public Object getAttribute(String name) {
+    return map.get(name);
+  }
+
+  //@ ensures \result != null ==> \result.hasMoreElements();
+  //@ ensures \result != null ==> (\forall String key; map.keySet().contains(key); \result.nextElement().equals(key));
+  public Enumeration<String> getAttributeNames() {
+    return Collections.enumeration(map.keySet());
+  }
+
+  //@ requires name != null;
+  //@ requires value != null;
+  //@ ensures map.get(name) == value;
+  public void setAttribute(String name, Object value) {
+    this.map.put(name, value);
+  }
+}

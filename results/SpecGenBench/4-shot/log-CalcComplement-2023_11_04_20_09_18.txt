@@ -1,0 +1,48 @@
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0 && \result <= num;
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining highbit == \max{int j; 1 <= j && j < i; num >= 1 << j ? j : 0};
+        //@ decreases 30 - i;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:7: error: '}' expected
+        //@ maintaining highbit == \max{int j; 1 <= j && j < i; num >= 1 << j ? j : 0};
+                                           ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:9: error: illegal start of type
+        for (int i = 1; i <= 30; ++i) {
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:9: error: Incorrectly formed or terminated loop_invariant statement near here
+        for (int i = 1; i <= 30; ++i) {
+                                      ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:12: error: illegal start of statement
+            } else {
+            ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:6: error: Loop specifications must immediately precede a loop statement
+        //@ maintaining 1 <= i && i <= 30;
+            ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:12: error: illegal start of type
+            } else {
+              ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:16: error: class, interface, enum, or record expected
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:17: error: class, interface, enum, or record expected
+        return num ^ mask;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:18: error: class, interface, enum, or record expected
+    }
+    ^
+9 errors
+

@@ -1,0 +1,45 @@
+public class ReLU {
+    //@ ensures \result >= 0 && \result == x ==> x >= 0;
+    //@ ensures \result == 0.0 ==> x < 0;
+    public static double computeReLU(double x) {
+        if(x >= 0) {
+            return x;
+        }
+        return 0.0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReLU.java:6: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ReLU.java:3:) in method computeReLU
+            return x;
+            ^
+/home/max/Documents/JMLGPT/tmp/ReLU.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ReLU.java:6:
+    //@ ensures \result == 0.0 ==> x < 0;
+        ^
+2 verification failures
+
+public class ReLU {
+    //@ ensures \result >= 0 && (\result == x ==> x >= 0) && (\result == 0.0 ==> x < 0);
+    public static double computeReLU(double x) {
+        if(x >= 0) {
+            return x;
+        }
+        return 0.0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ReLU.java:5: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/ReLU.java:2:) in method computeReLU
+            return x;
+            ^
+/home/max/Documents/JMLGPT/tmp/ReLU.java:2: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ReLU.java:5:
+    //@ ensures \result >= 0 && (\result == x ==> x >= 0) && (\result == 0.0 ==> x < 0);
+        ^
+2 verification failures
+
+public class ReLU {
+    //@ ensures \result >= 0 && (x >= 0 ==> \result == x) && (x < 0 ==> \result == 0.0);
+    public static double computeReLU(double x) {
+        if(x >= 0) {
+            return x;
+        }
+        return 0.0;
+    }
+}
+

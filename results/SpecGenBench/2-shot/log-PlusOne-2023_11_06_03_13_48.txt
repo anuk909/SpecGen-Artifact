@@ -1,0 +1,24 @@
+class PlusOne {
+    //@ requires digits != null;
+    //@ ensures \result != null;
+    //@ ensures \result.length == digits.length;
+    //@ ensures (\forall int i; 0 <= i && i < digits.length; \result[i] >= 0 && \result[i] <= 9);
+    //@ ensures (\forall int i; 0 <= i && i < digits.length - 1; \result[i] == digits[i]);
+    //@ ensures \result[digits.length - 1] == (digits[digits.length - 1] + 1) % 10;
+    //@ ensures (\exists int i; 0 <= i && i < digits.length; \result[i] != digits[i]);
+    public int[] plusOne(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            digits[i]++;
+            digits[i] = digits[i] % 10;
+            if (digits[i] != 0) return digits;
+        }
+        digits = new int[digits.length + 1];
+        digits[0] = 1;
+        return digits;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PlusOne.java:11: verify: The prover cannot establish an assertion (PossiblyTooLargeIndex) in method plusOne
+            digits[i]++;
+                  ^
+1 verification failure
+

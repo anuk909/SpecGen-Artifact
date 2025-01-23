@@ -1,0 +1,59 @@
+class PivotIndex {
+    //@ requires nums != null;
+    //@ ensures \result == -1 || (0 <= \result && \result < nums.length && (\forall int i; 0 <= i && i < \result; 2 * (\sum int j; 0 <= j && j < \result; nums[j]) + nums[\result] != (\sum int j; 0 <= j && j < nums.length; nums[j])));
+    public int pivotIndex(int[] nums) {
+        int total = 0;
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining total == (\sum int j; 0 <= j && j < i; nums[j]);
+        //@ decreases nums.length - i;
+        for (int i : nums) {
+            total += i;
+        }
+
+        int sum = 0;
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; 2 * (\sum int k; 0 <= k && k < j; nums[k]) + nums[j] != total);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; ++i) {
+            if (2 * sum + nums[i] == total) {
+                return i;
+            }
+            sum += nums[i];
+        }
+        
+        return -1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining total == (\sum int j; 0 <= j && j < i; nums[j]);
+                                  ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining total == (\sum int j; 0 <= j && j < i; nums[j]);
+                                  ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:7: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining total == (\sum int j; 0 <= j && j < i; nums[j]);
+                                  ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:15: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int j; 0 <= j && j < i; 2 * (\sum int k; 0 <= k && k < j; nums[k]) + nums[j] != total);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:15: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int j; 0 <= j && j < i; 2 * (\sum int k; 0 <= k && k < j; nums[k]) + nums[j] != total);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:15: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+        //@ maintaining (\forall int j; 0 <= j && j < i; 2 * (\sum int k; 0 <= k && k < j; nums[k]) + nums[j] != total);
+                                                              ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:3: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == -1 || (0 <= \result && \result < nums.length && (\forall int i; 0 <= i && i < \result; 2 * (\sum int j; 0 <= j && j < \result; nums[j]) + nums[\result] != (\sum int j; 0 <= j && j < nums.length; nums[j])));
+                                                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:3: warning: NOT IMPLEMENTED: Not yet supported feature in converting BasicPrograms to SMTLIB: JML Quantified expression using \sum
+    //@ ensures \result == -1 || (0 <= \result && \result < nums.length && (\forall int i; 0 <= i && i < \result; 2 * (\sum int j; 0 <= j && j < \result; nums[j]) + nums[\result] != (\sum int j; 0 <= j && j < nums.length; nums[j])));
+                                                                                                                                                                                       ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:7: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method pivotIndex
+        //@ maintaining total == (\sum int j; 0 <= j && j < i; nums[j]);
+            ^
+/home/max/Documents/JMLGPT/tmp/PivotIndex.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method pivotIndex
+        //@ maintaining 0 <= i && i <= nums.length;
+            ^
+8 warnings
+2 verification failures
+

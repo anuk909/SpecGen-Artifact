@@ -1,0 +1,39 @@
+class ConvertToTitle {
+    //@ requires columnNumber > 0;
+    //@ ensures \result != null;
+    //@ ensures \result.length() > 0;
+    //@ ensures (\forall int i; 0 <= i && i < \result.length(); ('A' <= \result.charAt(i) && \result.charAt(i) <= 'Z'));
+    public String convertToTitle(int columnNumber) {
+        StringBuffer sb = new StringBuffer();
+        //@ maintaining columnNumber > 0;
+        //@ maintaining \forall int i; 0 <= i && i < sb.length(); ('A' <= sb.charAt(i) && sb.charAt(i) <= 'Z');
+        //@ decreases columnNumber;
+        while (columnNumber > 0) {
+            int a0 = (columnNumber - 1) % 26 + 1;
+            sb.append((char)(a0 - 1 + 'A'));
+            columnNumber = (columnNumber - a0) / 26;
+        }
+        return sb.reverse().toString();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:18: verify: The prover cannot establish an assertion (UndefinedCalledMethodPrecondition: /home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:447:) in method convertToTitle
+}
+^
+Note: Call stack
+  /home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:458: java.lang.String.equals
+  /home/max/Documents/JMLGPT/openjml/specs/java/lang/StringBuffer.jml:35: java.lang.String.equals
+  /home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:7: java.lang.StringBuffer.<init>
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:447: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ConvertToTitle.java:18:
+      @ public static model helper boolean equals(nullable String s1, nullable String s2);
+                                           ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:436: verify: Precondition conjunct is false: s1.charArray != null
+      @   //-RAC@ requires s1.charArray != null & s2.charArray != null; // OPENJML: TODO Needs the invariant that charArray is not null
+                                        ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:439: verify: Precondition conjunct is false: s1 == s2
+      @   requires s1 == s2;
+                      ^
+/home/max/Documents/JMLGPT/openjml/specs/java/lang/String.jml:442: verify: Precondition conjunct is false: s1 == null || s2 == null || (java.lang.String.isInterned(s1) && java.lang.String.isInterned(s2))
+      @   requires s1 == null || s2 == null ||
+                                            ^
+5 verification failures
+

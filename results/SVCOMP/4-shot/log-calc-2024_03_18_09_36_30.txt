@@ -1,0 +1,36 @@
+public class calc {
+  /*@ public normal_behavior
+    @    requires a != null && b != null;
+    @    requires (\forall int i; 0 <= i && i < a.length(); (int)Character.MIN_VALUE <= (int)a.charAt(i) && (int)a.charAt(i) <= (int)Character.MAX_VALUE);
+    @    requires (\forall int i; 0 <= i && i < b.length(); (int)Character.MIN_VALUE <= (int)b.charAt(i) && (int)b.charAt(i) <= (int)Character.MAX_VALUE);
+    @    assignable \nothing;
+    @    ensures (\exists int x, y; x == Integer.parseInt(a) && y == Integer.parseInt(b); x != y || x == y); @*/
+  void do_stuff(String a, String b) {
+    try {
+      int x = Integer.parseInt(a);
+      int y = Integer.parseInt(b);
+      assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+    } catch (java.lang.NumberFormatException e) {
+    }
+  }
+
+  /*@ public normal_behavior
+    @    requires args != null;
+    @    requires args.length >= 2;
+    @    requires (\forall int i; 0 <= i && i < args.length; args[i] != null);
+    @    assignable \nothing;
+    @    ensures \result == null; @*/
+  public static void fun(String[] args) {
+    if (args.length < 2) {
+      System.out.println("need two arguments");
+      return;
+    }
+    new calc().do_stuff(args[0], args[1]);
+  }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 33554432 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid22609.log
+

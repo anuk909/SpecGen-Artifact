@@ -1,0 +1,30 @@
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i + 1]);
+    public static void selectionSort(int[] arr) {
+        //@ loop_invariant (\forall int k; 0 <= k && k < i; (\forall int j; i <= j && j < arr.length; arr[k] <= arr[j]));
+        for (int i = 0; i < arr.length - 1; i++) {
+            int index = i;
+            //@ loop_invariant i <= j && j <= arr.length;
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[k] >= arr[index]);
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[index]) {
+                    index = j;
+                }
+            }
+            int smallerNumber = arr[index];
+            arr[index] = arr[i];
+            arr[i] = smallerNumber;
+        }
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:5: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/SelectionSort.java:4:) in method selectionSort
+    public static void selectionSort(int[] arr) {
+                       ^
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/SelectionSort.java:5:
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i + 1]);
+        ^
+2 verification failures
+

@@ -1,0 +1,53 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires 0 <= k && k <= nums.length;
+    //@ ensures \result != null;
+    //@ ensures \result <= (\forall int i; 0 <= i && i < nums.length; nums[i]);
+    //@ ensures (\forall int i; 0 <= i && i < k; \result >= (\forall int j; 0 <= j && j < nums.length; nums[j]));
+    //@ ensures (\forall int i; k <= i && i < nums.length; \result >= (\forall int j; 0 <= j && j < nums.length; nums[j]));
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:6: error: bad operand types for binary operator '!='
+    //@ ensures \result != null;
+                        ^
+  first type:  int
+  second type: <null>
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: error: incompatible types: int cannot be converted to boolean
+    //@ ensures \result <= (\forall int i; 0 <= i && i < nums.length; nums[i]);
+                                                                          ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:7: error: bad operand types for binary operator '<='
+    //@ ensures \result <= (\forall int i; 0 <= i && i < nums.length; nums[i]);
+                        ^
+  first type:  int
+  second type: boolean
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:8: error: incompatible types: int cannot be converted to boolean
+    //@ ensures (\forall int i; 0 <= i && i < k; \result >= (\forall int j; 0 <= j && j < nums.length; nums[j]));
+                                                                                                           ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:8: error: bad operand types for binary operator '>='
+    //@ ensures (\forall int i; 0 <= i && i < k; \result >= (\forall int j; 0 <= j && j < nums.length; nums[j]));
+                                                         ^
+  first type:  int
+  second type: boolean
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:9: error: incompatible types: int cannot be converted to boolean
+    //@ ensures (\forall int i; k <= i && i < nums.length; \result >= (\forall int j; 0 <= j && j < nums.length; nums[j]));
+                                                                                                                     ^
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:9: error: bad operand types for binary operator '>='
+    //@ ensures (\forall int i; k <= i && i < nums.length; \result >= (\forall int j; 0 <= j && j < nums.length; nums[j]));
+                                                                   ^
+  first type:  int
+  second type: boolean
+7 errors
+

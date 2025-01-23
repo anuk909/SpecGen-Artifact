@@ -1,0 +1,50 @@
+public class LCM {
+    
+    //@ requires num1 != 0 && num2 != 0;
+    //@ ensures \result != -1;
+    public static int lcm(int num1, int num2) 
+    {
+        //@ assert num1 != 0 && num2 != 0;
+        
+        if (num1 == 0 || num2 == 0) {
+            //@ assert false; // unreachable code
+            return -1;
+        }	
+        
+        if (num1 < 0)
+            num1 = -num1;
+        if (num2 < 0)
+            num2 = -num2;
+        
+        //@ assert num1 >= 0 && num2 >= 0;
+        
+        int result = (num1 > num2) ? num1 : num2;
+        
+        //@ assert result >= num1 && result >= num2;
+        
+        while (result < Integer.MAX_VALUE)
+        {
+            //@ loop_invariant result >= num1 && result >= num2;
+            //@ loop_invariant result % num1 != 0 || result % num2 != 0;
+            
+            if (result % num1 == 0 && result % num2 == 0)
+            {
+                //@ assert result % num1 == 0 && result % num2 == 0;
+                break;
+            }
+            result++;
+        }
+        
+        //@ assert result >= num1 && result >= num2;
+        //@ assert result % num1 == 0 && result % num2 == 0;
+        
+        if (result % num1 == 0 && result % num2 == 0) {
+            //@ assert result % num1 == 0 && result % num2 == 0;
+            return result;
+        }
+        
+        //@ assert result % num1 != 0 || result % num2 != 0;
+        return -1;
+    }
+    
+}

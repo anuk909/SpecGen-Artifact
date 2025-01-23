@@ -1,0 +1,17 @@
+class A {
+  int i;
+}
+
+class NullPointerException2 {
+  //@ ensures \result == false <==> (\exists NullPointerException exc; true);
+  //@ ensures \result == true <==> (\forall NullPointerException exc; false);
+  public static boolean f() {
+    A a = null;
+    try {
+      a.i = 0;
+    } catch (NullPointerException exc) {
+      return false;
+    }
+    return true;
+  }
+}

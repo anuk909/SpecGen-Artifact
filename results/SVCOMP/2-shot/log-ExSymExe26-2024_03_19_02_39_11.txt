@@ -1,0 +1,29 @@
+class Main {
+
+  //@ requires x > (int)Integer.MIN_VALUE && x < (int)Integer.MAX_VALUE;
+  //@ requires y > (int)Integer.MIN_VALUE && y < (int)Integer.MAX_VALUE;
+  //@ requires z > (int)Integer.MIN_VALUE && z < (int)Integer.MAX_VALUE;
+  //@ ensures \result <==> (z > 0 && y > 0);
+  public boolean test(int x, int y, int z) {
+    System.out.println("Testing ExSymExe26");
+    y = x;
+    z++;
+    if (z > 0) System.out.println("branch FOO1");
+    else {
+      return false;
+    }
+    if (y > 0) System.out.println("branch BOO1");
+    else System.out.println("branch BOO2");
+
+    return true;
+  }
+
+  //@ ensures \result <==> test(a, b, a);
+  public static boolean f() {
+    int a = 3;
+    Main inst = new Main();
+    int b = 8;
+    return inst.test(a, b, a);
+  }
+}
+

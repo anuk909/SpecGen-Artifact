@@ -1,0 +1,21 @@
+import java.util.Random;
+
+class assert1 {
+  //@ ensures \old(i) >= 10 ==> i >= 10 : "my super assertion";
+  //@ ensures \old(i) >= 20 ==> i >= 10 : "my super assertion";
+  public static void func() {
+    int i = new Random().nextInt();
+
+    if (i >= 10) assert i >= 10 : "my super assertion"; // should hold
+
+    if (i >= 20) assert i >= 10 : "my super assertion"; // should hold
+  }
+}
+/home/max/Documents/JMLGPT/tmp/assert1.java:4: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures \old(i) >= 10 ==> i >= 10 : "my super assertion";
+                                        ^
+/home/max/Documents/JMLGPT/tmp/assert1.java:5: error: Incorrectly formed or terminated ensures statement near here
+  //@ ensures \old(i) >= 20 ==> i >= 10 : "my super assertion";
+                                        ^
+2 errors
+

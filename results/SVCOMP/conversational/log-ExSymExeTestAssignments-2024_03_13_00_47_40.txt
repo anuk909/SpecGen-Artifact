@@ -1,0 +1,21 @@
+class Main {
+  int field;
+
+  //@ ensures \result ==> x < 0 || test(3);
+  //@ ensures !\result ==> x >= 0 && !test(3);
+  public static boolean f (int x) {
+    if (x < 0) return true;
+    return test(x);
+  }
+
+  //@ ensures \result ==> x > 0;
+  //@ ensures !\result ==> x <= 0;
+  public static boolean test(int x) {
+    x = 3;
+    if (x > 0) System.out.println("branch BOO1");
+    else {
+      return false;
+    }
+    return true;
+  }
+}

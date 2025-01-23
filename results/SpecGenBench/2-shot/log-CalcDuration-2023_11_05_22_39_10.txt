@@ -1,0 +1,26 @@
+class CalcDuration {
+    //@ requires timeSeries != null;
+    //@ requires duration >= 0;
+    //@ ensures \result >= 0;
+    public int calcDuration(int[] timeSeries, int duration) {
+        int ans = 0;
+        int expired = 0;
+        //@ maintaining ans >= 0;
+        //@ maintaining 0 <= expired <= Integer.MAX_VALUE;
+        //@ decreasing timeSeries.length - i;
+        for (int i = 0; i < timeSeries.length; ++i) {
+            if (timeSeries[i] >= expired) {
+                ans += duration;
+            } else {
+                ans += timeSeries[i] + duration - expired;
+            }
+            expired = timeSeries[i] + duration;
+        }
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcDuration.java:8: verify: The prover cannot establish an assertion (LoopInvariant) in method calcDuration
+        //@ maintaining ans >= 0;
+            ^
+1 verification failure
+

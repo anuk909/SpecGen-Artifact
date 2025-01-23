@@ -1,0 +1,42 @@
+public class Fibonacci {
+
+	//@ requires n >= 0;
+	//@ ensures \result == -1 <==> n < 0;
+	//@ ensures \result == 0 <==> n == 0;
+	//@ ensures \result == fibCompute(n);
+	public static int fibCompute(int n) {
+		if(n < 0) return -1;
+		else if(n == 0) return 0;
+
+		int[] fib = new int[n + 1];
+		fib[0] = 0;
+		fib[1] = 1;
+		int index = 2;
+
+		//@ maintaining 2 <= index && index <= fib.length;
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fibCompute(i));
+		//@ decreases fib.length - index;
+		while (index < fib.length) {
+			fib[index] = fib[index - 2] + fib[index - 1];
+			index++;         
+		}
+
+		return fib[n];
+	}
+
+}
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:6: warning: A non-pure method is being called where it is not permitted: Fibonacci.fibCompute(int)
+	//@ ensures \result == fibCompute(n);
+	                                 ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:17: warning: A non-pure method is being called where it is not permitted: Fibonacci.fibCompute(int)
+		//@ maintaining (\forall int i; 2 <= i && i < index; fib[i] == fibCompute(i));
+		                                                                         ^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:24: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:4:) in method fibCompute
+		return fib[n];
+		^
+/home/max/Documents/JMLGPT/tmp/Fibonacci.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/Fibonacci.java:24:
+	//@ ensures \result == -1 <==> n < 0;
+	    ^
+2 warnings
+2 verification failures
+

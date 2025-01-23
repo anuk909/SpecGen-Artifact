@@ -1,0 +1,183 @@
+class ComputeAreaBranch {
+    //@ requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+    //@ ensures \result == spec_computeOverlapArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2);
+    public int computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int area1 = (ax2 - ax1) * (ay2 - ay1);
+        int area2 = (bx2 - bx1) * (by2 - by1);
+        int minX2 = bx2;
+        if(ax2 < bx2) {
+            minX2 = ax2;
+        }
+        int maxX1 = bx1;
+        if(ax1 > bx1) {
+            maxX1 = ax1;
+        }
+        int minY2 = by2;
+        if(ay2 < by2) {
+            minY2 = ay2;
+        }
+        int maxY1 = by1;
+        if(ay1 > by1) {
+            maxY1 = ay1;
+        }
+        int overlapWidth = minX2 - maxX1;
+        int overlapHeight = minY2 - maxY1;
+        if(overlapWidth < 0) {
+            overlapWidth = 0;
+        }
+        if(overlapHeight < 0) {
+            overlapHeight = 0;
+        }
+        int overlapArea = overlapWidth * overlapHeight;
+        return area1 + area2 - overlapArea;
+    }
+
+    /*@
+        requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+        ensures \result == (ax2 - ax1) * (ay2 - ay1) + (bx2 - bx1) * (by2 - by1) - spec_overlapArea(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2);
+     */
+    public model int spec_computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int overlapWidth = spec_overlapWidth(ax1, ax2, bx1, bx2);
+        int overlapHeight = spec_overlapHeight(ay1, ay2, by1, by2);
+        int overlapArea = overlapWidth * overlapHeight;
+        return (ax2 - ax1) * (ay2 - ay1) + (bx2 - bx1) * (by2 - by1) - overlapArea;
+    }
+
+    /*@
+        requires ax1 <= ax2 && bx1 <= bx2;
+        ensures \result == spec_minX2(ax2, bx2);
+     */
+    public model int spec_minX2(int ax2, int bx2) {
+        if(ax2 < bx2) {
+            return ax2;
+        } else {
+            return bx2;
+        }
+    }
+
+    /*@
+        requires ax1 <= ax2 && bx1 <= bx2;
+        ensures \result == spec_maxX1(ax1, bx1);
+     */
+    public model int spec_maxX1(int ax1, int bx1) {
+        if(ax1 > bx1) {
+            return ax1;
+        } else {
+            return bx1;
+        }
+    }
+
+    /*@
+        requires ay1 <= ay2 && by1 <= by2;
+        ensures \result == spec_minY2(ay2, by2);
+     */
+    public model int spec_minY2(int ay2, int by2) {
+        if(ay2 < by2) {
+            return ay2;
+        } else {
+            return by2;
+        }
+    }
+
+    /*@
+        requires ay1 <= ay2 && by1 <= by2;
+        ensures \result == spec_maxY1(ay1, by1);
+     */
+    public model int spec_maxY1(int ay1, int by1) {
+        if(ay1 > by1) {
+            return ay1;
+        } else {
+            return by1;
+        }
+    }
+
+    /*@
+        requires ax1 <= ax2 && bx1 <= bx2;
+        ensures \result == spec_overlapWidth(ax1, ax2, bx1, bx2);
+     */
+    public model int spec_overlapWidth(int ax1, int ax2, int bx1, int bx2) {
+        int minX2 = spec_minX2(ax2, bx2);
+        int maxX1 = spec_maxX1(ax1, bx1);
+        int overlapWidth = minX2 - maxX1;
+        if(overlapWidth < 0) {
+            return 0;
+        } else {
+            return overlapWidth;
+        }
+    }
+
+    /*@
+        requires ay1 <= ay2 && by1 <= by2;
+        ensures \result == spec_overlapHeight(ay1, ay2, by1, by2);
+     */
+    public model int spec_overlapHeight(int ay1, int ay2, int by1, int by2) {
+        int minY2 = spec_minY2(ay2, by2);
+        int maxY1 = spec_maxY1(ay1, by1);
+        int overlapHeight = minY2 - maxY1;
+        if(overlapHeight < 0) {
+            return 0;
+        } else {
+            return overlapHeight;
+        }
+    }
+
+    /*@
+        requires ax1 <= ax2 && ay1 <= ay2 && bx1 <= bx2 && by1 <= by2;
+        ensures \result == spec_overlapWidth(ax1, ax2, bx1, bx2) * spec_overlapHeight(ay1, ay2, by1, by2);
+     */
+    public model int spec_overlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+        int overlapWidth = spec_overlapWidth(ax1, ax2, bx1, bx2);
+        int overlapHeight = spec_overlapHeight(ay1, ay2, by1, by2);
+        return overlapWidth * overlapHeight;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:39: error: <identifier> expected
+    public model int spec_computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:39: error: Method specs may not precede a variable declaration
+    public model int spec_computeOverlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:50: error: <identifier> expected
+    public model int spec_minX2(int ax2, int bx2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:50: error: Method specs may not precede a variable declaration
+    public model int spec_minX2(int ax2, int bx2) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:62: error: <identifier> expected
+    public model int spec_maxX1(int ax1, int bx1) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:62: error: Method specs may not precede a variable declaration
+    public model int spec_maxX1(int ax1, int bx1) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:74: error: <identifier> expected
+    public model int spec_minY2(int ay2, int by2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:74: error: Method specs may not precede a variable declaration
+    public model int spec_minY2(int ay2, int by2) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:86: error: <identifier> expected
+    public model int spec_maxY1(int ay1, int by1) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:86: error: Method specs may not precede a variable declaration
+    public model int spec_maxY1(int ay1, int by1) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:98: error: <identifier> expected
+    public model int spec_overlapWidth(int ax1, int ax2, int bx1, int bx2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:98: error: Method specs may not precede a variable declaration
+    public model int spec_overlapWidth(int ax1, int ax2, int bx1, int bx2) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:113: error: <identifier> expected
+    public model int spec_overlapHeight(int ay1, int ay2, int by1, int by2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:113: error: Method specs may not precede a variable declaration
+    public model int spec_overlapHeight(int ay1, int ay2, int by1, int by2) {
+                 ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:128: error: <identifier> expected
+    public model int spec_overlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+                ^
+/home/max/Documents/JMLGPT/tmp/ComputeAreaBranch.java:128: error: Method specs may not precede a variable declaration
+    public model int spec_overlapArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+                 ^
+16 errors
+

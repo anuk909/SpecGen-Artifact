@@ -1,0 +1,37 @@
+class ExSymExeGetStatic {
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    SNode sn = new SNode();
+    SNode sn2 = sn.swap();
+  }
+}
+
+class SNode {
+  /*@ invariant this != null; */
+  /*@ invariant this.elem == 0; */
+  /*@ invariant this.next == null; */
+  /*@ invariant SNode.head == null; */
+  /*@ invariant SNode.$assertionsDisabled == false; */
+  /*@ spec_public */ int elem;
+  /*@ spec_public */ SNode next;
+  /*@ spec_public */ /*@ modifies this.next.elem, this.next.next, this.next.next.elem, this.next.next.next, SNode.head.elem, SNode.head.next, SNode.head.next.elem, SNode.head.next.next; */
+  /*@ ensures \result == \old(this); */
+  /*@ ensures \result != null; */
+  /*@ ensures \result.elem == 0; */
+  /*@ ensures \result.next == null; */
+  static SNode head; // = new SNode(); //change is here
+
+  SNode swap() {
+    if (head != null) {
+      assert false;
+      System.out.println("head is not null");
+    } else {
+      System.out.println("head is null");
+    }
+    return this;
+  }
+}

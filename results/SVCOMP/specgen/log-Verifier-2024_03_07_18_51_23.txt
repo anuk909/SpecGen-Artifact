@@ -1,0 +1,294 @@
+import java.util.Random;
+
+public final class Verifier {
+    //@ ensures \result ==> Runtime.getRuntime().halt(1);
+    public static void assume(boolean condition) {
+        if (!condition) {
+            Runtime.getRuntime().halt(1);
+        }
+    }
+
+    //@ ensures \result == \result;
+    public static boolean nondetBoolean() {
+        return new Random().nextBoolean();
+    }
+
+    //@ ensures \result == (byte) (new Random().nextInt());
+    public static byte nondetByte() {
+        return (byte) (new Random().nextInt());
+    }
+
+    //@ ensures \result == (char) (new Random().nextInt());
+    public static char nondetChar() {
+        return (char) (new Random().nextInt());
+    }
+
+    //@ ensures \result == (short) (new Random().nextInt());
+    public static short nondetShort() {
+        return (short) (new Random().nextInt());
+    }
+
+    //@ ensures \result == new Random().nextInt();
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures \result == new Random().nextLong();
+    public static long nondetLong() {
+        return new Random().nextLong();
+    }
+
+    //@ ensures \result == new Random().nextFloat();
+    public static float nondetFloat() {
+        return new Random().nextFloat();
+    }
+
+    //@ ensures \result == new Random().nextDouble();
+    public static double nondetDouble() {
+        return new Random().nextDouble();
+    }
+
+    //@ ensures \result != null;
+    //@ ensures \result.length() >= 0;
+    public static String nondetString() {
+        Random random = new Random();
+        int size = random.nextInt();
+        assume(size >= 0);
+        byte[] bytes = new byte[size];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Verifier.java:4: error: A \result expression may not be used in the specification of a method that returns void
+    //@ ensures \result ==> Runtime.getRuntime().halt(1);
+                 ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:4: error: incompatible types: void cannot be converted to boolean
+    //@ ensures \result ==> Runtime.getRuntime().halt(1);
+                                                     ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:16: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (byte) (new Random().nextInt());
+                                   ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:21: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (char) (new Random().nextInt());
+                                   ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:26: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (short) (new Random().nextInt());
+                                    ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:31: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextInt();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:36: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextLong();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:41: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextFloat();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:46: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextDouble();
+                           ^
+9 errors
+
+import java.util.Random;
+
+public final class Verifier {
+    //@ ensures condition || Runtime.getRuntime().halt(1);
+    public static void assume(boolean condition) {
+        if (!condition) {
+            Runtime.getRuntime().halt(1);
+        }
+    }
+
+    //@ ensures \result ==> true;
+    public static boolean nondetBoolean() {
+        return new Random().nextBoolean();
+    }
+
+    //@ ensures \result >= Byte.MIN_VALUE && \result <= Byte.MAX_VALUE;
+    public static byte nondetByte() {
+        return (byte) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Character.MIN_VALUE && \result <= Character.MAX_VALUE;
+    public static char nondetChar() {
+        return (char) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Short.MIN_VALUE && \result <= Short.MAX_VALUE;
+    public static short nondetShort() {
+        return (short) (new Random().nextInt());
+    }
+
+    //@ ensures \result == new Random().nextInt();
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures \result == new Random().nextLong();
+    public static long nondetLong() {
+        return new Random().nextLong();
+    }
+
+    //@ ensures \result == new Random().nextFloat();
+    public static float nondetFloat() {
+        return new Random().nextFloat();
+    }
+
+    //@ ensures \result == new Random().nextDouble();
+    public static double nondetDouble() {
+        return new Random().nextDouble();
+    }
+
+    //@ ensures \result != null;
+    //@ ensures \result.length() >= 0;
+    public static String nondetString() {
+        Random random = new Random();
+        int size = random.nextInt();
+        assume(size >= 0);
+        byte[] bytes = new byte[size];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Verifier.java:4: error: 'void' type not allowed here
+    //@ ensures condition || Runtime.getRuntime().halt(1);
+                                                      ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:31: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextInt();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:36: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextLong();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:41: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextFloat();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:46: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextDouble();
+                           ^
+5 errors
+
+import java.util.Random;
+
+public final class Verifier {
+    //@ ensures \result ==> true;
+    public static boolean nondetBoolean() {
+        return new Random().nextBoolean();
+    }
+
+    //@ ensures \result >= Byte.MIN_VALUE && \result <= Byte.MAX_VALUE;
+    public static byte nondetByte() {
+        return (byte) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Character.MIN_VALUE && \result <= Character.MAX_VALUE;
+    public static char nondetChar() {
+        return (char) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Short.MIN_VALUE && \result <= Short.MAX_VALUE;
+    public static short nondetShort() {
+        return (short) (new Random().nextInt());
+    }
+
+    //@ ensures \result == new Random().nextInt();
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures \result == new Random().nextLong();
+    public static long nondetLong() {
+        return new Random().nextLong();
+    }
+
+    //@ ensures \result == new Random().nextFloat();
+    public static float nondetFloat() {
+        return new Random().nextFloat();
+    }
+
+    //@ ensures \result == new Random().nextDouble();
+    public static double nondetDouble() {
+        return new Random().nextDouble();
+    }
+
+    //@ ensures \result != null;
+    //@ ensures \result.length() >= 0;
+    public static String nondetString() {
+        Random random = new Random();
+        int size = random.nextInt();
+        if (size < 0) {
+            size = -size;
+        }
+        byte[] bytes = new byte[size];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/Verifier.java:24: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextInt();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:29: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextLong();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:34: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextFloat();
+                           ^
+/home/max/Documents/JMLGPT/tmp/Verifier.java:39: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == new Random().nextDouble();
+                           ^
+4 errors
+
+import java.util.Random;
+
+public final class Verifier {
+    //@ ensures \result ==> true;
+    public static boolean nondetBoolean() {
+        return new Random().nextBoolean();
+    }
+
+    //@ ensures \result >= Byte.MIN_VALUE && \result <= Byte.MAX_VALUE;
+    public static byte nondetByte() {
+        return (byte) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Character.MIN_VALUE && \result <= Character.MAX_VALUE;
+    public static char nondetChar() {
+        return (char) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Short.MIN_VALUE && \result <= Short.MAX_VALUE;
+    public static short nondetShort() {
+        return (short) (new Random().nextInt());
+    }
+
+    //@ ensures \result >= Integer.MIN_VALUE && \result <= Integer.MAX_VALUE;
+    public static int nondetInt() {
+        return new Random().nextInt();
+    }
+
+    //@ ensures \result >= Long.MIN_VALUE && \result <= Long.MAX_VALUE;
+    public static long nondetLong() {
+        return new Random().nextLong();
+    }
+
+    //@ ensures \result >= 0.0 && \result < 1.0;
+    public static float nondetFloat() {
+        return new Random().nextFloat();
+    }
+
+    //@ ensures \result >= 0.0 && \result < 1.0;
+    public static double nondetDouble() {
+        return new Random().nextDouble();
+    }
+
+    //@ ensures \result != null;
+    //@ ensures \result.length() >= 0;
+    public static String nondetString() {
+        Random random = new Random();
+        int size = random.nextInt();
+        if (size < 0) {
+            size = -size;
+        }
+        byte[] bytes = new byte[size];
+        random.nextBytes(bytes);
+        return new String(bytes);
+    }
+}

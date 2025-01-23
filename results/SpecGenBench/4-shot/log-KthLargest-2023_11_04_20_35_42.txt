@@ -1,0 +1,39 @@
+import java.util.PriorityQueue;
+
+class KthLargest {
+    //@ requires nums != null;
+    //@ requires k > 0 && k <= nums.length;
+    //@ ensures \result >= 0 && \result <= Integer.MAX_VALUE;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; \result >= nums[i]);
+    //@ ensures (\forall int i; 0 <= i && i < nums.length && i != k-1; \result >= nums[i]);
+    //@ ensures (\exists int i; 0 <= i && i < nums.length; \result == nums[i]);
+    public static int kthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        
+        for (int x : nums) {
+            pq.offer(x);
+            if (pq.size() > k) {
+                pq.poll();
+            }
+        }
+
+        return pq.peek();
+    }
+}
+/home/max/Documents/JMLGPT/tmp/KthLargest.java:14: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69:) in method kthLargest
+            pq.offer(x);
+                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/KthLargest.java:14:
+      @   requires e == null & !containsNull;
+          ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:57: verify: Precondition conjunct is false: false
+      @   requires  false && (* capacity restrictions respected *);
+                    ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:64: verify: Precondition conjunct is false: false
+      @   requires false && (* capacity restrictions violated *);
+                   ^
+/home/max/Documents/JMLGPT/openjml/specs/java/util/Queue.jml:69: verify: Precondition conjunct is false: e == null
+      @   requires e == null & !containsNull;
+                     ^
+5 verification failures
+

@@ -1,0 +1,33 @@
+//@ public normal_behavior
+//@ ensures false;
+class A extends RuntimeException {}
+
+//@ public normal_behavior
+//@ ensures false;
+class B extends A {}
+
+//@ public normal_behavior
+//@ ensures false;
+class C extends B {}
+
+public class exceptions7 {
+    //@ public normal_behavior
+    //@ requires true;
+    //@ ensures false;
+    public static void main(String[] args) {
+        try {
+            try {
+                C c = new C();
+                A a = new A();
+                throw a;
+            } catch (C exc) {
+                assert false;
+            } catch (B exc) {
+                assert false;
+            }
+        } catch (A exc) {
+            assert false;
+        }
+    }
+}
+

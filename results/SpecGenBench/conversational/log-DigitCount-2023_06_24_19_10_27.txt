@@ -1,0 +1,89 @@
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\exists int j; 0 <= j && j <= 9; (num.charAt(i) - '0' == j) ==> (\forall int k; 0 <= k && k < num.length(); num.charAt(k) - '0' == j)));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); (\exists int j; 0 <= j && j <= 9; (num.charAt(i) - '0' == j) && (h.getOrDefault(j, 0) != j)));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j <= 9; h.getOrDefault(j, 0) == (\sum int k; 0 <= k && k < i; (num.charAt(k) - '0' == j ? 1 : 0)));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, h.getOrDefault(digit, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(num.charAt(k) - '0', 0) == num.charAt(k) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (h.getOrDefault(v, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); (\exists int j; 0 <= j && j <= 9; (num.charAt(i) - '0' == j) && (h.getOrDefault(j, 0) != j)));
+                                                                                                                                          ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:12: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int j; 0 <= j && j <= 9; h.getOrDefault(j, 0) == (\sum int k; 0 <= k && k < i; (num.charAt(k) - '0' == j ? 1 : 0)));
+                                                                        ^
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:19: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+        //@ maintaining (\forall int k; 0 <= k && k < i; h.getOrDefault(num.charAt(k) - '0', 0) == num.charAt(k) - '0');
+                                                                       ^
+1 error
+2 warnings
+
+import java.util.Map;
+import java.util.HashMap;
+
+class DigitCount {
+    //@ requires num != null;
+    //@ ensures \result ==> (\forall int i; 0 <= i && i < num.length(); (\exists int j; 0 <= j && j <= 9; (num.charAt(i) - '0' == j) ==> (\forall int k; 0 <= k && k < num.length(); num.charAt(k) - '0' == j)));
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); (\exists int j; 0 <= j && j <= 9; (num.charAt(i) - '0' == j) && (getOrDefault(h, j, 0) != j)));
+    public boolean digitCount(String num) {
+        Map<Integer, Integer> h = new HashMap<Integer, Integer>();
+        int n = num.length();
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j <= 9; getOrDefault(h, j, 0) == (\sum int k; 0 <= k && k < i; (num.charAt(k) - '0' == j ? 1 : 0)));
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            h.put(digit, getOrDefault(h, digit, 0) + 1);
+        }
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int k; 0 <= k && k < i; getOrDefault(h, num.charAt(k) - '0', 0) == num.charAt(k) - '0');
+        //@ decreases n - i;
+        for (int i = 0; i < n; i++) {
+            int v = num.charAt(i) - '0';
+            if (getOrDefault(h, v, 0) != v) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //@ requires map != null;
+    //@ ensures \result == map.getOrDefault(key, defaultValue);
+    public /*@ pure @*/ static <K,V> V getOrDefault(Map<K,V> map, K key, V defaultValue) {
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:7: error: cannot find symbol
+    //@ ensures !\result ==> (\exists int i; 0 <= i && i < num.length(); (\exists int j; 0 <= j && j <= 9; (num.charAt(i) - '0' == j) && (getOrDefault(h, j, 0) != j)));
+                                                                                                                                                       ^
+  symbol:   variable h
+  location: class DigitCount
+/home/max/Documents/JMLGPT/tmp/DigitCount.java:31: warning: A non-pure method is being called where it is not permitted: java.util.Map.getOrDefault(java.lang.Object,V)
+    //@ ensures \result == map.getOrDefault(key, defaultValue);
+                                           ^
+1 error
+1 warning
+

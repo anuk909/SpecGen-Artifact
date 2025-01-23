@@ -1,0 +1,52 @@
+/**
+ * @invariant A extends RuntimeException
+ * @invariant B extends A
+ * @invariant C extends B
+ */
+class A extends RuntimeException {}
+
+/**
+ * @invariant B extends A
+ * @invariant C extends B
+ */
+class B extends A {}
+
+/**
+ * @invariant C extends B
+ */
+class C extends B {}
+
+class Main {
+  /**
+   * @requires true
+   * @modifies \nothing
+   * @ensures if an instance of B is thrown, catch it as C and set i to 0
+   */
+  static void foo() {
+    try {
+      B b = new B();
+      throw b;
+    } catch (C exc) {
+      int i = 0;
+    }
+  }
+
+  /**
+   * @requires true
+   * @modifies \nothing
+   * @ensures if an instance of A is thrown, catch it as B and assert false
+   *          if an instance of B is thrown, catch it as A and assert false
+   */
+  public static void main(String[] args) {
+    try {
+      A a = new A();
+      foo();
+      throw a;
+    } catch (B exc) {
+      assert false;
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+

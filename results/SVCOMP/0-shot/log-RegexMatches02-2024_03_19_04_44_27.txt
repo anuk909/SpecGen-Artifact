@@ -1,0 +1,23 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+  //@ requires string1 != null;
+  //@ ensures \result ==> (\exists int i; 0 <= i && i < string1.length() - 17; 
+  //@                      string1.substring(i, i + 17).matches("W.*\\d[0-35-9]-\\d\\d-\\d\\d"));
+  public static boolean f(String string1) {
+    Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+    Matcher matcher = expression.matcher(string1);
+
+    //@ loop_invariant (\forall int i; 0 <= i && i < matcher.start(); 
+    //@                      !matcher.group().equals("WWWWW's Birthday is 12-17-77"));
+    while (matcher.find()) {
+      System.out.println(matcher.group());
+      String tmp = matcher.group();
+      if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+        return false;
+    }
+    return true;
+  }
+}
+

@@ -1,0 +1,22 @@
+public class Main {
+
+  //@ requires arg != null;
+  //@ ensures \result ==> \result == true;
+  //@ ensures !\result ==> \result == false;
+  public static boolean f(String arg) {
+    // Precondition: arg should not be null
+    // Postcondition: Returns true if the decoded string starts with "some", false otherwise
+
+    String s1 = "some-url+" + arg;
+
+    try {
+      String s2 = java.net.URLDecoder.decode(s1, "UTF-8");
+      if (!s2.startsWith("some")) {
+        return false;
+      }
+    } catch (java.io.UnsupportedEncodingException e) {
+    }
+    return true;
+  }
+}
+

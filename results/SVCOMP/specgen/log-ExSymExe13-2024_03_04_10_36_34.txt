@@ -1,0 +1,467 @@
+class Main {
+  static int field;
+  static int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(x, arg, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(x, arg, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: cannot find symbol
+  //@ ensures \result ==> test(x, arg, field2);
+                               ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> test(x, arg, field2);
+                                       ^
+2 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(arg, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: method test in class Main cannot be applied to given types;
+  //@ ensures \result ==> test(arg, field2);
+                          ^
+  required: int,int,int
+  found:    int,int
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:14: error: method test in class Main cannot be applied to given types;
+    return inst.test(arg, field2);
+               ^
+  required: int,int,int
+  found:    int,int
+  reason: actual and formal argument lists differ in length
+2 errors
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: Object allocation is not permitted in specification expressions
+  //@ ensures \result ==> new Main().test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(arg, field2, field2);
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> test(arg, field2, field2);
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+  //@ ensures \result ==> test(arg, field2, field2);  
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+
+/home/max/Documents/JMLGPT/tmp/ExSymExe13.java:6: error: non-static method test(int,int,int) cannot be referenced from a static context
+  //@ ensures \result ==> test(arg, field2, field2);  
+                          ^
+1 error
+
+class Main {
+  static /*@ spec_public @*/ int field;
+  static /*@ spec_public @*/ int field2;
+
+  //@ requires arg >= 0;
+ 
+  public static boolean f(int arg) {
+    if (arg < 0)
+      return true;
+    int x = arg;
+
+    Main inst = new Main();
+    field = 9;
+    return inst.test(arg, field2, field2);
+  }
+  
+  //@ requires true;
+  //@ ensures \result ==> (r < 99 && x >= z) || (r >= 99 && x < z);
+  public boolean test(int x, int z, int r) {
+    System.out.println("Testing ExSymExe13");
+    int y = 3;
+    r = x + z;
+    z = x - y - 4;
+    if (r < 99) System.out.println("branch FOO1");
+    else System.out.println("branch FOO2");
+    if (x < z) {
+      System.out.println("branch BOO1");
+      return false;
+    } else System.out.println("branch BOO2");
+
+    return true;
+  }
+}
+

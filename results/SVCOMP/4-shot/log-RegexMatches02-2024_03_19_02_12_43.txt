@@ -1,0 +1,21 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexMatches02 {
+    //@ requires string1 != null;
+    //@ ensures \result == true <==> (\exists int i; 0 <= i && i < string1.length(); string1.startsWith("W", i) && i+1 < string1.length() && Character.isDigit(string1.charAt(i+1)) && (string1.charAt(i+2) >= '0' && string1.charAt(i+2) <= '3') && string1.charAt(i+3) == '-' && Character.isDigit(string1.charAt(i+4)) && Character.isDigit(string1.charAt(i+5)) && string1.charAt(i+6) == '-' && Character.isDigit(string1.charAt(i+7)) && Character.isDigit(string1.charAt(i+8)));
+    public static boolean f(String string1) {
+        Pattern expression = Pattern.compile("W.*\\d[0-35-9]-\\d\\d-\\d\\d");
+        Matcher matcher = expression.matcher(string1);
+
+        //@ maintaining (\forall int i; 0 <= i && i < string1.length(); !string1.startsWith("W", i) || !(i+1 < string1.length()) || !Character.isDigit(string1.charAt(i+1)) || !(string1.charAt(i+2) >= '0' && string1.charAt(i+2) <= '3') || !(string1.charAt(i+3) == '-') || !Character.isDigit(string1.charAt(i+4)) || !Character.isDigit(string1.charAt(i+5)) || !(string1.charAt(i+6) == '-') || !Character.isDigit(string1.charAt(i+7)) || !Character.isDigit(string1.charAt(i+8)));
+        //@ decreases string1.length() - matcher.start();
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+            String tmp = matcher.group();
+            if (!tmp.equals("WWWWW's Birthday is 12-17-77"))
+                return false;
+        }
+        return true;
+    }
+}

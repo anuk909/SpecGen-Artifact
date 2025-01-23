@@ -1,0 +1,33 @@
+class EvenOdd {
+    static boolean isOdd(int n) {
+        if (n == 0) {
+          return false;
+        } else if (n == 1) {
+          return true;
+        } else {
+          return isEven(n - 1);
+        }
+    }
+    
+    static boolean isEven(int n) {
+        if (n == 0) {
+          return true;
+        } else if (n == 1) {
+          return false;
+        } else {
+          return isOdd(n - 1);
+        }
+    }
+
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = 0; i < 10; i++) {
+      isOdd(i);
+      isEven(i);
+    }
+  }
+}

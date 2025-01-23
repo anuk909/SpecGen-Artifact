@@ -1,0 +1,27 @@
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+public class exceptions3 {
+  //@ requires true;
+  //@ ensures (\forall Exception exc; exc instanceof C ==> false) && (\forall Exception exc; exc instanceof B ==> false);
+  public static void main(String[] args) {
+    try {
+      throw new B();
+    } catch (C exc) {
+      assert false;
+    } catch (B exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions3.java:9: error: incompatible types: Exception cannot be converted to C
+  //@ ensures (\forall Exception exc; exc instanceof C ==> false) && (\forall Exception exc; exc instanceof B ==> false);
+                                      ^
+/home/max/Documents/JMLGPT/tmp/exceptions3.java:9: error: incompatible types: Exception cannot be converted to B
+  //@ ensures (\forall Exception exc; exc instanceof C ==> false) && (\forall Exception exc; exc instanceof B ==> false);
+                                                                                             ^
+2 errors
+

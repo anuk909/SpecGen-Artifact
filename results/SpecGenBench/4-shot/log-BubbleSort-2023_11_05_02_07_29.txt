@@ -1,0 +1,56 @@
+public class BubbleSort { 
+    
+    //@ requires 0 <= x && x < array.length && 0 <= y && y < array.length;
+    //@ ensures array[x] == \old(array[y]) && array[y] == \old(array[x]);
+    void swap(int x, int y,  int array[]) {
+        int temp;     
+        temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+    }
+
+    //@ requires array != null && (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+    //@ ensures \result != null && \result.length == array.length && (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+    int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+
+        //@ maintaining 0 <= i && i <= n-1;
+        //@ maintaining (\forall int k; 0 <= k && k < i; (\forall int j; 0 <= j && j < n-k-1; arr[j+1] >= arr[j]));
+        //@ decreases n-1 - i;
+        for (int i = 0; i < n-1; i++) {	
+
+            //@ maintaining 0 <= j && j <= n-i-1;
+            //@ maintaining (\forall int k; 0 <= k && k < j; arr[k+1] >= arr[k]);
+            //@ decreases n-i-1 - j;
+            for (int j = 0; j < n-i-1; j++) {
+                if (arr[j+1] < arr[j]) {  
+		     swap(j, j + 1, arr); 
+                } 
+	    }
+	} 
+	return arr;
+    } 
+}
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: error: cannot find symbol
+    //@ requires array != null && (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+                 ^
+  symbol:   variable array
+  location: class BubbleSort
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: error: non-static variable length cannot be referenced from a static context
+    //@ requires array != null && (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+                                                                     ^
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: error: cannot find symbol
+    //@ requires array != null && (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+                                                                              ^
+  symbol:   variable array
+  location: class BubbleSort
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:12: error: cannot find symbol
+    //@ requires array != null && (\forall int i; 0 <= i && i < array.length; array[i] >= Integer.MIN_VALUE && array[i] <= Integer.MAX_VALUE);
+                                                                                                               ^
+  symbol:   variable array
+  location: class BubbleSort
+/home/max/Documents/JMLGPT/tmp/BubbleSort.java:13: error: non-static variable length cannot be referenced from a static context
+    //@ ensures \result != null && \result.length == array.length && (\forall int i; 0 <= i && i < \result.length - 1; \result[i] <= \result[i+1]);
+                                                          ^
+5 errors
+

@@ -1,0 +1,347 @@
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int j; 0 <= j && j < nums.length; j != \result ==> 2 * nums[j] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; i != biggest_index && 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int j; 0 <= j && j < nums.length; j != \result ==> 2 * nums[j] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; i != biggest_index && 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\exists int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length; i != \result ==> 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; i != biggest_index ==> 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:18: verify: The prover cannot establish an assertion (LoopInvariant) in method dominantIndex
+        //@ maintaining (\forall int j; 0 <= j && j < i; i != biggest_index ==> 2 * nums[j] <= nums[biggest_index]);
+            ^
+1 verification failure
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length; i != \result ==> 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; j != biggest_index ==> 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length; j != i ==> 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+
+class DominantIndex {
+    
+    //@ requires nums.length > 0;
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+    //@ ensures 0 <= \result && \result < nums.length ==> (\forall int i; 0 <= i && i < nums.length && i != \result; 2 * nums[i] <= nums[\result]);
+    public static int dominantIndex(int[] nums) {
+        int biggest_index = 0;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > nums[biggest_index])
+                biggest_index = i;
+        }
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i && j != biggest_index; 2 * nums[j] <= nums[biggest_index]);
+        //@ decreases nums.length - i;
+        for (int i = 0; i < nums.length; i++) {
+            if (i != biggest_index && 2 * nums[i] > nums[biggest_index])
+                return -1;
+        }
+
+        return biggest_index;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:4:) in method dominantIndex
+        return biggest_index;
+        ^
+/home/max/Documents/JMLGPT/tmp/DominantIndex.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/DominantIndex.java:25:
+    //@ ensures \result == -1 <==> (\forall int i; 0 <= i && i < nums.length; (\forall int j; 0 <= j && j < nums.length && j != i; 2 * nums[j] <= nums[i]));
+        ^
+2 verification failures
+

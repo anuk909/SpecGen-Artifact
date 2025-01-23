@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+import java.io.StringReader;
+
+public class BufferedReaderReadLine {
+
+  //@ requires br != null;
+  //@ ensures \result != null;
+  public static String check(BufferedReader br) throws Exception {
+    String s = br.readLine();
+    return s;
+  }
+
+  //@ requires arg != null;
+  public static void main(String arg) {
+    String thisLine = null;
+    int numLines = 0;
+
+    try {
+      BufferedReader br = new BufferedReader(new StringReader(arg));
+      String line = check(br);
+      //@ maintaining \forall int i; 0 <= i && i < numLines; \exists String s; s != null;
+      //@ decreases numLines;
+      while ((thisLine = check(br)) != null) {
+        System.out.println(thisLine);
+        numLines += 1;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return;
+    }
+    assert numLines > 0;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/BufferedReaderReadLine.java:22: error: Incorrectly formed or terminated loop_invariant statement near here
+      //@ decreases numLines;
+                    ^
+1 error
+

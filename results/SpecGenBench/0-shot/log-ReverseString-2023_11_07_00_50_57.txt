@@ -1,0 +1,16 @@
+class ReverseString {
+    //@ requires s != null;
+    //@ ensures (\forall int i; 0 <= i && i < s.length; s[i] == \old(s[s.length - i - 1]));
+    public void reverseString(char[] s) {
+        int n = s.length;
+        //@ loop_invariant 0 <= left && left <= right && right < n;
+        //@ loop_invariant (\forall int i; 0 <= i && i < left; s[i] == \old(s[i]));
+        //@ loop_invariant (\forall int i; right < i && i < n; s[i] == \old(s[i]));
+        //@ decreases right - left;
+        for (int left = 0, right = n - 1; left < right; ++left, --right) {
+            char tmp = s[left];
+            s[left] = s[right];
+            s[right] = tmp;
+        }
+    }
+}

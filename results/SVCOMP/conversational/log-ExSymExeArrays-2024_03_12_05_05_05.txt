@@ -1,0 +1,365 @@
+class Main {
+  static int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+                          ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+                                       ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: cannot find symbol
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+                                                                ^
+  symbol:   variable x
+  location: class Main
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:14: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires a != null && a.length == 1;
+               ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:14: error: An identifier with package visibility may not be used in a requires clause with public visibility
+  //@ requires a != null && a.length == 1;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures \result <==> a[0] < 0;
+                           ^
+7 errors
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:4: error: cannot find symbol
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == x;
+                                                                ^
+  symbol:   variable x
+  location: class Main
+1 error
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    //@ assume 0 <= 0 && 0 < a.length;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    //@ assume 0 <= 0 && 0 < a.length;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    //@ assume 0 <= 0 && 0 < a.length;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    //@ assume 0 <= 0 && 0 < a.length;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    //@ assume 0 <= 0 && 0 < a.length;
+    if (a[0] >= 0) {
+      return false;
+    } else {
+      System.out.println("branch2 <0");
+      return true;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    return a[0] < 0;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+
+class Main {
+  static /*@ spec_public */ int[] a;
+
+  //@ ensures \result ==> a != null && a.length == 1 && a[0] == -3;
+  public static boolean f() {
+    a = new int[1];
+    int x = -3;
+
+    Main inst = new Main();
+
+    return inst.test(x);
+  }
+
+  //@ requires a != null && a.length == 1;
+  //@ ensures \result <==> a[0] < 0;
+  public boolean test(int x) {
+    a[0] = x;
+    return a[0] < 0;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15: verify: The prover cannot establish an assertion (UndefinedTooLargeIndex: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11:) in method f
+  //@ ensures \result <==> a[0] < 0;
+                            ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:11: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:15:
+    return inst.test(x);
+                    ^
+/home/max/Documents/JMLGPT/tmp/ExSymExeArrays.java:12: verify: Associated method exit
+  }
+   ^
+3 verification failures
+

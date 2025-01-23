@@ -1,0 +1,31 @@
+public class array_iteration01 {
+
+  //@ requires index >= 0 && index < 200;
+  //@ ensures \result == 1 || \result == 0 || \result == -1;
+  public static int f(int index) {
+    int[] ia = new int[200];
+    if(0 > index || index >= ia.length) return -1;
+    ia[index] = Verifier.nondetInt();
+    //@ maintaining (\forall int k; 0 <= k && k < i; ia[k] != 0) ==> \result == 0;
+    //@ maintaining (\forall int k; 0 <= k && k < ia.length; ia[k] == 0) ==> \result == 1;
+    for (int i = 0; i < ia.length; i++) {
+      if (ia[i] == 0) {
+        return 0;
+      }
+    }
+    return 1;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/array_iteration01.java:8: error: cannot find symbol
+    ia[index] = Verifier.nondetInt();
+                ^
+  symbol:   variable Verifier
+  location: class array_iteration01
+/home/max/Documents/JMLGPT/tmp/array_iteration01.java:9: error: A \result expression may not be in a loop_invariant clause
+    //@ maintaining (\forall int k; 0 <= k && k < i; ia[k] != 0) ==> \result == 0;
+                                                                      ^
+/home/max/Documents/JMLGPT/tmp/array_iteration01.java:10: error: A \result expression may not be in a loop_invariant clause
+    //@ maintaining (\forall int k; 0 <= k && k < ia.length; ia[k] == 0) ==> \result == 1;
+                                                                              ^
+3 errors
+

@@ -1,0 +1,89 @@
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n) && n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y) && n >= 0;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:15: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method AddLoop
+            //@ maintaining sum == x - (n - y) && n >= 0;
+                ^
+1 verification failure
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ maintaining sum == x + (y - n) && 0 <= n && n <= y;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ maintaining sum == x - (n - y) && 0 <= n && n <= -y;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:14: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method AddLoop: int negation
+            int n = -y;
+                    ^
+1 verification failure
+
+public class AddLoop {
+    //@ ensures \result == x + y;
+    public static int AddLoop(int x, int y) {
+        int sum = x;
+        if (y > 0) {
+            int n = y;
+            //@ assume y > Integer.MIN_VALUE;
+            //@ maintaining sum == x + (y - n) && 0 <= n && n <= y;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum + 1;
+                n = n - 1;
+            }
+        } else {
+            int n = -y;
+            //@ assume -y > Integer.MIN_VALUE;
+            //@ maintaining sum == x - (n - y) && 0 <= n && n <= -y;
+            //@ decreases n;
+            while (n > 0) {
+                sum = sum - 1;
+                n = n - 1;
+            }
+        }
+        return sum;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/AddLoop.java:15: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method AddLoop: int negation
+            int n = -y;
+                    ^
+1 verification failure
+

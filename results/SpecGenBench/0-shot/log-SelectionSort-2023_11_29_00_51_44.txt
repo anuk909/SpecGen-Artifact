@@ -1,0 +1,44 @@
+public class SelectionSort {
+
+    //@ requires arr != null;
+    //@ ensures (\forall int i; 0 <= i && i < arr.length - 1; arr[i] <= arr[i + 1]);
+    public static void selectionSort(int[] arr){  
+        //@ loop_invariant (\forall int i; 0 <= i && i < j; arr[i] <= arr[j]);
+        //@ decreases arr.length - j;
+        for (int i = 0; i < arr.length - 1; i++)  
+        {  
+            int index = i;  
+            //@ loop_invariant (\forall int k; i <= k && k < j; arr[k] >= arr[i]);
+            //@ decreases arr.length - j;
+            for (int j = i + 1; j < arr.length; j++){  
+                if (arr[j] < arr[index]){  
+                    index = j;
+                }  
+            }  
+            int smallerNumber = arr[index];   
+            arr[index] = arr[i];  
+            arr[i] = smallerNumber;  
+        }  
+    }
+    
+}
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:6: error: variable i is already defined in method selectionSort(int[])
+        //@ loop_invariant (\forall int i; 0 <= i && i < j; arr[i] <= arr[j]);
+                                        ^
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:6: error: cannot find symbol
+        //@ loop_invariant (\forall int i; 0 <= i && i < j; arr[i] <= arr[j]);
+                                                         ^
+  symbol:   variable j
+  location: class SelectionSort
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:6: error: cannot find symbol
+        //@ loop_invariant (\forall int i; 0 <= i && i < j; arr[i] <= arr[j]);
+                                                                          ^
+  symbol:   variable j
+  location: class SelectionSort
+/home/max/Documents/JMLGPT/tmp/SelectionSort.java:7: error: cannot find symbol
+        //@ decreases arr.length - j;
+                                   ^
+  symbol:   variable j
+  location: class SelectionSort
+4 errors
+

@@ -1,0 +1,40 @@
+public class calc {
+    //@ requires args != null;
+    //@ requires args.length >= 2;
+    //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); Character.isDigit(args[i].charAt(j))));
+    //@ ensures (\forall int i; 0 <= i && i < args.length; Integer.parseInt(args[i]) >= Integer.MIN_VALUE && Integer.parseInt(args[i]) <= Integer.MAX_VALUE);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); args[i].charAt(j) == '-' && j == 0) ==> Integer.parseInt(args[i]) == Integer.parseInt(args[i].substring(1)));
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); args[i].charAt(j) == '-' && j == 0) ==> Integer.parseInt(args[i]) < 0);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); args[i].charAt(j) == '-' && j != 0) ==> Integer.parseInt(args[i]) >= 0);
+    void do_stuff(String a, String b) {
+        try {
+            int x = Integer.parseInt(a);
+            int y = Integer.parseInt(b);
+            assert Integer.parseInt(a) != Integer.parseInt(b) || x == y;
+        } catch (java.lang.NumberFormatException e) {
+        }
+    }
+
+    //@ requires args != null;
+    //@ requires args.length >= 2;
+    //@ ensures (\forall int i; 0 <= i && i < args.length; args[i] != null);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); Character.isDigit(args[i].charAt(j))));
+    //@ ensures (\forall int i; 0 <= i && i < args.length; Integer.parseInt(args[i]) >= Integer.MIN_VALUE && Integer.parseInt(args[i]) <= Integer.MAX_VALUE);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); args[i].charAt(j) == '-' && j == 0) ==> Integer.parseInt(args[i]) == Integer.parseInt(args[i].substring(1)));
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); args[i].charAt(j) == '-' && j == 0) ==> Integer.parseInt(args[i]) < 0);
+    //@ ensures (\forall int i; 0 <= i && i < args.length; (\exists int j; 0 <= j && j < args[i].length(); args[i].charAt(j) == '-' && j != 0) ==> Integer.parseInt(args[i]) >= 0);
+    public static void fun(String[] args) {
+        if (args.length < 2) {
+            System.out.println("need two arguments");
+            return;
+        }
+        new calc().do_stuff(args[0], args[1]);
+    }
+}
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 8388608 bytes for committing reserved memory.
+# An error report file with more information is saved as:
+# /home/max/Documents/JMLGPT/hs_err_pid22659.log
+

@@ -1,0 +1,112 @@
+class arrayread1 {
+
+  static arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures readback == null ==> \result == 1;
+  //@ ensures readback != null ==> \result == 0;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    arrayread1[] a = new arrayread1[c];
+    readback = a[0];
+    return ((readback == null) ? 1 : 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:6: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures readback == null ==> \result == 1;
+              ^
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:7: error: An identifier with package visibility may not be used in a ensures clause with public visibility
+  //@ ensures readback != null ==> \result == 0;
+              ^
+2 errors
+
+class arrayread1 {
+
+  static /*@ spec_public @*/ arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures readback == null ==> \result == 1;
+  //@ ensures readback != null ==> \result == 0;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    arrayread1[] a = new arrayread1[c];
+    readback = a[0];
+    return ((readback == null) ? 1 : 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:11: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method func
+    readback = a[0];
+             ^
+1 verification failure
+
+class arrayread1 {
+
+  static /*@ spec_public @*/ arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures readback == null ==> \result == 1;
+  //@ ensures readback != null ==> \result == 0;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    arrayread1[] a = new arrayread1[c];
+    //@ assume a[0] == null;
+    readback = a[0];
+    return ((readback == null) ? 1 : 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:12: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method func
+    readback = a[0];
+             ^
+1 verification failure
+
+class arrayread1 {
+
+  static /*@ spec_public @*/ arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures readback == null ==> \result == 1;
+  //@ ensures readback != null ==> \result == 0;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    arrayread1[] a = new arrayread1[c];
+    readback = null;
+    return ((readback == null) ? 1 : 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:11: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method func
+    readback = null;
+             ^
+1 verification failure
+
+class arrayread1 {
+
+  static /*@ spec_public @*/ arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures readback == null ==> \result == 1;
+  //@ ensures readback != null ==> \result == 0;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    readback = null;
+    return ((readback == null) ? 1 : 0);
+  }
+}
+/home/max/Documents/JMLGPT/tmp/arrayread1.java:10: verify: The prover cannot establish an assertion (PossiblyNullAssignment) in method func
+    readback = null;
+             ^
+1 verification failure
+
+class arrayread1 {
+
+  static /*@ spec_public @*/ arrayread1 readback;
+
+  //@ requires c == 1;
+  //@ ensures readback == null ==> \result == 1;
+  //@ ensures readback != null ==> \result == 0;
+  public static int func(int c) {
+    if (c != 1) return -1;
+    readback = new arrayread1();
+    return ((readback == null) ? 1 : 0);
+  }
+}
+

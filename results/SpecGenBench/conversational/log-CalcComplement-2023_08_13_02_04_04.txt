@@ -1,0 +1,289 @@
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 0 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 0 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int i; 0 <= i && i <= 30; num < 1 << i ==> \result < 1 << i);
+    //@ ensures (\forall int i; 0 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int i; 1 <= i && i <= highbit; num >= 1 << i);
+        //@ decreases 30 - highbit;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:11: error: variable i is already defined in method calcComplement(int)
+        //@ maintaining (\forall int i; 1 <= i && i <= highbit; num >= 1 << i);
+                                     ^
+1 error
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result < 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        for (int i = 1; i <= 30; ++i) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:14: verify: The prover cannot establish an assertion (PossiblyLargeShift) in method calcComplement
+            if (num >= 1 << i) {
+                         ^
+1 verification failure
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result < 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        for (int i = 1; i <= 30; ++i) {
+            //@ maintaining 0 <= i && i <= 30;
+            //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+            //@ decreases 30 - i;
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= 30;
+                ^
+1 error
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result < 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+    public int calcComplement(int num) {
+        int highbit = 0;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        for (int i = 1; i <= 30; ++i) {
+            //@ maintaining 0 <= i && i <= 30;
+            //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+            //@ decreases 30 - i;
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }            
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:14: error: Loop specifications must immediately precede a loop statement
+            //@ maintaining 0 <= i && i <= 30;
+                ^
+1 error
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result < 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+    public int calcComplement(int num) {
+        int highbit = 0;
+        int i = 1;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        while (i <= 30) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }
+            i++;
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        return num ^ mask;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:25: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:7:) in method calcComplement
+        return num ^ mask;
+        ^
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:7: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/CalcComplement.java:25:
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+        ^
+2 verification failures
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result < 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> \result >= 1 << (i+1));
+    public int calcComplement(int num) {
+        int highbit = 0;
+        int i = 1;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        while (i <= 30) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }
+            i++;
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        int result = num ^ mask;
+        //@ assert (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> result >= 1 << (i+1));
+        return result;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:26: error: variable i is already defined in method calcComplement(int)
+        //@ assert (\forall int i; 1 <= i && i <= 30; num < 1 << i ==> result >= 1 << (i+1));
+                                ^
+1 error
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> \result >= 1 << (j+1));
+    //@ ensures (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> \result < 1 << j);
+    public int calcComplement(int num) {
+        int highbit = 0;
+        int i = 1;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        while (i <= 30) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }
+            i++;
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        int result = num ^ mask;
+        //@ assert (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> result >= 1 << (j+1));
+        return result;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:26: verify: The prover cannot establish an assertion (Assert) in method calcComplement
+        //@ assert (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> result >= 1 << (j+1));
+            ^
+1 verification failure
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> \result >= 1 << (j+1));
+    //@ ensures (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> \result < 1 << j);
+    public int calcComplement(int num) {
+        int highbit = 0;
+        int i = 1;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        while (i <= 30) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }
+            i++;
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        int result = num ^ mask;
+        //@ assert (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> result >= 1 << (j+1));
+        return result;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:26: verify: The prover cannot establish an assertion (Assert) in method calcComplement
+        //@ assert (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> result >= 1 << (j+1));
+            ^
+1 verification failure
+
+class CalcComplement {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0;
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result >= 1 << i);
+    //@ ensures (\forall int i; 1 <= i && i <= 30; num >= 1 << i ==> \result <= 1 << (i+1));
+    //@ ensures (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> \result >= 1 << (j+1));
+    //@ ensures (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> \result < 1 << j);
+    public int calcComplement(int num) {
+        int highbit = 0;
+        int i = 1;
+        //@ maintaining 0 <= highbit && highbit <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j <= highbit; num >= 1 << j);
+        //@ maintaining 1 <= i && i <= 30;
+        //@ maintaining (\forall int j; 1 <= j && j < i; num >= 1 << j);
+        //@ decreases 30 - highbit;
+        while (i <= 30) {
+            if (num >= 1 << i) {
+                highbit = i;
+            } else {
+                break;
+            }
+            i++;
+        }
+        int mask = highbit == 30 ? 0x7fffffff : (1 << (highbit + 1)) - 1;
+        int result = num ^ mask;
+        //@ assert (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> result >= 1 << (j+1));
+        return result;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/CalcComplement.java:26: verify: The prover cannot establish an assertion (Assert) in method calcComplement
+        //@ assert (\forall int j; 1 <= j && j <= 30; num < 1 << j ==> result >= 1 << (j+1));
+            ^
+1 verification failure
+

@@ -1,0 +1,209 @@
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires predicate(e);
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  //@ requires index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ requires index < size();
+  //@ ensures \result == Head.Value;
+  //@ ensures \result == Head.Next.Value ==> index == 1;
+  //@ ensures \result == Head.Next.Next.Value ==> index == 2;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  public static int nondet_int() {
+    return Verifier.nondetInt();
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:30: error: cannot find symbol
+  //@ requires predicate(e);
+               ^
+  symbol:   method predicate(int)
+  location: class LinkedList
+/home/max/Documents/JMLGPT/tmp/list2.java:57: error: cannot find symbol
+    return Verifier.nondetInt();
+           ^
+  symbol:   variable Verifier
+  location: class Utils_nondet
+2 errors
+
+class LinkedListEntry {
+  public LinkedListEntry Next;
+  public int Value;
+}
+
+class LinkedList {
+  public LinkedListEntry Head;
+
+  //@ ensures \result >= 0;
+  public int size() {
+    int count = 0;
+    for (LinkedListEntry entry = Head; entry != null; entry = entry.Next) ++count;
+    return count;
+  }
+
+  //@ requires 0 <= index;
+  //@ requires index <= size();
+  public void add(int index, int e) {
+    LinkedListEntry newEntry = new LinkedListEntry();
+    newEntry.Value = e;
+    if (index == 0) {
+      newEntry.Next = Head;
+      Head = newEntry;
+      return;
+    }
+    LinkedListEntry entry = Head;
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    newEntry.Next = entry.Next;
+    entry.Next = newEntry;
+  }
+
+  //@ requires true;
+  public void add(int e) {
+    add(size(), e);
+  }
+
+  //@ requires 0 <= index;
+  //@ requires index < size();
+  public void remove(int index) {
+    LinkedListEntry entry = Head;
+    if (index == 0) {
+      Head = Head.Next;
+      return;
+    }
+    for (int i = 1; i < index; ++i) entry = entry.Next;
+    entry.Next = entry.Next.Next;
+  }
+
+  //@ requires 0 <= index;
+  //@ requires index < size();
+  //@ ensures \result == Head.Value;
+  //@ ensures \result == Head.Next.Value ==> index == 1;
+  //@ ensures \result == Head.Next.Next.Value ==> index == 2;
+  public int get(int index) {
+    LinkedListEntry entry = Head;
+    for (int i = 0; i < index; ++i) entry = entry.Next;
+    return entry.Value;
+  }
+}
+
+class Utils_nondet {
+  public static int nondet_int() {
+    return 0; // placeholder for nondeterministic integer generation
+  }
+}
+
+class Utils_synthesis {
+  //@ ensures \result >= aggregated;
+  public static int accumulator(int aggregated, int e) {
+    if (aggregated < e) return e;
+    return aggregated;
+  }
+
+  //@ ensures \result;
+  public static boolean predicate(int lhs) {
+    return true;
+  }
+}
+/home/max/Documents/JMLGPT/tmp/list2.java:2: verify: The prover cannot establish an assertion (NullField) in method LinkedListEntry
+  public LinkedListEntry Next;
+                         ^
+NULL PRECONDITION FOR LinkedList.add(int,int) LinkedList.add(int,int) true LinkedList.add(int,int) true public 
+  requires true; 
+  requires 0 <= index; 
+  requires index <= size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.remove(int) LinkedList.remove(int) true LinkedList.remove(int) true public 
+  requires true; 
+  requires 0 <= index; 
+  requires index < size(); 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+NULL PRECONDITION FOR LinkedList.get(int) LinkedList.get(int) true LinkedList.get(int) true public 
+  requires true; 
+  requires 0 <= index; 
+  requires index < size(); 
+  ensures \result == Head.Value; 
+  ensures \result == Head.Next.Value ==> index == 1; 
+  ensures \result == Head.Next.Next.Value ==> index == 2; 
+  signals_only java.lang.RuntimeException; 
+  assignable \everything; 
+  accessible \everything; 
+/home/max/Documents/JMLGPT/tmp/list2.java:7: verify: The prover cannot establish an assertion (NullField) in method LinkedList
+  public LinkedListEntry Head;
+                         ^
+/home/max/Documents/JMLGPT/tmp/list2.java:34: verify: The prover cannot establish an assertion (Precondition: /home/max/Documents/JMLGPT/tmp/list2.java:18:) in method add
+    add(size(), e);
+       ^
+/home/max/Documents/JMLGPT/tmp/list2.java:18: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:34:
+  public void add(int index, int e) {
+              ^
+/home/max/Documents/JMLGPT/tmp/list2.java:17: verify: Precondition conjunct is false: index <= size()
+  //@ requires index <= size();
+                     ^
+/home/max/Documents/JMLGPT/tmp/list2.java:57: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/list2.java:51:) in method get
+    return entry.Value;
+    ^
+/home/max/Documents/JMLGPT/tmp/list2.java:51: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/list2.java:57:
+  //@ ensures \result == Head.Value;
+      ^
+7 verification failures
+

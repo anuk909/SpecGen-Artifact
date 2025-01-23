@@ -1,0 +1,26 @@
+import java.util.Random;
+
+public class boolean2 {
+  /*@ ensures \result == true; */
+  public static boolean func() {
+    boolean b = new Random().nextBoolean();
+    boolean result = f(b);
+    return result == !b;
+  }
+
+  /*@ ensures (\result == false)  ==  (\old(b) == true); */
+  /*@ ensures (\result == true)  ==  (\old(b) == false); */
+  public static boolean f(boolean b) {
+    return !b;
+  }
+
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    for(int i = 0; i < 10; i++) {
+      func();
+    }
+  }
+}

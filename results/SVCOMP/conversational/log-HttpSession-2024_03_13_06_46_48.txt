@@ -1,0 +1,61 @@
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    private final Map<String, Object> map = new HashMap<>();
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> \result.hasMoreElements();
+    //@ ensures \result != null ==> (\forall String key; \result.hasMoreElements(); map.containsKey(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:10: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result == map.get(name);
+                           ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:16: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures \result != null ==> (\forall String key; \result.hasMoreElements(); map.containsKey(key));
+                                                                                    ^
+/home/max/Documents/JMLGPT/tmp/HttpSession.java:21: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures map.get(name) == value;
+                ^
+3 errors
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class HttpSession {
+
+    private /*@ spec_public @*/ final Map<String, Object> map = new HashMap<>();
+
+    //@ ensures \result == map.get(name);
+    public Object getAttribute(String name) {
+        return map.get(name);
+    }
+
+    //@ ensures \result != null ==> \result.hasMoreElements();
+    //@ ensures \result != null ==> (\forall String key; \result.hasMoreElements(); map.containsKey(key));
+    public Enumeration<String> getAttributeNames() {
+        return Collections.enumeration(map.keySet());
+    }
+
+    //@ ensures map.get(name) == value;
+    public void setAttribute(String name, Object value) {
+        this.map.put(name, value);
+    }
+}

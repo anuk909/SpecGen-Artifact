@@ -1,0 +1,55 @@
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ ensures c[0] == 's';
+    //@ ensures \result == c;
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ requires arg != null;
+    //@ requires arg.length() == 5;
+    //@ ensures \result == 1 <==> (new String(arg.toCharArray()).charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(new String(arg.toCharArray()).charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = new String("HELLO") + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/charArray.java:15: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == 1 <==> (new String(arg.toCharArray()).charAt(5) == 's');
+                                   ^
+/home/max/Documents/JMLGPT/tmp/charArray.java:16: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == 0 <==> !(new String(arg.toCharArray()).charAt(5) == 's');
+                                    ^
+2 errors
+
+public class charArray {
+    //@ requires c != null;
+    //@ requires c.length > 0;
+    //@ modifies c[0];
+    //@ ensures c[0] == 's';
+    //@ ensures \result == c;
+    public static char[] f(char c[]) {
+        if (c != null && c.length > 0) {
+            c[0] = 's';
+        }
+        return c;
+    }
+
+    //@ requires arg != null;
+    //@ requires arg.length() == 5;
+    //@ ensures \result == 1 <==> (arg.charAt(5) == 's');
+    //@ ensures \result == 0 <==> !(arg.charAt(5) == 's');
+    public static int fun(String arg) {
+        if (arg.length() != 5) return -1;
+        char[] c = f(arg.toCharArray());
+        String s = new String("HELLO") + new String(c, 0, c.length);
+        return (s.charAt(5) == 's') ? 1 : 0;
+    }
+}

@@ -1,0 +1,64 @@
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+class D extends C {}
+
+class Main {
+  //@ requires \typeof(arg) == \type(String[]);
+  public static void main(String[] arg) {
+    try {
+      D d = new D();
+      C c = new C();
+      B b = new B();
+      A a = new A();
+      A e = a;
+      throw e;
+    } catch (D exc) {
+      assert false;
+    } catch (C exc) {
+      assert false;
+    } catch (B exc) {
+      assert false;
+    } catch (A exc) {
+      assert false;
+    }
+  }
+}
+/home/max/Documents/JMLGPT/tmp/exceptions1.java:26: verify: The prover cannot establish an assertion (Assert) in method main
+      assert false;
+      ^
+1 verification failure
+
+class A extends Throwable {}
+
+class B extends A {}
+
+class C extends B {}
+
+class D extends C {}
+
+class Main {
+  //@ requires \typeof(arg) == \type(String[]);
+  public static void main(String[] arg) {
+    try {
+      D d = new D();
+      C c = new C();
+      B b = new B();
+      A a = new A();
+      A e = a;
+      throw e;
+    } catch (D exc) {
+      // Exception handling for D
+    } catch (C exc) {
+      // Exception handling for C
+    } catch (B exc) {
+      // Exception handling for B
+    } catch (A exc) {
+      // Exception handling for A
+    }
+  }
+}
+

@@ -1,0 +1,55 @@
+class Main {
+  /*@ ensures \result == true; */
+  public boolean test(int x, int y) {
+
+    int v = method_a(x, y);
+
+    if (v > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  /*@ ensures \result == 0; */
+  public int method_a(int x, int y) {
+
+    if (x > 10) return x;
+
+    if (y > 10) return y;
+
+    return 0;
+  }
+
+  /*@ requires this != null; */
+  /*@ ensures \result == \old(z); */
+  public int method_b(int z) {
+
+    if (z > 10) return z++;
+    else return z--;
+  }
+
+  /*@ ensures \result == true; */
+  public static boolean f(int arg) {
+
+    Main ex = new Main();
+    if (arg < 0 || arg > 10) return true;
+    return ex.test(arg, 0);
+  }
+}
+
+class ExSymExeSuzette {
+  /*@ requires args != null; */
+  /*@ requires \typeof(args) == \type(java.lang.String[]); */
+  /*@ requires (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  /*@ ensures (args.length == 0) && ((\forall int i; (0 <= i && i <= args.length-1) ==> (args[i] != null))); */
+  public static void main(String[] args) {
+    Main e = new Main();
+    for(int x = -4; x <= 4; x += 1) {
+      e.method_b(x);
+      for(int y = -4; y <= 4; y += 1) {
+        Main.f(x);
+        e.test(x, y);
+      }
+    }
+  }
+}

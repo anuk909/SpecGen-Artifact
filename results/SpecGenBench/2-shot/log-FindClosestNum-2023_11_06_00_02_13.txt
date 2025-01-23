@@ -1,0 +1,36 @@
+class FindClosestNum {
+    
+    //@ requires nums != null && nums.length > 0;
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; ans <= nums[i]);
+    //@ ensures (\exists int i; 0 <= i && i < nums.length; ans == nums[i]);
+    public int findClosestNumber(int[] nums) {
+        int ans = Integer.MAX_VALUE;
+
+        //@ maintaining 0 <= i && i <= nums.length;
+        //@ maintaining (\forall int j; 0 <= j && j < i; ans <= nums[j]);
+        //@ maintaining (\exists int j; 0 <= j && j < i; ans == nums[j]);
+        //@ decreases nums.length - i;
+        for(int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            int absNum = (num<0?-num:num);
+            int absAns = (ans<0?-ans:ans);
+            if(absNum < absAns || (absNum == absAns && num > ans)) {
+                ans = num;
+            }
+        }
+
+        return ans;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:4: error: cannot find symbol
+    //@ ensures (\forall int i; 0 <= i && i < nums.length; ans <= nums[i]);
+                                                           ^
+  symbol:   variable ans
+  location: class FindClosestNum
+/home/max/Documents/JMLGPT/tmp/FindClosestNum.java:5: error: cannot find symbol
+    //@ ensures (\exists int i; 0 <= i && i < nums.length; ans == nums[i]);
+                                                           ^
+  symbol:   variable ans
+  location: class FindClosestNum
+2 errors
+

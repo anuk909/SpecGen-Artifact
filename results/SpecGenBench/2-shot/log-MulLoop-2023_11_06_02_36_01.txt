@@ -1,0 +1,31 @@
+public class MulLoop {
+    //@ requires true;
+    //@ ensures \result == a * b;
+	public static int mulLoop(int a, int b) {
+        int res = 0;
+        if (b >= 0) {
+            //@ maintaining res == (\sum int i; 0 <= i && i < \old(b) - b; a);
+            //@ maintaining 0 <= i && i <= \old(b);
+            //@ decreases \old(b) - i;
+            for(int i = 0; i < b; i++) {
+                res = res + a;
+            }
+        } else {
+            //@ maintaining res == (\sum int i; 0 <= i && i < -\old(b) - b; -a);
+            //@ maintaining 0 <= i && i <= -\old(b);
+            //@ decreases -\old(b) - i;
+            for(int i = 0; i < -b; i++) {
+                res = res - a;
+            }
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/MulLoop.java:7: error: variable i is already defined in method mulLoop(int,int)
+            //@ maintaining res == (\sum int i; 0 <= i && i < \old(b) - b; a);
+                                             ^
+/home/max/Documents/JMLGPT/tmp/MulLoop.java:14: error: variable i is already defined in method mulLoop(int,int)
+            //@ maintaining res == (\sum int i; 0 <= i && i < -\old(b) - b; -a);
+                                             ^
+2 errors
+

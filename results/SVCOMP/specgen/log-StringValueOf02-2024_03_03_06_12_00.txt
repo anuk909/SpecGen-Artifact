@@ -1,0 +1,15 @@
+public class StringValueOf02 {
+    //@ requires arg != null && arg.length() >= 8;
+    //@ requires (\forall int i; 0 <= i && i < 8; Character.isLetter(arg.charAt(i)));
+    //@ ensures \result == true ==> (\forall int i; 0 <= i && i < 8; arg.charAt(i) == "difffblue".charAt(i));
+    //@ ensures \result == false ==> (\exists int i; 0 <= i && i < 8; arg.charAt(i) != "difffblue".charAt(i));
+    public static boolean f(String arg) {
+        char[] charArray = {
+            arg.charAt(0), arg.charAt(1), arg.charAt(2),
+            arg.charAt(3), arg.charAt(4), arg.charAt(5),
+            arg.charAt(6), arg.charAt(7)
+        };
+        String tmp = String.valueOf(charArray);
+        return tmp.equals("difffblue");
+    }
+}

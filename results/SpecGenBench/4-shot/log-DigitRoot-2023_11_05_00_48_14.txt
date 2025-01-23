@@ -1,0 +1,26 @@
+class DigitRoot {
+    //@ requires num >= 0;
+    //@ ensures \result >= 0 && \result < 10;
+    public int digitRoot(int num) {
+        //@ maintaining num >= 10 ==> num >= 0;
+        //@ maintaining num < 10 ==> num >= 0 && num < 10;
+        //@ decreases num;
+        while (num >= 10) {
+            int sum = 0;
+            //@ maintaining num > 0;
+            //@ maintaining 0 <= sum && sum <= num;
+            //@ decreases num;
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+            num = sum;
+        }
+        return num;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/DigitRoot.java:11: verify: The prover cannot establish an assertion (LoopInvariant) in method digitRoot
+            //@ maintaining 0 <= sum && sum <= num;
+                ^
+1 verification failure
+

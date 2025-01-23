@@ -1,0 +1,49 @@
+public class StringCompare04 {
+    //@ requires arg1 != null && arg2 != null;
+    //@ ensures \result == (new String(arg2)).compareTo(new String(arg1)) == 13;
+    public static boolean f(String arg1, String arg2) {
+        String s1 = new String(arg1);
+        String s2 = arg2;
+        return s2.compareTo(s1) == 13; // false
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringCompare04.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (new String(arg2)).compareTo(new String(arg1)) == 13;
+                                                        ^
+/home/max/Documents/JMLGPT/tmp/StringCompare04.java:3: error: Object allocation is not permitted in specification expressions
+    //@ ensures \result == (new String(arg2)).compareTo(new String(arg1)) == 13;
+                            ^
+/home/max/Documents/JMLGPT/tmp/StringCompare04.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (new String(arg2)).compareTo(new String(arg1)) == 13;
+                        ^
+/home/max/Documents/JMLGPT/tmp/StringCompare04.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (new String(arg2)).compareTo(new String(arg1)) == 13;
+                                                                          ^
+4 errors
+
+public class StringCompare04 {
+    //@ requires arg1 != null && arg2 != null;
+    //@ ensures \result == (arg2.compareTo(arg1)) == 13;
+    public static boolean f(String arg1, String arg2) {
+        String s1 = new String(arg1);
+        String s2 = arg2;
+        return s2.compareTo(s1) == 13; // false
+    }
+}
+/home/max/Documents/JMLGPT/tmp/StringCompare04.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (arg2.compareTo(arg1)) == 13;
+                        ^
+/home/max/Documents/JMLGPT/tmp/StringCompare04.java:3: error: incomparable types: boolean and int
+    //@ ensures \result == (arg2.compareTo(arg1)) == 13;
+                                                  ^
+2 errors
+
+public class StringCompare04 {
+    //@ requires arg1 != null && arg2 != null;
+    //@ ensures \result == (arg2.compareTo(arg1) == 13);
+    public static boolean f(String arg1, String arg2) {
+        String s1 = new String(arg1);
+        String s2 = arg2;
+        return s2.compareTo(s1) == 13; // false
+    }
+}

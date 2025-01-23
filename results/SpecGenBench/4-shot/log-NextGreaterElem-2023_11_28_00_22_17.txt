@@ -1,0 +1,44 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires nums1.length > 0 && nums2.length > 0;
+    //@ ensures \result != null;
+    //@ ensures \result.length == nums1.length;
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j])));
+    //@ ensures (\forall int i; 0 <= i && i < nums1.length; (\exists int j; 0 <= j && j < nums2.length; nums2[j] == nums1[i] && (\forall int k; j < k && k < nums2.length; nums2[k] < nums2[j]) && (\exists int k; j < k && k < nums2.length; \result[i] == nums2[k])));
+
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int m = nums1.length, n = nums2.length;
+        int[] res = new int[m];
+        //@ assume res != null && res.length == m;
+        //@ assume nums1 != null && nums1.length == m;
+        //@ assume nums2 != null && nums2.length == n;
+
+        //@ maintaining 0 <= i && i <= m;
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int j; 0 <= j && j < n; nums2[j] == nums1[x] && (\forall int k; j < k && k < n; nums2[k] < nums2[j])));
+        //@ maintaining (\forall int x; 0 <= x && x < i; (\exists int j; 0 <= j && j < n; nums2[j] == nums1[x] && (\forall int k; j < k && k < n; nums2[k] < nums2[j]) && (\exists int k; j < k && k < n; res[x] == nums2[k])));
+        //@ decreases m - i;
+        for (int i = 0; i < m; ++i) {
+            int j = 0;
+            //@ maintaining 0 <= j && j <= n;
+            //@ maintaining (\forall int k; 0 <= k && k < j; nums2[k] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                ++j;
+            }
+            int k = j + 1;
+            //@ maintaining j < k && k <= n;
+            //@ maintaining (\forall int x; j <= x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                ++k;
+            }
+            res[i] = k < n ? nums2[k] : -1;
+        }
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:29: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method nextGreaterElement
+            //@ maintaining j < k && k <= n;
+                ^
+1 verification failure
+

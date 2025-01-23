@@ -1,0 +1,70 @@
+class NextGreaterElem {
+    //@ requires nums1 != null && nums2 != null;
+    //@ requires nums1.length > 0 && nums2.length > 0;
+    //@ ensures \result != null && \result.length == nums1.length;
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        //@ assert nums1 != null && nums2 != null;
+        //@ assert nums1.length > 0 && nums2.length > 0;
+        
+        int m = nums1.length, n = nums2.length;
+        //@ assert m > 0 && n > 0;
+        
+        int[] res = new int[m];
+        //@ assert res != null && res.length == m;
+        
+        for (int i = 0; i < m; ++i) {
+            //@ assert 0 <= i && i < m;
+            
+            int j = 0;
+            //@ assert j == 0;
+            
+            //@ loop_invariant 0 <= j && j <= n;
+            //@ loop_invariant (\forall int x; 0 <= x && x < j; nums2[x] != nums1[i]);
+            //@ decreases n - j;
+            while (j < n && nums2[j] != nums1[i]) {
+                //@ assert 0 <= j && j < n;
+                //@ assert nums2[j] != nums1[i];
+                ++j;
+                //@ assert j > 0;
+            }
+            
+            int k = j + 1;
+            //@ assert k == j + 1;
+            
+            //@ loop_invariant j < k && k <= n;
+            //@ loop_invariant (\forall int x; j < x && x < k; nums2[x] < nums2[j]);
+            //@ decreases n - k;
+            while (k < n && nums2[k] < nums2[j]) {
+                //@ assert j < k && k < n;
+                //@ assert nums2[k] < nums2[j];
+                ++k;
+                //@ assert k > j + 1;
+            }
+            
+            res[i] = k < n ? nums2[k] : -1;
+            //@ assert res[i] == (k < n ? nums2[k] : -1);
+        }
+        
+        //@ assert \forall int i; 0 <= i && i < m; res[i] == (k < n ? nums2[k] : -1);
+        //@ assert \result != null && \result.length == m;
+        return res;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:48: error: cannot find symbol
+        //@ assert \forall int i; 0 <= i && i < m; res[i] == (k < n ? nums2[k] : -1);
+                                                              ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:48: error: cannot find symbol
+        //@ assert \forall int i; 0 <= i && i < m; res[i] == (k < n ? nums2[k] : -1);
+                                                                            ^
+  symbol:   variable k
+  location: class NextGreaterElem
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:49: error: A \result expression may not be in a assert clause
+        //@ assert \result != null && \result.length == m;
+                    ^
+/home/max/Documents/JMLGPT/tmp/NextGreaterElem.java:49: error: A \result expression may not be in a assert clause
+        //@ assert \result != null && \result.length == m;
+                                       ^
+4 errors
+

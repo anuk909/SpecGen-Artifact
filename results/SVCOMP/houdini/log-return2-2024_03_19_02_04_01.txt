@@ -1,0 +1,68 @@
+import java.util.Random;
+
+class return2 {
+  //@ ensures \result;
+  //@ ensures !\result;
+  public static boolean f() {
+    int v1 = new Random().nextInt();
+    int v2 = new Random().nextInt();
+    return v1 == v2;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/return2.java:9: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/return2.java:4:) in method f
+    return v1 == v2;
+    ^
+/home/max/Documents/JMLGPT/tmp/return2.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/return2.java:9:
+  //@ ensures \result;
+      ^
+2 verification failures
+
+import java.util.Random;
+
+class return2 {
+  //@ ensures !\result;
+  public static boolean f() {
+    int v1 = new Random().nextInt();
+    int v2 = new Random().nextInt();
+    return v1 == v2;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+/home/max/Documents/JMLGPT/tmp/return2.java:8: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/return2.java:4:) in method f
+    return v1 == v2;
+    ^
+/home/max/Documents/JMLGPT/tmp/return2.java:4: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/return2.java:8:
+  //@ ensures !\result;
+      ^
+2 verification failures
+
+import java.util.Random;
+
+class return2 {
+  public static boolean f() {
+    int v1 = new Random().nextInt();
+    int v2 = new Random().nextInt();
+    return v1 == v2;
+  }
+
+  //@ requires \nonnullelements(args);
+  public static void main(String[] args) {
+    f();
+  }
+}
+
+
+

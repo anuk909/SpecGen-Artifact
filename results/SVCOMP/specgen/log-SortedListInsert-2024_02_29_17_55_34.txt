@@ -1,0 +1,520 @@
+public class SortedListInsert {
+
+  private static class List {
+    public int x;
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    private List(int x, List next) {
+      this.x = x;
+      this.next = next;
+    }
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:14: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(x, next);
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:25: error: constructor List in class List cannot be applied to given types;
+        next = new List(x, next);
+               ^
+  required: no arguments
+  found:    int,List
+  reason: actual and formal argument lists differ in length
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this(SENTINEL, null);
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        next = new List(); // Updated to create a new List object with default constructor
+        next.x = x;
+        next.next = this.next;
+        x = data;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:13: error: constructor List in class List cannot be applied to given types;
+      this(SENTINEL, null);
+      ^
+  required: no arguments
+  found:    int,<null>
+  reason: actual and formal argument lists differ in length
+2 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public int x;
+    //@ spec_public
+    public List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+1 error
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public /*@ spec_public @*/ int x;
+    //@ spec_public
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:5: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:7: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ List next;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public /*@ spec_public @*/ int x;
+    //@ spec_public
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures next.x == \old(x);
+    //@ ensures next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:5: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:7: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ List next;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public /*@ spec_public @*/ int x;
+    //@ spec_public
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures \old(next) == null ==> next.x == \old(x) && next.next == null;
+    //@ ensures \old(next) != null ==> next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:5: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:7: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ List next;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;
+                     ^
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public /*@ spec_public @*/ int x;
+    //@ spec_public
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+    //@ ensures x == SENTINEL && next == null;  
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures \old(next) == null ==> next.x == \old(x) && next.next == null;
+    //@ ensures \old(next) != null ==> next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:5: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:7: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ List next;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:11: error: An identifier with private visibility may not be used in a ensures clause with public visibility
+    //@ ensures x == SENTINEL && next == null;  
+                     ^
+3 errors
+
+public class SortedListInsert {
+
+  private static class List {
+    //@ spec_public
+    public /*@ spec_public @*/ int x;
+    //@ spec_public
+    public /*@ spec_public @*/ List next;
+
+    private static final int SENTINEL = Integer.MAX_VALUE;
+
+ 
+    public List() {
+      this.x = SENTINEL;
+      this.next = null;
+    }
+
+    //@ requires data <= x || next != null;
+    //@ ensures (\forall List l; l != this && l != null; data <= l.x);
+    //@ ensures x == data;
+    //@ ensures \old(next) == null ==> next.x == \old(x) && next.next == null;
+    //@ ensures \old(next) != null ==> next.x == \old(x) && next.next == \old(next);
+    public void insert(int data) {
+      if (data > this.x) {
+        next.insert(data);
+      } else {
+        List temp = new List(); // Create a new List object with default constructor
+        temp.x = x;
+        temp.next = this.next;
+        x = data;
+        next = temp;
+      }
+    }
+  }
+  
+}
+
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:5: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ int x;
+               ^
+/home/max/Documents/JMLGPT/tmp/SortedListInsert.java:7: error: SpecPublic is not a repeatable annotation type
+    public /*@ spec_public @*/ List next;
+               ^
+2 errors
+

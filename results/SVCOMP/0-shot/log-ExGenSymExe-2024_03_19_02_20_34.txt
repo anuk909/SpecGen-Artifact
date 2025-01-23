@@ -1,0 +1,34 @@
+static class Node {
+  //@ public invariant elem >= 0; // elem should be a non-negative integer
+  //@ public invariant next != null ==> next.elem >= 0; // If next is not null, its elem should be non-negative
+
+  int elem;
+  Node next;
+  static Node static_next;
+
+  /*@
+    requires static_next == null;
+    ensures static_next != null;
+    ensures static_next.next != null;
+    ensures static_next.next.next != null;
+    ensures next == \old(next) && elem == \old(elem) && \result == this ||
+            next != \old(next) && elem > next.elem && next == \old(this.next) && \result == t;
+  @*/
+  Node swapNode() {
+    static_next = new Node();
+    static_next.next = new Node();
+    static_next.next.next = new Node();
+
+    if (next != null) {
+      if (elem > next.elem) {
+        assert next != null;
+        Node t = next;
+        next = t.next;
+        t.next = this;
+        return t;
+      }
+    }
+    return this;
+  }
+}
+

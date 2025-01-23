@@ -1,0 +1,433 @@
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isOneBitCharacter
+        //@ maintaining 0 <= i && i <= n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:9: verify: The prover cannot establish an assertion (ArithmeticOperationRange) in method isOneBitCharacter: overflow in int sum
+            i += bits[i] + 1;
+                         ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= Integer.MAX_VALUE && i + bits[i] + 1 >= Integer.MIN_VALUE;
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:6: verify: The prover cannot establish an assertion (LoopInvariant) in method isOneBitCharacter
+        //@ maintaining 0 <= i && i <= n;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n - 1;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= Integer.MAX_VALUE && i + bits[i] + 1 >= Integer.MIN_VALUE;
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:6: verify: The prover cannot establish an assertion (LoopInvariantBeforeLoop) in method isOneBitCharacter
+        //@ maintaining 0 <= i && i <= n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:12:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length; bits[i] == 0) && bits[bits.length - 1] == 0;
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:7: verify: The prover cannot establish an assertion (LoopInvariant) in method isOneBitCharacter
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; bits[i] == 0) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13:
+    //@ ensures \result <==> (\exists int i; 0 <= i && i < bits.length - 1; bits[i] == 0) && bits[bits.length - 1] == 0;
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && bits[bits.length - 1] == 0;
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && bits[bits.length - 1] == 0;
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Assert) in method isOneBitCharacter
+        //@ assert i == n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 : "Invalid index";
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 : "Invalid index";
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Assert) in method isOneBitCharacter
+        //@ assert i == n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 : "Invalid index";
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Assert) in method isOneBitCharacter
+        //@ assert i == n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 : "Invalid index";
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Assert) in method isOneBitCharacter
+        //@ assert i == n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 : "Invalid index";
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1;
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:13: verify: The prover cannot establish an assertion (Assert) in method isOneBitCharacter
+        //@ assert i == n - 1;
+            ^
+1 verification failure
+
+class IsOneBitCharacter {
+    //@ requires 0 <= bits.length && bits.length <= Integer.MAX_VALUE;
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+    public boolean isOneBitCharacter(int[] bits) {
+        int n = bits.length, i = 0;
+        //@ maintaining 0 <= i && i <= n;
+        //@ maintaining (\forall int j; 0 <= j && j < i; bits[j] == 0 || bits[j] == 1);
+        while (i < n - 1) {
+            //@ assume i + bits[i] + 1 <= n && i + bits[i] + 1 >= 0;
+            //@ assume (\forall int j; 0 <= j && j < i + bits[i] + 1; bits[j] == 0 || bits[j] == 1);
+            i += bits[i] + 1;
+        }
+        //@ assert i == n - 1 : "Invalid index";
+        return i == n - 1;
+    }
+}
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14: verify: The prover cannot establish an assertion (Postcondition: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3:) in method isOneBitCharacter
+        return i == n - 1;
+        ^
+/home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:3: verify: Associated declaration: /home/max/Documents/JMLGPT/tmp/IsOneBitCharacter.java:14:
+    //@ ensures \result <==> (\forall int i; 0 <= i && i < bits.length - 1; bits[i] == 0 || bits[i] == 1) && (bits.length == 0 || bits[bits.length - 1] == 0);
+        ^
+2 verification failures
+
