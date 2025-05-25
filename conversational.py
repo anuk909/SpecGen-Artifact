@@ -71,7 +71,6 @@ def main():
         exit(-1)
     classname = args.input.split('/')[-1].split('.')[0]
 
-    openai.api_key = open(args.key_file, 'r').read().strip()
     input_code = file2str(args.input)
 
     current_time_str = time.strftime("%Y_%m_%d_%H_%M_%S", time.localtime(time.time()))
@@ -123,7 +122,7 @@ def main():
         if err_info == "":
             break
         # time.sleep(20)
-    
+
     f_log.close()
 
     os.makedirs(os.path.abspath(".") + "/output", exist_ok=True)
